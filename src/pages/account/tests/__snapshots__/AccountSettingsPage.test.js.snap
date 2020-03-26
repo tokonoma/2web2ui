@@ -2,7 +2,6 @@
 
 exports[`AccountSettingsPage renders 1`] = `
 <Page
-  empty={Object {}}
   title="Account Settings"
 >
   <Panel

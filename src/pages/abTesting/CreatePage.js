@@ -9,9 +9,8 @@ import { showAlert } from 'src/actions/globalAlert';
 import { listTemplates } from 'src/actions/templates';
 
 // Components
-import { Page } from '@sparkpost/matchbox';
 import { PageLink } from 'src/components/links';
-import { Panel } from 'src/components/matchbox';
+import { Panel, Page } from 'src/components/matchbox';
 import AbTestCreateForm from './components/AbTestCreateForm';
 
 export class CreatePage extends Component {

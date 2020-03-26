@@ -1,13 +1,12 @@
 import React from 'react';
+import { Grid } from '@sparkpost/matchbox';
 import GuideBreadCrumbs from './GuideBreadCrumbs';
-import { Panel } from 'src/components/matchbox';
-import styles from './SendingStep.module.scss';
 import { useGuideContext } from './GettingStartedGuide';
 import { Card, CardContent, CardActions } from 'src/components';
 import ButtonWrapper from 'src/components/buttonWrapper';
-import { Grid } from '@sparkpost/matchbox';
-import { Button } from 'src/components/matchbox';
+import { Button, Panel } from 'src/components/matchbox';
 import { SENDING_STEP_LIST } from '../constants';
+import styles from './SendingStep.module.scss';
 
 export default function SendingStep() {
   return (

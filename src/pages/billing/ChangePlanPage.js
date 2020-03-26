@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Page } from '@sparkpost/matchbox';
 import { PendingPlanBanner } from './components/Banners';
 import { PageLink } from 'src/components/links';
+import { Page } from 'src/components/matchbox';
 import { canChangePlanSelector } from 'src/selectors/accountBillingInfo';
 import ChangePlanForm from './forms/ChangePlanForm';
 

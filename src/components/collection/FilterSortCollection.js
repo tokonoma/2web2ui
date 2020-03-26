@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Table, Grid } from '@sparkpost/matchbox';
-import { Panel, Select } from 'src/components/matchbox';
+import { Grid } from '@sparkpost/matchbox';
+import { Select, Table, Panel } from 'src/components/matchbox';
 import { Collection } from 'src/components/index';
 import _ from 'lodash';
 import styles from './FilterSortCollection.module.scss';

@@ -10,7 +10,7 @@ import { selectSubaccountIdFromQuery } from 'src/selectors/subaccounts';
 // Components
 import { Loading, DeleteModal } from 'src/components';
 import { PageLink } from 'src/components/links';
-import { Page, Tabs } from '@sparkpost/matchbox';
+import { Page, Tabs } from 'src/components/matchbox';
 import TestTab from './components/TestTab';
 import EditTab from './components/EditTab';
 import BatchTab from './components/BatchTab';

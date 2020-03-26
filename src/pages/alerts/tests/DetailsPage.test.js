@@ -1,6 +1,10 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import { DetailsPage } from '../DetailsPage';
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
+import TestApp from 'src/__testHelpers__/TestApp';
 
 describe('Page: Alert Details', () => {
   const props = {
@@ -58,13 +62,14 @@ describe('Page: Alert Details', () => {
   });
 
   it('should toggle delete modal upon clicking delete Button', () => {
-    expect(wrapper).toHaveState('isDeleteModalOpen', false);
-    wrapper
-      .find('Page')
-      .dive()
-      .find('Button')
-      .simulate('click');
-    expect(wrapper.find('DeleteModal')).toHaveProp('open', true);
+    const { queryByText } = render(
+      <TestApp>
+        <DetailsPage {...props} />
+      </TestApp>,
+    );
+    expect(queryByText('Are you sure you want to delete this alert?')).not.toBeInTheDocument();
+    userEvent.click(queryByText('Delete'));
+    expect(queryByText('Are you sure you want to delete this alert?')).toBeInTheDocument();
   });
 
   it('should handle delete', async () => {

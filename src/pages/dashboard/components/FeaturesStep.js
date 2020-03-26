@@ -1,13 +1,12 @@
 import React from 'react';
-import { Panel } from 'src/components/matchbox';
-import GuideBreadCrumbs from './GuideBreadCrumbs';
-import { Card, CardTitle, CardContent, CardActions } from 'src/components';
-import { Send } from '@sparkpost/matchbox-icons';
-import styles from './FeaturesStep.module.scss';
-import ButtonWrapper from 'src/components/buttonWrapper';
 import { Grid } from '@sparkpost/matchbox';
-import { Button } from 'src/components/matchbox';
+import { Send } from '@sparkpost/matchbox-icons';
+import { Card, CardTitle, CardContent, CardActions } from 'src/components';
+import ButtonWrapper from 'src/components/buttonWrapper';
+import { Button, Panel } from 'src/components/matchbox';
+import GuideBreadCrumbs from './GuideBreadCrumbs';
 import { useGuideContext } from './GettingStartedGuide';
+import styles from './FeaturesStep.module.scss';
 
 export default function FeaturesStep() {
   return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Page } from '@sparkpost/matchbox';
+import { Page } from 'src/components/matchbox';
 import ApiErrorBanner from 'src/components/apiErrorBanner';
 import { Templates } from 'src/components/images';
 import { PageLink } from 'src/components/links';

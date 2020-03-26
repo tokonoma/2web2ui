@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Page } from '@sparkpost/matchbox';
-import { Panel } from 'src/components/matchbox';
+import { Page, Panel } from 'src/components/matchbox';
 import { connect } from 'react-redux';
 import { formatDate, formatTime } from 'src/helpers/date';
 import { getJobStatus, triggerJob } from 'src/actions/recipientValidation';

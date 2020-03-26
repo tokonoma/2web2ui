@@ -2,11 +2,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import fp from 'lodash/fp';
-import { Page } from '@sparkpost/matchbox';
 import TimeAgo from 'react-timeago';
 import { Users } from 'src/components/images';
 import { PageLink } from 'src/components/links';
-import { Tag } from 'src/components/matchbox';
+import { Page, Tag } from 'src/components/matchbox';
 import { hasUiOption } from 'src/helpers/conditions/account';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
 import * as usersActions from 'src/actions/users';

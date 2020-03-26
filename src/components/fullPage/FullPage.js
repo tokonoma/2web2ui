@@ -1,8 +1,8 @@
 import React from 'react';
-import { ScreenReaderOnly } from '@sparkpost/matchbox';
-import { ChevronLeft } from '@sparkpost/matchbox-icons';
 import propTypes from 'prop-types';
+import { ChevronLeft } from '@sparkpost/matchbox-icons';
 import { PageLink } from 'src/components/links';
+import { ScreenReaderOnly } from 'src/components/matchbox';
 import SparkPost from 'src/components/sparkPost/SparkPost';
 import styles from './FullPage.module.scss';
 
@@ -16,7 +16,6 @@ const FullPage = ({ breadcrumbRedirectsTo, children, primaryArea, title }) => (
           <SparkPost.Icon height={28} width={28} />
           <ScreenReaderOnly>Back</ScreenReaderOnly>
         </PageLink>
-
         <h1 className={styles.FullPageTitle}>{title}</h1>
       </div>
       <div className={styles.FullPagePrimaryArea}>{primaryArea}</div>

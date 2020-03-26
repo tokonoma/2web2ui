@@ -2,6 +2,8 @@ describe('the Hibana navigation', () => {
   const desktopNavSelector = '[data-id="desktop-navigation"]';
   const secondaryNavSelector = '[data-id="secondary-navigation"]';
   const mobileNavSelector = '[data-id="mobile-navigation"]';
+  const accountActionlistSelector = '[data-id="desktop-navigation-account-actionlist"]';
+  const accountPopoverTriggerSelector = '[data-id="desktop-navigation-account-popover-trigger"]';
 
   function commonBeforeSteps() {
     cy.stubRequest({
@@ -12,6 +14,13 @@ describe('the Hibana navigation', () => {
     cy.visit('/');
 
     cy.findByText('Take a Look').click();
+  }
+
+  function stubGrantsRequest({ role }) {
+    cy.stubRequest({
+      url: '/api/v1/authenticate/grants*',
+      fixture: `authenticate/grants/200.get.${role}.json`,
+    });
   }
 
   beforeEach(() => {
@@ -35,7 +44,7 @@ describe('the Hibana navigation', () => {
       commonBeforeSteps();
 
       cy.get(desktopNavSelector).within(() => {
-        cy.assertLink({ content: 'Signals Analytics', href: '/reports' });
+        cy.assertLink({ content: 'Signals Analytics', href: '/reports/summary' });
         cy.assertLink({ content: 'Events', href: '/reports/message-events' });
         cy.assertLink({ content: 'Content', href: '/templates' });
         cy.assertLink({ content: 'Recipients', href: '/recipient-validation/list' });
@@ -253,9 +262,25 @@ describe('the Hibana navigation', () => {
         cy.assertLink({ content: 'SMTP Settings', href: '/account/smtp' });
         cy.assertLink({ content: 'Sending Domains', href: '/account/sending-domains' });
         cy.assertLink({ content: 'Tracking Domains', href: '/account/tracking-domains' });
-        cy.assertLink({ content: 'Subaccounts', href: '/account/subaccounts' });
         cy.findByText('Configuration').click();
+
+        cy.assertLink({ content: 'Profile', href: '/account/profile' });
+        cy.assertLink({ content: 'Alerts', href: '/alerts' });
+        cy.assertLink({ content: 'API Docs', href: 'https://developers.sparkpost.com/api' });
+        cy.assertLink({ content: 'Log Out', href: '/logout' });
       });
+    });
+
+    it('opens the help modal and closes the navigation when clicking "Help"', () => {
+      commonBeforeSteps();
+      toggleMobileMenu();
+
+      cy.get(mobileNavSelector).within(() => {
+        cy.findByText('Help').click();
+      });
+
+      cy.get(mobileNavSelector).should('not.be.visible');
+      cy.findByText('Submit A Ticket').should('be.visible');
     });
 
     it('moves focus to the menu when opened', () => {
@@ -279,27 +304,132 @@ describe('the Hibana navigation', () => {
           .should('have.focus');
       });
     });
+  });
 
-    it('implements a tab trap when opened', () => {
+  describe('account settings dropdown', () => {
+    function toggleAccountMenu() {
+      cy.findByText('Account Menu').click({ force: true });
+    }
+
+    it("renders the user's initials inside the account popover trigger", () => {
       commonBeforeSteps();
-      toggleMobileMenu();
 
-      cy.get(mobileNavSelector).within(() => {
-        cy.findByText('Signals Analytics')
-          .closest('button')
-          .focus()
-          .tab();
-        cy.focused().tab();
-        cy.focused().tab();
-        cy.focused().tab();
-        cy.focused().tab();
-        cy.focused().tab();
-        cy.focused().tab();
-        cy.focused().tab();
-        cy.focused().tab();
-        cy.findByText('Menu')
-          .closest('button')
-          .should('have.focus');
+      cy.get(accountPopoverTriggerSelector).should('contain', 'UT');
+    });
+
+    it('renders an icon if no user first name and last name are returned for the current user', () => {
+      cy.stubRequest({
+        url: `/api/v1/users/${Cypress.env('USERNAME')}`,
+        fixture: 'users/200.get.no-first-or-last-names.json',
+      });
+
+      commonBeforeSteps();
+
+      cy.get(accountPopoverTriggerSelector).should('not.contain', 'UT');
+      cy.get(accountPopoverTriggerSelector).within(() => cy.get('svg').should('be.visible'));
+    });
+
+    it('renders an icon if a first name is missing from the current user', () => {
+      cy.stubRequest({
+        url: `/api/v1/users/${Cypress.env('USERNAME')}`,
+        fixture: 'users/200.get.no-first-name.json',
+      });
+
+      commonBeforeSteps();
+
+      cy.get(accountPopoverTriggerSelector).should('not.contain', 'UT');
+      cy.get(accountPopoverTriggerSelector).within(() => cy.get('svg').should('be.visible'));
+    });
+
+    it('renders an icon if a last name is missing from the current user', () => {
+      cy.stubRequest({
+        url: `/api/v1/users/${Cypress.env('USERNAME')}`,
+        fixture: 'users/200.get.no-last-name.json',
+      });
+
+      commonBeforeSteps();
+
+      cy.get(accountPopoverTriggerSelector).should('not.contain', 'UT');
+      cy.get(accountPopoverTriggerSelector).within(() => cy.get('svg').should('be.visible'));
+    });
+
+    it('renders relevant account settings links when opened', () => {
+      commonBeforeSteps();
+      toggleAccountMenu();
+
+      cy.get(accountActionlistSelector).within(() => {
+        cy.assertLink({ content: 'Profile', href: '/account/profile' });
+        cy.assertLink({ content: 'Account Settings', href: '/account/settings' });
+        cy.assertLink({ content: 'Billing', href: '/account/billing' });
+        cy.assertLink({ content: 'Users', href: '/account/users' });
+        cy.assertLink({ content: 'Subaccounts', href: '/account/subaccounts' });
+        cy.assertLink({ content: 'Alerts', href: '/alerts' });
+        cy.assertLink({ content: 'API Docs', href: 'https://developers.sparkpost.com/api' });
+      });
+    });
+
+    it('closes the action list when a nav item is clicked', () => {
+      commonBeforeSteps();
+      toggleAccountMenu();
+
+      cy.get(accountActionlistSelector).within(() => {
+        cy.findByText('Profile').click();
+      });
+
+      cy.get(accountActionlistSelector).should('not.be.visible');
+    });
+
+    it('closes the action list when a nav item that triggers an action is clicked', () => {
+      commonBeforeSteps();
+      toggleAccountMenu();
+
+      cy.get(accountActionlistSelector).within(() => {
+        cy.findByText('Help').click();
+      });
+
+      cy.get(accountActionlistSelector).should('not.be.visible');
+    });
+
+    it('renders with relevant items as a templates user', () => {
+      stubGrantsRequest({ role: 'templates' });
+      commonBeforeSteps();
+      toggleAccountMenu();
+
+      cy.get(accountActionlistSelector).within(() => {
+        cy.assertLink({ content: 'Profile', href: '/account/profile' });
+        cy.assertLink({ content: 'Alerts', href: '/alerts' });
+        cy.findByText('Help').should('be.visible');
+        cy.assertLink({ content: 'API Docs', href: 'https://developers.sparkpost.com/api' });
+        cy.findByText('Log Out').should('be.visible');
+      });
+    });
+
+    it('renders with relevant items as a reporting user', () => {
+      stubGrantsRequest({ role: 'reporting' });
+      commonBeforeSteps();
+      toggleAccountMenu();
+
+      cy.get(accountActionlistSelector).within(() => {
+        cy.assertLink({ content: 'Profile', href: '/account/profile' });
+        cy.assertLink({ content: 'Alerts', href: '/alerts' });
+        cy.findByText('Help').should('be.visible');
+        cy.assertLink({ content: 'API Docs', href: 'https://developers.sparkpost.com/api' });
+        cy.findByText('Log Out').should('be.visible');
+      });
+    });
+
+    it('renders with a relevant items as a developer user', () => {
+      stubGrantsRequest({ role: 'developer' });
+      commonBeforeSteps();
+      toggleAccountMenu();
+
+      cy.get(accountActionlistSelector).within(() => {
+        cy.assertLink({ content: 'Profile', href: '/account/profile' });
+        cy.assertLink({ content: 'Subaccounts', href: '/account/subaccounts' });
+        cy.assertLink({ content: 'Alerts', href: '/alerts' });
+        cy.findByText('Help').should('be.visible');
+        cy.assertLink({ content: 'API Docs', href: 'https://developers.sparkpost.com/api' });
+        cy.findByText('Log Out').should('be.visible');
       });
     });
   });

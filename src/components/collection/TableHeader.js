@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
-import { Table } from '@sparkpost/matchbox';
+import { Table } from 'src/components/matchbox';
 import SortLabel from './SortLabel';
 
 export default class TableHeader extends Component {
-  handleSorting = (column) => {
+  handleSorting = column => {
     const { sortColumn, sortDirection } = this.props;
     let direction;
 
-    if (column === sortColumn) { // change direction as same column is clicked again
+    if (column === sortColumn) {
+      // change direction as same column is clicked again
       direction = sortDirection === 'asc' ? 'desc' : 'asc';
     } else {
       direction = 'asc';
     }
 
     this.props.onSort(column, direction);
-  }
+  };
 
-  renderSortCell = (item) => {
+  renderSortCell = item => {
     const { label, sortKey } = item;
     const { sortColumn, sortDirection } = this.props;
 
@@ -25,12 +26,13 @@ export default class TableHeader extends Component {
         <SortLabel
           onClick={() => this.handleSorting(sortKey)}
           direction={sortKey === sortColumn && sortDirection}
-          label={label} />
+          label={label}
+        />
       );
     }
 
     return label;
-  }
+  };
 
   render() {
     const { columns } = this.props;
@@ -41,7 +43,11 @@ export default class TableHeader extends Component {
       }
       const { label, sortKey, ...rest } = item;
 
-      return <Table.HeaderCell key={label} {...rest}>{this.renderSortCell(item)}</Table.HeaderCell>;
+      return (
+        <Table.HeaderCell key={label} {...rest}>
+          {this.renderSortCell(item)}
+        </Table.HeaderCell>
+      );
     });
 
     return (

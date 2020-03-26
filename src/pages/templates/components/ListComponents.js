@@ -1,10 +1,10 @@
 import React from 'react';
-import { Tooltip, ScreenReaderOnly } from '@sparkpost/matchbox';
+import { Tooltip } from '@sparkpost/matchbox';
 import { CheckCircle, Delete, Edit, ContentCopy } from '@sparkpost/matchbox-icons';
 import { formatDateTime } from 'src/helpers/date';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { PageLink } from 'src/components/links';
-import { Button, Tag } from 'src/components/matchbox';
+import { Button, ScreenReaderOnly, Tag } from 'src/components/matchbox';
 import styles from './ListComponents.module.scss';
 
 import { routeNamespace } from '../constants/routes';

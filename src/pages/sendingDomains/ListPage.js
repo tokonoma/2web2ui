@@ -13,7 +13,7 @@ import {
   StatusTooltipHeader,
   ApiErrorBanner,
 } from 'src/components';
-import { Page } from '@sparkpost/matchbox';
+import { Page } from 'src/components/matchbox';
 import { Setup } from 'src/components/images';
 import { PageLink } from 'src/components/links';
 import UnverifiedWarningBanner from './components/UnverifiedWarningBanner';

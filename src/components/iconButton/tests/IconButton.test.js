@@ -1,17 +1,15 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import TestApp from 'src/__testHelpers__/TestApp';
 import IconButton from '../IconButton';
 
 describe('IconButton', () => {
-  const subject = (props) => (
+  const subject = props =>
     mount(
-      <IconButton
-        onClick={jest.fn()}
-        screenReaderLabel="Hello, world"
-        {...props}
-      />
-    )
-  );
+      <TestApp>
+        <IconButton onClick={jest.fn()} screenReaderLabel="Hello, world" {...props} />
+      </TestApp>,
+    );
 
   it('renders with a screen reader label', () => {
     const wrapper = subject();

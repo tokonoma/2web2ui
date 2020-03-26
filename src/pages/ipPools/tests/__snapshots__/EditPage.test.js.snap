@@ -9,7 +9,6 @@ exports[`IP Pools Edit Page render tests should not show purchase action if show
       "to": "/account/ip-pools",
     }
   }
-  empty={Object {}}
   secondaryActions={
     Array [
       Object {
@@ -72,7 +71,6 @@ exports[`IP Pools Edit Page render tests should render the edit page correctly 1
       "to": "/account/ip-pools",
     }
   }
-  empty={Object {}}
   secondaryActions={
     Array [
       Object {

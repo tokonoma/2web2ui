@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Page } from '@sparkpost/matchbox';
+import { Page } from 'src/components/matchbox';
 import { Save } from '@sparkpost/matchbox-icons';
 import Section from './components/Section';
 import StatusPanel from './components/StatusPanel';

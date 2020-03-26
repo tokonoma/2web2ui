@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Page } from '@sparkpost/matchbox';
-import { Panel } from 'src/components/matchbox';
 import { ApiErrorBanner, DeleteModal, Loading } from 'src/components';
+import { Page, Panel } from 'src/components/matchbox';
 import PoolForm from './components/PoolForm';
 import IpList from './components/IpList';
 

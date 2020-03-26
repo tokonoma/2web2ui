@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Page } from '@sparkpost/matchbox';
 import { Setup } from 'src/components/images';
 import { PageLink } from 'src/components/links';
+import { Page } from 'src/components/matchbox';
 
 import { listApiKeys, hideNewApiKey } from 'src/actions/api-keys';
 import { list as listSubaccounts } from 'src/actions/subaccounts';

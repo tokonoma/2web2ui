@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from '@sparkpost/matchbox';
+import { Table } from 'src/components/matchbox';
 import cx from 'classnames';
 import _ from 'lodash';
 import { TableCollection } from 'src/components/collection';

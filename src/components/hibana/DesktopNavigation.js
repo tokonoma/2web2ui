@@ -1,13 +1,14 @@
 import React from 'react';
 import classNames from 'classnames';
-import { ScreenReaderOnly } from '@sparkpost/matchbox';
-import { PageLink } from 'src/components/links';
-import { Inline } from 'src/components/matchbox';
 import { SparkPost } from 'src/components';
+import { PageLink } from 'src/components/links';
+import { Inline, ScreenReaderOnly } from 'src/components/matchbox';
 import findRouteByPath from 'src/helpers/findRouteByPath';
+import AccountPopover from './AccountPopover';
 import styles from './DesktopNavigation.module.scss';
 
-export default function DesktopNavigation({ navItems, location }) {
+export default function DesktopNavigation(props) {
+  const { navItems, location } = props;
   const { category, subcategory } = findRouteByPath(location.pathname);
 
   const isCategoryActive = navItem => category === navItem.label;
@@ -26,7 +27,7 @@ export default function DesktopNavigation({ navItems, location }) {
 
           <nav className={styles.PrimaryNav} aria-labelledby="primary-nav-heading">
             {/* Visually hidden headings to help guide screen reader users */}
-            <ScreenReaderOnly>
+            <ScreenReaderOnly as="div">
               <h2 id="primary-nav-heading">Main</h2>
             </ScreenReaderOnly>
 
@@ -46,14 +47,7 @@ export default function DesktopNavigation({ navItems, location }) {
             </Inline>
           </nav>
 
-          {/* TODO: Implement in FE-924 */}
-          <AccountDropdown>
-            <button className={styles.AccountDropdownButton}>
-              <span aria-hidden="true">SP</span>
-
-              <ScreenReaderOnly>Account Menu</ScreenReaderOnly>
-            </button>
-          </AccountDropdown>
+          <AccountPopover />
         </div>
       </NavWrapper>
 
@@ -68,7 +62,7 @@ export default function DesktopNavigation({ navItems, location }) {
             >
               <NavWrapper>
                 {/* Visually hidden headings to help guide screen reader users */}
-                <ScreenReaderOnly>
+                <ScreenReaderOnly as="div">
                   <h3 id="secondary-nav-heading">Secondary</h3>
                 </ScreenReaderOnly>
 
@@ -90,6 +84,8 @@ export default function DesktopNavigation({ navItems, location }) {
             </nav>
           );
         }
+
+        return null;
       })}
     </div>
   );
@@ -124,8 +120,4 @@ function SkipLink() {
       Skip to Main Content
     </a>
   );
-}
-
-function AccountDropdown({ children }) {
-  return <div className={styles.AccountDropdownWrapper}>{children}</div>;
 }

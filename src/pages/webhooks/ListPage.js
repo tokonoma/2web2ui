@@ -13,7 +13,7 @@ import { selectWebhooks } from 'src/selectors/webhooks';
 
 // Components
 import { Loading, TableCollection, Subaccount, ApiErrorBanner } from 'src/components';
-import { Page } from '@sparkpost/matchbox';
+import { Page } from 'src/components/matchbox';
 import { Setup } from 'src/components/images';
 import { PageLink } from 'src/components/links';
 import { formatDateTime } from 'src/helpers/date';

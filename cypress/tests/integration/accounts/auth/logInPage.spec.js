@@ -33,7 +33,7 @@ describe('The log in page', () => {
     cy.findByText('Sign up').click();
 
     cy.title().should('include', 'Sign Up');
-    cy.findByText('Sign Up').should('be.visible');
+    cy.findByText('Sign Up for SparkPost').should('be.visible');
   });
 
   it('has a link to the single sign-on flow', () => {

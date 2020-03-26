@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Page } from '@sparkpost/matchbox';
 import { PageLink } from 'src/components/links';
-import { Banner, Panel } from 'src/components/matchbox';
+import { Banner, Page, Panel } from 'src/components/matchbox';
 import _ from 'lodash';
 
 import { listApiKeys, getApiKey, listGrants } from 'src/actions/api-keys';

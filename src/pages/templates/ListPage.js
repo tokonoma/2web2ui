@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 import React, { Component } from 'react';
-import { Page } from '@sparkpost/matchbox';
+import { Page } from 'src/components/matchbox';
 import { ApiErrorBanner, Loading, TableCollection } from 'src/components';
 import { Templates } from 'src/components/images';
 import { PageLink } from 'src/components/links';

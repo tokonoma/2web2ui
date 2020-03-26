@@ -9,7 +9,6 @@ exports[`Page: Alerts Edit should render happy path 1`] = `
       "to": "/alerts/details/alert-id-1",
     }
   }
-  empty={Object {}}
   title="Edit Alert"
 >
   <withRouter(Connect(ReduxForm))

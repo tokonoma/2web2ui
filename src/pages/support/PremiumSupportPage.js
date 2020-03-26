@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
-import { Page } from '@sparkpost/matchbox';
 import { createTicket } from 'src/actions/support';
 import { showAlert } from 'src/actions/globalAlert';
 import { PageLink } from 'src/components/links';
-import { Button, Panel } from 'src/components/matchbox';
+import { Button, Page, Panel } from 'src/components/matchbox';
 import PremiumSupportFields from './components/PremiumSupportFields';
 import { generateMessage } from './helpers/formHelpers';
 

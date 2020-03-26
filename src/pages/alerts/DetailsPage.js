@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Page } from '@sparkpost/matchbox';
 import { Delete, ContentCopy } from '@sparkpost/matchbox-icons';
 import { DeleteModal, Loading } from 'src/components';
 import { PageLink } from 'src/components/links';
-import { Button } from 'src/components/matchbox';
+import { Button, Page } from 'src/components/matchbox';
 import withAlert from './containers/DetailsPage.container';
 import { AlertDetails } from './components/AlertDetails';
 import AlertIncidents from './components/AlertIncidents';

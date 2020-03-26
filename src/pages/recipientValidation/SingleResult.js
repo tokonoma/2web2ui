@@ -1,11 +1,11 @@
 /* eslint-disable no-restricted-syntax */
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { ScreenReaderOnly, Page, Grid } from '@sparkpost/matchbox';
-import { ExternalLink, PageLink, SupportTicketLink } from 'src/components/links';
-import { Button, Panel } from 'src/components/matchbox';
-import styles from './SingleResult.module.scss';
 import { withRouter } from 'react-router-dom';
+import { Grid } from '@sparkpost/matchbox';
+import { ExternalLink, PageLink, SupportTicketLink } from 'src/components/links';
+import { Button, Page, Panel, ScreenReaderOnly } from 'src/components/matchbox';
+import styles from './SingleResult.module.scss';
 import CodeBlock from './components/CodeBlock';
 import {
   ROLE_TOOLTIP,

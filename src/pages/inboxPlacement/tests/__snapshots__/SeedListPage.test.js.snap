@@ -34,7 +34,6 @@ exports[`Page: SeedList tests renders page correctly with defaults 1`] = `
       "onClick": [Function],
     }
   }
-  empty={Object {}}
   subtitle="Start a Test"
   title="Inbox Placement"
 >

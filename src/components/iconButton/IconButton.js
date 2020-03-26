@@ -1,10 +1,10 @@
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { ScreenReaderOnly } from '@sparkpost/matchbox';
+import { ScreenReaderOnly } from 'src/components/matchbox';
 import styles from './IconButton.module.scss';
 
-const IconButton = (props) => {
+const IconButton = props => {
   const {
     className,
     onClick,
@@ -13,7 +13,7 @@ const IconButton = (props) => {
     children,
     disabled,
     'data-id': dataId,
-    'aria-expanded': ariaExpanded
+    'aria-expanded': ariaExpanded,
   } = props;
 
   return (
@@ -39,7 +39,7 @@ IconButton.propTypes = {
   title: PropTypes.string,
   disabled: PropTypes.bool,
   'data-id': PropTypes.string,
-  'aria-expanded': PropTypes.oneOf([ 'true', 'false' ])
+  'aria-expanded': PropTypes.oneOf(['true', 'false']),
 };
 
 export default IconButton;

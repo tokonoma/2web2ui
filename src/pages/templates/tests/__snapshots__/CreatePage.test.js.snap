@@ -9,7 +9,6 @@ exports[`CreatePage renders correctly 1`] = `
       "to": "/templates",
     }
   }
-  empty={Object {}}
   title="Create New Template"
 >
   <p

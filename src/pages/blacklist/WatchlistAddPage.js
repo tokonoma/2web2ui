@@ -1,10 +1,9 @@
 import React, { useState, useCallback } from 'react';
 import { connect } from 'react-redux';
-import { Page } from '@sparkpost/matchbox';
 import { showAlert } from 'src/actions/globalAlert';
 import { watchlistAdd } from 'src/actions/blacklist';
 import { PageLink } from 'src/components/links';
-import { Button, Panel, TextField } from 'src/components/matchbox';
+import { Button, Page, Panel, TextField } from 'src/components/matchbox';
 
 import styles from './WatchlistAddPage.module.scss';
 

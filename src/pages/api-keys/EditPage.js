@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { Page } from '@sparkpost/matchbox';
 import { PageLink } from 'src/components/links';
-import { Panel } from 'src/components/matchbox';
+import { Page, Panel } from 'src/components/matchbox';
 import {
   deleteApiKey,
   getApiKey,

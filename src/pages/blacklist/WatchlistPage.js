@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Page } from '@sparkpost/matchbox';
-import { PageLink } from 'src/components/links';
-import { Button } from 'src/components/matchbox';
-
 import { ApiErrorBanner, Loading } from 'src/components';
+import { PageLink } from 'src/components/links';
+import { Button, Page } from 'src/components/matchbox';
 import { selectBlacklistedCount } from 'src/selectors/blacklist';
 import { listMonitors } from 'src/actions/blacklist';
 import MonitorsCollection from './components/MonitorsCollection';

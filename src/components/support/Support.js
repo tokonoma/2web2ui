@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import qs from 'query-string';
-import { Tabs } from '@sparkpost/matchbox';
-import { Panel, UnstyledLink } from 'src/components/matchbox';
 import * as supportActions from 'src/actions/support';
 import { AccessControl } from 'src/components/auth';
+import { Panel, Tabs, UnstyledLink } from 'src/components/matchbox';
 import Modal from 'src/components/modals/Modal';
 import findRouteByPath from 'src/helpers/findRouteByPath';
 import { authorizedToSubmitSupportTickets, entitledToPhoneSupport } from 'src/selectors/support';
@@ -77,14 +76,14 @@ export class Support extends Component {
 
     return (
       <Modal open={showSupportPanel} onClose={closeSupportPanel} showCloseButton={true}>
-        {visibleTabs.length > 1 && (
-          <Tabs
-            connectBelow={true}
-            selected={visibleTabs.findIndex(tab => tab.view === currentSupportView)}
-            tabs={visibleTabs.map(({ content, onClick }) => ({ content, onClick }))}
-          />
-        )}
         <Panel className={styles.Support}>
+          {visibleTabs.length > 1 && (
+            <Tabs
+              connectBelow={true}
+              selected={visibleTabs.findIndex(tab => tab.view === currentSupportView)}
+              tabs={visibleTabs.map(({ content, onClick }) => ({ content, onClick }))}
+            />
+          )}
           {currentSupportView === 'docs' && <SearchPanel defaultSearchText={supportDocSearch} />}
           {currentSupportView === 'ticket' && <SupportForm onClose={closeSupportPanel} />}
           {currentSupportView === 'contact' && (

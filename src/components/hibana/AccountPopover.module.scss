@@ -1,0 +1,59 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+@import 'src/styles/resets';
+
+.AccountPopover {
+  align-self: center;
+  justify-self: end;
+}
+
+.AccountPopoverButton {
+  @include button-reset();
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: spacing(700);
+  height: spacing(700);
+  border-radius: border-radius(circle);
+  background-color: color(brand, orange);
+  color: color(white);
+  transition: background-color motion-duration(fast) motion-ease(in-out);
+
+  &:hover,
+  &:focus,
+  &.isOpen {
+    background-color: color(gray, 900);
+  }
+}
+
+.AccountPopoverIcon {
+  width: 50%;
+  height: 50%;
+}
+
+.AccountPopoverHeader {
+  padding: spacing(200) spacing(400);
+  background-color: color(white);
+  color: color(purple, 800);
+  overflow: hidden;
+  border-bottom: 1px solid color(gray, 300);
+  border-radius: border-radius(200) border-radius(200) 0 0;
+}
+
+.AccountPopoverUserInfo,
+.AccountPopoverSupplemental {
+  font-size: font-size(200);
+}
+
+.AccountPopoverUserInfo {
+  font-weight: font-weight(medium);
+}
+
+.AccountPopoverSupplemental {
+  text-transform: capitalize;
+}
+
+.PopoverItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

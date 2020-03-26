@@ -34,7 +34,6 @@ exports[`Component: TestContent renders page correctly with defaults 1`] = `
   <Panel>
     <Tabs
       color="blue"
-      connectBelow={true}
       selected={0}
       tabs={
         Array [

@@ -2,7 +2,6 @@
 
 exports[`BouncePage:  should display loading panel on top level metrics when aggregates are loading 1`] = `
 <Page
-  empty={Object {}}
   title="Bounce Report"
 >
   <withRouter(Connect(ReportOptions))
@@ -14,8 +13,6 @@ exports[`BouncePage:  should display loading panel on top level metrics when agg
     minHeight="115px"
   />
   <Tabs
-    color="orange"
-    connectBelow={true}
     selected={0}
     tabs={
       Array [
@@ -112,7 +109,6 @@ exports[`BouncePage:  should display loading panel on top level metrics when agg
 
 exports[`BouncePage:  should render 1`] = `
 <Page
-  empty={Object {}}
   title="Bounce Report"
 >
   <withRouter(Connect(ReportOptions))
@@ -131,15 +127,14 @@ exports[`BouncePage:  should render 1`] = `
     <strong>
       1
     </strong>
-     of 
+     of
+     
     <strong>
       10
     </strong>
      sent messages bounced
   </Connect(MetricsSummary)>
   <Tabs
-    color="orange"
-    connectBelow={true}
     selected={0}
     tabs={
       Array [
@@ -235,15 +230,12 @@ exports[`BouncePage:  should render 1`] = `
 
 exports[`BouncePage:  should render correctly with no bounces 1`] = `
 <Page
-  empty={Object {}}
   title="Bounce Report"
 >
   <withRouter(Connect(ReportOptions))
     searchOptions={Object {}}
   />
   <Tabs
-    color="orange"
-    connectBelow={true}
     selected={0}
     tabs={
       Array [
@@ -349,7 +341,7 @@ Array [
   undefined,
   <span>
     5
-     
+     
     <small>
       (
       <Percent
@@ -380,7 +372,7 @@ Array [
   undefined,
   <span>
     10
-     
+     
     <small>
       (
       <Percent
@@ -394,7 +386,6 @@ Array [
 
 exports[`BouncePage:  should show empty reasons table when there are no admin reasons when on admin bounce tab 1`] = `
 <Page
-  empty={Object {}}
   title="Bounce Report"
 >
   <withRouter(Connect(ReportOptions))
@@ -413,15 +404,14 @@ exports[`BouncePage:  should show empty reasons table when there are no admin re
     <strong>
       1
     </strong>
-     of 
+     of
+     
     <strong>
       10
     </strong>
      sent messages bounced
   </Connect(MetricsSummary)>
   <Tabs
-    color="orange"
-    connectBelow={true}
     selected={1}
     tabs={
       Array [
@@ -455,7 +445,6 @@ exports[`BouncePage:  should show empty reasons table when there are no admin re
 
 exports[`BouncePage:  should show empty reasons table when there are no reasons when on regular bounce tab 1`] = `
 <Page
-  empty={Object {}}
   title="Bounce Report"
 >
   <withRouter(Connect(ReportOptions))
@@ -474,15 +463,14 @@ exports[`BouncePage:  should show empty reasons table when there are no reasons 
     <strong>
       1
     </strong>
-     of 
+     of
+     
     <strong>
       10
     </strong>
      sent messages bounced
   </Connect(MetricsSummary)>
   <Tabs
-    color="orange"
-    connectBelow={true}
     selected={0}
     tabs={
       Array [
@@ -516,7 +504,6 @@ exports[`BouncePage:  should show empty reasons table when there are no reasons 
 
 exports[`BouncePage:  should show loading panel when table is loading 1`] = `
 <Page
-  empty={Object {}}
   title="Bounce Report"
 >
   <withRouter(Connect(ReportOptions))
@@ -535,15 +522,14 @@ exports[`BouncePage:  should show loading panel when table is loading 1`] = `
     <strong>
       1
     </strong>
-     of 
+     of
+     
     <strong>
       10
     </strong>
      sent messages bounced
   </Connect(MetricsSummary)>
   <Tabs
-    color="orange"
-    connectBelow={true}
     selected={0}
     tabs={
       Array [

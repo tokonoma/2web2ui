@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import { refreshDelayReport } from 'src/actions/delayReport';
 import { selectReportSearchOptions } from 'src/selectors/reportSearchOptions';
-import { Page } from '@sparkpost/matchbox';
+import { Page } from 'src/components/matchbox';
 import ReportOptions from 'src/pages/reports/components/ReportOptions';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import MetricsSummary from '../components/MetricsSummary';
@@ -24,7 +24,9 @@ export class DelayPage extends Component {
       return <PanelLoading />;
     }
 
-    return <DelaysDataTable title='Delayed Messages' totalAccepted={totalAccepted} rows={reasons} />;
+    return (
+      <DelaysDataTable title="Delayed Messages" totalAccepted={totalAccepted} rows={reasons} />
+    );
   }
 
   renderTopLevelMetrics() {

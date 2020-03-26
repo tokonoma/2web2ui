@@ -78,7 +78,7 @@ Array [
       "condition": [Function],
       "path": "/with/children",
     },
-    "to": "/with/children",
+    "to": "/child/a",
   },
   Object {
     "label": "No Condition",
@@ -180,7 +180,7 @@ Array [
       "condition": [Function],
       "path": "/with/children",
     },
-    "to": "/with/children",
+    "to": "/child/a",
   },
   Object {
     "label": "No Condition",
@@ -234,7 +234,7 @@ Array [
       "condition": [Function],
       "path": "/with/children",
     },
-    "to": "/with/children",
+    "to": "/child/a",
   },
   Object {
     "label": "No Condition",
@@ -296,7 +296,7 @@ Array [
       "condition": [Function],
       "path": "/with/children",
     },
-    "to": "/with/children",
+    "to": "/child/a",
   },
   Object {
     "label": "No Condition",

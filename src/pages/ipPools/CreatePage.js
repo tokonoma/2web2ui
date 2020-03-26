@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Page } from '@sparkpost/matchbox';
+import Page from 'src/components/matchbox/Page';
 import { ApiErrorBanner, Loading } from 'src/components';
 import { PageLink } from 'src/components/links';
 import PoolForm from './components/PoolForm';

@@ -6,7 +6,7 @@ import { listAbTests, deleteAbTest, cancelAbTest } from 'src/actions/abTesting';
 import { showAlert } from 'src/actions/globalAlert';
 
 // Components
-import { Page } from '@sparkpost/matchbox';
+import { Page } from 'src/components/matchbox';
 import { Loading, ApiErrorBanner, DeleteModal, ConfirmationModal } from 'src/components';
 import { Setup } from 'src/components/images';
 import { PageLink } from 'src/components/links';

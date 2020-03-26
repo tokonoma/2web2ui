@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Page } from '@sparkpost/matchbox';
-import { PageLink } from 'src/components/links';
-import { Panel } from 'src/components/matchbox';
 import _ from 'lodash';
 import { ApiErrorBanner, Loading } from 'src/components';
+import { PageLink } from 'src/components/links';
+import { Page, Panel } from 'src/components/matchbox';
 import PanelLoading from 'src/components/panelLoading';
 import IpForm from './components/IpForm';
 import DeliveryHistoryLineChart from './components/DeliveryHistoryLineChart';

@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Page } from '@sparkpost/matchbox';
 import { connect } from 'react-redux';
 import moment from 'moment';
-
 import { ApiErrorBanner, Loading } from 'src/components';
 import { Users } from 'src/components/images';
 import { PageLink } from 'src/components/links';
+import { Page } from 'src/components/matchbox';
 import { listMonitors, listIncidents } from 'src/actions/blacklist';
 import { selectIncidentsList } from 'src/selectors/blacklist';
 import { getRelativeDates } from 'src/helpers/date';

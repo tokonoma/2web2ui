@@ -1,6 +1,7 @@
 import { mount, shallow } from 'enzyme';
 import React from 'react';
 import { HealthScoreDashboard } from '../HealthScoreDashboard';
+import TestApp from 'src/__testHelpers__/TestApp';
 
 // Child components are mocked because
 // 1. useEffect requires enzyme mount to test
@@ -14,17 +15,20 @@ jest.mock('../../components/filters/DateFilter');
 jest.mock('../../components/filters/SubaccountFilter');
 
 describe('Signals Health Score Dashboard', () => {
-  const subject = (props = {}, render = shallow) => render(
-    <HealthScoreDashboard
-      getCurrentHealthScore={() => {}}
-      getSubaccounts={() => {}}
-      relativeRange='90days'
-      from='2015-01-01'
-      to='2015-01-05'
-      subaccounts={['sub1', 'sub2']}
-      {...props}
-    />
-  );
+  const subject = (props = {}, render = shallow) =>
+    render(
+      <TestApp>
+        <HealthScoreDashboard
+          getCurrentHealthScore={() => {}}
+          getSubaccounts={() => {}}
+          relativeRange="90days"
+          from="2015-01-01"
+          to="2015-01-05"
+          subaccounts={['sub1', 'sub2']}
+          {...props}
+        />
+      </TestApp>,
+    );
 
   it('renders page', () => {
     expect(subject()).toMatchSnapshot();
@@ -44,7 +48,7 @@ describe('Signals Health Score Dashboard', () => {
       limit: 1,
       order: 'asc',
       relativeRange: '90days',
-      to: '2015-01-05'
+      to: '2015-01-05',
     });
   });
 });

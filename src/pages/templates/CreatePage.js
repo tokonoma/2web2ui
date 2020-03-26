@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 // Components
-import { Page } from '@sparkpost/matchbox';
-import { Button, Panel } from 'src/components/matchbox';
+import { Button, Page, Panel } from 'src/components/matchbox';
 import { Loading } from 'src/components';
 import { PageLink } from 'src/components/links';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';

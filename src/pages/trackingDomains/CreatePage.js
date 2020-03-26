@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Page } from '@sparkpost/matchbox';
 import { ExternalLink, PageLink } from 'src/components/links';
-import { Banner } from 'src/components/matchbox';
+import { Banner, Page } from 'src/components/matchbox';
 import CreateForm from './components/CreateForm';
 import { createTrackingDomain } from 'src/actions/trackingDomains';
 import { selectTrackingDomainCname } from 'src/selectors/account';

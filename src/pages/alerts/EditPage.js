@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Page } from '@sparkpost/matchbox';
 import withEditPage from './containers/EditPage.container';
 import AlertForm from './components/AlertForm';
 import formatFormValues from './helpers/formatFormValues';
 import { Loading } from 'src/components';
 import { PageLink } from 'src/components/links';
+import { Page } from 'src/components/matchbox';
 import RedirectAndAlert from 'src/components/globalAlert/RedirectAndAlert';
 
 export class EditPage extends Component {

@@ -4,14 +4,13 @@ import _ from 'lodash';
 import { refreshRejectionReport } from 'src/actions/rejectionReport';
 import { selectReportSearchOptions } from 'src/selectors/reportSearchOptions';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
-import { Page } from '@sparkpost/matchbox';
+import { Page } from 'src/components/matchbox';
 import ReportOptions from '../components/ReportOptions';
 import MetricsSummary from '../components/MetricsSummary';
 import DataTable from './components/DataTable';
 import { safeRate } from 'src/helpers/math';
 
 export class RejectionPage extends Component {
-
   componentDidUpdate(prevProps) {
     if (prevProps.reportOptions !== this.props.reportOptions) {
       this.props.refreshRejectionReport(this.props.reportOptions);
@@ -33,7 +32,7 @@ export class RejectionPage extends Component {
     const { count_rejected, count_targeted } = aggregates;
 
     if (aggregatesLoading) {
-      return <PanelLoading minHeight='115px' />;
+      return <PanelLoading minHeight="115px" />;
     }
 
     if (_.isEmpty(aggregates)) {
@@ -43,8 +42,10 @@ export class RejectionPage extends Component {
     return (
       <MetricsSummary
         rateValue={safeRate(count_rejected, count_targeted)}
-        rateTitle='Rejected Rate'>
-        <strong>{count_rejected.toLocaleString()}</strong> of your messages were rejected of <strong>{count_targeted.toLocaleString()}</strong> messages targeted
+        rateTitle="Rejected Rate"
+      >
+        <strong>{count_rejected.toLocaleString()}</strong> of your messages were rejected of{' '}
+        <strong>{count_targeted.toLocaleString()}</strong> messages targeted
       </MetricsSummary>
     );
   }
@@ -53,26 +54,26 @@ export class RejectionPage extends Component {
     const { loading, rejectionSearchOptions } = this.props;
 
     return (
-      <Page title='Rejections Report'>
+      <Page title="Rejections Report">
         <ReportOptions reportLoading={loading} searchOptions={rejectionSearchOptions} />
         {this.renderTopLevelMetrics()}
-        <hr/>
+        <hr />
         {this.renderCollection()}
       </Page>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   loading: state.rejectionReport.aggregatesLoading || state.rejectionReport.reasonsLoading,
   aggregatesLoading: state.rejectionReport.aggregatesLoading,
   aggregates: state.rejectionReport.aggregates,
   list: state.rejectionReport.list,
   reportOptions: state.reportOptions,
-  rejectionSearchOptions: selectReportSearchOptions(state)
+  rejectionSearchOptions: selectReportSearchOptions(state),
 });
 
 const mapDispatchToProps = {
-  refreshRejectionReport
+  refreshRejectionReport,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(RejectionPage);

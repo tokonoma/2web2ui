@@ -13,7 +13,7 @@ import {
 import { showAlert } from 'src/actions/globalAlert';
 import { Loading, DeleteModal } from 'src/components';
 import { PageLink } from 'src/components/links';
-import { Page } from '@sparkpost/matchbox';
+import { Page } from 'src/components/matchbox';
 import AssignTrackingDomain from './components/AssignTrackingDomain';
 import EditBounce from './components/EditBounce';
 import SetupSending from './components/SetupSending';

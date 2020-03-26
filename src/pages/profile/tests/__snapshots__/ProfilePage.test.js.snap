@@ -2,7 +2,6 @@
 
 exports[`ProfilePage renders correctly 1`] = `
 <Page
-  empty={Object {}}
   title="Profile"
 >
   <Panel
@@ -51,7 +50,6 @@ exports[`ProfilePage renders correctly 1`] = `
 
 exports[`ProfilePage renders with verify email banner 1`] = `
 <Page
-  empty={Object {}}
   title="Profile"
 >
   <Connect(VerifyEmailBanner)

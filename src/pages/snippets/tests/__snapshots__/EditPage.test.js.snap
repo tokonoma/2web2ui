@@ -21,7 +21,6 @@ exports[`EditPage renders disabled form when submitting 1`] = `
       "to": "/snippets",
     }
   }
-  empty={Object {}}
   primaryAction={
     Object {
       "Component": [Function],
@@ -125,7 +124,6 @@ exports[`EditPage renders disabled form when user does not have authorization to
       "to": "/snippets",
     }
   }
-  empty={Object {}}
   primaryAction={
     Object {
       "Component": [Function],
@@ -208,7 +206,6 @@ exports[`EditPage renders edit form 1`] = `
       "to": "/snippets",
     }
   }
-  empty={Object {}}
   primaryAction={
     Object {
       "Component": [Function],

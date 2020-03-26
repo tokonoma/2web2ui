@@ -1,7 +1,6 @@
 import React from 'react';
 import { Field } from 'redux-form';
-import { Tabs } from '@sparkpost/matchbox';
-import { Panel } from 'src/components/matchbox';
+import { Panel, Tabs } from 'src/components/matchbox';
 import { json } from 'src/helpers/validation';
 import AceWrapper from './AceWrapper';
 
@@ -14,21 +13,21 @@ const fields = [
     mode: 'html',
     name: 'content.html',
     syntaxValidation: false,
-    show: () => true
+    show: () => true,
   },
   {
     content: 'Text',
     name: 'content.text',
     mode: 'text',
     syntaxValidation: false,
-    show: () => true
+    show: () => true,
   },
   {
     content: 'AMP HTML',
     name: 'content.amp_html',
     mode: 'html',
     syntaxValidation: false,
-    show: () => true
+    show: () => true,
   },
   {
     alwaysEditable: true,
@@ -36,54 +35,55 @@ const fields = [
     name: 'testData',
     mode: 'json',
     syntaxValidation: true,
-    show: ({ contentOnly }) => !contentOnly
-  }
+    show: ({ contentOnly }) => !contentOnly,
+  },
 ];
 
 class ContentEditor extends React.Component {
   state = {
-    selectedTab: 0
-  }
+    selectedTab: 0,
+  };
 
-  handleTab = (index) => {
+  handleTab = index => {
     this.setState({ selectedTab: index });
-  }
+  };
 
   // note, create/update snippet requests will fail if either part only contains whitespace
-  normalize = (value) => {
+  normalize = value => {
     if (!value || value.trim() === '') {
       return '';
     }
 
     return value;
-  }
+  };
 
   // note, must handle null template parts
-  requiredHtmlTextOrAmp = (value, { content: { html, text, amp_html } = {}}) => {
+  requiredHtmlTextOrAmp = (value, { content: { html, text, amp_html } = {} }) => {
     // return validation error if all parts are falsy or empty
     if (!this.normalize(html) && !this.normalize(text) && !this.normalize(amp_html)) {
       return 'HTML, AMP HTML, or Text is required';
     }
-  }
+  };
 
   validTestDataJson = (value, { testData }) => {
     if (!this.props.contentOnly && json(testData)) {
       return 'Invalid Test Data';
     }
-  }
+  };
 
   render() {
     const { readOnly } = this.props;
     const { selectedTab } = this.state;
-    const visibleFields = fields.filter((field) => field.show(this.props));
-    const tabs = visibleFields.map(({ content }, index) => ({ content, onClick: () => this.handleTab(index) }));
+    const visibleFields = fields.filter(field => field.show(this.props));
+    const tabs = visibleFields.map(({ content }, index) => ({
+      content,
+      onClick: () => this.handleTab(index),
+    }));
 
     return (
       <div className={styles.EditorSection}>
         <Tabs selected={selectedTab} tabs={tabs} />
-        {this.props.action && (
-          <div className={styles.Action}>{this.props.action}</div>
-        )}
+        {this.props.action && <div className={styles.Action}>{this.props.action}</div>}
         <Panel className={styles.EditorPanel}>
           <Field
             component={AceWrapper}

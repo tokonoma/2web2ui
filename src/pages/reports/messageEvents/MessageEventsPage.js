@@ -2,8 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { snakeToFriendly } from 'src/helpers/string';
-import { Page } from '@sparkpost/matchbox';
-import { Button } from 'src/components/matchbox';
+import { Button, Page } from 'src/components/matchbox';
 import {
   PanelLoading,
   TableCollection,

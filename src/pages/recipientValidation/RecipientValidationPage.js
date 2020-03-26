@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Page, Tabs } from '@sparkpost/matchbox';
 import { Launch } from '@sparkpost/matchbox-icons';
-import { Button, Panel } from 'src/components/matchbox';
+import { Button, Page, Panel, Tabs } from 'src/components/matchbox';
 import { reduxForm } from 'redux-form';
 import _ from 'lodash';
 import { prepareCardInfo, isProductOnSubscription } from 'src/helpers/billing';
@@ -160,7 +159,7 @@ export function RecipientValidationPage(props) {
               }))}
             />
             {selectedTab === 2 && (
-              <div className={styles.TagWrapper}>
+              <div className={styles.SecondaryActions}>
                 <Button
                   flat
                   external

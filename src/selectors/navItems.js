@@ -1,14 +1,14 @@
 import { createSelector } from 'reselect';
 import _ from 'lodash';
 import routes from 'src/config/routes';
-import navItems from 'src/config/navItems';
-import accountNavItems from 'src/config/navItems/account';
+import { navItems, hibanaNavItems } from 'src/config/navItems';
+import { accountNavItems, hibanaAccountNavItems } from 'src/config/navItems/account';
 import selectAccessConditionState from './accessConditionState';
 import { all } from 'src/helpers/conditions/compose';
 
-export const mapNavToRoutes = _.memoize((items) => {
+export const mapNavToRoutes = _.memoize(items => {
   const routesByPath = _.keyBy(routes, 'path');
-  return items.map((item) => {
+  return items.map(item => {
     item.route = routesByPath[item.to];
     if (item.children) {
       item.children = mapNavToRoutes(item.children);
@@ -18,21 +18,28 @@ export const mapNavToRoutes = _.memoize((items) => {
 });
 
 export function filterNavByAccess(items, accessConditionState) {
-  const firstLevelFiltered = items.filter((item) => {
+  const firstLevelFiltered = items.filter(item => {
     const allowed = () => true;
     const navCondition = _.get(item, 'condition', allowed);
     const routeCondition = _.get(item, 'route.condition', () => true);
     return all(navCondition, routeCondition)(accessConditionState);
   });
 
-  const childrenFiltered = firstLevelFiltered.map((item) => {
+  const childrenFiltered = firstLevelFiltered.map(item => {
     if (item.children) {
-      item = { ...item, children: filterNavByAccess(item.children, accessConditionState) };
+      const filteredChildren = filterNavByAccess(item.children, accessConditionState);
+
+      item = {
+        ...item,
+        children: filteredChildren,
+        to: filteredChildren[0] ? filteredChildren[0].to : '/', // If the item has children, the first level item `to` becomes
+      };
     }
+
     return item;
   });
 
-  return childrenFiltered.filter((item) => !item.children || item.children.length);
+  return childrenFiltered.filter(item => !item.children || item.children.length);
 }
 
 export function prepareNavItems(items, accessConditionState) {
@@ -40,12 +47,25 @@ export function prepareNavItems(items, accessConditionState) {
   return filterNavByAccess(mapped, accessConditionState);
 }
 
-export const selectNavItems = createSelector(
+// Navigation items selectors
+export const selectNavItems = createSelector([selectAccessConditionState], accessConditionState =>
+  prepareNavItems(navItems, accessConditionState),
+);
+
+export const selectHibanaNavItems = createSelector(
   [selectAccessConditionState],
-  (accessConditionState) => prepareNavItems(navItems, accessConditionState)
+  accessConditionState => {
+    return prepareNavItems(hibanaNavItems, accessConditionState);
+  },
 );
 
 export const selectAccountNavItems = createSelector(
   [selectAccessConditionState],
-  (accessConditionState) => prepareNavItems(accountNavItems, accessConditionState)
+  accessConditionState => prepareNavItems(accountNavItems, accessConditionState),
+);
+
+// Account item selectors
+export const selectHibanaAccountNavItems = createSelector(
+  [selectAccessConditionState],
+  accessConditionState => prepareNavItems(hibanaAccountNavItems, accessConditionState),
 );

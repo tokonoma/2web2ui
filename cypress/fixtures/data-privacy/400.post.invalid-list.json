@@ -1,0 +1,6 @@
+{
+  "errors": [
+    { "message": "invalid email address", "recipient": "bad address" },
+    { "message": "invalid email address", "recipient": "bad address 2" }
+  ]
+}

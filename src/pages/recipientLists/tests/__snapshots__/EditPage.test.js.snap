@@ -9,7 +9,6 @@ exports[`EditPage should delete a recipient list 1`] = `
       "to": "/lists/recipient-lists",
     }
   }
-  empty={Object {}}
   secondaryActions={
     Array [
       Object {
@@ -49,7 +48,6 @@ exports[`EditPage should render correctly 1`] = `
       "to": "/lists/recipient-lists",
     }
   }
-  empty={Object {}}
   secondaryActions={
     Array [
       Object {
@@ -87,7 +85,6 @@ exports[`EditPage should show a delete modal 1`] = `
       "to": "/lists/recipient-lists",
     }
   }
-  empty={Object {}}
   secondaryActions={
     Array [
       Object {
@@ -125,7 +122,6 @@ exports[`EditPage should update a recipient list 1`] = `
       "to": "/lists/recipient-lists",
     }
   }
-  empty={Object {}}
   secondaryActions={
     Array [
       Object {

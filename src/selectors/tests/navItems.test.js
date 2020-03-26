@@ -1,44 +1,44 @@
+import _ from 'lodash';
 import { prepareNavItems } from '../navItems';
 
-jest.mock('src/config/routes', () => ([
+jest.mock('src/config/routes', () => [
   {
     path: '/no/children',
-    condition: ({ blocked = []}) => !blocked.includes('/no/children')
+    condition: ({ blocked = [] }) => !blocked.includes('/no/children'),
   },
   {
     path: '/with/children',
-    condition: ({ blocked = []}) => !blocked.includes('/with/children')
+    condition: ({ blocked = [] }) => !blocked.includes('/with/children'),
   },
   {
     path: '/child/a',
-    condition: ({ blocked = []}) => !blocked.includes('/child/a')
+    condition: ({ blocked = [] }) => !blocked.includes('/child/a'),
   },
   {
     path: '/child/b',
-    condition: ({ blocked = []}) => !blocked.includes('/child/b')
+    condition: ({ blocked = [] }) => !blocked.includes('/child/b'),
   },
   {
     path: '/child/c',
-    condition: ({ blocked = []}) => !blocked.includes('/child/c')
+    condition: ({ blocked = [] }) => !blocked.includes('/child/c'),
   },
   {
-    path: '/no/condition'
+    path: '/no/condition',
   },
   {
-    path: '/nav/condition'
-  }
-]));
-
+    path: '/nav/condition',
+  },
+]);
 
 const mockItems = [
   {
     label: 'No Children',
-    to: '/no/children'
+    to: '/no/children',
   },
   {
     label: 'With Nav Condition',
     to: '/nav/condition',
-    condition: ({ blocked = []}) => !blocked.includes('/nav/condition')
+    condition: ({ blocked = [] }) => !blocked.includes('/nav/condition'),
   },
   {
     label: 'With Children',
@@ -46,22 +46,22 @@ const mockItems = [
     children: [
       {
         label: 'Child A',
-        to: '/child/a'
+        to: '/child/a',
       },
       {
         label: 'Child B',
-        to: '/child/b'
+        to: '/child/b',
       },
       {
         label: 'Child C',
-        to: '/child/c'
-      }
-    ]
+        to: '/child/c',
+      },
+    ],
   },
   {
     label: 'No Condition',
-    to: '/no/condition'
-  }
+    to: '/no/condition',
+  },
 ];
 
 // jest.mock('src/config/navItems', () => mockItems);
@@ -71,7 +71,7 @@ describe('NavItems Selectors', () => {
 
   beforeEach(() => {
     store = {
-      blocked: []
+      blocked: [],
     };
   });
 
@@ -134,4 +134,13 @@ describe('NavItems Selectors', () => {
     expect(selected).toMatchSnapshot();
   });
 
+  it('should render the "to" value based on child nav items', () => {
+    const selected = prepareNavItems(mockItems, store);
+
+    // Returns with the `to` value of the nav item when no children are present
+    expect(_.find(selected, ['label', 'No Children']).to).toBe('/no/children');
+
+    // Returns with the `to` value of the nav item's first child when present
+    expect(_.find(selected, ['label', 'With Children']).to).toBe('/child/a');
+  });
 });

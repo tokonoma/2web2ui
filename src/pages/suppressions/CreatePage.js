@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Page, Tabs } from '@sparkpost/matchbox';
 import { PageLink } from 'src/components/links';
-import { Panel } from 'src/components/matchbox';
+import { Page, Panel, Tabs } from 'src/components/matchbox';
 
 import AddForm from './components/AddForm';
 import UploadForm from './components/UploadForm';

@@ -6,30 +6,29 @@ exports[`Support renders search panel by default 1`] = `
   open={true}
   showCloseButton={true}
 >
-  <Tabs
-    color="orange"
-    connectBelow={true}
-    selected={0}
-    tabs={
-      Array [
-        Object {
-          "content": "Search Help",
-          "onClick": [Function],
-        },
-        Object {
-          "content": "Submit A Ticket",
-          "onClick": [Function],
-        },
-        Object {
-          "content": "Contact Us",
-          "onClick": [Function],
-        },
-      ]
-    }
-  />
   <Panel
     className="Support"
   >
+    <Tabs
+      connectBelow={true}
+      selected={0}
+      tabs={
+        Array [
+          Object {
+            "content": "Search Help",
+            "onClick": [Function],
+          },
+          Object {
+            "content": "Submit A Ticket",
+            "onClick": [Function],
+          },
+          Object {
+            "content": "Contact Us",
+            "onClick": [Function],
+          },
+        ]
+      }
+    />
     <SearchPanel />
   </Panel>
 </Modal>
@@ -41,30 +40,29 @@ exports[`Support renders search panel with current page search term 1`] = `
   open={true}
   showCloseButton={true}
 >
-  <Tabs
-    color="orange"
-    connectBelow={true}
-    selected={0}
-    tabs={
-      Array [
-        Object {
-          "content": "Search Help",
-          "onClick": [Function],
-        },
-        Object {
-          "content": "Submit A Ticket",
-          "onClick": [Function],
-        },
-        Object {
-          "content": "Contact Us",
-          "onClick": [Function],
-        },
-      ]
-    }
-  />
   <Panel
     className="Support"
   >
+    <Tabs
+      connectBelow={true}
+      selected={0}
+      tabs={
+        Array [
+          Object {
+            "content": "Search Help",
+            "onClick": [Function],
+          },
+          Object {
+            "content": "Submit A Ticket",
+            "onClick": [Function],
+          },
+          Object {
+            "content": "Contact Us",
+            "onClick": [Function],
+          },
+        ]
+      }
+    />
     <SearchPanel
       defaultSearchText="exampleKeyword"
     />
@@ -92,30 +90,29 @@ exports[`Support renders support contact panel 1`] = `
   open={true}
   showCloseButton={true}
 >
-  <Tabs
-    color="orange"
-    connectBelow={true}
-    selected={2}
-    tabs={
-      Array [
-        Object {
-          "content": "Search Help",
-          "onClick": [Function],
-        },
-        Object {
-          "content": "Submit A Ticket",
-          "onClick": [Function],
-        },
-        Object {
-          "content": "Contact Us",
-          "onClick": [Function],
-        },
-      ]
-    }
-  />
   <Panel
     className="Support"
   >
+    <Tabs
+      connectBelow={true}
+      selected={2}
+      tabs={
+        Array [
+          Object {
+            "content": "Search Help",
+            "onClick": [Function],
+          },
+          Object {
+            "content": "Submit A Ticket",
+            "onClick": [Function],
+          },
+          Object {
+            "content": "Contact Us",
+            "onClick": [Function],
+          },
+        ]
+      }
+    />
     <div
       className="SupportContainer"
     >
@@ -138,30 +135,29 @@ exports[`Support renders support form 1`] = `
   open={true}
   showCloseButton={true}
 >
-  <Tabs
-    color="orange"
-    connectBelow={true}
-    selected={1}
-    tabs={
-      Array [
-        Object {
-          "content": "Search Help",
-          "onClick": [Function],
-        },
-        Object {
-          "content": "Submit A Ticket",
-          "onClick": [Function],
-        },
-        Object {
-          "content": "Contact Us",
-          "onClick": [Function],
-        },
-      ]
-    }
-  />
   <Panel
     className="Support"
   >
+    <Tabs
+      connectBelow={true}
+      selected={1}
+      tabs={
+        Array [
+          Object {
+            "content": "Search Help",
+            "onClick": [Function],
+          },
+          Object {
+            "content": "Submit A Ticket",
+            "onClick": [Function],
+          },
+          Object {
+            "content": "Contact Us",
+            "onClick": [Function],
+          },
+        ]
+      }
+    />
     <Connect(ReduxForm)
       onClose={[MockFunction]}
     />

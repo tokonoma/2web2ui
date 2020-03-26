@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { withRouter } from 'react-router-dom';
 
-import { Page } from '@sparkpost/matchbox';
+import { Page } from 'src/components/matchbox';
 
 import { createRecipientList } from 'src/actions/recipientLists';
 import { showAlert } from 'src/actions/globalAlert';

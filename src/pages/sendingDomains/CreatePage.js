@@ -3,9 +3,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { create as createDomain } from 'src/actions/sendingDomains';
 import { showAlert } from 'src/actions/globalAlert';
-import { Page } from '@sparkpost/matchbox';
 import { PageLink } from 'src/components/links';
-import { Panel } from 'src/components/matchbox';
+import { Page, Panel } from 'src/components/matchbox';
 
 import CreateForm from './components/CreateForm';
 

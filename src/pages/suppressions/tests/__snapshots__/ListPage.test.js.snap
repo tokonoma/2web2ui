@@ -2,7 +2,6 @@
 
 exports[`ListPage renders correctly 1`] = `
 <Page
-  empty={Object {}}
   primaryAction={
     Object {
       "Component": [Function],
@@ -13,7 +12,6 @@ exports[`ListPage renders correctly 1`] = `
   title="Suppressions"
 >
   <Tabs
-    color="orange"
     connectBelow={true}
     selected={0}
     tabs={
@@ -42,7 +40,6 @@ exports[`ListPage renders correctly 1`] = `
 
 exports[`ListPage renders correctly with subaccounts 1`] = `
 <Page
-  empty={Object {}}
   primaryAction={
     Object {
       "Component": [Function],
@@ -53,7 +50,6 @@ exports[`ListPage renders correctly with subaccounts 1`] = `
   title="Suppressions"
 >
   <Tabs
-    color="orange"
     connectBelow={true}
     selected={0}
     tabs={
@@ -83,7 +79,6 @@ exports[`ListPage renders correctly with subaccounts 1`] = `
 
 exports[`ListPage renders filter by email tab correctly when selected 1`] = `
 <Page
-  empty={Object {}}
   primaryAction={
     Object {
       "Component": [Function],
@@ -94,7 +89,6 @@ exports[`ListPage renders filter by email tab correctly when selected 1`] = `
   title="Suppressions"
 >
   <Tabs
-    color="orange"
     connectBelow={true}
     selected={1}
     tabs={

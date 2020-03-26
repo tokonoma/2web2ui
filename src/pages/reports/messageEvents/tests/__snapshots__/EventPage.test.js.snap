@@ -33,7 +33,6 @@ exports[`Page: Event tests should render page correctly 1`] = `
       "to": "/reports/message-events",
     }
   }
-  empty={Object {}}
   title="Message: id"
 >
   <Grid>

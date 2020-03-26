@@ -25,17 +25,19 @@ import { isAccountUiOptionSet, onPlan } from 'src/helpers/conditions/account';
  * The "icon" key here will right-align an icon when the item is displayed
  */
 
-export default [
-  {
-    label: 'Account Settings',
-    to: '/account/settings',
-    section: 1,
-  },
-  {
-    label: 'Profile',
-    to: '/account/profile',
-    section: 1,
-  },
+const accountSettings = {
+  label: 'Account Settings',
+  to: '/account/settings',
+  section: 1,
+};
+
+const profile = {
+  label: 'Profile',
+  to: '/account/profile',
+  section: 1,
+};
+
+const billingLinks = [
   {
     label: 'Billing',
     to: '/account/billing',
@@ -49,35 +51,89 @@ export default [
     section: 1,
     condition: not(any(onPlan('free500-0419'), onPlan('free500-SPCEU-0419'))), //not on free plan
   },
-  {
-    label: 'Manage Users',
-    to: '/account/users',
-    section: 1,
-  },
-  {
-    label: 'Data and Privacy',
-    to: '/account/data-privacy',
-    section: 1,
-    condition: all(hasGrants('users/manage'), isAccountUiOptionSet('data_privacy')),
-  },
-  {
-    label: 'Get Help',
-    section: 2,
-    action: openSupportPanel,
-  },
-  {
-    label: 'API Docs',
-    external: true,
-    to: LINKS.API_DOCS,
-    icon: OpenInNew,
-    section: 2,
-    condition: not(isHeroku),
-  },
-  {
-    label: 'Log Out',
-    to: '/logout',
-    icon: ExitToApp,
-    section: 3,
-    condition: not(isHeroku),
-  },
+];
+
+const manageUsers = {
+  label: 'Manage Users',
+  to: '/account/users',
+  section: 1,
+};
+
+const users = {
+  label: 'Users',
+  to: '/account/users',
+  section: 1,
+};
+
+const subaccounts = {
+  label: 'Subaccounts',
+  to: '/account/subaccounts',
+  section: 1,
+};
+
+const alerts = {
+  label: 'Alerts',
+  to: '/alerts',
+  section: 1,
+};
+
+const dataAndPrivacy = {
+  label: 'Data and Privacy',
+  to: '/account/data-privacy',
+  section: 1,
+  condition: all(hasGrants('users/manage'), isAccountUiOptionSet('data_privacy')),
+};
+
+const getHelp = {
+  label: 'Get Help',
+  section: 2,
+  action: openSupportPanel,
+};
+
+const help = {
+  label: 'Help',
+  section: 2,
+  action: openSupportPanel,
+};
+
+const APIDocs = {
+  label: 'API Docs',
+  external: true,
+  to: LINKS.API_DOCS,
+  icon: OpenInNew,
+  section: 2,
+  condition: not(isHeroku),
+};
+
+const logOut = {
+  label: 'Log Out',
+  to: '/logout',
+  icon: ExitToApp,
+  section: 3,
+  condition: not(isHeroku),
+};
+
+export const accountNavItems = [
+  accountSettings,
+  profile,
+  ...billingLinks,
+  manageUsers,
+  dataAndPrivacy,
+  getHelp,
+  APIDocs,
+  logOut,
+];
+
+export const hibanaAccountNavItems = [
+  profile,
+  accountSettings,
+  // myPlan, // In the mock, but doesn't exist yet?
+  // usage,  // In the mock, but doesn't exist yet?
+  ...billingLinks,
+  users,
+  subaccounts,
+  alerts,
+  help,
+  APIDocs,
+  logOut,
 ];

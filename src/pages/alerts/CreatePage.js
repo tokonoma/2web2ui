@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Page } from '@sparkpost/matchbox';
 import withAlertsCreate from './containers/CreatePage.container';
 import AlertForm from './components/AlertForm';
 import formatFormValues from './helpers/formatFormValues';
 import { Loading } from 'src/components';
-import { PageLink } from 'src/components/links';
 import { RedirectAndAlert } from 'src/components/globalAlert';
+import { PageLink } from 'src/components/links';
+import { Page } from 'src/components/matchbox';
 
 export class CreatePage extends Component {
   componentDidMount() {

@@ -9,7 +9,6 @@ exports[`Sending Domains Create Page renders and mounts correctly 1`] = `
       "to": "/account/sending-domains",
     }
   }
-  empty={Object {}}
 >
   <Panel
     title="Add a Domain"

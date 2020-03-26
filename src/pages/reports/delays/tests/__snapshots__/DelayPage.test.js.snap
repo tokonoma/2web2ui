@@ -2,7 +2,6 @@
 
 exports[`DelayPage:  should render 1`] = `
 <Page
-  empty={Object {}}
   title="Delay Report"
 >
   <withRouter(Connect(ReportOptions)) />
@@ -39,7 +38,6 @@ exports[`DelayPage:  should render 1`] = `
 
 exports[`DelayPage:  should show loading indicator when loading table 1`] = `
 <Page
-  empty={Object {}}
   title="Delay Report"
 >
   <withRouter(Connect(ReportOptions))
@@ -69,7 +67,6 @@ exports[`DelayPage:  should show loading indicator when loading table 1`] = `
 
 exports[`DelayPage:  should show loading panel when aggregates are still loading 1`] = `
 <Page
-  empty={Object {}}
   title="Delay Report"
 >
   <withRouter(Connect(ReportOptions)) />

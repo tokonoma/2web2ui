@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { listPools } from 'src/actions/ipPools';
-import { getOrderedIpPools, shouldShowIpPurchaseCTA } from 'src/selectors/ipPools';
-import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
-import { Page } from '@sparkpost/matchbox';
 import { OpenInNew } from '@sparkpost/matchbox-icons';
+import { listPools } from 'src/actions/ipPools';
+import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
 import { PageLink } from 'src/components/links';
-import { Banner, Button } from 'src/components/matchbox';
+import { Banner, Button, Page } from 'src/components/matchbox';
 import { LINKS } from 'src/constants';
 import { openSupportTicketForm } from 'src/actions/support';
 import { not } from 'src/helpers/conditions';
 import { selectCondition } from 'src/selectors/accessConditionState';
+import { getOrderedIpPools, shouldShowIpPurchaseCTA } from 'src/selectors/ipPools';
 import { isSelfServeBilling } from 'src/helpers/conditions/account';
 
 const columns = [

@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Page, Grid } from '@sparkpost/matchbox';
-import { PageLink } from 'src/components/links';
-import { Panel } from 'src/components/matchbox';
-
+import { Grid } from '@sparkpost/matchbox';
 import { ApiErrorBanner, Loading, Empty, PanelLoading } from 'src/components';
+import { PageLink } from 'src/components/links';
+import { Page, Panel } from 'src/components/matchbox';
+
 import {
   getIncident,
   listIncidentsForResource,

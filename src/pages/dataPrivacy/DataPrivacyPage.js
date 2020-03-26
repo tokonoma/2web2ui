@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Page, Tabs } from '@sparkpost/matchbox';
-import { Panel } from 'src/components/matchbox';
+import { Page, Panel, Tabs } from 'src/components/matchbox';
+import { connect } from 'react-redux';
+import { resetDataPrivacy } from 'src/actions/dataPrivacy';
 import styles from './DataPrivacyPage.module.scss';
 import ApiDetailsTab from './components/ApiDetailsTab';
 import SingleRecipientTab from './components/SingleRecipientTab';
+import MultipleRecipientsTab from './components/MultipleRecipientsTab';
 const tabs = [
   { content: 'Single Recipient', key: 'single-recipient' },
   { content: 'Multiple Recipients', key: 'multiple-recipients' },
@@ -19,6 +21,7 @@ export const DataPrivacyPage = props => {
   }, [props.history, tabIndex]);
 
   const handleTabs = tabIdx => {
+    props.resetDataPrivacy();
     setTabIndex(tabIdx);
   };
 
@@ -26,6 +29,8 @@ export const DataPrivacyPage = props => {
     switch (tabIdx) {
       case 0:
         return <SingleRecipientTab />;
+      case 1:
+        return <MultipleRecipientsTab />;
       case 2:
         return <ApiDetailsTab history={props.history} />;
 
@@ -54,4 +59,4 @@ export const DataPrivacyPage = props => {
   );
 };
 
-export default withRouter(DataPrivacyPage);
+export default connect(null, { resetDataPrivacy })(withRouter(DataPrivacyPage));

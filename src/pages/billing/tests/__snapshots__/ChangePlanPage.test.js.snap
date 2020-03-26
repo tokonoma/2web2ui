@@ -9,7 +9,6 @@ exports[`Page: ChangePlanPage should not render form if not allowed to change pl
       "to": "/account/billing",
     }
   }
-  empty={Object {}}
 >
   <PendingPlanBanner
     account={Object {}}
@@ -26,7 +25,6 @@ exports[`Page: ChangePlanPage should render form if allowed to change plan 1`] =
       "to": "/account/billing",
     }
   }
-  empty={Object {}}
 >
   <PendingPlanBanner
     account={Object {}}

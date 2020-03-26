@@ -33,11 +33,11 @@ describe('Component: TestContent', () => {
         <TestContent {...props} />
       </TestApp>,
     );
-    expect(wrapper.find('Tabs').prop('selected')).toEqual(0);
+    expect(wrapper.find('Tabs')).toHaveProp('selected', 0);
     wrapper
       .find('Tab')
       .last()
       .simulate('click');
-    expect(wrapper.find('Tabs').prop('selected')).toEqual(4);
+    expect(wrapper.find('Tabs')).toHaveProp('selected', 4);
   });
 });

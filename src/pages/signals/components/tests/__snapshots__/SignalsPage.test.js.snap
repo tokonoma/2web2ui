@@ -2,7 +2,6 @@
 
 exports[`Signals Page Component renders correctly with title 1`] = `
 <Page
-  empty={Object {}}
   pass="through"
   title="test title"
 />
