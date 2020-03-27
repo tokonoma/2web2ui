@@ -5,7 +5,7 @@ import styles from './FieldSet.module.scss';
 const FieldSet = ({ children, legend }) => (
   <fieldset className={styles.FieldSet}>
     <legend className={styles.Legend}>{legend}</legend>
-    {React.Children.map(children, React.cloneElement)}
+    {children}
   </fieldset>
 );
 
