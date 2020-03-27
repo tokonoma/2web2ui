@@ -1,5 +1,5 @@
 import { omit } from '@styled-system/props';
-
+import _ from 'lodash';
 export const omitSystemProps = (props, whitelistedProps = []) => {
   const newProps = omit(props);
 
@@ -12,4 +12,8 @@ export const omitSystemProps = (props, whitelistedProps = []) => {
   }
 
   return newProps;
+};
+
+export const omitDeprecatedProps = (props, deprecatedProps = []) => {
+  return _.omit(props, deprecatedProps);
 };

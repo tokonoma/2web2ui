@@ -5,7 +5,6 @@ import styles from './Tooltip.module.scss';
 
 const InfoTooltip = ({ content }) => (
   <Tooltip
-    color
     children={<InfoOutline className={styles.TooltipIcon} size={16} />}
     content={<div className={styles.content}>{content}</div>}
     dark
