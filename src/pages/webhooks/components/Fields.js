@@ -1,12 +1,12 @@
 import React from 'react';
 import { Field } from 'redux-form';
 import { TextFieldWrapper, SelectWrapper, RadioGroup, CheckboxWrapper } from 'src/components';
+import { FieldSet } from 'src/components/form';
 import { ExternalLink } from 'src/components/links';
 import { required, maxLength, url } from 'src/helpers/validation';
 
 const BasicAuthFields = ({ disabled }) => (
-  <div>
-    Basic Auth
+  <FieldSet legend="Basic Auth">
     <Field
       name="basicUser"
       label="Username"
@@ -24,7 +24,7 @@ const BasicAuthFields = ({ disabled }) => (
       type="password"
       disabled={disabled}
     />
-  </div>
+  </FieldSet>
 );
 
 const OAuth2Fields = ({ disabled }) => (
