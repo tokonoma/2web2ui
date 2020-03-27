@@ -1,13 +1,12 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import MetricsModal from '../MetricsModal';
-import { Checkbox } from '@sparkpost/matchbox';
+import { Checkbox } from 'src/components/matchbox';
 
 // this uses the src/config/__mocks__/metrics.js file automatically
 jest.mock('src/config/metrics');
 
 describe('Component: Summary Chart Metrics Modal', () => {
-
   let props;
   let wrapper;
 
@@ -16,7 +15,7 @@ describe('Component: Summary Chart Metrics Modal', () => {
       open: true,
       onCancel: jest.fn(),
       onSubmit: jest.fn(),
-      selectedMetrics: []
+      selectedMetrics: [],
     };
     wrapper = shallow(<MetricsModal {...props} />);
   });
@@ -69,5 +68,4 @@ describe('Component: Summary Chart Metrics Modal', () => {
     expect(props.onSubmit).not.toHaveBeenCalled();
     expect(props.onCancel).not.toHaveBeenCalled();
   });
-
 });
