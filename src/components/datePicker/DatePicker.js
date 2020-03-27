@@ -36,7 +36,7 @@ export default class DatePicker extends Component {
     if (
       nextProps.from !== this.props.from ||
       nextProps.to !== this.props.to ||
-      nextProps.manualPrecision !== this.props.manualPrecision
+      nextProps.precision !== this.props.precision
     ) {
       this.syncTimeToState(nextProps);
     }
@@ -157,7 +157,11 @@ export default class DatePicker extends Component {
     }
 
     this.setState({ showDatePicker: false, selecting: false, validationError: null });
-    this.props.onChange({ ...this.state.selected, relativeRange: 'custom' });
+    this.props.onChange({
+      ...this.state.selected,
+      relativeRange: 'custom',
+      precision: this.state.manualPrecision,
+    });
   };
 
   handleTextUpdate = () => {
@@ -288,12 +292,14 @@ export default class DatePicker extends Component {
           </span>
         )}
         {selectPrecision && (
-          <PrecisionSelector
-            from={from}
-            to={to}
-            selectedPrecision={manualPrecision}
-            changeTime={this.syncTimeToState}
-          />
+          <div className={styles.Precision}>
+            <PrecisionSelector
+              from={from}
+              to={to}
+              selectedPrecision={manualPrecision}
+              changeTime={this.syncTimeToState}
+            />
+          </div>
         )}
         <WindowEvent event="keydown" handler={this.handleKeyDown} />
       </Popover>
@@ -314,9 +320,11 @@ DatePicker.propTypes = {
   disabled: PropTypes.bool,
   showPresets: PropTypes.bool,
   hideManualEntry: PropTypes.bool,
+  selectPrecision: PropTypes.bool,
 };
 
 DatePicker.defaultProps = {
-  roundToPrecision: false,
   preventFuture: true,
+  roundToPrecision: false,
+  selectPrecision: false,
 };

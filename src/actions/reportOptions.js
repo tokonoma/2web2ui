@@ -128,10 +128,10 @@ export function refreshReportOptions(update) {
     if (update.relativeRange) {
       if (update.relativeRange !== 'custom') {
         const { from, to } = getRelativeDates(update.relativeRange);
-        const precision = getPrecision(from, moment(to));
+        const precision = update.precision || getPrecision(from, moment(to));
         update = { ...update, from, to, precision };
       } else {
-        const precision = getPrecision(update.from, moment(update.to));
+        const precision = update.precision || getPrecision(update.from, moment(update.to));
         update = { ...update, precision };
       }
     }

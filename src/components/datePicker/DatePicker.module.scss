@@ -16,6 +16,15 @@
   line-height: rem(18);
 }
 
+.Precision {
+  width: 20%;
+  line-height: rem(18);
+  float: right;
+  display: inline-block;
+  margin-left: spacing();
+  vertical-align: middle;
+}
+
 .Label {
   @include visually-hidden();
 }

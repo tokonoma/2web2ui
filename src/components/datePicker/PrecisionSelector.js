@@ -16,7 +16,7 @@ const PrecisionSelector = ({ from, to, changeTime, selectedPrecision }) => {
 
   const updatePrecision = ({ currentTarget: { value: precision } }) => {
     const { from: roundedFrom, to: roundedTo } = roundBoundaries({ from, to, precision });
-    changeTime({ from: roundedFrom.toDate(), to: roundedTo.toDate() }, precision);
+    changeTime({ from: roundedFrom.toDate(), to: roundedTo.toDate(), precision });
   };
 
   return <Select options={precisionOptions} onChange={updatePrecision} value={selectedPrecision} />;

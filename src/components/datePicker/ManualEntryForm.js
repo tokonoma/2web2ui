@@ -19,6 +19,7 @@ export default class ManualEntryForm extends Component {
     toTime: '',
     fromDate: '',
     fromTime: '',
+    precision: '',
   };
 
   componentDidMount() {
