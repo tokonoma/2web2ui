@@ -8,9 +8,8 @@ exports[`FullPage renders a page 1`] = `
     <div
       className="FullPageHeaderArea"
     >
-      <UnstyledLink
+      <PageLink
         className="FullPageBreadcrumb"
-        component={[Function]}
         to="/here"
       >
         <ChevronLeft
@@ -23,7 +22,7 @@ exports[`FullPage renders a page 1`] = `
         <ScreenReaderOnly>
           Back
         </ScreenReaderOnly>
-      </UnstyledLink>
+      </PageLink>
       <h1
         className="FullPageTitle"
       >

@@ -5,7 +5,8 @@ import { Field, SubmissionError, reduxForm } from 'redux-form';
 import _ from 'lodash';
 
 import { Banner, Error, Button, Panel } from 'src/components/matchbox';
-import { DownloadLink, TextFieldWrapper } from 'src/components';
+import { TextFieldWrapper } from 'src/components';
+import { DownloadLink } from 'src/components/links';
 import { required, maxLength } from 'src/helpers/validation';
 
 import FileFieldWrapper from 'src/components/reduxFormWrappers/FileFieldWrapper';

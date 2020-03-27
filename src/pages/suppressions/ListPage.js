@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { PageLink } from 'src/components/links';
 import { Page, Panel, Tabs } from 'src/components/matchbox';
 import { searchRecipient } from 'src/actions/suppressions';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
@@ -43,7 +43,7 @@ export class ListPage extends Component {
       <Page
         title="Suppressions"
         primaryAction={{
-          Component: Link,
+          Component: PageLink,
           content: 'Add Suppressions',
           to: '/lists/suppressions/create',
         }}

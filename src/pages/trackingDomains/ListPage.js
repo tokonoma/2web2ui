@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { Page, Panel } from 'src/components/matchbox';
 import { Loading, ApiErrorBanner, Collection } from 'src/components';
+import { PageLink } from 'src/components/links';
+import { Page, Panel } from 'src/components/matchbox';
 import { Generic } from 'src/components/images';
 import { listTrackingDomains } from 'src/actions/trackingDomains';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
@@ -17,7 +17,7 @@ import TrackingDomainRow from './components/TrackingDomainRow';
 
 const primaryAction = {
   content: 'Create Tracking Domain',
-  Component: Link,
+  Component: PageLink,
   to: '/account/tracking-domains/create',
 };
 

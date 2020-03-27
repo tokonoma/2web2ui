@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { Panel } from 'src/components/matchbox';
 import {
   getAccountSingleSignOnDetails,
-  updateAccountSingleSignOn
+  updateAccountSingleSignOn,
 } from 'src/actions/accountSingleSignOn';
-import ExternalLink from 'src/components/externalLink/ExternalLink';
+import { ExternalLink } from 'src/components/links';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import { LINKS } from 'src/constants';
 import ProviderSection from './ProviderSection';
@@ -48,8 +48,8 @@ export class SingleSignOnPanel extends React.Component {
             color: 'orange',
             component: ExternalLink,
             content: 'Learn More',
-            to: LINKS.SSO_GUIDE
-          }
+            to: LINKS.SSO_GUIDE,
+          },
         ]}
       >
         {this.renderContents()}
@@ -60,15 +60,12 @@ export class SingleSignOnPanel extends React.Component {
 
 const mapDispatchToProps = {
   getAccountSingleSignOnDetails,
-  updateAccountSingleSignOn
+  updateAccountSingleSignOn,
 };
 
 const mapStateToProps = ({ account, accountSingleSignOn }) => ({
   ...accountSingleSignOn,
-  tfaRequired: account.tfa_required
+  tfaRequired: account.tfa_required,
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SingleSignOnPanel);
+export default connect(mapStateToProps, mapDispatchToProps)(SingleSignOnPanel);

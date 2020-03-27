@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { LINKS } from 'src/constants';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 
@@ -10,6 +9,7 @@ import { showAlert } from 'src/actions/globalAlert';
 import { listTemplates } from 'src/actions/templates';
 
 // Components
+import { PageLink } from 'src/components/links';
 import { Panel, Page } from 'src/components/matchbox';
 import AbTestCreateForm from './components/AbTestCreateForm';
 
@@ -35,7 +35,9 @@ export class CreatePage extends Component {
 
   render() {
     return (
-      <Page breadcrumbAction={{ content: 'Back to A/B Tests', component: Link, to: '/ab-testing' }}>
+      <Page
+        breadcrumbAction={{ content: 'Back to A/B Tests', component: PageLink, to: '/ab-testing' }}
+      >
         <Panel
           title="Create a New A/B Test"
           actions={[

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'src/components/matchbox';
 import FocusContainer from 'src/components/focusContainer';
-import ExternalLink from 'src/components/externalLink';
+import { ExternalLink } from 'src/components/links';
 import styles from './ListError.module.scss';
 
 const ListError = () => (

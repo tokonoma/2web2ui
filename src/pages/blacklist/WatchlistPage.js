@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Page } from 'src/components/matchbox';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-
 import { ApiErrorBanner, Loading } from 'src/components';
+import { PageLink } from 'src/components/links';
+import { Button, Page } from 'src/components/matchbox';
 import { selectBlacklistedCount } from 'src/selectors/blacklist';
 import { listMonitors } from 'src/actions/blacklist';
 import MonitorsCollection from './components/MonitorsCollection';
@@ -62,18 +61,13 @@ export const WatchlistPage = props => {
       breadcrumbAction={{
         content: 'Blacklisting Incidents',
         to: '/blacklist/incidents',
-        component: Link,
+        component: PageLink,
       }}
       primaryArea={
         <>
-          <Button
-            primary
-            component={Link}
-            to={`/blacklist/watchlist/add`}
-            className={styles.Buttons}
-          >
+          <PageLink as={Button} primary to={`/blacklist/watchlist/add`} className={styles.Buttons}>
             Add IP or Sending Domain
-          </Button>
+          </PageLink>
         </>
       }
     >

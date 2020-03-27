@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetch as fetchAccount, renewAccount } from 'src/actions/account';
+import { PageLink } from 'src/components/links';
 import { Button, Panel } from 'src/components/matchbox';
 import { showAlert } from 'src/actions/globalAlert';
 import config from 'src/config';
 import Brightback from 'src/components/brightback/Brightback';
 import { formatDate } from 'src/helpers/date';
-import { Link } from 'react-router-dom';
 
 const ACCOUNT_CANCEL_LINK = '/account/cancel';
 
@@ -73,7 +73,7 @@ export class CancellationPanel extends React.Component {
               <Button
                 destructive
                 to={enabled ? to : ACCOUNT_CANCEL_LINK}
-                component={enabled ? null : Link}
+                component={enabled ? null : PageLink}
               >
                 Cancel Account
               </Button>

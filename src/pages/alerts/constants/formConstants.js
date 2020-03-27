@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { EmailIcon, SlackIcon, WebhookIcon } from 'src/components/icons';
+import { ExternalLink } from 'src/components/links';
 import { emails, ifStringPresent, maxItems, noDuplicateItems } from 'src/helpers/validation';
-import { UnstyledLink } from '@sparkpost/matchbox';
 export const FORM_NAME = 'alertForm';
 
 export const METRICS = {
@@ -63,21 +63,18 @@ export const RECOMMENDED_METRIC_VALUE = {
 const webhookSubtitle = (
   <Fragment>
     {'Create a webhook for this alert. '}
-    <UnstyledLink
-      external
-      to={'https://www.sparkpost.com/docs/user-guide/alerts/#webhook-payload-sample'}
-    >
+    <ExternalLink to="https://www.sparkpost.com/docs/user-guide/alerts/#webhook-payload-sample">
       Sample payload
-    </UnstyledLink>
+    </ExternalLink>
   </Fragment>
 );
 
 const slackSubtitle = (
   <Fragment>
     {'Integrate this alert with Slack. '}
-    <UnstyledLink external to={'https://api.slack.com/incoming-webhooks'}>
+    <ExternalLink to="https://api.slack.com/incoming-webhooks">
       How to create a Slack Incoming webhook
-    </UnstyledLink>
+    </ExternalLink>
   </Fragment>
 );
 

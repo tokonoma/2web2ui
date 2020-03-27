@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { reduxForm } from 'redux-form';
 import { createTicket } from 'src/actions/support';
 import { showAlert } from 'src/actions/globalAlert';
+import { PageLink } from 'src/components/links';
 import { Button, Page, Panel } from 'src/components/matchbox';
 import PremiumSupportFields from './components/PremiumSupportFields';
 import { generateMessage } from './helpers/formHelpers';
@@ -34,7 +34,11 @@ export class PremiumSupportPage extends Component {
 
     return (
       <Page
-        breadcrumbAction={{ component: Link, to: '/account/billing', content: 'Back to billing' }}
+        breadcrumbAction={{
+          component: PageLink,
+          to: '/account/billing',
+          content: 'Back to billing',
+        }}
       >
         <Panel title="Request Premium Support" sectioned accent>
           <form onSubmit={handleSubmit(this.handleTicketCreate)}>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Link, Route } from 'react-router-dom';
+import { withRouter, Route } from 'react-router-dom';
 
 // Actions
 import { getWebhook, deleteWebhook } from 'src/actions/webhooks';
@@ -9,6 +9,7 @@ import { selectSubaccountIdFromQuery } from 'src/selectors/subaccounts';
 
 // Components
 import { Loading, DeleteModal } from 'src/components';
+import { PageLink } from 'src/components/links';
 import { Page, Tabs } from 'src/components/matchbox';
 import TestTab from './components/TestTab';
 import EditTab from './components/EditTab';
@@ -63,17 +64,17 @@ export class WebhooksDetails extends Component {
     const tabs = [
       {
         content: 'Settings',
-        Component: Link,
+        component: PageLink,
         to: `${editPath}${query}`,
       },
       {
         content: 'Test',
-        Component: Link,
+        component: PageLink,
         to: `${testPath}${query}`,
       },
       {
         content: 'Batch Status',
-        Component: Link,
+        component: PageLink,
         to: `${batchPath}${query}`,
       },
     ];
@@ -92,7 +93,7 @@ export class WebhooksDetails extends Component {
       <Page
         title={webhook.name}
         secondaryActions={secondaryActions}
-        breadcrumbAction={{ content: 'Webhooks', Component: Link, to: '/webhooks/' }}
+        breadcrumbAction={{ content: 'Webhooks', component: PageLink, to: '/webhooks/' }}
       >
         <Tabs selected={selectedTab} tabs={tabs} />
         <Route exact path={editPath} render={() => <EditTab webhook={webhook} />} />

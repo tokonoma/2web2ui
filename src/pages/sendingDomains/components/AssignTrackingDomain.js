@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import { PageLink } from 'src/components/links';
 import { Button, Panel } from 'src/components/matchbox';
 import { showAlert } from 'src/actions/globalAlert';
 import { SendingDomainSection } from './SendingDomainSection';
@@ -70,7 +70,7 @@ export class AssignTrackingDomain extends Component {
       <SendingDomainSection title="Select a Tracking Domain">
         <SendingDomainSection.Left>
           <p>Link to a tracking domain to track opens, clicks, and unsubscribes.</p>
-          <Link to={'/account/tracking-domains/create'}>Create a tracking domain.</Link>
+          <PageLink to={'/account/tracking-domains/create'}>Create a tracking domain.</PageLink>
         </SendingDomainSection.Left>
         <SendingDomainSection.Right>{this.renderTrackingDomains()}</SendingDomainSection.Right>
       </SendingDomainSection>

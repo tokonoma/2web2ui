@@ -8,12 +8,11 @@ exports[`Component: AssignTrackingDomain form should have button disabled when f
     <p>
       Link to a tracking domain to track opens, clicks, and unsubscribes.
     </p>
-    <Link
-      replace={false}
+    <PageLink
       to="/account/tracking-domains/create"
     >
       Create a tracking domain.
-    </Link>
+    </PageLink>
   </Left>
   <Right>
     <Panel
@@ -60,12 +59,11 @@ exports[`Component: AssignTrackingDomain form should have button disabled when s
     <p>
       Link to a tracking domain to track opens, clicks, and unsubscribes.
     </p>
-    <Link
-      replace={false}
+    <PageLink
       to="/account/tracking-domains/create"
     >
       Create a tracking domain.
-    </Link>
+    </PageLink>
   </Left>
   <Right>
     <Panel
@@ -112,12 +110,11 @@ exports[`Component: AssignTrackingDomain form should render form with initial va
     <p>
       Link to a tracking domain to track opens, clicks, and unsubscribes.
     </p>
-    <Link
-      replace={false}
+    <PageLink
       to="/account/tracking-domains/create"
     >
       Create a tracking domain.
-    </Link>
+    </PageLink>
   </Left>
   <Right>
     <Panel
@@ -164,12 +161,11 @@ exports[`Component: AssignTrackingDomain form should render panel loading compon
     <p>
       Link to a tracking domain to track opens, clicks, and unsubscribes.
     </p>
-    <Link
-      replace={false}
+    <PageLink
       to="/account/tracking-domains/create"
     >
       Create a tracking domain.
-    </Link>
+    </PageLink>
   </Left>
   <Right>
     <PanelLoading

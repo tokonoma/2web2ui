@@ -49,12 +49,12 @@ exports[`ListProgress renders status and progress bar 1`] = `
       />
     </div>
   </div>
-  <Button
+  <PageLink
+    as={[Function]}
     color="orange"
-    component={[Function]}
     to="/recipient-validation"
   >
     Validate Another
-  </Button>
+  </PageLink>
 </FocusContainer>
 `;

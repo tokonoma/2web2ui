@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Page } from 'src/components/matchbox';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import moment from 'moment';
-
 import { ApiErrorBanner, Loading } from 'src/components';
 import { Users } from 'src/components/images';
+import { PageLink } from 'src/components/links';
+import { Page } from 'src/components/matchbox';
 import { listMonitors, listIncidents } from 'src/actions/blacklist';
 import { selectIncidentsList } from 'src/selectors/blacklist';
 import { getRelativeDates } from 'src/helpers/date';
@@ -116,7 +115,7 @@ export const IncidentsPage = props => {
       primaryAction={{
         content: monitors.length === 0 ? 'Add to Watchlist' : 'View Watchlist',
         to: monitors.length === 0 ? '/blacklist/watchlist/add' : '/blacklist/watchlist',
-        component: Link,
+        component: PageLink,
       }}
     >
       <p className={styles.Description}>

@@ -43,14 +43,13 @@ exports[`Template List Components Name should render 1`] = `
   <p
     className="Name"
   >
-    <Link
-      replace={false}
+    <PageLink
       to="/templates/edit/id-123/draft/content?subaccount=123"
     >
       <strong>
         template name
       </strong>
-    </Link>
+    </PageLink>
   </p>
 </Fragment>
 `;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowForward } from '@sparkpost/matchbox-icons';
-import { PageLink } from 'src/components';
+import { PageLink } from 'src/components/links';
 
 import styles from './SkipLink.module.scss';
 

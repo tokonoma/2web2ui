@@ -246,6 +246,7 @@ describe('The recipient validation list progress page', () => {
 
       cy.queryByText('Validation Error').should('be.visible');
 
+      // eslint-disable-next-line cypress/no-unnecessary-waiting
       cy.wait(5000); // Wait for the polling interval as defined on the list progress component
 
       cy.findByText('Validation limit exceeded').should('be.visible');
@@ -253,10 +254,7 @@ describe('The recipient validation list progress page', () => {
       cy.findByText('View Details')
         .last()
         .click();
-
-      cy.findByText('Submit a ticket')
-        .should('have.attr', 'href', '?supportTicket=true&supportIssue=general_issue')
-        .click();
+      cy.findByText('Submit a ticket').click();
 
       cy.findByText('I need help with...').should('be.visible');
     });

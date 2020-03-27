@@ -1,0 +1,12 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+// these are overrides to Matchbox globals
+.FieldSet {
+  border-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.Legend {
+  margin-bottom: spacing();
+}

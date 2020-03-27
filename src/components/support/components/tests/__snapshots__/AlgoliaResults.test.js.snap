@@ -7,12 +7,11 @@ exports[`Algolia Results component should render 1`] = `
   <strong>
     <InsertLink />
      
-    <UnstyledLink
-      external={true}
+    <ExternalLink
       to="my-link"
     >
       Post Title
-    </UnstyledLink>
+    </ExternalLink>
   </strong>
   <div>
     <AlgoliaHighlighter(Snippet)

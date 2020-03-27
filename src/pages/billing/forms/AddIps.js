@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
+import { PageLink } from 'src/components/links';
 import { Error, Button, Panel } from 'src/components/matchbox';
 import { addDedicatedIps } from 'src/actions/billing';
 import { showAlert } from 'src/actions/globalAlert';
@@ -82,7 +82,7 @@ export class AddIps extends Component {
     const action = {
       content: 'Manage Your IPs',
       to: '/account/ip-pools',
-      Component: Link,
+      Component: PageLink,
       color: 'orange',
     };
 

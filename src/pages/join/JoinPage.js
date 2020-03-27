@@ -5,7 +5,8 @@ import qs from 'query-string';
 import cookie from 'js-cookie';
 import _ from 'lodash';
 
-import { CenteredLogo, PageLink } from 'src/components';
+import { CenteredLogo } from 'src/components';
+import { PageLink } from 'src/components/links';
 import { Error, Panel } from 'src/components/matchbox';
 import JoinForm from './components/JoinForm';
 import JoinError from './components/JoinError';

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { Page } from 'src/components/matchbox';
-import { Users } from 'src/components/images';
 import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
+import { Users } from 'src/components/images';
+import { PageLink } from 'src/components/links';
+import { Page } from 'src/components/matchbox';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
 import { selectSubaccounts } from 'src/selectors/subaccounts';
 import getRowData from './helpers/getRowData';
@@ -19,7 +19,7 @@ const columns = [
 
 const primaryAction = {
   content: 'Create Subaccount',
-  Component: Link,
+  Component: PageLink,
   to: '/account/subaccounts/create',
 };
 

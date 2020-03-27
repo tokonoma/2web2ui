@@ -1,7 +1,7 @@
 /* eslint-disable max-lines */
 import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
 import { Grid } from '@sparkpost/matchbox';
+import { PageLink } from 'src/components/links';
 import { Panel } from 'src/components/matchbox';
 import { selectHealthScoreDetails } from 'src/selectors/signals';
 import { getHealthScore, getSpamHits } from 'src/actions/signals';
@@ -249,7 +249,7 @@ export class HealthScorePage extends Component {
         breadcrumbAction={{
           content: 'Back to Health Score Overview',
           to: '/signals/health-score',
-          component: Link,
+          component: PageLink,
         }}
         title="Health Score"
         facet={facet}

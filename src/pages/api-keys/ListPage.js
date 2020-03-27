@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { Page } from 'src/components/matchbox';
 import { Setup } from 'src/components/images';
+import { PageLink } from 'src/components/links';
+import { Page } from 'src/components/matchbox';
 
 import { listApiKeys, hideNewApiKey } from 'src/actions/api-keys';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
@@ -23,7 +23,7 @@ import { LINKS } from 'src/constants';
 
 const primaryAction = {
   content: 'Create API Key',
-  Component: Link,
+  Component: PageLink,
   to: '/account/api-keys/create',
 };
 
@@ -45,11 +45,15 @@ export class ListPage extends Component {
   getLabel = ({ canCurrentUserEdit, id, subaccount_id, label }) => {
     if (canCurrentUserEdit) {
       return (
-        <Link to={`/account/api-keys/edit/${id}${setSubaccountQuery(subaccount_id)}`}>{label}</Link>
+        <PageLink to={`/account/api-keys/edit/${id}${setSubaccountQuery(subaccount_id)}`}>
+          {label}
+        </PageLink>
       );
     } else {
       return (
-        <Link to={`/account/api-keys/view/${id}${setSubaccountQuery(subaccount_id)}`}>{label}</Link>
+        <PageLink to={`/account/api-keys/view/${id}${setSubaccountQuery(subaccount_id)}`}>
+          {label}
+        </PageLink>
       );
     }
   };

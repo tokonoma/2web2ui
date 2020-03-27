@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-
-import { UnstyledLink } from '@sparkpost/matchbox';
-import { Page, Panel } from 'src/components/matchbox';
 import { ApiErrorBanner, DeleteModal, Loading } from 'src/components';
+import { Page, Panel } from 'src/components/matchbox';
 import PoolForm from './components/PoolForm';
 import IpList from './components/IpList';
 
@@ -19,12 +16,12 @@ import isDefaultPool from './helpers/defaultPool';
 import { not } from 'src/helpers/conditions';
 import { selectCondition } from 'src/selectors/accessConditionState';
 import { isSelfServeBilling } from 'src/helpers/conditions/account';
-import SupportTicketLink from 'src/components/supportTicketLink/SupportTicketLink';
+import { PageLink, SupportTicketLink } from 'src/components/links';
 import { openSupportTicketForm } from 'src/actions/support';
 
 const breadcrumbAction = {
   content: 'IP Pools',
-  Component: Link,
+  Component: PageLink,
   to: '/account/ip-pools',
 };
 
@@ -128,10 +125,7 @@ export class EditPage extends Component {
         </>
       ) : (
         <>
-          , or by&nbsp;
-          <UnstyledLink to="/account/billing" component={Link}>
-            purchasing new IPs
-          </UnstyledLink>
+          , or by <PageLink to="/account/billing">purchasing new IPs</PageLink>
         </>
       )
     ) : null;
@@ -170,7 +164,7 @@ export class EditPage extends Component {
           {
             content: 'Purchase IPs',
             to: '/account/billing',
-            component: Link,
+            component: PageLink,
             visible: showPurchaseCTA && !isManuallyBilled,
           },
           {

@@ -1,6 +1,6 @@
 import React from 'react';
-import { UnstyledLink } from '@sparkpost/matchbox';
 import { Check, ChevronRight } from '@sparkpost/matchbox-icons';
+import { UnstyledLink } from 'src/components/matchbox';
 import styles from './SubaccountOption.module.scss';
 
 class SubaccountOption extends React.Component {
@@ -10,7 +10,7 @@ class SubaccountOption extends React.Component {
     if (!selected) {
       onChange(value);
     }
-  }
+  };
 
   render() {
     const { label, nested, onOpen, selected } = this.props;

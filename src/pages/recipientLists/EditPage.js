@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import { Page } from 'src/components/matchbox';
 
@@ -13,6 +13,7 @@ import {
 
 import { showAlert } from 'src/actions/globalAlert';
 import { Loading, DeleteModal } from 'src/components';
+import { PageLink } from 'src/components/links';
 
 import RecipientListForm from './components/RecipientListForm';
 
@@ -81,7 +82,7 @@ export class EditPage extends Component {
         secondaryActions={this.secondaryActions}
         breadcrumbAction={{
           content: 'Recipient Lists',
-          Component: Link,
+          Component: PageLink,
           to: '/lists/recipient-lists',
         }}
       >

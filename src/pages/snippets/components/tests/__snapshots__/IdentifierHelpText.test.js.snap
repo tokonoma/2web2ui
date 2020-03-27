@@ -2,7 +2,8 @@
 
 exports[`IdentifierHelpText renders message with link 1`] = `
 <Fragment>
-  Use this unique identifier to 
+  Use this unique identifier to
+   
   <ExternalLink
     to="https://developers.sparkpost.com/api/substitutions-reference/#header-snippets"
   >
