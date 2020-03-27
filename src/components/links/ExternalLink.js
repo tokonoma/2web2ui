@@ -7,7 +7,6 @@ const ExternalLink = ({
   as: Component = UnstyledLink,
   children,
   component: _component, // ignore, won't apply external props correctly if set
-  onClick: _onClick, // ignore
   ...props
 }) => (
   <Component {...props} external={true}>

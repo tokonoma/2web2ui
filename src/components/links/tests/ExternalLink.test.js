@@ -25,10 +25,6 @@ describe('ExternalLink', () => {
     expect(subject({ component: 'button' })).not.toHaveProp('component');
   });
 
-  it('ignores click event handler', () => {
-    expect(subject({ onClick: () => {} })).not.toHaveProp('onClick');
-  });
-
   it('renders a button', () => {
     const wrapper = subject({ as: Button });
     expect(wrapper).toHaveDisplayName('Button');
