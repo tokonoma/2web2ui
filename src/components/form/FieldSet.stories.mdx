@@ -1,7 +1,7 @@
 import { Meta, Preview, Props } from '@storybook/addon-docs/blocks';
 import FieldSet from './FieldSet';
 
-<Meta title="Form|FieldSet" component={FieldSet} />
+<Meta title="Form Controls|FieldSet" component={FieldSet} />
 
 # FieldSet
 
@@ -16,13 +16,13 @@ Use the `<FieldSet/>` component to group related form fields.
 ### Default
 
 <Preview>
-  <FieldSet legend="Name">
+  <FieldSet legend="Full Name">
     <label>
       First Name
       <input name="first" type="text"></input>
     </label>
     <label>
-      First Name
+      Last Name
       <input name="last" type="text"></input>
     </label>
   </FieldSet>
@@ -42,7 +42,7 @@ const NameFields = () => (
     </label>
 
     <label>
-      First Name
+      Last Name
       <input name="last" type="text" />
     </label>
   </FieldSet>
