@@ -18,6 +18,7 @@ import { selectFeatureFlaggedMetrics } from 'src/selectors/metrics';
 import typeaheadCacheSelector from 'src/selectors/reportFilterTypeaheadCache';
 import CustomReports from './CustomReports';
 import styles from './ReportOptions.module.scss';
+import { isUserUiOptionSet } from 'src/helpers/conditions/user';
 
 const RELATIVE_DATE_OPTIONS = ['hour', 'day', '7days', '30days', '90days', 'custom'];
 
@@ -59,11 +60,13 @@ export class ReportOptions extends Component {
 
   getPanelContent = () => {
     const {
+      customReportsEnabled,
       typeaheadCache,
       reportOptions,
       reportLoading,
       refreshReportOptions,
       searchOptions,
+      shouldUseMetricsRollup,
       featureFlaggedMetrics,
     } = this.props;
 
@@ -158,6 +161,7 @@ export class ReportOptions extends Component {
 }
 
 const mapStateToProps = state => ({
+  shouldUseMetricsRollup: Boolean(isUserUiOptionSet('use-metrics-rollup')(state)),
   reportOptions: state.reportOptions,
   typeaheadCache: typeaheadCacheSelector(state),
   featureFlaggedMetrics: selectFeatureFlaggedMetrics(state),

@@ -22,20 +22,21 @@ export default class ManualEntryForm extends Component {
   };
 
   componentDidMount() {
-    const { to, from } = this.props;
-    this.syncPropsToState({ to, from });
+    const { to, from, precision } = this.props;
+    this.syncPropsToState({ to, from, precision });
   }
 
   componentWillReceiveProps(nextProps) {
     this.syncPropsToState(nextProps);
   }
 
-  syncPropsToState({ to, from }) {
+  syncPropsToState({ to, from, precision }) {
     this.setState({
       toDate: formatInputDate(to),
       toTime: formatInputTime(to),
       fromDate: formatInputDate(from),
       fromTime: formatInputTime(from),
+      precision,
     });
   }
 
@@ -62,8 +63,7 @@ export default class ManualEntryForm extends Component {
     const from = parseDatetime(this.state.fromDate, this.state.fromTime);
     const to = parseDatetime(this.state.toDate, this.state.toTime);
     // allow for prop-level override of "now" (DI, etc.)
-    const { now, roundToPrecision, preventFuture } = this.props;
-
+    const { now, roundToPrecision, preventFuture, precision } = this.props;
     try {
       const { to: roundedTo, from: roundedFrom } = getValidDateRange({
         from,
@@ -71,6 +71,7 @@ export default class ManualEntryForm extends Component {
         now,
         roundToPrecision,
         preventFuture,
+        precision,
       });
       return this.props.selectDates({ to: roundedTo.toDate(), from: roundedFrom.toDate() }, () => {
         if (e && e.key === 'Enter') {
@@ -86,11 +87,11 @@ export default class ManualEntryForm extends Component {
 
   render() {
     const { toDate, toTime, fromDate, fromTime } = this.state;
-    const { roundToPrecision } = this.props;
+    const { roundToPrecision, precision } = this.props;
 
     let precisionLabel = null;
     let precisionLabelValue;
-    let momentPrecision;
+    let shouldDisableTime;
     const from = parseDatetime(fromDate, fromTime);
     const to = parseDatetime(toDate, toTime);
 
@@ -103,9 +104,12 @@ export default class ManualEntryForm extends Component {
           to,
           now,
           roundToPrecision,
+          precision,
         });
         precisionLabelValue = getPrecision(validatedFrom, validatedTo);
-        momentPrecision = getMomentPrecision(validatedFrom, validatedTo);
+        shouldDisableTime = precision
+          ? ['day', 'week', 'month'].includes(precision)
+          : getMomentPrecision(validatedFrom, validatedTo) === 'days';
       } catch (e) {
         precisionLabelValue = '';
       }
@@ -140,7 +144,7 @@ export default class ManualEntryForm extends Component {
               onChange={this.handleFieldChange}
               onBlur={this.handleBlur}
               value={fromTime}
-              disabled={momentPrecision === 'days'}
+              disabled={shouldDisableTime}
             />
           </Grid.Column>
           <Grid.Column xs={1}>
@@ -168,11 +172,11 @@ export default class ManualEntryForm extends Component {
               onChange={this.handleFieldChange}
               onBlur={this.handleBlur}
               value={toTime}
-              disabled={momentPrecision === 'days'}
+              disabled={shouldDisableTime}
             />
           </Grid.Column>
         </Grid>
-        {precisionLabel}
+        {!precision && precisionLabel}
       </form>
     );
   }

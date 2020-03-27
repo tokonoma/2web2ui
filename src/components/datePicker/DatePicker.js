@@ -13,6 +13,7 @@ import { Popover } from '@sparkpost/matchbox';
 import { Button, Error, Select, TextField, WindowEvent } from 'src/components/matchbox';
 import DateSelector from 'src/components/dateSelector/DateSelector';
 import ManualEntryForm from './ManualEntryForm';
+import PrecisionSelector from './PrecisionSelector';
 import { FORMATS } from 'src/constants';
 import styles from './DatePicker.module.scss';
 import PropTypes from 'prop-types';
@@ -24,6 +25,7 @@ export default class DatePicker extends Component {
     selecting: false,
     selected: {},
     validationError: null,
+    manualPrecision: '',
   };
 
   componentDidMount() {
@@ -31,14 +33,23 @@ export default class DatePicker extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.from !== this.props.from || nextProps.to !== this.props.to) {
+    if (
+      nextProps.from !== this.props.from ||
+      nextProps.to !== this.props.to ||
+      nextProps.manualPrecision !== this.props.manualPrecision
+    ) {
       this.syncTimeToState(nextProps);
     }
   }
 
   // Sets local state from reportOptions redux state - need to separate to handle pre-apply state
-  syncTimeToState = ({ from, to }) => {
-    this.setState({ selected: { from, to } });
+  syncTimeToState = ({ from, to, precision: manualPrecision }) => {
+    if (from && to) {
+      this.setState({ selected: { from, to } });
+    }
+    if (manualPrecision) {
+      this.setState({ manualPrecision });
+    }
   };
 
   // Closes popover on escape, submits on enter
@@ -114,7 +125,7 @@ export default class DatePicker extends Component {
     }
 
     if (this.props.roundToPrecision) {
-      const rounded = roundBoundaries(from, to);
+      const rounded = roundBoundaries({ from, to });
       from = rounded.from.toDate();
       to = rounded.to.toDate();
     }
@@ -166,6 +177,7 @@ export default class DatePicker extends Component {
       selected: { from, to },
       showDatePicker,
       validationError,
+      manualPrecision,
     } = this.state;
     const selectedRange = showDatePicker ? 'custom' : this.props.relativeRange;
 
@@ -183,6 +195,7 @@ export default class DatePicker extends Component {
       error,
       left,
       hideManualEntry,
+      selectPrecision,
       id = 'date-picker', // When multiple <DatePicker/> components are present, each one will need a unique `id`. This is a safe default.
     } = this.props;
     const dateFormat = dateFieldFormat || this.DATE_FORMAT;
@@ -256,6 +269,7 @@ export default class DatePicker extends Component {
             from={from}
             roundToPrecision={roundToPrecision}
             preventFuture={preventFuture}
+            precision={manualPrecision}
           />
         )}
 
@@ -272,6 +286,14 @@ export default class DatePicker extends Component {
           <span className={styles.Error}>
             <Error wrapper="span" error={validationError}></Error>
           </span>
+        )}
+        {selectPrecision && (
+          <PrecisionSelector
+            from={from}
+            to={to}
+            selectedPrecision={manualPrecision}
+            changeTime={this.syncTimeToState}
+          />
         )}
         <WindowEvent event="keydown" handler={this.handleKeyDown} />
       </Popover>
