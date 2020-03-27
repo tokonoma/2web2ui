@@ -111,8 +111,9 @@ exports[`should render NameField 1`] = `
 `;
 
 exports[`should render OAuth2Fields 1`] = `
-<div>
-  OAuth 2.0
+<FieldSet
+  legend="OAuth 2.0"
+>
   <Field
     component={[Function]}
     disabled={false}
@@ -137,7 +138,7 @@ exports[`should render OAuth2Fields 1`] = `
     placeholder="https://www.example.com/tokens/"
     validate={[Function]}
   />
-</div>
+</FieldSet>
 `;
 
 exports[`should render TargetField 1`] = `

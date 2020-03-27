@@ -28,8 +28,7 @@ const BasicAuthFields = ({ disabled }) => (
 );
 
 const OAuth2Fields = ({ disabled }) => (
-  <div>
-    OAuth 2.0
+  <FieldSet legend="OAuth 2.0">
     <Field
       name="clientId"
       label="Client ID"
@@ -54,7 +53,7 @@ const OAuth2Fields = ({ disabled }) => (
       validate={required}
       disabled={disabled}
     />
-  </div>
+  </FieldSet>
 );
 
 const NameField = ({ disabled }) => (
