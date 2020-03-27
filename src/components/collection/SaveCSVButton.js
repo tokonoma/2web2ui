@@ -15,7 +15,7 @@ const SaveCSVButton = ({ data, saveCsv, caption = 'Save As CSV', filename, ...pr
     <DownloadLink
       as={Button}
       download={download}
-      to={formatToCsv({ data, returnBlob: false })}
+      href={formatToCsv({ data, returnBlob: false })}
       {...props}
     >
       {caption}

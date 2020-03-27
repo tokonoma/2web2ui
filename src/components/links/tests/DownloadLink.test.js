@@ -6,7 +6,7 @@ import DownloadLink from '../DownloadLink';
 describe('DownloadLink', () => {
   const subject = props =>
     shallow(
-      <DownloadLink to="/download/data.csv" {...props}>
+      <DownloadLink href="/download/data.csv" {...props}>
         Download Me!
       </DownloadLink>,
     );

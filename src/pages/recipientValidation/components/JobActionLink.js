@@ -25,7 +25,7 @@ const JobActionLink = ({ jobId, fileHref, status }) => {
 
   if (status === 'success') {
     return (
-      <DownloadLink as={Button} to={fileHref} color="orange" flat size="small">
+      <DownloadLink as={Button} href={fileHref} color="orange" flat size="small">
         <span>Download</span>&nbsp;
         <FileDownload />
       </DownloadLink>

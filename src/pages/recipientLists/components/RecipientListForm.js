@@ -112,8 +112,8 @@ export class RecipientListForm extends Component {
                 helpText={
                   <span>
                     You can download a{' '}
-                    <DownloadLink to={exampleRecipientListPath}>CSV template here</DownloadLink> to
-                    use when formatting your recipient list for upload.
+                    <DownloadLink href={exampleRecipientListPath}>CSV template here</DownloadLink>{' '}
+                    to use when formatting your recipient list for upload.
                   </span>
                 }
                 label={uploadHint}

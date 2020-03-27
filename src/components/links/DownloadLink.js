@@ -9,9 +9,10 @@ const DownloadLink = ({
   children,
   component: _component, // ignore
   download = true,
+  href,
   ...props
 }) => (
-  <Component {...props} download={download} referrerPolicy="origin">
+  <Component {...props} download={download} referrerPolicy="origin" to={href}>
     {children}
   </Component>
 );
@@ -20,7 +21,7 @@ DownloadLink.propTypes = {
   as: PropTypes.oneOf([Button, UnstyledLink]),
   children: PropTypes.node.isRequired,
   download: PropTypes.string,
-  to: PropTypes.string.isRequired,
+  href: PropTypes.string.isRequired,
 };
 
 export default DownloadLink;

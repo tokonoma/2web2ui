@@ -112,7 +112,7 @@ export function MultipleRecipientsTab({
             label="Upload List"
             fileType="csv"
             helpText={
-              <DownloadLink to={exampleRecipientListPath}>Download a CSV Template</DownloadLink>
+              <DownloadLink href={exampleRecipientListPath}>Download a CSV Template</DownloadLink>
             }
             component={FileFieldWrapper}
             disabled={submitting}
