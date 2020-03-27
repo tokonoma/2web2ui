@@ -4,7 +4,6 @@ exports[`Page: BillingSummaryPage should render correctly when loading 1`] = `<L
 
 exports[`Page: BillingSummaryPage should render correctly when not loading 1`] = `
 <Page
-  empty={Object {}}
   title="Billing"
 >
   <Connect(ConditionSwitch)>

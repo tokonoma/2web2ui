@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Page } from '@sparkpost/matchbox';
+import { Page } from 'src/components/matchbox';
 import { UsageReport } from 'src/components';
 import { GettingStartedGuide } from './components/GettingStartedGuide';
 import VerifyEmailBanner from 'src/components/verifyEmailBanner/VerifyEmailBanner';

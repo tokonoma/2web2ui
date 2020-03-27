@@ -9,7 +9,6 @@ exports[`Page: Webhook Create should build proper events tree 1`] = `
       "to": "/webhooks",
     }
   }
-  empty={Object {}}
   title="Create Webhook"
 >
   <Panel>
@@ -30,7 +29,6 @@ exports[`Page: Webhook Create should not show loading component while events are
       "to": "/webhooks",
     }
   }
-  empty={Object {}}
   title="Create Webhook"
 >
   <Panel>
@@ -51,7 +49,6 @@ exports[`Page: Webhook Create should render happy path 1`] = `
       "to": "/webhooks",
     }
   }
-  empty={Object {}}
   title="Create Webhook"
 >
   <Panel>

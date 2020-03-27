@@ -1,9 +1,9 @@
 import React, { createContext, Component } from 'react';
-import { WindowEvent } from '@sparkpost/matchbox';
+import { WindowEvent } from 'src/components/matchbox';
 import _ from 'lodash';
 
 const defaultContext = {
-  mobile: false
+  mobile: false,
 };
 
 export const WindowSizeContext = createContext(defaultContext);
@@ -23,7 +23,7 @@ class WindowSize extends Component {
 
   updateSize = () => {
     this.setState({
-      mobile: window.innerWidth < 720
+      mobile: window.innerWidth < 720,
     });
   };
 
@@ -32,7 +32,7 @@ class WindowSize extends Component {
   render() {
     return (
       <WindowSizeContext.Provider value={this.state}>
-        <WindowEvent event='resize' handler={this.debouncedUpdateSize} />
+        <WindowEvent event="resize" handler={this.debouncedUpdateSize} />
         {/* Only components that are rendered under this tree will be able to "consume" */}
         {this.props.children}
       </WindowSizeContext.Provider>

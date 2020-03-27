@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Page, UnstyledLink } from '@sparkpost/matchbox';
-import { Banner } from 'src/components/matchbox';
+import { UnstyledLink } from '@sparkpost/matchbox';
+import { Banner, Page } from 'src/components/matchbox';
 import CreateForm from './components/CreateForm';
 import { createTrackingDomain } from 'src/actions/trackingDomains';
 import { selectTrackingDomainCname } from 'src/selectors/account';

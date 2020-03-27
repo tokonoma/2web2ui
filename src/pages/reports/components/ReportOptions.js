@@ -14,6 +14,7 @@ import { Grid } from '@sparkpost/matchbox';
 import Typeahead from './Typeahead';
 import { Panel, Tag } from 'src/components/matchbox';
 import DatePicker from 'src/components/datePicker/DatePicker';
+import { selectFeatureFlaggedMetrics } from 'src/selectors/metrics';
 import typeaheadCacheSelector from 'src/selectors/reportFilterTypeaheadCache';
 import CustomReports from './CustomReports';
 import styles from './ReportOptions.module.scss';
@@ -56,47 +57,97 @@ export class ReportOptions extends Component {
     this.props.addFilters([item]);
   };
 
-  render() {
+  getPanelContent = () => {
     const {
-      customReportsEnabled,
       typeaheadCache,
       reportOptions,
       reportLoading,
       refreshReportOptions,
       searchOptions,
+      featureFlaggedMetrics,
     } = this.props;
+
+    if (featureFlaggedMetrics.useMetricsRollup) {
+      return [
+        <Panel.Section>
+          <Grid>
+            <Grid.Column xs={9} md={7}>
+              <Typeahead
+                reportOptions={reportOptions}
+                placeholder="Filter by domain, campaign, etc"
+                onSelect={this.handleTypeaheadSelect}
+                items={typeaheadCache}
+                selected={reportOptions.filters}
+              />
+            </Grid.Column>
+            <Grid.Column xs={3} md={2} mdOffset={3}>
+              <ShareModal disabled={reportLoading} searchOptions={searchOptions} />
+            </Grid.Column>
+          </Grid>
+        </Panel.Section>,
+        <Panel.Section>
+          <Grid>
+            <Grid.Column xs={12} md={7}>
+              <div className={styles.FieldWrapper}>
+                <DatePicker
+                  {...reportOptions}
+                  relativeDateOptions={RELATIVE_DATE_OPTIONS}
+                  disabled={reportLoading}
+                  onChange={refreshReportOptions}
+                  roundToPrecision={true}
+                />
+              </div>
+            </Grid.Column>
+            <Grid.Column xs={6} md={2} mdOffset={1}>
+              {/* { Time Zone Picker } */}
+            </Grid.Column>
+            <Grid.Column xs={6} md={2}>
+              {/* { Precision Picker } */}
+            </Grid.Column>
+          </Grid>
+        </Panel.Section>,
+      ];
+    }
+
+    return (
+      <Panel.Section>
+        <Grid>
+          <Grid.Column xs={12} md={6}>
+            <div className={styles.FieldWrapper}>
+              <DatePicker
+                {...reportOptions}
+                relativeDateOptions={RELATIVE_DATE_OPTIONS}
+                disabled={reportLoading}
+                onChange={refreshReportOptions}
+                roundToPrecision={true}
+              />
+            </div>
+          </Grid.Column>
+          <Grid.Column xs={8} md={4} xl={5}>
+            <Typeahead
+              reportOptions={reportOptions}
+              placeholder="Filter by domain, campaign, etc"
+              onSelect={this.handleTypeaheadSelect}
+              items={typeaheadCache}
+              selected={reportOptions.filters}
+            />
+          </Grid.Column>
+          <Grid.Column xs={4} md={2} xl={1}>
+            <ShareModal disabled={reportLoading} searchOptions={searchOptions} />
+          </Grid.Column>
+        </Grid>
+      </Panel.Section>
+    );
+  };
+
+  render() {
+    const { customReportsEnabled, searchOptions } = this.props;
 
     return (
       <div data-id="report-options">
         <Panel>
           {customReportsEnabled && <CustomReports searchOptions={searchOptions} />}
-          <Panel.Section>
-            <Grid>
-              <Grid.Column xs={12} md={6}>
-                <div className={styles.FieldWrapper}>
-                  <DatePicker
-                    {...reportOptions}
-                    relativeDateOptions={RELATIVE_DATE_OPTIONS}
-                    disabled={reportLoading}
-                    onChange={refreshReportOptions}
-                    roundToPrecision={true}
-                  />
-                </div>
-              </Grid.Column>
-              <Grid.Column xs={8} md={4} xl={5}>
-                <Typeahead
-                  reportOptions={reportOptions}
-                  placeholder="Filter by domain, campaign, etc"
-                  onSelect={this.handleTypeaheadSelect}
-                  items={typeaheadCache}
-                  selected={reportOptions.filters}
-                />
-              </Grid.Column>
-              <Grid.Column xs={4} md={2} xl={1}>
-                <ShareModal disabled={reportLoading} searchOptions={searchOptions} />
-              </Grid.Column>
-            </Grid>
-          </Panel.Section>
+          {this.getPanelContent()}
           {this.renderActiveFilters()}
         </Panel>
       </div>
@@ -107,6 +158,7 @@ export class ReportOptions extends Component {
 const mapStateToProps = state => ({
   reportOptions: state.reportOptions,
   typeaheadCache: typeaheadCacheSelector(state),
+  featureFlaggedMetrics: selectFeatureFlaggedMetrics(state),
 });
 
 const mapDispatchToProps = {

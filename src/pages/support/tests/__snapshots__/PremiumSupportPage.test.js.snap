@@ -9,7 +9,6 @@ exports[`PremiumSupportPage default state 1`] = `
       "to": "/account/billing",
     }
   }
-  empty={Object {}}
 >
   <Panel
     accent={true}

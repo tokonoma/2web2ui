@@ -2,7 +2,6 @@
 
 exports[`IP Pools List Page does not render purchase action if isAdmin is false 1`] = `
 <Page
-  empty={Object {}}
   primaryAction={
     Object {
       "Component": [Function],
@@ -70,7 +69,6 @@ exports[`IP Pools List Page does not render purchase action if isAdmin is false 
 
 exports[`IP Pools List Page does not render purchase action if showPurchaseCTA is false 1`] = `
 <Page
-  empty={Object {}}
   primaryAction={
     Object {
       "Component": [Function],
@@ -130,7 +128,6 @@ exports[`IP Pools List Page does not render purchase action if showPurchaseCTA i
 
 exports[`IP Pools List Page does not render purchase action if showPurchaseCTA is false2 1`] = `
 <Page
-  empty={Object {}}
   primaryAction={
     Object {
       "Component": [Function],
@@ -234,7 +231,6 @@ exports[`IP Pools List Page should render the IP warm-up banner correctly 1`] = 
 
 exports[`IP Pools List Page should render the list page correctly 1`] = `
 <Page
-  empty={Object {}}
   primaryAction={
     Object {
       "Component": [Function],
@@ -315,7 +311,6 @@ exports[`IP Pools List Page should render the list page correctly 1`] = `
 
 exports[`IP Pools List Page should show alert upon error 1`] = `
 <Page
-  empty={Object {}}
   primaryAction={
     Object {
       "Component": [Function],

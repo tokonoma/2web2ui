@@ -2,7 +2,6 @@
 
 exports[`Page: Smtp tests should render page correctly with defaults 1`] = `
 <Page
-  empty={Object {}}
   title="SMTP Relay"
 >
   <Panel

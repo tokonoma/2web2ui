@@ -9,7 +9,6 @@ exports[`Page: Webhook Details should render happy path 1`] = `
       "to": "/webhooks/",
     }
   }
-  empty={Object {}}
   secondaryActions={
     Array [
       Object {

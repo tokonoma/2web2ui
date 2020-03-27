@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter, Route, Switch } from 'react-router-dom';
-import { Page } from '@sparkpost/matchbox';
-import { Tabs } from 'src/components/matchbox';
+import { Page, Tabs } from 'src/components/matchbox';
+
 import { clearSubaccount, getSubaccount } from 'src/actions/subaccounts';
 import { ApiKeySuccessBanner } from 'src/components';
 import { selectSubaccount } from 'src/selectors/subaccounts';

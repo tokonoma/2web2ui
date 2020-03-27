@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Checkbox, Tooltip, WindowEvent } from '@sparkpost/matchbox';
-import { Button, Panel } from 'src/components/matchbox';
+import { Checkbox, Tooltip } from '@sparkpost/matchbox';
+import { Button, Panel, WindowEvent } from 'src/components/matchbox';
 import { Modal } from 'src/components';
 import { list } from 'src/config/metrics';
 import _ from 'lodash';

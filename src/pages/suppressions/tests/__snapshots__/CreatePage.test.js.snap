@@ -9,7 +9,6 @@ exports[`CreatePage tests should display the error banner on parse error 1`] = `
       "to": "/lists/suppressions",
     }
   }
-  empty={Object {}}
   title="Add Suppressions"
 >
   <ErrorBanner
@@ -47,7 +46,6 @@ exports[`CreatePage tests should display the error banner on persist error 1`] =
       "to": "/lists/suppressions",
     }
   }
-  empty={Object {}}
   title="Add Suppressions"
 >
   <ErrorBanner
@@ -85,7 +83,6 @@ exports[`CreatePage tests should render AddTab 1`] = `
       "to": "/lists/suppressions",
     }
   }
-  empty={Object {}}
   title="Add Suppressions"
 >
   <Tabs
@@ -119,7 +116,6 @@ exports[`CreatePage tests should render UploadTab 1`] = `
       "to": "/lists/suppressions",
     }
   }
-  empty={Object {}}
   title="Add Suppressions"
 >
   <Tabs

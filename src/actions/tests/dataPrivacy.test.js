@@ -1,45 +1,23 @@
 import * as dataPrivacyRequests from '../dataPrivacy';
-import { showAlert } from 'src/actions/globalAlert';
-import { sparkpost as spReq } from 'src/helpers/axiosInstances';
-
 jest.mock('src/helpers/axiosInstances');
-jest.mock('src/actions/globalAlert');
+jest.mock('../helpers/sparkpostApiRequest', () => jest.fn(a => a));
 
 describe('Action Creator: dataPrivacy', () => {
-  let dispatchMock;
-
-  beforeEach(() => {
-    dispatchMock = jest.fn(a => Promise.resolve(a));
-    spReq.mockImplementation = jest.fn(a => Promise.resolve(a));
-  });
-
-  afterEach(() => {
-    jest.resetAllMocks();
-  });
-
-  it('.submitRTBFRequest should show appropriate alert on success', async () => {
+  it('submitRTBFRequest should make the appropriate request', () => {
     const thunk = dataPrivacyRequests.submitRTBFRequest({
       subaccountId: 100,
       recipients: ['fakeAddress@email.com'],
       include_subaccounts: false,
     });
-    await thunk(dispatchMock);
-    expect(showAlert).toHaveBeenCalledWith({
-      type: 'success',
-      message: 'Request Saved',
-    });
+    expect(thunk).toMatchSnapshot();
   });
 
-  it('.deleteUser should show appropriate alert on success', async () => {
+  it('submitOptOutRequest should make the appropriate request', () => {
     const thunk = dataPrivacyRequests.submitOptOutRequest({
       subaccountId: 100,
       recipients: ['fakeAddress@email.com'],
       include_subaccounts: false,
     });
-    await thunk(dispatchMock);
-    expect(showAlert).toHaveBeenCalledWith({
-      type: 'success',
-      message: 'Request Saved',
-    });
+    expect(thunk).toMatchSnapshot();
   });
 });

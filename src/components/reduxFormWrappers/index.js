@@ -8,3 +8,4 @@ export { default as TextFieldWrapper } from './TextFieldWrapper';
 export { default as DatePickerWrapper } from './DatePickerWrapper';
 export { default as ComboBoxTypeaheadWrapper } from './ComboBoxTypeaheadWrapper';
 export { default as SliderFieldWrapper } from './SliderFieldWrapper';
+export { default as FileFieldWrapper } from './FileFieldWrapper';

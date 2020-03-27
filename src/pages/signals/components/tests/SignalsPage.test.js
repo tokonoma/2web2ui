@@ -14,14 +14,18 @@ describe('Signals Page Component', () => {
       pass: 'through',
       facet: 'facet',
       facetId: 'facetId',
-      subaccountId: 22
+      subaccountId: 22,
     };
     helpers.getFriendlyTitle = jest.fn();
-    wrapper = shallow(<SignalsPage {...props}/>);
+    wrapper = shallow(<SignalsPage {...props} />);
   });
 
   it('renders correctly with title', () => {
     expect(wrapper).toMatchSnapshot();
-    expect(helpers.getFriendlyTitle).toHaveBeenCalledWith({ facet: 'facet', facetId: 'facetId', subaccountId: 22 });
+    expect(helpers.getFriendlyTitle).toHaveBeenCalledWith({
+      facet: 'facet',
+      facetId: 'facetId',
+      subaccountId: 22,
+    });
   });
 });

@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React, { useCallback, useEffect } from 'react';
-import { Page } from '@sparkpost/matchbox';
+import { Page } from 'src/components/matchbox';
 import { CursorPaging, PerPageButtons } from 'src/components/collection';
 import { DEFAULT_PER_PAGE_BUTTONS } from 'src/constants';
 import { batchStatusOptions } from './constants/integration';

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Popover, ActionList, ScreenReaderOnly } from '@sparkpost/matchbox';
-import { Tabs, Button, Panel, Tag } from 'src/components/matchbox';
+import { Popover, ActionList } from '@sparkpost/matchbox';
+import { Tabs, Button, Panel, Tag, ScreenReaderOnly } from 'src/components/matchbox';
 import { MoreHoriz } from '@sparkpost/matchbox-icons';
 import ConfirmationModal from 'src/components/modals/ConfirmationModal';
 import tabs from '../constants/editTabs';

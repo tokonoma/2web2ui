@@ -19,7 +19,6 @@ exports[`Page: User Create Page should render correctly by default 1`] = `
       "to": "/account/users",
     }
   }
-  empty={Object {}}
   title="Invite User"
 >
   <Panel>

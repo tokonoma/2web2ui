@@ -2,7 +2,6 @@
 
 exports[`AcceptedPage:  should render 1`] = `
 <Page
-  empty={Object {}}
   title="Accepted Report"
 >
   <withRouter(Connect(ReportOptions))

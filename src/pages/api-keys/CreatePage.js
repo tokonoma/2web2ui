@@ -8,14 +8,13 @@ import { getFormLoading } from 'src/selectors/api-keys';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 
 import ApiKeyForm from './components/ApiKeyForm';
-import { Page } from '@sparkpost/matchbox';
-import { Panel } from 'src/components/matchbox';
+import { Page, Panel } from 'src/components/matchbox';
 import { Loading } from 'src/components';
 
 const breadcrumbAction = {
   content: 'API Keys',
   Component: Link,
-  to: '/account/api-keys'
+  to: '/account/api-keys',
 };
 
 export class CreatePage extends React.Component {
@@ -26,17 +25,16 @@ export class CreatePage extends React.Component {
     }
   }
 
-  onSubmit = (values) => {
+  onSubmit = values => {
     const { createApiKey, history, showAlert } = this.props;
 
-    return createApiKey(values).then((res) => {
+    return createApiKey(values).then(() => {
       showAlert({ type: 'success', message: 'API key created' });
       history.push('/account/api-keys');
     });
   };
 
   render() {
-
     if (this.props.loading) {
       return <Loading />;
     }
@@ -51,11 +49,13 @@ export class CreatePage extends React.Component {
   }
 }
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = state => ({
   loading: getFormLoading(state),
-  hasSubaccounts: hasSubaccounts(state)
+  hasSubaccounts: hasSubaccounts(state),
 });
 
 export default withRouter(
-  connect(mapStateToProps, { createApiKey, listGrants, listSubaccountGrants, showAlert })(CreatePage)
+  connect(mapStateToProps, { createApiKey, listGrants, listSubaccountGrants, showAlert })(
+    CreatePage,
+  ),
 );

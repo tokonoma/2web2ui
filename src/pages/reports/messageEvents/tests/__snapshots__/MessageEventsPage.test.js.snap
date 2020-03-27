@@ -34,7 +34,6 @@ Array [
 
 exports[`Page: Message Events tests should only render loading component while loading 1`] = `
 <Page
-  empty={Object {}}
   title="Events Search"
 >
   <withRouter(Connect(MessageEventsSearch)) />
@@ -47,7 +46,6 @@ exports[`Page: Message Events tests should only render loading component while l
 
 exports[`Page: Message Events tests should render error when action fails 1`] = `
 <Page
-  empty={Object {}}
   title="Events Search"
 >
   <withRouter(Connect(MessageEventsSearch)) />
@@ -61,7 +59,6 @@ exports[`Page: Message Events tests should render error when action fails 1`] = 
 
 exports[`Page: Message Events tests should render page correctly 1`] = `
 <Page
-  empty={Object {}}
   title="Events Search"
 >
   <withRouter(Connect(MessageEventsSearch)) />
@@ -166,7 +163,6 @@ exports[`Page: Message Events tests should render page correctly 1`] = `
 
 exports[`Page: Message Events tests should render the empty message when 0 results are returned 1`] = `
 <Page
-  empty={Object {}}
   title="Events Search"
 >
   <withRouter(Connect(MessageEventsSearch)) />

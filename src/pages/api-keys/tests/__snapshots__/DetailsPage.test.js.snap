@@ -9,7 +9,6 @@ exports[`renders ready only mode correctly 1`] = `
       "to": "/account/api-keys",
     }
   }
-  empty={Object {}}
 >
   <Banner
     my="300"
@@ -48,7 +47,6 @@ exports[`should render not found pane when api key can not be found 1`] = `
       "to": "/account/api-keys",
     }
   }
-  empty={Object {}}
 >
   <Panel>
     <Banner

@@ -6,8 +6,7 @@ import { refreshBounceReport } from 'src/actions/bounceReport';
 import { TableCollection, Empty, LongTextContainer } from 'src/components';
 import { Percent } from 'src/components/formatters';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
-import { Page } from '@sparkpost/matchbox';
-import { Tabs } from 'src/components/matchbox';
+import { Page, Tabs } from 'src/components/matchbox';
 import ReportOptions from '../components/ReportOptions';
 import BounceChart from './components/BounceChart';
 import MetricsSummary from '../components/MetricsSummary';
@@ -62,7 +61,7 @@ export class BouncePage extends Component {
       bounce_category_name,
       bounce_class_name,
       <span>
-        {numerator}{' '}
+        {numerator}&nbsp;
         <small>
           (<Percent value={safeRate(numerator, denominator)} />)
         </small>

@@ -21,7 +21,6 @@ exports[`DetailsPage should render api keys tab 1`] = `
       "to": "/account/subaccounts",
     }
   }
-  empty={Object {}}
   title="Bob Evans, the restaurant. (123)"
 >
   <Tabs
@@ -75,7 +74,6 @@ exports[`DetailsPage should render edit tab 1`] = `
       "to": "/account/subaccounts",
     }
   }
-  empty={Object {}}
   title="Bob Evans, the restaurant. (123)"
 >
   <Tabs
@@ -131,7 +129,6 @@ exports[`DetailsPage should select sending domains tab 1`] = `
       "to": "/account/subaccounts",
     }
   }
-  empty={Object {}}
   title="Bob Evans, the restaurant. (123)"
 >
   <Tabs
@@ -185,7 +182,6 @@ exports[`DetailsPage should show api key banner with new api key 1`] = `
       "to": "/account/subaccounts",
     }
   }
-  empty={Object {}}
   title="Bob Evans, the restaurant. (123)"
 >
   <Connect(ApiKeySuccessBanner)

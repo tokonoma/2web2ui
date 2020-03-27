@@ -23,7 +23,6 @@ exports[`UploadedListPage renders the list error when the job status is error 1`
         "to": "/recipient-validation",
       }
     }
-    empty={Object {}}
     title="Recipient Validation"
   >
     <Panel>
@@ -61,7 +60,6 @@ exports[`UploadedListPage renders with list progress 1`] = `
         "to": "/recipient-validation",
       }
     }
-    empty={Object {}}
     title="Recipient Validation"
   >
     <Panel>

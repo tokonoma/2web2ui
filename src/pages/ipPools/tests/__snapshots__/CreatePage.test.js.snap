@@ -17,7 +17,6 @@ exports[`IP Pools Create Page should render the list page correctly 1`] = `
       "to": "/account/ip-pools",
     }
   }
-  empty={Object {}}
   title="Create IP Pool"
 >
   <withRouter(Connect(ReduxForm))

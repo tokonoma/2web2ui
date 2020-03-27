@@ -7,31 +7,10 @@ import SubaccountSection from 'src/components/subaccountSection';
 import { required, email, maxLength } from 'src/helpers/validation';
 import { Button, Panel } from 'src/components/matchbox';
 import { submitRTBFRequest, submitOptOutRequest } from 'src/actions/dataPrivacy';
+import { showAlert } from 'src/actions/globalAlert';
 import ButtonWrapper from 'src/components/buttonWrapper';
-import styles from './SingleRecipientTab.module.scss';
-
-const requestTypes = [
-  {
-    value: 'rtbf',
-    label: 'Right to be forgotten',
-  },
-  {
-    value: 'opt-out',
-    label: 'Opt-out of third-party use',
-  },
-];
-
-const subaccountItems = {
-  shared: null,
-  subaccount: -2,
-  master: 0,
-};
-
-const createOptions = [
-  { label: 'Master Account', value: 'master' },
-  { label: 'Master and All Subaccounts', value: 'shared' },
-  { label: 'Select a Subaccount', value: 'subaccount' },
-];
+import styles from './DataPrivacy.module.scss';
+import { REQUEST_TYPES, SUBACCOUNT_ITEMS, SUBACCOUNT_OPTIONS } from '../constants';
 
 export function SingleRecipientTab(props) {
   const onSubmit = values => {
@@ -39,30 +18,21 @@ export function SingleRecipientTab(props) {
       ? null
       : values.assignTo === 'subaccount'
       ? values.subaccount.id
-      : subaccountItems[values.assignTo];
+      : SUBACCOUNT_ITEMS[values.assignTo];
     const include_subaccounts = values.assignTo === 'shared';
-    switch (values.requestType) {
-      case 'rtbf':
-        props
-          .submitRTBFRequest({
-            recipients: [values.email],
-            subaccountId: subaccountId,
-            include_subaccounts: include_subaccounts,
-          })
-          .then(() => props.reset());
-        break;
-      case 'opt-out':
-      default:
-        props
-          .submitOptOutRequest({
-            recipients: [values.email],
-            subaccountId: subaccountId,
-            include_subaccounts: include_subaccounts,
-          })
-          .then(() => props.reset());
-        break;
-    }
+    const submitRequest =
+      values.requestType === 'rtbf' ? props.submitRTBFRequest : props.submitOptOutRequest;
+
+    return submitRequest({
+      recipients: [values.email],
+      subaccountId: subaccountId,
+      include_subaccounts: include_subaccounts,
+    }).then(() => {
+      props.showAlert({ type: 'success', message: `Request Saved` });
+      props.reset();
+    });
   };
+
   return (
     <Panel.Section>
       <div className={styles.FormContainer}>
@@ -71,7 +41,7 @@ export function SingleRecipientTab(props) {
             component={RadioGroup}
             name="requestType"
             title="Select Compliance Type"
-            options={requestTypes}
+            options={REQUEST_TYPES}
             disabled={props.dataPrivacyRequestPending}
             validate={[required]}
           />
@@ -89,22 +59,26 @@ export function SingleRecipientTab(props) {
             newTemplate={true}
             disabled={props.dataPrivacyRequestPending}
             validate={[required]}
-            createOptions={createOptions}
+            createOptions={SUBACCOUNT_OPTIONS}
           />
 
           <ButtonWrapper>
-            <Button color="orange" type="submit" disabled={props.dataPrivacyRequestPending}>
+            <Button
+              className={styles.submit}
+              color="orange"
+              type="submit"
+              disabled={props.dataPrivacyRequestPending}
+            >
               Submit Request
             </Button>
-            <div className={styles.ClearButtonContainer}>
-              <Button onClick={props.reset}>Clear</Button>
-            </div>
+            <Button onClick={props.reset}>Clear</Button>
           </ButtonWrapper>
         </form>
       </div>
     </Panel.Section>
   );
 }
+
 const formOptions = {
   form: 'DATA_PRIVACY_SINGLE_RECIPIENT',
   enableReinitialize: true,
@@ -114,6 +88,6 @@ const mapStateToProps = state => {
     dataPrivacyRequestPending: state.dataPrivacy.dataPrivacyRequestPending,
   };
 };
-export default connect(mapStateToProps, { submitRTBFRequest, submitOptOutRequest })(
+export default connect(mapStateToProps, { submitRTBFRequest, submitOptOutRequest, showAlert })(
   reduxForm(formOptions)(SingleRecipientTab),
 );

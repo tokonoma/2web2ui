@@ -9,7 +9,6 @@ exports[`EnableAutomaticBillingPage renders page with form 1`] = `
       "to": "/account/billing",
     }
   }
-  empty={Object {}}
 >
   <withRouter(Connect(ReduxForm)) />
 </Page>

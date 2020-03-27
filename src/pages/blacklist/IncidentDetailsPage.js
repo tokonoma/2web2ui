@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { Page, Grid } from '@sparkpost/matchbox';
-import { Panel } from 'src/components/matchbox';
+import { Grid } from '@sparkpost/matchbox';
+import { Page, Panel } from 'src/components/matchbox';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
