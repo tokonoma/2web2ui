@@ -10,7 +10,7 @@ const ExternalLink = ({
   onClick: _onClick, // ignore
   ...props
 }) => (
-  <Component {...props} external>
+  <Component {...props} external={true}>
     {children} <OpenInNew size={13} style={{ marginTop: '-0.1em' }} />
   </Component>
 );

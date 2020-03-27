@@ -14,12 +14,13 @@ describe('DownloadLink', () => {
   it('renders a link', () => {
     const wrapper = subject();
     expect(wrapper).toHaveDisplayName('UnstyledLink');
+    expect(wrapper).toHaveProp('to', '/download/data.csv');
     expect(wrapper).toHaveTextContent('Download Me!');
   });
 
   it('sets download props', () => {
     const wrapper = subject();
-    expect(wrapper).toHaveProp('download');
+    expect(wrapper).toHaveProp('download', true);
     expect(wrapper).toHaveProp('referrerPolicy');
   });
 
@@ -32,5 +33,10 @@ describe('DownloadLink', () => {
     const wrapper = subject({ as: Button });
     expect(wrapper).toHaveDisplayName('Button');
     expect(wrapper).toHaveTextContent('Download Me!');
+  });
+
+  it('sets custom filename', () => {
+    const wrapper = subject({ download: 'myData.csv' });
+    expect(wrapper).toHaveProp('download', 'myData.csv');
   });
 });

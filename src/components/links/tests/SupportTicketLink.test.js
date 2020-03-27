@@ -11,20 +11,23 @@ describe('SupportTicketLink', () => {
       </SupportTicketLink>,
     );
 
-  it('renders a link', () => {
-    expect(subject()).toHaveDisplayName('UnstyledLink');
-  });
-
-  it('ignores to prop', () => {
-    const wrapper = subject({ to: '/paradise' });
-    expect(wrapper).not.toHaveProp('to');
-  });
-
-  it('sets a11y props', () => {
+  it('renders an a11y link', () => {
     const wrapper = subject();
 
-    expect(wrapper).toHaveProp('href');
-    expect(wrapper).toHaveProp('role');
+    expect(wrapper).toHaveDisplayName('UnstyledLink');
+    expect(wrapper).toHaveProp('href', 'javascript:void(0);');
+    expect(wrapper).toHaveProp('role', 'button');
+    expect(wrapper).toHaveTextContent('Help!');
+  });
+
+  it('ignores "component" prop', () => {
+    const wrapper = subject({ component: 'a' });
+    expect(wrapper).not.toHaveProp('component');
+  });
+
+  it('ignores "to" prop', () => {
+    const wrapper = subject({ to: '/paradise' });
+    expect(wrapper).not.toHaveProp('to');
   });
 
   it('opens support ticket form', () => {
@@ -40,6 +43,8 @@ describe('SupportTicketLink', () => {
   });
 
   it('renders a button', () => {
-    expect(subject({ as: Button })).toHaveDisplayName('Button');
+    const wrapper = subject({ as: Button });
+    expect(wrapper).toHaveDisplayName('Button');
+    expect(wrapper).not.toHaveProp('role');
   });
 });

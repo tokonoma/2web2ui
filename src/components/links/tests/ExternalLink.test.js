@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { Button } from 'src/components/matchbox';
 import ExternalLink from '../ExternalLink';
 
 describe('ExternalLink', () => {
@@ -10,8 +11,13 @@ describe('ExternalLink', () => {
       </ExternalLink>,
     );
 
-  it('renders link copy', () => {
+  it('renders an external link', () => {
     const wrapper = subject();
+    expect(wrapper).toHaveDisplayName('UnstyledLink');
+    expect(wrapper).toHaveProp({
+      to: 'http://example.com',
+      external: true,
+    });
     expect(wrapper).toHaveTextContent('See ya!');
   });
 
@@ -21,5 +27,10 @@ describe('ExternalLink', () => {
 
   it('ignores click event handler', () => {
     expect(subject({ onClick: () => {} })).not.toHaveProp('onClick');
+  });
+
+  it('renders a button', () => {
+    const wrapper = subject({ as: Button });
+    expect(wrapper).toHaveDisplayName('Button');
   });
 });
