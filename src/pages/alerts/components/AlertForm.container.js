@@ -27,6 +27,7 @@ export default function withAlertForm(WrappedComponent) {
   const formOptions = {
     form: FORM_NAME,
     enableReinitialize: true,
+    destroyOnUnmount: false, //prevents the initial values and values disappearing when hibana is enabled
     validate: validateForm,
   };
 
