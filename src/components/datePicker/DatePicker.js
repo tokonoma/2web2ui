@@ -127,7 +127,7 @@ export default class DatePicker extends Component {
     const precision = getRollupPrecision({
       from,
       to,
-      precision: selectPrecision && this.props.precision,
+      precision: selectPrecision && this.state.selectedPrecision,
     });
     if (this.props.roundToPrecision) {
       const rounded = roundBoundaries({ from, to, precision });
@@ -320,6 +320,7 @@ DatePicker.propTypes = {
   disabled: PropTypes.bool,
   showPresets: PropTypes.bool,
   hideManualEntry: PropTypes.bool,
+  selectPrecision: PropTypes.bool,
 };
 
 DatePicker.defaultProps = {

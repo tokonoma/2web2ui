@@ -42,6 +42,7 @@ describe('Component: DatePicker', () => {
       from: moment(mockFrom),
       to: moment(mockNow),
     }));
+    metricsHelpers.getRollupPrecision = jest.fn(({ precision }) => precision);
     dateHelpers.getRelativeDateOptions = jest.fn(() => [1, 2, 3]);
     datefns.format = jest.fn((a, b) => b);
     datefns.subMonths = jest.fn(a => a);
@@ -91,6 +92,16 @@ describe('Component: DatePicker', () => {
       wrapper.setProps({ other: 'stuff' });
       expect(instance.syncTimeToState).not.toHaveBeenCalled();
       expect(wrapper.state('selected')).toEqual(before);
+    });
+
+    it('should update precision when changed', () => {
+      wrapper.setProps({ selectPrecision: true, precision: '5min' });
+      wrapper.update();
+      wrapper.setState({ selected: before, selectedPrecision: '5min' });
+      wrapper.setProps({ precision: 'hour' });
+
+      expect(instance.syncTimeToState).toHaveBeenCalled();
+      expect(wrapper.state('selectedPrecision')).toEqual('hour');
     });
   });
 
@@ -276,6 +287,24 @@ describe('Component: DatePicker', () => {
       expect(dateHelpers.getStartOfDay).not.toHaveBeenCalled();
       expect(metricsHelpers.roundBoundaries).toHaveBeenCalledWith({ from, to: 'end-of-day' });
       expect(range).toEqual({ from: moment(mockFrom).toDate(), to: moment(mockNow).toDate() });
+    });
+
+    it('should round to precision if given', () => {
+      const from = new Date('2018-01-01');
+      const newDate = new Date('2018-01-02');
+      const to = new Date('2018-01-03');
+
+      wrapper.setProps({ selectPrecision: true, precision: 'hour' });
+      wrapper.update();
+      wrapper.setState({ beforeSelected: { from, to }, selectedPrecision: 'hour' });
+      wrapper.update();
+      const range = instance.getOrderedRange(newDate);
+
+      expect(range).toEqual({
+        from: moment(mockFrom).toDate(),
+        to: moment(mockNow).toDate(),
+        precision: 'hour',
+      });
     });
 
     it('should return correct range when new date is before from and to (start of day)', () => {

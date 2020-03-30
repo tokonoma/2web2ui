@@ -7,7 +7,6 @@ import { delay } from 'src/__testHelpers__';
 import moment from 'moment';
 
 describe('Component: DatePicker ManualEntryForm', () => {
-
   let props;
   let wrapper;
   let instance;
@@ -30,7 +29,7 @@ describe('Component: DatePicker ManualEntryForm', () => {
       now: mockNow,
       to: mockTo,
       from: mockFrom,
-      roundToPrecision: true
+      roundToPrecision: true,
     };
 
     metricsHelpers.getValidDateRange = jest.fn(() => ({ from: mockFrom, to: mockTo }));
@@ -38,7 +37,7 @@ describe('Component: DatePicker ManualEntryForm', () => {
 
     wrapper = shallow(<ManualEntryForm {...props} />);
     instance = wrapper.instance();
-    _.functions(instance).forEach((f) => jest.spyOn(instance, f));
+    _.functions(instance).forEach(f => jest.spyOn(instance, f));
     jest.spyOn(instance, 'syncPropsToState');
   });
 
@@ -49,7 +48,7 @@ describe('Component: DatePicker ManualEntryForm', () => {
   it('should sync props to state', () => {
     instance.syncPropsToState({
       from: moment('2018-01-10T10:00:00'),
-      to: moment('2018-01-15T14:00:00')
+      to: moment('2018-01-15T14:00:00'),
     });
     wrapper.update();
     expect(wrapper).toMatchSnapshot();
@@ -58,7 +57,7 @@ describe('Component: DatePicker ManualEntryForm', () => {
   it('should update state from new props', () => {
     wrapper.setProps({
       from: moment('2018-01-10T10:00:00'),
-      to: moment('2018-01-15T14:00:00')
+      to: moment('2018-01-15T14:00:00'),
     });
     wrapper.update();
     expect(wrapper).toMatchSnapshot();
@@ -66,7 +65,7 @@ describe('Component: DatePicker ManualEntryForm', () => {
 
   it('should not show precision when rounding is disabled', () => {
     wrapper.setProps({
-      roundToPrecision: false
+      roundToPrecision: false,
     });
     wrapper.update();
     expect(wrapper).toMatchSnapshot();
@@ -75,7 +74,19 @@ describe('Component: DatePicker ManualEntryForm', () => {
   it('should disable time picker if precision is day (time difference > 2 days)', () => {
     wrapper.setProps({
       from: moment('2018-01-10T10:00:00'),
-      to: moment('2018-01-15T14:00:00')
+      to: moment('2018-01-15T14:00:00'),
+    });
+    wrapper.update();
+    expect(wrapper.find({ id: 'fromTime' })).toHaveProp('disabled', true);
+    expect(wrapper.find({ id: 'toTime' })).toHaveProp('disabled', true);
+  });
+
+  it('should disable time picker if precision is explicitly set to day', () => {
+    wrapper.setProps({
+      from: moment('2018-01-10T10:00:00'),
+      to: moment('2018-01-15T14:00:00'),
+      selectedPrecision: 'day',
+      defaultPrecision: 'day',
     });
     wrapper.update();
     expect(wrapper.find({ id: 'fromTime' })).toHaveProp('disabled', true);
@@ -86,7 +97,7 @@ describe('Component: DatePicker ManualEntryForm', () => {
     mockTo = moment('2018-01-12T10:00:00');
     wrapper.setProps({
       from: moment('2018-01-10T10:00:00'),
-      to: moment('2018-01-12T10:00:00')
+      to: moment('2018-01-12T10:00:00'),
     });
     wrapper.update();
     expect(wrapper.find({ id: 'fromTime' })).toHaveProp('disabled', false);
@@ -94,7 +105,7 @@ describe('Component: DatePicker ManualEntryForm', () => {
   });
 
   it('should handle a field change', () => {
-    const event = { target: { id: 'fromDate', value: '2018-04-15' }};
+    const event = { target: { id: 'fromDate', value: '2018-04-15' } };
 
     instance.handleFieldChange(event);
 
@@ -119,7 +130,7 @@ describe('Component: DatePicker ManualEntryForm', () => {
     expect(instance.validate).toHaveBeenCalledWith(e, true);
   });
 
-  it('should do nothing on key events that aren\'t Enter', () => {
+  it("should do nothing on key events that aren't Enter", () => {
     const e = { key: 'X' };
     instance.handleEnter(e);
     expect(instance.validate).not.toHaveBeenCalled();
@@ -133,7 +144,9 @@ describe('Component: DatePicker ManualEntryForm', () => {
 
   describe('validate', () => {
     it('should reset with invalid date', () => {
-      metricsHelpers.getValidDateRange = jest.fn(() => { throw new Error('invalid dates!'); });
+      metricsHelpers.getValidDateRange = jest.fn(() => {
+        throw new Error('invalid dates!');
+      });
 
       instance.validate({}, true);
       expect(metricsHelpers.getValidDateRange).toHaveBeenCalled();
@@ -142,7 +155,9 @@ describe('Component: DatePicker ManualEntryForm', () => {
     });
 
     it('should NOT reset with invalid date (when shouldReset is false)', () => {
-      metricsHelpers.getValidDateRange = jest.fn(() => { throw new Error('invalid dates!'); });
+      metricsHelpers.getValidDateRange = jest.fn(() => {
+        throw new Error('invalid dates!');
+      });
 
       instance.validate({}, false);
       expect(metricsHelpers.getValidDateRange).toHaveBeenCalled();
@@ -153,10 +168,13 @@ describe('Component: DatePicker ManualEntryForm', () => {
     it('should select dates when valid', () => {
       instance.validate({}, true);
       expect(metricsHelpers.getValidDateRange).toHaveBeenCalled();
-      expect(props.selectDates).toHaveBeenCalledWith({
-        from: mockFrom.toDate(),
-        to: mockTo.toDate()
-      }, expect.any(Function));
+      expect(props.selectDates).toHaveBeenCalledWith(
+        {
+          from: mockFrom.toDate(),
+          to: mockTo.toDate(),
+        },
+        expect.any(Function),
+      );
       expect(props.onEnter).not.toHaveBeenCalled();
     });
 
@@ -169,11 +187,26 @@ describe('Component: DatePicker ManualEntryForm', () => {
       instance.validate(e, true);
 
       expect(metricsHelpers.getValidDateRange).toHaveBeenCalled();
-      expect(selectDates).toHaveBeenCalledWith({
-        from: mockFrom.toDate(),
-        to: mockTo.toDate()
-      }, expect.any(Function));
+      expect(selectDates).toHaveBeenCalledWith(
+        {
+          from: mockFrom.toDate(),
+          to: mockTo.toDate(),
+        },
+        expect.any(Function),
+      );
       expect(onEnter).toHaveBeenCalledWith(e);
+    });
+
+    it('should use precision if given', () => {
+      wrapper.setProps({ defaultPrecision: 'hour', selectedPrecision: 'hour' });
+
+      instance.validate({}, true);
+
+      expect(metricsHelpers.getValidDateRange).toHaveBeenCalledWith(
+        expect.objectContaining({
+          precision: 'hour',
+        }),
+      );
     });
   });
 });

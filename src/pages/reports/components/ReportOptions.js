@@ -107,7 +107,12 @@ export class ReportOptions extends Component {
                 {/* { Time Zone Picker } */}
               </Grid.Column>
               <Grid.Column xs={6} md={3}>
-                {/* { Precision Picker } */}
+                <PrecisionSelector
+                  from={reportOptions.from}
+                  to={reportOptions.to}
+                  selectedPrecision={reportOptions.precision}
+                  changeTime={refreshReportOptions}
+                />
               </Grid.Column>
             </Grid>
           </Panel.Section>

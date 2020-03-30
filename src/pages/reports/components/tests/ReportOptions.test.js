@@ -92,4 +92,9 @@ describe('Component: Report Options', () => {
     wrapper.setProps({ customReportsEnabled: true });
     expect(wrapper.find('withRouter(Connect(CustomReports))')).toExist();
   });
+
+  it('should mount and render metrics rollup option correctly', () => {
+    wrapper.setProps({ shouldUseMetricsRollup: true });
+    expect(wrapper.find('PrecisionSelector')).toExist();
+  });
 });

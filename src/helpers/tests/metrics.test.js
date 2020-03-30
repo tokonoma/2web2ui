@@ -266,7 +266,11 @@ describe('metrics helpers', () => {
         precision: 'hour',
       });
       expect(from.toISOString()).toEqual(moment('2016-02-18T10:00').toISOString());
-      expect(to.toISOString()).toEqual(moment('2016-12-19T10:59:59.999').toISOString());
+      expect(to.toISOString()).toEqual(
+        moment('2016-12-19T10:00')
+          .endOf('hour')
+          .toISOString(),
+      );
     });
   });
 
@@ -485,6 +489,28 @@ describe('metrics helpers', () => {
         preventFuture: false,
       });
       expect(validRange).toEqual({ from, to });
+    });
+
+    it('should use the default precision if given', () => {
+      const from = moment('2018-01-20T12:01Z');
+      const now = moment('2018-01-22T12:00Z');
+      const to = moment('2018-01-21T12:13Z');
+
+      const validRange = metricsHelpers.getValidDateRange({
+        from,
+        to,
+        now,
+        roundToPrecision: true,
+        preventFuture: false,
+        precision: '15min',
+      });
+
+      expect(validRange.from.toISOString()).toEqual(moment('2018-01-20T12:00Z').toISOString());
+      expect(validRange.to.toISOString()).toEqual(
+        moment('2018-01-21T12:15:59Z')
+          .endOf('minute')
+          .toISOString(),
+      );
     });
   });
 });
