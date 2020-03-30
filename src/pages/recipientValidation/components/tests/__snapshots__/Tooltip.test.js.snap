@@ -2,7 +2,6 @@
 
 exports[`renders tooltip correctly renders correctly icon 1`] = `
 <Tooltip
-  color={true}
   content={
     <div
       className="content"
