@@ -5,7 +5,7 @@ import { Grid } from '@sparkpost/matchbox';
 import { ArrowForward } from '@sparkpost/matchbox-icons';
 import { TextField } from 'src/components/matchbox';
 import { formatInputDate, formatInputTime, parseDatetime } from 'src/helpers/date';
-import { getValidDateRange, getPrecision, getMomentPrecision } from 'src/helpers/metrics';
+import { getValidDateRange, getPrecision, getPrecisionOptions } from 'src/helpers/metrics';
 import styles from './ManualEntryForm.module.scss';
 
 const DATE_PLACEHOLDER = '1970-01-20';
@@ -19,7 +19,6 @@ export default class ManualEntryForm extends Component {
     toTime: '',
     fromDate: '',
     fromTime: '',
-    precision: '',
   };
 
   componentDidMount() {
@@ -31,13 +30,12 @@ export default class ManualEntryForm extends Component {
     this.syncPropsToState(nextProps);
   }
 
-  syncPropsToState({ to, from, precision }) {
+  syncPropsToState({ to, from }) {
     this.setState({
       toDate: formatInputDate(to),
       toTime: formatInputTime(to),
       fromDate: formatInputDate(from),
       fromTime: formatInputTime(from),
-      precision,
     });
   }
 
@@ -64,8 +62,14 @@ export default class ManualEntryForm extends Component {
     const from = parseDatetime(this.state.fromDate, this.state.fromTime);
     const to = parseDatetime(this.state.toDate, this.state.toTime);
     // allow for prop-level override of "now" (DI, etc.)
-    const { now, roundToPrecision, preventFuture, precision } = this.props;
+    const { now, roundToPrecision, preventFuture } = this.props;
     try {
+      const precisionOptionsValues = getPrecisionOptions(moment(from), moment(to)).map(
+        ({ value }) => value,
+      );
+      const precision = precisionOptionsValues.includes(this.props.precision)
+        ? this.props.precision
+        : precisionOptionsValues[0];
       const { to: roundedTo, from: roundedFrom } = getValidDateRange({
         from,
         to,
@@ -74,11 +78,14 @@ export default class ManualEntryForm extends Component {
         preventFuture,
         precision,
       });
-      return this.props.selectDates({ to: roundedTo.toDate(), from: roundedFrom.toDate() }, () => {
-        if (e && e.key === 'Enter') {
-          this.props.onEnter(e);
-        }
-      });
+      return this.props.selectDates(
+        { to: roundedTo.toDate(), from: roundedFrom.toDate(), precision },
+        () => {
+          if (e && e.key === 'Enter') {
+            this.props.onEnter(e);
+          }
+        },
+      );
     } catch (e) {
       if (shouldReset) {
         this.syncPropsToState(this.props); // Resets fields if dates are not valid
@@ -107,10 +114,8 @@ export default class ManualEntryForm extends Component {
           roundToPrecision,
           precision,
         });
-        precisionLabelValue = getPrecision(validatedFrom, validatedTo);
-        shouldDisableTime = precision
-          ? ['day', 'week', 'month'].includes(precision)
-          : getMomentPrecision(validatedFrom, validatedTo) === 'days';
+        precisionLabelValue = precision || getPrecision(validatedFrom, validatedTo);
+        shouldDisableTime = ['day', 'week', 'month'].includes(precisionLabelValue);
       } catch (e) {
         precisionLabelValue = '';
       }
@@ -177,7 +182,7 @@ export default class ManualEntryForm extends Component {
             />
           </Grid.Column>
         </Grid>
-        {!precision && precisionLabel}
+        {precisionLabel}
       </form>
     );
   }

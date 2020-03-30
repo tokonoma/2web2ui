@@ -9,6 +9,7 @@ import {
   initTypeaheadCache,
 } from 'src/actions/reportOptions';
 import ShareModal from './ShareModal';
+import PrecisionSelector from './PrecisionSelector';
 import { parseSearch } from 'src/helpers/reports';
 import { Grid } from '@sparkpost/matchbox';
 import Typeahead from './Typeahead';

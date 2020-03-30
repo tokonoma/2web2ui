@@ -83,7 +83,10 @@ export function getLocalTimezone() {
   return format.resolvedOptions().timeZone;
 }
 
-export function getRelativeDates(range, { now = moment().toDate(), roundToPrecision = true } = {}) {
+export function getRelativeDates(
+  range,
+  { now = moment().toDate(), roundToPrecision = true, precision } = {},
+) {
   let preciseFrom;
 
   switch (range) {
@@ -124,7 +127,7 @@ export function getRelativeDates(range, { now = moment().toDate(), roundToPrecis
   }
 
   if (roundToPrecision) {
-    const { to, from } = roundBoundaries({ from: preciseFrom, to: now });
+    const { to, from } = roundBoundaries({ from: preciseFrom, to: now, precision });
     return { to: to.toDate(), from: from.toDate(), relativeRange: range };
   }
 

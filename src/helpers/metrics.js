@@ -2,8 +2,14 @@ import moment from 'moment';
 import _ from 'lodash';
 import { list as METRICS_LIST } from 'src/config/metrics';
 import config from 'src/config';
-import { getRelativeDates, getLocalTimezone } from 'src/helpers/date';
+import { getRelativeDates } from 'src/helpers/date';
 import { safeDivide, safeRate } from './math';
+
+let count = 1;
+export function counter() {
+  count++;
+  return count;
+}
 
 const {
   metricsPrecisionMap: precisionMap,
@@ -94,6 +100,11 @@ export function getPrecision(from, to = moment()) {
   return precisionMap.find(({ time }) => diff <= time).value;
 }
 
+export function getRollupPrecision(from, to = moment()) {
+  const diff = to.diff(from, 'minutes');
+  return rollupPrecisionMap.find(({ recommended }) => diff <= recommended).value;
+}
+
 export function getPrecisionOptions(from, to = moment()) {
   const diff = to.diff(from, 'minutes');
   return rollupPrecisionMap
@@ -129,8 +140,8 @@ export function roundBoundaries({
   const from = moment(fromInput);
   const to = moment(toInput);
 
-  const precision = defaultPrecision || getPrecision(from, to);
-  const momentPrecision = precision.includes('min') ? 'minutes' : defaultPrecision;
+  const precision = defaultPrecision || getRollupPrecision(from, to);
+  const momentPrecision = precision.includes('min') ? 'minutes' : precision;
   // extract rounding interval from precision query param value
   const roundInt = momentPrecision === 'minutes' ? parseInt(precision.replace('min', '')) : 1;
 

@@ -127,7 +127,9 @@ export function refreshReportOptions(update) {
 
     if (update.relativeRange) {
       if (update.relativeRange !== 'custom') {
-        const { from, to } = getRelativeDates(update.relativeRange);
+        const { from, to } = getRelativeDates(update.relativeRange, {
+          precision: update.precision,
+        });
         const precision = update.precision || getPrecision(from, moment(to));
         update = { ...update, from, to, precision };
       } else {
