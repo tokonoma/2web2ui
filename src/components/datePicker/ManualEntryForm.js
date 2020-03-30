@@ -5,7 +5,12 @@ import { Grid } from '@sparkpost/matchbox';
 import { ArrowForward } from '@sparkpost/matchbox-icons';
 import { TextField } from 'src/components/matchbox';
 import { formatInputDate, formatInputTime, parseDatetime } from 'src/helpers/date';
-import { getValidDateRange, getPrecision, getRollupPrecision } from 'src/helpers/metrics';
+import {
+  getValidDateRange,
+  getPrecision,
+  getRollupPrecision,
+  getMomentPrecision,
+} from 'src/helpers/metrics';
 import styles from './ManualEntryForm.module.scss';
 
 const DATE_PLACEHOLDER = '1970-01-20';
@@ -110,7 +115,9 @@ export default class ManualEntryForm extends Component {
           selectedPrecision,
         });
         precisionLabelValue = selectedPrecision || getPrecision(validatedFrom, validatedTo);
-        shouldDisableTime = ['day', 'week', 'month'].includes(precisionLabelValue);
+        shouldDisableTime = selectedPrecision
+          ? ['day', 'week', 'month'].includes(precisionLabelValue)
+          : getMomentPrecision(validatedFrom, validatedTo) === 'days';
       } catch (e) {
         precisionLabelValue = '';
       }

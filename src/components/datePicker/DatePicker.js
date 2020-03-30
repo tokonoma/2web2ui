@@ -153,7 +153,7 @@ export default class DatePicker extends Component {
   };
 
   handleSubmit = () => {
-    const { validate, precision } = this.props;
+    const { validate } = this.props;
     const selectedDates = this.state.selected;
     const validationError = validate && validate(selectedDates);
     if (validationError) {
@@ -165,7 +165,9 @@ export default class DatePicker extends Component {
     this.props.onChange({
       ...selectedDates,
       relativeRange: 'custom',
-      precision: precision || getPrecision(moment(selectedDates.from), moment(selectedDates.to)),
+      precision:
+        this.state.selectedPrecision ||
+        getPrecision(moment(selectedDates.from), moment(selectedDates.to)),
     });
   };
 

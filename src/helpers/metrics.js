@@ -5,12 +5,6 @@ import config from 'src/config';
 import { getRelativeDates } from 'src/helpers/date';
 import { safeDivide, safeRate } from './math';
 
-let count = 1;
-export function counter() {
-  count++;
-  return count;
-}
-
 const {
   metricsPrecisionMap: precisionMap,
   metricsRollupPrecisionMap: rollupPrecisionMap,
@@ -149,7 +143,7 @@ export function roundBoundaries({
   const to = moment(toInput);
 
   const precision = defaultPrecision || getPrecision(from, to);
-  const momentPrecision = precision.includes('min') ? 'minutes' : precision;
+  const momentPrecision = getMomentPrecision(from, to);
   // extract rounding interval from precision query param value
   const roundInt = momentPrecision === 'minutes' ? parseInt(precision.replace('min', '')) : 1;
 
@@ -219,7 +213,7 @@ export function getValidDateRange({
     // Use the user's rounded 'to' input if it's less than or equal to 'now' rounded up to the nearest precision,
     // otherwise use the valid range and precision of floor(from) to ceil(now).
     // This is necessary because the precision could change between the user's invalid range, and a valid range.
-    const { from: roundedFromNow, to: roundedNow } = roundBoundaries({ from, now, precision });
+    const { from: roundedFromNow, to: roundedNow } = roundBoundaries({ from, to: now, precision });
     const { from: roundedFrom, to: roundedTo } = roundBoundaries({ from, to, precision });
 
     if (roundedTo.isSameOrBefore(roundedNow)) {
