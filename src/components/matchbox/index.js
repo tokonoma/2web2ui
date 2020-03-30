@@ -2,6 +2,7 @@ export { default as ActionList } from './ActionList';
 export { default as Banner } from './Banner';
 export { default as Box } from './Box';
 export { default as Button } from './Button';
+export { default as Checkbox } from './Checkbox';
 export { default as Error } from './Error';
 export { default as Expandable } from './Expandable';
 export { default as Inline } from './Inline';
