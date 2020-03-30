@@ -94,6 +94,11 @@ export function getPrecision(from, to = moment()) {
   return precisionMap.find(({ time }) => diff <= time).value;
 }
 
+/**
+ * Calculates the precision value for metrics Rollup. If the precision given
+ * is still within range, do not change precision. If the possible precision options
+ * do not include the current precision, get the recommended precision.
+ */
 export function getRollupPrecision({ from, to = moment(), precision }) {
   if (!precision) {
     return undefined;
@@ -107,6 +112,9 @@ export function getRollupPrecision({ from, to = moment(), precision }) {
   return rollupPrecisionMap.find(({ recommended }) => diff <= recommended).value;
 }
 
+/**
+ * Creates an array of possible precision options for a time span
+ */
 export function getPrecisionOptions(from, to = moment()) {
   const diff = to.diff(from, 'minutes');
   return rollupPrecisionMap
@@ -131,6 +139,7 @@ export function getPrecisionType(precision) {
  *
  * @param fromInput
  * @param toInput
+ * @param precision,
  * @return {{to: *|moment.Moment, from: *|moment.Moment}}
  */
 export function roundBoundaries({
@@ -143,7 +152,11 @@ export function roundBoundaries({
   const to = moment(toInput);
 
   const precision = defaultPrecision || getPrecision(from, to);
-  const momentPrecision = getMomentPrecision(from, to);
+  const momentPrecision = defaultPrecision
+    ? precision.includes('min')
+      ? 'minutes'
+      : precision
+    : getMomentPrecision(from, to);
   // extract rounding interval from precision query param value
   const roundInt = momentPrecision === 'minutes' ? parseInt(precision.replace('min', '')) : 1;
 

@@ -124,9 +124,11 @@ export default class DatePicker extends Component {
     } else {
       from = this.fromFormatter(newDate);
     }
-    const precision = selectPrecision
-      ? getRollupPrecision({ from, to, precision: this.props.precision })
-      : undefined;
+    const precision = getRollupPrecision({
+      from,
+      to,
+      precision: selectPrecision && this.props.precision,
+    });
     if (this.props.roundToPrecision) {
       const rounded = roundBoundaries({ from, to, precision });
       from = rounded.from.toDate();

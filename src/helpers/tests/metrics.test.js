@@ -94,6 +94,46 @@ describe('metrics helpers', () => {
     expect(metricsHelpers.getPrecision(from, to)).toEqual('month');
   });
 
+  describe('getRollupPrecision', () => {
+    const from = moment('2016-12-18T00:00').utc();
+    const to = moment('2016-12-18T04:30').utc();
+
+    it('should return undefined when no precision is given', () => {
+      expect(metricsHelpers.getRollupPrecision({ from, to, precision: undefined })).toEqual(
+        undefined,
+      );
+    });
+    it('should return correct precision', () => {
+      expect(metricsHelpers.getRollupPrecision({ from, to, precision: 'month' })).toEqual('5min');
+    });
+    it('should return the same precision when it is still in the allowed precision options', () => {
+      expect(metricsHelpers.getRollupPrecision({ from, to, precision: 'hour' })).toEqual('hour');
+    });
+  });
+
+  it('should return correct rollup precision options when given time span', () => {
+    const from = moment('2016-12-18T00:00').utc();
+    const to = moment('2016-12-19T00:30').utc();
+    expect(metricsHelpers.getPrecisionOptions(from, to)).toEqual([
+      {
+        label: '5 Min',
+        value: '5min',
+      },
+      {
+        label: '15 Min',
+        value: '15min',
+      },
+      {
+        label: 'Hour',
+        value: 'hour',
+      },
+      {
+        label: 'Day',
+        value: 'day',
+      },
+    ]);
+  });
+
   it('should return minute as moment precision type', () => {
     const from = moment('2016-12-18T00:00').utc();
     const to = moment('2016-12-18T00:30').utc();
@@ -217,6 +257,16 @@ describe('metrics helpers', () => {
 
       expect(from.toISOString()).toEqual(moment('2016-02-18T00:00').toISOString());
       expect(to.toISOString()).toEqual(now.toISOString());
+    });
+
+    it('will round to fixed precision when given', () => {
+      const { from, to } = metricsHelpers.roundBoundaries({
+        from: moment('2016-02-18T10:31'),
+        to: moment('2016-12-19T10:35'),
+        precision: 'hour',
+      });
+      expect(from.toISOString()).toEqual(moment('2016-02-18T10:00').toISOString());
+      expect(to.toISOString()).toEqual(moment('2016-12-19T10:59:59.999').toISOString());
     });
   });
 
