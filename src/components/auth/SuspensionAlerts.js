@@ -1,10 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { showAlert } from 'src/actions/globalAlert';
-import { openSupportTicketForm } from 'src/actions/support';
-import { PageLink } from 'src/components';
+import { PageLink, SupportTicketLink } from 'src/components/links';
 import { hasStatus, isSuspendedForBilling } from 'src/helpers/conditions/account';
-import { UnstyledLink } from '@sparkpost/matchbox';
 
 /**
  * Triggers global alerts for:
@@ -12,26 +10,27 @@ import { UnstyledLink } from '@sparkpost/matchbox';
  * - Account suspended for billing
  */
 export class SuspensionAlerts extends Component {
-  openTicket = () => {
-    this.props.openSupportTicketForm({ issueId: 'account_suspension' });
+  getMessage() {
+    return this.props.isSuspendedForBilling ? (
+      <Fragment>
+        <div>Your account is currently suspended due to a billing problem.</div>
+        <div>
+          To make a payment and reactivate your account,{' '}
+          <PageLink to="/account/billing">visit the billing page</PageLink>.
+        </div>
+      </Fragment>
+    ) : (
+      <Fragment>
+        <div>Your account is currently suspended.</div>
+        <div>
+          For any questions or to request reactivation, please{' '}
+          <SupportTicketLink issueId="account_suspension">submit a ticket</SupportTicketLink>.
+        </div>
+      </Fragment>
+    );
   }
 
-  getMessage () {
-    return this.props.isSuspendedForBilling
-      ? (
-        <Fragment>
-          <div>Your account is currently suspended due to a billing problem.</div>
-          <div>To make a payment and reactivate your account, <PageLink to='/account/billing'>visit the billing page</PageLink>.</div>
-        </Fragment>
-      ) : (
-        <Fragment>
-          <div>Your account is currently suspended.</div>
-          <div>For any questions or to request reactivation, please <UnstyledLink onClick={this.openTicket}>submit a ticket</UnstyledLink>.</div>
-        </Fragment>
-      );
-  }
-
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     const { isSuspended, showAlert } = this.props;
 
     if (!prevProps.isSuspended && isSuspended) {
@@ -40,18 +39,18 @@ export class SuspensionAlerts extends Component {
         message: this.getMessage(),
         maxWidth: 800,
         autoDismiss: false,
-        dedupeId: 'SUSPENSION_NOTICE'
+        dedupeId: 'SUSPENSION_NOTICE',
       });
     }
   }
 
-  render () {
+  render() {
     return null;
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   isSuspended: hasStatus('suspended')(state),
-  isSuspendedForBilling: isSuspendedForBilling(state)
+  isSuspendedForBilling: isSuspendedForBilling(state),
 });
-export default connect(mapStateToProps, { showAlert, openSupportTicketForm })(SuspensionAlerts);
+export default connect(mapStateToProps, { showAlert })(SuspensionAlerts);

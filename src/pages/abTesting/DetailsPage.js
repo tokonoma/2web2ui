@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { getAbTest, getLatestAbTest, deleteAbTest, cancelAbTest } from 'src/actions/abTesting';
 import { selectAbTestFromParams, selectIdAndVersionFromParams } from 'src/selectors/abTesting';
 import { selectSubaccountIdFromQuery } from 'src/selectors/subaccounts';
 
 import { Loading, DeleteModal, ConfirmationModal } from 'src/components';
+import { PageLink } from 'src/components/links';
 import { Delete, Block } from '@sparkpost/matchbox-icons';
 import { showAlert } from 'src/actions/globalAlert';
 import RedirectAndAlert from 'src/components/globalAlert/RedirectAndAlert';
@@ -22,14 +22,14 @@ import { selectSubaccountFromId } from '../../selectors/subaccounts';
  */
 export class DetailsPage extends Component {
   static defaultProps = {
-    test: {}
-  }
+    test: {},
+  };
 
   state = {
     shouldRedirect: false,
     showDeleteModal: false,
-    showCancelModal: false
-  }
+    showCancelModal: false,
+  };
 
   componentDidMount() {
     const { id, version, subaccountId, getAbTest, getLatestAbTest } = this.props;
@@ -54,7 +54,7 @@ export class DetailsPage extends Component {
 
   toggleDelete = () => {
     this.setState({ showDeleteModal: !this.state.showDeleteModal });
-  }
+  };
 
   handleDelete = () => {
     const { id } = this.props.test;
@@ -68,7 +68,7 @@ export class DetailsPage extends Component {
 
   toggleCancel = () => {
     this.setState({ showCancelModal: !this.state.showCancelModal });
-  }
+  };
 
   handleCancel = () => {
     const { id } = this.props.test;
@@ -87,20 +87,28 @@ export class DetailsPage extends Component {
     const { test, subaccountId, subaccountName, rescheduling } = this.props;
 
     return {
-      breadcrumbAction: { content: 'Back to A/B Tests', component: Link, to: '/ab-testing' },
+      breadcrumbAction: { content: 'Back to A/B Tests', component: PageLink, to: '/ab-testing' },
       cancelAction: {
-        content: <span><Block/> Cancel Test</span>,
+        content: (
+          <span>
+            <Block /> Cancel Test
+          </span>
+        ),
         visible: status === 'scheduled' || status === 'running',
-        onClick: this.toggleCancel
+        onClick: this.toggleCancel,
       },
       deleteAction: {
-        content: <span><Delete/> Delete Test</span>,
-        onClick: this.toggleDelete
+        content: (
+          <span>
+            <Delete /> Delete Test
+          </span>
+        ),
+        onClick: this.toggleDelete,
       },
       test,
       subaccountId,
       subaccountName,
-      rescheduling
+      rescheduling,
     };
   };
 
@@ -115,33 +123,48 @@ export class DetailsPage extends Component {
     if (this.state.shouldRedirect) {
       return (
         <RedirectAndAlert
-          to='/ab-testing'
-          alert={{ type: 'warning', message: 'Unable to load A/B test', details: _.get(error, 'message') }}
+          to="/ab-testing"
+          alert={{
+            type: 'warning',
+            message: 'Unable to load A/B test',
+            details: _.get(error, 'message'),
+          }}
         />
       );
     }
 
-    const DetailPage = (status === 'draft' || status === 'scheduled' || rescheduling) ? EditMode : ViewMode;
+    const DetailPage =
+      status === 'draft' || status === 'scheduled' || rescheduling ? EditMode : ViewMode;
 
     return (
       <Fragment>
         <DetailPage {...this.getSharedProps()} />
         <DeleteModal
           open={this.state.showDeleteModal}
-          title='Are you sure you want to delete this test?'
-          content={<p>The test and all associated versions will be immediately and permanently removed. This cannot be undone.</p>}
+          title="Are you sure you want to delete this test?"
+          content={
+            <p>
+              The test and all associated versions will be immediately and permanently removed. This
+              cannot be undone.
+            </p>
+          }
           onDelete={this.handleDelete}
           onCancel={this.toggleDelete}
           isPending={this.props.deletePending}
         />
         <ConfirmationModal
           open={this.state.showCancelModal}
-          title='Are you sure you want to cancel this test?'
-          content={<p>The test will be cancelled and all further messages will be delivered to the default template.</p>}
+          title="Are you sure you want to cancel this test?"
+          content={
+            <p>
+              The test will be cancelled and all further messages will be delivered to the default
+              template.
+            </p>
+          }
           onConfirm={this.handleCancel}
           onCancel={this.toggleCancel}
           isPending={this.props.cancelPending}
-          confirmVerb='OK'
+          confirmVerb="OK"
         />
       </Fragment>
     );
@@ -160,8 +183,14 @@ function mapStateToProps(state, props) {
     ...selectIdAndVersionFromParams(state, props),
     subaccountId,
     subaccountName: subaccount ? subaccount.name : null,
-    rescheduling: _.get(props, 'location.state.rescheduling')
+    rescheduling: _.get(props, 'location.state.rescheduling'),
   };
 }
 
-export default connect(mapStateToProps, { getAbTest, getLatestAbTest, deleteAbTest, cancelAbTest, showAlert })(DetailsPage);
+export default connect(mapStateToProps, {
+  getAbTest,
+  getLatestAbTest,
+  deleteAbTest,
+  cancelAbTest,
+  showAlert,
+})(DetailsPage);

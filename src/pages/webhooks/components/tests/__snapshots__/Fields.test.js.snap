@@ -16,13 +16,13 @@ exports[`should render AuthDropDown 1`] = `
   disabled={false}
   helpText={
     <span>
-      Select "None" if your target URL has no authentication scheme. 
-      <UnstyledLink
-        external={true}
+      Select "None" if your target URL has no authentication scheme.
+       
+      <ExternalLink
         to="https://support.sparkpost.com/customer/portal/articles/2112385"
       >
         More information
-      </UnstyledLink>
+      </ExternalLink>
       .
     </span>
   }
@@ -48,8 +48,9 @@ exports[`should render AuthDropDown 1`] = `
 `;
 
 exports[`should render BasicAuthFields 1`] = `
-<div>
-  Basic Auth
+<FieldSet
+  legend="Basic Auth"
+>
   <Field
     component={[Function]}
     disabled={false}
@@ -67,7 +68,7 @@ exports[`should render BasicAuthFields 1`] = `
     type="password"
     validate={[Function]}
   />
-</div>
+</FieldSet>
 `;
 
 exports[`should render EventsRadioGroup 1`] = `
@@ -110,8 +111,9 @@ exports[`should render NameField 1`] = `
 `;
 
 exports[`should render OAuth2Fields 1`] = `
-<div>
-  OAuth 2.0
+<FieldSet
+  legend="OAuth 2.0"
+>
   <Field
     component={[Function]}
     disabled={false}
@@ -136,7 +138,7 @@ exports[`should render OAuth2Fields 1`] = `
     placeholder="https://www.example.com/tokens/"
     validate={[Function]}
   />
-</div>
+</FieldSet>
 `;
 
 exports[`should render TargetField 1`] = `

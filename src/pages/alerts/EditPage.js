@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Page } from 'src/components/matchbox';
 import withEditPage from './containers/EditPage.container';
 import AlertForm from './components/AlertForm';
 import formatFormValues from './helpers/formatFormValues';
 import { Loading } from 'src/components';
+import { PageLink } from 'src/components/links';
+import { Page } from 'src/components/matchbox';
 import RedirectAndAlert from 'src/components/globalAlert/RedirectAndAlert';
 
 export class EditPage extends Component {
@@ -46,7 +46,7 @@ export class EditPage extends Component {
         breadcrumbAction={{
           content: 'Back to Alert',
           to: `/alerts/details/${id}`,
-          component: Link,
+          component: PageLink,
         }}
       >
         <AlertForm submitting={loading} onSubmit={this.handleUpdate} isNewAlert={false} />

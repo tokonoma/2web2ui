@@ -12,7 +12,7 @@ import {
   resetState,
 } from 'src/actions/inboxPlacement';
 import { RedirectAndAlert } from 'src/components/globalAlert';
-import PageLink from 'src/components/pageLink';
+import { PageLink } from 'src/components/links';
 import AllMessagesCollection from './components/AllMessagesCollection';
 import InfoBlock from './components/InfoBlock';
 import styles from './AllMessagesPage.module.scss';

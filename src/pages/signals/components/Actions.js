@@ -1,39 +1,59 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { formatDate } from 'src/helpers/date';
-import ExternalLink from 'src/components/externalLink/ExternalLink';
-import { PageLink } from 'src/components';
 import { Warning, CheckCircleOutline } from '@sparkpost/matchbox-icons';
+import { formatDate } from 'src/helpers/date';
+import { ExternalLink, PageLink } from 'src/components/links';
 import Callout from 'src/components/callout';
 import styles from './Actions.module.scss';
 
 const Action = ({ content, link, type = 'bad', internal = false, linkText = 'Learn More' }) => {
   let iconMarkup;
 
-  const linkMarkup = link && (internal
-    ? (<PageLink to={link} className={styles.Link}>{linkText}</PageLink>)
-    : (<ExternalLink to={link} className={styles.Link}>{linkText}</ExternalLink>)
-  );
+  const linkMarkup =
+    link &&
+    (internal ? (
+      <PageLink to={link} className={styles.Link}>
+        {linkText}
+      </PageLink>
+    ) : (
+      <ExternalLink to={link} className={styles.Link}>
+        {linkText}
+      </ExternalLink>
+    ));
 
   if (type === 'bad') {
-    iconMarkup = <div className={styles.IconBad}><Warning size={25} /></div>;
+    iconMarkup = (
+      <div className={styles.IconBad}>
+        <Warning size={25} />
+      </div>
+    );
   }
 
   if (type === 'good') {
-    iconMarkup = <div className={styles.IconGood}><CheckCircleOutline size={25} /></div>;
+    iconMarkup = (
+      <div className={styles.IconGood}>
+        <CheckCircleOutline size={25} />
+      </div>
+    );
   }
 
   if (type === 'warning') {
-    iconMarkup = <div className={styles.IconWarning}><Warning size={25} /></div>;
+    iconMarkup = (
+      <div className={styles.IconWarning}>
+        <Warning size={25} />
+      </div>
+    );
   }
 
   return (
     <div className={styles.ActionWrapper}>
       <div className={styles.Action}>
         {iconMarkup}
-        <p>{content}{' '}{linkMarkup}</p>
+        <p>
+          {content} {linkMarkup}
+        </p>
       </div>
-      <hr className={styles.Dash}/>
+      <hr className={styles.Dash} />
     </div>
   );
 };
@@ -42,22 +62,24 @@ const Actions = ({ actions, date, empty }) => (
   <div className={styles.Wrapper}>
     <div className={styles.Title}>
       <h6 className={styles.TitleText}>
-          Recommendations
+        Recommendations
         {date && ` – ${formatDate(date)}`}
       </h6>
     </div>
     {!empty && actions.map((props, i) => <Action key={i} {...props} />)}
-    {empty && <Callout height='100px'>No actions to display at this time.</Callout>}
+    {empty && <Callout height="100px">No actions to display at this time.</Callout>}
   </div>
 );
 
 Actions.propTypes = {
-  actions: PropTypes.arrayOf(PropTypes.shape({
-    type: PropTypes.oneOf(['good', 'bad', 'warning']),
-    content: PropTypes.node,
-    link: PropTypes.string
-  })),
-  date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)])
+  actions: PropTypes.arrayOf(
+    PropTypes.shape({
+      type: PropTypes.oneOf(['good', 'bad', 'warning']),
+      content: PropTypes.node,
+      link: PropTypes.string,
+    }),
+  ),
+  date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
 };
 
 export default Actions;

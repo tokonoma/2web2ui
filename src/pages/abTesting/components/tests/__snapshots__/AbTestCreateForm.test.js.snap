@@ -48,12 +48,11 @@ exports[`A/B Test Create Form Component should render correctly 1`] = `
         <span>
           Only published templates are available. This template will be sent when the test is not running. If you need to create a new template,
            
-          <UnstyledLink
-            component={[Function]}
+          <PageLink
             to="/templates"
           >
             head over to the templates page
-          </UnstyledLink>
+          </PageLink>
           .
         </span>
       }
@@ -138,12 +137,11 @@ exports[`A/B Test Create Form Component should render when no available template
         <span>
           No published templates available.
            
-          <UnstyledLink
-            component={[Function]}
+          <PageLink
             to="/templates"
           >
             Head over to the templates page to set some up
-          </UnstyledLink>
+          </PageLink>
           .
         </span>
       }

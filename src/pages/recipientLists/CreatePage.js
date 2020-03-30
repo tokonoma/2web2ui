@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import { Page } from 'src/components/matchbox';
 
 import { createRecipientList } from 'src/actions/recipientLists';
 import { showAlert } from 'src/actions/globalAlert';
+import { PageLink } from 'src/components/links';
 
 import RecipientListForm from './components/RecipientListForm';
 
@@ -29,7 +30,7 @@ export class CreatePage extends Component {
         title="Create Recipient List"
         breadcrumbAction={{
           content: 'Recipient Lists',
-          Component: Link,
+          Component: PageLink,
           to: '/lists/recipient-lists',
         }}
       >

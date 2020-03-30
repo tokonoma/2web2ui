@@ -1,10 +1,10 @@
 /* eslint-disable max-lines */
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { getSpamHits } from 'src/actions/signals';
 import { selectSpamHitsDetails } from 'src/selectors/signals';
 import { Grid } from '@sparkpost/matchbox';
-import { Panel } from 'src/components/matchbox';;
+import { PageLink } from 'src/components/links';
+import { Panel } from 'src/components/matchbox';
 import Page from './components/SignalsPage';
 import BarChart from './components/charts/barchart/BarChart';
 import SpamTrapActions from './components/actionContent/SpamTrapActions';
@@ -30,38 +30,46 @@ import styles from './DetailsPages.module.scss';
 
 export class SpamTrapPage extends Component {
   state = {
-    calculation: 'relative'
-  }
+    calculation: 'relative',
+  };
 
-  handleCalculationToggle = (value) => {
+  handleCalculationToggle = value => {
     this.setState({ calculation: value });
-  }
+  };
 
   getYAxisProps = () => {
     const { data } = this.props;
     const { calculation } = this.state;
 
     return {
-      tickFormatter: calculation === 'relative' ? (tick) => `${roundToPlaces(tick * 100, 3)}%` : (tick) => formatNumber(tick),
-      domain: data.every(({ relative_trap_hits }) => !relative_trap_hits) && calculation === 'relative'
-        ? [0, 1] : ['auto', 'auto']
+      tickFormatter:
+        calculation === 'relative'
+          ? tick => `${roundToPlaces(tick * 100, 3)}%`
+          : tick => formatNumber(tick),
+      domain:
+        data.every(({ relative_trap_hits }) => !relative_trap_hits) && calculation === 'relative'
+          ? [0, 1]
+          : ['auto', 'auto'],
     };
-  }
+  };
 
   getXAxisProps = () => {
     const { xTicks } = this.props;
     return {
       ticks: xTicks,
-      tickFormatter: (tick) => moment(tick).format('M/D')
+      tickFormatter: tick => moment(tick).format('M/D'),
     };
-  }
+  };
 
-  getTooltipContent = ({ payload = {}}) => (
+  getTooltipContent = ({ payload = {} }) => (
     <>
       {this.state.calculation === 'absolute' ? (
-        <TooltipMetric label='Spam Trap Hits' value={formatFullNumber(payload.trap_hits)} />
+        <TooltipMetric label="Spam Trap Hits" value={formatFullNumber(payload.trap_hits)} />
       ) : (
-        <TooltipMetric label='Spam Trap Rate' value={`${roundToPlaces(payload.relative_trap_hits * 100, 4)}%`} />
+        <TooltipMetric
+          label="Spam Trap Rate"
+          value={`${roundToPlaces(payload.relative_trap_hits * 100, 4)}%`}
+        />
       )}
       {spamTrapHitTypesCollection.map(({ fill, key, label }) => (
         <TooltipMetric
@@ -75,22 +83,36 @@ export class SpamTrapPage extends Component {
           }
         />
       ))}
-      <TooltipMetric label='Injections' value={formatFullNumber(payload.injections)} />
+      <TooltipMetric label="Injections" value={formatFullNumber(payload.injections)} />
     </>
-  )
+  );
 
   renderContent = () => {
-    const { data = [], handleDateSelect, loading, gap, empty, error, selectedDate, handleDateHover, resetDateHover, hoveredDate, shouldHighlightSelected } = this.props;
+    const {
+      data = [],
+      handleDateSelect,
+      loading,
+      gap,
+      empty,
+      error,
+      selectedDate,
+      handleDateHover,
+      resetDateHover,
+      hoveredDate,
+      shouldHighlightSelected,
+    } = this.props;
     const { calculation } = this.state;
     const selectedSpamTrapHits = _.find(data, ['date', selectedDate]) || {};
     let chartPanel;
 
     if (empty) {
-      chartPanel = <Callout title='No Data Available'>Insufficient data to populate this chart</Callout>;
+      chartPanel = (
+        <Callout title="No Data Available">Insufficient data to populate this chart</Callout>
+      );
     }
 
     if (error) {
-      chartPanel = <Callout title='Unable to Load Data'>{error.message}</Callout>;
+      chartPanel = <Callout title="Unable to Load Data">{error.message}</Callout>;
     }
 
     if (loading) {
@@ -106,7 +128,7 @@ export class SpamTrapPage extends Component {
         <Grid.Column sm={12} md={7}>
           <Panel sectioned>
             <ChartHeader
-              title='Spam Trap Monitoring'
+              title="Spam Trap Monitoring"
               primaryArea={
                 <Calculation
                   initialSelected={calculation}
@@ -116,7 +138,7 @@ export class SpamTrapPage extends Component {
               tooltipContent={SPAM_TRAP_INFO}
             />
             {chartPanel || (
-              <div className='LiftTooltip'>
+              <div className="LiftTooltip">
                 <BarChart
                   gap={gap}
                   onClick={handleDateSelect}
@@ -127,20 +149,18 @@ export class SpamTrapPage extends Component {
                   hovered={hoveredDate}
                   shouldHighlightSelected={shouldHighlightSelected}
                   tooltipContent={this.getTooltipContent}
-                  yKeys={
-                    spamTrapHitTypesCollection
-                      .map(({ fill, key }) => ({
-                        key: calculation === 'relative' ? `relative_${key}` : key,
-                        fill
-                      }))
-                      .reverse()
-                  }
+                  yKeys={spamTrapHitTypesCollection
+                    .map(({ fill, key }) => ({
+                      key: calculation === 'relative' ? `relative_${key}` : key,
+                      fill,
+                    }))
+                    .reverse()}
                   yAxisProps={this.getYAxisProps()}
                   xAxisProps={this.getXAxisProps()}
                 />
                 <Legend
                   items={spamTrapHitTypesCollection}
-                  tooltipContent={(label) => spamTrapHitTypesByLabel[label].description}
+                  tooltipContent={label => spamTrapHitTypesByLabel[label].description}
                 />
               </div>
             )}
@@ -148,24 +168,34 @@ export class SpamTrapPage extends Component {
         </Grid.Column>
         <Grid.Column sm={12} md={5} mdOffset={0}>
           <div className={styles.OffsetCol}>
-            {!chartPanel && <SpamTrapActions percent={selectedSpamTrapHits.relative_trap_hits} date={selectedDate} />}
+            {!chartPanel && (
+              <SpamTrapActions
+                percent={selectedSpamTrapHits.relative_trap_hits}
+                date={selectedDate}
+              />
+            )}
           </div>
         </Grid.Column>
       </Grid>
     );
-  }
+  };
 
   render() {
     const { facet, facetId, subaccountId } = this.props;
 
     return (
       <Page
-        breadcrumbAction={{ content: 'Back to Spam Trap Overview', to: '/signals/spam-traps', component: Link }}
-        title='Spam Traps'
+        breadcrumbAction={{
+          content: 'Back to Spam Trap Overview',
+          to: '/signals/spam-traps',
+          component: PageLink,
+        }}
+        title="Spam Traps"
         facet={facet}
         facetId={facetId}
         subaccountId={subaccountId}
-        primaryArea={<DateFilter left />}>
+        primaryArea={<DateFilter left />}
+      >
         {this.renderContent()}
         <Divider />
         <Grid>
@@ -181,8 +211,4 @@ export class SpamTrapPage extends Component {
   }
 }
 
-export default withDetails(
-  withDateSelection(SpamTrapPage),
-  { getSpamHits },
-  selectSpamHitsDetails,
-);
+export default withDetails(withDateSelection(SpamTrapPage), { getSpamHits }, selectSpamHitsDetails);

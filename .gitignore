@@ -16,6 +16,7 @@ cypress.env.json
 /build
 
 # misc
+.codemod.bookmark
 .DS_Store
 .env.local
 .env.development.local

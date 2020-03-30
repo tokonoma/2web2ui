@@ -4,7 +4,7 @@ exports[`Sending Domains Create Page renders and mounts correctly 1`] = `
 <Page
   breadcrumbAction={
     Object {
-      "Component": [Function],
+      "component": [Function],
       "content": "Back to Sending Domains",
       "to": "/account/sending-domains",
     }

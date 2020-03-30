@@ -1,10 +1,11 @@
 /* eslint-disable no-restricted-syntax */
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Grid, UnstyledLink } from '@sparkpost/matchbox';
+import { withRouter } from 'react-router-dom';
+import { Grid } from '@sparkpost/matchbox';
+import { ExternalLink, PageLink, SupportTicketLink } from 'src/components/links';
 import { Button, Page, Panel, ScreenReaderOnly } from 'src/components/matchbox';
 import styles from './SingleResult.module.scss';
-import { withRouter, Link } from 'react-router-dom';
 import CodeBlock from './components/CodeBlock';
 import {
   ROLE_TOOLTIP,
@@ -34,9 +35,7 @@ export function SingleResult(props) {
         message: isUsageError ? 'Validation limit exceeded' : message,
         details: isUsageError ? (
           <>
-            <UnstyledLink to="?supportTicket=true&supportIssue=general_issue">
-              Submit a ticket
-            </UnstyledLink>
+            <SupportTicketLink issueId="general_issue">Submit a ticket</SupportTicketLink>
             &nbsp;to request an increase.
           </>
         ) : (
@@ -60,7 +59,7 @@ export function SingleResult(props) {
     <Page
       title="Recipient Validation"
       subtitle="Results"
-      breadcrumbAction={{ content: 'Back', to: SINGLE_RV_LINK, component: Link }}
+      breadcrumbAction={{ content: 'Back', to: SINGLE_RV_LINK, component: PageLink }}
     >
       <Panel>
         <Grid>
@@ -74,9 +73,9 @@ export function SingleResult(props) {
 
               <ResultList data={singleResults} />
 
-              <Button component={Link} color="orange" to={SINGLE_RV_LINK}>
+              <PageLink as={Button} color="orange" to={SINGLE_RV_LINK}>
                 Validate Another
-              </Button>
+              </PageLink>
             </div>
           </Grid.Column>
 
@@ -89,13 +88,12 @@ export function SingleResult(props) {
                   <WhiteText>
                     The following raw API results outline the reasons for your email's validation
                     status. Learn how to&nbsp;
-                    <UnstyledLink
-                      external
-                      to="https://developers.sparkpost.com/api/recipient-validation/"
+                    <ExternalLink
                       className={styles.ApiDescriptionLink}
+                      to="https://developers.sparkpost.com/api/recipient-validation/"
                     >
                       integrate with Recipient Validation
-                    </UnstyledLink>
+                    </ExternalLink>
                     &nbsp;in your product.
                   </WhiteText>
                 </p>

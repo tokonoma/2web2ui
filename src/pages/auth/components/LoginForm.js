@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { TextFieldWrapper, CheckboxWrapper, PageLink } from 'src/components';
+import { TextFieldWrapper, CheckboxWrapper } from 'src/components';
+import { PageLink } from 'src/components/links';
+import { Error, Button } from 'src/components/matchbox';
 import { FORMS } from 'src/constants';
 import { required } from 'src/helpers/validation';
 import { trimWhitespaces } from 'src/helpers/string';
-import { Error, Button } from 'src/components/matchbox';
 
 export const LoginForm = ({ loginPending, loginError, handleSubmit }) => (
   <React.Fragment>

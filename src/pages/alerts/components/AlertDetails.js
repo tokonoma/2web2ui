@@ -12,7 +12,7 @@ import { MAILBOX_PROVIDERS } from 'src/constants';
 import styles from './AlertDetails.module.scss';
 import AlertToggle from './AlertToggle';
 import { SlackIcon, WebhookIcon } from 'src/components/icons';
-import { Link } from 'react-router-dom';
+import { PageLink } from 'src/components/links';
 import { getEvaluatorOptions } from '../helpers/alertForm';
 
 const extraChannels = [
@@ -194,9 +194,9 @@ export const AlertDetails = ({ alert, id, subaccountIdToString, hasSubaccounts }
     <Panel data-id="alert-details-panel">
       <Panel.Section>
         <h3 className={styles.Title}>Alert Details</h3>
-        <Button component={Link} to={`/alerts/edit/${id}`} className={styles.Button} primary>
+        <PageLink as={Button} to={`/alerts/edit/${id}`} className={styles.Button} primary>
           Edit
-        </Button>
+        </PageLink>
       </Panel.Section>
       {renderAlertDetails()}
     </Panel>

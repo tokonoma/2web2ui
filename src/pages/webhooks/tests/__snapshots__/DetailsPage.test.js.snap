@@ -4,7 +4,7 @@ exports[`Page: Webhook Details should render happy path 1`] = `
 <Page
   breadcrumbAction={
     Object {
-      "Component": [Function],
+      "component": [Function],
       "content": "Webhooks",
       "to": "/webhooks/",
     }
@@ -24,17 +24,17 @@ exports[`Page: Webhook Details should render happy path 1`] = `
     tabs={
       Array [
         Object {
-          "Component": [Function],
+          "component": [Function],
           "content": "Settings",
           "to": "/webhooks/details/my-id?subaccount=101",
         },
         Object {
-          "Component": [Function],
+          "component": [Function],
           "content": "Test",
           "to": "/webhooks/details/my-id/test?subaccount=101",
         },
         Object {
-          "Component": [Function],
+          "component": [Function],
           "content": "Batch Status",
           "to": "/webhooks/details/my-id/batches?subaccount=101",
         },

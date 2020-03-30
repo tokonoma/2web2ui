@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Tooltip } from '@sparkpost/matchbox';
-import { Table, Button, Tag, ScreenReaderOnly } from 'src/components/matchbox';
-import { TableCollection, PageLink, DisplayDate } from 'src/components';
-import { NewCollectionBody } from 'src/components/collection';
-import AlertToggle from './AlertToggle';
 import { Delete } from '@sparkpost/matchbox-icons';
+import { TableCollection, DisplayDate } from 'src/components';
+import { NewCollectionBody } from 'src/components/collection';
+import { PageLink } from 'src/components/links';
+import { Button, ScreenReaderOnly, Table, Tag } from 'src/components/matchbox';
+import AlertToggle from './AlertToggle';
 import { METRICS } from '../constants/formConstants';
 import styles from './AlertCollection.module.scss';
 

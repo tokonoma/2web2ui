@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Page } from 'src/components/matchbox';
 import { ApiErrorBanner, Loading, TableCollection } from 'src/components';
 import { Templates } from 'src/components/images';
-import PageLink from 'src/components/pageLink';
+import { PageLink } from 'src/components/links';
 import { resolveTemplateStatus } from 'src/helpers/templates';
 import RecentActivity from './components/RecentActivity';
 import {

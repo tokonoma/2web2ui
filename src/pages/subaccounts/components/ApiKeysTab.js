@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
-import { Button, Panel } from 'src/components/matchbox';
+import { withRouter } from 'react-router-dom';
 import { TableCollection } from 'src/components';
+import { PageLink } from 'src/components/links';
+import { Button, Panel } from 'src/components/matchbox';
 import { filterBoxConfig } from 'src/pages/api-keys/tableConfig';
 import { getSubaccountApiKeys } from 'src/selectors/api-keys';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
@@ -36,7 +37,9 @@ export class ApiKeysTab extends Component {
 
     //unlike api keys page, no need to check if user can edit as that logic checks if subaccount_id exists which is always true here
     return [
-      <Link to={`/account/api-keys/edit/${id}${setSubaccountQuery(subaccountId)}`}>{label}</Link>,
+      <PageLink to={`/account/api-keys/edit/${id}${setSubaccountQuery(subaccountId)}`}>
+        {label}
+      </PageLink>,
       <code>{short_key}••••••••</code>,
     ];
   };
@@ -48,9 +51,9 @@ export class ApiKeysTab extends Component {
           This subaccount has no API Keys assigned to it. You can assign an existing one, or create
           a new one.
         </p>
-        <Button plain Component={Link} to="/account/api-keys" color="orange">
+        <PageLink as={Button} color="orange" plain to="/account/api-keys">
           Manage API Keys
-        </Button>
+        </PageLink>
       </Panel.Section>
     );
   }

@@ -89,12 +89,11 @@ Array [
       className="Name"
     >
       <strong>
-        <UnstyledLink
-          component={[Function]}
+        <PageLink
           to="/ab-testing/id-1/1?subaccount=101"
         >
           my ab test 1
-        </UnstyledLink>
+        </PageLink>
       </strong>
     </p>
     <p
@@ -196,12 +195,11 @@ Array [
       className="Name"
     >
       <strong>
-        <UnstyledLink
-          component={[Function]}
+        <PageLink
           to="/ab-testing/id-2/2"
         >
           my ab test 2
-        </UnstyledLink>
+        </PageLink>
       </strong>
     </p>
     <p
@@ -303,12 +301,11 @@ Array [
       className="Name"
     >
       <strong>
-        <UnstyledLink
-          component={[Function]}
+        <PageLink
           to="/ab-testing/id-3/3"
         >
           my ab test 3
-        </UnstyledLink>
+        </PageLink>
       </strong>
     </p>
     <p

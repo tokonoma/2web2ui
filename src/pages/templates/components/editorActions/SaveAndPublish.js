@@ -1,7 +1,6 @@
 import React from 'react';
-import { UnstyledLink } from '@sparkpost/matchbox';
-import { Button } from 'src/components/matchbox';
 import { CheckCircleOutline } from '@sparkpost/matchbox-icons';
+import { Button, UnstyledLink } from 'src/components/matchbox';
 
 const SaveAndPublish = props => {
   const { onClick, className, children } = props;

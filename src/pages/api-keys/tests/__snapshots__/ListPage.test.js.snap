@@ -3,34 +3,31 @@
 exports[`Api Keys List Page gets row data correctly 1`] = `
 Array [
   Array [
-    <Link
-      replace={false}
+    <PageLink
       to="/account/api-keys/edit/123id?subaccount=101"
     >
       Test Key 1
-    </Link>,
+    </PageLink>,
     <ShortKeyCode
       shortKey="ab01"
     />,
   ],
   Array [
-    <Link
-      replace={false}
+    <PageLink
       to="/account/api-keys/edit/456id"
     >
       Test Key 2
-    </Link>,
+    </PageLink>,
     <ShortKeyCode
       shortKey="fe98"
     />,
   ],
   Array [
-    <Link
-      replace={false}
+    <PageLink
       to="/account/api-keys/view/789id"
     >
       Other User Key
-    </Link>,
+    </PageLink>,
     <ShortKeyCode
       shortKey="c00l"
     />,
@@ -257,12 +254,11 @@ Array [
 
 exports[`Api Keys List Page should render correctly with subaccounts 2`] = `
 Array [
-  <Link
-    replace={false}
+  <PageLink
     to="/account/api-keys/edit/123id?subaccount=101"
   >
     Test Key 1
-  </Link>,
+  </PageLink>,
   <ShortKeyCode
     shortKey="ab01"
   />,

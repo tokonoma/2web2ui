@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { PageLink } from 'src/components/links';
 import { Page, Panel, Tabs } from 'src/components/matchbox';
 
 import AddForm from './components/AddForm';
@@ -34,7 +34,11 @@ export class CreatePage extends Component {
     return (
       <Page
         title="Add Suppressions"
-        breadcrumbAction={{ content: 'Suppressions', Component: Link, to: '/lists/suppressions' }}
+        breadcrumbAction={{
+          content: 'Suppressions',
+          component: PageLink,
+          to: '/lists/suppressions',
+        }}
       >
         {(parseError || persistError) && (
           <ErrorBanner parseError={parseError} persistError={persistError} />

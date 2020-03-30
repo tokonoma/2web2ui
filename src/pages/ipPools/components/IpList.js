@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import _ from 'lodash';
 
 import { TableCollection } from 'src/components';
+import { PageLink } from 'src/components/links';
 
 const columns = ['IP', 'Hostname'];
 
 export class IpList extends Component {
-  getRowData = (ip) => {
+  getRowData = ip => {
     const { pool } = this.props;
-    const ipLink = <Link to={`/account/ip-pools/edit/${pool.id}/${ip.external_ip}`}>{ip.external_ip}</Link>;
+    const ipLink = (
+      <PageLink to={`/account/ip-pools/edit/${pool.id}/${ip.external_ip}`}>
+        {ip.external_ip}
+      </PageLink>
+    );
 
-    return [
-      ipLink,
-      ip.hostname
-    ];
+    return [ipLink, ip.hostname];
   };
 
   render() {

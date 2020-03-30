@@ -8,8 +8,8 @@ import { Button, Label, Panel } from 'src/components/matchbox';
 import { SelectWrapper, RadioGroup } from 'src/components/reduxFormWrappers';
 import { ConfirmationModal, Abbreviation } from 'src/components';
 import { Card, CardTitle, CardContent } from 'src/components/card';
-import ExternalLink from 'src/components/externalLink';
 import ButtonWrapper from 'src/components/buttonWrapper';
+import { ExternalLink } from 'src/components/links';
 import {
   getIpPools,
   selectCurrentPool,

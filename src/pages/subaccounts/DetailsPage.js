@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter, Route, Switch } from 'react-router-dom';
+import { withRouter, Route, Switch } from 'react-router-dom';
 import { Page, Tabs } from 'src/components/matchbox';
 
 import { clearSubaccount, getSubaccount } from 'src/actions/subaccounts';
 import { ApiKeySuccessBanner } from 'src/components';
+import { PageLink } from 'src/components/links';
 import { selectSubaccount } from 'src/selectors/subaccounts';
 import { listPools } from 'src/actions/ipPools';
 import { listApiKeys, hideNewApiKey } from 'src/actions/api-keys';
@@ -18,24 +19,24 @@ import SendingDomainsTab from './components/SendingDomainsTab';
 
 const breadcrumbAction = {
   content: 'Subaccounts',
-  Component: Link,
+  Component: PageLink,
   to: '/account/subaccounts',
 };
 
 const buildTabs = id => [
   {
     content: 'Details',
-    Component: Link,
+    Component: PageLink,
     to: `/account/subaccounts/${id}`,
   },
   {
     content: 'API Keys',
-    Component: Link,
+    Component: PageLink,
     to: `/account/subaccounts/${id}/api-keys`,
   },
   {
     content: 'Sending Domains',
-    Component: Link,
+    Component: PageLink,
     to: `/account/subaccounts/${id}/sending-domains`,
   },
 ];

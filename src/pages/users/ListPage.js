@@ -1,12 +1,11 @@
 /* eslint-disable max-lines */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import fp from 'lodash/fp';
 import TimeAgo from 'react-timeago';
 import { Users } from 'src/components/images';
+import { PageLink } from 'src/components/links';
 import { Page, Tag } from 'src/components/matchbox';
-import PageLink from 'src/components/pageLink/PageLink';
 import { hasUiOption } from 'src/helpers/conditions/account';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
 import * as usersActions from 'src/actions/users';
@@ -43,7 +42,7 @@ const SUB_COLUMN = [
 ];
 
 export const Actions = ({ username, deletable, onDelete }) => {
-  const actions = [{ content: 'Edit', to: `/account/users/edit/${username}`, component: Link }];
+  const actions = [{ content: 'Edit', to: `/account/users/edit/${username}`, component: PageLink }];
   if (deletable) {
     actions.push({ content: 'Delete', onClick: () => onDelete(username) });
   }
@@ -58,7 +57,7 @@ const DEFAULT_STATE = {
 
 const primaryAction = {
   content: 'Invite User',
-  Component: Link,
+  Component: PageLink,
   to: '/account/users/create',
 };
 

@@ -139,9 +139,7 @@ describe('The recipient validation single result page', () => {
       .first()
       .click();
 
-    cy.findByText('Submit a ticket')
-      .should('have.attr', 'href', '?supportTicket=true&supportIssue=general_issue')
-      .click();
+    cy.findByText('Submit a ticket').click();
 
     cy.findByText('I need help with...').should('be.visible');
   });

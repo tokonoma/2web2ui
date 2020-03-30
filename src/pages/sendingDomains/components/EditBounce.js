@@ -1,13 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { update } from 'src/actions/sendingDomains';
-
 import { Tooltip } from '@sparkpost/matchbox';
-import { Panel } from 'src/components/matchbox';
-import { Banner } from 'src/components/matchbox';
 import { Help } from '@sparkpost/matchbox-icons';
+import { update } from 'src/actions/sendingDomains';
+import { PageLink } from 'src/components/links';
+import { Banner, Panel } from 'src/components/matchbox';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
 import { SendingDomainSection } from './SendingDomainSection';
 import { resolveReadyFor } from 'src/helpers/domains';
@@ -45,7 +43,8 @@ export class EditBounce extends Component {
     return (
       <Banner status="warning" my="300">
         We strongly recommend using a subdomain such as <strong>bounces.{id}</strong> for bounce
-        domains. <Link to={'/account/sending-domains/create'}>Create a new domain now.</Link>
+        domains.{' '}
+        <PageLink to={'/account/sending-domains/create'}>Create a new domain now.</PageLink>
       </Banner>
     );
   }

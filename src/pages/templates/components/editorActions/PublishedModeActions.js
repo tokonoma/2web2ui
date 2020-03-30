@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Popover } from '@sparkpost/matchbox';
 import { Button, ScreenReaderOnly } from 'src/components/matchbox';
 import { ArrowDropDown, FileEdit } from '@sparkpost/matchbox-icons';
-import PageLink from 'src/components/pageLink';
+import { PageLink } from 'src/components/links';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { routeNamespace } from '../../constants/routes';
 import styles from './Actions.module.scss';
@@ -75,7 +75,7 @@ const PublishedModeActions = () => {
         >
           <div className={styles.ActionsBody}>
             <div className={styles.ActionItem}>
-              <PageLink to={editDraftTo} data-id="action-edit-draft" role="button">
+              <PageLink to={editDraftTo} data-id="action-edit-draft">
                 <FileEdit />
 
                 <span>Edit Draft</span>

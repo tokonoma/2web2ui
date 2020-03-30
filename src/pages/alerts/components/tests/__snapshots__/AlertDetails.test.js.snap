@@ -10,14 +10,14 @@ exports[`Alert Details Component should render the alert details component corre
     >
       Alert Details
     </h3>
-    <Button
+    <PageLink
+      as={[Function]}
       className="Button"
-      component={[Function]}
       primary={true}
       to="/alerts/edit/alert-id"
     >
       Edit
-    </Button>
+    </PageLink>
   </Panel.Section>
   <Panel.Section
     key="0"

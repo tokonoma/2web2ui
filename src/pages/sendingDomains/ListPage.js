@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { list as listDomains } from 'src/actions/sendingDomains';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
 
@@ -13,10 +12,10 @@ import {
   DomainStatusCell,
   StatusTooltipHeader,
   ApiErrorBanner,
-  PageLink,
 } from 'src/components';
 import { Page } from 'src/components/matchbox';
 import { Setup } from 'src/components/images';
+import { PageLink } from 'src/components/links';
 import UnverifiedWarningBanner from './components/UnverifiedWarningBanner';
 import VerifyToken from './components/VerifyToken';
 import { LINKS } from 'src/constants';
@@ -106,7 +105,7 @@ export class ListPage extends Component {
 
     const primaryAction = {
       content: 'Add a Domain',
-      Component: Link,
+      Component: PageLink,
       to: '/account/sending-domains/create',
     };
 

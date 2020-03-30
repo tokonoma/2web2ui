@@ -1,8 +1,7 @@
 import React from 'react';
-import { Button } from 'src/components/matchbox';
 import { Cached, FileDownload, PlaylistAddCheck } from '@sparkpost/matchbox-icons';
-import DownloadLink from 'src/components/downloadLink/DownloadLink';
-import PageLink from 'src/components/pageLink/PageLink';
+import { Button } from 'src/components/matchbox';
+import { DownloadLink, PageLink } from 'src/components/links';
 
 const JobActionLink = ({ jobId, fileHref, status }) => {
   if (status === 'error') {
@@ -11,8 +10,8 @@ const JobActionLink = ({ jobId, fileHref, status }) => {
 
   if (status === 'queued_for_batch') {
     return (
-      <Button
-        component={PageLink}
+      <PageLink
+        as={Button}
         to={`/recipient-validation/list/${jobId}`}
         flat
         color="orange"
@@ -20,13 +19,13 @@ const JobActionLink = ({ jobId, fileHref, status }) => {
       >
         <span>Review</span>&nbsp;
         <PlaylistAddCheck />
-      </Button>
+      </PageLink>
     );
   }
 
   if (status === 'success') {
     return (
-      <DownloadLink component={Button} to={fileHref} flat color="orange" size="small">
+      <DownloadLink as={Button} href={fileHref} color="orange" flat size="small">
         <span>Download</span>&nbsp;
         <FileDownload />
       </DownloadLink>
@@ -34,8 +33,8 @@ const JobActionLink = ({ jobId, fileHref, status }) => {
   }
 
   return (
-    <Button
-      component={PageLink}
+    <PageLink
+      as={Button}
       to={`/recipient-validation/list/${jobId}`}
       flat
       color="orange"
@@ -43,7 +42,7 @@ const JobActionLink = ({ jobId, fileHref, status }) => {
     >
       <span>See Progress</span>&nbsp;
       <Cached />
-    </Button>
+    </PageLink>
   );
 };
 

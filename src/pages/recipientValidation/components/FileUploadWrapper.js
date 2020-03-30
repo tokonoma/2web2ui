@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
-import { DownloadLink, Loading } from 'src/components';
+import { Loading } from 'src/components';
+import { DownloadLink } from 'src/components/links';
 import { Error } from 'src/components/matchbox';
 import { FileType } from '@sparkpost/matchbox-icons';
 import exampleRecipientValidationListPath from './example-recipient-validation-list.csv';

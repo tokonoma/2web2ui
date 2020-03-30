@@ -1,10 +1,10 @@
 import React, { useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { Tooltip } from '@sparkpost/matchbox';
 import { Page, Panel, Table } from 'src/components/matchbox';
 import { Schedule } from '@sparkpost/matchbox-icons';
-import { ApiErrorBanner, Loading, PageLink } from 'src/components';
+import { ApiErrorBanner, Loading } from 'src/components';
+import { PageLink } from 'src/components/links';
 import formatScheduleLine from './helpers/formatScheduleLine';
 import getStatusProps from './helpers/getStatusProps';
 import formatPercentage from './helpers/formatPercentage';
@@ -232,7 +232,7 @@ export const TestListPage = ({ tests, error, loading, listTests }) => {
       primaryAction={{
         content: 'Start a Test',
         to: '/inbox-placement/seedlist',
-        component: Link,
+        component: PageLink,
       }}
     >
       {error ? renderError() : renderPage()}

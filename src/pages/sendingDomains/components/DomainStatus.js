@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { Panel } from 'src/components/matchbox';
-import { Banner } from 'src/components/matchbox';
+import { Banner, Panel } from 'src/components/matchbox';
 import { resolveStatus, resolveReadyFor } from 'src/helpers/domains';
 
 import VerificationHelp from './VerificationHelp';

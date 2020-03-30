@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Page } from 'src/components/matchbox';
 import { Save } from '@sparkpost/matchbox-icons';
@@ -11,6 +11,7 @@ import { StatusView, SettingsView, VariantsView } from './components/view';
 import { ConfirmationModal } from 'src/components';
 import { updateDraft } from 'src/actions/abTesting';
 import { showAlert } from 'src/actions/globalAlert';
+import { PageLink } from 'src/components/links';
 import { selectLatestVersionNumberFromParams } from 'src/selectors/abTesting';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 
@@ -34,7 +35,7 @@ export class ViewMode extends Component {
             rescheduling: true,
           },
         },
-        component: Link,
+        component: PageLink,
       };
     }
 

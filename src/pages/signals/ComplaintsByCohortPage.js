@@ -1,10 +1,10 @@
 /* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { getComplaintsByCohort, getEngagementRecency } from 'src/actions/signals';
 import { selectComplaintsByCohortDetails } from 'src/selectors/signals';
 import { Grid } from '@sparkpost/matchbox';
-import { Panel } from 'src/components/matchbox';;
+import { PageLink } from 'src/components/links';
+import { Panel } from 'src/components/matchbox';
 import LineChart from './components/charts/linechart/LineChart';
 import Legend from './components/charts/legend/Legend';
 import Callout from 'src/components/callout';
@@ -162,7 +162,7 @@ export class ComplaintsByCohortPage extends Component {
         breadcrumbAction={{
           content: 'Back to Engagement Recency Overview',
           to: '/signals/engagement',
-          component: Link,
+          component: PageLink,
         }}
         title="Complaints by Cohort"
         facet={facet}

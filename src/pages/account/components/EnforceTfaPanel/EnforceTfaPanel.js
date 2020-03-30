@@ -3,7 +3,7 @@ import { Panel } from 'src/components/matchbox';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import { ConfirmationModal } from 'src/components/modals';
 import TogglePanel from './TogglePanel';
-import ExternalLink from 'src/components/externalLink/ExternalLink';
+import { ExternalLink } from 'src/components/links';
 import { LINKS } from 'src/constants';
 
 export class EnforceTFAPanel extends React.Component {

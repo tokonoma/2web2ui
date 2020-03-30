@@ -2,8 +2,8 @@ import React from 'react';
 import { Page } from 'src/components/matchbox';
 import ApiErrorBanner from 'src/components/apiErrorBanner';
 import { Templates } from 'src/components/images';
+import { PageLink } from 'src/components/links';
 import Loading from 'src/components/loading';
-import PageLink from 'src/components/pageLink';
 import SnippetCollection from './components/SnippetCollection';
 import { ROLES } from 'src/constants';
 export default class ListPage extends React.Component {

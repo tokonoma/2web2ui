@@ -7,14 +7,13 @@ exports[`HerokuMessage View Component should render 1`] = `
   <h6>
     Please submit a ticket through Heroku
   </h6>
-  <Button
+  <ExternalLink
+    as={[Function]}
     color="orange"
-    external={true}
     flat={true}
     to="https://help.heroku.com"
   >
-    Go to help.heroku.com 
-    <OpenInNew />
-  </Button>
+    Go to help.heroku.com
+  </ExternalLink>
 </div>
 `;

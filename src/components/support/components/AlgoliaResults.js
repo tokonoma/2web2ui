@@ -1,13 +1,17 @@
 import React from 'react';
-import { UnstyledLink } from '@sparkpost/matchbox';
 import { InsertLink } from '@sparkpost/matchbox-icons';
 import { Snippet } from 'react-instantsearch/dom';
+import { ExternalLink } from 'src/components/links';
 import styles from './AlgoliaResults.module.scss';
 
 const AlgoliaResults = ({ hit }) => (
   <div className={styles.Result}>
-    <strong><InsertLink /> <UnstyledLink external to={hit.permalink}>{hit.post_title}</UnstyledLink></strong>
-    <div><Snippet tagName="b" attribute="post_excerpt" hit={hit} /></div>
+    <strong>
+      <InsertLink /> <ExternalLink to={hit.permalink}>{hit.post_title}</ExternalLink>
+    </strong>
+    <div>
+      <Snippet tagName="b" attribute="post_excerpt" hit={hit} />
+    </div>
   </div>
 );
 

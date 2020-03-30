@@ -8,7 +8,7 @@ import { ExpandMore } from '@sparkpost/matchbox-icons';
 import Plan from './Plan';
 import styles from './PlanPicker.module.scss';
 import { PLAN_TIERS } from 'src/constants';
-import ExternalLink from 'src/components/externalLink/ExternalLink';
+import { ExternalLink } from 'src/components/links';
 
 const TIERS = [
   { key: 'default' },

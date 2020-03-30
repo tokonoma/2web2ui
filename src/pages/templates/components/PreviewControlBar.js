@@ -1,8 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
-import { UnstyledLink } from '@sparkpost/matchbox';
 import { DesktopWindows, PhoneAndroid } from '@sparkpost/matchbox-icons';
-import { ScreenReaderOnly } from 'src/components/matchbox';
+import { ScreenReaderOnly, UnstyledLink } from 'src/components/matchbox';
 import useEditorContext from '../hooks/useEditorContext';
 import SendTestEmailButton from './SendTestEmailButton';
 import styles from './PreviewControlBar.module.scss';

@@ -50,15 +50,14 @@ exports[`Billing Banners:  Free Plan Downgrade warning banner renders 1`] = `
     Your plan will automatically downgrade to 500 emails/month in
      
     15 days
-    . 
-    <Link
-      replace={false}
+    .
+     
+    <PageLink
       to="/account/billing/plan"
     >
       Upgrade your plan
-    </Link>
-     
-    to keep or increase your sending limits.
+    </PageLink>
+     to keep or increase your sending limits.
   </p>
 </Banner>
 `;
@@ -73,15 +72,14 @@ exports[`Billing Banners:  Free Plan Downgrade warning banner renders correct te
     Your plan will automatically downgrade to 500 emails/month in
      
     1 day
-    . 
-    <Link
-      replace={false}
+    .
+     
+    <PageLink
       to="/account/billing/plan"
     >
       Upgrade your plan
-    </Link>
-     
-    to keep or increase your sending limits.
+    </PageLink>
+     to keep or increase your sending limits.
   </p>
 </Banner>
 `;

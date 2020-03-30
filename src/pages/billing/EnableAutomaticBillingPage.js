@@ -1,6 +1,6 @@
 import React from 'react';
+import { PageLink } from 'src/components/links';
 import { Page } from 'src/components/matchbox';
-import PageLink from 'src/components/pageLink/PageLink';
 import EnableAutomaticBillingForm from './forms/EnableAutomaticBillingForm';
 
 const EnableAutomaticBillingPage = () => (

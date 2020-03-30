@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import qs from 'query-string';
-import { Panel } from 'src/components/matchbox';
 import { ssoCheck } from 'src/actions/auth';
-import { PageLink, CenteredLogo } from 'src/components';
+import { CenteredLogo } from 'src/components';
+import { PageLink } from 'src/components/links';
+import { Panel } from 'src/components/matchbox';
 
 import config from 'src/config';
 import { decodeBase64 } from 'src/helpers/string';
@@ -13,7 +14,7 @@ import { AUTH_ROUTE } from 'src/constants';
 
 export class SsoAuthPage extends React.Component {
   state = {
-    submitted: false
+    submitted: false,
   };
 
   loginSubmit = ({ username }) => {
@@ -62,10 +63,7 @@ export class SsoAuthPage extends React.Component {
 }
 
 const mapStateToProps = ({ auth }) => ({
-  auth
+  auth,
 });
 
-export default connect(
-  mapStateToProps,
-  { ssoCheck }
-)(SsoAuthPage);
+export default connect(mapStateToProps, { ssoCheck })(SsoAuthPage);
