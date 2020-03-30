@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-import { Popover, ActionList } from '@sparkpost/matchbox';
+import { Popover } from '@sparkpost/matchbox';
+import { ActionList, ScreenReaderOnly } from 'src/components/matchbox';
 import { Person } from '@sparkpost/matchbox-icons';
 import { selectHibanaAccountNavItems } from 'src/selectors/navItems';
-import { ScreenReaderOnly } from 'src/components/matchbox';
 import { shrinkToFit } from 'src/helpers/string';
 import styles from './AccountPopover.module.scss';
 

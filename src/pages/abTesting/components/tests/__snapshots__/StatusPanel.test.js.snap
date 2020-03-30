@@ -94,7 +94,6 @@ exports[`Status Panel Component version selector should render correctly 1`] = `
         },
       ]
     }
-    groupByKey="section"
   />
 </Popover>
 `;

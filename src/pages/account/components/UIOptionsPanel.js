@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Toggle } from '@sparkpost/matchbox';
-import { Panel } from 'src/components/matchbox';
+import { Panel, Toggle } from 'src/components/matchbox';
 import LabelledValue from 'src/components/labelledValue/LabelledValue';
 import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 import { selectCondition } from 'src/selectors/accessConditionState';
@@ -12,13 +11,12 @@ const OPTIONS = [
   {
     key: 'hideTerminatedSubaccounts',
     label: 'Hide Subaccounts',
-    description: 'Hide terminated subaccounts. Resources associated with terminated subaccounts can still be accessed.'
-  }
+    description:
+      'Hide terminated subaccounts. Resources associated with terminated subaccounts can still be accessed.',
+  },
 ];
 
-
 export class UIOptionsPanel extends Component {
-
   setUIOption = (key, value) => {
     this.props.setAccountOption(key, value);
   };
@@ -27,14 +25,12 @@ export class UIOptionsPanel extends Component {
     const { loading, uiOptions } = this.props;
 
     return (
-      <Panel title='Account Options'>
+      <Panel title="Account Options">
         <Panel.Section>
           {uiOptions.map(({ label, description, value, key }) => (
             <LabelledValue label={label} key={`ui-option-${key}`}>
               <div className={styles.ToggleRow}>
-                <div>
-                  {description}
-                </div>
+                <div>{description}</div>
                 <div>
                   <Toggle
                     id={key}
@@ -52,14 +48,14 @@ export class UIOptionsPanel extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  const uiOptions = OPTIONS.map((option) => {
+const mapStateToProps = state => {
+  const uiOptions = OPTIONS.map(option => {
     option.value = selectCondition(isAccountUiOptionSet(option.key))(state);
     return option;
   });
   return {
     uiOptions,
-    loading: state.account.updateLoading
+    loading: state.account.updateLoading,
   };
 };
 

@@ -25,7 +25,6 @@ exports[`FromEmailMenu renders action list 1`] = `
     ]
   }
   className="List"
-  groupByKey="section"
   maxHeight={300}
 />
 `;
@@ -55,7 +54,6 @@ exports[`FromEmailMenu renders action list as open 1`] = `
     ]
   }
   className="List open"
-  groupByKey="section"
   maxHeight={300}
 />
 `;
@@ -85,7 +83,6 @@ exports[`FromEmailMenu renders action list with second item highlighted 1`] = `
     ]
   }
   className="List"
-  groupByKey="section"
   maxHeight={300}
 />
 `;
