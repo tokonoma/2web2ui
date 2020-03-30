@@ -2,24 +2,33 @@ import moment from 'moment';
 import _ from 'lodash';
 import { list as METRICS_LIST } from 'src/config/metrics';
 import config from 'src/config';
-import { getRelativeDates, getLocalTimezone } from 'src/helpers/date';
+import { getRelativeDates } from 'src/helpers/date';
 import { safeDivide, safeRate } from './math';
 
-const { metricsPrecisionMap: precisionMap, apiDateFormat, chartColors = []} = config;
+const { metricsPrecisionMap: precisionMap, apiDateFormat, chartColors = [] } = config;
 const indexedPrecisions = _.keyBy(precisionMap, 'value');
 const FILTER_KEY_MAP = {
   'Recipient Domain': 'domains',
-  'Campaign': 'campaigns',
-  'Template': 'templates',
+  Campaign: 'campaigns',
+  Template: 'templates',
   'Sending IP': 'sending_ips',
   'IP Pool': 'ip_pools',
-  'Subaccount': 'subaccounts',
-  'Sending Domain': 'sending_domains'
+  Subaccount: 'subaccounts',
+  'Sending Domain': 'sending_domains',
 };
 
 const DELIMITERS = ',;:+~`!@#$%^*()-={}[]"\'<>?./|\\'.split('');
 
-export function getQueryFromOptions({ from, to, metrics, filters = [], match = '', limit }) {
+export function getQueryFromOptions({
+  from,
+  to,
+  timezone,
+  precision,
+  metrics,
+  filters = [],
+  match = '',
+  limit,
+}) {
   from = moment(from);
   to = moment(to);
 
@@ -27,12 +36,12 @@ export function getQueryFromOptions({ from, to, metrics, filters = [], match = '
   const delimiter = getDelimiter(filters);
   const options = {
     metrics: apiMetricsKeys.join(delimiter),
-    precision: getPrecision(from, to),
     from: from.format(apiDateFormat),
     to: to.format(apiDateFormat),
     delimiter,
     ...getFilterSets(filters, delimiter),
-    timezone: getLocalTimezone()
+    timezone,
+    precision,
   };
   if (match.length > 0) {
     options.match = match;
@@ -50,8 +59,12 @@ export function pushToKey(obj, key, value) {
 }
 
 export function getFilterSets(filters = [], delimiter) {
-  const hash = filters.reduce((result, { type, value, id }) => pushToKey(result, FILTER_KEY_MAP[type], type === 'Subaccount' ? id : value), {});
-  return _.mapValues(hash, (v) => v.join(delimiter));
+  const hash = filters.reduce(
+    (result, { type, value, id }) =>
+      pushToKey(result, FILTER_KEY_MAP[type], type === 'Subaccount' ? id : value),
+    {},
+  );
+  return _.mapValues(hash, v => v.join(delimiter));
 }
 
 /**
@@ -62,7 +75,7 @@ export function getFilterSets(filters = [], delimiter) {
  * @param {array} filters
  */
 export function getDelimiter(filters = []) {
-  const uniques = _.uniq(filters.map((f) => f.value).join(''));
+  const uniques = _.uniq(filters.map(f => f.value).join(''));
   return _.difference(DELIMITERS, uniques).shift();
 }
 
@@ -78,14 +91,14 @@ export function getPrecision(from, to = moment()) {
 
 export function getMomentPrecision(from, to = moment()) {
   const diff = to.diff(from, 'minutes');
-  if (diff <= (60 * 24)) {
+  if (diff <= 60 * 24) {
     return 'minutes';
   }
-  return diff <= (60 * 24 * 2) ? 'hours' : 'days';
+  return diff <= 60 * 24 * 2 ? 'hours' : 'days';
 }
 
 export function getPrecisionType(precision) {
-  return (indexedPrecisions[precision].time <= (60 * 24 * 2)) ? 'hour' : precision;
+  return indexedPrecisions[precision].time <= 60 * 24 * 2 ? 'hour' : precision;
 }
 
 /**
@@ -102,7 +115,7 @@ export function roundBoundaries(fromInput, toInput, now = moment()) {
   const precision = getPrecision(from, to);
   const momentPrecision = getMomentPrecision(from, to);
   // extract rounding interval from precision query param value
-  const roundInt = (momentPrecision === 'minutes') ? parseInt(precision.replace('min', '')) : 1;
+  const roundInt = momentPrecision === 'minutes' ? parseInt(precision.replace('min', '')) : 1;
 
   floorMoment(from, roundInt, momentPrecision);
 
@@ -152,10 +165,14 @@ function ceilMoment(time, roundInt = 1, precision = 'minutes') {
 export function getValidDateRange({ from, to, now = moment(), roundToPrecision, preventFuture }) {
   // If we're not rounding, check to see if we want to prevent future dates. if not, we're good.
   const nonRoundCondition = roundToPrecision || !preventFuture || to.isBefore(now);
-  const validDates = _.every(_.map([from, to, now], (date) => moment.isMoment(date) && date.isValid()));
+  const validDates = _.every(
+    _.map([from, to, now], date => moment.isMoment(date) && date.isValid()),
+  );
 
   if (validDates && from.isBefore(to) && nonRoundCondition) {
-    if (!roundToPrecision) { return { from, to }; }
+    if (!roundToPrecision) {
+      return { from, to };
+    }
     // Use the user's rounded 'to' input if it's less than or equal to 'now' rounded up to the nearest precision,
     // otherwise use the valid range and precision of floor(from) to ceil(now).
     // This is necessary because the precision could change between the user's invalid range, and a valid range.
@@ -178,7 +195,7 @@ export function getValidDateRange({ from, to, now = moment(), roundToPrecision, 
 
 export function _getMetricsFromKeys(keys = []) {
   return keys.map((metric, i) => {
-    const found = METRICS_LIST.find((M) => M.key === metric || M.key === metric.key);
+    const found = METRICS_LIST.find(M => M.key === metric || M.key === metric.key);
 
     if (!found) {
       throw new Error(`Cannot find metric: ${JSON.stringify(metric)}`);
@@ -191,17 +208,18 @@ export function _getMetricsFromKeys(keys = []) {
 export const getMetricsFromKeys = _.memoize(_getMetricsFromKeys, (keys = []) => keys.join(''));
 
 export function getKeysFromMetrics(metrics = []) {
-  const flattened = _.flatMap(metrics, ({ key, computeKeys }) => computeKeys ? computeKeys : key);
+  const flattened = _.flatMap(metrics, ({ key, computeKeys }) => (computeKeys ? computeKeys : key));
   return _.uniq(flattened);
 }
 
 export function computeKeysForItem(metrics = []) {
-  return (item) => metrics.reduce((acc, metric) => {
-    if (metric.compute) {
-      acc[metric.key] = metric.compute(acc, metric.computeKeys) || 0;
-    }
-    return acc;
-  }, item);
+  return item =>
+    metrics.reduce((acc, metric) => {
+      if (metric.compute) {
+        acc[metric.key] = metric.compute(acc, metric.computeKeys) || 0;
+      }
+      return acc;
+    }, item);
 }
 
 /**
@@ -223,7 +241,7 @@ export function buildCommonOptions(reportOptions, updates = {}) {
     ...reportOptions,
     ...updates,
     ...getRelativeDates(reportOptions.relativeRange),
-    ...getRelativeDates(updates.relativeRange)
+    ...getRelativeDates(updates.relativeRange),
   };
 }
 

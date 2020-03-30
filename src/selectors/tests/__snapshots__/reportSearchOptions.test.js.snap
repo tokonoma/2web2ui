@@ -7,7 +7,9 @@ Object {
     102,
   ],
   "from": "2018-03-23T21:10:08Z",
+  "precision": "hour",
   "range": undefined,
+  "timezone": "America/New_York",
   "to": "2018-03-23T21:11:08Z",
 }
 `;
@@ -24,7 +26,9 @@ Object {
     "count_accepted",
     "metric_key",
   ],
+  "precision": "hour",
   "range": undefined,
+  "timezone": "America/New_York",
   "to": "2018-03-23T21:11:08Z",
 }
 `;

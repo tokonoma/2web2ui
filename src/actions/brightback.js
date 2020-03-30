@@ -32,7 +32,13 @@ export function prepBrightback(accountDetails) {
 
 export function loadPrerequisiteMetrics() {
   const { from, to } = getRelativeDates('7days', { roundToPrecision: false });
-  const metricsRequest = getQueryFromOptions({ from, to, metrics: METRICS });
+  const metricsRequest = getQueryFromOptions({
+    from,
+    to,
+    precision: 'day',
+    timezone: 'UTC',
+    metrics: METRICS,
+  });
   return sparkpostApiRequest({
     type: 'BRIGHTBACK_METRICS',
     meta: {
