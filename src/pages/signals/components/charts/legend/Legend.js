@@ -1,11 +1,11 @@
 import React from 'react';
-import { Tooltip } from '@sparkpost/matchbox';
+import { Tooltip } from 'src/components/matchbox';
 import styles from './Legend.module.scss';
 
 const Item = ({ label, fill = 'whitesmoke', tooltipContent }) => {
   const content = (
     <div className={styles.Item}>
-      <span className={styles.Fill} style={{ background: fill }}/>
+      <span className={styles.Fill} style={{ background: fill }} />
       <span className={styles.Label}>{label}</span>
     </div>
   );
@@ -23,7 +23,9 @@ const Item = ({ label, fill = 'whitesmoke', tooltipContent }) => {
 
 const Legend = ({ items, tooltipContent }) => (
   <div>
-    {items.map((item, i) => <Item key={i} tooltipContent={tooltipContent} {...item} />)}
+    {items.map((item, i) => (
+      <Item key={i} tooltipContent={tooltipContent} {...item} />
+    ))}
   </div>
 );
 

@@ -98,20 +98,9 @@ Array [
     muted={true}
   />,
   <Tooltip
-    bottom={true}
     content="Delete"
     dark={true}
-    forcePosition={false}
     horizontalOffset="-8px"
-    preferredDirection={
-      Object {
-        "bottom": true,
-        "left": false,
-        "right": true,
-        "top": false,
-      }
-    }
-    right={true}
     width="auto"
   >
     <Button
@@ -149,20 +138,9 @@ Array [
     muted={false}
   />,
   <Tooltip
-    bottom={true}
     content="Delete"
     dark={true}
-    forcePosition={false}
     horizontalOffset="-8px"
-    preferredDirection={
-      Object {
-        "bottom": true,
-        "left": false,
-        "right": true,
-        "top": false,
-      }
-    }
-    right={true}
     width="auto"
   >
     <Button
@@ -200,20 +178,9 @@ Array [
     muted={true}
   />,
   <Tooltip
-    bottom={true}
     content="Delete"
     dark={true}
-    forcePosition={false}
     horizontalOffset="-8px"
-    preferredDirection={
-      Object {
-        "bottom": true,
-        "left": false,
-        "right": true,
-        "top": false,
-      }
-    }
-    right={true}
     width="auto"
   >
     <Button

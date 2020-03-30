@@ -20,20 +20,8 @@ exports[`Component: Summary Chart Metrics Modal should disable checkboxes when m
           key="count_accepted"
         >
           <Tooltip
-            bottom={true}
             content="Messages an ISP or other remote domain accepted (less Out-of-Band Bounces)."
             dark={true}
-            forcePosition={false}
-            horizontalOffset="0px"
-            preferredDirection={
-              Object {
-                "bottom": true,
-                "left": false,
-                "right": true,
-                "top": false,
-              }
-            }
-            right={true}
           >
             <Checkbox
               checked={false}
@@ -49,20 +37,8 @@ exports[`Component: Summary Chart Metrics Modal should disable checkboxes when m
           key="count_injected"
         >
           <Tooltip
-            bottom={true}
             content="Messages either injected to or received by SparkPost."
             dark={true}
-            forcePosition={false}
-            horizontalOffset="0px"
-            preferredDirection={
-              Object {
-                "bottom": true,
-                "left": false,
-                "right": true,
-                "top": false,
-              }
-            }
-            right={true}
           >
             <Checkbox
               checked={true}
@@ -78,20 +54,8 @@ exports[`Component: Summary Chart Metrics Modal should disable checkboxes when m
           key="count_sent"
         >
           <Tooltip
-            bottom={true}
             content="Messages that SparkPost attempted to deliver, which includes both Deliveries and In-Band Bounces."
             dark={true}
-            forcePosition={false}
-            horizontalOffset="0px"
-            preferredDirection={
-              Object {
-                "bottom": true,
-                "left": false,
-                "right": true,
-                "top": false,
-              }
-            }
-            right={true}
           >
             <Checkbox
               checked={false}
@@ -107,20 +71,8 @@ exports[`Component: Summary Chart Metrics Modal should disable checkboxes when m
           key="count_targeted"
         >
           <Tooltip
-            bottom={true}
             content="Messages successfully injected into SparkPost as well as rejected by it."
             dark={true}
-            forcePosition={false}
-            horizontalOffset="0px"
-            preferredDirection={
-              Object {
-                "bottom": true,
-                "left": false,
-                "right": true,
-                "top": false,
-              }
-            }
-            right={true}
           >
             <Checkbox
               checked={true}
@@ -173,20 +125,8 @@ exports[`Component: Summary Chart Metrics Modal should render 1`] = `
           key="count_accepted"
         >
           <Tooltip
-            bottom={true}
             content="Messages an ISP or other remote domain accepted (less Out-of-Band Bounces)."
             dark={true}
-            forcePosition={false}
-            horizontalOffset="0px"
-            preferredDirection={
-              Object {
-                "bottom": true,
-                "left": false,
-                "right": true,
-                "top": false,
-              }
-            }
-            right={true}
           >
             <Checkbox
               checked={false}
@@ -202,20 +142,8 @@ exports[`Component: Summary Chart Metrics Modal should render 1`] = `
           key="count_injected"
         >
           <Tooltip
-            bottom={true}
             content="Messages either injected to or received by SparkPost."
             dark={true}
-            forcePosition={false}
-            horizontalOffset="0px"
-            preferredDirection={
-              Object {
-                "bottom": true,
-                "left": false,
-                "right": true,
-                "top": false,
-              }
-            }
-            right={true}
           >
             <Checkbox
               checked={false}
@@ -231,20 +159,8 @@ exports[`Component: Summary Chart Metrics Modal should render 1`] = `
           key="count_sent"
         >
           <Tooltip
-            bottom={true}
             content="Messages that SparkPost attempted to deliver, which includes both Deliveries and In-Band Bounces."
             dark={true}
-            forcePosition={false}
-            horizontalOffset="0px"
-            preferredDirection={
-              Object {
-                "bottom": true,
-                "left": false,
-                "right": true,
-                "top": false,
-              }
-            }
-            right={true}
           >
             <Checkbox
               checked={false}
@@ -260,20 +176,8 @@ exports[`Component: Summary Chart Metrics Modal should render 1`] = `
           key="count_targeted"
         >
           <Tooltip
-            bottom={true}
             content="Messages successfully injected into SparkPost as well as rejected by it."
             dark={true}
-            forcePosition={false}
-            horizontalOffset="0px"
-            preferredDirection={
-              Object {
-                "bottom": true,
-                "left": false,
-                "right": true,
-                "top": false,
-              }
-            }
-            right={true}
           >
             <Checkbox
               checked={false}
@@ -326,20 +230,8 @@ exports[`Component: Summary Chart Metrics Modal should select metrics 1`] = `
           key="count_accepted"
         >
           <Tooltip
-            bottom={true}
             content="Messages an ISP or other remote domain accepted (less Out-of-Band Bounces)."
             dark={true}
-            forcePosition={false}
-            horizontalOffset="0px"
-            preferredDirection={
-              Object {
-                "bottom": true,
-                "left": false,
-                "right": true,
-                "top": false,
-              }
-            }
-            right={true}
           >
             <Checkbox
               checked={false}
@@ -355,20 +247,8 @@ exports[`Component: Summary Chart Metrics Modal should select metrics 1`] = `
           key="count_injected"
         >
           <Tooltip
-            bottom={true}
             content="Messages either injected to or received by SparkPost."
             dark={true}
-            forcePosition={false}
-            horizontalOffset="0px"
-            preferredDirection={
-              Object {
-                "bottom": true,
-                "left": false,
-                "right": true,
-                "top": false,
-              }
-            }
-            right={true}
           >
             <Checkbox
               checked={true}
@@ -384,20 +264,8 @@ exports[`Component: Summary Chart Metrics Modal should select metrics 1`] = `
           key="count_sent"
         >
           <Tooltip
-            bottom={true}
             content="Messages that SparkPost attempted to deliver, which includes both Deliveries and In-Band Bounces."
             dark={true}
-            forcePosition={false}
-            horizontalOffset="0px"
-            preferredDirection={
-              Object {
-                "bottom": true,
-                "left": false,
-                "right": true,
-                "top": false,
-              }
-            }
-            right={true}
           >
             <Checkbox
               checked={false}
@@ -413,20 +281,8 @@ exports[`Component: Summary Chart Metrics Modal should select metrics 1`] = `
           key="count_targeted"
         >
           <Tooltip
-            bottom={true}
             content="Messages successfully injected into SparkPost as well as rejected by it."
             dark={true}
-            forcePosition={false}
-            horizontalOffset="0px"
-            preferredDirection={
-              Object {
-                "bottom": true,
-                "left": false,
-                "right": true,
-                "top": false,
-              }
-            }
-            right={true}
           >
             <Checkbox
               checked={true}

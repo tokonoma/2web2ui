@@ -80,20 +80,8 @@ exports[`Template List Components Status should render published 1`] = `
 
 exports[`Template List Components Status should render unpublished changes 1`] = `
 <Tooltip
-  bottom={true}
   content="Contains unpublished changes"
   dark={true}
-  forcePosition={false}
-  horizontalOffset="0px"
-  preferredDirection={
-    Object {
-      "bottom": true,
-      "left": false,
-      "right": true,
-      "top": false,
-    }
-  }
-  right={true}
 >
   <Tag
     className="PublishedWithChanges"

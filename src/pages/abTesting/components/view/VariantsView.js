@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
-import { Tooltip } from '@sparkpost/matchbox';
 import { PageLink } from 'src/components/links';
-import { Panel } from 'src/components/matchbox';
+import { Panel, Tooltip } from 'src/components/matchbox';
 import { InfoOutline } from '@sparkpost/matchbox-icons';
 import { LabelledValue, Unit } from 'src/components';
 import { hasTestDelivered } from 'src/helpers/abTesting';
