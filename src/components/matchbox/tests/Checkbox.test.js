@@ -8,13 +8,13 @@ jest.mock('src/context/HibanaContext');
 describe('Checkbox', () => {
   it('should only render hibana component when hibana is enabled', () => {
     useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: true }]);
-    const wrapper = shallow(<Checkbox />);
+    const wrapper = shallow(<Checkbox id="test" />);
     expect(wrapper).toHaveDisplayName('HibanaCheckbox');
   });
 
   it('should only render matchbox component when hibana is not enabled', () => {
     useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: false }]);
-    const wrapper = shallow(<Checkbox />);
+    const wrapper = shallow(<Checkbox id="test" />);
     expect(wrapper).toHaveDisplayName('Checkbox');
   });
 
@@ -22,7 +22,7 @@ describe('Checkbox', () => {
     useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: true }]);
     const wrapper = shallow(
       <Checkbox.Group>
-        <Checkbox />
+        <Checkbox id="test" />
       </Checkbox.Group>,
     );
     expect(wrapper).toHaveDisplayName('HibanaCheckbox.Group');
@@ -32,7 +32,7 @@ describe('Checkbox', () => {
     useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: false }]);
     const wrapper = shallow(
       <Checkbox.Group>
-        <Checkbox />
+        <Checkbox id="test" />
       </Checkbox.Group>,
     );
     expect(wrapper).toHaveDisplayName('Checkbox.Group');
