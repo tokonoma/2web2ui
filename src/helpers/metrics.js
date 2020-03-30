@@ -100,8 +100,16 @@ export function getPrecision(from, to = moment()) {
   return precisionMap.find(({ time }) => diff <= time).value;
 }
 
-export function getRollupPrecision(from, to = moment()) {
-  const diff = to.diff(from, 'minutes');
+export function getRollupPrecision({ from, to = moment(), precision }) {
+  if (!precision) {
+    return undefined;
+  }
+  const precisionOptions = getPrecisionOptions(moment(from), moment(to));
+  const precisionOptionsValues = precisionOptions.map(({ value }) => value);
+  if (precisionOptionsValues.includes(precision)) {
+    return precision;
+  }
+  const diff = moment(to).diff(moment(from), 'minutes');
   return rollupPrecisionMap.find(({ recommended }) => diff <= recommended).value;
 }
 
@@ -140,7 +148,7 @@ export function roundBoundaries({
   const from = moment(fromInput);
   const to = moment(toInput);
 
-  const precision = defaultPrecision || getRollupPrecision(from, to);
+  const precision = defaultPrecision || getPrecision(from, to);
   const momentPrecision = precision.includes('min') ? 'minutes' : precision;
   // extract rounding interval from precision query param value
   const roundInt = momentPrecision === 'minutes' ? parseInt(precision.replace('min', '')) : 1;

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import { getPrecisionOptions, roundBoundaries } from 'src/helpers/metrics';
+import { getPrecisionOptions, roundBoundaries, getRollupPrecision } from 'src/helpers/metrics';
 import { Select } from 'src/components/matchbox';
 import moment from 'moment';
 
@@ -8,9 +8,9 @@ const PrecisionSelector = ({ from, to, changeTime, selectedPrecision }) => {
   const precisionOptions = getPrecisionOptions(moment(from), moment(to));
 
   useEffect(() => {
-    const precisionOptionsValues = precisionOptions.map(({ value }) => value);
-    if (!precisionOptionsValues.includes(selectedPrecision)) {
-      changeTime({ precision: precisionOptionsValues[0] });
+    const updatedPrecision = getRollupPrecision({ from, to, precision: selectedPrecision });
+    if (updatedPrecision !== selectedPrecision) {
+      changeTime({ precision: updatedPrecision });
     }
   }, [changeTime, from, precisionOptions, selectedPrecision, to]);
 

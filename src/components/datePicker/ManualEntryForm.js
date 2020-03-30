@@ -5,7 +5,7 @@ import { Grid } from '@sparkpost/matchbox';
 import { ArrowForward } from '@sparkpost/matchbox-icons';
 import { TextField } from 'src/components/matchbox';
 import { formatInputDate, formatInputTime, parseDatetime } from 'src/helpers/date';
-import { getValidDateRange, getPrecision, getPrecisionOptions } from 'src/helpers/metrics';
+import { getValidDateRange, getPrecision, getRollupPrecision } from 'src/helpers/metrics';
 import styles from './ManualEntryForm.module.scss';
 
 const DATE_PLACEHOLDER = '1970-01-20';
@@ -62,14 +62,9 @@ export default class ManualEntryForm extends Component {
     const from = parseDatetime(this.state.fromDate, this.state.fromTime);
     const to = parseDatetime(this.state.toDate, this.state.toTime);
     // allow for prop-level override of "now" (DI, etc.)
-    const { now, roundToPrecision, preventFuture } = this.props;
+    const { now, roundToPrecision, preventFuture, defaultPrecision } = this.props;
     try {
-      const precisionOptionsValues = getPrecisionOptions(moment(from), moment(to)).map(
-        ({ value }) => value,
-      );
-      const precision = precisionOptionsValues.includes(this.props.precision)
-        ? this.props.precision
-        : precisionOptionsValues[0];
+      const precision = getRollupPrecision({ from, to, precision: defaultPrecision });
       const { to: roundedTo, from: roundedFrom } = getValidDateRange({
         from,
         to,
@@ -95,7 +90,7 @@ export default class ManualEntryForm extends Component {
 
   render() {
     const { toDate, toTime, fromDate, fromTime } = this.state;
-    const { roundToPrecision, precision } = this.props;
+    const { roundToPrecision, selectedPrecision } = this.props;
 
     let precisionLabel = null;
     let precisionLabelValue;
@@ -112,9 +107,9 @@ export default class ManualEntryForm extends Component {
           to,
           now,
           roundToPrecision,
-          precision,
+          selectedPrecision,
         });
-        precisionLabelValue = precision || getPrecision(validatedFrom, validatedTo);
+        precisionLabelValue = selectedPrecision || getPrecision(validatedFrom, validatedTo);
         shouldDisableTime = ['day', 'week', 'month'].includes(precisionLabelValue);
       } catch (e) {
         precisionLabelValue = '';
