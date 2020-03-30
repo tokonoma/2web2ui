@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { listPools } from 'src/actions/ipPools';
-import { getOrderedIpPools, shouldShowIpPurchaseCTA } from 'src/selectors/ipPools';
-import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
-import { Banner, Button, Page } from 'src/components/matchbox';
 import { OpenInNew } from '@sparkpost/matchbox-icons';
+import { listPools } from 'src/actions/ipPools';
+import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
+import { PageLink } from 'src/components/links';
+import { Banner, Button, Page } from 'src/components/matchbox';
 import { LINKS } from 'src/constants';
 import { openSupportTicketForm } from 'src/actions/support';
 import { not } from 'src/helpers/conditions';
 import { selectCondition } from 'src/selectors/accessConditionState';
+import { getOrderedIpPools, shouldShowIpPurchaseCTA } from 'src/selectors/ipPools';
 import { isSelfServeBilling } from 'src/helpers/conditions/account';
 
 const columns = [
@@ -19,7 +19,7 @@ const columns = [
 ];
 
 export const getRowData = ({ id, name, ips }) => {
-  const nameLink = <Link to={`/account/ip-pools/edit/${id}`}>{name}</Link>;
+  const nameLink = <PageLink to={`/account/ip-pools/edit/${id}`}>{name}</PageLink>;
   return [nameLink, id, ips.length.toString()];
 };
 
@@ -64,7 +64,7 @@ export class IpPoolsList extends Component {
 
     const createAction = {
       content: 'Create IP Pool',
-      Component: Link,
+      Component: PageLink,
       to: '/account/ip-pools/create',
     };
     const purchaseActions = showPurchaseCTA
@@ -75,7 +75,7 @@ export class IpPoolsList extends Component {
               onClick: () => openSupportTicketForm({ issueId: 'request_new_ip' }),
             },
           ]
-        : [{ content: 'Purchase IPs', Component: Link, to: '/account/billing' }]
+        : [{ content: 'Purchase IPs', Component: PageLink, to: '/account/billing' }]
       : null;
 
     return (

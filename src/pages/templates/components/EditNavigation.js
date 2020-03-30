@@ -1,17 +1,13 @@
 import React from 'react';
 import classNames from 'classnames';
-import { UnstyledLink } from '@sparkpost/matchbox';
+import { UnstyledLink } from 'src/components/matchbox';
 import links from '../constants/editNavigationLinks';
 import SavedIndicator from './SavedIndicator';
 import useEditorContext from '../hooks/useEditorContext';
 import styles from './EditNavigation.module.scss';
 
 const EditNavigation = ({ primaryArea }) => {
-  const {
-    currentNavigationKey,
-    setNavigation,
-    hasSaved
-  } = useEditorContext();
+  const { currentNavigationKey, setNavigation, hasSaved } = useEditorContext();
 
   return (
     <nav className={styles.Navigation}>
@@ -19,10 +15,12 @@ const EditNavigation = ({ primaryArea }) => {
         {links.map(({ key, content }) => (
           <UnstyledLink
             className={classNames(styles.NavigationLink, {
-              [styles.active]: key === currentNavigationKey
+              [styles.active]: key === currentNavigationKey,
             })}
             key={key}
-            onClick={() => { setNavigation(key); }}
+            onClick={() => {
+              setNavigation(key);
+            }}
             to="javascript:void(0)"
             role="button"
             data-id={`subnav-link-${key}`}
@@ -32,7 +30,7 @@ const EditNavigation = ({ primaryArea }) => {
         ))}
       </div>
       <div className={styles.NavigationPrimaryArea}>
-        <SavedIndicator hasSaved={hasSaved}/>
+        <SavedIndicator hasSaved={hasSaved} />
 
         {primaryArea}
       </div>

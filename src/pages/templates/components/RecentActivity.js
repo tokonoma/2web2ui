@@ -2,19 +2,15 @@ import React from 'react';
 import _ from 'lodash';
 import { Panel } from 'src/components/matchbox';
 import { FileEdit, CheckCircle } from '@sparkpost/matchbox-icons';
+import { PageLink } from 'src/components/links';
 import { formatDate } from 'src/helpers/date';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
-import PageLink from 'src/components/pageLink';
 import { DuplicateAction, DeleteAction } from './ListComponents';
 import { routeNamespace } from '../constants/routes';
 import styles from './RecentActivity.module.scss';
 
-const RecentActivity = (props) => {
-  const {
-    templates,
-    onToggleDeleteModal,
-    onToggleDuplicateModal
-  } = props;
+const RecentActivity = props => {
+  const { templates, onToggleDeleteModal, onToggleDuplicateModal } = props;
   const descendingSortedTemplates = _.orderBy(templates, 'last_update_time', 'desc');
 
   if (templates.length < 3) {
@@ -29,22 +25,25 @@ const RecentActivity = (props) => {
         {descendingSortedTemplates.map((template, index) => {
           const version = template.list_status === 'draft' ? 'draft' : 'published';
 
-          { /* Render only the first four items */ }
+          {
+            /* Render only the first four items */
+          }
           if (index <= 3) {
             return (
               <div role="listitem" key={`recent-activity-template-${index}`}>
                 <Panel className={styles.RecentActivityPanel} accent>
                   <div className={styles.RecentActivityPanelContent}>
                     <Panel.Section className={styles.RecentActivityStatus}>
-                      {(template.list_status === 'published' || template.list_status === 'published_with_draft') ? (
+                      {template.list_status === 'published' ||
+                      template.list_status === 'published_with_draft' ? (
                         <div className={styles.RecentActivityStatus}>
-                          <CheckCircle className={styles.RecentActivityPublishedIcon}/>
+                          <CheckCircle className={styles.RecentActivityPublishedIcon} />
 
                           <span className={styles.RecentActivityContent}>Published</span>
                         </div>
                       ) : (
                         <div className={styles.RecentActivityStatus}>
-                          <FileEdit className={styles.RecentActivityDraftIcon}/>
+                          <FileEdit className={styles.RecentActivityDraftIcon} />
 
                           <span className={styles.RecentActivityContent}>Draft</span>
                         </div>
@@ -53,7 +52,11 @@ const RecentActivity = (props) => {
 
                     <Panel.Section className={styles.RecentActivitySection}>
                       <strong>
-                        <PageLink to={`/${routeNamespace}/edit/${template.id}/${version}/content${setSubaccountQuery(template.subaccount_id)}`}>
+                        <PageLink
+                          to={`/${routeNamespace}/edit/${
+                            template.id
+                          }/${version}/content${setSubaccountQuery(template.subaccount_id)}`}
+                        >
                           {template.name}
                         </PageLink>
                       </strong>

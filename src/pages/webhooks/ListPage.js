@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 // Actions
 import { listWebhooks } from 'src/actions/webhooks';
@@ -15,6 +15,7 @@ import { selectWebhooks } from 'src/selectors/webhooks';
 import { Loading, TableCollection, Subaccount, ApiErrorBanner } from 'src/components';
 import { Page } from 'src/components/matchbox';
 import { Setup } from 'src/components/images';
+import { PageLink } from 'src/components/links';
 import { formatDateTime } from 'src/helpers/date';
 
 const filterBoxConfig = {
@@ -58,7 +59,7 @@ export class WebhooksList extends Component {
   }) => {
     const { hasSubaccounts } = this.props;
     const nameLink = (
-      <Link to={`/webhooks/details/${id}${setSubaccountQuery(subaccount_id)}`}>{name}</Link>
+      <PageLink to={`/webhooks/details/${id}${setSubaccountQuery(subaccount_id)}`}>{name}</PageLink>
     );
     const row = [
       nameLink,
@@ -115,7 +116,7 @@ export class WebhooksList extends Component {
 
     return (
       <Page
-        primaryAction={{ content: 'Create Webhook', Component: Link, to: '/webhooks/create' }}
+        primaryAction={{ content: 'Create Webhook', component: PageLink, to: '/webhooks/create' }}
         title="Webhooks"
         empty={{
           show: !error && webhooks.length === 0,

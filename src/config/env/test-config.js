@@ -4,47 +4,48 @@ const testConfig = {
   release: 'test-release',
   smtpAuth: {
     host: 'smtp.sparkmail.com',
-    alternativePort: 2525
+    alternativePort: 2525,
   },
   support: {
     algolia: {
       appID: 'id',
       apiKey: 'key',
-      index: 'index'
-    }
+      index: 'index',
+    },
   },
   authentication: {
     app: {
       cookie: {
         name: 'test',
         options: {
-          path: '/'
-        }
-      }
+          path: '/',
+        },
+      },
     },
     site: {
       cookie: {
         name: 'website_test',
         options: {
-          path: '/'
-        }
-      }
-    }
+          path: '/',
+        },
+      },
+    },
   },
+  crossLinkTenant: 'spc',
   cookieConsent: {
     cookie: {
       name: 'cookieConsent',
       ageDays: 365,
       options: {
         domain: 'test',
-        path: '/'
-      }
-    }
+        path: '/',
+      },
+    },
   },
   tenantId: 'test',
   brightback: {
-    enabled: false
-  }
+    enabled: false,
+  },
 };
 
 export default testConfig;

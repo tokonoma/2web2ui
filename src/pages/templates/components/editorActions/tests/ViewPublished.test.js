@@ -6,31 +6,29 @@ import useEditorContext from '../../../hooks/useEditorContext';
 jest.mock('../../../hooks/useEditorContext');
 
 describe('ViewPublished', () => {
-  const subject = (editorState) => {
+  const subject = editorState => {
     useEditorContext.mockReturnValue({
       draft: { id: 'foo' },
-
-      ...editorState
+      ...editorState,
     });
 
-    return shallow(<ViewPublished className={'Foo'}/>);
+    return shallow(<ViewPublished className="Foo" />);
   };
 
   it('renders ViewPublished action', () => {
     expect(subject()).toMatchSnapshot();
   });
 
-  it('redirects to published path upon click', () => {
-    const push = jest.fn();
-    const wrapper = subject({ history: { push }});
-    wrapper.find('UnstyledLink').simulate('click');
-    expect(push).toHaveBeenCalledWith('/templates/edit/foo/published/content');
+  it('renders a link to published', () => {
+    const wrapper = subject();
+    expect(wrapper.find('PageLink')).toHaveProp('to', '/templates/edit/foo/published/content');
   });
 
-  it('redirects to published path (with subaccount) upon click', () => {
-    const push = jest.fn();
-    const wrapper = subject({ history: { push }, draft: { id: 'foo', subaccount_id: 1001 }});
-    wrapper.find('UnstyledLink').simulate('click');
-    expect(push).toHaveBeenCalledWith('/templates/edit/foo/published/content?subaccount=1001');
+  it('renders a link to published with subaccount', () => {
+    const wrapper = subject({ draft: { id: 'foo', subaccount_id: 1001 } });
+    expect(wrapper.find('PageLink')).toHaveProp(
+      'to',
+      '/templates/edit/foo/published/content?subaccount=1001',
+    );
   });
 });

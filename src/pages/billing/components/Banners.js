@@ -1,7 +1,7 @@
 import React from 'react';
 import { format } from 'date-fns';
+import { PageLink } from 'src/components/links';
 import { Banner } from 'src/components/matchbox';
-import { Link } from 'react-router-dom';
 import { LINKS } from 'src/constants';
 import { pluralString } from 'src/helpers/string';
 import * as conversions from 'src/helpers/conversionTracking';
@@ -123,8 +123,9 @@ export const FreePlanWarningBanner = ({
     <Banner status="warning" title="Free Plan Downgrade" my="300">
       <p>
         Your plan will automatically downgrade to 500 emails/month in{' '}
-        {pluralString(daysLeft, 'day')}. <Link to="/account/billing/plan">Upgrade your plan</Link>{' '}
-        to keep or increase your sending limits.
+        {pluralString(daysLeft, 'day')}.{' '}
+        <PageLink to="/account/billing/plan">Upgrade your plan</PageLink> to keep or increase your
+        sending limits.
       </p>
     </Banner>
   );

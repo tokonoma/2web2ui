@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { reduxForm, Field, formValueSelector } from 'redux-form';
-import { UnstyledLink, Grid } from '@sparkpost/matchbox';
-import { Button, Panel } from 'src/components/matchbox';
+import { Grid } from '@sparkpost/matchbox';
 import { TextFieldWrapper } from 'src/components';
+import { PageLink } from 'src/components/links';
+import { Button, Panel } from 'src/components/matchbox';
 import {
   TemplateTypeaheadWrapper,
   SubaccountTypeaheadWrapper,
@@ -85,17 +85,14 @@ export class AbTestCreateForm extends Component {
                 <span>
                   Only published templates are available. This template will be sent when the test
                   is not running. If you need to create a new template,{' '}
-                  <UnstyledLink component={Link} to="/templates">
-                    head over to the templates page
-                  </UnstyledLink>
-                  .
+                  <PageLink to="/templates">head over to the templates page</PageLink>.
                 </span>
               ) : (
                 <span>
                   No published templates available.{' '}
-                  <UnstyledLink component={Link} to="/templates">
+                  <PageLink to="/templates">
                     Head over to the templates page to set some up
-                  </UnstyledLink>
+                  </PageLink>
                   .
                 </span>
               )

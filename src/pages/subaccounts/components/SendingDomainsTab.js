@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import { PageLink } from 'src/components/links';
 import { Button, Panel } from 'src/components/matchbox';
 import { TableCollection, DomainStatusCell, StatusTooltipHeader } from 'src/components';
 import { selectSendingDomainsForSubaccount } from 'src/selectors/sendingDomains';
@@ -12,7 +13,7 @@ const columns = [
 ];
 
 export const getRowData = row => [
-  <Link to={`/account/sending-domains/edit/${row.domain}`}>{row.domain}</Link>,
+  <PageLink to={`/account/sending-domains/edit/${row.domain}`}>{row.domain}</PageLink>,
   <DomainStatusCell domain={row} />,
 ];
 
@@ -41,9 +42,9 @@ export class SendingDomainsTab extends Component {
           This subaccount has no sending domains assigned to it. You can assign an existing one, or
           create a new one.
         </p>
-        <Button plain color="orange" Component={Link} to="/account/sending-domains">
+        <PageLink as={Button} plain color="orange" to="/account/sending-domains">
           Manage Sending Domains
-        </Button>
+        </PageLink>
       </Panel.Section>
     );
   }

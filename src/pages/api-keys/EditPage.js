@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import { PageLink } from 'src/components/links';
 import { Page, Panel } from 'src/components/matchbox';
 import {
   deleteApiKey,
@@ -20,7 +21,7 @@ import ApiKeyForm from './components/ApiKeyForm';
 
 const breadcrumbAction = {
   content: 'API Keys',
-  Component: Link,
+  Component: PageLink,
   to: '/account/api-keys',
 };
 

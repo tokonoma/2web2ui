@@ -8,7 +8,7 @@ const mdxRegex = /\.(.mdx)$/;
 
 module.exports = {
   resolve: {
-    modules: [paths.appBase, 'node_modules']
+    modules: [paths.appBase, 'node_modules'],
   },
   module: {
     rules: [
@@ -16,7 +16,7 @@ module.exports = {
         test: sassRegex,
         exclude: sassModuleRegex,
         use: ['style-loader', 'css-loader', 'sass-loader'],
-        include: path.resolve(__dirname, '../')
+        include: path.resolve(__dirname, '../'),
       },
       {
         test: sassModuleRegex,
@@ -27,8 +27,8 @@ module.exports = {
             options: {
               importLoaders: 2,
               modules: true,
-              localIdentName: '[name]__[local]___[hash:base64:5]'
-            }
+              localIdentName: '[name]__[local]___[hash:base64:5]',
+            },
           },
           {
             loader: require.resolve('postcss-loader'),
@@ -43,18 +43,26 @@ module.exports = {
                   stage: 3,
                 }),
               ],
-            }
+            },
           },
-          require.resolve('sass-loader')
+          require.resolve('sass-loader'),
         ],
-        include: path.resolve(__dirname, '../')
+        include: path.resolve(__dirname, '../'),
       },
-    ]
+      {
+        test: /.csv$/,
+        loaders: [require.resolve('file-loader')],
+      },
+    ],
   },
   plugins: [
     new webpack.DefinePlugin({
       SUPPORTED_BROWSERS: '[]',
-      TENANT_CONFIGS: '{}'
-    })
-  ]
+      TENANT_CONFIGS: '{}',
+    }),
+    new webpack.NormalModuleReplacementPlugin(
+      /HibanaContext/,
+      path.resolve(__dirname, './FakeHibanaContext.js'),
+    ),
+  ],
 };

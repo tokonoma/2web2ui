@@ -12,14 +12,14 @@ exports[`ApiKeysTab empty 1`] = `
     <p>
       This subaccount has no API Keys assigned to it. You can assign an existing one, or create a new one.
     </p>
-    <Button
-      Component={[Function]}
+    <PageLink
+      as={[Function]}
       color="orange"
       plain={true}
       to="/account/api-keys"
     >
       Manage API Keys
-    </Button>
+    </PageLink>
   </Panel.Section>
 </Panel>
 `;
@@ -89,12 +89,11 @@ exports[`ApiKeysTab normal props 1`] = `
 
 exports[`getRowData 1`] = `
 Array [
-  <Link
-    replace={false}
+  <PageLink
     to="/account/api-keys/edit/12313"
   >
     test
-  </Link>,
+  </PageLink>,
   <code>
     cdwa
     ••••••••

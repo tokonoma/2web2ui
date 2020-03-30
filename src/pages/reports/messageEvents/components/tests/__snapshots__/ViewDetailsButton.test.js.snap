@@ -4,8 +4,8 @@ exports[`Component ViewDetailsButton renders correct if message_id is absent 1`]
 <div
   className="AlignRight"
 >
-  <Button
-    Component={[Function]}
+  <PageLink
+    as={[Function]}
     size="small"
     to={
       Object {
@@ -14,7 +14,7 @@ exports[`Component ViewDetailsButton renders correct if message_id is absent 1`]
     }
   >
     View Details
-  </Button>
+  </PageLink>
 </div>
 `;
 
@@ -22,8 +22,8 @@ exports[`Component ViewDetailsButton renders correctly when message_id exists 1`
 <div
   className="AlignRight"
 >
-  <Button
-    Component={[Function]}
+  <PageLink
+    as={[Function]}
     size="small"
     to={
       Object {
@@ -32,6 +32,6 @@ exports[`Component ViewDetailsButton renders correctly when message_id exists 1`
     }
   >
     View Details
-  </Button>
+  </PageLink>
 </div>
 `;

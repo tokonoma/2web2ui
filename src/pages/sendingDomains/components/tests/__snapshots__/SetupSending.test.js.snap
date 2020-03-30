@@ -58,12 +58,14 @@ exports[`Component: SetupSending renders correctly for unverified DKIM and inval
       , add this TXT record to your DNS settings, paying close attention to the specified hostname.
     </p>
     <p>
-      We recommend DNS verification, but if you don't have DNS access, you can 
+      We recommend DNS verification, but if you don't have DNS access, you can
+       
       <UnstyledLink
         id="verify-with-email"
         onClick={[Function]}
       >
-         set this domain up for sending via email.
+         
+        set this domain up for sending via email.
       </UnstyledLink>
     </p>
   </Left>
@@ -154,7 +156,8 @@ exports[`Component: SetupSending renders correctly when ownership is valid and D
       <strong>
         ready for DKIM
       </strong>
-       as well.
+       
+      as well.
     </p>
   </Left>
   <Right>

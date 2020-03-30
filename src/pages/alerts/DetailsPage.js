@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Button, Page } from 'src/components/matchbox';
 import { Delete, ContentCopy } from '@sparkpost/matchbox-icons';
 import { DeleteModal, Loading } from 'src/components';
+import { PageLink } from 'src/components/links';
+import { Button, Page } from 'src/components/matchbox';
 import withAlert from './containers/DetailsPage.container';
 import { AlertDetails } from './components/AlertDetails';
 import AlertIncidents from './components/AlertIncidents';
@@ -71,13 +71,13 @@ export class DetailsPage extends Component {
     return (
       <Page
         title={name || 'Alert'}
-        breadcrumbAction={{ content: 'Back to Alerts', to: '/alerts', component: Link }}
+        breadcrumbAction={{ content: 'Back to Alerts', to: '/alerts', component: PageLink }}
         primaryArea={
           <>
-            <Button flat component={Link} to={`/alerts/create/${id}`}>
+            <PageLink as={Button} flat to={`/alerts/create/${id}`}>
               <ContentCopy className={styles.Icon} />
               Duplicate
-            </Button>
+            </PageLink>
             <Button flat onClick={this.openDeleteModal}>
               <Delete className={styles.Icon} />
               Delete

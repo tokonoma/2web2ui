@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { create as createDomain } from 'src/actions/sendingDomains';
 import { showAlert } from 'src/actions/globalAlert';
+import { PageLink } from 'src/components/links';
 import { Page, Panel } from 'src/components/matchbox';
 
 import CreateForm from './components/CreateForm';
@@ -21,7 +22,7 @@ export class CreatePage extends Component {
       <Page
         breadcrumbAction={{
           content: 'Back to Sending Domains',
-          Component: Link,
+          component: PageLink,
           to: '/account/sending-domains',
         }}
       >

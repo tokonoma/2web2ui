@@ -1,10 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { UnstyledLink } from '@sparkpost/matchbox';
 import { Button } from 'src/components/matchbox';
 import { getJobStatus } from 'src/actions/recipientValidation';
 import FocusContainer from 'src/components/focusContainer';
-import PageLink from 'src/components/pageLink';
+import { PageLink, SupportTicketLink } from 'src/components/links';
 import { PollContext } from 'src/context/Poll';
 import withContext from 'src/context/withContext';
 import { lerp } from 'src/helpers/math';
@@ -59,9 +58,7 @@ export const ListProgress = ({
                 details:
                   batch_status === 'usage_limit_exceeded' ? (
                     <>
-                      <UnstyledLink to="?supportTicket=true&supportIssue=general_issue">
-                        Submit a ticket
-                      </UnstyledLink>
+                      <SupportTicketLink issueId="general_issue">Submit a ticket</SupportTicketLink>
                       &nbsp;to request an increase.
                     </>
                   ) : (
@@ -100,9 +97,9 @@ export const ListProgress = ({
           </div>
         )}
       </div>
-      <Button color="orange" component={PageLink} to="/recipient-validation">
+      <PageLink as={Button} color="orange" to="/recipient-validation">
         Validate Another
-      </Button>
+      </PageLink>
     </FocusContainer>
   );
 };

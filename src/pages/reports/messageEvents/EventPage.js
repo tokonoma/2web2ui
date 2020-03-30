@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import { getMessageHistory, getDocumentation, getSelectedEvent } from 'src/actions/messageEvents';
 import RedirectAndAlert from 'src/components/globalAlert/RedirectAndAlert';
+import { PageLink } from 'src/components/links';
 import { eventPageMSTP } from 'src/selectors/messageEvents';
 import { getDetailsPath } from 'src/helpers/messageEvents';
 import { Grid } from '@sparkpost/matchbox';
@@ -14,7 +14,7 @@ import EventDetails from './components/EventDetails';
 
 const breadcrumbAction = {
   content: 'All Events',
-  Component: Link,
+  Component: PageLink,
   to: '/reports/message-events',
 };
 

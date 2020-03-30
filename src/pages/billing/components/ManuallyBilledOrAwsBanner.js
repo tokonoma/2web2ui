@@ -1,7 +1,6 @@
 import React from 'react';
 import { Banner } from 'src/components/matchbox';
-import PageLink from 'src/components/pageLink/PageLink';
-import SupportTicketLink from 'src/components/supportTicketLink/SupportTicketLink';
+import { PageLink, SupportTicketLink } from 'src/components/links';
 
 /**
  * Renders plan information for non-self-serve users

@@ -18,11 +18,11 @@ export function dedupeFilters(filters) {
  */
 export function parseSearch(search) {
   if (!search) {
-    return { options: {}};
+    return { options: {} };
   }
 
-  const { from, to, range, metrics, filters = []} = qs.parse(search);
-  const filtersList = (typeof filters === 'string' ? [filters] : filters).map((filter) => {
+  const { from, to, range, metrics, timezone, precision, filters = [] } = qs.parse(search);
+  const filtersList = (typeof filters === 'string' ? [filters] : filters).map(filter => {
     const parts = filter.split(':');
     const type = parts.shift();
     let value;
@@ -40,11 +40,10 @@ export function parseSearch(search) {
     return { value, type, id };
   });
 
-
   let options = {};
 
   if (metrics) {
-    options.metrics = (typeof metrics === 'string') ? [metrics] : metrics;
+    options.metrics = typeof metrics === 'string' ? [metrics] : metrics;
   }
 
   const fromTime = new Date(from);
@@ -62,6 +61,14 @@ export function parseSearch(search) {
     const invalidRange = !_.find(relativeDateOptions, ['value', range]);
     const effectiveRange = invalidRange ? 'day' : range;
     options = { ...options, ...getRelativeDates(effectiveRange) };
+  }
+
+  if (precision) {
+    options.precision = precision;
+  }
+
+  if (timezone) {
+    options.timezone = timezone;
   }
 
   // filters are used in pages to dispatch updates to Redux store

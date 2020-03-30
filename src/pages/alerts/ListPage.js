@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Grid, Page } from '@sparkpost/matchbox';
+import { Grid } from '@sparkpost/matchbox';
 import { ApiErrorBanner, DeleteModal, Loading, DisplayDate } from 'src/components';
-import { Panel, Tag } from 'src/components/matchbox';
+import { PageLink } from 'src/components/links';
+import { Page, Panel, Tag } from 'src/components/matchbox';
 import { Templates } from 'src/components/images';
 import AlertCollection from './components/AlertCollection';
 import withAlertsList from './containers/ListPage.container';
@@ -59,9 +59,9 @@ export class ListPage extends Component {
             <Grid.Column xs={12} md={6} lg={3} key={alert.id}>
               <Panel accent>
                 <Panel.Section className={styles.LastTriggeredCard}>
-                  <Link className={styles.AlertName} to={`/alerts/details/${alert.id}`}>
+                  <PageLink className={styles.AlertName} to={`/alerts/details/${alert.id}`}>
                     <strong data-id="link-alert-name">{alert.name}</strong>
-                  </Link>
+                  </PageLink>
                   <Tag>{METRICS[alert.metric]}</Tag>
                 </Panel.Section>
                 <Panel.Section className={styles.Footer}>
@@ -113,7 +113,7 @@ export class ListPage extends Component {
     return (
       <Page
         title="Alerts"
-        primaryAction={{ content: 'Create an Alert', to: '/alerts/create', component: Link }}
+        primaryAction={{ content: 'Create an Alert', to: '/alerts/create', component: PageLink }}
         empty={{
           show: !error && alerts.length === 0,
           image: Templates,

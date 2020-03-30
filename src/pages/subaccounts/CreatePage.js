@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
-import { Page, Panel } from 'src/components/matchbox';
+import { withRouter } from 'react-router-dom';
 import { Loading } from 'src/components';
+import { PageLink } from 'src/components/links';
+import { Page, Panel } from 'src/components/matchbox';
 
 import SubaccountCreateForm from './components/SubaccountCreateForm';
 
@@ -13,7 +14,7 @@ import { showAlert } from 'src/actions/globalAlert';
 
 const breadcrumbAction = {
   content: 'Subaccounts',
-  Component: Link,
+  Component: PageLink,
   to: '/account/subaccounts',
 };
 

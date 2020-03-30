@@ -43,7 +43,9 @@ Object {
     2,
     3,
   ],
+  "precision": "hour",
   "relativeRange": "day",
+  "timezone": "America/New_York",
   "to": 2018-01-02T00:00:00.000Z,
 }
 `;

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 // Actions
 import { listAbTests, deleteAbTest, cancelAbTest } from 'src/actions/abTesting';
@@ -10,6 +9,7 @@ import { showAlert } from 'src/actions/globalAlert';
 import { Page } from 'src/components/matchbox';
 import { Loading, ApiErrorBanner, DeleteModal, ConfirmationModal } from 'src/components';
 import { Setup } from 'src/components/images';
+import { PageLink } from 'src/components/links';
 import TestCollection from './components/TestCollection';
 
 export class ListPage extends Component {
@@ -91,7 +91,7 @@ export class ListPage extends Component {
         primaryAction={{
           content: 'Create a New A/B Test',
           to: '/ab-testing/create',
-          component: Link,
+          component: PageLink,
         }}
         empty={{
           show: !error && abTests.length === 0,

@@ -3,11 +3,11 @@ import { Panel } from 'src/components/matchbox';
 import { ArrowForward } from '@sparkpost/matchbox-icons';
 import { ConfirmationModal } from 'src/components/modals';
 import LabelledValue from 'src/components/labelledValue/LabelledValue';
-import PageLink from 'src/components/pageLink/PageLink';
+import { PageLink } from 'src/components/links';
 
 export class StatusSection extends React.Component {
   state = {
-    isModalOpen: false
+    isModalOpen: false,
   };
 
   componentDidUpdate(prevProps) {
@@ -82,8 +82,8 @@ export class StatusSection extends React.Component {
             color: 'orange',
             content: enabled ? 'Disable SSO' : 'Enable SSO',
             disabled: updating || readOnly,
-            onClick: this.toggle
-          }
+            onClick: this.toggle,
+          },
         ]}
       >
         {this.renderControls()}

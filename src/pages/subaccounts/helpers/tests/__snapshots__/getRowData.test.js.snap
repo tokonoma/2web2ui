@@ -2,12 +2,11 @@
 
 exports[`Get row data active 1`] = `
 Array [
-  <Link
-    replace={false}
+  <PageLink
     to="/account/subaccounts/123"
   >
     Joe's Garage
-  </Link>,
+  </PageLink>,
   <p>
     123
   </p>,
@@ -21,12 +20,11 @@ Array [
 
 exports[`Get row data suspended 1`] = `
 Array [
-  <Link
-    replace={false}
+  <PageLink
     to="/account/subaccounts/789"
   >
     Dev Avocado
-  </Link>,
+  </PageLink>,
   <p>
     789
   </p>,
@@ -40,12 +38,11 @@ Array [
 
 exports[`Get row data terminated 1`] = `
 Array [
-  <Link
-    replace={false}
+  <PageLink
     to="/account/subaccounts/456"
   >
     SharkPost
-  </Link>,
+  </PageLink>,
   <p>
     456
   </p>,

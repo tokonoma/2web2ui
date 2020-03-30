@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import { Page } from 'src/components/matchbox';
 import { Loading, ApiErrorBanner, TableCollection } from 'src/components';
 import { Users } from 'src/components/images';
+import { PageLink } from 'src/components/links';
 import { listRecipientLists } from 'src/actions/recipientLists';
 import { LINKS } from 'src/constants';
 
@@ -16,12 +16,12 @@ const columns = [
 
 const primaryAction = {
   content: 'Create Recipient List',
-  Component: Link,
+  Component: PageLink,
   to: '/lists/recipient-lists/create',
 };
 
 const getRowData = ({ name, id, total_accepted_recipients }) => [
-  <Link to={`/lists/recipient-lists/edit/${id}`}>{name}</Link>,
+  <PageLink to={`/lists/recipient-lists/edit/${id}`}>{name}</PageLink>,
   id,
   total_accepted_recipients,
 ];

@@ -106,13 +106,12 @@ exports[`IP Pools Edit Page render tests should render the edit page correctly 1
           There are no IPs in this pool. 
         </span>
         Add dedicated IPs to this pool by moving them from their current pool
-        , or by 
-        <UnstyledLink
-          component={[Function]}
+        , or by 
+        <PageLink
           to="/account/billing"
         >
           purchasing new IPs
-        </UnstyledLink>
+        </PageLink>
         .
       </p>
     </Panel.Section>

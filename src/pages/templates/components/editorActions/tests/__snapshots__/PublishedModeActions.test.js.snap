@@ -42,7 +42,6 @@ exports[`PublishedModeActions renders published actions 1`] = `
         >
           <PageLink
             data-id="action-edit-draft"
-            role="button"
             to="/templates/edit/a-random-id-123/draft/content?subaccount=some-subaccount-id"
           >
             <FileEdit />

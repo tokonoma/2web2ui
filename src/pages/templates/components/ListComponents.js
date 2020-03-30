@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Tooltip } from '@sparkpost/matchbox';
 import { CheckCircle, Delete, Edit, ContentCopy } from '@sparkpost/matchbox-icons';
 import { formatDateTime } from 'src/helpers/date';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
-import { Button, Tag, ScreenReaderOnly } from 'src/components/matchbox';
+import { PageLink } from 'src/components/links';
+import { Button, ScreenReaderOnly, Tag } from 'src/components/matchbox';
 import styles from './ListComponents.module.scss';
 
 import { routeNamespace } from '../constants/routes';
@@ -15,13 +15,13 @@ export const Name = ({ list_name: name, id, subaccount_id, ...rowData }) => {
   return (
     <>
       <p className={styles.Name}>
-        <Link
+        <PageLink
           to={`/${routeNamespace}/edit/${id}/${version}/content${setSubaccountQuery(
             subaccount_id,
           )}`}
         >
           <strong>{name}</strong>
-        </Link>
+        </PageLink>
       </p>
     </>
   );

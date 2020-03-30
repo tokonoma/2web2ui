@@ -15,11 +15,11 @@ exports[`JoinError render:  duplicate email 1`] = `
   It looks like you already have a SparkPost account using 
   foo@bar.com
   . 
-  <UnstyledLink
+  <PageLink
     to="/auth"
   >
     Sign in
-  </UnstyledLink>
+  </PageLink>
 </span>
 `;
 

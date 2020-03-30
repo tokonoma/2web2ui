@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { snakeToFriendly } from 'src/helpers/string';
+import { PageLink } from 'src/components/links';
 import { Tag } from 'src/components/matchbox';
 
 const statusTagColors = {
@@ -13,7 +13,7 @@ const statusTagColors = {
  Subaccounts getRowData passed to TableCollection in ListPage.
 */
 const getRowData = ({ status, id, name }) => [
-  <Link to={`/account/subaccounts/${id}`}>{name}</Link>,
+  <PageLink to={`/account/subaccounts/${id}`}>{name}</PageLink>,
   <p>{id}</p>,
   <Tag color={statusTagColors[status]}>{snakeToFriendly(status)}</Tag>,
 ];

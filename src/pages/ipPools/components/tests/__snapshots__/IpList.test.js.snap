@@ -32,12 +32,11 @@ exports[`IP List tests renders with ips 1`] = `
 
 exports[`IP List tests should render row properly 1`] = `
 Array [
-  <Link
-    replace={false}
+  <PageLink
     to="/account/ip-pools/edit/foopool/1.1.1.1"
   >
     1.1.1.1
-  </Link>,
+  </PageLink>,
   "foo.com",
 ]
 `;

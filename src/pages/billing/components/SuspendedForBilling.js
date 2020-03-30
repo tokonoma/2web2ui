@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Banner } from 'src/components/matchbox';
 import UpdatePaymentForm from '../forms/UpdatePaymentForm';
-import SupportTicketLink from 'src/components/supportTicketLink/SupportTicketLink';
+import { SupportTicketLink } from 'src/components/links';
 
 export default function SuspendedForBilling({ account }) {
   const { billing = {} } = account;

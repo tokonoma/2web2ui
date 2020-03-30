@@ -4,15 +4,14 @@ exports[`ViewPublished renders ViewPublished action 1`] = `
 <div
   className="Foo"
 >
-  <UnstyledLink
+  <PageLink
     data-id="action-view-published"
-    onClick={[Function]}
-    to="javascript:void(0);"
+    to="/templates/edit/foo/published/content"
   >
     <RemoveRedEye />
     <span>
       View Published
     </span>
-  </UnstyledLink>
+  </PageLink>
 </div>
 `;

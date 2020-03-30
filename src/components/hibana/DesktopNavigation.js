@@ -1,9 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-import { Inline } from 'src/components/matchbox';
+import { Link } from 'react-router-dom';
 import { SparkPost } from 'src/components';
-import { ScreenReaderOnly } from 'src/components/matchbox';
+import { Inline, ScreenReaderOnly } from 'src/components/matchbox';
 import findRouteByPath from 'src/helpers/findRouteByPath';
 import AccountPopover from './AccountPopover';
 import styles from './DesktopNavigation.module.scss';

@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { Page, Panel } from 'src/components/matchbox';
 import _ from 'lodash';
 import { ApiErrorBanner, Loading } from 'src/components';
+import { PageLink } from 'src/components/links';
+import { Page, Panel } from 'src/components/matchbox';
 import PanelLoading from 'src/components/panelLoading';
 import IpForm from './components/IpForm';
 import DeliveryHistoryLineChart from './components/DeliveryHistoryLineChart';
@@ -83,7 +83,7 @@ export function EditIpPage(props) {
       title={`Sending IP: ${ip.external_ip}`}
       breadcrumbAction={{
         content: pool.name,
-        Component: Link,
+        Component: PageLink,
         to: `/account/ip-pools/edit/${pool.id}`,
       }}
     >

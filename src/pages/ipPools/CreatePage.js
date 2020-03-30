@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import Page from 'src/components/matchbox/Page';
 import { ApiErrorBanner, Loading } from 'src/components';
+import { PageLink } from 'src/components/links';
 import PoolForm from './components/PoolForm';
 
 import { showAlert } from 'src/actions/globalAlert';
@@ -11,7 +11,7 @@ import { createPool, listPools } from 'src/actions/ipPools';
 
 const breadcrumbAction = {
   content: 'IP Pools',
-  Component: Link,
+  Component: PageLink,
   to: '/account/ip-pools',
 };
 

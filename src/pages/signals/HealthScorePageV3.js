@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react';
-import { Link } from 'react-router-dom';
 import { selectHealthScoreDetailsV3 } from 'src/selectors/signals';
 import Page from './components/SignalsPage';
 import { Grid } from '@sparkpost/matchbox';
+import { PageLink } from 'src/components/links';
 import { Button, Panel } from 'src/components/matchbox';
 import withDetails from './containers/withDetails';
 import BarChart from './components/charts/barchart/BarChart';
@@ -101,16 +101,16 @@ export function HealthScorePageV3(props) {
       breadcrumbAction={{
         content: 'Back to Health Score Overview',
         to: '/signals/health-score',
-        component: Link,
+        component: PageLink,
       }}
       title="Health Score"
       facet={facet}
       facetId={facetId}
       subaccountId={subaccountId}
       primaryArea={
-        <Button primary component={Link} to="/alerts/create">
+        <PageLink as={Button} primary to="/alerts/create">
           Create Alert
-        </Button>
+        </PageLink>
       }
     >
       <Panel>

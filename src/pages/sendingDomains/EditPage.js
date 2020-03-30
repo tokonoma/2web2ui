@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import { hasAutoVerifyEnabledSelector } from 'src/selectors/account';
 import { selectDomain } from 'src/selectors/sendingDomains';
@@ -12,6 +12,7 @@ import {
 } from 'src/actions/sendingDomains';
 import { showAlert } from 'src/actions/globalAlert';
 import { Loading, DeleteModal } from 'src/components';
+import { PageLink } from 'src/components/links';
 import { Page } from 'src/components/matchbox';
 import AssignTrackingDomain from './components/AssignTrackingDomain';
 import EditBounce from './components/EditBounce';
@@ -22,7 +23,7 @@ import { DomainStatus } from './components/DomainStatus';
 
 const breadcrumbAction = {
   content: 'Sending Domains',
-  Component: Link,
+  Component: PageLink,
   to: '/account/sending-domains',
 };
 

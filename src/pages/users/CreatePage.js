@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
-import { Button, Page, Panel } from 'src/components/matchbox';
 import { TextFieldWrapper } from 'src/components';
+import { PageLink } from 'src/components/links';
+import { Button, Page, Panel } from 'src/components/matchbox';
 import { required, email } from 'src/helpers/validation';
 import { inviteUser } from 'src/actions/users';
 import { showAlert } from 'src/actions/globalAlert';
@@ -15,7 +16,7 @@ import RoleRadioGroup from './components/RoleRadioGroup';
 
 const breadcrumbAction = {
   content: 'Users',
-  Component: Link,
+  Component: PageLink,
   to: '/account/users',
 };
 
