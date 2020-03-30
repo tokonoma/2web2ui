@@ -1,7 +1,6 @@
 import React from 'react';
 import { Typeahead } from './Typeahead';
 import moment from 'moment-timezone';
-import { TIMEZONES, TIMEZONE_LABEL_MAP } from 'src/constants/timezones';
 import styles from './Typeahead.module.scss';
 
 const Item = ({ label }) => (
@@ -12,9 +11,6 @@ const Item = ({ label }) => (
 
 const options = moment.tz
   .names()
-  .filter(tz => {
-    return TIMEZONES.includes(tz);
-  })
   .reduce((memo, tz) => {
     memo.push({
       name: tz,
@@ -31,7 +27,7 @@ const options = moment.tz
 
     memo.push({
       value: tz.name,
-      label: `(GMT${timezone}) ${TIMEZONE_LABEL_MAP[tz.name] || tz.name}`,
+      label: `(UTC${timezone}) ${tz.name}`,
     });
     return memo;
   }, []);
@@ -42,6 +38,7 @@ export const TimezoneTypeahead = props => {
       renderItem={item => <Item label={item.label} />}
       itemToString={item => (item ? item.label : '')}
       placeholder="Select a Timezone"
+      label="Time Zone"
       errorInLabel={false}
       disabled={false}
       error={false}

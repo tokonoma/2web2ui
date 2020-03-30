@@ -16,6 +16,7 @@ import { Panel, Tag } from 'src/components/matchbox';
 import DatePicker from 'src/components/datePicker/DatePicker';
 import { selectFeatureFlaggedMetrics } from 'src/selectors/metrics';
 import typeaheadCacheSelector from 'src/selectors/reportFilterTypeaheadCache';
+import { TimezoneTypeahead } from 'src/components/typeahead/TimezoneTypeahead';
 import CustomReports from './CustomReports';
 import styles from './ReportOptions.module.scss';
 
@@ -87,7 +88,7 @@ export class ReportOptions extends Component {
         </Panel.Section>,
         <Panel.Section>
           <Grid>
-            <Grid.Column xs={12} md={7}>
+            <Grid.Column xs={12} md={6}>
               <div className={styles.FieldWrapper}>
                 <DatePicker
                   {...reportOptions}
@@ -98,10 +99,10 @@ export class ReportOptions extends Component {
                 />
               </div>
             </Grid.Column>
-            <Grid.Column xs={6} md={2} mdOffset={1}>
-              {/* { Time Zone Picker } */}
+            <Grid.Column xs={6} md={3}>
+              <TimezoneTypeahead timezone={reportOptions.timezone} />
             </Grid.Column>
-            <Grid.Column xs={6} md={2}>
+            <Grid.Column xs={6} md={3}>
               {/* { Precision Picker } */}
             </Grid.Column>
           </Grid>
