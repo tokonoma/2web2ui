@@ -58,6 +58,11 @@ export class ReportOptions extends Component {
     this.props.addFilters([item]);
   };
 
+  handleTimezoneSelect = timezone => {
+    const { refreshReportOptions } = this.props;
+    refreshReportOptions({ timezone: timezone.value });
+  };
+
   getPanelContent = () => {
     const {
       typeaheadCache,
@@ -70,7 +75,7 @@ export class ReportOptions extends Component {
 
     if (featureFlaggedMetrics.useMetricsRollup) {
       return [
-        <Panel.Section>
+        <Panel.Section key="filter-by-section">
           <Grid>
             <Grid.Column xs={9} md={7}>
               <Typeahead
@@ -86,7 +91,7 @@ export class ReportOptions extends Component {
             </Grid.Column>
           </Grid>
         </Panel.Section>,
-        <Panel.Section>
+        <Panel.Section key="date-section">
           <Grid>
             <Grid.Column xs={12} md={6}>
               <div className={styles.FieldWrapper}>
@@ -100,7 +105,10 @@ export class ReportOptions extends Component {
               </div>
             </Grid.Column>
             <Grid.Column xs={6} md={3}>
-              <TimezoneTypeahead timezone={reportOptions.timezone} />
+              <TimezoneTypeahead
+                initialValue={reportOptions.timezone}
+                onChange={this.handleTimezoneSelect}
+              />
             </Grid.Column>
             <Grid.Column xs={6} md={3}>
               {/* { Precision Picker } */}

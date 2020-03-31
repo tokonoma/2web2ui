@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Typeahead } from './Typeahead';
 import moment from 'moment-timezone';
 import styles from './Typeahead.module.scss';
@@ -33,6 +33,25 @@ const options = moment.tz
   }, []);
 
 export const TimezoneTypeahead = props => {
+  const { initialValue, onChange: parentOnChange, rest } = props;
+  const [selected, setSelected] = useState(options[0]);
+
+  const findOptionInList = useCallback(value => options.find(option => option.value === value), []);
+
+  // initialValue may change if it's coming from redux on parent
+  useEffect(() => {
+    if (initialValue) {
+      setSelected(findOptionInList(initialValue));
+    }
+  }, [initialValue, findOptionInList]);
+
+  const onChange = item => {
+    setSelected(item);
+    if (item) {
+      parentOnChange(item);
+    }
+  };
+
   return (
     <Typeahead
       renderItem={item => <Item label={item.label} />}
@@ -40,12 +59,13 @@ export const TimezoneTypeahead = props => {
       placeholder="Select a Timezone"
       label="Time Zone"
       errorInLabel={false}
-      disabled={false}
       error={false}
       name="timezone-typeahead"
       results={options}
-      selectedItem={options.find(option => option.value === props.timezone)}
-      {...props}
+      selectedItem={selected}
+      onChange={onChange}
+      maxNumberOfResults={options.length}
+      {...rest}
     />
   );
 };
