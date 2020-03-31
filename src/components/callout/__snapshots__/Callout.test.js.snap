@@ -1,44 +1,214 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Callout renders title 1`] = `
-<div
-  className="Callout"
-  style={
-    Object {
-      "height": "220px",
+<TestApp>
+  <Providers
+    store={
+      Object {
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+        Symbol(observable): [Function],
+      }
     }
-  }
->
-  <div>
-    <h3
-      className="Title"
+  >
+    <Provider
+      store={
+        Object {
+          "dispatch": [Function],
+          "getState": [Function],
+          "replaceReducer": [Function],
+          "subscribe": [Function],
+          Symbol(observable): [Function],
+        }
+      }
     >
-      Example
-    </h3>
-  </div>
-</div>
+      <ErrorBoundary
+        ctaLabel="Reload Page"
+        onCtaClick={[Function]}
+      >
+        <HibanaProvider>
+          <HibanaTheme>
+            <ThemeProvider>
+              <Connect(Poll)>
+                <Poll
+                  dispatch={[Function]}
+                  loggedIn={false}
+                >
+                  <MemoryRouter>
+                    <Router
+                      history={
+                        Object {
+                          "action": "POP",
+                          "block": [Function],
+                          "canGo": [Function],
+                          "createHref": [Function],
+                          "entries": Array [
+                            Object {
+                              "hash": "",
+                              "key": "zhqyvt",
+                              "pathname": "/",
+                              "search": "",
+                              "state": undefined,
+                            },
+                          ],
+                          "go": [Function],
+                          "goBack": [Function],
+                          "goForward": [Function],
+                          "index": 0,
+                          "length": 1,
+                          "listen": [Function],
+                          "location": Object {
+                            "hash": "",
+                            "key": "zhqyvt",
+                            "pathname": "/",
+                            "search": "",
+                            "state": undefined,
+                          },
+                          "push": [Function],
+                          "replace": [Function],
+                        }
+                      }
+                    >
+                      <Callout
+                        title="Example"
+                      >
+                        <div
+                          className="Callout"
+                          style={
+                            Object {
+                              "height": "220px",
+                            }
+                          }
+                        >
+                          <div>
+                            <h3
+                              className="Title"
+                            >
+                              Example
+                            </h3>
+                          </div>
+                        </div>
+                      </Callout>
+                    </Router>
+                  </MemoryRouter>
+                </Poll>
+              </Connect(Poll)>
+            </ThemeProvider>
+          </HibanaTheme>
+        </HibanaProvider>
+      </ErrorBoundary>
+    </Provider>
+  </Providers>
+</TestApp>
 `;
 
 exports[`Callout renders title and details 1`] = `
-<div
-  className="Callout"
-  style={
-    Object {
-      "height": "220px",
+<TestApp>
+  <Providers
+    store={
+      Object {
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+        Symbol(observable): [Function],
+      }
     }
-  }
->
-  <div>
-    <h3
-      className="Title"
+  >
+    <Provider
+      store={
+        Object {
+          "dispatch": [Function],
+          "getState": [Function],
+          "replaceReducer": [Function],
+          "subscribe": [Function],
+          Symbol(observable): [Function],
+        }
+      }
     >
-      Example
-    </h3>
-    <p
-      className="Content"
-    >
-      Here is the deal...
-    </p>
-  </div>
-</div>
+      <ErrorBoundary
+        ctaLabel="Reload Page"
+        onCtaClick={[Function]}
+      >
+        <HibanaProvider>
+          <HibanaTheme>
+            <ThemeProvider>
+              <Connect(Poll)>
+                <Poll
+                  dispatch={[Function]}
+                  loggedIn={false}
+                >
+                  <MemoryRouter>
+                    <Router
+                      history={
+                        Object {
+                          "action": "POP",
+                          "block": [Function],
+                          "canGo": [Function],
+                          "createHref": [Function],
+                          "entries": Array [
+                            Object {
+                              "hash": "",
+                              "key": "b8m9on",
+                              "pathname": "/",
+                              "search": "",
+                              "state": undefined,
+                            },
+                          ],
+                          "go": [Function],
+                          "goBack": [Function],
+                          "goForward": [Function],
+                          "index": 0,
+                          "length": 1,
+                          "listen": [Function],
+                          "location": Object {
+                            "hash": "",
+                            "key": "b8m9on",
+                            "pathname": "/",
+                            "search": "",
+                            "state": undefined,
+                          },
+                          "push": [Function],
+                          "replace": [Function],
+                        }
+                      }
+                    >
+                      <Callout
+                        title="Example"
+                      >
+                        <div
+                          className="Callout"
+                          style={
+                            Object {
+                              "height": "220px",
+                            }
+                          }
+                        >
+                          <div>
+                            <h3
+                              className="Title"
+                            >
+                              Example
+                            </h3>
+                            <p
+                              className="Content"
+                            >
+                              Here is the deal...
+                            </p>
+                          </div>
+                        </div>
+                      </Callout>
+                    </Router>
+                  </MemoryRouter>
+                </Poll>
+              </Connect(Poll)>
+            </ThemeProvider>
+          </HibanaTheme>
+        </HibanaProvider>
+      </ErrorBoundary>
+    </Provider>
+  </Providers>
+</TestApp>
 `;
