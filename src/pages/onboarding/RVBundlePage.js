@@ -1,7 +1,13 @@
 import React from 'react';
 import { Modal } from '@sparkpost/matchbox';
 import { CheckCircle, Send, Close } from '@sparkpost/matchbox-icons';
-import { Card, CenteredLogo, RecipientValidationPriceTable } from 'src/components';
+import {
+  Card,
+  CenteredLogo,
+  RecipientValidationPriceTable,
+  CardTitle,
+  CardContent,
+} from 'src/components';
 import { PageLink } from 'src/components/links';
 import { Button, Panel, UnstyledLink } from 'src/components/matchbox';
 import styles from './RVBundlePage.module.scss';
@@ -55,33 +61,35 @@ const RVBundlePage = () => {
         <Panel.Section>
           <div className={styles.grid}>
             <Card>
-              <h2>
+              <CardTitle>
                 <CheckCircle className={styles.icon} />
                 <span>Recipient Validation</span>
-              </h2>
-              <p>
-                With our monthly pay-as-you-go plan using tiered pricing, the more you validate, the
-                less you pay per message.
-              </p>
-              <p>
-                <UnstyledLink onClick={() => setModalOpen(true)} className={styles.link}>
-                  See Pricing
-                </UnstyledLink>
-              </p>
+              </CardTitle>
+              <CardContent>
+                <p>
+                  With our monthly pay-as-you-go plan using tiered pricing, the more you validate,
+                  the less you pay per message.
+                </p>
+                <p>
+                  <UnstyledLink onClick={() => setModalOpen(true)} className={styles.link}>
+                    See Pricing
+                  </UnstyledLink>
+                </p>
+              </CardContent>
             </Card>
             <Card>
-              <h2>
+              <CardTitle>
                 <Send className={`${styles.icon} ${styles.send}`} />
                 <span>Email Messaging</span>
-              </h2>
-              <div>
+              </CardTitle>
+              <CardContent>
                 <p>A full featured FREE test account is standard with all SparkPost accounts:</p>
                 <ul>
                   <li>500 emails/month included for testing.</li>
                   <li>Access to all our powerful API features.</li>
                   <li>Free technical support to get you up and running.</li>
                 </ul>
-              </div>
+              </CardContent>
             </Card>
           </div>
           <div className={styles.buttonRow}>
