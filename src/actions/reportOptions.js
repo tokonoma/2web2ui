@@ -11,9 +11,15 @@ import {
 import { list as listSubaccounts } from './subaccounts';
 import { list as listSendingDomains } from './sendingDomains';
 import { getRelativeDates } from 'src/helpers/date';
-import { getQueryFromOptions, getPrecision } from 'src/helpers/metrics';
+import {
+  getQueryFromOptions,
+  getPrecision,
+  getRollupPrecision,
+  getRecommendedRollupPrecision,
+} from 'src/helpers/metrics';
 import { isSameDate, getLocalTimezone } from 'src/helpers/date';
 import _ from 'lodash';
+import { isUserUiOptionSet } from '../helpers/conditions/user';
 
 // array of all lists that need to be re-filtered when time changes
 const metricLists = [
@@ -124,16 +130,22 @@ export function refreshReportOptions(update) {
   return (dispatch, getState) => {
     const { reportOptions } = getState();
     update = { ...reportOptions, ...update };
+    const shouldUseMetricsRollup = Boolean(isUserUiOptionSet('use-metrics-rollup')(getState()));
+    const updatedPrecision = shouldUseMetricsRollup && update.precision;
 
     if (update.relativeRange) {
       if (update.relativeRange !== 'custom') {
         const { from, to } = getRelativeDates(update.relativeRange, {
-          precision: update.precision,
+          precision: updatedPrecision,
         });
-        const precision = update.precision || getPrecision(from, moment(to));
+        const precision = shouldUseMetricsRollup
+          ? getRecommendedRollupPrecision(from, to)
+          : getPrecision(from, moment(to));
         update = { ...update, from, to, precision };
       } else {
-        const precision = update.precision || getPrecision(update.from, moment(update.to));
+        const precision = shouldUseMetricsRollup
+          ? getRollupPrecision({ from: update.from, to: update.to, precision: updatedPrecision })
+          : getPrecision(update.from, moment(update.to));
         update = { ...update, precision };
       }
     }

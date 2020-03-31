@@ -108,6 +108,9 @@ export function getRollupPrecision({ from, to = moment(), precision }) {
   if (precisionOptionsValues.includes(precision)) {
     return precision;
   }
+  return getRecommendedRollupPrecision(from, to);
+}
+export function getRecommendedRollupPrecision(from, to = moment()) {
   const diff = moment(to).diff(moment(from), 'minutes');
   return rollupPrecisionMap.find(({ recommended }) => diff <= recommended).value;
 }

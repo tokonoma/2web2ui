@@ -100,6 +100,7 @@ export class ReportOptions extends Component {
                     disabled={reportLoading}
                     onChange={refreshReportOptions}
                     roundToPrecision={true}
+                    selectPrecision={true}
                   />
                 </div>
               </Grid.Column>
