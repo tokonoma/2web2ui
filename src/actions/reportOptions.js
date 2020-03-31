@@ -19,7 +19,7 @@ import {
 } from 'src/helpers/metrics';
 import { isSameDate, getLocalTimezone } from 'src/helpers/date';
 import _ from 'lodash';
-import { isUserUiOptionSet } from '../helpers/conditions/user';
+import { selectFeatureFlaggedMetrics } from 'src/selectors/metrics';
 
 // array of all lists that need to be re-filtered when time changes
 const metricLists = [
@@ -130,20 +130,21 @@ export function refreshReportOptions(update) {
   return (dispatch, getState) => {
     const { reportOptions } = getState();
     update = { ...reportOptions, ...update };
-    const shouldUseMetricsRollup = Boolean(isUserUiOptionSet('use-metrics-rollup')(getState()));
-    const updatedPrecision = shouldUseMetricsRollup && update.precision;
+    const { useMetricsRollup } = selectFeatureFlaggedMetrics(getState());
+    const updatedPrecision = useMetricsRollup && update.precision;
 
     if (update.relativeRange) {
       if (update.relativeRange !== 'custom') {
         const { from, to } = getRelativeDates(update.relativeRange, {
           precision: updatedPrecision,
         });
-        const precision = shouldUseMetricsRollup
+        //for metrics rollup, when using the relative dates, get hte recommended precision, else get the set precision
+        const precision = useMetricsRollup
           ? getRecommendedRollupPrecision(from, to)
           : getPrecision(from, moment(to));
         update = { ...update, from, to, precision };
       } else {
-        const precision = shouldUseMetricsRollup
+        const precision = useMetricsRollup
           ? getRollupPrecision({ from: update.from, to: update.to, precision: updatedPrecision })
           : getPrecision(update.from, moment(update.to));
         update = { ...update, precision };

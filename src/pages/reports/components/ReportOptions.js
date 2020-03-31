@@ -15,11 +15,10 @@ import { Grid } from '@sparkpost/matchbox';
 import Typeahead from './Typeahead';
 import { Panel, Tag } from 'src/components/matchbox';
 import DatePicker from 'src/components/datePicker/DatePicker';
-import { selectFeatureFlaggedMetrics } from 'src/selectors/metrics';
 import typeaheadCacheSelector from 'src/selectors/reportFilterTypeaheadCache';
 import CustomReports from './CustomReports';
 import styles from './ReportOptions.module.scss';
-import { isUserUiOptionSet } from 'src/helpers/conditions/user';
+import { selectFeatureFlaggedMetrics } from 'src/selectors/metrics';
 
 const RELATIVE_DATE_OPTIONS = ['hour', 'day', '7days', '30days', '90days', 'custom'];
 
@@ -66,7 +65,6 @@ export class ReportOptions extends Component {
       reportLoading,
       refreshReportOptions,
       searchOptions,
-      shouldUseMetricsRollup,
       featureFlaggedMetrics,
     } = this.props;
 
@@ -91,7 +89,7 @@ export class ReportOptions extends Component {
           </Panel.Section>
           <Panel.Section>
             <Grid>
-              <Grid.Column xs={12} md={6}>
+              <Grid.Column xs={12} md={7}>
                 <div className={styles.FieldWrapper}>
                   <DatePicker
                     {...reportOptions}
@@ -103,10 +101,10 @@ export class ReportOptions extends Component {
                   />
                 </div>
               </Grid.Column>
-              <Grid.Column xs={6} md={3}>
+              <Grid.Column xs={6} md={2} mdOffset={1}>
                 {/* { Time Zone Picker } */}
               </Grid.Column>
-              <Grid.Column xs={6} md={3}>
+              <Grid.Column xs={6} md={2}>
                 <PrecisionSelector
                   from={reportOptions.from}
                   to={reportOptions.to}
@@ -167,7 +165,6 @@ export class ReportOptions extends Component {
 }
 
 const mapStateToProps = state => ({
-  shouldUseMetricsRollup: Boolean(isUserUiOptionSet('use-metrics-rollup')(state)),
   reportOptions: state.reportOptions,
   typeaheadCache: typeaheadCacheSelector(state),
   featureFlaggedMetrics: selectFeatureFlaggedMetrics(state),

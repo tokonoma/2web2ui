@@ -42,6 +42,9 @@ describe('Component: Report Options', () => {
       initTypeaheadCache: jest.fn(),
       refreshReportOptions: jest.fn(),
       refreshTypeaheadCache: jest.fn(),
+      featureFlaggedMetrics: {
+        useMetricsRollup: false,
+      },
     };
     wrapper = shallow(<ReportOptions {...testProps} />);
   });
@@ -94,7 +97,7 @@ describe('Component: Report Options', () => {
   });
 
   it('should mount and render metrics rollup option correctly', () => {
-    wrapper.setProps({ shouldUseMetricsRollup: true });
+    wrapper.setProps({ featureFlaggedMetrics: { useMetricsRollup: true } });
     expect(wrapper.find('PrecisionSelector')).toExist();
   });
 });
