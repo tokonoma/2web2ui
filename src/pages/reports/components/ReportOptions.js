@@ -74,48 +74,50 @@ export class ReportOptions extends Component {
     } = this.props;
 
     if (featureFlaggedMetrics.useMetricsRollup) {
-      return [
-        <Panel.Section key="filter-by-section">
-          <Grid>
-            <Grid.Column xs={9} md={7}>
-              <Typeahead
-                reportOptions={reportOptions}
-                placeholder="Filter by domain, campaign, etc"
-                onSelect={this.handleTypeaheadSelect}
-                items={typeaheadCache}
-                selected={reportOptions.filters}
-              />
-            </Grid.Column>
-            <Grid.Column xs={3} md={2} mdOffset={3}>
-              <ShareModal disabled={reportLoading} searchOptions={searchOptions} />
-            </Grid.Column>
-          </Grid>
-        </Panel.Section>,
-        <Panel.Section key="date-section">
-          <Grid>
-            <Grid.Column xs={12} md={6}>
-              <div className={styles.FieldWrapper}>
-                <DatePicker
-                  {...reportOptions}
-                  relativeDateOptions={RELATIVE_DATE_OPTIONS}
-                  disabled={reportLoading}
-                  onChange={refreshReportOptions}
-                  roundToPrecision={true}
+      return (
+        <>
+          <Panel.Section>
+            <Grid>
+              <Grid.Column xs={9} md={7}>
+                <Typeahead
+                  reportOptions={reportOptions}
+                  placeholder="Filter by domain, campaign, etc"
+                  onSelect={this.handleTypeaheadSelect}
+                  items={typeaheadCache}
+                  selected={reportOptions.filters}
                 />
-              </div>
-            </Grid.Column>
-            <Grid.Column xs={6} md={3}>
-              <TimezoneTypeahead
-                initialValue={reportOptions.timezone}
-                onChange={this.handleTimezoneSelect}
-              />
-            </Grid.Column>
-            <Grid.Column xs={6} md={3}>
-              {/* { Precision Picker } */}
-            </Grid.Column>
-          </Grid>
-        </Panel.Section>,
-      ];
+              </Grid.Column>
+              <Grid.Column xs={3} md={2} mdOffset={3}>
+                <ShareModal disabled={reportLoading} searchOptions={searchOptions} />
+              </Grid.Column>
+            </Grid>
+          </Panel.Section>
+          <Panel.Section>
+            <Grid>
+              <Grid.Column xs={12} md={6}>
+                <div className={styles.FieldWrapper}>
+                  <DatePicker
+                    {...reportOptions}
+                    relativeDateOptions={RELATIVE_DATE_OPTIONS}
+                    disabled={reportLoading}
+                    onChange={refreshReportOptions}
+                    roundToPrecision={true}
+                  />
+                </div>
+              </Grid.Column>
+              <Grid.Column xs={6} md={3}>
+                <TimezoneTypeahead
+                  initialValue={reportOptions.timezone}
+                  onChange={this.handleTimezoneSelect}
+                />
+              </Grid.Column>
+              <Grid.Column xs={6} md={2}>
+                {/* { Precision Picker } */}
+              </Grid.Column>
+            </Grid>
+          </Panel.Section>
+        </>
+      );
     }
 
     return (
