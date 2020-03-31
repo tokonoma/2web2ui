@@ -4,6 +4,7 @@ import { list as listSubaccounts } from 'src/actions/subaccounts';
 import { list as listSendingDomains } from 'src/actions/sendingDomains';
 import { getRelativeDates, isSameDate } from 'src/helpers/date';
 
+jest.mock('src/helpers/conditions/user', () => ({ isUserUiOptionSet: jest.fn(() => () => false) }));
 jest.mock('src/helpers/date');
 jest.mock('src/helpers/metrics');
 jest.mock('src/actions/metrics');
@@ -23,27 +24,26 @@ describe('Action Creator: Report Options', () => {
         domains: [],
         sendingIps: [],
         ipPools: [],
-        templates: []
+        templates: [],
       },
       subaccounts: {
-        list: []
+        list: [],
       },
       sendingDomains: {
-        list: []
+        list: [],
       },
       typeahead: {
         from: null,
         to: null,
-        cache: {}
-      }
+        cache: {},
+      },
     };
-    dispatchMock = jest.fn((a) => a);
+    dispatchMock = jest.fn(a => a);
     getStateMock = jest.fn(() => testState);
     isSameDate.mockImplementation(() => false);
   });
 
   describe('initTypeaheadCache', () => {
-
     it('should dispatch 2 actions', () => {
       reportOptions.initTypeaheadCache()(dispatchMock, getStateMock);
       expect(dispatchMock).toHaveBeenCalledTimes(2);
@@ -61,7 +61,6 @@ describe('Action Creator: Report Options', () => {
       expect(listSubaccounts).not.toHaveBeenCalled();
       expect(listSendingDomains).not.toHaveBeenCalled();
     });
-
   });
 
   it('should refresh the metrics lists for the typeahead cache if the results are not cached', async () => {
@@ -76,8 +75,8 @@ describe('Action Creator: Report Options', () => {
   it('should load metrics lists for the typeahead from cache if exists', async () => {
     testState.typeahead = {
       cache: {
-        foo: ['foobar']
-      }
+        foo: ['foobar'],
+      },
     };
     isSameDate.mockImplementation(() => true);
     await reportOptions.refreshTypeaheadCache({ match: 'foo' })(dispatchMock, getStateMock);
@@ -86,14 +85,13 @@ describe('Action Creator: Report Options', () => {
     expect(metrics.fetchMetricsSendingIps).not.toHaveBeenCalled();
     expect(metrics.fetchMetricsIpPools).not.toHaveBeenCalled();
     expect(metrics.fetchMetricsTemplates).not.toHaveBeenCalled();
-
   });
 
   it('should add multiple filters', () => {
     const filters = [];
     expect(reportOptions.addFilters(filters)).toEqual({
       payload: filters,
-      type: 'ADD_FILTERS'
+      type: 'ADD_FILTERS',
     });
   });
 
@@ -101,12 +99,11 @@ describe('Action Creator: Report Options', () => {
     const filterToRemove = {};
     expect(reportOptions.removeFilter(filterToRemove)).toEqual({
       type: 'REMOVE_FILTER',
-      payload: filterToRemove
+      payload: filterToRemove,
     });
   });
 
   describe('refreshReportOptions', () => {
-
     let currentFrom;
     let currentTo;
     let updatedFrom;
@@ -120,45 +117,56 @@ describe('Action Creator: Report Options', () => {
       testState.reportOptions = {
         from: currentFrom,
         to: currentTo,
-        relativeRange: 'custom'
+        relativeRange: 'custom',
       };
       getRelativeDates.mockImplementation(() => ({ from: 'relative', to: 'relative' }));
     });
 
     it('should calculate a non-custom relative range', () => {
-      const action = reportOptions.refreshReportOptions({ relativeRange: 'day' })(dispatchMock, getStateMock);
+      const action = reportOptions.refreshReportOptions({ relativeRange: 'day' })(
+        dispatchMock,
+        getStateMock,
+      );
       expect(getRelativeDates).toHaveBeenCalledTimes(1);
       expect(action).toEqual({
         type: 'REFRESH_REPORT_OPTIONS',
         payload: expect.objectContaining({
           from: 'relative',
-          to: 'relative'
-        })
+          to: 'relative',
+        }),
       });
       expect(dispatchMock).toHaveBeenCalledTimes(1);
     });
 
     it('should calculate a non-custom relative range merged from the redux store', () => {
       testState.reportOptions.relativeRange = 'day';
-      const action = reportOptions.refreshReportOptions({ from: currentFrom, to: currentTo })(dispatchMock, getStateMock);
+      const action = reportOptions.refreshReportOptions({ from: currentFrom, to: currentTo })(
+        dispatchMock,
+        getStateMock,
+      );
       expect(getRelativeDates).toHaveBeenCalledTimes(1);
-      expect(action.payload).toEqual(expect.objectContaining({
-        from: 'relative',
-        to: 'relative'
-      }));
+      expect(action.payload).toEqual(
+        expect.objectContaining({
+          from: 'relative',
+          to: 'relative',
+        }),
+      );
       expect(dispatchMock).toHaveBeenCalledTimes(1);
     });
 
     it('should NOT calculate a "custom" relative range', () => {
-      const action = reportOptions.refreshReportOptions({ from: updatedFrom, relativeRange: 'custom' })(dispatchMock, getStateMock);
-      expect(getRelativeDates).not.toHaveBeenCalled();
-      expect(action.payload).toEqual(expect.objectContaining({
+      const action = reportOptions.refreshReportOptions({
         from: updatedFrom,
-        to: currentTo
-      }));
+        relativeRange: 'custom',
+      })(dispatchMock, getStateMock);
+      expect(getRelativeDates).not.toHaveBeenCalled();
+      expect(action.payload).toEqual(
+        expect.objectContaining({
+          from: updatedFrom,
+          to: currentTo,
+        }),
+      );
       expect(dispatchMock).toHaveBeenCalledTimes(1);
     });
-
   });
-
 });
