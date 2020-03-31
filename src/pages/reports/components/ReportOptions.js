@@ -61,7 +61,6 @@ export class ReportOptions extends Component {
 
   getPanelContent = () => {
     const {
-      customReportsEnabled,
       typeaheadCache,
       reportOptions,
       reportLoading,
