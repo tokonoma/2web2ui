@@ -10,7 +10,7 @@ import { inviteUser } from 'src/actions/users';
 import { showAlert } from 'src/actions/globalAlert';
 import { trimWhitespaces } from 'src/helpers/string';
 import { FORMS, ROLES } from 'src/constants';
-import { hasUiOption } from 'src/helpers/conditions/account';
+import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 
 import RoleRadioGroup from './components/RoleRadioGroup';
 
@@ -72,7 +72,7 @@ const mapStateToProps = state => ({
   initialValues: {
     access: ROLES.ADMIN, // Sadly redux-form does not reflect a select's initial value
   },
-  isSubaccountReportingLive: hasUiOption('subaccount_reporting')(state),
+  isSubaccountReportingLive: isAccountUiOptionSet('subaccount_reporting')(state),
 });
 
 const mapDispatchToProps = { inviteUser, showAlert };

@@ -6,7 +6,7 @@ import TimeAgo from 'react-timeago';
 import { Users } from 'src/components/images';
 import { PageLink } from 'src/components/links';
 import { Page, Tag } from 'src/components/matchbox';
-import { hasUiOption } from 'src/helpers/conditions/account';
+import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
 import * as usersActions from 'src/actions/users';
 import { selectUsers } from 'src/selectors/users';
@@ -211,7 +211,7 @@ const mapStateToProps = state => ({
   users: selectUsers(state),
   hasSubaccounts: hasSubaccounts(state),
   subaccounts: state.subaccounts.list,
-  isSubAccountReportingLive: hasUiOption('subaccount_reporting')(state),
+  isSubAccountReportingLive: isAccountUiOptionSet('subaccount_reporting')(state),
 });
 
 export default connect(mapStateToProps, { ...usersActions, listSubaccounts })(ListPage);
