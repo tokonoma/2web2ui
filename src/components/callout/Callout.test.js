@@ -10,7 +10,8 @@ describe('Callout', () => {
         <Callout title="Example" />
       </TestApp>,
     );
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find('div')).toExist();
+    expect(wrapper.find('h3')).toExist();
   });
 
   it('renders title and details', () => {
@@ -20,6 +21,7 @@ describe('Callout', () => {
       </TestApp>,
     );
 
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find('h3').text()).toEqual('Example');
+    expect(wrapper.find('p').text()).toEqual('Here is the deal...');
   });
 });
