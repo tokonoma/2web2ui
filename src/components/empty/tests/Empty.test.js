@@ -1,10 +1,15 @@
 import React from 'react';
 import { Empty } from 'src/components';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
+import TestApp from 'src/__testHelpers__/TestApp';
 
 describe('Empty: ', () => {
   it('should render', () => {
-    const wrapper = shallow(<Empty title={'Empty Title'} message={'nothing here to see'} />);
+    const wrapper = mount(
+      <TestApp>
+        <Empty title={'Empty Title'} message={'nothing here to see'} />
+      </TestApp>,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });
