@@ -65,7 +65,6 @@ exports[`SummaryTable renders a table 1`] = `
         onChange={[Function]}
         pageRange={5}
         pages={0}
-        selectedColor="orange"
       />
     </div>
     <div>
