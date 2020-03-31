@@ -9,6 +9,7 @@ export { default as Inline } from './Inline';
 export { default as Label } from './Label';
 export { default as Page } from './Page';
 export { default as Pager } from './Pager';
+export { default as Pagination } from './Pagination';
 export { default as Panel } from './Panel';
 export { default as Portal } from './Portal';
 export { default as ProgressBar } from './ProgressBar';
