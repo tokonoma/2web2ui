@@ -108,7 +108,6 @@ export class ReportOptions extends Component {
               </Grid.Column>
             </Grid>
           </Panel.Section>
-          ,
         </>
       );
     }
