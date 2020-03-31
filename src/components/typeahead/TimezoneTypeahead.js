@@ -11,26 +11,34 @@ const Item = ({ label }) => (
 
 const options = moment.tz
   .names()
+  // Filter out non-standard timezones
+  .filter(tz => tz.indexOf('/') >= 0)
+  // Filter out inverse timezones (ETC/UTC-7 is equivalent to UTC+7)
+  .filter(tz => tz.indexOf('Etc/') === -1)
   .reduce((memo, tz) => {
-    memo.push({
-      name: tz,
-      offset: moment.tz(tz).utcOffset(),
-    });
-
+    const offset = moment.tz(tz).utcOffset();
+    if (offset !== 0) {
+      memo.push({
+        name: tz,
+        offset: offset,
+      });
+    }
     return memo;
   }, [])
-  .sort((a, b) => {
-    return a.offset - b.offset;
-  })
+  .sort((a, b) => a.offset - b.offset)
   .reduce((memo, tz) => {
     const timezone = tz.offset ? moment.tz(tz.name).format('Z') : '';
-
     memo.push({
       value: tz.name,
-      label: `(UTC${timezone}) ${tz.name}`,
+      label: `(UTC${timezone}) ${tz.name.replace(/_/g, ' ')}`,
     });
     return memo;
   }, []);
+
+options.unshift({
+  value: 'UTC',
+  label: 'UTC',
+});
 
 export const TimezoneTypeahead = props => {
   const { initialValue, onChange: parentOnChange, rest } = props;
