@@ -18,7 +18,17 @@ export const Card = ({ children, textAlign }) => {
 
 export const CardActions = ({ children }) => <>{children}</>;
 
-export const CardContent = ({ children }) => <div className={styles.CardContent}>{children}</div>;
+export const CardContent = ({ children }) => {
+  const [state] = useHibana();
+  const { isHibanaEnabled } = state;
+  if (!isHibanaEnabled) return <div className={styles.CardContent}>{children}</div>;
+
+  return (
+    <Box display="inline-block" fontSize="500">
+      {children}
+    </Box>
+  );
+};
 
 export const CardTitle = ({ children }) => {
   const [state] = useHibana();
