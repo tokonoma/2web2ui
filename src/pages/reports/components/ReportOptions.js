@@ -111,7 +111,7 @@ export class ReportOptions extends Component {
                   onChange={this.handleTimezoneSelect}
                 />
               </Grid.Column>
-              <Grid.Column xs={6} md={2}>
+              <Grid.Column xs={6} md={3}>
                 {/* { Precision Picker } */}
               </Grid.Column>
             </Grid>
