@@ -23,7 +23,6 @@ export const isManuallyBilled = ({ account }) => _.get(account, 'subscription.ty
 export const isCustomBilling = ({ account }) => _.get(account, 'subscription.custom', false);
 export const isSelfServeBilling = any(subscriptionSelfServeIsTrue, isAws);
 export const hasOnlineSupport = ({ account }) => _.get(account, 'support.online', false);
-export const hasUiOption = option => ({ account }) => _.has(account.options, `ui.${option}`);
 export const isAccountUiOptionSet = (option, defaultValue) => ({ account }) => {
   return Boolean(_.get(account.options, `ui.${option}`, defaultValue));
 };
