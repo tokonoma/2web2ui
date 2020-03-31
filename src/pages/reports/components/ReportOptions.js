@@ -86,10 +86,9 @@ export class ReportOptions extends Component {
               </Grid.Column>
             </Grid>
           </Panel.Section>
-          ,
           <Panel.Section>
             <Grid>
-              <Grid.Column xs={12} md={7}>
+              <Grid.Column xs={12} md={6}>
                 <div className={styles.FieldWrapper}>
                   <DatePicker
                     {...reportOptions}
@@ -100,10 +99,10 @@ export class ReportOptions extends Component {
                   />
                 </div>
               </Grid.Column>
-              <Grid.Column xs={6} md={2} mdOffset={1}>
+              <Grid.Column xs={6} md={3}>
                 {/* { Time Zone Picker } */}
               </Grid.Column>
-              <Grid.Column xs={6} md={2}>
+              <Grid.Column xs={6} md={3}>
                 {/* { Precision Picker } */}
               </Grid.Column>
             </Grid>
