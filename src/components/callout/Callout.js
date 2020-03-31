@@ -4,7 +4,7 @@ import styles from './Callout.module.scss';
 import { useHibana } from 'src/context/HibanaContext';
 import { Box, Text } from 'src/components/matchbox';
 
-export const Callout = ({ children, height = '220px', title }) => {
+const Callout = ({ children, height = '220px', title }) => {
   const [state] = useHibana();
   const { isHibanaEnabled } = state;
   if (!isHibanaEnabled)
