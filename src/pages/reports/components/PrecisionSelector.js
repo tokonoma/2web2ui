@@ -20,7 +20,14 @@ const PrecisionSelector = ({ from, to, changeTime, selectedPrecision }) => {
     changeTime({ from: roundedFrom.toDate(), to: roundedTo.toDate(), precision });
   };
 
-  return <Select options={precisionOptions} onChange={updatePrecision} value={selectedPrecision} />;
+  return (
+    <Select
+      data-id="precision-selector"
+      options={precisionOptions}
+      onChange={updatePrecision}
+      value={selectedPrecision}
+    />
+  );
 };
 
 export default PrecisionSelector;
