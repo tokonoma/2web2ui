@@ -3,8 +3,12 @@ import * as metrics from 'src/actions/metrics';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
 import { list as listSendingDomains } from 'src/actions/sendingDomains';
 import { getRelativeDates, isSameDate } from 'src/helpers/date';
+import { getPrecision, getRecommendedRollupPrecision } from 'src/helpers/metrics';
+import { selectFeatureFlaggedMetrics } from 'src/selectors/metrics';
 
-jest.mock('src/helpers/conditions/user', () => ({ isUserUiOptionSet: jest.fn(() => () => false) }));
+jest.mock('src/selectors/metrics', () => ({
+  selectFeatureFlaggedMetrics: jest.fn(() => () => ({ useMetricsRollup: false })),
+}));
 jest.mock('src/helpers/date');
 jest.mock('src/helpers/metrics');
 jest.mock('src/actions/metrics');
@@ -120,6 +124,8 @@ describe('Action Creator: Report Options', () => {
         relativeRange: 'custom',
       };
       getRelativeDates.mockImplementation(() => ({ from: 'relative', to: 'relative' }));
+      getPrecision.mockImplementation(() => 'hour');
+      getRecommendedRollupPrecision.mockImplementation(() => '15min');
     });
 
     it('should calculate a non-custom relative range', () => {
@@ -133,6 +139,7 @@ describe('Action Creator: Report Options', () => {
         payload: expect.objectContaining({
           from: 'relative',
           to: 'relative',
+          precision: 'hour',
         }),
       });
       expect(dispatchMock).toHaveBeenCalledTimes(1);
@@ -149,6 +156,7 @@ describe('Action Creator: Report Options', () => {
         expect.objectContaining({
           from: 'relative',
           to: 'relative',
+          precision: 'hour',
         }),
       );
       expect(dispatchMock).toHaveBeenCalledTimes(1);
@@ -164,6 +172,42 @@ describe('Action Creator: Report Options', () => {
         expect.objectContaining({
           from: updatedFrom,
           to: currentTo,
+          precision: 'hour',
+        }),
+      );
+      expect(dispatchMock).toHaveBeenCalledTimes(1);
+    });
+
+    it('should update redux for a custom time span (for metrics rollup) with the precision given', () => {
+      selectFeatureFlaggedMetrics.mockImplementationOnce(() => ({ useMetricsRollup: true }));
+      const action = reportOptions.refreshReportOptions({
+        from: updatedFrom,
+        relativeRange: 'custom',
+        precision: '5min',
+      })(dispatchMock, getStateMock);
+      expect(getRelativeDates).not.toHaveBeenCalled();
+      expect(action.payload).toEqual(
+        expect.objectContaining({
+          from: updatedFrom,
+          to: currentTo,
+          precision: '5min',
+        }),
+      );
+      expect(dispatchMock).toHaveBeenCalledTimes(1);
+    });
+
+    it('should update redux for a relative range (for metrics rollup) with recommended precision', () => {
+      selectFeatureFlaggedMetrics.mockImplementationOnce(() => ({ useMetricsRollup: true }));
+      const action = reportOptions.refreshReportOptions({
+        relativeRange: 'day',
+        precision: '5min',
+      })(dispatchMock, getStateMock);
+      expect(getRelativeDates).toHaveBeenCalledTimes(1);
+      expect(action.payload).toEqual(
+        expect.objectContaining({
+          from: 'relative',
+          to: 'relative',
+          precision: '15min',
         }),
       );
       expect(dispatchMock).toHaveBeenCalledTimes(1);
