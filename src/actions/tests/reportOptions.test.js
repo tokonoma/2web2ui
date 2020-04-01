@@ -196,13 +196,28 @@ describe('Action Creator: Report Options', () => {
       expect(dispatchMock).toHaveBeenCalledTimes(1);
     });
 
-    it('should update redux for a relative range (for metrics rollup) with recommended precision', () => {
+    it('should update redux for a relative range (for metrics rollup) with recommended precision if current precision is not selectable', () => {
       selectFeatureFlaggedMetrics.mockImplementationOnce(() => ({ useMetricsRollup: true }));
       const action = reportOptions.refreshReportOptions({
         relativeRange: 'day',
-        precision: '5min',
+        precision: 'week',
       })(dispatchMock, getStateMock);
       expect(getRelativeDates).toHaveBeenCalledTimes(1);
+      expect(action.payload).toEqual(
+        expect.objectContaining({
+          from: 'relative',
+          to: 'relative',
+          precision: '15min',
+        }),
+      );
+      expect(dispatchMock).toHaveBeenCalledTimes(1);
+    });
+
+    it('should update redux (for metrics rollup) with recommended precision if precision is not given', () => {
+      selectFeatureFlaggedMetrics.mockImplementationOnce(() => ({ useMetricsRollup: true }));
+      const action = reportOptions.refreshReportOptions({
+        relativeRange: 'day',
+      })(dispatchMock, getStateMock);
       expect(action.payload).toEqual(
         expect.objectContaining({
           from: 'relative',

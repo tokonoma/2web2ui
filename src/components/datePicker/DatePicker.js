@@ -42,13 +42,24 @@ export default class DatePicker extends Component {
     }
   }
 
+  //For metrics rollup, update the precision display when precision changes
+  componentDidUpdate(prevProps, prevState) {
+    const { selectedPrecision, showDatePicker } = this.state;
+    const { updateShownPrecision } = this.props;
+    if (
+      updateShownPrecision &&
+      prevState.selectedPrecision !== selectedPrecision &&
+      showDatePicker
+    ) {
+      updateShownPrecision(selectedPrecision);
+    }
+  }
+
   // Sets local state from reportOptions redux state - need to separate to handle pre-apply state
   syncTimeToState = ({ from, to, precision }) => {
     if (from && to) {
-      this.setState({ selected: { from, to } });
-    }
-    if (this.props.selectPrecision && precision) {
-      this.setState({ selectedPrecision: precision });
+      const selectedPrecision = this.props.selectPrecision && precision;
+      this.setState({ selected: { from, to }, selectedPrecision });
     }
   };
 
@@ -74,6 +85,7 @@ export default class DatePicker extends Component {
 
   cancelDatePicker = () => {
     this.syncTimeToState(this.props);
+    this.props.updateShownPrecision && this.props.updateShownPrecision('');
     this.setState({ showDatePicker: false });
   };
 
@@ -118,16 +130,17 @@ export default class DatePicker extends Component {
 
   getOrderedRange(newDate) {
     let { from, to } = this.state.beforeSelected;
-    const { preventFuture, selectPrecision } = this.props;
+    const { preventFuture, selectPrecision, precision: oldPrecision } = this.props;
     if (from.getTime() <= newDate.getTime()) {
       to = getEndOfDay(newDate, { preventFuture });
     } else {
       from = this.fromFormatter(newDate);
     }
+    //Changes datepicker precision if the current set precision is not available
     const precision = getRollupPrecision({
       from,
       to,
-      precision: selectPrecision && this.state.selectedPrecision,
+      precision: selectPrecision && oldPrecision,
     });
     if (this.props.roundToPrecision) {
       const rounded = roundBoundaries({ from, to, precision });

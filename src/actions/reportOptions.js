@@ -14,6 +14,7 @@ import { getRelativeDates } from 'src/helpers/date';
 import {
   getQueryFromOptions,
   getPrecision,
+  getRollupPrecision,
   getRecommendedRollupPrecision,
 } from 'src/helpers/metrics';
 import { isSameDate, getLocalTimezone } from 'src/helpers/date';
@@ -137,14 +138,16 @@ export function refreshReportOptions(update) {
         const { from, to } = getRelativeDates(update.relativeRange, {
           precision: updatedPrecision,
         });
-        //for metrics rollup, when using the relative dates, get the recommended precision, else get the set precision
+        //for metrics rollup, when using the relative dates, get the precision, else use the given precision
+        //If precision is not in the URL, get the recommended precision.
         const precision = useMetricsRollup
-          ? getRecommendedRollupPrecision(from, to)
+          ? getRollupPrecision({ from, to, precision: updatedPrecision }) ||
+            getRecommendedRollupPrecision(from, moment(to))
           : getPrecision(from, moment(to));
         update = { ...update, from, to, precision };
       } else {
         const precision = useMetricsRollup
-          ? updatedPrecision
+          ? updatedPrecision || getRecommendedRollupPrecision(update.from, moment(update.to))
           : getPrecision(update.from, moment(update.to));
         update = { ...update, precision };
       }
