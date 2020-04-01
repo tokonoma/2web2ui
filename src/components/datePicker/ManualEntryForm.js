@@ -114,15 +114,16 @@ export default class ManualEntryForm extends Component {
           roundToPrecision,
           selectedPrecision,
         });
-        precisionLabelValue = selectedPrecision || getPrecision(validatedFrom, validatedTo);
+
+        precisionLabelValue = getPrecision(validatedFrom, validatedTo);
         shouldDisableTime = selectedPrecision
-          ? ['day', 'week', 'month'].includes(precisionLabelValue)
+          ? ['day', 'week', 'month'].includes(selectedPrecision)
           : getMomentPrecision(validatedFrom, validatedTo) === 'days';
       } catch (e) {
         precisionLabelValue = '';
       }
 
-      precisionLabel = (
+      precisionLabel = !selectedPrecision && (
         <div className={styles.PrecisionLabel}>
           Precision: {_.startCase(_.words(precisionLabelValue).join(' '))}
         </div>

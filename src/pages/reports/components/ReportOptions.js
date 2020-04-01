@@ -13,16 +13,27 @@ import PrecisionSelector from './PrecisionSelector';
 import { parseSearch } from 'src/helpers/reports';
 import { Grid } from '@sparkpost/matchbox';
 import Typeahead from './Typeahead';
-import { Panel, Tag } from 'src/components/matchbox';
+import { Panel, Select, Tag } from 'src/components/matchbox';
 import DatePicker from 'src/components/datePicker/DatePicker';
 import typeaheadCacheSelector from 'src/selectors/reportFilterTypeaheadCache';
 import CustomReports from './CustomReports';
 import styles from './ReportOptions.module.scss';
 import { selectFeatureFlaggedMetrics } from 'src/selectors/metrics';
+import _ from 'lodash';
+import config from 'src/config';
 
+const { metricsRollupPrecisionMap } = config;
 const RELATIVE_DATE_OPTIONS = ['hour', 'day', '7days', '30days', '90days', 'custom'];
+const PRECISION_OPTIONS = metricsRollupPrecisionMap.map(({ value }) => ({
+  value,
+  label: _.startCase(_.words(value).join(' ')),
+}));
 
 export class ReportOptions extends Component {
+  state = {
+    shownPrecision: '',
+  };
+
   componentDidMount() {
     const { options, filters = [] } = parseSearch(this.props.location.search);
     this.props.addFilters(filters);
@@ -31,6 +42,10 @@ export class ReportOptions extends Component {
     // initial typeahead cache load
     this.props.initTypeaheadCache();
   }
+
+  updateShownPrecision = shownPrecision => {
+    this.setState({ shownPrecision });
+  };
 
   renderActiveFilters = () => {
     const { reportOptions } = this.props;
@@ -98,6 +113,7 @@ export class ReportOptions extends Component {
                     onChange={refreshReportOptions}
                     roundToPrecision={true}
                     selectPrecision={true}
+                    updateShownPrecision={this.updateShownPrecision}
                   />
                 </div>
               </Grid.Column>
@@ -105,12 +121,16 @@ export class ReportOptions extends Component {
                 {/* { Time Zone Picker } */}
               </Grid.Column>
               <Grid.Column xs={6} md={2}>
-                <PrecisionSelector
-                  from={reportOptions.from}
-                  to={reportOptions.to}
-                  selectedPrecision={reportOptions.precision}
-                  changeTime={refreshReportOptions}
-                />
+                {!this.state.shownPrecision ? (
+                  <PrecisionSelector
+                    from={reportOptions.from}
+                    to={reportOptions.to}
+                    selectedPrecision={reportOptions.precision}
+                    changeTime={refreshReportOptions}
+                  />
+                ) : (
+                  <Select options={PRECISION_OPTIONS} value={this.state.shownPrecision} readOnly />
+                )}
               </Grid.Column>
             </Grid>
           </Panel.Section>
