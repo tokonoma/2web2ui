@@ -75,6 +75,14 @@ describe('Component: DatePicker', () => {
     expect(wrapper.find('ManualEntryForm')).not.toExist();
   });
 
+  it('should call updateShownPrecision when internal state precision changes', () => {
+    const mockUpdateShownPrecision = jest.fn();
+    wrapper.setProps({ updateShownPrecision: mockUpdateShownPrecision, precision: '15min' });
+    wrapper.update();
+    wrapper.setState({ selectedPrecision: 'hour', showDatePicker: true });
+    expect(mockUpdateShownPrecision).toHaveBeenCalledWith('hour');
+  });
+
   describe('syncTimeToState', () => {
     const before = { from: 'unchanged', to: 'unchanged' };
     const after = { from: new Date(), to: new Date() };
