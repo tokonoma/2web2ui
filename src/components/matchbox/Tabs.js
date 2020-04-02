@@ -1,9 +1,17 @@
+import React from 'react';
 import { Tabs as OGTabs } from '@sparkpost/matchbox';
 import { Tabs as HibanaTabs } from '@sparkpost/matchbox-hibana';
-import useHibanaToggle from './useHibanaToggle';
+import { useHibana } from 'src/context/HibanaContext';
+import { omitSystemProps } from 'src/helpers/hibana';
 
 export default function Tabs(props) {
-  return useHibanaToggle(OGTabs, HibanaTabs)(props)(['color']);
+  const [state] = useHibana();
+  const { isHibanaEnabled } = state;
+
+  if (!isHibanaEnabled) {
+    return <OGTabs {...omitSystemProps(props, ['color'])} />;
+  }
+  return <HibanaTabs {...props} />;
 }
 
 OGTabs.displayName = 'OGTabs';

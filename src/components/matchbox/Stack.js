@@ -1,12 +1,12 @@
 import React from 'react';
 import { Stack as HibanaStack } from '@sparkpost/matchbox-hibana';
-import useHibanaToggle from './useHibanaToggle';
+import { useHibana } from 'src/context/HibanaContext';
 
 HibanaStack.displayName = 'HibanaStack';
 
 export default function Stack(props) {
-  function OGStack(props) {
-    return <>{props.children}</>;
-  }
-  return useHibanaToggle(OGStack, HibanaStack)(props)();
+  const [state] = useHibana();
+  const { isHibanaEnabled } = state;
+
+  return !isHibanaEnabled ? <>{props.children}</> : <HibanaStack {...props} />;
 }

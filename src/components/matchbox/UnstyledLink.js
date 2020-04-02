@@ -1,9 +1,17 @@
+import React from 'react';
 import { UnstyledLink as OGUnstyledLink } from '@sparkpost/matchbox';
 import { UnstyledLink as HibanaUnstyledLink } from '@sparkpost/matchbox-hibana';
-import useHibanaToggle from './useHibanaToggle';
+import { useHibana } from 'src/context/HibanaContext';
+import { omitSystemProps } from 'src/helpers/hibana';
 
 const UnstyledLink = props => {
-  return useHibanaToggle(OGUnstyledLink, HibanaUnstyledLink)(props)();
+  const [state] = useHibana();
+  const { isHibanaEnabled } = state;
+
+  if (!isHibanaEnabled) {
+    return <OGUnstyledLink {...omitSystemProps(props)} />;
+  }
+  return <HibanaUnstyledLink {...props} />;
 };
 
 HibanaUnstyledLink.displayName = 'HibanaUnstyledLink';

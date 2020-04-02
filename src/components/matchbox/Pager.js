@@ -1,17 +1,40 @@
+import React from 'react';
 import { Pager as OGPager } from '@sparkpost/matchbox';
 import { Pager as HibanaPager } from '@sparkpost/matchbox-hibana';
-import useHibanaToggle from './useHibanaToggle';
+import { useHibana } from 'src/context/HibanaContext';
+import { omitSystemProps } from 'src/helpers/hibana';
 
 function Pager(props) {
-  return useHibanaToggle(OGPager, HibanaPager)(props)();
+  const [state] = useHibana();
+  const { isHibanaEnabled } = state;
+
+  if (!isHibanaEnabled) {
+    return <OGPager {...omitSystemProps(props)} />;
+  }
+
+  return <HibanaPager {...props} />;
 }
 
 function Next(props) {
-  return useHibanaToggle(OGPager.Next, HibanaPager.Next)(props)();
+  const [state] = useHibana();
+  const { isHibanaEnabled } = state;
+
+  if (!isHibanaEnabled) {
+    return <OGPager.Next {...omitSystemProps(props)} />;
+  }
+
+  return <HibanaPager.Next {...props} />;
 }
 
 function Previous(props) {
-  return useHibanaToggle(OGPager.Previous, HibanaPager.Previous)(props)();
+  const [state] = useHibana();
+  const { isHibanaEnabled } = state;
+
+  if (!isHibanaEnabled) {
+    return <OGPager.Previous {...omitSystemProps(props)} />;
+  }
+
+  return <HibanaPager.Previous {...props} />;
 }
 
 Pager.Next = Next;

@@ -1,9 +1,17 @@
+import React from 'react';
 import { WindowEvent as OGWindowEvent } from '@sparkpost/matchbox';
 import { WindowEvent as HibanaWindowEvent } from '@sparkpost/matchbox-hibana';
-import useHibanaToggle from './useHibanaToggle';
+import { useHibana } from 'src/context/HibanaContext';
 
 HibanaWindowEvent.displayName = 'HibanaWindowEvent';
 
 export default function WindowEvent(props) {
-  return useHibanaToggle(OGWindowEvent, HibanaWindowEvent)(props)();
+  const [state] = useHibana();
+  const { isHibanaEnabled } = state;
+
+  if (!isHibanaEnabled) {
+    return <OGWindowEvent {...props} />;
+  }
+
+  return <HibanaWindowEvent {...props} />;
 }

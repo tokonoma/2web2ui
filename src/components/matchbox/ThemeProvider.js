@@ -1,12 +1,12 @@
 import React from 'react';
 import { ThemeProvider as HibanaThemeProvider } from '@sparkpost/matchbox-hibana';
-import useHibanaToggle from './useHibanaToggle';
+import { useHibana } from 'src/context/HibanaContext';
 
 export default function ThemeProvider(props) {
-  function OGThemeProvider(props) {
-    return <>{props.children}</>;
-  }
-  return useHibanaToggle(OGThemeProvider, HibanaThemeProvider)(props)();
+  const [state] = useHibana();
+  const { isHibanaEnabled } = state;
+
+  return !isHibanaEnabled ? <>{props.children}</> : <HibanaThemeProvider {...props} />;
 }
 
 HibanaThemeProvider.displayName = 'HibanaThemeProvider';
