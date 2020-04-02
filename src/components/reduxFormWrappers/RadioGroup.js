@@ -1,6 +1,6 @@
 import React from 'react';
-import { Grid, Radio } from '@sparkpost/matchbox';
-import { Error, Label } from 'src/components/matchbox';
+import { Grid } from '@sparkpost/matchbox';
+import { Error, Label, Radio } from 'src/components/matchbox';
 import styles from './RadioGroup.module.scss';
 
 export default function RadioGroup({
