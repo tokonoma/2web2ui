@@ -6,8 +6,9 @@ import Radio from '../Radio';
 jest.mock('src/context/HibanaContext');
 
 describe('Radio Matchbox component wrapper', () => {
-  const subject = () => {
-    return shallow(<Radio>Radio content is here</Radio>);
+  const subject = props => {
+    const defaultProps = { id: 'radio' };
+    return shallow(<Radio {...defaultProps} {...props}></Radio>);
   };
 
   it('renders the Hibana version of the Radio component correctly when hibana is enabled', () => {
@@ -23,12 +24,14 @@ describe('Radio Matchbox component wrapper', () => {
 
     const wrapper = subject();
 
+    expect(wrapper).toHaveProp('id', 'radio');
+
     expect(wrapper).toHaveDisplayName('OGRadio');
   });
 
   describe('Radio.Group', () => {
     const subject = () => {
-      return shallow(<Radio.Group>Radio content is here</Radio.Group>);
+      return shallow(<Radio.Group>Children...</Radio.Group>);
     };
     it('renders the Hibana version of the Radio.Group component correctly when hibana is enabled', () => {
       useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: true }]);
