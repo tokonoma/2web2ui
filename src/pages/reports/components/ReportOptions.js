@@ -94,16 +94,17 @@ export class ReportOptions extends Component {
         <>
           <Panel.Section>
             <Grid>
-              <Grid.Column xs={9} md={7}>
+              <Grid.Column xs={9} md={6}>
                 <Typeahead
                   reportOptions={reportOptions}
                   placeholder="Filter by domain, campaign, etc"
                   onSelect={this.handleTypeaheadSelect}
                   items={typeaheadCache}
                   selected={reportOptions.filters}
+                  disabled={reportLoading}
                 />
               </Grid.Column>
-              <Grid.Column xs={3} md={2} mdOffset={3}>
+              <Grid.Column xs={3} md={2} mdOffset={4}>
                 <ShareModal disabled={reportLoading} searchOptions={searchOptions} />
               </Grid.Column>
             </Grid>

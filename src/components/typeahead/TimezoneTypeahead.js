@@ -41,7 +41,7 @@ options.unshift({
 });
 
 export const TimezoneTypeahead = props => {
-  const { initialValue, onChange: parentOnChange, rest } = props;
+  const { initialValue, onChange: parentOnChange, ...rest } = props;
   const [selected, setSelected] = useState(options[0]);
 
   const findOptionInList = useCallback(value => options.find(option => option.value === value), []);
