@@ -33,7 +33,12 @@ export const CardContent = ({ children }) => {
 export const CardTitle = ({ children }) => {
   const [state] = useHibana();
   const { isHibanaEnabled } = state;
-  if (!isHibanaEnabled) return <h2 className={styles.CardTitle}>{children}</h2>;
+  if (!isHibanaEnabled)
+    return (
+      <div className={styles.CardTitle} role="heading" aria-level="3">
+        {children}
+      </div>
+    );
 
   return (
     <Text as="h3" mb="100">
