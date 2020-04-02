@@ -7,10 +7,14 @@ import { Box, Text } from 'src/components/matchbox';
 const HibanaCallout = ({ children, height = '220px', title }) => (
   <Box height={height} display="flex" justifyContent="center" alignItems="center">
     <Box>
-      <Text as="h3" lineHeight="2">
+      <Text as="h3" mb="200" color="gray.800">
         {title}
       </Text>
-      {children && <Text as="p">{children}</Text>}
+      {children && (
+        <Text as="p" color="gray.800">
+          {children}
+        </Text>
+      )}
     </Box>
   </Box>
 );

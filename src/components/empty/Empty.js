@@ -16,9 +16,9 @@ function OGEmpty({ title, message }) {
 function HibanaEmpty({ title, message }) {
   return (
     <Panel sectioned title={title}>
-      <Box textAlign="center" color="gray.400">
+      <Box textAlign="center" color="gray.700">
         <Block size={28} />
-        <Text as="h3" color="gray.400">
+        <Text as="h3" color="gray.700">
           {message}
         </Text>
       </Box>

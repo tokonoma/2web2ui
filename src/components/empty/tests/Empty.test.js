@@ -10,7 +10,7 @@ describe('Empty: ', () => {
         <Empty title={'Empty Title'} message={'nothing here to see'} />
       </TestApp>,
     );
-    expect(wrapper.find('Panel')).toHaveLength(1);
-    expect(wrapper.find('h6')).toHaveLength(1);
+    expect(wrapper).toHaveTextContent('Empty Title');
+    expect(wrapper).toHaveTextContent('nothing here to see');
   });
 });

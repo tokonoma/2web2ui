@@ -26,6 +26,6 @@ describe('Card', () => {
         <CardTitle />
       </TestApp>,
     );
-    expect(wrapper.find('h2')).toHaveLength(1);
+    expect(wrapper.find('div')).toHaveLength(1);
   });
 });

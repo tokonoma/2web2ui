@@ -20,7 +20,7 @@ const OGCardTitle = ({ children }) => (
 
 const HibanaCard = ({ children, textAlign }) => {
   return (
-    <Box border="400" padding="400" textAlign={textAlign}>
+    <Box border="400" padding="400" textAlign={textAlign} color="gray.900">
       {children}
     </Box>
   );
@@ -28,7 +28,7 @@ const HibanaCard = ({ children, textAlign }) => {
 
 const HibanaCardContent = ({ children }) => {
   return (
-    <Box display="inline-block" fontSize="500">
+    <Box display="inline-block" fontSize="500" color="gray.900">
       {children}
     </Box>
   );
@@ -36,7 +36,7 @@ const HibanaCardContent = ({ children }) => {
 
 const HibanaCardTitle = ({ children }) => {
   return (
-    <Text as="h3" mb="100">
+    <Text as="h3" mb="100" color="gray.900">
       {children}
     </Text>
   );
