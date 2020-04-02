@@ -12,8 +12,16 @@ export const CardActions = ({ children }) => <>{children}</>;
 
 const OGCardContent = ({ children }) => <div className={styles.CardContent}>{children}</div>;
 
-const OGCardTitle = ({ children }) => (
-  <div className={styles.CardTitle} role="heading" aria-level="3">
+const OGCardTitle = ({ children, level = '3' }) => (
+  <div
+    className={classNames(
+      styles.CardTitle,
+      level === '2' && styles.level2,
+      level === '3' && styles.level3,
+    )}
+    role="heading"
+    aria-level={level}
+  >
     {children}
   </div>
 );

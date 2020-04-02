@@ -61,8 +61,8 @@ const RVBundlePage = () => {
         <Panel.Section>
           <div className={styles.grid}>
             <Card>
-              <CardTitle>
-                <CheckCircle className={styles.icon} />
+              <CardTitle level="2">
+                <CheckCircle className={styles.icon} size={22} />
                 <span>Recipient Validation</span>
               </CardTitle>
               <CardContent>
@@ -78,8 +78,8 @@ const RVBundlePage = () => {
               </CardContent>
             </Card>
             <Card>
-              <CardTitle>
-                <Send className={`${styles.icon} ${styles.send}`} />
+              <CardTitle level="2">
+                <Send className={`${styles.icon} ${styles.send}`} size={22} />
                 <span>Email Messaging</span>
               </CardTitle>
               <CardContent>

@@ -11,9 +11,14 @@
 
 .CardTitle {
   display: block;
-  color: color(gray, 3);
+  color: color(gray, 2);
   font-weight: 600;
-  font-size: font-size(500);
+  &.level2 {
+    font-size: font-size(700);
+  }
+  &.level3 {
+    font-size: font-size(500);
+  }
 }
 
 .CardContent {
