@@ -101,6 +101,11 @@ describe('Component: Report Options', () => {
     expect(wrapper.find('PrecisionSelector')).toExist();
   });
 
+  it('should mount and render metrics rollup option with Timezone Selector', () => {
+    wrapper.setProps({ featureFlaggedMetrics: { useMetricsRollup: true } });
+    expect(wrapper.find('TimezoneTypeahead')).toExist();
+  });
+
   it('should mount and render metrics rollup option correctly with only the display selector', () => {
     wrapper.setProps({ featureFlaggedMetrics: { useMetricsRollup: true } });
     wrapper.setState({ shownPrecision: 'hour' });
