@@ -1,8 +1,6 @@
-import React from 'react';
 import { Table as OGTable } from '@sparkpost/matchbox';
 import { Table as HibanaTable } from '@sparkpost/matchbox-hibana';
-import { useHibana } from 'src/context/HibanaContext';
-import { omitSystemProps } from 'src/helpers/hibana';
+import useHibanaToggle from './useHibanaToggle';
 
 HibanaTable.displayName = 'HibanaTable';
 HibanaTable.Cell.displayName = 'HibanaTableCell';
@@ -14,43 +12,19 @@ OGTable.HeaderCell.displayName = 'OGTableHeaderCell';
 OGTable.Row.displayName = 'OGTableRow';
 
 export function Table(props) {
-  const [state] = useHibana();
-  const { isHibanaEnabled } = state;
-
-  if (!isHibanaEnabled) {
-    return <OGTable {...omitSystemProps(props)} />;
-  }
-  return <HibanaTable {...props} />;
+  return useHibanaToggle(OGTable, HibanaTable)(props)();
 }
 
 export function Cell(props) {
-  const [state] = useHibana();
-  const { isHibanaEnabled } = state;
-
-  if (!isHibanaEnabled) {
-    return <OGTable.Cell {...omitSystemProps(props)} />;
-  }
-  return <HibanaTable.Cell {...props} />;
+  return useHibanaToggle(OGTable.Cell, HibanaTable.Cell)(props)();
 }
 
 export function HeaderCell(props) {
-  const [state] = useHibana();
-  const { isHibanaEnabled } = state;
-
-  if (!isHibanaEnabled) {
-    return <OGTable.HeaderCell {...omitSystemProps(props, ['width'])} />;
-  }
-  return <HibanaTable.HeaderCell {...props} />;
+  return useHibanaToggle(OGTable.HeaderCell, HibanaTable.HeaderCell)(props)(['width']);
 }
 
 export function Row(props) {
-  const [state] = useHibana();
-  const { isHibanaEnabled } = state;
-
-  if (!isHibanaEnabled) {
-    return <OGTable.Row {...omitSystemProps(props)} />;
-  }
-  return <HibanaTable.Row {...props} />;
+  return useHibanaToggle(OGTable.Row, HibanaTable.Row)(props)();
 }
 
 Cell.displayName = 'Table.Cell';

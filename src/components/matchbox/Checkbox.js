@@ -1,29 +1,13 @@
-import React from 'react';
 import { Checkbox as OGCheckbox } from '@sparkpost/matchbox';
 import { Checkbox as HibanaCheckbox } from '@sparkpost/matchbox-hibana';
-import { useHibana } from 'src/context/HibanaContext';
-import { omitSystemProps } from 'src/helpers/hibana';
+import useHibanaToggle from './useHibanaToggle';
 
 const Checkbox = props => {
-  const [state] = useHibana();
-  const { isHibanaEnabled } = state;
-
-  if (!isHibanaEnabled) {
-    return <OGCheckbox {...omitSystemProps(props)} />;
-  }
-
-  return <HibanaCheckbox {...props} />;
+  return useHibanaToggle(OGCheckbox, HibanaCheckbox)(props)();
 };
 
 const Group = props => {
-  const [state] = useHibana();
-  const { isHibanaEnabled } = state;
-
-  if (!isHibanaEnabled) {
-    return <OGCheckbox.Group {...omitSystemProps(props)} />;
-  }
-
-  return <HibanaCheckbox.Group {...props} />;
+  return useHibanaToggle(OGCheckbox.Group, HibanaCheckbox.Group)(props)();
 };
 
 Group.displayName = 'Checkbox.Group';

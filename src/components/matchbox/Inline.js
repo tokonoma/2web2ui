@@ -1,10 +1,10 @@
 import React from 'react';
 import { Inline as HibanaInline } from '@sparkpost/matchbox-hibana';
-import { useHibana } from 'src/context/HibanaContext';
+import useHibanaToggle from './useHibanaToggle';
 
 export default function Inline(props) {
-  const [state] = useHibana();
-  const { isHibanaEnabled } = state;
-
-  return isHibanaEnabled ? <HibanaInline {...props} /> : <>{props.children}</>;
+  function OGInline(props) {
+    return <>{props.children}</>;
+  }
+  return useHibanaToggle(OGInline, HibanaInline)(props)();
 }

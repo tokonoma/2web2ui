@@ -1,17 +1,9 @@
-import React from 'react';
 import { Tag as OGTag } from '@sparkpost/matchbox';
 import { Tag as HibanaTag } from '@sparkpost/matchbox-hibana';
-import { useHibana } from 'src/context/HibanaContext';
-import { omitSystemProps } from 'src/helpers/hibana';
+import useHibanaToggle from './useHibanaToggle';
 
 export default function Tag(props) {
-  const [state] = useHibana();
-  const { isHibanaEnabled } = state;
-
-  if (!isHibanaEnabled) {
-    return <OGTag {...omitSystemProps(props, ['color'])} />;
-  }
-  return <HibanaTag {...props} />;
+  return useHibanaToggle(OGTag, HibanaTag)(props)(['color']);
 }
 
 OGTag.displayName = 'OGTag';

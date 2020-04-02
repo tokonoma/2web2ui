@@ -1,29 +1,13 @@
-import React from 'react';
 import { Button as OGButton } from '@sparkpost/matchbox';
 import { Button as HibanaButton } from '@sparkpost/matchbox-hibana';
-import { useHibana } from 'src/context/HibanaContext';
-import { omitSystemProps } from 'src/helpers/hibana';
+import useHibanaToggle from './useHibanaToggle';
 
 const Button = props => {
-  const [state] = useHibana();
-  const { isHibanaEnabled } = state;
-
-  if (!isHibanaEnabled) {
-    return <OGButton {...omitSystemProps(props, ['size', 'color'])} />;
-  }
-
-  return <HibanaButton {...props} />;
+  return useHibanaToggle(OGButton, HibanaButton)(props)(['size', 'color']);
 };
 
 const Group = props => {
-  const [state] = useHibana();
-  const { isHibanaEnabled } = state;
-
-  if (!isHibanaEnabled) {
-    return <OGButton.Group {...omitSystemProps(props)} />;
-  }
-
-  return <HibanaButton.Group {...props} />;
+  return useHibanaToggle(OGButton.Group, HibanaButton.Group)(props)();
 };
 
 Group.displayName = 'Button.Group';

@@ -1,12 +1,12 @@
 import React from 'react';
 import { Text as HibanaText } from '@sparkpost/matchbox-hibana';
-import { useHibana } from 'src/context/HibanaContext';
+import useHibanaToggle from './useHibanaToggle';
 
 HibanaText.displayName = 'HibanaText';
 
 export default function Text(props) {
-  const [state] = useHibana();
-  const { isHibanaEnabled } = state;
-
-  return isHibanaEnabled ? <HibanaText {...props} /> : <>{props.children}</>;
+  function OGText(props) {
+    return <>{props.children}</>;
+  }
+  return useHibanaToggle(OGText, HibanaText)(props)();
 }
