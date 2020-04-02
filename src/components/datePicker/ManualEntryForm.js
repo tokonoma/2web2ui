@@ -5,7 +5,12 @@ import { Grid } from '@sparkpost/matchbox';
 import { ArrowForward } from '@sparkpost/matchbox-icons';
 import { TextField } from 'src/components/matchbox';
 import { formatInputDate, formatInputTime, parseDatetime } from 'src/helpers/date';
-import { getValidDateRange, getPrecision, getMomentPrecision } from 'src/helpers/metrics';
+import {
+  getValidDateRange,
+  getPrecision,
+  getRollupPrecision,
+  getMomentPrecision,
+} from 'src/helpers/metrics';
 import styles from './ManualEntryForm.module.scss';
 
 const DATE_PLACEHOLDER = '1970-01-20';
@@ -62,21 +67,25 @@ export default class ManualEntryForm extends Component {
     const from = parseDatetime(this.state.fromDate, this.state.fromTime);
     const to = parseDatetime(this.state.toDate, this.state.toTime);
     // allow for prop-level override of "now" (DI, etc.)
-    const { now, roundToPrecision, preventFuture } = this.props;
-
+    const { now, roundToPrecision, preventFuture, defaultPrecision } = this.props;
     try {
+      const precision = getRollupPrecision({ from, to, precision: defaultPrecision });
       const { to: roundedTo, from: roundedFrom } = getValidDateRange({
         from,
         to,
         now,
         roundToPrecision,
         preventFuture,
+        precision,
       });
-      return this.props.selectDates({ to: roundedTo.toDate(), from: roundedFrom.toDate() }, () => {
-        if (e && e.key === 'Enter') {
-          this.props.onEnter(e);
-        }
-      });
+      return this.props.selectDates(
+        { to: roundedTo.toDate(), from: roundedFrom.toDate(), precision },
+        () => {
+          if (e && e.key === 'Enter') {
+            this.props.onEnter(e);
+          }
+        },
+      );
     } catch (e) {
       if (shouldReset) {
         this.syncPropsToState(this.props); // Resets fields if dates are not valid
@@ -86,11 +95,11 @@ export default class ManualEntryForm extends Component {
 
   render() {
     const { toDate, toTime, fromDate, fromTime } = this.state;
-    const { roundToPrecision } = this.props;
+    const { roundToPrecision, selectedPrecision } = this.props;
 
     let precisionLabel = null;
     let precisionLabelValue;
-    let momentPrecision;
+    let shouldDisableTime;
     const from = parseDatetime(fromDate, fromTime);
     const to = parseDatetime(toDate, toTime);
 
@@ -103,14 +112,18 @@ export default class ManualEntryForm extends Component {
           to,
           now,
           roundToPrecision,
+          selectedPrecision,
         });
+
         precisionLabelValue = getPrecision(validatedFrom, validatedTo);
-        momentPrecision = getMomentPrecision(validatedFrom, validatedTo);
+        shouldDisableTime = selectedPrecision
+          ? ['day', 'week', 'month'].includes(selectedPrecision)
+          : getMomentPrecision(validatedFrom, validatedTo) === 'days';
       } catch (e) {
         precisionLabelValue = '';
       }
 
-      precisionLabel = (
+      precisionLabel = !selectedPrecision && (
         <div className={styles.PrecisionLabel}>
           Precision: {_.startCase(_.words(precisionLabelValue).join(' '))}
         </div>
@@ -140,7 +153,7 @@ export default class ManualEntryForm extends Component {
               onChange={this.handleFieldChange}
               onBlur={this.handleBlur}
               value={fromTime}
-              disabled={momentPrecision === 'days'}
+              disabled={shouldDisableTime}
             />
           </Grid.Column>
           <Grid.Column xs={1}>
@@ -168,7 +181,7 @@ export default class ManualEntryForm extends Component {
               onChange={this.handleFieldChange}
               onBlur={this.handleBlur}
               value={toTime}
-              disabled={momentPrecision === 'days'}
+              disabled={shouldDisableTime}
             />
           </Grid.Column>
         </Grid>
