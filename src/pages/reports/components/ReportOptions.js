@@ -121,7 +121,9 @@ export class ReportOptions extends Component {
                 {/* { Time Zone Picker } */}
               </Grid.Column>
               <Grid.Column xs={6} md={2}>
-                {!this.state.shownPrecision ? (
+                {//We will show a fake selector that shows the temporary precision when the user
+                //is selecting dates using the datepicker but has not confirmed the selection
+                !this.state.shownPrecision ? (
                   <PrecisionSelector
                     from={reportOptions.from}
                     to={reportOptions.to}

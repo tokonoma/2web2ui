@@ -46,12 +46,14 @@ export default class DatePicker extends Component {
   componentDidUpdate(prevProps, prevState) {
     const { selectedPrecision, showDatePicker } = this.state;
     const { updateShownPrecision } = this.props;
-    if (
-      updateShownPrecision &&
-      prevState.selectedPrecision !== selectedPrecision &&
-      showDatePicker
-    ) {
-      updateShownPrecision(selectedPrecision);
+    if (updateShownPrecision) {
+      //closing datepicker resets to the actual precision
+      if (prevState.showDatePicker && !showDatePicker) {
+        return updateShownPrecision('');
+      }
+      if (prevState.selectedPrecision !== selectedPrecision && showDatePicker) {
+        return updateShownPrecision(selectedPrecision);
+      }
     }
   }
 
@@ -85,7 +87,6 @@ export default class DatePicker extends Component {
 
   cancelDatePicker = () => {
     this.syncTimeToState(this.props);
-    this.props.updateShownPrecision && this.props.updateShownPrecision('');
     this.setState({ showDatePicker: false });
   };
 
@@ -95,7 +96,7 @@ export default class DatePicker extends Component {
 
   handleDayClick = clicked => {
     const { selecting, selected } = this.state;
-    const { validate } = this.props;
+    const { validate, selectPrecision } = this.props;
 
     const dates = selecting
       ? selected
@@ -116,6 +117,9 @@ export default class DatePicker extends Component {
       beforeSelected: dates,
       selecting: !selecting,
       validationError: null,
+      selectedPrecision:
+        selectPrecision &&
+        getRollupPrecision({ from: dates.from, to: dates.to, precision: this.props.precision }),
     });
   };
 
