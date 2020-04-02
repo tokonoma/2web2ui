@@ -7,9 +7,9 @@ export default function useHibanaToggle(OGComponent, HibanaComponent) {
   const { isHibanaEnabled } = state;
   return props => (whiteListedProps = [], deprecatedProps = []) => {
     return isHibanaEnabled ? (
-      <HibanaComponent {...omitSystemProps(props, whiteListedProps)} />
+      <HibanaComponent {...omitDeprecatedProps(props, whiteListedProps)} />
     ) : (
-      <OGComponent {...omitDeprecatedProps(props, deprecatedProps)} />
+      <OGComponent {...omitSystemProps(props, deprecatedProps)} />
     );
   };
 }
