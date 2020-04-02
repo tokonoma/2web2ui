@@ -7,6 +7,14 @@
   }
 }
 
+.FieldWrapperMetricsRollup {
+  margin-top: 20px; // Matches the label height of other fields
+  @media screen and (max-width: breakpoint(small)) {
+    margin-bottom: spacing();
+    margin-top: 0;
+  }
+}
+
 .TagWrapper {
   margin: 0 spacing(small);
 }

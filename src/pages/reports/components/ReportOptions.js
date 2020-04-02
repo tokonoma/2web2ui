@@ -111,7 +111,7 @@ export class ReportOptions extends Component {
           <Panel.Section>
             <Grid>
               <Grid.Column xs={12} md={6}>
-                <div className={styles.FieldWrapper}>
+                <div className={styles.FieldWrapperMetricsRollup}>
                   <DatePicker
                     {...reportOptions}
                     relativeDateOptions={RELATIVE_DATE_OPTIONS}
@@ -127,6 +127,7 @@ export class ReportOptions extends Component {
                 <TimezoneTypeahead
                   initialValue={reportOptions.timezone}
                   onChange={this.handleTimezoneSelect}
+                  disabled={reportLoading}
                 />
               </Grid.Column>
               <Grid.Column xs={6} md={2}>
@@ -138,12 +139,14 @@ export class ReportOptions extends Component {
                     to={reportOptions.to}
                     selectedPrecision={reportOptions.precision}
                     changeTime={refreshReportOptions}
+                    disabled={reportLoading}
                   />
                 ) : (
                   <Select
                     label="Precision"
                     options={PRECISION_OPTIONS}
                     value={this.state.shownPrecision}
+                    disabled={reportLoading}
                     readOnly
                   />
                 )}
