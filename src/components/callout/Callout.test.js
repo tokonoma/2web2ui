@@ -21,7 +21,7 @@ describe('Callout', () => {
       </TestApp>,
     );
 
-    expect(wrapper.find('h3').text()).toEqual('Example');
-    expect(wrapper.find('p').text()).toEqual('Here is the deal...');
+    expect(wrapper).toHaveTextContent('Example');
+    expect(wrapper).toHaveTextContent('Here is the deal...');
   });
 });
