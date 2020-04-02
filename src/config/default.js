@@ -67,6 +67,16 @@ const config = identifier => ({
     { time: 60 * 24 * 190, value: 'week', format: 'MMM Do' },
     { time: Infinity, value: 'month', format: 'MMM YY' },
   ],
+
+  metricsRollupPrecisionMap: [
+    { recommended: 60 * 4, min: 0, max: 60 * 12, value: '1min', format: 'ha' },
+    { recommended: 60 * 12, min: 10, max: 60 * 24 * 2, value: '5min', format: 'ha' },
+    { recommended: 60 * 24 * 2, min: 30, max: 60 * 24 * 10, value: '15min', format: 'ha' },
+    { recommended: 60 * 24 * 10, min: 60 * 2, max: 60 * 24 * 30, value: 'hour', format: 'ha' },
+    { recommended: Infinity, min: 60 * 24, max: Infinity, value: 'day', format: 'MMM Do' },
+    { recommended: Infinity, min: 60 * 24 * 7, max: Infinity, value: 'week', format: 'MMM Do' },
+    { recommended: Infinity, min: 60 * 24 * 30, max: Infinity, value: 'month', format: 'MMM YY' },
+  ],
   release: process.env.REACT_APP_VERSION,
   sandbox: {
     localpart: 'sandbox',

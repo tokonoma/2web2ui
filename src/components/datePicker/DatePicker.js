@@ -8,7 +8,7 @@ import {
   getNextHour,
   isSameDate,
 } from 'src/helpers/date';
-import { roundBoundaries } from 'src/helpers/metrics';
+import { roundBoundaries, getRollupPrecision, getPrecision } from 'src/helpers/metrics';
 import { Popover } from '@sparkpost/matchbox';
 import { Button, Error, Select, TextField, WindowEvent } from 'src/components/matchbox';
 import DateSelector from 'src/components/dateSelector/DateSelector';
@@ -16,6 +16,7 @@ import ManualEntryForm from './ManualEntryForm';
 import { FORMATS } from 'src/constants';
 import styles from './DatePicker.module.scss';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 
 export default class DatePicker extends Component {
   DATE_FORMAT = FORMATS.LONG_DATETIME;
@@ -24,6 +25,7 @@ export default class DatePicker extends Component {
     selecting: false,
     selected: {},
     validationError: null,
+    selectedPrecision: undefined,
   };
 
   componentDidMount() {
@@ -31,14 +33,36 @@ export default class DatePicker extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.from !== this.props.from || nextProps.to !== this.props.to) {
+    if (
+      nextProps.from !== this.props.from ||
+      nextProps.to !== this.props.to ||
+      nextProps.precision !== this.props.precision
+    ) {
       this.syncTimeToState(nextProps);
     }
   }
 
+  //For metrics rollup, update the precision display when precision changes
+  componentDidUpdate(prevProps, prevState) {
+    const { selectedPrecision, showDatePicker } = this.state;
+    const { updateShownPrecision } = this.props;
+    if (updateShownPrecision) {
+      //closing datepicker resets to the actual precision
+      if (prevState.showDatePicker && !showDatePicker) {
+        return updateShownPrecision('');
+      }
+      if (prevState.selectedPrecision !== selectedPrecision && showDatePicker) {
+        return updateShownPrecision(selectedPrecision);
+      }
+    }
+  }
+
   // Sets local state from reportOptions redux state - need to separate to handle pre-apply state
-  syncTimeToState = ({ from, to }) => {
-    this.setState({ selected: { from, to } });
+  syncTimeToState = ({ from, to, precision }) => {
+    if (from && to) {
+      const selectedPrecision = this.props.selectPrecision && precision;
+      this.setState({ selected: { from, to }, selectedPrecision });
+    }
   };
 
   // Closes popover on escape, submits on enter
@@ -72,7 +96,7 @@ export default class DatePicker extends Component {
 
   handleDayClick = clicked => {
     const { selecting, selected } = this.state;
-    const { validate } = this.props;
+    const { validate, selectPrecision } = this.props;
 
     const dates = selecting
       ? selected
@@ -93,6 +117,9 @@ export default class DatePicker extends Component {
       beforeSelected: dates,
       selecting: !selecting,
       validationError: null,
+      selectedPrecision:
+        selectPrecision &&
+        getRollupPrecision({ from: dates.from, to: dates.to, precision: this.props.precision }),
     });
   };
 
@@ -100,25 +127,31 @@ export default class DatePicker extends Component {
     const { selecting } = this.state;
 
     if (selecting) {
-      this.setState({ selected: { ...this.getOrderedRange(hovered) } });
+      const { from, to, precision } = this.getOrderedRange(hovered);
+      this.setState({ selected: { from, to }, selectedPrecision: precision });
     }
   };
 
   getOrderedRange(newDate) {
     let { from, to } = this.state.beforeSelected;
-
+    const { preventFuture, selectPrecision, precision: oldPrecision } = this.props;
     if (from.getTime() <= newDate.getTime()) {
-      to = getEndOfDay(newDate, { preventFuture: this.props.preventFuture });
+      to = getEndOfDay(newDate, { preventFuture });
     } else {
       from = this.fromFormatter(newDate);
     }
-
+    //Changes datepicker precision if the current set precision is not available
+    const precision = getRollupPrecision({
+      from,
+      to,
+      precision: selectPrecision && oldPrecision,
+    });
     if (this.props.roundToPrecision) {
-      const rounded = roundBoundaries(from, to);
+      const rounded = roundBoundaries({ from, to, precision });
       from = rounded.from.toDate();
       to = rounded.to.toDate();
     }
-    return { from, to };
+    return { from, to, precision };
   }
 
   handleSelectRange = e => {
@@ -138,21 +171,29 @@ export default class DatePicker extends Component {
     }
   };
 
-  handleFormDates = ({ from, to }, callback) => {
-    this.setState({ selected: { from, to } }, () => callback());
+  handleFormDates = ({ from, to, precision }, callback) => {
+    const selectedPrecision = this.props.selectPrecision ? precision : undefined;
+
+    this.setState({ selected: { from, to }, selectedPrecision }, () => callback());
   };
 
   handleSubmit = () => {
     const { validate } = this.props;
-
-    const validationError = validate && validate(this.state.selected);
+    const selectedDates = this.state.selected;
+    const validationError = validate && validate(selectedDates);
     if (validationError) {
       this.setState({ validationError });
       return;
     }
 
     this.setState({ showDatePicker: false, selecting: false, validationError: null });
-    this.props.onChange({ ...this.state.selected, relativeRange: 'custom' });
+    this.props.onChange({
+      ...selectedDates,
+      relativeRange: 'custom',
+      precision:
+        this.state.selectedPrecision ||
+        getPrecision(moment(selectedDates.from), moment(selectedDates.to)),
+    });
   };
 
   handleTextUpdate = () => {
@@ -172,6 +213,7 @@ export default class DatePicker extends Component {
       selected: { from, to },
       showDatePicker,
       validationError,
+      selectedPrecision,
     } = this.state;
     const selectedRange = showDatePicker ? 'custom' : this.props.relativeRange;
 
@@ -189,11 +231,11 @@ export default class DatePicker extends Component {
       error,
       left,
       hideManualEntry,
+      precision,
       id = 'date-picker', // When multiple <DatePicker/> components are present, each one will need a unique `id`. This is a safe default.
     } = this.props;
 
     const dateFormat = dateFieldFormat || this.DATE_FORMAT;
-
     const rangeSelect = showPresets ? (
       <>
         <label className={styles.Label} htmlFor={`range-select-${id}`}>
@@ -263,6 +305,8 @@ export default class DatePicker extends Component {
             from={from}
             roundToPrecision={roundToPrecision}
             preventFuture={preventFuture}
+            selectedPrecision={selectedPrecision}
+            defaultPrecision={precision}
           />
         )}
         <Button
@@ -279,6 +323,7 @@ export default class DatePicker extends Component {
             <Error wrapper="span" error={validationError}></Error>
           </span>
         )}
+
         <WindowEvent event="keydown" handler={this.handleKeyDown} />
       </Popover>
     );
@@ -298,9 +343,10 @@ DatePicker.propTypes = {
   disabled: PropTypes.bool,
   showPresets: PropTypes.bool,
   hideManualEntry: PropTypes.bool,
+  selectPrecision: PropTypes.bool,
 };
 
 DatePicker.defaultProps = {
-  roundToPrecision: false,
   preventFuture: true,
+  roundToPrecision: false,
 };

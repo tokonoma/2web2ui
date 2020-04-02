@@ -42,6 +42,9 @@ describe('Component: Report Options', () => {
       initTypeaheadCache: jest.fn(),
       refreshReportOptions: jest.fn(),
       refreshTypeaheadCache: jest.fn(),
+      featureFlaggedMetrics: {
+        useMetricsRollup: false,
+      },
     };
     wrapper = shallow(<ReportOptions {...testProps} />);
   });
@@ -91,5 +94,19 @@ describe('Component: Report Options', () => {
   it('should render custom reports when the option is enabled', () => {
     wrapper.setProps({ customReportsEnabled: true });
     expect(wrapper.find('withRouter(Connect(CustomReports))')).toExist();
+  });
+
+  it('should mount and render metrics rollup option with Precision Selector', () => {
+    wrapper.setProps({ featureFlaggedMetrics: { useMetricsRollup: true } });
+    expect(wrapper.find('PrecisionSelector')).toExist();
+  });
+
+  it('should mount and render metrics rollup option correctly with only the display selector', () => {
+    wrapper.setProps({ featureFlaggedMetrics: { useMetricsRollup: true } });
+    wrapper.setState({ shownPrecision: 'hour' });
+    wrapper.update();
+    expect(wrapper.find('PrecisionSelector')).not.toExist();
+    expect(wrapper.find('Select')).toExist();
+    expect(wrapper.find('Select')).toHaveValue('hour');
   });
 });

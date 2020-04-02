@@ -83,7 +83,7 @@ describe('Date helpers', () => {
         let expectedFrom = moment(date.toDate()).subtract(...subtractArgs);
         let expectedTo = date;
         if (roundToPrecision) {
-          const rounded = roundBoundaries(expectedFrom, expectedTo);
+          const rounded = roundBoundaries({ from: expectedFrom, to: expectedTo });
           expectedFrom = rounded.from;
           expectedTo = rounded.to;
         }
@@ -143,10 +143,10 @@ describe('Date helpers', () => {
     it('should default to rounding the range', () => {
       const date = moment(new Date('2017-12-17T12:00:00'));
       Date.now = jest.fn(() => date);
-      const { from: expectedFrom, to: expectedTo } = roundBoundaries(
-        moment(date.toDate()).subtract(7, 'days'),
-        date,
-      );
+      const { from: expectedFrom, to: expectedTo } = roundBoundaries({
+        from: moment(date.toDate()).subtract(7, 'days'),
+        to: date,
+      });
       const { from, to, relativeRange } = getRelativeDates('7days');
 
       expect(to).toEqual(expectedTo.toDate());

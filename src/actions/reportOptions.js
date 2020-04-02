@@ -11,9 +11,15 @@ import {
 import { list as listSubaccounts } from './subaccounts';
 import { list as listSendingDomains } from './sendingDomains';
 import { getRelativeDates } from 'src/helpers/date';
-import { getQueryFromOptions, getPrecision } from 'src/helpers/metrics';
+import {
+  getQueryFromOptions,
+  getPrecision,
+  getRollupPrecision,
+  getRecommendedRollupPrecision,
+} from 'src/helpers/metrics';
 import { isSameDate, getLocalTimezone } from 'src/helpers/date';
 import _ from 'lodash';
+import { selectFeatureFlaggedMetrics } from 'src/selectors/metrics';
 
 // array of all lists that need to be re-filtered when time changes
 const metricLists = [
@@ -124,14 +130,25 @@ export function refreshReportOptions(update) {
   return (dispatch, getState) => {
     const { reportOptions } = getState();
     update = { ...reportOptions, ...update };
+    const { useMetricsRollup } = selectFeatureFlaggedMetrics(getState());
+    const updatedPrecision = useMetricsRollup && update.precision;
 
     if (update.relativeRange) {
       if (update.relativeRange !== 'custom') {
-        const { from, to } = getRelativeDates(update.relativeRange);
-        const precision = getPrecision(from, moment(to));
+        const { from, to } = getRelativeDates(update.relativeRange, {
+          precision: updatedPrecision,
+        });
+        //for metrics rollup, when using the relative dates, get the precision, else use the given precision
+        //If precision is not in the URL, get the recommended precision.
+        const precision = useMetricsRollup
+          ? getRollupPrecision({ from, to, precision: updatedPrecision }) ||
+            getRecommendedRollupPrecision(from, moment(to))
+          : getPrecision(from, moment(to));
         update = { ...update, from, to, precision };
       } else {
-        const precision = getPrecision(update.from, moment(update.to));
+        const precision = useMetricsRollup
+          ? updatedPrecision || getRecommendedRollupPrecision(update.from, moment(update.to))
+          : getPrecision(update.from, moment(update.to));
         update = { ...update, precision };
       }
     }
