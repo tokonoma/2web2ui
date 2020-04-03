@@ -1,7 +1,9 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import FeaturesStep, { FeaturesStepList } from '../FeaturesStep';
+import TestApp from 'src/__testHelpers__/TestApp';
 import { useGuideContext } from '../GettingStartedGuide';
+import { Button } from 'src/components/matchbox';
 jest.mock('../GettingStartedGuide');
 
 describe('FeaturesStep', () => {
@@ -16,9 +18,13 @@ describe('FeaturesStep', () => {
 
 describe('FeatureStepList', () => {
   const contextState = { setAndStoreStepName: jest.fn() };
-  const subject = (props, func = shallow) => {
+  const subject = (props, func = mount) => {
     useGuideContext.mockReturnValue(contextState);
-    return func(<FeaturesStepList {...props} />);
+    return func(
+      <TestApp>
+        <FeaturesStepList {...props} />
+      </TestApp>,
+    );
   };
   it('should contain a Card with title Sending with SparkPost', () => {
     const instance = subject();
@@ -26,7 +32,7 @@ describe('FeatureStepList', () => {
   });
   it('should call setAndStoreStepName when action button is clicked', () => {
     const instance = subject();
-    instance.find('Button').simulate('click');
+    instance.find(Button).simulate('click');
     expect(contextState.setAndStoreStepName).toHaveBeenCalledWith('Sending');
   });
 });
