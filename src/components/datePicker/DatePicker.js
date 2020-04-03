@@ -165,12 +165,6 @@ export default class DatePicker extends Component {
     }
   };
 
-  handleTimezoneChange = item => {
-    if (item) {
-      this.props.onChange({ timezone: item.value });
-    }
-  };
-
   handleFormDates = ({ from, to, precision }, callback) => {
     const selectedPrecision = this.props.selectPrecision ? precision : undefined;
 
