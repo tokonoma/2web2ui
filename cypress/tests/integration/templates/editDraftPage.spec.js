@@ -21,6 +21,15 @@ function testPreviewContent({ selector, content }) {
   });
 }
 
+// see, https://www.cypress.io/blog/2020/02/12/working-with-iframes-in-cypress/
+// todo, maybe replace testPreviewContent
+const getIframeBody = () =>
+  cy
+    .get('iframe')
+    .its('0.contentDocument.body')
+    .should('not.be.empty')
+    .then(cy.wrap);
+
 describe('The templates edit draft page', () => {
   beforeEach(() => {
     cy.stubAuth();
@@ -85,6 +94,7 @@ describe('The templates edit draft page', () => {
 
     cy.visit(PAGE_URL);
 
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(300); // The duration of the debounce function that triggers AMP validation
 
     // NOTE: No assertion necessary.
@@ -528,6 +538,12 @@ describe('The templates edit draft page', () => {
         selector: 'h1',
         content: 'This is some HTML content',
       });
+
+      getIframeBody()
+        .find('a')
+        .should('contain', 'Click Here')
+        .should('have.attr', 'rel', 'noopener noreferrer')
+        .should('have.attr', 'target', '_blank');
 
       cy.findByText('AMP HTML').click();
 
