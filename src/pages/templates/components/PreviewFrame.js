@@ -62,8 +62,10 @@ export default class PreviewFrame extends Component {
     // ...because DOM collections only array-like
     const anchors = [...anchorHTMLCollection];
     anchors.forEach(a => {
+      // must overwrite "rel" value to avoid a security vulnerability
       a.setAttribute('rel', 'noopener noreferrer');
-      a.setAttribute('target', '_blank');
+      // must use _parent because Firefox and other browsers do not support _blank from an iframe
+      a.setAttribute('target', '_parent');
     });
 
     this.setState({ height: `${height + PADDING}px` });

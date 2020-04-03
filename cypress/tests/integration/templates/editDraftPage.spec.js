@@ -543,7 +543,7 @@ describe('The templates edit draft page', () => {
         .find('a')
         .should('contain', 'Click Here')
         .should('have.attr', 'rel', 'noopener noreferrer')
-        .should('have.attr', 'target', '_blank');
+        .should('have.attr', 'target', '_parent');
 
       cy.findByText('AMP HTML').click();
 
