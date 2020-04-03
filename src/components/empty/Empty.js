@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Panel } from 'src/components/matchbox';
 import { Block } from '@sparkpost/matchbox-icons';
+import useHibanaToggle from 'src/hooks/useHibanaToggle';
 import { Box, Text } from 'src/components/matchbox';
-import { toggleHibana } from 'src/components/hibana';
 import styles from './Empty.module.scss';
 
 function OGEmpty({ title, message }) {
@@ -26,7 +26,9 @@ function HibanaEmpty({ title, message }) {
   );
 }
 
-const Empty = toggleHibana(OGEmpty, HibanaEmpty);
+function Empty({ title, message }) {
+  return useHibanaToggle(OGEmpty, HibanaEmpty)({ title, message });
+}
 
 Empty.propTypes = {
   title: PropTypes.string,

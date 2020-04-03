@@ -2,7 +2,8 @@ import React from 'react';
 import styles from './Card.module.scss';
 import classNames from 'classnames';
 import { Box, Text } from 'src/components/matchbox';
-import { toggleHibana } from 'src/components/hibana';
+import useHibanaToggle from 'src/hooks/useHibanaToggle';
+
 const OGCard = ({ children, textAlign }) => (
   <div className={classNames(styles.CardContainer, styles[textAlign])}>{children}</div>
 );
@@ -57,8 +58,14 @@ const HibanaCardTitle = ({ children, level }) => {
   );
 };
 
-export const Card = toggleHibana(OGCard, HibanaCard);
+export const Card = props => {
+  return useHibanaToggle(OGCard, HibanaCard)(props);
+};
 
-export const CardContent = toggleHibana(OGCardContent, HibanaCardContent);
+export const CardContent = ({ children }) => {
+  return useHibanaToggle(OGCardContent, HibanaCardContent)({ children });
+};
 
-export const CardTitle = toggleHibana(OGCardTitle, HibanaCardTitle);
+export const CardTitle = props => {
+  return useHibanaToggle(OGCardTitle, HibanaCardTitle)(props);
+};

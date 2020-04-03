@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Callout.module.scss';
+import useHibanaToggle from 'src/hooks/useHibanaToggle';
 import { Box, Text } from 'src/components/matchbox';
-import { toggleHibana } from 'src/components/hibana';
 
 const HibanaCallout = ({ children, height = '220px', title }) => (
   <Box height={height} display="flex" justifyContent="center" alignItems="center">
@@ -28,7 +28,9 @@ const OGCallout = ({ children, height = '220px', title }) => (
   </div>
 );
 
-const Callout = toggleHibana(OGCallout, HibanaCallout);
+const Callout = ({ children, height = '220px', title }) => {
+  return useHibanaToggle(OGCallout, HibanaCallout)({ children, height, title });
+};
 
 Callout.propTypes = {
   title: PropTypes.string,

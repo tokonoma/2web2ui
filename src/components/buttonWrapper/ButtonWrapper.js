@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './ButtonWrapper.module.scss';
+import useHibanaToggle from 'src/hooks/useHibanaToggle';
 import { Box } from 'src/components/matchbox';
-import { toggleHibana } from 'src/components/hibana';
 
 const OGButtonWrapper = ({ children }) => {
   return <div className={styles.ButtonWrapper}>{children}</div>;
@@ -10,5 +10,8 @@ const OGButtonWrapper = ({ children }) => {
 const HibanaButtonWrapper = ({ children }) => {
   return <Box marginTop="500">{children}</Box>;
 };
+const ButtonWrapper = ({ children }) => {
+  return useHibanaToggle(OGButtonWrapper, HibanaButtonWrapper)({ children });
+};
 
-export default toggleHibana(OGButtonWrapper, HibanaButtonWrapper);
+export default ButtonWrapper;
