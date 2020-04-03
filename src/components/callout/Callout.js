@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Callout.module.scss';
-import { Box, Text, toggleHibana } from 'src/components/matchbox';
+import { Box, Text } from 'src/components/matchbox';
+import { toggleHibana } from 'src/components/hibana';
 
 const HibanaCallout = ({ children, height = '220px', title }) => (
   <Box height={height} display="flex" justifyContent="center" alignItems="center">

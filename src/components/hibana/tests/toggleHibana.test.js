@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { useHibana } from 'src/context/HibanaContext';
-import { toggleHibana } from '..';
+import { toggleHibana } from 'src/components/hibana';
 jest.mock('src/context/HibanaContext');
 
 describe('Text matchbox component wrapper', () => {

@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Panel } from 'src/components/matchbox';
 import { Block } from '@sparkpost/matchbox-icons';
-import { Box, Text, toggleHibana } from 'src/components/matchbox';
+import { Box, Text } from 'src/components/matchbox';
+import { toggleHibana } from 'src/components/hibana';
 import styles from './Empty.module.scss';
 
 function OGEmpty({ title, message }) {

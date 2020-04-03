@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './ButtonWrapper.module.scss';
-import { Box, toggleHibana } from 'src/components/matchbox';
+import { Box } from 'src/components/matchbox';
+import { toggleHibana } from 'src/components/hibana';
 
 const OGButtonWrapper = ({ children }) => {
   return <div className={styles.ButtonWrapper}>{children}</div>;

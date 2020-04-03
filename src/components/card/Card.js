@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './Card.module.scss';
 import classNames from 'classnames';
-import { Box, Text, toggleHibana } from 'src/components/matchbox';
-
+import { Box, Text } from 'src/components/matchbox';
+import { toggleHibana } from 'src/components/hibana';
 const OGCard = ({ children, textAlign }) => (
   <div className={classNames(styles.CardContainer, styles[textAlign])}>{children}</div>
 );
