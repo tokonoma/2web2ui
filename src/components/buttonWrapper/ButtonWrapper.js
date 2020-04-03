@@ -10,7 +10,7 @@ const OGButtonWrapper = ({ children }) => {
 const HibanaButtonWrapper = ({ children }) => {
   return <Box marginTop="500">{children}</Box>;
 };
-export const ButtonWrapper = ({ children }) => {
+const ButtonWrapper = ({ children }) => {
   return useHibanaToggle(OGButtonWrapper, HibanaButtonWrapper)({ children });
 };
 
