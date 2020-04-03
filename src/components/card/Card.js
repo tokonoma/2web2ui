@@ -42,9 +42,17 @@ const HibanaCardContent = ({ children }) => {
   );
 };
 
-const HibanaCardTitle = ({ children }) => {
+const HibanaCardTitle = ({ children, level }) => {
   return (
-    <Text as="h3" mb="100" color="gray.900">
+    <Text
+      as="div"
+      mb="100"
+      color="gray.900"
+      role="heading"
+      aria-level={level}
+      fontSize={level === '2' ? 22 : 20}
+      fontWeight="500"
+    >
       {children}
     </Text>
   );
@@ -58,6 +66,6 @@ export const CardContent = ({ children }) => {
   return useHibanaToggle(OGCardContent, HibanaCardContent)({ children });
 };
 
-export const CardTitle = ({ children }) => {
-  return useHibanaToggle(OGCardTitle, HibanaCardTitle)({ children });
+export const CardTitle = props => {
+  return useHibanaToggle(OGCardTitle, HibanaCardTitle)(props);
 };
