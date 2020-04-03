@@ -3,7 +3,7 @@
     "subject": "Test Template",
     "from": { "email": "fake-user@bounce.uat.sparkspam.com" },
     "text": "This is some text content.",
-    "html": "<h1>This is some HTML content</h1>",
+    "html": "<div><h1>This is some HTML content</h1><a href='https://example.com'>Click Here</a></div>",
     "amp_html": "<h1>This is some AMP HTML content</h1>"
   }
 }
