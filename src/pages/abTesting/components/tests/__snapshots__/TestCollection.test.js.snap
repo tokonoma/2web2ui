@@ -181,7 +181,6 @@ Array [
             },
           ]
         }
-        groupByKey="section"
       />
     </Popover>
   </div>,
@@ -287,7 +286,6 @@ Array [
             },
           ]
         }
-        groupByKey="section"
       />
     </Popover>
   </div>,
@@ -401,7 +399,6 @@ Array [
             },
           ]
         }
-        groupByKey="section"
       />
     </Popover>
   </div>,

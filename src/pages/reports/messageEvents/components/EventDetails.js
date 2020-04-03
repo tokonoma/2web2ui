@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Tooltip } from '@sparkpost/matchbox';
+import { Tooltip } from 'src/components/matchbox';
 import { Panel } from 'src/components/matchbox';
 import { LabelledValue, CopyField } from 'src/components';
 
@@ -8,8 +8,8 @@ import _ from 'lodash';
 
 class EventDetails extends Component {
   static defaultProps = {
-    details: {}
-  }
+    details: {},
+  };
 
   renderRow = ({ value, label, key }) => {
     // Renders value in a read only textfield
@@ -22,39 +22,42 @@ class EventDetails extends Component {
     }
 
     return <LabelledValue key={key} label={label} value={value} />;
-  }
+  };
 
   // Renders key-value rows
-  renderDetails = (detailsToRender) => {
+  renderDetails = detailsToRender => {
     const { documentation } = this.props;
 
-    return _.keys(detailsToRender).map((key) => {
-
+    return _.keys(detailsToRender).map(key => {
       // Gets tooltip content from documentation store
       const tooltipContent = _.get(documentation, [detailsToRender.type, key]);
 
       const row = {
         key,
-        label: tooltipContent ? <Tooltip dark content={tooltipContent}>{key}</Tooltip> : key,
-        value: detailsToRender[key]
+        label: tooltipContent ? (
+          <Tooltip dark content={tooltipContent}>
+            {key}
+          </Tooltip>
+        ) : (
+          key
+        ),
+        value: detailsToRender[key],
       };
 
       return this.renderRow(row);
     });
-  }
+  };
 
   render() {
     // Remove formattedDate as its only used for the history table
     const detailsToRender = _.omit(this.props.details, 'formattedDate');
 
     return (
-      <Panel title='Event Details'>
+      <Panel title="Event Details">
+        <Panel.Section>{this.renderDetails(detailsToRender)}</Panel.Section>
         <Panel.Section>
-          { this.renderDetails(detailsToRender) }
-        </Panel.Section>
-        <Panel.Section>
-          <LabelledValue label='Raw Json'>
-            <CopyField value={JSON.stringify(detailsToRender)}/>
+          <LabelledValue label="Raw Json">
+            <CopyField value={JSON.stringify(detailsToRender)} />
           </LabelledValue>
         </Panel.Section>
       </Panel>

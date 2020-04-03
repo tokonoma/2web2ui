@@ -9,20 +9,8 @@ exports[`EventDetails Component should render with all props 1`] = `
       key="key1"
       label={
         <Tooltip
-          bottom={true}
           content="description for key1"
           dark={true}
-          forcePosition={false}
-          horizontalOffset="0px"
-          preferredDirection={
-            Object {
-              "bottom": true,
-              "left": false,
-              "right": true,
-              "top": false,
-            }
-          }
-          right={true}
         >
           key1
         </Tooltip>

@@ -47,7 +47,6 @@ exports[`Component: FilterDropdown renders correctly 1`] = `
           },
         ]
       }
-      groupByKey="section"
     />
   </Popover>
   <Field
@@ -127,7 +126,6 @@ exports[`Component: FilterDropdown renders selected correctly 1`] = `
           },
         ]
       }
-      groupByKey="section"
     />
   </Popover>
   <Field

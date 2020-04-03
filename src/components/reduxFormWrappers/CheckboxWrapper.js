@@ -1,5 +1,5 @@
 import React from 'react';
-import { Checkbox } from '@sparkpost/matchbox';
+import { Checkbox } from 'src/components/matchbox';
 
 export default function CheckboxWrapper({ input, meta, ...rest }) {
   const { active, error, touched } = meta;

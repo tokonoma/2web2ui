@@ -1,8 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Pagination } from '@sparkpost/matchbox';
-import { Table } from 'src/components/matchbox';
+import { Pagination, Table } from 'src/components/matchbox';
 import Body from './Body';
 import Column from './Column';
 import Head from './Head';

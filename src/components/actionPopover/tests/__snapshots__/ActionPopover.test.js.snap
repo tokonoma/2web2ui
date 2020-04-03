@@ -35,7 +35,6 @@ exports[`ActionPopover Component should render with actions 1`] = `
           },
         ]
       }
-      groupByKey="section"
     />
   </Popover>
 </div>
@@ -63,9 +62,7 @@ exports[`ActionPopover Component should render with no props 1`] = `
       </Button>
     }
   >
-    <ActionList
-      groupByKey="section"
-    />
+    <ActionList />
   </Popover>
 </div>
 `;
