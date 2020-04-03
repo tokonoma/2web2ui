@@ -7,7 +7,6 @@ exports[`Variants View Component: Engagement Component: should render clicks cor
   >
     <h6>
       <Tooltip
-        bottom={true}
         content={
           <span>
             10
@@ -18,17 +17,6 @@ exports[`Variants View Component: Engagement Component: should render clicks cor
           </span>
         }
         dark={true}
-        forcePosition={false}
-        horizontalOffset="0px"
-        preferredDirection={
-          Object {
-            "bottom": true,
-            "left": false,
-            "right": true,
-            "top": false,
-          }
-        }
-        right={true}
       >
         <Unit
           unit="percent"
@@ -53,7 +41,6 @@ exports[`Variants View Component: Engagement Component: should render opens corr
   >
     <h6>
       <Tooltip
-        bottom={true}
         content={
           <span>
             0
@@ -64,17 +51,6 @@ exports[`Variants View Component: Engagement Component: should render opens corr
           </span>
         }
         dark={true}
-        forcePosition={false}
-        horizontalOffset="0px"
-        preferredDirection={
-          Object {
-            "bottom": true,
-            "left": false,
-            "right": true,
-            "top": false,
-          }
-        }
-        right={true}
       >
         <Unit
           unit="percent"

@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { WindowSizeContext } from 'src/context/WindowSize';
 import { selectAccountNavItems } from 'src/selectors/navItems';
-import { Popover, ActionList } from '@sparkpost/matchbox';
-import { Tag, ScreenReaderOnly } from 'src/components/matchbox';
+import { Popover } from '@sparkpost/matchbox';
+import { ActionList, Tag, ScreenReaderOnly } from 'src/components/matchbox';
 import { ArrowDropDown, Person } from '@sparkpost/matchbox-icons';
 import styles from './AccountDropdown.module.scss';
 

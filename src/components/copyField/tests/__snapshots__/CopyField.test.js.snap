@@ -2,21 +2,9 @@
 
 exports[`CopyField Component should handle copy click 1`] = `
 <Tooltip
-  bottom={true}
   content="Copied to clipboard!"
   dark={true}
   disabled={false}
-  forcePosition={false}
-  horizontalOffset="0px"
-  preferredDirection={
-    Object {
-      "bottom": true,
-      "left": false,
-      "right": true,
-      "top": false,
-    }
-  }
-  right={true}
 >
   <Button
     name="copy-field-button"
@@ -34,21 +22,9 @@ exports[`CopyField Component should pass rest of attrs to TextField 1`] = `
 <TextField
   connectRight={
     <Tooltip
-      bottom={true}
       content="Copied to clipboard!"
       dark={true}
       disabled={true}
-      forcePosition={false}
-      horizontalOffset="0px"
-      preferredDirection={
-        Object {
-          "bottom": true,
-          "left": false,
-          "right": true,
-          "top": false,
-        }
-      }
-      right={true}
     >
       <Button
         name="copy-field-button"
@@ -73,21 +49,9 @@ exports[`CopyField Component should render - no props 1`] = `
 <TextField
   connectRight={
     <Tooltip
-      bottom={true}
       content="Copied to clipboard!"
       dark={true}
       disabled={true}
-      forcePosition={false}
-      horizontalOffset="0px"
-      preferredDirection={
-        Object {
-          "bottom": true,
-          "left": false,
-          "right": true,
-          "top": false,
-        }
-      }
-      right={true}
     >
       <Button
         name="copy-field-button"

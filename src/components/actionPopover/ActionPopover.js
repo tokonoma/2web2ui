@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Popover, ActionList } from '@sparkpost/matchbox';
-import { Button } from 'src/components/matchbox';
+import { Popover } from '@sparkpost/matchbox';
+import { Button, ActionList } from 'src/components/matchbox';
 import { MoreHoriz } from '@sparkpost/matchbox-icons';
 
 const ActionPopover = ({ actions }) => (

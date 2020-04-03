@@ -76,7 +76,6 @@ exports[`EditSection renders tabs and section 1`] = `
             },
           ]
         }
-        groupByKey="section"
       />
     </Popover>
   </div>

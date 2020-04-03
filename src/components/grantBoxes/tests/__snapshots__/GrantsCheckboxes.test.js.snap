@@ -14,20 +14,8 @@ exports[`GrantsCheckboxes should render 1`] = `
       key="grant1"
     >
       <Tooltip
-        bottom={true}
         content="desc for grant 1"
         dark={true}
-        forcePosition={false}
-        horizontalOffset="0px"
-        preferredDirection={
-          Object {
-            "bottom": true,
-            "left": false,
-            "right": true,
-            "top": false,
-          }
-        }
-        right={true}
       >
         <Field
           component={[Function]}
@@ -48,20 +36,8 @@ exports[`GrantsCheckboxes should render 1`] = `
       key="grant2"
     >
       <Tooltip
-        bottom={true}
         content="desc for grant 2"
         dark={true}
-        forcePosition={false}
-        horizontalOffset="0px"
-        preferredDirection={
-          Object {
-            "bottom": true,
-            "left": false,
-            "right": true,
-            "top": false,
-          }
-        }
-        right={true}
       >
         <Field
           component={[Function]}

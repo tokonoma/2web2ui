@@ -12,20 +12,8 @@ exports[`EventTypeFilters should render from a list of event types 1`] = `
       key="amp_open"
       label={
         <Tooltip
-          bottom={true}
           content="AMP open desc"
           dark={true}
-          forcePosition={false}
-          horizontalOffset="0px"
-          preferredDirection={
-            Object {
-              "bottom": true,
-              "left": false,
-              "right": true,
-              "top": false,
-            }
-          }
-          right={true}
         >
           AMP Open
         </Tooltip>
@@ -38,20 +26,8 @@ exports[`EventTypeFilters should render from a list of event types 1`] = `
       key="bounce"
       label={
         <Tooltip
-          bottom={true}
           content="Bounce desc"
           dark={true}
-          forcePosition={false}
-          horizontalOffset="0px"
-          preferredDirection={
-            Object {
-              "bottom": true,
-              "left": false,
-              "right": true,
-              "top": false,
-            }
-          }
-          right={true}
         >
           Bounce
         </Tooltip>

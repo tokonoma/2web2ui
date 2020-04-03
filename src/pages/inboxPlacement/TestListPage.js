@@ -1,7 +1,6 @@
 import React, { useEffect, useCallback } from 'react';
 import moment from 'moment';
-import { Tooltip } from '@sparkpost/matchbox';
-import { Page, Panel, Table } from 'src/components/matchbox';
+import { Page, Panel, Table, Tooltip } from 'src/components/matchbox';
 import { Schedule } from '@sparkpost/matchbox-icons';
 import { ApiErrorBanner, Loading } from 'src/components';
 import { PageLink } from 'src/components/links';
