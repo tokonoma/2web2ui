@@ -50,8 +50,8 @@ const HibanaCardTitle = ({ children }) => {
   );
 };
 
-export const Card = ({ children, textAlign }) => {
-  return useHibanaToggle(OGCard, HibanaCard)({ children, textAlign });
+export const Card = props => {
+  return useHibanaToggle(OGCard, HibanaCard)(props);
 };
 
 export const CardContent = ({ children }) => {
