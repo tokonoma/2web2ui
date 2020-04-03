@@ -8,7 +8,7 @@ function Radio(props) {
   const [state] = useHibana();
   const { isHibanaEnabled } = state;
   if (!isHibanaEnabled) {
-    return <OGRadio {...omitSystemProps(props, ['id'])} />;
+    return <OGRadio {...omitSystemProps(props)} />;
   }
   return <HibanaRadio {...props} />;
 }
@@ -23,9 +23,6 @@ function Group(props) {
 }
 
 Radio.Group = Group;
-
-Radio.displayName = 'Radio';
-Radio.Group.displayName = 'Radio.Group';
 
 OGRadio.displayName = 'OGRadio';
 OGRadio.Group.displayName = 'OGRadio.Group';

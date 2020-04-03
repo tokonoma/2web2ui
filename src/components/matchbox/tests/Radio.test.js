@@ -7,8 +7,7 @@ jest.mock('src/context/HibanaContext');
 
 describe('Radio Matchbox component wrapper', () => {
   const subject = props => {
-    const defaultProps = { id: 'radio' };
-    return shallow(<Radio {...defaultProps} {...props}></Radio>);
+    return shallow(<Radio {...props}></Radio>);
   };
 
   it('renders the Hibana version of the Radio component correctly when hibana is enabled', () => {
@@ -23,8 +22,6 @@ describe('Radio Matchbox component wrapper', () => {
     useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: false }]);
 
     const wrapper = subject();
-
-    expect(wrapper).toHaveProp('id', 'radio');
 
     expect(wrapper).toHaveDisplayName('OGRadio');
   });
