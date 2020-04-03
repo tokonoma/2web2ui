@@ -24,6 +24,7 @@ function Group(props) {
 
 Radio.Group = Group;
 
+Radio.Group.displayName = 'Radio.Group';
 OGRadio.displayName = 'OGRadio';
 OGRadio.Group.displayName = 'OGRadio.Group';
 HibanaRadio.displayName = 'HibanaRadio';
