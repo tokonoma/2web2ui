@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { isForcedUTCRollupPrecision } from 'src/helpers/metrics';
 import { Typeahead } from './Typeahead';
 import moment from 'moment-timezone';
 import styles from './Typeahead.module.scss';
@@ -41,7 +42,7 @@ options.unshift({
 });
 
 export const TimezoneTypeahead = props => {
-  const { initialValue, onChange: parentOnChange, ...rest } = props;
+  const { initialValue, onChange: parentOnChange, precision, ...rest } = props;
   const [selected, setSelected] = useState(options[0]);
 
   const findOptionInList = useCallback(value => options.find(option => option.value === value), []);
@@ -52,6 +53,13 @@ export const TimezoneTypeahead = props => {
       setSelected(findOptionInList(initialValue));
     }
   }, [initialValue, findOptionInList]);
+
+  useEffect(() => {
+    if (precision && isForcedUTCRollupPrecision(precision)) {
+      setSelected(findOptionInList('UTC'));
+      parentOnChange({ timezone: 'UTC' });
+    }
+  }, [precision, parentOnChange, findOptionInList]);
 
   const onChange = item => {
     setSelected(item);

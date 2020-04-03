@@ -11,7 +11,8 @@ import {
 import ShareModal from './ShareModal';
 import PrecisionSelector from './PrecisionSelector';
 import { parseSearch } from 'src/helpers/reports';
-import { Grid } from '@sparkpost/matchbox';
+import { isForcedUTCRollupPrecision } from 'src/helpers/metrics';
+import { Grid, Tooltip } from '@sparkpost/matchbox';
 import Typeahead from './Typeahead';
 import { Panel, Select, Tag } from 'src/components/matchbox';
 import DatePicker from 'src/components/datePicker/DatePicker';
@@ -90,6 +91,17 @@ export class ReportOptions extends Component {
     } = this.props;
 
     if (featureFlaggedMetrics.useMetricsRollup) {
+      const isForcedUTC =
+        reportOptions.precision && isForcedUTCRollupPrecision(reportOptions.precision);
+
+      const timezoneTypeahead = (
+        <TimezoneTypeahead
+          initialValue={reportOptions.timezone}
+          onChange={this.handleTimezoneSelect}
+          disabled={reportLoading || isForcedUTC}
+          precision={reportOptions.precision}
+        />
+      );
       return (
         <>
           <Panel.Section>
@@ -125,11 +137,13 @@ export class ReportOptions extends Component {
                 </div>
               </Grid.Column>
               <Grid.Column xs={6} md={4}>
-                <TimezoneTypeahead
-                  initialValue={reportOptions.timezone}
-                  onChange={this.handleTimezoneSelect}
-                  disabled={reportLoading}
-                />
+                {isForcedUTC ? (
+                  <Tooltip content={'Only UTC is available for precisions of day or higher'}>
+                    {timezoneTypeahead}
+                  </Tooltip>
+                ) : (
+                  timezoneTypeahead
+                )}
               </Grid.Column>
               <Grid.Column xs={6} md={2}>
                 {//We will show a fake selector that shows the temporary precision when the user

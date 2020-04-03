@@ -137,6 +137,12 @@ export function getPrecisionType(precision) {
   return indexedPrecisions[precision].time <= 60 * 24 * 2 ? 'hour' : precision;
 }
 
+// We are forced to use UTC for any precision greater or equal to 'day'
+export function isForcedUTCRollupPrecision(precision) {
+  const precisionObj = rollupPrecisionMap.find(p => p.value === precision);
+  return precisionObj.min >= 60 * 24;
+}
+
 /**
  * Round 'from' and 'to' to nearest precision
  *
