@@ -2,8 +2,8 @@ import { OpenInNew, ExitToApp } from '@sparkpost/matchbox-icons';
 import { LINKS } from 'src/constants';
 import { openSupportPanel } from 'src/actions/support';
 import { isHeroku } from 'src/helpers/conditions/user';
-import { all, hasGrants, not, any } from 'src/helpers/conditions';
-import { isAccountUiOptionSet, onPlan } from 'src/helpers/conditions/account';
+import { hasGrants, not, any } from 'src/helpers/conditions';
+import { onPlan } from 'src/helpers/conditions/account';
 
 /***
  * These values are pulled in through the accountNavItems selector, which will map
@@ -81,7 +81,7 @@ const dataAndPrivacy = {
   label: 'Data and Privacy',
   to: '/account/data-privacy',
   section: 1,
-  condition: all(hasGrants('users/manage'), isAccountUiOptionSet('data_privacy')),
+  condition: hasGrants('users/manage'),
 };
 
 const getHelp = {
@@ -131,6 +131,7 @@ export const hibanaAccountNavItems = [
   // usage,  // In the mock, but doesn't exist yet?
   ...billingLinks,
   users,
+  dataAndPrivacy,
   subaccounts,
   alerts,
   help,
