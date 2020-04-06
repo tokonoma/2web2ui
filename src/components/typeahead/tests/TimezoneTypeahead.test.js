@@ -42,11 +42,11 @@ describe('Timezone Typeahead Item', () => {
     });
   });
 
-  it('if precision is set to day, it should set timezone to UTC in onChange ', () => {
+  it('if isForcedUTC is set, it should set timezone to UTC in onChange ', () => {
     const onChange = jest.fn();
     mount(
       <TestApp>
-        <TimezoneTypeahead initialValue="Pacific/Chatham" onChange={onChange} precision="day" />
+        <TimezoneTypeahead initialValue="Pacific/Chatham" onChange={onChange} isForcedUTC={true} />
       </TestApp>,
     );
 
@@ -55,11 +55,11 @@ describe('Timezone Typeahead Item', () => {
     });
   });
 
-  it('if precision is set to less than day, it should not call the onChange', () => {
+  it('if isForcedUTC is not set, it should not call the onChange', () => {
     const onChange = jest.fn();
     mount(
       <TestApp>
-        <TimezoneTypeahead initialValue="Pacific/Chatham" onChange={onChange} precision="1min" />
+        <TimezoneTypeahead initialValue="Pacific/Chatham" onChange={onChange} isForcedUTC={false} />
       </TestApp>,
     );
 

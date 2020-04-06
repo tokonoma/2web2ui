@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { isForcedUTCRollupPrecision } from 'src/helpers/metrics';
 import { Typeahead } from './Typeahead';
 import moment from 'moment-timezone';
 import styles from './Typeahead.module.scss';
@@ -27,14 +26,10 @@ const options = moment.tz
     return memo;
   }, [])
   .sort((a, b) => a.offset - b.offset)
-  .reduce((memo, tz) => {
-    const timezone = tz.offset ? moment.tz(tz.name).format('Z') : '';
-    memo.push({
-      value: tz.name,
-      label: `(UTC${timezone}) ${tz.name.replace(/_/g, ' ')}`,
-    });
-    return memo;
-  }, []);
+  .map(tz => ({
+    value: tz.name,
+    label: `(UTC${tz.offset ? moment.tz(tz.name).format('Z') : ''}) ${tz.name.replace(/_/g, ' ')}`,
+  }));
 
 options.unshift({
   value: 'UTC',
@@ -42,7 +37,7 @@ options.unshift({
 });
 
 export const TimezoneTypeahead = props => {
-  const { initialValue, onChange: parentOnChange, precision, ...rest } = props;
+  const { initialValue, onChange: parentOnChange, isForcedUTC, ...rest } = props;
   const [selected, setSelected] = useState(options[0]);
 
   const findOptionInList = useCallback(value => options.find(option => option.value === value), []);
@@ -55,11 +50,11 @@ export const TimezoneTypeahead = props => {
   }, [initialValue, findOptionInList]);
 
   useEffect(() => {
-    if (precision && isForcedUTCRollupPrecision(precision)) {
+    if (isForcedUTC) {
       setSelected(findOptionInList('UTC'));
       parentOnChange({ timezone: 'UTC' });
     }
-  }, [precision, parentOnChange, findOptionInList]);
+  }, [isForcedUTC, parentOnChange, findOptionInList]);
 
   const onChange = item => {
     setSelected(item);

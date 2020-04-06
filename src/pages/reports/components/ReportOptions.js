@@ -99,7 +99,7 @@ export class ReportOptions extends Component {
           initialValue={reportOptions.timezone}
           onChange={this.handleTimezoneSelect}
           disabled={reportLoading || isForcedUTC}
-          precision={reportOptions.precision}
+          isForcedUTC={isForcedUTC}
         />
       );
       return (
