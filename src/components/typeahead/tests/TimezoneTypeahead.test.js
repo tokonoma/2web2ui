@@ -5,7 +5,9 @@ import { TimezoneTypeahead } from '../TimezoneTypeahead';
 import TestApp from 'src/__testHelpers__/TestApp';
 
 describe('Timezone Typeahead Item', () => {
-  moment.tz.setDefault('America/New_York');
+  beforeEach(() => {
+    moment.tz.setDefault('America/New_York');
+  });
   // This includes a long list of options, but it's actually helpful to see a difference
   // when/if we update moment/moment-timezone which options might change
   it('should render the timezone list properly', () => {
@@ -51,7 +53,8 @@ describe('Timezone Typeahead Item', () => {
     );
 
     expect(onChange).toBeCalledWith({
-      timezone: 'UTC',
+      label: 'UTC',
+      value: 'UTC',
     });
   });
 
