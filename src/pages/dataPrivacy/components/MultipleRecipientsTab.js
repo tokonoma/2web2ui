@@ -102,7 +102,7 @@ export function MultipleRecipientsTab({
           <Field
             component={RadioGroup}
             name="requestType"
-            title="Select Compliance Type"
+            label="Select Compliance Type"
             options={REQUEST_TYPES}
             disabled={submitting}
             validate={[required]}

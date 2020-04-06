@@ -40,7 +40,7 @@ export function SingleRecipientTab(props) {
           <Field
             component={RadioGroup}
             name="requestType"
-            title="Select Compliance Type"
+            label="Select Compliance Type"
             options={REQUEST_TYPES}
             disabled={props.dataPrivacyRequestPending}
             validate={[required]}
