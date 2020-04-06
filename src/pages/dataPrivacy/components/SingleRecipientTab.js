@@ -71,7 +71,9 @@ export function SingleRecipientTab(props) {
             >
               Submit Request
             </Button>
-            <Button onClick={props.reset}>Clear</Button>
+            <Button onClick={props.reset} disabled={props.pristine || props.submitting}>
+              Clear
+            </Button>
           </ButtonWrapper>
         </form>
       </div>

@@ -29,6 +29,7 @@ export function MultipleRecipientsTab({
   submitting,
   dataPrivacyRequestError,
   resetDataPrivacy,
+  pristine,
 }) {
   // Adapted minimally from parseRecipientList() in webui/src/app/recipients/recipients-controller.js
 
@@ -140,7 +141,9 @@ export function MultipleRecipientsTab({
             <Button className={styles.submit} color="orange" type="submit">
               Submit Request
             </Button>
-            <Button onClick={reset}>Clear</Button>
+            <Button onClick={reset} disabled={pristine || submitting}>
+              Clear
+            </Button>
           </ButtonWrapper>
         </form>
       </div>
