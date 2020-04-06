@@ -21,7 +21,6 @@ exports[`Component: DatePicker ManualEntryForm should not show precision when ro
     </Grid.Column>
     <Grid.Column>
       <TextField
-        disabled={false}
         id="fromTime"
         label="From Time"
         labelHidden={true}
@@ -53,7 +52,6 @@ exports[`Component: DatePicker ManualEntryForm should not show precision when ro
     </Grid.Column>
     <Grid.Column>
       <TextField
-        disabled={false}
         id="toTime"
         label="To Time"
         labelHidden={true}

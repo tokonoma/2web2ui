@@ -5,7 +5,12 @@ import config from 'src/config';
 import { getRelativeDates } from 'src/helpers/date';
 import { safeDivide, safeRate } from './math';
 
-const { metricsPrecisionMap: precisionMap, apiDateFormat, chartColors = [] } = config;
+const {
+  metricsPrecisionMap: precisionMap,
+  metricsRollupPrecisionMap: rollupPrecisionMap,
+  apiDateFormat,
+  chartColors = [],
+} = config;
 const indexedPrecisions = _.keyBy(precisionMap, 'value');
 const FILTER_KEY_MAP = {
   'Recipient Domain': 'domains',
@@ -89,7 +94,38 @@ export function getPrecision(from, to = moment()) {
   return precisionMap.find(({ time }) => diff <= time).value;
 }
 
-export function getMomentPrecision(from, to = moment()) {
+/**
+ * Calculates the precision value for metrics Rollup. If the precision given
+ * is still within range, do not change precision. If the possible precision options
+ * do not include the current precision, get the recommended precision.
+ */
+export function getRollupPrecision({ from, to = moment(), precision }) {
+  if (!precision) {
+    return undefined;
+  }
+  const precisionOptions = getPrecisionOptions(moment(from), moment(to));
+  const precisionOptionsValues = precisionOptions.map(({ value }) => value);
+  if (precisionOptionsValues.includes(precision)) {
+    return precision;
+  }
+  return getRecommendedRollupPrecision(from, to);
+}
+export function getRecommendedRollupPrecision(from, to = moment()) {
+  const diff = moment(to).diff(moment(from), 'minutes');
+  return rollupPrecisionMap.find(({ recommended }) => diff <= recommended).value;
+}
+
+/**
+ * Creates an array of possible precision options for a time span
+ */
+export function getPrecisionOptions(from, to = moment()) {
+  const diff = to.diff(from, 'minutes');
+  return rollupPrecisionMap
+    .filter(({ min, max }) => diff >= min && diff <= max)
+    .map(({ value }) => ({ value, label: _.startCase(_.words(value).join(' ')) }));
+}
+
+export function getMomentPrecisionByDate(from, to = moment()) {
   const diff = to.diff(from, 'minutes');
   if (diff <= 60 * 24) {
     return 'minutes';
@@ -97,8 +133,24 @@ export function getMomentPrecision(from, to = moment()) {
   return diff <= 60 * 24 * 2 ? 'hours' : 'days';
 }
 
+export function getMomentPrecisionByPrecision(precision) {
+  if (precision.includes('min')) {
+    return 'minutes';
+  }
+  if (['day', 'week', 'month'].includes(precision)) {
+    return 'day';
+  }
+  return 'hour';
+}
+
 export function getPrecisionType(precision) {
   return indexedPrecisions[precision].time <= 60 * 24 * 2 ? 'hour' : precision;
+}
+
+// We are forced to use UTC for any precision greater or equal to 'day'
+const FORCED_UTC_ROLLUP_PRECISIONS = ['day', 'week', 'month'];
+export function isForcedUTCRollupPrecision(precision) {
+  return FORCED_UTC_ROLLUP_PRECISIONS.includes(precision);
 }
 
 /**
@@ -106,14 +158,20 @@ export function getPrecisionType(precision) {
  *
  * @param fromInput
  * @param toInput
+ * @param precision,
  * @return {{to: *|moment.Moment, from: *|moment.Moment}}
  */
-export function roundBoundaries(fromInput, toInput, now = moment()) {
+export function roundBoundaries({
+  from: fromInput,
+  to: toInput,
+  now = moment(),
+  precision: defaultPrecision,
+}) {
   const from = moment(fromInput);
   const to = moment(toInput);
 
-  const precision = getPrecision(from, to);
-  const momentPrecision = getMomentPrecision(from, to);
+  const precision = defaultPrecision || getPrecision(from, to);
+  const momentPrecision = getMomentPrecisionByPrecision(precision);
   // extract rounding interval from precision query param value
   const roundInt = momentPrecision === 'minutes' ? parseInt(precision.replace('min', '')) : 1;
 
@@ -162,9 +220,16 @@ function ceilMoment(time, roundInt = 1, precision = 'minutes') {
  * @param roundToPrecision
  * @return {*}
  */
-export function getValidDateRange({ from, to, now = moment(), roundToPrecision, preventFuture }) {
+export function getValidDateRange({
+  from,
+  to,
+  now = moment(),
+  roundToPrecision,
+  preventFuture,
+  precision,
+}) {
   // If we're not rounding, check to see if we want to prevent future dates. if not, we're good.
-  const nonRoundCondition = roundToPrecision || !preventFuture || to.isBefore(now);
+  const nonRoundCondition = roundToPrecision || precision || !preventFuture || to.isBefore(now);
   const validDates = _.every(
     _.map([from, to, now], date => moment.isMoment(date) && date.isValid()),
   );
@@ -176,8 +241,8 @@ export function getValidDateRange({ from, to, now = moment(), roundToPrecision, 
     // Use the user's rounded 'to' input if it's less than or equal to 'now' rounded up to the nearest precision,
     // otherwise use the valid range and precision of floor(from) to ceil(now).
     // This is necessary because the precision could change between the user's invalid range, and a valid range.
-    const { from: roundedFromNow, to: roundedNow } = roundBoundaries(from, now);
-    const { from: roundedFrom, to: roundedTo } = roundBoundaries(from, to);
+    const { from: roundedFromNow, to: roundedNow } = roundBoundaries({ from, to: now, precision });
+    const { from: roundedFrom, to: roundedTo } = roundBoundaries({ from, to, precision });
 
     if (roundedTo.isSameOrBefore(roundedNow)) {
       from = roundedFrom;

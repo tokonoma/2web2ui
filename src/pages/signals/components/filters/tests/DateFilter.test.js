@@ -34,10 +34,10 @@ describe('DateFilter', () => {
   it('sets a relative range', () => {
     const wrapper = subject();
     const options = { relativeRange: '90days' };
-    const { from, to } = roundBoundaries(
-      moment('2017-10-02T04:00:00Z'),
-      moment('2017-12-31T05:59:59.999Z'),
-    );
+    const { from, to } = roundBoundaries({
+      from: moment('2017-10-02T04:00:00Z'),
+      to: moment('2017-12-31T05:59:59.999Z'),
+    });
 
     wrapper.find('DatePicker').prop('onChange')(options);
     expect(props.changeSignalOptions).toHaveBeenCalledWith({

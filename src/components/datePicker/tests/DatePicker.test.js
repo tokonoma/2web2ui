@@ -42,6 +42,7 @@ describe('Component: DatePicker', () => {
       from: moment(mockFrom),
       to: moment(mockNow),
     }));
+    metricsHelpers.getRollupPrecision = jest.fn(({ precision }) => precision);
     dateHelpers.getRelativeDateOptions = jest.fn(() => [1, 2, 3]);
     datefns.format = jest.fn((a, b) => b);
     datefns.subMonths = jest.fn(a => a);
@@ -91,6 +92,36 @@ describe('Component: DatePicker', () => {
       wrapper.setProps({ other: 'stuff' });
       expect(instance.syncTimeToState).not.toHaveBeenCalled();
       expect(wrapper.state('selected')).toEqual(before);
+    });
+
+    it('should update precision when changed', () => {
+      wrapper.setProps({ selectPrecision: true, precision: '5min' });
+      wrapper.update();
+      wrapper.setState({ selected: before, selectedPrecision: '5min' });
+      wrapper.setProps({ precision: 'hour' });
+
+      expect(instance.syncTimeToState).toHaveBeenCalled();
+      expect(wrapper.state('selectedPrecision')).toEqual('hour');
+    });
+  });
+
+  describe('updateShownPrecision', () => {
+    const mockUpdateShownPrecision = jest.fn();
+
+    it('should be called with internal state precision when it changes', () => {
+      wrapper.setProps({ updateShownPrecision: mockUpdateShownPrecision, precision: '15min' });
+      wrapper.update();
+      wrapper.setState({ selectedPrecision: 'hour', showDatePicker: true });
+      expect(mockUpdateShownPrecision).toHaveBeenCalledWith('hour');
+    });
+
+    it('should be called with empty string when the datepicker closes', () => {
+      wrapper.setProps({ updateShownPrecision: mockUpdateShownPrecision, precision: '15min' });
+      wrapper.setState({ showDatePicker: true });
+      wrapper.update();
+      wrapper.setState({ showDatePicker: false });
+      wrapper.update();
+      expect(mockUpdateShownPrecision).toHaveBeenCalledWith('');
     });
   });
 
@@ -274,8 +305,26 @@ describe('Component: DatePicker', () => {
 
       expect(dateHelpers.getEndOfDay).toHaveBeenCalledWith(newDate, { preventFuture: true });
       expect(dateHelpers.getStartOfDay).not.toHaveBeenCalled();
-      expect(metricsHelpers.roundBoundaries).toHaveBeenCalledWith(from, 'end-of-day');
+      expect(metricsHelpers.roundBoundaries).toHaveBeenCalledWith({ from, to: 'end-of-day' });
       expect(range).toEqual({ from: moment(mockFrom).toDate(), to: moment(mockNow).toDate() });
+    });
+
+    it('should round to precision if given', () => {
+      const from = new Date('2018-01-01');
+      const newDate = new Date('2018-01-02');
+      const to = new Date('2018-01-03');
+
+      wrapper.setProps({ selectPrecision: true, precision: 'hour' });
+      wrapper.update();
+      wrapper.setState({ beforeSelected: { from, to }, selectedPrecision: 'hour' });
+      wrapper.update();
+      const range = instance.getOrderedRange(newDate);
+
+      expect(range).toEqual({
+        from: moment(mockFrom).toDate(),
+        to: moment(mockNow).toDate(),
+        precision: 'hour',
+      });
     });
 
     it('should return correct range when new date is before from and to (start of day)', () => {
@@ -289,7 +338,7 @@ describe('Component: DatePicker', () => {
       expect(dateHelpers.getEndOfDay).not.toHaveBeenCalled();
       expect(dateHelpers.getStartOfDay).toHaveBeenCalledWith(newDate);
       expect(dateHelpers.getStartOfDay).toHaveBeenCalledTimes(3);
-      expect(metricsHelpers.roundBoundaries).toHaveBeenCalledWith('start-of-day', to);
+      expect(metricsHelpers.roundBoundaries).toHaveBeenCalledWith({ from: 'start-of-day', to });
       expect(range).toEqual({ from: moment(mockFrom).toDate(), to: moment(mockNow).toDate() });
     });
 
@@ -307,7 +356,7 @@ describe('Component: DatePicker', () => {
       expect(dateHelpers.getEndOfDay).not.toHaveBeenCalled();
       expect(dateHelpers.getNextHour).toHaveBeenCalledWith(newDate);
       expect(dateHelpers.getStartOfDay).toHaveBeenCalledTimes(2);
-      expect(metricsHelpers.roundBoundaries).toHaveBeenCalledWith('next-hour', to);
+      expect(metricsHelpers.roundBoundaries).toHaveBeenCalledWith({ from: 'next-hour', to });
       expect(range).toEqual({ from: moment(mockFrom).toDate(), to: moment(mockNow).toDate() });
     });
 
@@ -321,7 +370,7 @@ describe('Component: DatePicker', () => {
 
       expect(dateHelpers.getEndOfDay).toHaveBeenCalledWith(newDate, { preventFuture: true });
       expect(dateHelpers.getStartOfDay).not.toHaveBeenCalled();
-      expect(metricsHelpers.roundBoundaries).toHaveBeenCalledWith(from, 'end-of-day');
+      expect(metricsHelpers.roundBoundaries).toHaveBeenCalledWith({ from, to: 'end-of-day' });
       expect(range).toEqual({ from: moment(mockFrom).toDate(), to: moment(mockNow).toDate() });
     });
 
@@ -335,7 +384,7 @@ describe('Component: DatePicker', () => {
 
       expect(dateHelpers.getEndOfDay).toHaveBeenCalledWith(newDate, { preventFuture: true });
       expect(dateHelpers.getStartOfDay).not.toHaveBeenCalled();
-      expect(metricsHelpers.roundBoundaries).toHaveBeenCalledWith(from, 'end-of-day');
+      expect(metricsHelpers.roundBoundaries).toHaveBeenCalledWith({ from, to: 'end-of-day' });
       expect(range).toEqual({ from: moment(mockFrom).toDate(), to: moment(mockNow).toDate() });
     });
   });
@@ -385,11 +434,20 @@ describe('Component: DatePicker', () => {
   describe('handleSubmit', () => {
     it('should reset some state and refresh', () => {
       const mockSelected = { a: 1, b: 2, c: 3 };
-      wrapper.setState({ showDatePicker: true, selecting: true, selected: mockSelected });
+      wrapper.setState({
+        showDatePicker: true,
+        selecting: true,
+        selected: mockSelected,
+        selectedPrecision: 'hour',
+      });
       instance.handleSubmit();
       expect(wrapper.state('showDatePicker')).toEqual(false);
       expect(wrapper.state('selecting')).toEqual(false);
-      expect(props.onChange).toHaveBeenCalledWith({ ...mockSelected, relativeRange: 'custom' });
+      expect(props.onChange).toHaveBeenCalledWith({
+        ...mockSelected,
+        precision: 'hour',
+        relativeRange: 'custom',
+      });
     });
 
     it('should not do anything with a validation error', () => {
