@@ -18,3 +18,11 @@
 .TagWrapper {
   margin: 0 spacing(small);
 }
+
+// The Tooltip component sets the display to inline block,
+// which messes up the Column flex layout
+.TimezoneTooltipWrapper {
+  > span {
+    display: inherit;
+  }
+}
