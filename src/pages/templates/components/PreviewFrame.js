@@ -12,28 +12,25 @@ const FLEXIBLE_POLICY = [
   'allow-presentation',
   'allow-same-origin',
   'allow-scripts',
-  'allow-top-navigation'
+  'allow-top-navigation',
 ];
 
-const STRICT_POLICY = [
-  'allow-same-origin',
-  'allow-top-navigation'
-];
+const STRICT_POLICY = ['allow-same-origin', 'allow-top-navigation'];
 
 // @note This is a port of the previous fd.templates.preview.directive
 // @see https://github.com/SparkPost/webui/blob/master/src/app/templates/preview-directive.js
 export default class PreviewFrame extends Component {
   static defaultProps = {
-    strict: true
-  }
+    strict: true,
+  };
 
   static propTypes = {
-    content: PropTypes.string.isRequired
-  }
+    content: PropTypes.string.isRequired,
+  };
 
   state = {
-    height: undefined
-  }
+    height: undefined,
+  };
 
   componentDidMount() {
     // Must wait to write content until this.iframe is set after render()
@@ -56,7 +53,7 @@ export default class PreviewFrame extends Component {
       body.scrollHeight,
       html.clientHeight,
       html.offsetHeight,
-      html.scrollHeight
+      html.scrollHeight,
     );
 
     // Avoid loading links in iframe
@@ -64,12 +61,19 @@ export default class PreviewFrame extends Component {
 
     // ...because DOM collections only array-like
     const anchors = [...anchorHTMLCollection];
-    anchors.forEach((a) => a.setAttribute('target', '_parent'));
+    anchors.forEach(a => {
+      // must overwrite "rel" value to avoid a security vulnerability
+      a.setAttribute('rel', 'noopener noreferrer');
+      // must use _parent because Firefox and other browsers do not support _blank from an iframe
+      a.setAttribute('target', '_parent');
+    });
 
     this.setState({ height: `${height + PADDING}px` });
-  }
+  };
 
-  setRef = (iframe) => { this.iframe = iframe; }
+  setRef = iframe => {
+    this.iframe = iframe;
+  };
 
   writeContent() {
     const { contentDocument } = this.iframe;

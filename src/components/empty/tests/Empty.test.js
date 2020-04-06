@@ -1,10 +1,16 @@
 import React from 'react';
 import { Empty } from 'src/components';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
+import TestApp from 'src/__testHelpers__/TestApp';
 
 describe('Empty: ', () => {
   it('should render', () => {
-    const wrapper = shallow(<Empty title={'Empty Title'} message={'nothing here to see'} />);
-    expect(wrapper).toMatchSnapshot();
+    const wrapper = mount(
+      <TestApp>
+        <Empty title={'Empty Title'} message={'nothing here to see'} />
+      </TestApp>,
+    );
+    expect(wrapper).toHaveTextContent('Empty Title');
+    expect(wrapper).toHaveTextContent('nothing here to see');
   });
 });

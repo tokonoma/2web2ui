@@ -125,7 +125,7 @@ export function getPrecisionOptions(from, to = moment()) {
     .map(({ value }) => ({ value, label: _.startCase(_.words(value).join(' ')) }));
 }
 
-export function getMomentPrecision(from, to = moment()) {
+export function getMomentPrecisionByDate(from, to = moment()) {
   const diff = to.diff(from, 'minutes');
   if (diff <= 60 * 24) {
     return 'minutes';
@@ -133,14 +133,24 @@ export function getMomentPrecision(from, to = moment()) {
   return diff <= 60 * 24 * 2 ? 'hours' : 'days';
 }
 
+export function getMomentPrecisionByPrecision(precision) {
+  if (precision.includes('min')) {
+    return 'minutes';
+  }
+  if (['day', 'week', 'month'].includes(precision)) {
+    return 'day';
+  }
+  return 'hour';
+}
+
 export function getPrecisionType(precision) {
   return indexedPrecisions[precision].time <= 60 * 24 * 2 ? 'hour' : precision;
 }
 
 // We are forced to use UTC for any precision greater or equal to 'day'
+const FORCED_UTC_ROLLUP_PRECISIONS = ['day', 'week', 'month'];
 export function isForcedUTCRollupPrecision(precision) {
-  const precisionObj = rollupPrecisionMap.find(p => p.value === precision);
-  return precisionObj.min >= 60 * 24;
+  return FORCED_UTC_ROLLUP_PRECISIONS.includes(precision);
 }
 
 /**
@@ -161,11 +171,7 @@ export function roundBoundaries({
   const to = moment(toInput);
 
   const precision = defaultPrecision || getPrecision(from, to);
-  const momentPrecision = defaultPrecision
-    ? precision.includes('min')
-      ? 'minutes'
-      : precision
-    : getMomentPrecision(from, to);
+  const momentPrecision = getMomentPrecisionByPrecision(precision);
   // extract rounding interval from precision query param value
   const roundInt = momentPrecision === 'minutes' ? parseInt(precision.replace('min', '')) : 1;
 

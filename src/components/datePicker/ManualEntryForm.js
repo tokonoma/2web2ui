@@ -9,7 +9,7 @@ import {
   getValidDateRange,
   getPrecision,
   getRollupPrecision,
-  getMomentPrecision,
+  getMomentPrecisionByDate,
 } from 'src/helpers/metrics';
 import styles from './ManualEntryForm.module.scss';
 
@@ -118,7 +118,7 @@ export default class ManualEntryForm extends Component {
         precisionLabelValue = getPrecision(validatedFrom, validatedTo);
         shouldDisableTime = selectedPrecision
           ? ['day', 'week', 'month'].includes(selectedPrecision)
-          : getMomentPrecision(validatedFrom, validatedTo) === 'days';
+          : getMomentPrecisionByDate(validatedFrom, validatedTo) === 'days';
       } catch (e) {
         precisionLabelValue = '';
       }

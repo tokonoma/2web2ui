@@ -137,19 +137,19 @@ describe('metrics helpers', () => {
   it('should return minute as moment precision type', () => {
     const from = moment('2016-12-18T00:00').utc();
     const to = moment('2016-12-18T00:30').utc();
-    expect(metricsHelpers.getMomentPrecision(from, to)).toEqual('minutes');
+    expect(metricsHelpers.getMomentPrecisionByDate(from, to)).toEqual('minutes');
   });
 
   it('should return hour as moment precision type', () => {
     const from = moment('2016-12-18T00:00').utc();
     const to = moment('2016-12-19T00:30').utc();
-    expect(metricsHelpers.getMomentPrecision(from, to)).toEqual('hours');
+    expect(metricsHelpers.getMomentPrecisionByDate(from, to)).toEqual('hours');
   });
 
   it('should return day as moment precision type', () => {
     const from = moment('2016-12-18T00:00').utc();
     const to = moment('2016-12-25T00:30').utc();
-    expect(metricsHelpers.getMomentPrecision(from, to)).toEqual('days');
+    expect(metricsHelpers.getMomentPrecisionByDate(from, to)).toEqual('days');
   });
 
   it('should return hours as precision type for time <= 2 days', () => {

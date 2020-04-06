@@ -99,7 +99,7 @@ export class ReportOptions extends Component {
           initialValue={reportOptions.timezone}
           onChange={this.handleTimezoneSelect}
           disabled={reportLoading || isForcedUTC}
-          precision={reportOptions.precision}
+          isForcedUTC={isForcedUTC}
         />
       );
       return (
@@ -138,9 +138,11 @@ export class ReportOptions extends Component {
               </Grid.Column>
               <Grid.Column xs={6} md={4}>
                 {isForcedUTC ? (
-                  <Tooltip content="Day, week, and month precision only support UTC.">
-                    {timezoneTypeahead}
-                  </Tooltip>
+                  <div className={styles.TimezoneTooltipWrapper}>
+                    <Tooltip content="Day, week, and month precision only support UTC.">
+                      {timezoneTypeahead}
+                    </Tooltip>
+                  </div>
                 ) : (
                   timezoneTypeahead
                 )}
