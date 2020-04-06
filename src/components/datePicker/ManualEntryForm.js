@@ -112,7 +112,7 @@ export default class ManualEntryForm extends Component {
           to,
           now,
           roundToPrecision,
-          selectedPrecision,
+          precision: selectedPrecision,
         });
 
         precisionLabelValue = getPrecision(validatedFrom, validatedTo);
