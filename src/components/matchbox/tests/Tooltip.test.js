@@ -7,7 +7,7 @@ jest.mock('src/context/HibanaContext');
 
 describe('Tooltip Matchbox component wrapper', () => {
   const subject = props => {
-    const defaultProps = { width: '50px' };
+    const defaultProps = { id: 'tooltip-id', width: '50px' };
     return shallow(
       <Tooltip {...defaultProps} {...props}>
         Children...
