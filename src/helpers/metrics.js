@@ -138,9 +138,9 @@ export function getPrecisionType(precision) {
 }
 
 // We are forced to use UTC for any precision greater or equal to 'day'
+const FORCED_UTC_ROLLUP_PRECISIONS = ['day', 'week', 'month'];
 export function isForcedUTCRollupPrecision(precision) {
-  const precisionObj = rollupPrecisionMap.find(p => p.value === precision);
-  return precisionObj.min >= 60 * 24;
+  return FORCED_UTC_ROLLUP_PRECISIONS.includes(precision);
 }
 
 /**

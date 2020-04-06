@@ -1,13 +1,68 @@
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import React from 'react';
 import moment from 'moment';
 import { TimezoneTypeahead } from '../TimezoneTypeahead';
+import TestApp from 'src/__testHelpers__/TestApp';
 
 describe('Timezone Typeahead Item', () => {
+  moment.tz.setDefault('America/New_York');
   // This includes a long list of options, but it's actually helpful to see a difference
   // when/if we update moment/moment-timezone which options might change
   it('should render the timezone list properly', () => {
-    moment.tz.setDefault('America/New_York');
-    expect(shallow(<TimezoneTypeahead />)).toMatchSnapshot();
+    const wrapper = mount(
+      <TestApp>
+        <TimezoneTypeahead />
+      </TestApp>,
+    );
+    expect(wrapper.find('Typeahead').prop('results')).toMatchSnapshot();
+  });
+
+  it('should should select the first timezone (UTC) as the default', () => {
+    const wrapper = mount(
+      <TestApp>
+        <TimezoneTypeahead />
+      </TestApp>,
+    );
+    expect(wrapper.find('Typeahead').prop('selectedItem')).toEqual({
+      value: 'UTC',
+      label: 'UTC',
+    });
+  });
+
+  it('if initialValue is set, it should select that as the default', () => {
+    const wrapper = mount(
+      <TestApp>
+        <TimezoneTypeahead initialValue="Pacific/Chatham" />
+      </TestApp>,
+    );
+
+    expect(wrapper.find('Typeahead').prop('selectedItem')).toEqual({
+      label: '(UTC+12:45) Pacific/Chatham',
+      value: 'Pacific/Chatham',
+    });
+  });
+
+  it('if precision is set to day, it should set timezone to UTC in onChange ', () => {
+    const onChange = jest.fn();
+    mount(
+      <TestApp>
+        <TimezoneTypeahead initialValue="Pacific/Chatham" onChange={onChange} precision="day" />
+      </TestApp>,
+    );
+
+    expect(onChange).toBeCalledWith({
+      timezone: 'UTC',
+    });
+  });
+
+  it('if precision is set to less than day, it should not call the onChange', () => {
+    const onChange = jest.fn();
+    mount(
+      <TestApp>
+        <TimezoneTypeahead initialValue="Pacific/Chatham" onChange={onChange} precision="1min" />
+      </TestApp>,
+    );
+
+    expect(onChange).not.toBeCalled();
   });
 });
