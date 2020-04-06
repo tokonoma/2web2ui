@@ -10,6 +10,8 @@ import { Table, MetricsModal, ChartGroup, ChartHeader } from './components';
 import { selectSummaryChartSearchOptions } from 'src/selectors/reportSearchOptions';
 import { selectReportsEnhancementsEnabled } from 'src/selectors/customReports';
 import styles from './SummaryPage.module.scss';
+import { selectFeatureFlaggedMetrics } from 'src/selectors/metrics';
+import _ from 'lodash';
 
 export class SummaryReportPage extends Component {
   state = {
@@ -53,8 +55,13 @@ export class SummaryReportPage extends Component {
   };
 
   render() {
-    const { chart, summarySearchOptions = {}, enhancementsEnabled } = this.props;
-    const { to } = summarySearchOptions;
+    const {
+      chart,
+      summarySearchOptions = {},
+      enhancementsEnabled,
+      featureFlaggedMetrics,
+    } = this.props;
+    const { to, timezone = '', precision } = summarySearchOptions;
     const { scale, eventTime, metricsModal } = this.state;
 
     return (
@@ -78,6 +85,13 @@ export class SummaryReportPage extends Component {
                 onMetricsToggle={this.handleMetricsModal}
               />
               <ChartGroup {...chart} to={to} yScale={scale} />
+              {featureFlaggedMetrics.useMetricsRollup && (
+                <div className={styles.TimezonePrecision}>
+                  <b>Timezone - </b> {timezone.replace(/_/g, ' ')}
+                  <b className={styles.Precision}>Precision - </b>{' '}
+                  {_.startCase(_.words(precision).join(' '))}
+                </div>
+              )}
             </Panel.Section>
 
             {this.renderLoading()}
@@ -103,6 +117,7 @@ const mapStateToProps = state => ({
   reportOptions: state.reportOptions,
   summarySearchOptions: selectSummaryChartSearchOptions(state),
   enhancementsEnabled: selectReportsEnhancementsEnabled(state),
+  featureFlaggedMetrics: selectFeatureFlaggedMetrics(state),
 });
 
 const mapDispatchToProps = {
