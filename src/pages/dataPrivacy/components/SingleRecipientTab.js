@@ -86,6 +86,9 @@ const formOptions = {
 const mapStateToProps = state => {
   return {
     dataPrivacyRequestPending: state.dataPrivacy.dataPrivacyRequestPending,
+    initialValues: {
+      assignTo: 'master',
+    },
   };
 };
 export default connect(mapStateToProps, { submitRTBFRequest, submitOptOutRequest, showAlert })(

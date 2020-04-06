@@ -157,6 +157,9 @@ const mapStateToProps = ({ dataPrivacy }) => {
   const { dataPrivacyRequestError } = dataPrivacy;
   return {
     dataPrivacyRequestError,
+    initialValues: {
+      assignTo: 'master',
+    },
   };
 };
 
