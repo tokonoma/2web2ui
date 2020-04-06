@@ -94,6 +94,7 @@ export class Typeahead extends Component {
   }) => {
     const {
       placeholder, // TextField placeholder
+      disabled,
     } = this.props;
 
     const { matches = [] } = this.state;
@@ -121,6 +122,7 @@ export class Typeahead extends Component {
             onFocus: clearSelection,
           })}
           suffix={<MatchesLoading isLoading={this.state.calculatingMatches} />}
+          disabled={disabled}
         />
       </div>
     );

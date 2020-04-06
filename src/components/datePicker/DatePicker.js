@@ -228,6 +228,7 @@ export default class DatePicker extends Component {
       precision,
       id = 'date-picker', // When multiple <DatePicker/> components are present, each one will need a unique `id`. This is a safe default.
     } = this.props;
+
     const dateFormat = dateFieldFormat || this.DATE_FORMAT;
     const rangeSelect = showPresets ? (
       <>
@@ -302,7 +303,6 @@ export default class DatePicker extends Component {
             defaultPrecision={precision}
           />
         )}
-
         <Button
           primary
           onClick={this.handleSubmit}

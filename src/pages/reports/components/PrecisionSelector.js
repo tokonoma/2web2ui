@@ -4,7 +4,7 @@ import { getPrecisionOptions, roundBoundaries, getRollupPrecision } from 'src/he
 import { Select } from 'src/components/matchbox';
 import moment from 'moment';
 
-const PrecisionSelector = ({ from, to, changeTime, selectedPrecision }) => {
+const PrecisionSelector = ({ from, to, changeTime, selectedPrecision, disabled }) => {
   const precisionOptions = getPrecisionOptions(moment(from), moment(to));
 
   useEffect(() => {
@@ -26,6 +26,8 @@ const PrecisionSelector = ({ from, to, changeTime, selectedPrecision }) => {
       options={precisionOptions}
       onChange={updatePrecision}
       value={selectedPrecision}
+      label="Precision"
+      disabled={disabled}
     />
   );
 };
