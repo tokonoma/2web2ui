@@ -63,8 +63,6 @@ exports[`Component: TestContent renders page correctly with defaults 1`] = `
     <Panel.Section>
       <CodeBlock
         code="The Raw message"
-        height={355}
-        numbered={false}
       />
     </Panel.Section>
   </Panel>
