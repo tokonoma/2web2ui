@@ -36,6 +36,7 @@ exports[`ApiKeyFields 2`] = `
   <Field
     component={[Function]}
     disabled={false}
+    label="API Permissions"
     name="grantsRadio"
     options={
       Array [
@@ -49,7 +50,6 @@ exports[`ApiKeyFields 2`] = `
         },
       ]
     }
-    title="API Permissions"
   />
   <GrantsCheckboxes
     grants={

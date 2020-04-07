@@ -74,6 +74,7 @@ exports[`should render BasicAuthFields 1`] = `
 exports[`should render EventsRadioGroup 1`] = `
 <Field
   component={[Function]}
+  label="Events:"
   name="eventsRadio"
   options={
     Array [
@@ -89,7 +90,6 @@ exports[`should render EventsRadioGroup 1`] = `
       },
     ]
   }
-  title="Events:"
 />
 `;
 

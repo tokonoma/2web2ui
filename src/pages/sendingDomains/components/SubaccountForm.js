@@ -8,7 +8,7 @@ import { required } from 'src/helpers/validation';
 const createOptions = [
   { label: 'Assign to Master Account', value: 'master' },
   { label: 'Share with all Subaccounts', value: 'shared' },
-  { label: 'Assign to Subaccount', value: 'subaccount' }
+  { label: 'Assign to Subaccount', value: 'subaccount' },
 ];
 
 /**
@@ -29,17 +29,19 @@ export class SubaccountForm extends Component {
   render() {
     const { assignTo } = this.props;
 
-    const typeahead = assignTo === 'subaccount'
-      ? <Field name='subaccount' component={SubaccountTypeaheadWrapper} validate={required} />
-      : null;
+    const typeahead =
+      assignTo === 'subaccount' ? (
+        <Field name="subaccount" component={SubaccountTypeaheadWrapper} validate={required} />
+      ) : null;
 
     return (
       <div>
         <Field
           component={RadioGroup}
-          name='assignTo'
-          title='Subaccount Assignment'
-          options={createOptions} />
+          name="assignTo"
+          label="Subaccount Assignment"
+          options={createOptions}
+        />
         {typeahead}
       </div>
     );
@@ -48,7 +50,7 @@ export class SubaccountForm extends Component {
 
 SubaccountForm.propTypes = {
   assignTo: PropTypes.oneOf(['master', 'shared', 'subaccount', null]),
-  change: PropTypes.func
+  change: PropTypes.func,
 };
 
 const mapStateToProps = (state, props) => {

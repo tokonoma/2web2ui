@@ -49,8 +49,8 @@ export default class SubaccountSection extends Component {
       <div>
         <Field
           component={RadioGroup}
-          name="assignTo"
           label="Subaccount Assignment"
+          name="assignTo"
           options={this.props.createOptions ? this.props.createOptions : createOptions}
         />
         {typeahead}

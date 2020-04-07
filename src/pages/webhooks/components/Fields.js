@@ -85,7 +85,7 @@ const EventsRadioGroup = ({ disabled }) => (
   <Field
     name="eventsRadio"
     component={RadioGroup}
-    title="Events:"
+    label="Events:"
     options={[
       { value: 'all', label: 'All events', disabled },
       { value: 'select', label: 'Select individual events', disabled },

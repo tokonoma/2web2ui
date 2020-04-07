@@ -16,6 +16,7 @@ exports[`Component: RoleRadioGroup should render the RadioGroup 1`] = `
   allowSuperUser={false}
   clearFields={[MockFunction]}
   hasSubaccounts={false}
+  label="Role"
   options={
     Array [
       Object {
@@ -54,7 +55,6 @@ exports[`Component: RoleRadioGroup should render the RadioGroup 1`] = `
     ]
   }
   selectedRole="admin"
-  title="Role"
   useSubaccountChecked={false}
 />
 `;

@@ -4,6 +4,7 @@ exports[`Sending Domains Subaccount Form renders correctly 1`] = `
 <div>
   <Field
     component={[Function]}
+    label="Subaccount Assignment"
     name="assignTo"
     options={
       Array [
@@ -21,7 +22,6 @@ exports[`Sending Domains Subaccount Form renders correctly 1`] = `
         },
       ]
     }
-    title="Subaccount Assignment"
   />
 </div>
 `;
