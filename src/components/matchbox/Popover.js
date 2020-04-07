@@ -9,7 +9,7 @@ function Popover(props) {
   const { isHibanaEnabled } = state;
 
   if (!isHibanaEnabled) {
-    return <OGPopover {...omitSystemProps(props)} />;
+    return <OGPopover {...omitSystemProps(props, ['left'])} />;
   }
 
   return <HibanaPopover {...props} />;
