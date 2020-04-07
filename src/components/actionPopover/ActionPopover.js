@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Popover } from '@sparkpost/matchbox';
-import { Button, ActionList } from 'src/components/matchbox';
 import { MoreHoriz } from '@sparkpost/matchbox-icons';
+import { ActionList, Button, Popover } from 'src/components/matchbox';
 
-const ActionPopover = ({ actions }) => (
+const ActionPopover = ({ actions, id }) => (
   <div style={{ textAlign: 'right' }}>
     <Popover
+      id={id}
       left
       trigger={
-        <Button flat>
+        <Button aria-describedby={id} flat>
           <MoreHoriz size={20} />
         </Button>
       }
@@ -21,6 +21,7 @@ const ActionPopover = ({ actions }) => (
 
 ActionPopover.propTypes = {
   actions: PropTypes.array,
+  id: PropTypes.string.isRequired,
 };
 
 export default ActionPopover;

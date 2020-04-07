@@ -15,6 +15,7 @@ exports[`Page: Users List should render ActionPopover 1`] = `
       },
     ]
   }
+  id="action-popover-for-test-username"
 />
 `;
 

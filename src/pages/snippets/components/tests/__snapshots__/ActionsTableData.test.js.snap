@@ -26,6 +26,7 @@ exports[`ActionsTableData by default 1`] = `
       },
     ]
   }
+  id="action-popover-for-example-id"
 />
 `;
 
@@ -55,5 +56,6 @@ exports[`ActionsTableData with subaccount 1`] = `
       },
     ]
   }
+  id="action-popover-for-example-id-999"
 />
 `;
