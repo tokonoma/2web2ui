@@ -226,6 +226,7 @@ export default class DatePicker extends Component {
       left,
       hideManualEntry,
       precision,
+      selectPrecision,
       id = 'date-picker', // When multiple <DatePicker/> components are present, each one will need a unique `id`. This is a safe default.
     } = this.props;
 
@@ -300,7 +301,7 @@ export default class DatePicker extends Component {
             roundToPrecision={roundToPrecision}
             preventFuture={preventFuture}
             selectedPrecision={selectedPrecision}
-            defaultPrecision={precision}
+            defaultPrecision={selectPrecision && precision}
           />
         )}
         <Button
