@@ -5,11 +5,10 @@ exports[`Component: Summary Chart Header should render 1`] = `
   className="ChartHeader"
 >
   <Grid.Column
-    lg={5}
-    md={5}
+    md={9}
     xs={12}
   >
-    <Legend
+    <Connect(Legend)
       metrics={
         Array [
           "metric-1",
@@ -18,8 +17,7 @@ exports[`Component: Summary Chart Header should render 1`] = `
     />
   </Grid.Column>
   <Grid.Column
-    lg={7}
-    md={7}
+    md={3}
     xs={12}
   >
     <div

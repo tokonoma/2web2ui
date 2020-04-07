@@ -58,13 +58,13 @@ describe('Component: Summary Chart Legend', () => {
     expect(wrapper).not.toHaveTextContent('C per minute');
   });
 
-  it('should render using "per minute" labels for unique metrics', () => {
+  it('should render using "per minute" labels for unique metrics for 1min precision', () => {
     const wrapper = subject({ featureFlaggedMetrics: { useMetricsRollup: true } });
     expect(wrapper).not.toHaveTextContent('B per minute');
     expect(wrapper).toHaveTextContent('C per minute');
   });
 
-  it('should render using "per hour" labels for unique metrics', () => {
+  it('should render using "per hour" labels for unique metrics for hour precision', () => {
     const wrapper = subject({
       featureFlaggedMetrics: { useMetricsRollup: true },
       reportOptions: {
@@ -74,7 +74,7 @@ describe('Component: Summary Chart Legend', () => {
     expect(wrapper).toHaveTextContent('C per hour');
   });
 
-  it('should render using "per day" labels for unique metrics', () => {
+  it('should render using "per day" labels for unique metrics for month precision', () => {
     const wrapper = subject({
       featureFlaggedMetrics: { useMetricsRollup: true },
       reportOptions: {
