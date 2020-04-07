@@ -38,10 +38,10 @@ export default class ChartHeader extends Component {
 
     return (
       <Grid className={styles.ChartHeader}>
-        <Grid.Column xs={12} md={5} lg={5}>
+        <Grid.Column xs={12} md={9}>
           <Legend metrics={selectedMetrics} />
         </Grid.Column>
-        <Grid.Column xs={12} md={7} lg={7}>
+        <Grid.Column xs={12} md={3}>
           <div className={styles.Controls}>
             <Button size="small" onClick={onMetricsToggle}>
               Select Metrics
