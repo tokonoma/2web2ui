@@ -5,6 +5,7 @@ exports[`Templates SubaccountSection on create should render radio group 1`] = `
   <div>
     <Field
       component={[Function]}
+      label="Subaccount Assignment"
       name="assignTo"
       options={
         Array [
@@ -22,7 +23,6 @@ exports[`Templates SubaccountSection on create should render radio group 1`] = `
           },
         ]
       }
-      title="Subaccount Assignment"
     />
   </div>
 </Fragment>

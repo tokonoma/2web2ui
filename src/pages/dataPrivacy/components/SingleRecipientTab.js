@@ -40,7 +40,7 @@ export function SingleRecipientTab(props) {
           <Field
             component={RadioGroup}
             name="requestType"
-            title="Select Compliance Type"
+            label="Select Compliance Type"
             options={REQUEST_TYPES}
             disabled={props.dataPrivacyRequestPending}
             validate={[required]}
@@ -71,7 +71,9 @@ export function SingleRecipientTab(props) {
             >
               Submit Request
             </Button>
-            <Button onClick={props.reset}>Clear</Button>
+            <Button onClick={props.reset} disabled={props.pristine || props.submitting}>
+              Clear
+            </Button>
           </ButtonWrapper>
         </form>
       </div>
@@ -86,6 +88,9 @@ const formOptions = {
 const mapStateToProps = state => {
   return {
     dataPrivacyRequestPending: state.dataPrivacy.dataPrivacyRequestPending,
+    initialValues: {
+      assignTo: 'master',
+    },
   };
 };
 export default connect(mapStateToProps, { submitRTBFRequest, submitOptOutRequest, showAlert })(
