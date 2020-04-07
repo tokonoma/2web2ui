@@ -20,6 +20,7 @@ exports[`renders correctly - new and no subaccounts 1`] = `
   <Panel.Section>
     <Field
       component={[Function]}
+      label="API Permissions"
       name="grantsRadio"
       options={
         Array [
@@ -35,7 +36,6 @@ exports[`renders correctly - new and no subaccounts 1`] = `
           },
         ]
       }
-      title="API Permissions"
     />
     <GrantsCheckboxes
       disabled={false}
@@ -97,6 +97,7 @@ exports[`renders correctly - readonly mode 1`] = `
   <Panel.Section>
     <Field
       component={[Function]}
+      label="API Permissions"
       name="grantsRadio"
       options={
         Array [
@@ -112,7 +113,6 @@ exports[`renders correctly - readonly mode 1`] = `
           },
         ]
       }
-      title="API Permissions"
     />
     <GrantsCheckboxes
       disabled={true}
@@ -166,6 +166,7 @@ exports[`renders correctly - update and subaccounts 1`] = `
   <Panel.Section>
     <Field
       component={[Function]}
+      label="API Permissions"
       name="grantsRadio"
       options={
         Array [
@@ -181,7 +182,6 @@ exports[`renders correctly - update and subaccounts 1`] = `
           },
         ]
       }
-      title="API Permissions"
     />
     <GrantsCheckboxes
       disabled={false}
@@ -237,6 +237,7 @@ exports[`submits correctly 1`] = `
   <Panel.Section>
     <Field
       component={[Function]}
+      label="API Permissions"
       name="grantsRadio"
       options={
         Array [
@@ -252,7 +253,6 @@ exports[`submits correctly 1`] = `
           },
         ]
       }
-      title="API Permissions"
     />
     <GrantsCheckboxes
       disabled={false}

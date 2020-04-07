@@ -1,13 +1,12 @@
 import React from 'react';
-import { Grid, Radio } from '@sparkpost/matchbox';
-import { Error, Label } from 'src/components/matchbox';
+import { Grid } from '@sparkpost/matchbox';
+import { Error, Radio } from 'src/components/matchbox';
 import styles from './RadioGroup.module.scss';
 
 export default function RadioGroup({
   label,
   input,
   options,
-  title,
   meta,
   bottomError,
   grid = { xs: 12, sm: 12, md: 12, lg: 12, xl: 12 },
@@ -16,10 +15,7 @@ export default function RadioGroup({
 
   return (
     <Radio.Group label={label}>
-      <Label>
-        {title}
-        {!bottomError && touched && error ? <Error error={error} /> : ''}
-      </Label>
+      {!bottomError && touched && error && <Error error={error} />}
       <Grid>
         {options.map(option => (
           <Grid.Column {...grid} key={`${input.name}-${option.value}`}>
@@ -38,7 +34,7 @@ export default function RadioGroup({
           </Grid.Column>
         ))}
       </Grid>
-      {bottomError && touched && error ? <Error error={error} /> : ''}
+      {bottomError && touched && error && <Error error={error} />}
     </Radio.Group>
   );
 }

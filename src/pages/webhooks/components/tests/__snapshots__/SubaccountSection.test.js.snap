@@ -4,6 +4,7 @@ exports[`Webhooks SubaccountSection on create should render radio group 1`] = `
 <div>
   <Field
     component={[Function]}
+    label="Receive events from:"
     name="assignTo"
     options={
       Array [
@@ -24,7 +25,6 @@ exports[`Webhooks SubaccountSection on create should render radio group 1`] = `
         },
       ]
     }
-    title="Receive events from:"
   />
 </div>
 `;

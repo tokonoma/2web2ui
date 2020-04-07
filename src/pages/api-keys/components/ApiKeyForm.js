@@ -87,7 +87,7 @@ export class ApiKeyForm extends Component {
           <Field
             name="grantsRadio"
             component={RadioGroup}
-            title="API Permissions"
+            label="API Permissions"
             options={this.getGrantOptions()}
           />
           <GrantsCheckboxes grants={this.availableGrants} show={showGrants} disabled={isReadOnly} />

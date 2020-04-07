@@ -31,20 +31,22 @@ export class SubaccountSection extends Component {
     const createOptions = [
       { label: 'Master and all subaccounts', value: 'all', disabled },
       { label: 'Master account only', value: 'master', disabled },
-      { label: 'Single Subaccount', value: 'subaccount', disabled }
+      { label: 'Single Subaccount', value: 'subaccount', disabled },
     ];
 
-    const typeahead = assignTo === 'subaccount'
-      ? <Field name='subaccount' component={SubaccountTypeaheadWrapper} validate={required} />
-      : null;
+    const typeahead =
+      assignTo === 'subaccount' ? (
+        <Field name="subaccount" component={SubaccountTypeaheadWrapper} validate={required} />
+      ) : null;
 
     return (
       <div>
         <Field
           component={RadioGroup}
-          name='assignTo'
-          title='Receive events from:'
-          options={createOptions} />
+          name="assignTo"
+          label="Receive events from:"
+          options={createOptions}
+        />
         {typeahead}
       </div>
     );
@@ -62,10 +64,11 @@ export class SubaccountSection extends Component {
     return (
       <Field
         component={component}
-        name='subaccount'
-        label='Receive events from'
-        helpText='This assignment is permanent.'
-        disabled />
+        name="subaccount"
+        label="Receive events from"
+        helpText="This assignment is permanent."
+        disabled
+      />
     );
   }
 
@@ -77,14 +80,14 @@ export class SubaccountSection extends Component {
 SubaccountSection.propTypes = {
   newWebhook: PropTypes.bool,
   assignTo: PropTypes.oneOf(['master', 'all', 'subaccount']),
-  change: PropTypes.func
+  change: PropTypes.func,
 };
 
 const mapStateToProps = (state, props) => {
   const selector = formValueSelector(props.formName);
   return {
     assignTo: selector(state, 'assignTo'),
-    subaccount: selector(state, 'subaccount')
+    subaccount: selector(state, 'subaccount'),
   };
 };
 

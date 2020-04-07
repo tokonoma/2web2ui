@@ -10,36 +10,34 @@ import SubaccountAssignment from './SubaccountAssignment';
 const ADMIN_ROLE = {
   label: <strong>{ROLE_LABELS[ROLES.ADMIN]}</strong>,
   value: ROLES.ADMIN,
-  helpText:
-    'All permissions. The only user that can manage users, security, and billing settings.'
+  helpText: 'All permissions. The only user that can manage users, security, and billing settings.',
 };
 
 const DEVELOPER_ROLE = {
   label: <strong>{ROLE_LABELS[ROLES.DEVELOPER]}</strong>,
   value: ROLES.DEVELOPER,
   helpText:
-    'Setup and development user. Full access to API Keys, and all other email related setup, sending, and reporting features.'
+    'Setup and development user. Full access to API Keys, and all other email related setup, sending, and reporting features.',
 };
 
 const TEMPLATES_ROLE = {
   label: <strong>{ROLE_LABELS[ROLES.TEMPLATES]}</strong>,
   value: ROLES.TEMPLATES,
   helpText:
-    'Content and deliverability management user. Has access to Templates, Recipients Lists, Suppressions, AB Testing, and all reporting features.'
+    'Content and deliverability management user. Has access to Templates, Recipients Lists, Suppressions, AB Testing, and all reporting features.',
 };
 
 const REPORTING_ROLE = {
   label: <strong>{ROLE_LABELS[ROLES.REPORTING]}</strong>,
   value: ROLES.REPORTING,
   helpText:
-    'Data analytics user. Has access to all reporting features and can view templates. No access to any account or feature settings.'
+    'Data analytics user. Has access to all reporting features and can view templates. No access to any account or feature settings.',
 };
 
 const SUPERUSER_ROLE = {
   label: <strong>{ROLE_LABELS[ROLES.SUPERUSER]}</strong>,
-  value: ROLES.SUPERUSER
+  value: ROLES.SUPERUSER,
 };
-
 
 export class RoleRadioGroup extends React.Component {
   componentDidUpdate(prevProps) {
@@ -58,7 +56,7 @@ export class RoleRadioGroup extends React.Component {
       hasSubaccounts,
       useSubaccountChecked,
       allowSuperUser,
-      allowSubaccountAssignment
+      allowSubaccountAssignment,
     } = this.props;
 
     return [
@@ -67,15 +65,14 @@ export class RoleRadioGroup extends React.Component {
       TEMPLATES_ROLE,
       {
         ...REPORTING_ROLE,
-        children: allowSubaccountAssignment &&
-          hasSubaccounts && (
+        children: allowSubaccountAssignment && hasSubaccounts && (
           <SubaccountAssignment
             selectedRole={selectedRole}
             useSubaccountChecked={useSubaccountChecked}
           />
-        )
+        ),
       },
-      allowSuperUser && SUPERUSER_ROLE
+      allowSuperUser && SUPERUSER_ROLE,
     ].filter(Boolean);
   }
 
@@ -83,27 +80,27 @@ export class RoleRadioGroup extends React.Component {
     const { disabled, ...rest } = this.props;
 
     const roles = this.renderRoles();
-    const options = roles.map((role) => ({ ...role, disabled }));
+    const options = roles.map(role => ({ ...role, disabled }));
 
-    return <RadioGroup title="Role" options={options} {...rest} />;
+    return <RadioGroup label="Role" options={options} {...rest} />;
   }
 }
 
 RoleRadioGroup.propTypes = {
   disabled: propTypes.bool.isRequired,
   allowSuperUser: propTypes.bool.isRequired,
-  allowSubaccountAssignment: propTypes.bool.isRequired
+  allowSubaccountAssignment: propTypes.bool.isRequired,
 };
 
 RoleRadioGroup.defaultProps = {
   disabled: false,
-  allowSuperUser: false
+  allowSuperUser: false,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   selectedRole: formValueSelector(FORMS.INVITE_USER)(state, 'access'),
   hasSubaccounts: hasSubaccounts(state),
-  useSubaccountChecked: formValueSelector(FORMS.INVITE_USER)(state, 'useSubaccount')
+  useSubaccountChecked: formValueSelector(FORMS.INVITE_USER)(state, 'useSubaccount'),
 });
 
 const mapDispatchToProps = { clearFields };
