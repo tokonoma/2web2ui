@@ -2,10 +2,8 @@
 
 exports[`Tooltip renders correctly 1`] = `
 <Popover
-  bottom={true}
   className="Content"
   open={false}
-  right={true}
   sectioned={false}
   trigger={
     <span

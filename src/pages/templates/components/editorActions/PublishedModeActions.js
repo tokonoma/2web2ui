@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Popover } from '@sparkpost/matchbox';
-import { Button, ScreenReaderOnly } from 'src/components/matchbox';
+import { Button, Popover, ScreenReaderOnly } from 'src/components/matchbox';
 import { ArrowDropDown, FileEdit } from '@sparkpost/matchbox-icons';
 import { PageLink } from 'src/components/links';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';

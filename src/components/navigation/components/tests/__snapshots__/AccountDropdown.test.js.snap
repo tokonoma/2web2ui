@@ -47,11 +47,9 @@ exports[`AccountDropdown activator should render email address on desktop 1`] = 
 
 exports[`AccountDropdown should render correctly 1`] = `
 <Popover
-  bottom={true}
   left={true}
   onClose={[Function]}
   open={false}
-  right={true}
   trigger={
     <Context.Consumer>
       [Function]

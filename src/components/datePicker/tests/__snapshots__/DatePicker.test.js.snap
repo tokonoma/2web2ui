@@ -64,11 +64,9 @@ exports[`Component: DatePicker should not render range select if showPresets is 
 
 exports[`Component: DatePicker should render ok by default 1`] = `
 <Popover
-  bottom={true}
   className="Popover"
   onClose={[Function]}
   open={false}
-  right={true}
   trigger={
     <React.Fragment>
       <label

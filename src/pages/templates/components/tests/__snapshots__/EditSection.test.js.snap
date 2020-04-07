@@ -45,11 +45,9 @@ exports[`EditSection renders tabs and section 1`] = `
       }
     />
     <Popover
-      bottom={true}
       left={true}
       onClose={[Function]}
       open={false}
-      right={true}
       trigger={
         <Button
           className="MoreButton"

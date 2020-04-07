@@ -124,9 +124,7 @@ Array [
     }
   >
     <Popover
-      bottom={true}
       left={true}
-      right={true}
       trigger={
         <Button
           flat={true}
@@ -229,9 +227,7 @@ Array [
     }
   >
     <Popover
-      bottom={true}
       left={true}
-      right={true}
       trigger={
         <Button
           flat={true}
@@ -342,9 +338,7 @@ Array [
     }
   >
     <Popover
-      bottom={true}
       left={true}
-      right={true}
       trigger={
         <Button
           flat={true}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Popover } from '@sparkpost/matchbox';
+import { Popover } from 'src/components/matchbox';
 import style from './Tooltip.module.scss';
 
 // note, Matchbox's Tooltip has static dimensions that prevent us from doing fun things
@@ -15,8 +15,12 @@ const Tooltip = ({ children, content, initialOpen = false }) => {
       sectioned={false}
       trigger={
         <span
-          onMouseEnter={() => { setOpen(true); }}
-          onMouseLeave={() => { setOpen(false); }}
+          onMouseEnter={() => {
+            setOpen(true);
+          }}
+          onMouseLeave={() => {
+            setOpen(false);
+          }}
         >
           {children}
         </span>

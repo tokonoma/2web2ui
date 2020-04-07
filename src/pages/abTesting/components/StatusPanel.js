@@ -7,9 +7,8 @@ import {
   selectIdAndVersionFromParams,
 } from 'src/selectors/abTesting';
 import { LabelledValue, Subaccount } from 'src/components';
-import { Popover } from '@sparkpost/matchbox';
 import { PageLink } from 'src/components/links';
-import { ActionList, Panel } from 'src/components/matchbox';
+import { ActionList, Panel, Popover } from 'src/components/matchbox';
 import { ExpandMore } from '@sparkpost/matchbox-icons';
 import StatusTag from './StatusTag';
 

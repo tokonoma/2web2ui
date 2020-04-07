@@ -2,9 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 
 // Components
-import { Popover } from '@sparkpost/matchbox';
 import { PageLink } from 'src/components/links';
-import { ActionList, Button } from 'src/components/matchbox';
+import { ActionList, Button, Popover } from 'src/components/matchbox';
 import { TableCollection } from 'src/components';
 import { MoreHoriz } from '@sparkpost/matchbox-icons';
 import StatusTag from './StatusTag';

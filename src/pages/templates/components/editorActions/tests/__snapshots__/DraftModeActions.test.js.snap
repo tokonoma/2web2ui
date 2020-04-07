@@ -14,11 +14,9 @@ exports[`DraftModeActions renders draft actions 1`] = `
     className="Actions"
   >
     <Popover
-      bottom={true}
       left={true}
       onClose={[Function]}
       open={false}
-      right={true}
       trigger={
         <Button
           aria-expanded="false"

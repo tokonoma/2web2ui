@@ -2,11 +2,9 @@
 
 exports[`SubaccountFilter Component renders open popover with options 1`] = `
 <Popover
-  bottom={true}
   className="Popover"
   left={true}
   open={true}
-  right={true}
   trigger={
     <div>
       <Button
@@ -126,11 +124,9 @@ exports[`SubaccountFilter Component renders with subaccount 1`] = `
       handler={[Function]}
     />
     <Popover
-      bottom={true}
       className="Popover"
       left={true}
       open={false}
-      right={true}
       trigger={
         <div>
           <Button
