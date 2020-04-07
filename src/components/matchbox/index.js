@@ -13,6 +13,7 @@ export { default as Page } from './Page';
 export { default as Pager } from './Pager';
 export { default as Pagination } from './Pagination';
 export { default as Panel } from './Panel';
+export { default as Popover } from './Popover';
 export { default as Portal } from './Portal';
 export { default as ProgressBar } from './ProgressBar';
 export { default as Radio } from './Radio';
