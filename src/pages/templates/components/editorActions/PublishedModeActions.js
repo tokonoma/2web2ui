@@ -57,12 +57,14 @@ const PublishedModeActions = () => {
 
       <div className={styles.Actions}>
         <Popover
+          id="popover-editor-actions"
           left={true}
           open={isPopoverOpen}
           onClose={() => setPopoverOpen(false)}
           trigger={
             <Button
               onClick={() => setPopoverOpen(!isPopoverOpen)}
+              aria-describedby="popover-editor-actions"
               aria-expanded={isPopoverOpen ? 'true' : 'false'}
               data-id="popover-trigger-editor-actions"
             >
