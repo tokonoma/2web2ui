@@ -124,9 +124,11 @@ Array [
     }
   >
     <Popover
+      id="popover-actions-for-id-1"
       left={true}
       trigger={
         <Button
+          aria-describedby="popover-actions-for-id-1"
           flat={true}
           size="large"
         >
@@ -227,9 +229,11 @@ Array [
     }
   >
     <Popover
+      id="popover-actions-for-id-2"
       left={true}
       trigger={
         <Button
+          aria-describedby="popover-actions-for-id-2"
           flat={true}
           size="large"
         >
@@ -338,9 +342,11 @@ Array [
     }
   >
     <Popover
+      id="popover-actions-for-id-3"
       left={true}
       trigger={
         <Button
+          aria-describedby="popover-actions-for-id-3"
           flat={true}
           size="large"
         >

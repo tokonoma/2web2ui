@@ -106,9 +106,10 @@ export class TestCollection extends Component {
       <p className={styles.LastUpdated}>{formatDateTime(updated_at)}</p>,
       <div style={{ textAlign: 'right' }}>
         <Popover
+          id={`popover-actions-for-${id}`}
           left
           trigger={
-            <Button flat size="large">
+            <Button aria-describedby={`popover-actions-for-${id}`} flat size="large">
               <MoreHoriz size={21} />
             </Button>
           }

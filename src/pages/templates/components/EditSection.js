@@ -110,6 +110,7 @@ const EditSection = () => {
 
         {hasPopover && (
           <Popover
+            id="popover-more"
             left
             open={isPopoverOpen}
             onClose={() => setPopoverOpen(false)}
@@ -117,6 +118,7 @@ const EditSection = () => {
               <Button
                 flat
                 className={styles.MoreButton}
+                aria-describedby="popover-more"
                 onClick={() => setPopoverOpen(!isPopoverOpen)}
                 data-id="popover-trigger-more"
               >

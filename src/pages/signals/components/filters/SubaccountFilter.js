@@ -72,7 +72,12 @@ export class SubaccountFilter extends React.Component {
 
     const trigger = (
       <div ref={node => (this.triggerRef = node)}>
-        <Button fullWidth onClick={this.handleVisibilityToggle} className={styles.Button}>
+        <Button
+          aria-describedby="popover-subaccount-filter"
+          fullWidth
+          onClick={this.handleVisibilityToggle}
+          className={styles.Button}
+        >
           <span className={styles.ButtonLabel}>{subaccount.name}</span>
           {subaccount.id > 0 && <span>({subaccount.id})</span>}
           <ArrowDropDown className={styles.ButtonIcon} />
@@ -85,7 +90,13 @@ export class SubaccountFilter extends React.Component {
         <div className={styles.SubaccountFilter}>
           <WindowEvent handler={this.handleWindowClick} event="click" />
           <WindowEvent handler={onEscape(this.close)} event="keydown" />
-          <Popover className={styles.Popover} left open={isOpen} trigger={trigger}>
+          <Popover
+            id="popover-subaccount-filter"
+            className={styles.Popover}
+            left
+            open={isOpen}
+            trigger={trigger}
+          >
             <div ref={node => (this.contentRef = node)}>
               <div className={classnames(styles.PopoverContent, isSearchOpen && styles.showSearch)}>
                 <div className={styles.SubaccountSearchHeader}>
