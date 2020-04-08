@@ -72,6 +72,7 @@ export class FilterDropdown extends Component {
     return (
       <div>
         <Popover
+          id={`filter-dropdown-popover-${id}`}
           className={popoverClassName}
           trigger={
             <>
@@ -81,6 +82,7 @@ export class FilterDropdown extends Component {
 
               <TextField
                 id={`filter-dropdown-${id}`}
+                aria-describedby={`filter-dropdown-popover-${id}`}
                 prefix={prefix}
                 value={displayValue}
                 readOnly

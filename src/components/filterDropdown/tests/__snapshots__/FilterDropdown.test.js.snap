@@ -3,6 +3,7 @@
 exports[`Component: FilterDropdown renders correctly 1`] = `
 <div>
   <Popover
+    id="filter-dropdown-popover-my-filter-dropdown"
     onClose={[Function]}
     trigger={
       <React.Fragment>
@@ -13,6 +14,7 @@ exports[`Component: FilterDropdown renders correctly 1`] = `
           My Label
         </label>
         <TextField
+          aria-describedby="filter-dropdown-popover-my-filter-dropdown"
           id="filter-dropdown-my-filter-dropdown"
           prefix={null}
           readOnly={true}
@@ -80,6 +82,7 @@ exports[`Component: FilterDropdown renders correctly 1`] = `
 exports[`Component: FilterDropdown renders selected correctly 1`] = `
 <div>
   <Popover
+    id="filter-dropdown-popover-my-filter-dropdown"
     onClose={[Function]}
     trigger={
       <React.Fragment>
@@ -90,6 +93,7 @@ exports[`Component: FilterDropdown renders selected correctly 1`] = `
           My Label
         </label>
         <TextField
+          aria-describedby="filter-dropdown-popover-my-filter-dropdown"
           id="filter-dropdown-my-filter-dropdown"
           prefix="(1)"
           readOnly={true}
