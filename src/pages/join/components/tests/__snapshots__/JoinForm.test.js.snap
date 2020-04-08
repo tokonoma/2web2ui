@@ -41,7 +41,7 @@ exports[`JoinForm render disables form when loading 1`] = `
     component={[Function]}
     disabled={true}
     label="Company"
-    name="company"
+    name="company_name"
     placeholder="Knope Industries LLC"
   />
   <Field
@@ -181,7 +181,7 @@ exports[`JoinForm render disables form when recaptcha is not loaded 1`] = `
     component={[Function]}
     disabled={true}
     label="Company"
-    name="company"
+    name="company_name"
     placeholder="Knope Industries LLC"
   />
   <Field
@@ -321,7 +321,7 @@ exports[`JoinForm render enables form correctly 1`] = `
     component={[Function]}
     disabled={false}
     label="Company"
-    name="company"
+    name="company_name"
     placeholder="Knope Industries LLC"
   />
   <Field

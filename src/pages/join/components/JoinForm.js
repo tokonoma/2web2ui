@@ -97,7 +97,7 @@ export class JoinForm extends Component {
           </Grid.Column>
         </Grid>
         <Field
-          name="company"
+          name="company_name"
           component={TextFieldWrapper}
           label="Company"
           disabled={pending}
