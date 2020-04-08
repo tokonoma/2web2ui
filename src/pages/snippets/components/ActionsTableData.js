@@ -24,7 +24,6 @@ const ActionsTableData = ({ id, subaccount_id: subaccountId, openDeleteModal }) 
         onClick: () => openDeleteModal({ id, subaccountId }),
       },
     ]}
-    id={['action', 'popover', 'for', id, subaccountId].filter(Boolean).join('-')}
   />
 );
 

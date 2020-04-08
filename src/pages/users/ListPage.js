@@ -46,7 +46,7 @@ export const Actions = ({ username, deletable, onDelete }) => {
   if (deletable) {
     actions.push({ content: 'Delete', onClick: () => onDelete(username) });
   }
-  return <ActionPopover actions={actions} id={['action', 'popover', 'for', username].join('-')} />;
+  return <ActionPopover actions={actions} />;
 };
 
 Actions.displayName = 'Actions';
