@@ -254,6 +254,7 @@ export default class DatePicker extends Component {
 
         <TextField
           id={`date-field-${id}`}
+          aria-describedby={`popover-${id}`}
           onClick={this.showDatePicker}
           connectLeft={rangeSelect}
           value={`${format(from, dateFormat)} – ${format(to, dateFormat)}`}
@@ -268,6 +269,7 @@ export default class DatePicker extends Component {
 
     return (
       <Popover
+        id={`popover-${id}`}
         wrapper="div"
         className={styles.Popover}
         trigger={dateField}

@@ -9,6 +9,7 @@ exports[`Component: DatePicker handleFormDates should use a date field format if
     Narrow Date Range
   </label>
   <TextField
+    aria-describedby="popover-date-picker"
     connectLeft={
       <React.Fragment>
         <label
@@ -51,6 +52,7 @@ exports[`Component: DatePicker should not render range select if showPresets is 
     Narrow Date Range
   </label>
   <TextField
+    aria-describedby="popover-date-picker"
     connectLeft={null}
     disabled={false}
     id="date-field-date-picker"
@@ -65,6 +67,7 @@ exports[`Component: DatePicker should not render range select if showPresets is 
 exports[`Component: DatePicker should render ok by default 1`] = `
 <Popover
   className="Popover"
+  id="popover-date-picker"
   onClose={[Function]}
   open={false}
   trigger={
@@ -76,6 +79,7 @@ exports[`Component: DatePicker should render ok by default 1`] = `
         Narrow Date Range
       </label>
       <TextField
+        aria-describedby="popover-date-picker"
         connectLeft={
           <React.Fragment>
             <label
