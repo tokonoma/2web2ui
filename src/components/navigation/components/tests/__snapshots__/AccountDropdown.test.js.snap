@@ -2,6 +2,7 @@
 
 exports[`AccountDropdown activator should render an icon on desktop if email doesnt exist 1`] = `
 <button
+  aria-controls="account-dropdown-popover"
   className="Email"
   data-id="nav-button-accounts"
   onClick={[Function]}
@@ -17,6 +18,7 @@ exports[`AccountDropdown activator should render an icon on desktop if email doe
 
 exports[`AccountDropdown activator should render an icon on mobile 1`] = `
 <button
+  aria-controls="account-dropdown-popover"
   className="Email"
   data-id="nav-button-accounts"
   onClick={[Function]}
@@ -32,6 +34,7 @@ exports[`AccountDropdown activator should render an icon on mobile 1`] = `
 
 exports[`AccountDropdown activator should render email address on desktop 1`] = `
 <button
+  aria-controls="account-dropdown-popover"
   className="Email"
   data-id="nav-button-accounts"
   onClick={[Function]}
@@ -47,6 +50,7 @@ exports[`AccountDropdown activator should render email address on desktop 1`] = 
 
 exports[`AccountDropdown should render correctly 1`] = `
 <Popover
+  id="account-dropdown-popover"
   left={true}
   onClose={[Function]}
   open={false}

@@ -21,6 +21,7 @@ export class AccountDropdown extends Component {
     <WindowSizeContext.Consumer>
       {({ mobile }) => (
         <button
+          aria-controls="account-dropdown-popover"
           className={styles.Email}
           onClick={this.toggleDropdown}
           data-id="nav-button-accounts"
@@ -85,6 +86,7 @@ export class AccountDropdown extends Component {
   render() {
     return (
       <Popover
+        id="account-dropdown-popover"
         left
         trigger={this.renderActivator()}
         open={this.state.open}
