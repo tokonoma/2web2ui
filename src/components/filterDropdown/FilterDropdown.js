@@ -82,7 +82,6 @@ export class FilterDropdown extends Component {
 
               <TextField
                 id={`filter-dropdown-${id}`}
-                aria-describedby={`filter-dropdown-popover-${id}`}
                 prefix={prefix}
                 value={displayValue}
                 readOnly
