@@ -5,8 +5,8 @@ export function list() {
     type: 'LIST_INVOICES',
     meta: {
       method: 'GET',
-      url: '/v1/account/invoices'
-    }
+      url: '/v1/billing/invoices',
+    },
   });
 }
 
@@ -15,9 +15,9 @@ export function get(id) {
     type: 'GET_INVOICE',
     meta: {
       method: 'GET',
-      url: `/v1/account/invoices/${id}`,
+      url: `/v1/billing/invoices/${id}`,
       responseType: 'blob',
-      invoiceId: id
-    }
+      invoiceId: id,
+    },
   });
 }
