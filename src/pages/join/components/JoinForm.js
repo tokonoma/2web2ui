@@ -35,6 +35,7 @@ export class JoinForm extends Component {
     reCaptchaReady: false,
     reCaptchaInstance: null,
     recaptcha_response: null,
+    showPassword: false,
   };
 
   reCaptchaLoaded = () => {
@@ -65,7 +66,7 @@ export class JoinForm extends Component {
   render() {
     const { loading, pristine, invalid, submitting } = this.props;
 
-    const { reCaptchaReady } = this.state;
+    const { reCaptchaReady, showPassword } = this.state;
 
     const pending = loading || submitting || !reCaptchaReady;
 
@@ -96,6 +97,14 @@ export class JoinForm extends Component {
           </Grid.Column>
         </Grid>
         <Field
+          name="company"
+          component={TextFieldWrapper}
+          label="Company"
+          disabled={pending}
+          autoComplete="organization"
+          placeholder="Knope Industries LLC"
+        />
+        <Field
           name="email"
           component={TextFieldWrapper}
           label="Email"
@@ -110,9 +119,14 @@ export class JoinForm extends Component {
           label="Password"
           validate={[required, minLength(12), endsWithWhitespace]}
           disabled={!reCaptchaReady || loading}
-          type="password"
+          type={showPassword ? 'text' : 'password'}
           autoComplete="new-password"
           placeholder="••••••••••••"
+          connectRight={
+            <Button onClick={() => this.setState({ showPassword: !showPassword })}>
+              {showPassword ? 'hide' : 'show'}
+            </Button>
+          }
         />
 
         <Checkbox.Group>
@@ -140,7 +154,12 @@ export class JoinForm extends Component {
           />
         </Checkbox.Group>
 
-        <Button primary disabled={pending || pristine || invalid} onClick={this.executeRecaptcha}>
+        <Button
+          id="submit"
+          primary
+          disabled={pending || pristine || invalid}
+          onClick={this.executeRecaptcha}
+        >
           {loading ? 'Loading' : 'Create Account'}
         </Button>
 

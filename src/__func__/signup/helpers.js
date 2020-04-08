@@ -29,7 +29,7 @@ class SignupFlow {
       { name: 'tou_accepted', value: true, type: 'checkbox' },
       { name: 'email_opt_in', value: optIn, type: 'checkbox' },
     ]);
-    await this.page.simulate('button', 'click');
+    await this.page.simulate('button[id="submit"]', 'click');
   }
 
   async choosePlan({ planFilter = freePlanPredicate, submit = true } = {}) {
