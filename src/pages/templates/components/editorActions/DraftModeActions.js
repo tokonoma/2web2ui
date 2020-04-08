@@ -62,14 +62,14 @@ const DraftModeActions = () => {
 
       <div className={styles.Actions}>
         <Popover
-          id="popover-editor-actions"
+          id="popover-action-list"
           left={true}
           open={isPopoverOpen}
           onClose={() => setPopoverOpen(false)}
           trigger={
             <Button
               onClick={() => setPopoverOpen(!isPopoverOpen)}
-              aria-describedby="popover-editor-actions"
+              aria-controls="popover-action-list"
               aria-expanded={isPopoverOpen ? 'true' : 'false'}
               data-id="popover-actions-trigger"
             >

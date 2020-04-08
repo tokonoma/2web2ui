@@ -109,7 +109,7 @@ export class TestCollection extends Component {
           id={`popover-actions-for-${id}`}
           left
           trigger={
-            <Button aria-describedby={`popover-actions-for-${id}`} flat size="large">
+            <Button aria-controls={`popover-actions-for-${id}`} flat size="large">
               <MoreHoriz size={21} />
             </Button>
           }

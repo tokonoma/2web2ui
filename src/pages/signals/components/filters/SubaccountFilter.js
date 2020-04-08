@@ -73,7 +73,7 @@ export class SubaccountFilter extends React.Component {
     const trigger = (
       <div ref={node => (this.triggerRef = node)}>
         <Button
-          aria-describedby="popover-subaccount-filter"
+          aria-controls="popover-subaccount-filter"
           fullWidth
           onClick={this.handleVisibilityToggle}
           className={styles.Button}

@@ -14,13 +14,13 @@ exports[`DraftModeActions renders draft actions 1`] = `
     className="Actions"
   >
     <Popover
-      id="popover-editor-actions"
+      id="popover-action-list"
       left={true}
       onClose={[Function]}
       open={false}
       trigger={
         <Button
-          aria-describedby="popover-editor-actions"
+          aria-controls="popover-action-list"
           aria-expanded="false"
           data-id="popover-actions-trigger"
           onClick={[Function]}

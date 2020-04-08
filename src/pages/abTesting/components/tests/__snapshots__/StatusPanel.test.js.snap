@@ -6,7 +6,7 @@ exports[`Status Panel Component should render 1`] = `
     actions={
       Array [
         Object {
-          "aria-describedby": "popover-version-selector",
+          "aria-controls": "popover-version-selector",
           "color": "orange",
           "content": <VersionSelector
             current={4}

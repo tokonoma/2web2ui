@@ -49,7 +49,7 @@ export const StatusPanel = ({ test, version, id, subaccountId, latest, subaccoun
           <VersionSelector current={version} id={id} latest={latest} subaccountId={subaccountId} />
         ),
         color: 'orange',
-        'aria-describedby': 'popover-version-selector',
+        'aria-controls': 'popover-version-selector',
       },
     ];
   }

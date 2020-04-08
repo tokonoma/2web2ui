@@ -9,7 +9,7 @@ exports[`SubaccountFilter Component renders open popover with options 1`] = `
   trigger={
     <div>
       <Button
-        aria-describedby="popover-subaccount-filter"
+        aria-controls="popover-subaccount-filter"
         className="Button"
         fullWidth={true}
         onClick={[Function]}
@@ -133,7 +133,7 @@ exports[`SubaccountFilter Component renders with subaccount 1`] = `
       trigger={
         <div>
           <Button
-            aria-describedby="popover-subaccount-filter"
+            aria-controls="popover-subaccount-filter"
             className="Button"
             fullWidth={true}
             onClick={[Function]}
