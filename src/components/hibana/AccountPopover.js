@@ -17,6 +17,7 @@ function AccountPopover(props) {
   return (
     <div className={styles.AccountPopover} data-id="desktop-navigation-account-popover">
       <Popover
+        id="desktop-navigation-account-popover-contents"
         trigger={
           <PopoverTrigger isOpen={isOpen} currentUser={currentUser} onClick={togglePopover} />
         }
@@ -72,6 +73,7 @@ function PopoverTrigger({ currentUser, onClick, isOpen }) {
 
   return (
     <button
+      aria-controls="desktop-navigation-account-popover-contents"
       onClick={onClick}
       className={classNames(styles.AccountPopoverButton, isOpen && styles.isOpen)}
       disabled={isCurrentUserLoading}
