@@ -10,7 +10,7 @@ describe('Popover Matchbox component wrapper', () => {
     shallow(
       <Popover
         id="test-popover"
-        trigger={<button aria-describedby="test-popover">Click</button>}
+        trigger={<button aria-controls="test-popover">Click</button>}
         {...props}
       >
         Hi
