@@ -2,7 +2,6 @@
 
 exports[`Component: RecipientValidationModal should render properly 1`] = `
 <Panel
-  accent={true}
   actions={
     Array [
       Object {

@@ -5,7 +5,6 @@ exports[`Component: BackupCodesModal should change button text to Generating... 
   open={true}
 >
   <Panel
-    accent={true}
     title="Generate Two-factor Backup Codes"
   >
     <form
@@ -76,7 +75,6 @@ exports[`Component: BackupCodesModal should render correctly 1`] = `
   open={true}
 >
   <Panel
-    accent={true}
     title="Generate Two-factor Backup Codes"
   >
     <form
@@ -147,7 +145,6 @@ exports[`Component: BackupCodesModal should show new codes when they exist 1`] =
   open={true}
 >
   <Panel
-    accent={true}
     title="Generate Two-factor Backup Codes"
   >
     <form
@@ -203,7 +200,6 @@ exports[`Component: BackupCodesModal should show password error when exists 1`] 
   open={true}
 >
   <Panel
-    accent={true}
     title="Generate Two-factor Backup Codes"
   >
     <form

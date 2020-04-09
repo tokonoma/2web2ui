@@ -6,7 +6,6 @@ exports[`DuplicateTemplateModal renders with default props and some data from th
   open={false}
 >
   <Panel
-    accent={true}
     sectioned={true}
     title="Duplicate Template"
   >
