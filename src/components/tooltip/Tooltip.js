@@ -7,7 +7,7 @@ import style from './Tooltip.module.scss';
 // todo, should use Matchbox's Tooltip
 const Tooltip = ({ children, content, initialOpen = false }) => {
   const [isOpen, setOpen] = useState(initialOpen);
-  const uniqueId = useUniqueId('tooltip-');
+  const uniqueId = useUniqueId('tooltip');
 
   return (
     <Popover

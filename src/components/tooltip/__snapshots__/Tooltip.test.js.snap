@@ -3,12 +3,12 @@
 exports[`Tooltip renders correctly 1`] = `
 <Popover
   className="Content"
-  id="custom-tooltip"
+  id="tooltip-1"
   open={false}
   sectioned={false}
   trigger={
     <span
-      aria-describedby="custom-tooltip"
+      aria-controls="tooltip-1"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
