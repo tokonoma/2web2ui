@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
 import { relativeDateOptions } from 'src/helpers/date';
-import { Button, Checkbox, Panel, WindowEvent } from 'src/components/matchbox';
-import { Modal, CopyField } from 'src/components';
+import { Button, Checkbox, Panel, WindowEvent, Modal } from 'src/components/matchbox';
+import { CopyField } from 'src/components';
 import { onEnter } from 'src/helpers/keyEvents';
 import _ from 'lodash';
 
