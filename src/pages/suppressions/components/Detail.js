@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import { Button, Panel } from 'src/components/matchbox';
-import { Modal, LabelledValue, CopyField, LongTextContainer } from 'src/components';
+import { Button, Panel, Modal } from 'src/components/matchbox';
+import { LabelledValue, CopyField, LongTextContainer } from 'src/components';
 import { formatDateTime } from 'src/helpers/date';
 import { formatSubaccountDisplay } from '../helpers';
 import styles from './Detail.module.scss';
