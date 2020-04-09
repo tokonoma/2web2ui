@@ -4,6 +4,7 @@ export { default as Box } from './Box';
 export { default as Button } from './Button';
 export { default as Checkbox } from './Checkbox';
 export { default as CodeBlock } from './CodeBlock';
+export { default as EmptyState } from './EmptyState';
 export { default as Error } from './Error';
 export { default as Expandable } from './Expandable';
 export { default as Grid } from './Grid';

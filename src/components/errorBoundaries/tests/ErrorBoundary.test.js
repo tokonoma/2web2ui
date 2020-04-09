@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { EmptyState } from '@sparkpost/matchbox';
+import { EmptyState } from 'src/components/matchbox';
 import ErrorBoundary from '../ErrorBoundary';
 import ErrorTracker from 'src/helpers/errorTracker';
 import { DEFAULT_REDIRECT_ROUTE } from '../../../constants';
@@ -14,10 +14,14 @@ describe('Component: ErrorBoundary', () => {
   beforeEach(() => {
     props = {
       showAction: false,
-      children: jest.fn()
+      children: jest.fn(),
     };
 
-    wrapper = shallow(<ErrorBoundary {...props}><div>Children</div></ErrorBoundary>);
+    wrapper = shallow(
+      <ErrorBoundary {...props}>
+        <div>Children</div>
+      </ErrorBoundary>,
+    );
   });
 
   it('renders (children) correctly without error', () => {
@@ -55,7 +59,10 @@ describe('Component: ErrorBoundary', () => {
   it('redirects to default landing page if custom action not passed', () => {
     window.location.replace = jest.fn();
     wrapper.setState({ hasError: true });
-    wrapper.find(EmptyState).prop('primaryAction').onClick();
+    wrapper
+      .find(EmptyState)
+      .prop('primaryAction')
+      .onClick();
     expect(window.location.replace).toHaveBeenCalledWith(DEFAULT_REDIRECT_ROUTE);
   });
 
