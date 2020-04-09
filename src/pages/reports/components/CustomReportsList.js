@@ -1,7 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { Modal } from '@sparkpost/matchbox';
-import { Button, Panel } from 'src/components/matchbox';
+import { Button, Panel, Modal } from 'src/components/matchbox';
 import ReportRow from './CustomReportRow';
 
 export function CustomReportsList({ deleting, handleLoad, onDelete, reports }) {

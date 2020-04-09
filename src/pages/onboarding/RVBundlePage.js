@@ -1,5 +1,4 @@
 import React from 'react';
-import { Modal } from '@sparkpost/matchbox';
 import { CheckCircle, Send, Close } from '@sparkpost/matchbox-icons';
 import {
   Card,
@@ -9,7 +8,7 @@ import {
   CardContent,
 } from 'src/components';
 import { PageLink } from 'src/components/links';
-import { Button, Panel, UnstyledLink } from 'src/components/matchbox';
+import { Button, Panel, UnstyledLink, Modal } from 'src/components/matchbox';
 import styles from './RVBundlePage.module.scss';
 
 const RVPriceModal = ({ open, onClose }) => (

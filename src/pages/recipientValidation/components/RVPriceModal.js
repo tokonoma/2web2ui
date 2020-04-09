@@ -1,8 +1,7 @@
 import React from 'react';
-import { Modal } from '@sparkpost/matchbox';
 import { Close } from '@sparkpost/matchbox-icons';
 import { RecipientValidationPriceTable } from 'src/components';
-import { Button, Panel } from 'src/components/matchbox';
+import { Button, Panel, Modal } from 'src/components/matchbox';
 import styles from './RVPriceModal.module.scss';
 
 export default function RVPriceModal({ isOpen, handleOpen }) {
