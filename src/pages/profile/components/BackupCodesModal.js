@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import Modal from 'src/components/modals/Modal';
 import BackupCodesView from './BackupCodesView';
-import { Grid, Banner, Button, Panel, TextField } from 'src/components/matchbox';
+import { Grid, Banner, Button, Panel, TextField, Modal } from 'src/components/matchbox';
 import styles from './TfaModals.module.scss';
 
 const initialState = {
