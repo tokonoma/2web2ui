@@ -3,7 +3,6 @@
 exports[`VerifyEmail component should disable the send button while sending 1`] = `
 <Modal>
   <Panel
-    accent={true}
     actions={
       Array [
         Object {
@@ -83,7 +82,6 @@ exports[`VerifyEmail component should disable the send button while sending 1`] 
 exports[`VerifyEmail component should error if custom mailbox field is invalid 1`] = `
 <Modal>
   <Panel
-    accent={true}
     actions={
       Array [
         Object {
@@ -144,7 +142,6 @@ exports[`VerifyEmail component should error if custom mailbox field is invalid 1
 exports[`VerifyEmail component should render success message 1`] = `
 <Modal>
   <Panel
-    accent={true}
     actions={
       Array [
         Object {
@@ -222,7 +219,6 @@ exports[`VerifyEmail component should render success message 1`] = `
 exports[`VerifyEmail component should render with mailbox verification 1`] = `
 <Modal>
   <Panel
-    accent={true}
     actions={
       Array [
         Object {
@@ -282,7 +278,6 @@ exports[`VerifyEmail component should render with mailbox verification 1`] = `
 exports[`VerifyEmail component should render with postmaster and abuse email verification 1`] = `
 <Modal>
   <Panel
-    accent={true}
     actions={
       Array [
         Object {
@@ -360,7 +355,6 @@ exports[`VerifyEmail component should render with postmaster and abuse email ver
 exports[`VerifyEmail component should send abuse-at email 1`] = `
 <Modal>
   <Panel
-    accent={true}
     actions={
       Array [
         Object {
@@ -438,7 +432,6 @@ exports[`VerifyEmail component should send abuse-at email 1`] = `
 exports[`VerifyEmail component should send custom mailbox email 1`] = `
 <Modal>
   <Panel
-    accent={true}
     actions={
       Array [
         Object {
@@ -498,7 +491,6 @@ exports[`VerifyEmail component should send custom mailbox email 1`] = `
 exports[`VerifyEmail component should send postmaster-at email 1`] = `
 <Modal>
   <Panel
-    accent={true}
     actions={
       Array [
         Object {

@@ -1,6 +1,5 @@
 import React from 'react';
-import Modal from 'src/components/modals/Modal';
-import { Panel } from 'src/components/matchbox';
+import { Panel, Modal } from 'src/components/matchbox';
 import EnableTfaForm from 'src/components/enableTfaForm/EnableTfaForm';
 import EnableTfaModalPropTypes from './EnableTfaModal.propTypes';
 
@@ -18,7 +17,7 @@ export default class EnableTfaModal extends React.Component {
 
     return (
       <Modal open={open}>
-        <Panel title='Enable Two-Factor Authentication' accent>
+        <Panel title="Enable Two-Factor Authentication">
           <EnableTfaForm afterEnable={onEnable} onClose={onClose} />
         </Panel>
       </Modal>

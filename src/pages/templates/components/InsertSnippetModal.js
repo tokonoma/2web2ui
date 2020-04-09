@@ -1,7 +1,6 @@
 /* eslint-disable */
 import React, { useState, useEffect } from 'react';
-import { Modal } from '@sparkpost/matchbox';
-import { Button, Label, Panel } from 'src/components/matchbox';
+import { Button, Label, Panel, Modal } from 'src/components/matchbox';
 import copy from 'copy-to-clipboard';
 import { PageLink } from 'src/components/links';
 import { Typeahead, TypeaheadItem } from 'src/components/typeahead/Typeahead';
@@ -60,14 +59,14 @@ const InsertSnippetModal = props => {
   if (areSnippetsLoading) {
     return (
       <ModalWrapper {...modalProps}>
-        <PanelLoading accent />
+        <PanelLoading />
       </ModalWrapper>
     );
   }
 
   return (
     <ModalWrapper {...modalProps}>
-      <Panel title="Add a snippet" accent sectioned>
+      <Panel title="Add a snippet" sectioned>
         <form onSubmit={handleSubmit}>
           <p>
             Snippets are a great way to manage sections like headers or footers that are used across

@@ -2,11 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Field } from 'redux-form';
 import { reduxForm, SubmissionError } from 'redux-form';
-import { Modal } from '@sparkpost/matchbox';
 import { RadioGroup } from 'src/components';
 import ButtonWrapper from 'src/components/buttonWrapper';
 import { DownloadLink } from 'src/components/links';
-import { Button, Panel } from 'src/components/matchbox';
+import { Button, Panel, Modal } from 'src/components/matchbox';
 import { FileFieldWrapper } from 'src/components/reduxFormWrappers';
 import SubaccountSection from 'src/components/subaccountSection';
 import { required } from 'src/helpers/validation';
@@ -121,7 +120,7 @@ export function MultipleRecipientsTab({
             validate={[required]}
           />
           <Modal open={Boolean(dataPrivacyRequestError)} showCloseButton onClose={resetDataPrivacy}>
-            <Panel sectioned title="Upload Error" accent>
+            <Panel sectioned title="Upload Error">
               <p>
                 We couldn’t process some of the addresses in your list. Download a list of the
                 errors, update your list, and please upload again.

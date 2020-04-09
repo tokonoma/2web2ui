@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import Modal from 'src/components/modals/Modal';
 import BackupCodesView from './BackupCodesView';
-import { Grid, Banner, Button, Panel, TextField } from 'src/components/matchbox';
+import { Grid, Banner, Button, Panel, TextField, Modal } from 'src/components/matchbox';
 import styles from './TfaModals.module.scss';
 
 const initialState = {
@@ -66,7 +65,7 @@ export default class BackupCodesModal extends Component {
 
     return (
       <Modal open={open}>
-        <Panel title="Generate Two-factor Backup Codes" accent>
+        <Panel title="Generate Two-factor Backup Codes">
           <form onSubmit={e => e.preventDefault()}>
             <Panel.Section>
               {!generatedCodes && hasCodes && (

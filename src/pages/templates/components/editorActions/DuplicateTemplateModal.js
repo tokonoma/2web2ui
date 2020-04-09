@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Modal } from '@sparkpost/matchbox';
 import ButtonWrapper from 'src/components/buttonWrapper';
 import PanelLoading from 'src/components/panelLoading';
-import { Button, Panel, TextField } from 'src/components/matchbox';
+import { Button, Panel, TextField, Modal } from 'src/components/matchbox';
 
 const ModalWrapper = props => {
   const { open, onClose, children } = props;
@@ -90,14 +89,14 @@ const DuplicateTemplateModal = props => {
   if (isLoading) {
     return (
       <ModalWrapper {...modalProps}>
-        <PanelLoading accent minHeight="330px" />
+        <PanelLoading minHeight="330px" />
       </ModalWrapper>
     );
   }
 
   return (
     <ModalWrapper {...modalProps}>
-      <Panel accent title="Duplicate Template" sectioned>
+      <Panel title="Duplicate Template" sectioned>
         <form onSubmit={e => handleSubmit(e)}>
           <TextField
             id="template-name"

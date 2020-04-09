@@ -1,7 +1,6 @@
 /* eslint-disable max-lines */
 import React, { useState } from 'react';
-import { Modal } from '@sparkpost/matchbox';
-import { Button, Panel, TextField } from 'src/components/matchbox';
+import { Button, Panel, TextField, Modal } from 'src/components/matchbox';
 import PanelLoading from 'src/components/panelLoading';
 import ButtonWrapper from 'src/components/buttonWrapper';
 import MultiEmailField, { useMultiEmailField } from 'src/components/multiEmailField';
@@ -135,7 +134,7 @@ const SendTestEmailButton = () => {
         {isModalLoading && <PanelLoading />}
 
         {!isModalLoading && (
-          <Panel accent title="Send a Test" sectioned>
+          <Panel title="Send a Test" sectioned>
             <p>Verify your email renders as expected in the inbox by sending a quick test.</p>
 
             <form onSubmit={handleSubmit}>
