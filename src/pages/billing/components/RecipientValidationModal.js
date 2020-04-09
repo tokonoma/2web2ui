@@ -48,7 +48,6 @@ export default ({ onClose, volumeUsed }) => {
     <Panel
       actions={[{ content: <Close />, onClick: onClose }]}
       className={styles.modalContainer}
-      accent
       title="How was this calculated?"
     >
       <Panel.Section>

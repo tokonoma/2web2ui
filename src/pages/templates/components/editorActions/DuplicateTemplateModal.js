@@ -89,14 +89,14 @@ const DuplicateTemplateModal = props => {
   if (isLoading) {
     return (
       <ModalWrapper {...modalProps}>
-        <PanelLoading accent minHeight="330px" />
+        <PanelLoading minHeight="330px" />
       </ModalWrapper>
     );
   }
 
   return (
     <ModalWrapper {...modalProps}>
-      <Panel accent title="Duplicate Template" sectioned>
+      <Panel title="Duplicate Template" sectioned>
         <form onSubmit={e => handleSubmit(e)}>
           <TextField
             id="template-name"

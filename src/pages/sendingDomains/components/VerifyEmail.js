@@ -146,7 +146,6 @@ export class VerifyEmail extends Component {
       <Modal open={open} onClose={onCancel}>
         <Panel
           title="Verify through Email"
-          accent
           actions={[{ content: 'Close', onClick: onCancel, color: 'orange' }]}
         >
           {renderVerification}

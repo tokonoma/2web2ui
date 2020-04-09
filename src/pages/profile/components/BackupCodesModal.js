@@ -65,7 +65,7 @@ export default class BackupCodesModal extends Component {
 
     return (
       <Modal open={open}>
-        <Panel title="Generate Two-factor Backup Codes" accent>
+        <Panel title="Generate Two-factor Backup Codes">
           <form onSubmit={e => e.preventDefault()}>
             <Panel.Section>
               {!generatedCodes && hasCodes && (

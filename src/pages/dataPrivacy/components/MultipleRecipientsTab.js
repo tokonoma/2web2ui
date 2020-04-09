@@ -120,7 +120,7 @@ export function MultipleRecipientsTab({
             validate={[required]}
           />
           <Modal open={Boolean(dataPrivacyRequestError)} showCloseButton onClose={resetDataPrivacy}>
-            <Panel sectioned title="Upload Error" accent>
+            <Panel sectioned title="Upload Error">
               <p>
                 We couldn’t process some of the addresses in your list. Download a list of the
                 errors, update your list, and please upload again.

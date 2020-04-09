@@ -13,7 +13,7 @@ import styles from './RVBundlePage.module.scss';
 
 const RVPriceModal = ({ open, onClose }) => (
   <Modal open={open} onClose={onClose}>
-    <Panel className={styles.modalContainer} accent>
+    <Panel className={styles.modalContainer}>
       <Panel.Section>
         <div className={styles.modalTitle}>
           <div className={styles.title}>Pay-As-You-Go Pricing</div>

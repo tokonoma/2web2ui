@@ -46,7 +46,7 @@ export const StopMonitoringModal = ({
 
   return (
     <Modal open={Boolean(monitorToDelete)} onClose={closeModal} showCloseButton={true}>
-      <Panel title={title} accent sectioned>
+      <Panel title={title} sectioned>
         {isPending ? (
           <div className={styles.Loading}>
             <Loading />

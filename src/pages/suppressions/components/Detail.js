@@ -47,7 +47,7 @@ export default class Detail extends Component {
 
     return (
       <Modal open={open} onClose={onCancel}>
-        <Panel title="Suppression Details" accent sectioned>
+        <Panel title="Suppression Details" sectioned>
           {suppression && this.renderContents()}
           <div className={styles.Buttons}>
             <Button onClick={onCancel}>Close</Button>

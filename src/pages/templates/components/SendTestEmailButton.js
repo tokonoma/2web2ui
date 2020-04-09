@@ -134,7 +134,7 @@ const SendTestEmailButton = () => {
         {isModalLoading && <PanelLoading />}
 
         {!isModalLoading && (
-          <Panel accent title="Send a Test" sectioned>
+          <Panel title="Send a Test" sectioned>
             <p>Verify your email renders as expected in the inbox by sending a quick test.</p>
 
             <form onSubmit={handleSubmit}>

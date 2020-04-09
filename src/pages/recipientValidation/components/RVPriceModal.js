@@ -7,7 +7,7 @@ import styles from './RVPriceModal.module.scss';
 export default function RVPriceModal({ isOpen, handleOpen }) {
   return (
     <Modal open={isOpen} onClose={() => handleOpen(false)}>
-      <Panel className={styles.modalContainer} accent>
+      <Panel className={styles.modalContainer}>
         <div style={{ float: 'right' }}>
           <Button onClick={() => handleOpen(false)} flat>
             <Close />

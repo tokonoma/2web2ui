@@ -51,7 +51,7 @@ export default class ConfirmationModal extends Component {
 
     return (
       <Modal open={open} onClose={onCancel}>
-        <Panel title={title} accent sectioned>
+        <Panel title={title} sectioned>
           {isPending ? (
             <div className={styles.Loading}>
               <Loading />

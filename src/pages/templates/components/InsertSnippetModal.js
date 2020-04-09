@@ -59,14 +59,14 @@ const InsertSnippetModal = props => {
   if (areSnippetsLoading) {
     return (
       <ModalWrapper {...modalProps}>
-        <PanelLoading accent />
+        <PanelLoading />
       </ModalWrapper>
     );
   }
 
   return (
     <ModalWrapper {...modalProps}>
-      <Panel title="Add a snippet" accent sectioned>
+      <Panel title="Add a snippet" sectioned>
         <form onSubmit={handleSubmit}>
           <p>
             Snippets are a great way to manage sections like headers or footers that are used across
