@@ -62,11 +62,11 @@ exports[`JoinForm render disables form when loading 1`] = `
     autoComplete="new-password"
     component={[Function]}
     connectRight={
-      <Button
+      <ShowPasswordButton
         onClick={[Function]}
       >
-        show
-      </Button>
+        Show
+      </ShowPasswordButton>
     }
     disabled={true}
     label="Password"
@@ -202,11 +202,11 @@ exports[`JoinForm render disables form when recaptcha is not loaded 1`] = `
     autoComplete="new-password"
     component={[Function]}
     connectRight={
-      <Button
+      <ShowPasswordButton
         onClick={[Function]}
       >
-        show
-      </Button>
+        Show
+      </ShowPasswordButton>
     }
     disabled={true}
     label="Password"
@@ -342,11 +342,11 @@ exports[`JoinForm render enables form correctly 1`] = `
     autoComplete="new-password"
     component={[Function]}
     connectRight={
-      <Button
+      <ShowPasswordButton
         onClick={[Function]}
       >
-        show
-      </Button>
+        Show
+      </ShowPasswordButton>
     }
     disabled={false}
     label="Password"

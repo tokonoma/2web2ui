@@ -10,6 +10,7 @@ import { Grid } from '@sparkpost/matchbox';
 import { ExternalLink } from 'src/components/links';
 import { Button, Checkbox } from 'src/components/matchbox';
 import { required, minLength, email, endsWithWhitespace } from 'src/helpers/validation';
+import useHibanaToggle from 'src/hooks/useHibanaToggle';
 import styles from './JoinForm.module.scss';
 const { recaptcha } = config;
 
@@ -123,9 +124,9 @@ export class JoinForm extends Component {
           autoComplete="new-password"
           placeholder="••••••••••••"
           connectRight={
-            <Button onClick={() => this.setState({ showPassword: !showPassword })}>
-              {showPassword ? 'hide' : 'show'}
-            </Button>
+            <ShowPasswordButton onClick={() => this.setState({ showPassword: !showPassword })}>
+              {showPassword ? 'Hide' : 'Show'}
+            </ShowPasswordButton>
           }
         />
 
@@ -176,6 +177,25 @@ export class JoinForm extends Component {
   }
 }
 
+function OGShowPasswordButton({ children, onClick }) {
+  return (
+    <Button onClick={onClick} data-id="show-password-button">
+      {children}
+    </Button>
+  );
+}
+
+function HibanaShowPasswordButton({ children, onClick }) {
+  return (
+    <Button primary outline onClick={onClick} data-id="show-password-button">
+      {children}
+    </Button>
+  );
+}
+
+function ShowPasswordButton(props) {
+  return useHibanaToggle(OGShowPasswordButton, HibanaShowPasswordButton)(props);
+}
 const mapStateToProps = state => ({
   initialValues: {
     tou_accepted: false,
