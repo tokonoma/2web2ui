@@ -7,14 +7,15 @@ import {
   selectIdAndVersionFromParams,
 } from 'src/selectors/abTesting';
 import { LabelledValue, Subaccount } from 'src/components';
-import { Popover } from '@sparkpost/matchbox';
 import { PageLink } from 'src/components/links';
-import { ActionList, Panel } from 'src/components/matchbox';
+import { ActionList, Panel, Popover } from 'src/components/matchbox';
 import { ExpandMore } from '@sparkpost/matchbox-icons';
 import StatusTag from './StatusTag';
 
 import _ from 'lodash';
 
+// todo, this component is rendered as a panel action content and panel actions are buttons, this
+//   doesn't work to have the Popover inside the Button
 const VersionSelector = ({ current, latest, id, subaccountId }) => {
   const actions = _.times(latest, i => ({
     content: `View Version ${i + 1}`,
@@ -25,6 +26,7 @@ const VersionSelector = ({ current, latest, id, subaccountId }) => {
 
   return (
     <Popover
+      id="popover-version-selector"
       left
       trigger={
         <Fragment>
@@ -47,6 +49,7 @@ export const StatusPanel = ({ test, version, id, subaccountId, latest, subaccoun
           <VersionSelector current={version} id={id} latest={latest} subaccountId={subaccountId} />
         ),
         color: 'orange',
+        'aria-controls': 'popover-version-selector',
       },
     ];
   }

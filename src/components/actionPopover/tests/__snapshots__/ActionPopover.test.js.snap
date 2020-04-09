@@ -9,11 +9,11 @@ exports[`ActionPopover Component should render with actions 1`] = `
   }
 >
   <Popover
-    bottom={true}
+    id="action-popover-0"
     left={true}
-    right={true}
     trigger={
       <Button
+        aria-controls="action-popover-0"
         flat={true}
       >
         <MoreHoriz
@@ -49,11 +49,11 @@ exports[`ActionPopover Component should render with no props 1`] = `
   }
 >
   <Popover
-    bottom={true}
+    id="action-popover-0"
     left={true}
-    right={true}
     trigger={
       <Button
+        aria-controls="action-popover-0"
         flat={true}
       >
         <MoreHoriz

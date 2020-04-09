@@ -8,7 +8,7 @@ jest.mock('src/context/HibanaContext');
 describe('CodeBlock Matchbox component wrapper', () => {
   const subject = () =>
     shallow(
-      <CodeBlock code="This is some code" to="/test">
+      <CodeBlock code="<h1>Test</h1>" to="/test">
         Children...
       </CodeBlock>,
     );

@@ -16,13 +16,13 @@ exports[`PublishedModeActions renders published actions 1`] = `
     className="Actions"
   >
     <Popover
-      bottom={true}
+      id="popover-action-list"
       left={true}
       onClose={[Function]}
       open={false}
-      right={true}
       trigger={
         <Button
+          aria-controls="popover-action-list"
           aria-expanded="false"
           data-id="popover-trigger-editor-actions"
           onClick={[Function]}

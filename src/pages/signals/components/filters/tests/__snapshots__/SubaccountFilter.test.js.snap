@@ -2,14 +2,14 @@
 
 exports[`SubaccountFilter Component renders open popover with options 1`] = `
 <Popover
-  bottom={true}
   className="Popover"
+  id="popover-subaccount-filter"
   left={true}
   open={true}
-  right={true}
   trigger={
     <div>
       <Button
+        aria-controls="popover-subaccount-filter"
         className="Button"
         fullWidth={true}
         onClick={[Function]}
@@ -126,14 +126,14 @@ exports[`SubaccountFilter Component renders with subaccount 1`] = `
       handler={[Function]}
     />
     <Popover
-      bottom={true}
       className="Popover"
+      id="popover-subaccount-filter"
       left={true}
       open={false}
-      right={true}
       trigger={
         <div>
           <Button
+            aria-controls="popover-subaccount-filter"
             className="Button"
             fullWidth={true}
             onClick={[Function]}

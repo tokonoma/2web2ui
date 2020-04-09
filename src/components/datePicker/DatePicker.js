@@ -9,8 +9,7 @@ import {
   isSameDate,
 } from 'src/helpers/date';
 import { roundBoundaries, getRollupPrecision, getPrecision } from 'src/helpers/metrics';
-import { Popover } from '@sparkpost/matchbox';
-import { Button, Error, Select, TextField, WindowEvent } from 'src/components/matchbox';
+import { Button, Error, Popover, Select, TextField, WindowEvent } from 'src/components/matchbox';
 import DateSelector from 'src/components/dateSelector/DateSelector';
 import ManualEntryForm from './ManualEntryForm';
 import { FORMATS } from 'src/constants';
@@ -269,6 +268,7 @@ export default class DatePicker extends Component {
 
     return (
       <Popover
+        id={`popover-${id}`}
         wrapper="div"
         className={styles.Popover}
         trigger={dateField}

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Popover } from '@sparkpost/matchbox';
-import { Button, ScreenReaderOnly } from 'src/components/matchbox';
+import { Button, Popover, ScreenReaderOnly } from 'src/components/matchbox';
 import { ArrowDropDown } from '@sparkpost/matchbox-icons';
 import SaveAndPublish from './SaveAndPublish';
 import SaveAndPublishConfirmationModal from './SaveAndPublishConfirmationModal';
@@ -63,12 +62,14 @@ const DraftModeActions = () => {
 
       <div className={styles.Actions}>
         <Popover
+          id="popover-action-list"
           left={true}
           open={isPopoverOpen}
           onClose={() => setPopoverOpen(false)}
           trigger={
             <Button
               onClick={() => setPopoverOpen(!isPopoverOpen)}
+              aria-controls="popover-action-list"
               aria-expanded={isPopoverOpen ? 'true' : 'false'}
               data-id="popover-actions-trigger"
             >

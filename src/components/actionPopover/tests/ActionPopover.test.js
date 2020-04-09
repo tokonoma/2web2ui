@@ -2,22 +2,21 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import ActionPopover from '../ActionPopover';
 
-describe('ActionPopover Component', () => {
+jest.mock('src/hooks/useUniqueId/useUniqueId');
 
-  const actions = [
-    { content: 'Edit', to: '/some/link' },
-    { content: 'Delete', onClick: jest.fn() }
-  ];
+describe('ActionPopover Component', () => {
+  const subject = props => shallow(<ActionPopover id="test-popover" {...props} />);
 
   it('should render with no props', () => {
-    const wrapper = shallow(<ActionPopover />);
-
-    expect(wrapper).toMatchSnapshot();
+    expect(subject()).toMatchSnapshot();
   });
 
   it('should render with actions', () => {
-    const wrapper = shallow(<ActionPopover actions={actions}/>);
-
+    const actions = [
+      { content: 'Edit', to: '/some/link' },
+      { content: 'Delete', onClick: jest.fn() },
+    ];
+    const wrapper = subject({ actions });
     expect(wrapper).toMatchSnapshot();
   });
 });
