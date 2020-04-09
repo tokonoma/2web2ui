@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Panel } from 'src/components/matchbox';
 import { Loading } from 'src/components/loading/Loading';
-import Modal from './Modal';
+import { Modal } from 'src/components/matchbox';
 import styles from './ActionsModal.module.scss';
 
 const ActionsModal = ({

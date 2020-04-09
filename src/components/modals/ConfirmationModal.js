@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Panel } from 'src/components/matchbox';
-import Modal from './Modal';
+import { Button, Panel, Modal } from 'src/components/matchbox';
 import styles from './ConfirmationModal.module.scss';
 import { Loading } from 'src/components/loading/Loading';
 
