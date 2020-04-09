@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Grid } from '@sparkpost/matchbox';
 import { ApiErrorBanner, DeleteModal, Loading, DisplayDate } from 'src/components';
 import { PageLink } from 'src/components/links';
-import { Page, Panel, Tag } from 'src/components/matchbox';
+import { Grid, Page, Panel, Tag } from 'src/components/matchbox';
 import { Templates } from 'src/components/images';
 import AlertCollection from './components/AlertCollection';
 import withAlertsList from './containers/ListPage.container';

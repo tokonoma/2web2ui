@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Field, formValueSelector, change } from 'redux-form';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { Grid } from '@sparkpost/matchbox';
+import { Grid } from 'src/components/matchbox';
 import { TextFieldWrapper, SelectWrapper } from 'src/components';
 import { required, email } from 'src/helpers/validation';
 import { getZipLabel } from 'src/helpers/billing';
@@ -38,49 +38,50 @@ export class BillingContactForm extends Component {
   render() {
     const { countries = [], countryValue } = this.props;
 
-    const stateOrProvince = countries.length && (countryValue === 'US' || countryValue === 'CA')
-      ? <Grid.Column xs={6}>
-        <Field
-          label={countryValue === 'US' ? 'State' : 'Province'}
-          name='billingContact.state'
-          component={SelectWrapper}
-          options={_.find(countries, { value: countryValue }).states}
-          validate={required}
-        />
-      </Grid.Column>
-      : null;
+    const stateOrProvince =
+      countries.length && (countryValue === 'US' || countryValue === 'CA') ? (
+        <Grid.Column xs={6}>
+          <Field
+            label={countryValue === 'US' ? 'State' : 'Province'}
+            name="billingContact.state"
+            component={SelectWrapper}
+            options={_.find(countries, { value: countryValue }).states}
+            validate={required}
+          />
+        </Grid.Column>
+      ) : null;
 
     return (
       <div>
         <Grid className={styles.spacer}>
           <Grid.Column xs={6}>
             <Field
-              label='First Name'
-              name='billingContact.firstName'
+              label="First Name"
+              name="billingContact.firstName"
               component={TextFieldWrapper}
               validate={required}
             />
           </Grid.Column>
           <Grid.Column xs={6}>
             <Field
-              label='Last Name'
-              name='billingContact.lastName'
+              label="Last Name"
+              name="billingContact.lastName"
               component={TextFieldWrapper}
               validate={required}
             />
           </Grid.Column>
         </Grid>
         <Field
-          label='Email'
-          name='billingContact.email'
+          label="Email"
+          name="billingContact.email"
           component={TextFieldWrapper}
           validate={[required, email]}
         />
 
         <Field
-          label='Country'
-          name='billingContact.country'
-          placeholder='Select a country'
+          label="Country"
+          name="billingContact.country"
+          placeholder="Select a country"
           component={SelectWrapper}
           options={countries}
           validate={required}
@@ -90,7 +91,7 @@ export class BillingContactForm extends Component {
           <Grid.Column xs={6}>
             <Field
               label={getZipLabel(countryValue)}
-              name='billingContact.zip'
+              name="billingContact.zip"
               component={TextFieldWrapper}
               validate={required}
             />
@@ -102,14 +103,15 @@ export class BillingContactForm extends Component {
 }
 
 BillingContactForm.propTypes = {
-  countries: PropTypes.arrayOf(PropTypes.shape({
-    value: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired
-  })),
+  countries: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+    }),
+  ),
   countryValue: PropTypes.string,
-  formName: PropTypes.string.isRequired
+  formName: PropTypes.string.isRequired,
 };
-
 
 const mapStateToProps = (state, { formName }) => {
   // Get country value from state
@@ -118,7 +120,7 @@ const mapStateToProps = (state, { formName }) => {
 
   return {
     countryValue,
-    firstState: getFirstStateForCountry(state, countryValue)
+    firstState: getFirstStateForCountry(state, countryValue),
   };
 };
 

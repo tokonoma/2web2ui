@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Field, formValueSelector, change } from 'redux-form';
 import PropTypes from 'prop-types';
 
-import { Grid } from '@sparkpost/matchbox';
+import { Grid } from 'src/components/matchbox';
 import { TextFieldWrapper, SelectWrapper } from 'src/components';
 import { required } from 'src/helpers/validation';
 import { getZipLabel } from 'src/helpers/billing';

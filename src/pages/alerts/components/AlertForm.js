@@ -2,8 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { Field, Form } from 'redux-form';
 // Components
-import { Grid } from '@sparkpost/matchbox';
-import { Error, Button, Expandable, Panel } from 'src/components/matchbox';
+import { Grid, Error, Button, Expandable, Panel } from 'src/components/matchbox';
 import { TextFieldWrapper, SelectWrapper } from 'src/components';
 import FilterFields from './fields/FilterFields';
 import EvaluatorFields from './fields/EvaluatorFields';

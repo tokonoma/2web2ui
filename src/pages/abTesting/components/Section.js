@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid } from '@sparkpost/matchbox';
+import { Grid } from 'src/components/matchbox';
 import styles from './Section.module.scss';
 
 const Left = ({ children }) => (
@@ -22,11 +22,9 @@ export default class Section extends Component {
 
     return (
       <div className={styles.Section}>
-        <hr className={styles.Hr}/>
+        <hr className={styles.Hr} />
         <h3>{title}</h3>
-        <Grid>
-          {children}
-        </Grid>
+        <Grid>{children}</Grid>
       </div>
     );
   }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
 import { Field, change } from 'redux-form';
-import { Grid } from '@sparkpost/matchbox';
+import { Grid } from 'src/components/matchbox';
 import _ from 'lodash';
 import config from 'src/config';
 import { TextFieldWrapper } from 'src/components';

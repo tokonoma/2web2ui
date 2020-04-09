@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid } from '@sparkpost/matchbox';
+import { Grid } from 'src/components/matchbox';
 import styles from './ApiDetails.module.scss';
 import CodeBlock from './CodeBlock';
 const Tab = () => <span className={styles.tab} />;

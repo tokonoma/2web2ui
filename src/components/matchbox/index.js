@@ -6,6 +6,7 @@ export { default as Checkbox } from './Checkbox';
 export { default as CodeBlock } from './CodeBlock';
 export { default as Error } from './Error';
 export { default as Expandable } from './Expandable';
+export { default as Grid } from './Grid';
 export { default as Inline } from './Inline';
 export { default as Label } from './Label';
 export { default as Page } from './Page';

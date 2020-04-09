@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { tokens } from '@sparkpost/design-tokens-hibana';
-import { Grid } from '@sparkpost/matchbox';
-import { Box, Panel } from 'src/components/matchbox';
+import { Grid, Box, Panel } from 'src/components/matchbox';
 import { PanelLoading } from 'src/components';
 import { Percent } from 'src/components/formatters';
 import { formatDateTime, relativeDateOptionsIndexed } from 'src/helpers/date';

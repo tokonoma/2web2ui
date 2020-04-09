@@ -1,7 +1,5 @@
 import React from 'react';
-
-import { Grid } from '@sparkpost/matchbox';
-import { Toggle } from 'src/components/matchbox';
+import { Grid, Toggle } from 'src/components/matchbox';
 import styles from './ToggleBlock.module.scss';
 
 const ToggleBlock = ({ input, meta, label, helpText, ...rest }) => {

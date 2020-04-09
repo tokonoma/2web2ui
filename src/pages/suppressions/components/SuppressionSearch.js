@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { reduxForm } from 'redux-form';
-import { Grid } from '@sparkpost/matchbox';
+import { Grid } from 'src/components/matchbox';
 import { FilterDropdown } from 'src/components';
 import * as suppressionActions from 'src/actions/suppressions';
 import DatePicker from 'src/components/datePicker/DatePicker';

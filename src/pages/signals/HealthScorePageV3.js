@@ -1,9 +1,8 @@
 import React, { useCallback } from 'react';
 import { selectHealthScoreDetailsV3 } from 'src/selectors/signals';
 import Page from './components/SignalsPage';
-import { Grid } from '@sparkpost/matchbox';
 import { PageLink } from 'src/components/links';
-import { Button, Panel } from 'src/components/matchbox';
+import { Grid, Button, Panel } from 'src/components/matchbox';
 import withDetails from './containers/withDetails';
 import BarChart from './components/charts/barchart/BarChart';
 import withDateSelection from './containers/withDateSelection';

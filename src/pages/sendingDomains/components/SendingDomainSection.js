@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid } from '@sparkpost/matchbox';
+import { Grid } from 'src/components/matchbox';
 import styles from './SendingDomainSection.module.scss';
 
 const Left = ({ children }) => (

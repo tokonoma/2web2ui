@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import { Grid } from '@sparkpost/matchbox';
-import { Panel } from 'src/components/matchbox';
+import { Grid, Panel } from 'src/components/matchbox';
 import { Loading, PieChart } from 'src/components';
 import { generateColors } from 'src/helpers/color';
 import styles from './AcceptedChart.module.scss';
@@ -14,7 +13,7 @@ const primaryColor = '#8CCA3A';
 export default class AcceptedChart extends Component {
   state = {
     hoveredItem: null,
-    active: null
+    active: null,
   };
 
   /**
@@ -37,37 +36,43 @@ export default class AcceptedChart extends Component {
       name,
       count,
       index: _.findIndex(dataSet, { name }),
-      dataSet: hoverSet
+      dataSet: hoverSet,
     };
 
     this.setState({ hoveredItem });
-  }
+  };
 
   handleMouseOut = () => {
     this.setState({ hoveredItem: null });
-  }
+  };
 
   handleClick = ({ name, children, count }) => {
     if (children) {
       this.setState({
         active: { name, children, count },
-        hoveredItem: null
+        hoveredItem: null,
       });
     }
-  }
+  };
 
   handleBreadcrumb = () => {
     this.setState({ active: null });
-  }
+  };
 
   getLabelProps = () => {
     const { aggregates } = this.props;
     const { hoveredItem } = this.state;
 
     return hoveredItem
-      ? { name: hoveredItem.name, value: formatPercent(safeRate(hoveredItem.count, aggregates.count_accepted)) }
-      : { name: 'Accepted Rate', value: formatPercent(safeRate(aggregates.count_accepted, aggregates.count_sent)) };
-  }
+      ? {
+          name: hoveredItem.name,
+          value: formatPercent(safeRate(hoveredItem.count, aggregates.count_accepted)),
+        }
+      : {
+          name: 'Accepted Rate',
+          value: formatPercent(safeRate(aggregates.count_accepted, aggregates.count_sent)),
+        };
+  };
 
   getLegendHeaderData = () => {
     const { aggregates } = this.props;
@@ -76,18 +81,23 @@ export default class AcceptedChart extends Component {
     // Header with breadcrumb & active data
     if (active) {
       return [
-        { name: 'Accepted', breadcrumb: true, onClick: this.handleBreadcrumb, count: aggregates.count_accepted },
+        {
+          name: 'Accepted',
+          breadcrumb: true,
+          onClick: this.handleBreadcrumb,
+          count: aggregates.count_accepted,
+        },
         { name: 'Sent', count: aggregates.count_sent },
-        { name: active.name, count: active.count }
+        { name: active.name, count: active.count },
       ];
     }
 
     // Default header
     return [
       { name: 'Accepted', count: aggregates.count_accepted },
-      { name: 'Sent', count: aggregates.count_sent }
+      { name: 'Sent', count: aggregates.count_sent },
     ];
-  }
+  };
 
   // Gets primary and secondary data for BounceChart & Legend
   getData = () => {
@@ -101,19 +111,23 @@ export default class AcceptedChart extends Component {
     }
 
     return {
-      primaryData: generateColors(data, { baseColor: primaryColor, saturate: 0, rotate: -40 })
+      primaryData: generateColors(data, { baseColor: primaryColor, saturate: 0, rotate: -40 }),
     };
-  }
+  };
 
-  render () {
+  render() {
     const { loading } = this.props;
 
     if (loading) {
-      return <Panel title='Accepted Rates' sectioned className={styles.LoadingPanel}><Loading /></Panel>;
+      return (
+        <Panel title="Accepted Rates" sectioned className={styles.LoadingPanel}>
+          <Loading />
+        </Panel>
+      );
     }
 
     return (
-      <Panel title='Accepted Rates' sectioned>
+      <Panel title="Accepted Rates" sectioned>
         <Grid>
           <Grid.Column xs={12} lg={5}>
             <div className={styles.ChartWrapper}>
@@ -122,8 +136,9 @@ export default class AcceptedChart extends Component {
                 hoveredItem={this.state.hoveredItem}
                 onMouseOver={this.handleMouseOver}
                 onMouseOut={this.handleMouseOut}
-                onClick={this.handleClick} />
-              <PieChart.ActiveLabel {...this.getLabelProps()}/>
+                onClick={this.handleClick}
+              />
+              <PieChart.ActiveLabel {...this.getLabelProps()} />
             </div>
           </Grid.Column>
           <Grid.Column xs={12} lg={7}>
@@ -133,7 +148,8 @@ export default class AcceptedChart extends Component {
               hoveredItem={this.state.hoveredItem}
               onMouseOver={this.handleMouseOver}
               onMouseOut={this.handleMouseOut}
-              onClick={this.handleClick} />
+              onClick={this.handleClick}
+            />
           </Grid.Column>
         </Grid>
       </Panel>

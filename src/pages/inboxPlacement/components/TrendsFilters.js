@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useMemo } from 'react';
 import moment from 'moment';
-import { Grid } from '@sparkpost/matchbox';
-import { Tag } from 'src/components/matchbox';
+import { Grid, Tag } from 'src/components/matchbox';
 import InboxPlacementTypeahead from 'src/components/typeahead/InboxPlacementTypeahead';
 import DatePicker from 'src/components/datePicker/DatePicker';
 import { getRelativeDates, formatApiTimestamp } from 'src/helpers/date';

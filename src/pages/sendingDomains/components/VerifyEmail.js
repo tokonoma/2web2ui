@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Modal } from 'src/components';
-import { Grid } from '@sparkpost/matchbox';
-import { Button, Panel, TextField } from 'src/components/matchbox';
+import { Grid, Button, Panel, TextField } from 'src/components/matchbox';
 import { selectHasAnyoneAtDomainVerificationEnabled } from 'src/selectors/account';
 
 import styles from './VerifyEmail.module.scss';

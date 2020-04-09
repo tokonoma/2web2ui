@@ -10,7 +10,8 @@ exports[`Accepted TopLevelMetrics Component:  should render correctly 1`] = `
     <strong>
       150
     </strong>
-     of 
+     of
+     
     <strong>
       160
     </strong>

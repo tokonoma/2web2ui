@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field, formValueSelector } from 'redux-form';
-import { Grid } from '@sparkpost/matchbox';
 import { TextFieldWrapper } from 'src/components';
 import { PageLink } from 'src/components/links';
-import { Button, Panel } from 'src/components/matchbox';
+import { Grid, Button, Panel } from 'src/components/matchbox';
 import {
   TemplateTypeaheadWrapper,
   SubaccountTypeaheadWrapper,
