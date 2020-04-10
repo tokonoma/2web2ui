@@ -6,7 +6,8 @@ import ComboBoxTextField from '../ComboBoxTextField';
 jest.mock('src/context/HibanaContext');
 
 describe('ComboBoxTextField Matchbox component wrapper', () => {
-  const subject = () => shallow(<ComboBoxTextField label="Test Example" value="" />);
+  const subject = () =>
+    shallow(<ComboBoxTextField id="test-text-field" label="Test Example" value="" />);
 
   it('renders the Hibana version of the ComboBoxTextField component correctly when Hibana is enabled', () => {
     useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: true }]);

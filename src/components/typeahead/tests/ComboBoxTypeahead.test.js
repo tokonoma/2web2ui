@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
 import { useDebouncedCallback } from 'use-debounce';
+import TestApp from 'src/__testHelpers__/TestApp';
 import { ComboBoxTypeahead } from '../ComboBoxTypeahead';
 
 jest.mock('use-debounce');
@@ -9,21 +10,23 @@ jest.mock('use-debounce');
 describe('ComboBoxTypeahead', () => {
   const subject = (props = {}) =>
     mount(
-      <ComboBoxTypeahead
-        value={[]}
-        onChange={() => {}}
-        results={[
-          'apple',
-          'banana',
-          'blue ',
-          'cauliflower',
-          'grape',
-          'grapefruit',
-          'orange',
-          'pineapple',
-        ]}
-        {...props}
-      />,
+      <TestApp>
+        <ComboBoxTypeahead
+          value={[]}
+          onChange={() => {}}
+          results={[
+            'apple',
+            'banana',
+            'blue ',
+            'cauliflower',
+            'grape',
+            'grapefruit',
+            'orange',
+            'pineapple',
+          ]}
+          {...props}
+        />
+      </TestApp>,
     );
 
   const changeInputValue = (wrapper, nextValue) => {
