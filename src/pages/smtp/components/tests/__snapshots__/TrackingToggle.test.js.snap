@@ -5,17 +5,19 @@ exports[`Page: Smtp tests should disable form when updateLoading is true 1`] = `
   sectioned={true}
   title="Engagement Tracking"
 >
-  <p>
-    Engagement tracking allows the ability to show how many recipients opened messages or clicked links. This is the default setting for engagement tracking for SMTP.
-  </p>
-  <Field
-    component={[Function]}
-    disabled={true}
-    label="SMTP Engagement Tracking"
-    name="options.smtp_tracking_default"
-    onChange={[MockFunction]}
-    type="checkbox"
-  />
+  <Stack>
+    <p>
+      Engagement tracking allows the ability to show how many recipients opened messages or clicked links. This is the default setting for engagement tracking for SMTP.
+    </p>
+    <Field
+      component={[Function]}
+      disabled={true}
+      label="SMTP Engagement Tracking"
+      name="options.smtp_tracking_default"
+      onChange={[MockFunction]}
+      type="checkbox"
+    />
+  </Stack>
 </Panel>
 `;
 
@@ -24,16 +26,18 @@ exports[`Page: Smtp tests should render form correctly with defaults 1`] = `
   sectioned={true}
   title="Engagement Tracking"
 >
-  <p>
-    Engagement tracking allows the ability to show how many recipients opened messages or clicked links. This is the default setting for engagement tracking for SMTP.
-  </p>
-  <Field
-    component={[Function]}
-    disabled={false}
-    label="SMTP Engagement Tracking"
-    name="options.smtp_tracking_default"
-    onChange={[MockFunction]}
-    type="checkbox"
-  />
+  <Stack>
+    <p>
+      Engagement tracking allows the ability to show how many recipients opened messages or clicked links. This is the default setting for engagement tracking for SMTP.
+    </p>
+    <Field
+      component={[Function]}
+      disabled={false}
+      label="SMTP Engagement Tracking"
+      name="options.smtp_tracking_default"
+      onChange={[MockFunction]}
+      type="checkbox"
+    />
+  </Stack>
 </Panel>
 `;

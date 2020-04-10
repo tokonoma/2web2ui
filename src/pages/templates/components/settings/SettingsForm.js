@@ -1,7 +1,7 @@
 /* eslint-disable max-lines */
 import React from 'react';
 import { Field } from 'redux-form';
-import { Button, Panel } from 'src/components/matchbox';
+import { Button, Panel, Stack } from 'src/components/matchbox';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
 import SubaccountSection from 'src/components/subaccountSection';
 import { TextFieldWrapper } from 'src/components';
@@ -100,11 +100,13 @@ export default class SettingsForm extends React.Component {
               disabled={true}
             />
           </Panel.Section>
+
           {canViewSubaccountSection && (
             <Panel.Section>
               <SubaccountSection newTemplate={false} disabled={submitting || isPublishedMode} />
             </Panel.Section>
           )}
+
           <Panel.Section>
             <Field
               name="content.subject"
@@ -151,38 +153,37 @@ export default class SettingsForm extends React.Component {
             />
           </Panel.Section>
           <Panel.Section>
-            <Field
-              name="options.open_tracking"
-              component={ToggleBlock}
-              label="Track Opens"
-              type="checkbox"
-              parse={this.parseToggle}
-              disabled={submitting || isPublishedMode}
-            />
+            <Stack>
+              <Field
+                name="options.open_tracking"
+                component={ToggleBlock}
+                label="Track Opens"
+                type="checkbox"
+                parse={this.parseToggle}
+                disabled={submitting || isPublishedMode}
+              />
 
-            <Field
-              name="options.click_tracking"
-              component={ToggleBlock}
-              label="Track Clicks"
-              type="checkbox"
-              parse={this.parseToggle}
-              disabled={submitting || isPublishedMode}
-            />
-            <Field
-              name="options.transactional"
-              component={ToggleBlock}
-              label="Transactional"
-              type="checkbox"
-              parse={this.parseToggle}
-              helpText={
-                <p className={styles.HelpText}>
-                  Transactional messages are triggered by a user’s actions on the website, like
-                  requesting a password reset, signing up, or making a purchase.
-                </p>
-              }
-              disabled={submitting || isPublishedMode}
-            />
+              <Field
+                name="options.click_tracking"
+                component={ToggleBlock}
+                label="Track Clicks"
+                type="checkbox"
+                parse={this.parseToggle}
+                disabled={submitting || isPublishedMode}
+              />
+
+              <Field
+                name="options.transactional"
+                component={ToggleBlock}
+                label="Transactional"
+                type="checkbox"
+                parse={this.parseToggle}
+                helpText="Transactional messages are triggered by a user’s actions on the website, like requesting a password reset, signing up, or making a purchase."
+                disabled={submitting || isPublishedMode}
+              />
+            </Stack>
           </Panel.Section>
+
           <Panel.Section>
             <Button
               type="submit"

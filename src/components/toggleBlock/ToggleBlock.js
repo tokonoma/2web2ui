@@ -1,9 +1,12 @@
 import React from 'react';
-import { Grid, Toggle } from 'src/components/matchbox';
+import PropTypes from 'prop-types';
+import { Grid } from '@sparkpost/matchbox';
+import { Box, Label, Text, Toggle } from 'src/components/matchbox';
+import useHibanaToggle from 'src/hooks/useHibanaToggle';
 import styles from './ToggleBlock.module.scss';
 
-const ToggleBlock = ({ input, meta, label, helpText, ...rest }) => {
-  const helpMarkup = helpText ? <div className={styles.Help}>{helpText}</div> : null;
+function OGToggleBlock({ input, label, helpText, ...rest }) {
+  const helpMarkup = helpText ? <p className={styles.Help}>{helpText}</p> : null;
 
   return (
     <div className={styles.ToggleBlock} data-id="toggle-block">
@@ -20,6 +23,53 @@ const ToggleBlock = ({ input, meta, label, helpText, ...rest }) => {
       {helpMarkup}
     </div>
   );
+}
+
+function HibanaToggleBlock(props) {
+  const { input, label, helpText, ...rest } = props;
+
+  return (
+    <Box data-id="toggle-block">
+      <Grid middle="xs">
+        <Grid.Column xs={8}>
+          {/* actual label for ScreenReaders made available via the `Toggle` component */}
+          <div aria-hidden="true">
+            <Label label={label} fontSize="200" />
+          </div>
+        </Grid.Column>
+
+        <Grid.Column xs={4}>
+          <Box display="flex" alignItems="center" justifyContent="flex-end">
+            <Toggle
+              id={input.name}
+              label={label}
+              aria-describedby={helpText && `help-text-${input.name}`}
+              {...input}
+              {...rest}
+            />
+          </Box>
+        </Grid.Column>
+      </Grid>
+
+      {helpText && (
+        <Box maxWidth="70%">
+          <Text color="gray.700" fontSize="200" id={`help-text-${input.name}`}>
+            {helpText}
+          </Text>
+        </Box>
+      )}
+    </Box>
+  );
+}
+
+function ToggleBlock(props) {
+  return useHibanaToggle(OGToggleBlock, HibanaToggleBlock)(props);
+}
+
+ToggleBlock.propTypes = {
+  input: PropTypes.object,
+  label: PropTypes.string,
+  helpText: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
 };
 
 export default ToggleBlock;

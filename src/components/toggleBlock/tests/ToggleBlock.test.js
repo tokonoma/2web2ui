@@ -1,30 +1,39 @@
-import { shallow } from 'enzyme';
 import React from 'react';
-
+import { render } from '@testing-library/react';
 import ToggleBlock from '../ToggleBlock';
+import TestApp from 'src/__testHelpers__/TestApp';
 
 describe('ToggleBlock', () => {
-  let wrapper;
-
-  beforeEach(() => {
-    const props = {
+  const subject = props => {
+    const defaultProps = {
       input: {
-        name: 'name'
+        name: 'my-test-toggle-block',
       },
-      meta: {},
-      label: 'label',
-      helpText: 'some help'
+      helpText: 'Default help text',
     };
 
-    wrapper = shallow(<ToggleBlock {...props} />);
+    return render(
+      <TestApp>
+        <ToggleBlock {...defaultProps} {...props} />
+      </TestApp>,
+    );
+  };
+
+  it('renders the passed in label for the toggle input', () => {
+    const { queryByText } = subject({ label: 'My Label' });
+
+    expect(queryByText('My Label')).toBeInTheDocument();
   });
 
-  it('should render', () => {
-    expect(wrapper).toMatchSnapshot();
+  it('renders passed in help text', () => {
+    const { queryByText } = subject({ helpText: 'This is some help text' });
+
+    expect(queryByText('This is some help text')).toBeInTheDocument();
   });
 
-  it('should not render helptext if it is not provided', () => {
-    wrapper.setProps({ helpText: null });
-    expect(wrapper.find('p')).toHaveLength(0);
+  it('should not render help text if it is not provided', () => {
+    const { queryByText } = subject({ helpText: null });
+
+    expect(queryByText('Default help text')).not.toBeInTheDocument();
   });
 });

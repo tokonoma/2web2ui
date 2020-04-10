@@ -1,18 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Typeahead TypeaheadItem renders a typeahead item 1`] = `
-<div
-  className="Item"
->
-  Example Label
-  <span
-    className="id"
-  >
-    example-id
-  </span>
-</div>
-`;
-
 exports[`Typeahead render function renders list of matches 1`] = `
 <div
   className="Typeahead"
@@ -21,31 +8,25 @@ exports[`Typeahead render function renders list of matches 1`] = `
     actions={
       Array [
         Object {
-          "content": <div
-            className="Item"
-          >
-            apples
-          </div>,
+          "content": <TypeaheadItem
+            label="apples"
+          />,
           "highlighted": true,
           "index": 0,
           "item": "apples",
         },
         Object {
-          "content": <div
-            className="Item"
-          >
-            bananas
-          </div>,
+          "content": <TypeaheadItem
+            label="bananas"
+          />,
           "highlighted": false,
           "index": 1,
           "item": "bananas",
         },
         Object {
-          "content": <div
-            className="Item"
-          >
-            cauliflower
-          </div>,
+          "content": <TypeaheadItem
+            label="cauliflower"
+          />,
           "highlighted": false,
           "index": 2,
           "item": "cauliflower",
@@ -63,6 +44,7 @@ exports[`Typeahead render function renders list of matches 1`] = `
     name="subaccount"
     placeholder="None"
     readOnly={false}
+    suffix={<Search />}
   />
 </div>
 `;
