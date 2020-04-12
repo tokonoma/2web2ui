@@ -18,7 +18,7 @@ const OGAlgoliaResults = ({ hit }) => (
 );
 
 const HibanaAlgoliaResults = ({ hit }) => (
-  <Stack>
+  <Stack space="300">
     <Text fontWeight="normal" as="p" fontSize="400">
       <ExternalLink to={hit.permalink}>{hit.post_title}</ExternalLink>
     </Text>
