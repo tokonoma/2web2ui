@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
-import { Error, Label } from 'src/components/matchbox';
+import { Error } from 'src/components/matchbox';
 import { FileUpload } from '@sparkpost/matchbox-icons';
 import { shrinkToFit } from 'src/helpers/string';
 import styles from './FileFieldWrapper.module.scss';
@@ -50,7 +50,7 @@ export default class FileFieldWrapper extends Component {
 
     return (
       <fieldset className={styles.Field}>
-        <Label id={input.id}>
+        <label id={input.id}>
           {!labelHidden && label}
           {!labelHidden && required && ' *'}
           {meta.touched && meta.error ? (
@@ -59,7 +59,7 @@ export default class FileFieldWrapper extends Component {
               <Error error={meta.error} wrapper="span" />
             </span>
           ) : null}
-        </Label>
+        </label>
         <div className={styles.InputWrapper}>
           <Dropzone
             accept={acceptedTypes}
