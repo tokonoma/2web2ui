@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
 import Dropzone from 'react-dropzone';
-import { Error, Label, Box, Text } from 'src/components/matchbox';
+import { Error, Label, Box, Text, ScreenReaderOnly } from 'src/components/matchbox';
 import useHibanaToggle from 'src/hooks/useHibanaToggle';
 import { FileUpload } from '@sparkpost/matchbox-icons';
 import { shrinkToFit } from 'src/helpers/string';
@@ -108,28 +108,33 @@ export function HibanaFileFieldWrapper({
   const { handleCancel, handleDrop } = getSharedHandlers(input);
 
   const getLabel = () => {
-    let l = '';
-    if (!labelHidden) {
-      if (label) {
-        l = label;
-      }
-      if (required) {
-        l += ' *';
-      }
-    }
-    if (meta.touched && meta.error) {
-      l += (
+    let l = label;
+
+    if (required) {
+      l = (
         <span>
-          {' '}
-          <Error error={meta.error} wrapper="span" />
+          {l}
+          <span aria-hidden="true"> *</span>
         </span>
       );
+    }
+
+    if (meta.touched && meta.error) {
+      l = (
+        <span>
+          {l} <Error error={meta.error} wrapper="span" />
+        </span>
+      );
+    }
+
+    if (labelHidden) {
+      l = <ScreenReaderOnly>{l}</ScreenReaderOnly>;
     }
     return l;
   };
 
   return (
-    <Box as="fieldset" border="none" ml="0" mr="0" p="0">
+    <Box>
       <Label id={input.id} label={getLabel()}></Label>
       <Box display="flex" justifyContent="space-between">
         <Dropzone
@@ -154,7 +159,13 @@ export function HibanaFileFieldWrapper({
                   <Text>
                     <Text as="span" fontWeight="medium" children="Drag and drop" />
                     <Text as="span" children=" a file, or " />
-                    <Text as="u" fontWeight="medium" color="blue.700" children="select a file" />
+                    <Text
+                      as="a"
+                      role="presentation"
+                      fontWeight="medium"
+                      color="blue.700"
+                      children="select a file"
+                    />
                     <Text as="span" children=" to upload" />
                   </Text>
                 )}

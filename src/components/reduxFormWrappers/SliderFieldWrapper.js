@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Label, Slider, TextField, Box, Stack } from 'src/components/matchbox';
+import { Label, Slider, TextField, Box } from 'src/components/matchbox';
 import useHibanaToggle from 'src/hooks/useHibanaToggle';
 import { clamp } from 'src/helpers/math';
 import { roundToPlaces } from 'src/helpers/units';
@@ -24,7 +24,6 @@ const useSliderWrapper = ({ min, max, precision, value }) => {
   return { cleanAndClamp, setInternalValue, internalValue };
 };
 
-// Wrapped matchbox components for use with react-redux Field components
 export function OGSliderFieldWrapper({
   input: { onChange, value, ...input },
   disabled = false,
@@ -102,8 +101,8 @@ export function HibanaSliderFieldWrapper({
     value,
   });
   return (
-    <Stack space={0}>
-      <Box as="label" id={`${id}Slider`}>
+    <Box flexDirection="column">
+      <Box as="label" htmlFor={`${id}Slider`}>
         {label}
       </Box>
       <Box display="flex" mb="400">
@@ -141,7 +140,7 @@ export function HibanaSliderFieldWrapper({
           />
         </Box>
       </Box>
-    </Stack>
+    </Box>
   );
 }
 

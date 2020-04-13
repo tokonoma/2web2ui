@@ -55,7 +55,7 @@ export function HibanaRadioGroup({
         {!bottomError && touched && error && <Error error={error} />}
         <Grid>
           {options.map(option => (
-            <Grid.Column {...grid} key={`${input.name}-${option.value}`}>
+            <Box as={Grid.Column} mb="100" {...grid} key={`${input.name}-${option.value}`}>
               <Radio
                 {...input}
                 id={`${input.name}-${option.value}`}
@@ -66,7 +66,7 @@ export function HibanaRadioGroup({
                 helpText={option.helpText}
               />
               {option.children}
-            </Grid.Column>
+            </Box>
           ))}
         </Grid>
         {bottomError && touched && error && <Error error={error} />}
