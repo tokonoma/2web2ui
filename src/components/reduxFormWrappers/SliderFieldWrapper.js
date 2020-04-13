@@ -25,7 +25,7 @@ const useSliderWrapper = ({ min, max, precision, value }) => {
 };
 
 // Wrapped matchbox components for use with react-redux Field components
-function OGSliderFieldWrapper({
+export function OGSliderFieldWrapper({
   input: { onChange, value, ...input },
   disabled = false,
   id,
@@ -84,7 +84,7 @@ function OGSliderFieldWrapper({
   );
 }
 
-function HibanaSliderFieldWrapper({
+export function HibanaSliderFieldWrapper({
   input: { onChange, value, ...input },
   disabled = false,
   id,
