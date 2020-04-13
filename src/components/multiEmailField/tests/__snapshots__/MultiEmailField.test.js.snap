@@ -7,6 +7,7 @@ exports[`MultiEmailField renders 1`] = `
   itemToString={[Function]}
   label="To:"
   name="emailTo"
+  removeItem={[Function]}
   selectedItems={Array []}
   value=""
 />

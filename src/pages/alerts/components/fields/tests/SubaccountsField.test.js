@@ -1,8 +1,8 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 import { reduxForm } from 'redux-form';
-import TestApp from 'src/__testHelpers__/TestApp';
 import { SubaccountsField } from '../SubaccountsField';
+import renderWithRedux from 'src/__testHelpers__/renderWithRedux';
 
 describe('Subaccount Field', () => {
   const defaultProps = {
@@ -24,17 +24,17 @@ describe('Subaccount Field', () => {
 
   it('calls listSubaccounts on mount', () => {
     const listSubaccounts = jest.fn();
+    const initialState = { form: { foo: { values: { subaccounts: [] } } } };
+    const defaultReducer = () => initialState;
     const ReduxFormWrapper = reduxForm({
       form: 'foo',
-      initialValues: { subaccounts: [] },
     })(SubaccountsField);
 
-    mount(
-      <TestApp>
-        <ReduxFormWrapper {...defaultProps} listSubaccounts={listSubaccounts} />
-      </TestApp>,
-    );
-
+    renderWithRedux({
+      reducer: defaultReducer,
+      initialState,
+      component: <ReduxFormWrapper {...defaultProps} listSubaccounts={listSubaccounts} />,
+    });
     expect(listSubaccounts).toHaveBeenCalled();
   });
 
