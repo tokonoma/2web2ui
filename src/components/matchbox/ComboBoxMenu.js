@@ -15,6 +15,7 @@ function ComboBoxMenu(props) {
   return <HibanaComboBoxMenu {...props} />;
 }
 
+ComboBoxMenu.displayName = 'ComboBoxMenu'; // needs to be set for matchbox
 HibanaComboBoxMenu.displayName = 'HibanaComboBoxMenu';
 
 export default ComboBoxMenu;
