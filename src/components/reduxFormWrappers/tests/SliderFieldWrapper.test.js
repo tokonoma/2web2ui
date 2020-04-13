@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import SliderFieldWrapper from '../SliderFieldWrapper';
 import TestApp from 'src/__testHelpers__/TestApp';
 import { Slider, TextField } from 'src/components/matchbox';
@@ -50,15 +50,21 @@ describe('SliderFieldWrapper', () => {
   });
 
   it('rerenders when value is updated', () => {
-    const wrapper = shallow(<SliderFieldWrapper input={{ value: 45 }} />);
+    const Proxy = props => (
+      <TestApp>
+        <SliderFieldWrapper {...props} />
+      </TestApp>
+    );
+
+    const wrapper = mount(<Proxy input={{ value: 45 }} />);
 
     expect(wrapper.find(Slider)).toHaveValue(45);
-    expect(wrapper.find('TextField')).toHaveValue(45);
+    expect(wrapper.find(TextField)).toHaveValue(45);
 
-    wrapper.setProps({ input: { value: 79 }, onChange: jest.fn() });
+    wrapper.setProps({ input: { value: 79 } });
     wrapper.update();
 
     expect(wrapper.find(Slider)).toHaveValue(79);
-    expect(wrapper.find('TextField')).toHaveValue(79);
+    expect(wrapper.find(TextField)).toHaveValue(79);
   });
 });

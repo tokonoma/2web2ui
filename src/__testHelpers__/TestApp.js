@@ -1,10 +1,12 @@
 import React from 'react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import Providers from 'src/Providers';
-import store from 'src/store';
+import getStore from 'src/store';
+
+const store = getStore();
 
 const TestApp = ({ children, history }) => (
-  <Providers store={store()}>
+  <Providers store={store}>
     <Router history={history}>{children}</Router>
   </Providers>
 );
