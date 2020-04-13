@@ -6,7 +6,7 @@ import styles from './AlgoliaResults.module.scss';
 import useHibanaToggle from 'src/hooks/useHibanaToggle';
 import { Box, Stack, Text } from 'src/components/matchbox';
 
-const OGAlgoliaResults = ({ hit }) => (
+export const OGAlgoliaResults = ({ hit }) => (
   <div className={styles.Result}>
     <strong>
       <InsertLink /> <ExternalLink to={hit.permalink}>{hit.post_title}</ExternalLink>
