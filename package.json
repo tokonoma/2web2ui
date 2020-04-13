@@ -71,7 +71,7 @@
     "@sparkpost/boomerang": "^1.0.6",
     "@sparkpost/design-tokens-hibana": "npm:@sparkpost/design-tokens@^1.0.0-beta.16",
     "@sparkpost/matchbox": "^3.9.1",
-    "@sparkpost/matchbox-hibana": "npm:@sparkpost/matchbox@^4.0.0-hibana.14",
+    "@sparkpost/matchbox-hibana": "npm:@sparkpost/matchbox@^4.0.0-hibana.15",
     "@sparkpost/matchbox-icons": "^1.2.1",
     "@styled-system/props": "^5.1.5",
     "axios": "^0.18.0",
