@@ -6,7 +6,7 @@ import styles from './CenteredLogo.module.scss';
 import PartnerLogos from './partners/PartnerLogos';
 import useHibanaToggle from 'src/hooks/useHibanaToggle';
 
-const OGCenteredLogo = ({ showAwsLogo }) => (
+export const OGCenteredLogo = ({ showAwsLogo }) => (
   <div className={styles.CenteredLogo}>
     {/* note, ExternalLink should be used instead of PageLink because the logo is linking to a
           different domain, our corp website, however, ExternalLink doesn't look good with the
