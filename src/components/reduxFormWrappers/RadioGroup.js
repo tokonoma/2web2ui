@@ -4,7 +4,7 @@ import { Error, Radio, Box } from 'src/components/matchbox';
 import useHibanaToggle from 'src/hooks/useHibanaToggle';
 import styles from './RadioGroup.module.scss';
 
-function OGRadioGroup({
+export function OGRadioGroup({
   label,
   input,
   options,
@@ -40,7 +40,7 @@ function OGRadioGroup({
   );
 }
 
-function HibanaRadioGroup({
+export function HibanaRadioGroup({
   label,
   input,
   options,
@@ -51,7 +51,7 @@ function HibanaRadioGroup({
   const { error, touched } = meta;
 
   return (
-    <Box mb="400">
+    <Box>
       <Radio.Group label={label}>
         {!bottomError && touched && error && <Error error={error} />}
         <Grid>

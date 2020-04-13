@@ -24,7 +24,7 @@ const getSharedHandlers = input => {
 
 // TODO: Integrate in Matchbox if Dropzone isn't too big of a dependency
 // TODO: Need a clear button
-function OGFileFieldWrapper({
+export function OGFileFieldWrapper({
   disabled,
   fileType,
   fileTypes = [],
@@ -86,7 +86,7 @@ function OGFileFieldWrapper({
   );
 }
 
-function HibanaFileFieldWrapper({
+export function HibanaFileFieldWrapper({
   disabled,
   fileType,
   fileTypes = [],
@@ -97,6 +97,7 @@ function HibanaFileFieldWrapper({
   required,
   style = {},
   labelHidden,
+  placeholder,
 }) {
   const filename = _.get(input, 'value.name');
   let acceptedTypes = fileType ? `.${fileType}` : '';
@@ -149,12 +150,14 @@ function HibanaFileFieldWrapper({
               <Text>{shrinkToFit(filename, 50)}</Text>
             ) : (
               <Box as="span" display="flex" justifyContent="center">
-                <Text>
-                  <Text as="span" fontWeight="medium" children="Drag and drop" />
-                  <Text as="span" children=" a file, or " />
-                  <Text as="u" fontWeight="medium" color="blue.700" children="select a file" />
-                  <Text as="span" children=" to upload" />
-                </Text>
+                {placeholder || (
+                  <Text>
+                    <Text as="span" fontWeight="medium" children="Drag and drop" />
+                    <Text as="span" children=" a file, or " />
+                    <Text as="u" fontWeight="medium" color="blue.700" children="select a file" />
+                    <Text as="span" children=" to upload" />
+                  </Text>
+                )}
               </Box>
             )}
           </Box>

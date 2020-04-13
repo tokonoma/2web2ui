@@ -2,14 +2,17 @@ import React from 'react';
 import cases from 'jest-in-case';
 import { shallow } from 'enzyme';
 
-import RadioGroup from '../RadioGroup';
+import { OGRadioGroup, HibanaRadioGroup } from '../RadioGroup';
 
 cases(
   'RadioGroup',
   ({ name, ...props }) => {
     // ignore test name
-    const wrapper = shallow(<RadioGroup {...props} />);
+    const wrapper = shallow(<OGRadioGroup {...props} />);
     expect(wrapper).toMatchSnapshot();
+
+    const hibanaWrapper = shallow(<HibanaRadioGroup {...props} />);
+    expect(hibanaWrapper).toMatchSnapshot();
   },
   {
     'renders radio buttons': {
