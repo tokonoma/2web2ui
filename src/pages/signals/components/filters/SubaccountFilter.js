@@ -1,10 +1,9 @@
 import React from 'react';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
-import { Grid, Popover } from '@sparkpost/matchbox';
 import { ArrowDropDown, ChevronLeft } from '@sparkpost/matchbox-icons';
+import { Button, Grid, Popover, UnstyledLink, WindowEvent } from 'src/components/matchbox';
 import SubaccountTypeahead from 'src/components/typeahead/SubaccountTypeahead';
-import { Button, UnstyledLink, WindowEvent } from 'src/components/matchbox';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 import withSignalOptions from '../../containers/withSignalOptions';
 import SubaccountOption from './SubaccountOption';
@@ -73,7 +72,12 @@ export class SubaccountFilter extends React.Component {
 
     const trigger = (
       <div ref={node => (this.triggerRef = node)}>
-        <Button fullWidth onClick={this.handleVisibilityToggle} className={styles.Button}>
+        <Button
+          aria-controls="popover-subaccount-filter"
+          fullWidth
+          onClick={this.handleVisibilityToggle}
+          className={styles.Button}
+        >
           <span className={styles.ButtonLabel}>{subaccount.name}</span>
           {subaccount.id > 0 && <span>({subaccount.id})</span>}
           <ArrowDropDown className={styles.ButtonIcon} />
@@ -86,7 +90,13 @@ export class SubaccountFilter extends React.Component {
         <div className={styles.SubaccountFilter}>
           <WindowEvent handler={this.handleWindowClick} event="click" />
           <WindowEvent handler={onEscape(this.close)} event="keydown" />
-          <Popover className={styles.Popover} left open={isOpen} trigger={trigger}>
+          <Popover
+            id="popover-subaccount-filter"
+            className={styles.Popover}
+            left
+            open={isOpen}
+            trigger={trigger}
+          >
             <div ref={node => (this.contentRef = node)}>
               <div className={classnames(styles.PopoverContent, isSearchOpen && styles.showSearch)}>
                 <div className={styles.SubaccountSearchHeader}>

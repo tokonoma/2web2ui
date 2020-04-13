@@ -1,6 +1,5 @@
 import React from 'react';
-import { Modal } from '@sparkpost/matchbox';
-import { Button, Panel } from 'src/components/matchbox';
+import { Button, Panel, Modal } from 'src/components/matchbox';
 import { connect } from 'react-redux';
 import { domainRegex } from 'src/helpers/regex';
 import { Loading } from 'src/components';
@@ -47,7 +46,7 @@ export const StopMonitoringModal = ({
 
   return (
     <Modal open={Boolean(monitorToDelete)} onClose={closeModal} showCloseButton={true}>
-      <Panel title={title} accent sectioned>
+      <Panel title={title} sectioned>
         {isPending ? (
           <div className={styles.Loading}>
             <Loading />

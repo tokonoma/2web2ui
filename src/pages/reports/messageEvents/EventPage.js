@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import { getMessageHistory, getDocumentation, getSelectedEvent } from 'src/actions/messageEvents';
 import RedirectAndAlert from 'src/components/globalAlert/RedirectAndAlert';
 import { PageLink } from 'src/components/links';
 import { eventPageMSTP } from 'src/selectors/messageEvents';
 import { getDetailsPath } from 'src/helpers/messageEvents';
-import { Grid } from '@sparkpost/matchbox';
-import { Page } from 'src/components/matchbox';
+import { Grid, Page } from 'src/components/matchbox';
 import { Loading } from 'src/components';
 import HistoryTable from './components/HistoryTable';
 import EventDetails from './components/EventDetails';

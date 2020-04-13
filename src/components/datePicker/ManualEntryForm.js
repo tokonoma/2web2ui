@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import _ from 'lodash';
-import { Grid } from '@sparkpost/matchbox';
 import { ArrowForward } from '@sparkpost/matchbox-icons';
-import { TextField } from 'src/components/matchbox';
+import { Grid, TextField } from 'src/components/matchbox';
 import { formatInputDate, formatInputTime, parseDatetime } from 'src/helpers/date';
 import {
   getValidDateRange,

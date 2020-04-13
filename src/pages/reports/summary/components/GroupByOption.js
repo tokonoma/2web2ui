@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styles from './Table.module.scss';
-import { Grid } from '@sparkpost/matchbox';
-import { Checkbox, Select } from 'src/components/matchbox';
+import { Grid, Checkbox, Select } from 'src/components/matchbox';
 import _ from 'lodash';
 import { GROUP_CONFIG } from './tableConfig';
 

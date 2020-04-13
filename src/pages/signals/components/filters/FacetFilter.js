@@ -1,8 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
-import { Grid } from '@sparkpost/matchbox';
 import { Search } from '@sparkpost/matchbox-icons';
-import { Select, TextField } from 'src/components/matchbox';
+import { Grid, Select, TextField } from 'src/components/matchbox';
 import { onEnter } from 'src/helpers/keyEvents';
 import withSignalOptions from '../../containers/withSignalOptions';
 import styles from './FacetFilter.module.scss';

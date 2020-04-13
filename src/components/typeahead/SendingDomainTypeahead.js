@@ -1,13 +1,12 @@
-
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { list as listSendingDomains } from 'src/actions/sendingDomains';
 import { selectDkimVerifiedDomains } from 'src/selectors/sendingDomains';
 import { Typeahead } from './Typeahead';
-import React, { Component } from 'react';
 
 export class SendingDomainTypeahead extends Component {
   static defaultProps = {
-    name: 'sendingDomain'
+    name: 'sendingDomain',
   };
 
   componentDidMount() {
@@ -21,21 +20,16 @@ export class SendingDomainTypeahead extends Component {
       return null;
     }
 
-    return (
-      <Typeahead
-        label="Sending Domain"
-        {...this.props}
-      />
-    );
+    return <Typeahead label="Sending Domain" {...this.props} />;
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   const verifiedDomains = selectDkimVerifiedDomains(state);
 
   return {
     results: verifiedDomains,
-    hasVerifiedDomains: verifiedDomains.length > 0
+    hasVerifiedDomains: verifiedDomains.length > 0,
   };
 };
 

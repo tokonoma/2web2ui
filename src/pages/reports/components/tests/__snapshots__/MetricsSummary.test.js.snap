@@ -40,7 +40,8 @@ exports[`MetricsSummary:  should render custom date 1`] = `
               message
             </p>
             <span>
-               from 
+               
+              from 
               <strong>
                 Dec 25 2017, 5:30am
               </strong>
@@ -98,7 +99,8 @@ exports[`MetricsSummary:  should render relative range 1`] = `
               message
             </p>
             <span>
-               in the 
+               
+              in the 
               <strong>
                 last 30 days
               </strong>
@@ -152,7 +154,8 @@ exports[`MetricsSummary:  should render secondary message 1`] = `
               message
             </p>
             <span>
-               from 
+               
+              from 
               <strong>
                 Dec 25 2017, 5:30am
               </strong>

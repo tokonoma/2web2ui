@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { WindowSizeContext } from 'src/context/WindowSize';
 import { selectAccountNavItems } from 'src/selectors/navItems';
-import { Popover } from '@sparkpost/matchbox';
-import { ActionList, Tag, ScreenReaderOnly } from 'src/components/matchbox';
+import { ActionList, Popover, Tag, ScreenReaderOnly } from 'src/components/matchbox';
 import { ArrowDropDown, Person } from '@sparkpost/matchbox-icons';
 import styles from './AccountDropdown.module.scss';
 
@@ -22,6 +21,7 @@ export class AccountDropdown extends Component {
     <WindowSizeContext.Consumer>
       {({ mobile }) => (
         <button
+          aria-controls="account-dropdown-popover"
           className={styles.Email}
           onClick={this.toggleDropdown}
           data-id="nav-button-accounts"
@@ -86,6 +86,7 @@ export class AccountDropdown extends Component {
   render() {
     return (
       <Popover
+        id="account-dropdown-popover"
         left
         trigger={this.renderActivator()}
         open={this.state.open}

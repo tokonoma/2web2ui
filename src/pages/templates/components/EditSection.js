@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
-import { Popover } from '@sparkpost/matchbox';
-import { ActionList, Button, Panel, ScreenReaderOnly, Tabs, Tag } from 'src/components/matchbox';
+import {
+  ActionList,
+  Button,
+  Panel,
+  Popover,
+  ScreenReaderOnly,
+  Tabs,
+  Tag,
+} from 'src/components/matchbox';
 import { MoreHoriz } from '@sparkpost/matchbox-icons';
 import ConfirmationModal from 'src/components/modals/ConfirmationModal';
 import tabs from '../constants/editTabs';
@@ -103,6 +110,7 @@ const EditSection = () => {
 
         {hasPopover && (
           <Popover
+            id="popover-action-list"
             left
             open={isPopoverOpen}
             onClose={() => setPopoverOpen(false)}
@@ -110,6 +118,7 @@ const EditSection = () => {
               <Button
                 flat
                 className={styles.MoreButton}
+                aria-controls="popover-action-list"
                 onClick={() => setPopoverOpen(!isPopoverOpen)}
                 data-id="popover-trigger-more"
               >

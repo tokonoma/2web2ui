@@ -1,39 +1,43 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { Panel } from 'src/components/matchbox';
+import { Panel, Stack } from 'src/components/matchbox';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
-
 
 export class DefaultTrackingForm extends Component {
   render() {
     const { updateLoading, toggle } = this.props;
     return (
-      <Panel sectioned title='Engagement Tracking'>
-        <p>Engagement tracking allows the ability to show how many recipients opened messages or clicked links. This is the default setting for engagement tracking for SMTP.</p>
-        <Field
-          name='options.smtp_tracking_default'
-          component={ToggleBlock}
-          label='SMTP Engagement Tracking'
-          type='checkbox'
-          disabled={updateLoading}
-          onChange={toggle}
-        />
+      <Panel sectioned title="Engagement Tracking">
+        <Stack>
+          <p>
+            Engagement tracking allows the ability to show how many recipients opened messages or
+            clicked links. This is the default setting for engagement tracking for SMTP.
+          </p>
+
+          <Field
+            name="options.smtp_tracking_default"
+            component={ToggleBlock}
+            label="SMTP Engagement Tracking"
+            type="checkbox"
+            disabled={updateLoading}
+            onChange={toggle}
+          />
+        </Stack>
       </Panel>
     );
   }
-
 }
 
 const mapStateToProps = ({ account }) => ({
   updateLoading: account.updateLoading,
   initialValues: {
-    ...account
-  }
+    ...account,
+  },
 });
 
 const formOptions = {
-  form: 'smtpDefaultOptions'
+  form: 'smtpDefaultOptions',
 };
 
 export default connect(mapStateToProps)(reduxForm(formOptions)(DefaultTrackingForm));

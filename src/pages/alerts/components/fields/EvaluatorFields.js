@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Field, formValueSelector, change } from 'redux-form';
 import { SelectWrapper, SliderFieldWrapper } from 'src/components/reduxFormWrappers';
 import { getFormSpec, getEvaluatorOptions } from '../../helpers/alertForm';
-import { Grid, Label } from '@sparkpost/matchbox';
+import { Grid, Label } from 'src/components/matchbox';
 import { numberBetweenInclusive } from 'src/helpers/validation';
 import { FORM_NAME, RECOMMENDED_METRIC_VALUE } from '../../constants/formConstants';
 import _ from 'lodash';

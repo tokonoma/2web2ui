@@ -2,7 +2,6 @@
 
 exports[`Component: RecipientValidationModal should render properly 1`] = `
 <Panel
-  accent={true}
   actions={
     Array [
       Object {
@@ -26,7 +25,8 @@ exports[`Component: RecipientValidationModal should render properly 1`] = `
           className="Bold"
         >
           0 - 5,000
-           emails
+           
+          emails
         </span>
       </Grid.Column>
       <Grid.Column
@@ -85,7 +85,8 @@ exports[`Component: RecipientValidationModal should render properly 1`] = `
           className="Bold"
         >
           5,000 - 10,000
-           emails
+           
+          emails
         </span>
       </Grid.Column>
       <Grid.Column
@@ -144,7 +145,8 @@ exports[`Component: RecipientValidationModal should render properly 1`] = `
           className="Bold"
         >
           10,000 - 50,000
-           emails
+           
+          emails
         </span>
       </Grid.Column>
       <Grid.Column
@@ -203,7 +205,8 @@ exports[`Component: RecipientValidationModal should render properly 1`] = `
           className="Bold"
         >
           50,000 - 100,000
-           emails
+           
+          emails
         </span>
       </Grid.Column>
       <Grid.Column
@@ -262,7 +265,8 @@ exports[`Component: RecipientValidationModal should render properly 1`] = `
           className="Bold"
         >
           100,000 - 250,000
-           emails
+           
+          emails
         </span>
       </Grid.Column>
       <Grid.Column
@@ -321,7 +325,8 @@ exports[`Component: RecipientValidationModal should render properly 1`] = `
           className="Bold"
         >
           250,000 - 750,000
-           emails
+           
+          emails
         </span>
       </Grid.Column>
       <Grid.Column
@@ -354,7 +359,8 @@ exports[`Component: RecipientValidationModal should render properly 1`] = `
           className="Bold"
         >
           750,000 - 1,000,000
-           emails
+           
+          emails
         </span>
       </Grid.Column>
       <Grid.Column
@@ -387,7 +393,8 @@ exports[`Component: RecipientValidationModal should render properly 1`] = `
           className="Bold"
         >
           1,000,000+
-           emails
+           
+          emails
         </span>
       </Grid.Column>
       <Grid.Column

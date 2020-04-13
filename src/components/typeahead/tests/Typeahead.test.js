@@ -1,23 +1,23 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Typeahead, TypeaheadItem } from '../Typeahead';
+import { Typeahead } from '../Typeahead';
+import { useHibana } from 'src/context/HibanaContext';
+jest.mock('src/context/HibanaContext');
 
-jest.mock('lodash/debounce', () => jest.fn((fn) => {
-  fn.cancel = jest.fn();
-  return fn;
-}));
+jest.mock('lodash/debounce', () =>
+  jest.fn(fn => {
+    fn.cancel = jest.fn();
+    return fn;
+  }),
+);
 
 describe('Typeahead', () => {
-  const subject = (props = {}) => shallow(
-    <Typeahead
-      results={[
-        'apples',
-        'bananas',
-        'cauliflower'
-      ]}
-      {...props}
-    />
-  );
+  beforeEach(() => {
+    useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: false }]);
+  });
+
+  const subject = (props = {}) =>
+    shallow(<Typeahead results={['apples', 'bananas', 'cauliflower']} {...props} />);
 
   it('calls onChange callback when changed', () => {
     const onChange = jest.fn();
@@ -43,10 +43,10 @@ describe('Typeahead', () => {
           inputValue="test@t"
           isOpen={false}
           highlightedIndex={0}
-          getInputProps={jest.fn((props) => props)}
-          getItemProps={jest.fn((a) => a)}
+          getInputProps={jest.fn(props => props)}
+          getItemProps={jest.fn(a => a)}
           {...props}
-        />
+        />,
       );
     };
 
@@ -56,15 +56,17 @@ describe('Typeahead', () => {
     });
 
     it('updates list of matches when data is loaded', () => {
-      const wrapper = subject({ results: []});
-      wrapper.setProps({ results: ['one', 'two', 'three']});
+      const wrapper = subject({ results: [] });
+      wrapper.setProps({ results: ['one', 'two', 'three'] });
 
       expect(
-        renderFn(wrapper).find('ActionList').prop('actions')
+        renderFn(wrapper)
+          .find('ActionList')
+          .prop('actions'),
       ).toEqual([
         expect.objectContaining({ item: 'one' }),
         expect.objectContaining({ item: 'two' }),
-        expect.objectContaining({ item: 'three' })
+        expect.objectContaining({ item: 'three' }),
       ]);
     });
 
@@ -73,20 +75,24 @@ describe('Typeahead', () => {
       wrapper.simulate('inputValueChange', 'a');
 
       expect(
-        renderFn(wrapper).find('ActionList').prop('actions')
-      ).toEqual([
-        expect.objectContaining({ item: 'apples' })
-      ]);
+        renderFn(wrapper)
+          .find('ActionList')
+          .prop('actions'),
+      ).toEqual([expect.objectContaining({ item: 'apples' })]);
     });
 
     it('truncates list of matches to max number', () => {
       const wrapper = subject({
         maxNumberOfResults: 50,
-        results: Array.from(Array(110)).map((_, index) => `example${index}`)
+        results: Array.from(Array(110)).map((_, index) => `example${index}`),
       });
       wrapper.simulate('inputValueChange', 'example');
 
-      expect(renderFn(wrapper).find('ActionList').prop('actions')).toHaveLength(50);
+      expect(
+        renderFn(wrapper)
+          .find('ActionList')
+          .prop('actions'),
+      ).toHaveLength(50);
     });
 
     it('renders list of matches with custom maxHeight', () => {
@@ -128,14 +134,6 @@ describe('Typeahead', () => {
       const wrapper = subject();
       wrapper.simulate('stateChange', null, { highlightedIndex: null, setHighlightedIndex });
       expect(setHighlightedIndex).toHaveBeenCalledWith(0);
-    });
-
-  });
-
-  describe('TypeaheadItem', () => {
-    it('renders a typeahead item', () => {
-      const wrapper = shallow(<TypeaheadItem id="example-id" label="Example Label" />);
-      expect(wrapper).toMatchSnapshot();
     });
   });
 });

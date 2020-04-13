@@ -1,10 +1,9 @@
 import React from 'react';
-import { Grid } from '@sparkpost/matchbox';
 import { Search } from '@sparkpost/matchbox-icons';
 import { FORMATS } from 'src/constants';
 import { TableCollection, DisplayDate } from 'src/components';
 import { PageLink } from 'src/components/links';
-import { Panel, Table, Tag, TextField } from 'src/components/matchbox';
+import { Grid, Panel, Table, Tag, TextField } from 'src/components/matchbox';
 import styles from './IncidentsCollection.module.scss';
 import DatePicker from 'src/components/datePicker/DatePicker';
 

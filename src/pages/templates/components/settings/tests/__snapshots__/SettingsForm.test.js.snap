@@ -95,37 +95,33 @@ exports[`SettingsForm renders without subaccounts 1`] = `
       />
     </Panel.Section>
     <Panel.Section>
-      <Field
-        component={[Function]}
-        disabled={false}
-        label="Track Opens"
-        name="options.open_tracking"
-        parse={[Function]}
-        type="checkbox"
-      />
-      <Field
-        component={[Function]}
-        disabled={false}
-        label="Track Clicks"
-        name="options.click_tracking"
-        parse={[Function]}
-        type="checkbox"
-      />
-      <Field
-        component={[Function]}
-        disabled={false}
-        helpText={
-          <p
-            className="HelpText"
-          >
-            Transactional messages are triggered by a user’s actions on the website, like requesting a password reset, signing up, or making a purchase.
-          </p>
-        }
-        label="Transactional"
-        name="options.transactional"
-        parse={[Function]}
-        type="checkbox"
-      />
+      <Stack>
+        <Field
+          component={[Function]}
+          disabled={false}
+          label="Track Opens"
+          name="options.open_tracking"
+          parse={[Function]}
+          type="checkbox"
+        />
+        <Field
+          component={[Function]}
+          disabled={false}
+          label="Track Clicks"
+          name="options.click_tracking"
+          parse={[Function]}
+          type="checkbox"
+        />
+        <Field
+          component={[Function]}
+          disabled={false}
+          helpText="Transactional messages are triggered by a user’s actions on the website, like requesting a password reset, signing up, or making a purchase."
+          label="Transactional"
+          name="options.transactional"
+          parse={[Function]}
+          type="checkbox"
+        />
+      </Stack>
     </Panel.Section>
     <Panel.Section>
       <Button

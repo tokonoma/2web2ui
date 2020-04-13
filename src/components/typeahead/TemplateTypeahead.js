@@ -1,13 +1,12 @@
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { listTemplates } from 'src/actions/templates';
 import { selectPublishedTemplatesBySubaccount } from 'src/selectors/templates';
-import { Typeahead } from './Typeahead';
-import React, { Component } from 'react';
-import Item from './TemplateTypeaheadItem';
+import { Typeahead, TypeaheadItem } from 'src/components/typeahead/Typeahead';
 
 export class TemplateTypeahead extends Component {
   static defaultProps = {
-    name: 'template'
+    name: 'template',
   };
 
   componentDidMount() {
@@ -26,8 +25,8 @@ export class TemplateTypeahead extends Component {
 
     return (
       <Typeahead
-        renderItem={(item) => <Item id={item.id} />}
-        itemToString={(item) => (item ? item.id : '')}
+        renderItem={item => <TypeaheadItem label={item.id} />}
+        itemToString={item => (item ? item.id : '')}
         label="Template"
         disabled={!hasTemplates}
         {...this.props}
@@ -40,7 +39,7 @@ function mapStateToProps(state, props) {
   const templates = selectPublishedTemplatesBySubaccount(state, props.subaccountId);
   return {
     results: templates,
-    hasTemplates: templates.length > 0
+    hasTemplates: templates.length > 0,
   };
 }
 

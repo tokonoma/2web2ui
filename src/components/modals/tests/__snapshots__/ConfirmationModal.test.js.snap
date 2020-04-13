@@ -5,7 +5,6 @@ exports[`Component: ConfirmationModal should disable confirmation button 1`] = `
   onClose={[MockFunction]}
 >
   <Panel
-    accent={true}
     sectioned={true}
   >
     <div>
@@ -34,7 +33,6 @@ exports[`Component: ConfirmationModal should render correctly with basic props 1
   onClose={[MockFunction]}
 >
   <Panel
-    accent={true}
     sectioned={true}
   >
     <div>
@@ -63,7 +61,6 @@ exports[`Component: ConfirmationModal should render correctly with open, content
   open={true}
 >
   <Panel
-    accent={true}
     sectioned={true}
     title="Confirmation Modal Test Title"
   >

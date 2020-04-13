@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Popover } from '@sparkpost/matchbox';
-import { Button, ScreenReaderOnly } from 'src/components/matchbox';
+import { Button, Popover, ScreenReaderOnly } from 'src/components/matchbox';
 import { ArrowDropDown, FileEdit } from '@sparkpost/matchbox-icons';
 import { PageLink } from 'src/components/links';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
@@ -58,12 +57,14 @@ const PublishedModeActions = () => {
 
       <div className={styles.Actions}>
         <Popover
+          id="popover-action-list"
           left={true}
           open={isPopoverOpen}
           onClose={() => setPopoverOpen(false)}
           trigger={
             <Button
               onClick={() => setPopoverOpen(!isPopoverOpen)}
+              aria-controls="popover-action-list"
               aria-expanded={isPopoverOpen ? 'true' : 'false'}
               data-id="popover-trigger-editor-actions"
             >

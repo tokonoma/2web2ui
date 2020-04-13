@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import cases from 'jest-in-case';
-import { Grid } from '@sparkpost/matchbox';
+import { Grid } from 'src/components/matchbox';
 import { EvaluatorFields } from '../EvaluatorFields';
 import { FORM_NAME } from '../../../constants/formConstants';
 

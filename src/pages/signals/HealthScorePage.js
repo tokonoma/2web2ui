@@ -1,8 +1,7 @@
 /* eslint-disable max-lines */
 import React, { Component, Fragment } from 'react';
-import { Grid } from '@sparkpost/matchbox';
 import { PageLink } from 'src/components/links';
-import { Panel } from 'src/components/matchbox';
+import { Grid, Panel } from 'src/components/matchbox';
 import { selectHealthScoreDetails } from 'src/selectors/signals';
 import { getHealthScore, getSpamHits } from 'src/actions/signals';
 import Page from './components/SignalsPage';

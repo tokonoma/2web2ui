@@ -6,7 +6,12 @@ import CodeBlock from '../CodeBlock';
 jest.mock('src/context/HibanaContext');
 
 describe('CodeBlock Matchbox component wrapper', () => {
-  const subject = () => shallow(<CodeBlock to="/test">Children...</CodeBlock>);
+  const subject = () =>
+    shallow(
+      <CodeBlock code="<h1>Test</h1>" to="/test">
+        Children...
+      </CodeBlock>,
+    );
 
   it('renders the Hibana version of the CodeBlock component correctly when Hibana is enabled', () => {
     useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: true }]);

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Grid } from '@sparkpost/matchbox';
+import { Grid } from 'src/components/matchbox';
 import LegendItem from './LegendItem';
 
 import styles from './Legend.module.scss';
@@ -12,33 +12,44 @@ const Legend = ({
   onMouseOver,
   onMouseOut,
   onClick,
-  hoveredItem
+  hoveredItem,
 }) => {
   const hoveredDataSet = hoveredItem && hoveredItem.dataSet;
 
   const primaryLegend = primaryData.map((item, i) => (
-    <LegendItem key={i}
+    <LegendItem
+      key={i}
       onMouseOver={() => onMouseOver(item, 'primary')}
       onMouseOut={onMouseOut}
       onClick={() => onClick(item)}
       hovered={hoveredDataSet === 'primary' && hoveredItem.index === i}
-      otherHovered={hoveredItem && ((hoveredDataSet === 'primary' && hoveredItem.index !== i) || hoveredDataSet !== 'primary') }
-      {...item} />
+      otherHovered={
+        hoveredItem &&
+        ((hoveredDataSet === 'primary' && hoveredItem.index !== i) || hoveredDataSet !== 'primary')
+      }
+      {...item}
+    />
   ));
 
-  const secondaryLegend = secondaryData
-    ? <Grid.Column>
+  const secondaryLegend = secondaryData ? (
+    <Grid.Column>
       {secondaryData.map((item, i) => (
-        <LegendItem key={i}
+        <LegendItem
+          key={i}
           onMouseOver={() => onMouseOver(item, 'secondary')}
           onMouseOut={onMouseOut}
           onClick={() => onClick(item)}
           hovered={hoveredDataSet === 'secondary' && hoveredItem.index === i}
-          otherHovered={hoveredItem && ((hoveredDataSet === 'secondary' && hoveredItem.index !== i) || hoveredDataSet !== 'secondary') }
-          {...item} />
+          otherHovered={
+            hoveredItem &&
+            ((hoveredDataSet === 'secondary' && hoveredItem.index !== i) ||
+              hoveredDataSet !== 'secondary')
+          }
+          {...item}
+        />
       ))}
     </Grid.Column>
-    : null;
+  ) : null;
 
   const header = headerData ? headerData.map((item, i) => <LegendItem key={i} {...item} />) : null;
 
@@ -60,11 +71,11 @@ Legend.propTypes = {
   onMouseOver: PropTypes.func,
   onMouseOut: PropTypes.func,
   onClick: PropTypes.func,
-  hoveredItem: PropTypes.object
+  hoveredItem: PropTypes.object,
 };
 
 Legend.defaultProps = {
-  primaryData: []
+  primaryData: [],
 };
 
 Legend.displayName = 'PieChart.Legend';

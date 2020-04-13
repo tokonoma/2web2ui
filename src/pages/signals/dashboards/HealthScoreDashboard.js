@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { list as getSubaccounts } from 'src/actions/subaccounts';
 import { getCurrentHealthScore } from 'src/actions/signals';
-import { Grid } from '@sparkpost/matchbox';
+import { Grid } from 'src/components/matchbox';
 import Page from '../components/SignalsPage';
 import HealthScoreOverview from '../containers/HealthScoreOverviewContainer';
 import FacetFilter from '../components/filters/FacetFilter';

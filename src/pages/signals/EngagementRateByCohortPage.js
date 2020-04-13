@@ -2,9 +2,8 @@
 import React, { Component } from 'react';
 import { getEngagementRateByCohort, getEngagementRecency } from 'src/actions/signals';
 import { selectEngagementRateByCohortDetails } from 'src/selectors/signals';
-import { Grid } from '@sparkpost/matchbox';
 import { PageLink } from 'src/components/links';
-import { Panel } from 'src/components/matchbox';
+import { Grid, Panel } from 'src/components/matchbox';
 import LineChart from './components/charts/linechart/LineChart';
 import Legend from './components/charts/legend/Legend';
 import Callout from 'src/components/callout';

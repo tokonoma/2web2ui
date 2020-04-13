@@ -6,6 +6,7 @@ exports[`Status Panel Component should render 1`] = `
     actions={
       Array [
         Object {
+          "aria-controls": "popover-version-selector",
           "color": "orange",
           "content": <VersionSelector
             current={4}
@@ -45,9 +46,8 @@ exports[`Status Panel Component should render 1`] = `
 
 exports[`Status Panel Component version selector should render correctly 1`] = `
 <Popover
-  bottom={true}
+  id="popover-version-selector"
   left={true}
-  right={true}
   trigger={
     <React.Fragment>
       Version 

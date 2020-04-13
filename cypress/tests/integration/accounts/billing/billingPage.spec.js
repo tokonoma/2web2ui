@@ -26,8 +26,8 @@ describe('Billing Page', () => {
     });
 
     cy.stubRequest({
-      url: `${ACCOUNT_API_BASE_URL}/invoices`,
-      fixture: 'account/invoices/200.get.json',
+      url: `${BILLING_API_BASE_URL}/invoices`,
+      fixture: 'billing/invoices/200.get.json',
       fixtureAlias: 'invoicesGet',
     });
 
@@ -539,7 +539,7 @@ describe('Billing Page', () => {
 
     it('does not render the "Invoice History" table when no results are returned', () => {
       cy.stubRequest({
-        url: `${ACCOUNT_API_BASE_URL}/invoices`,
+        url: `${BILLING_API_BASE_URL}/invoices`,
         fixture: '200.get.no-results',
         fixtureAlias: 'invoicesGet',
       });
@@ -552,7 +552,7 @@ describe('Billing Page', () => {
     it('does not render the "Invoice History" table when the server returns an error', () => {
       cy.stubRequest({
         status: 400,
-        url: `${ACCOUNT_API_BASE_URL}/invoices`,
+        url: `${BILLING_API_BASE_URL}/invoices`,
         fixture: '400.json',
       });
 
@@ -571,8 +571,8 @@ describe('Billing Page', () => {
       // In the meantime, just checking the request goes through.
 
       cy.stubRequest({
-        url: `${ACCOUNT_API_BASE_URL}/invoices/abc`,
-        fixture: 'account/invoices/abc/200.get.pdf',
+        url: `${BILLING_API_BASE_URL}/invoices/abc`,
+        fixture: 'billing/invoices/abc/200.get.pdf',
       });
 
       cy.get('tbody tr')

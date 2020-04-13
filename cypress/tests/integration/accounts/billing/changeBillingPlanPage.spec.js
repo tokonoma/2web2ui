@@ -66,7 +66,7 @@ describe('Change Billing Plan Page', () => {
       fixture: 'blank.json',
     });
     cy.stubRequest({
-      url: '/api/v1/account/invoices',
+      url: '/api/v1/billing/invoices',
       fixture: 'blank.json',
     });
     cy.stubRequest({

@@ -172,13 +172,6 @@ export function HibanaFileFieldWrapper({
   );
 }
 
-// padding-top: 0.33333rem;
-//     font-size: 0.83333rem;
-//     line-height: 1.2em;
-//     color: #828287;
-//     word-break: normal;
-//     word-wrap: normal;
-
 export default function FileFieldWrapper(props) {
   return useHibanaToggle(OGFileFieldWrapper, HibanaFileFieldWrapper)(props);
 }

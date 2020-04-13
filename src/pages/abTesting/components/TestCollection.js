@@ -2,9 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 
 // Components
-import { Popover } from '@sparkpost/matchbox';
 import { PageLink } from 'src/components/links';
-import { ActionList, Button } from 'src/components/matchbox';
+import { ActionList, Button, Popover } from 'src/components/matchbox';
 import { TableCollection } from 'src/components';
 import { MoreHoriz } from '@sparkpost/matchbox-icons';
 import StatusTag from './StatusTag';
@@ -107,9 +106,10 @@ export class TestCollection extends Component {
       <p className={styles.LastUpdated}>{formatDateTime(updated_at)}</p>,
       <div style={{ textAlign: 'right' }}>
         <Popover
+          id={`popover-actions-for-${id}`}
           left
           trigger={
-            <Button flat size="large">
+            <Button aria-controls={`popover-actions-for-${id}`} flat size="large">
               <MoreHoriz size={21} />
             </Button>
           }

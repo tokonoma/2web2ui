@@ -1,6 +1,5 @@
 import React from 'react';
-import { Grid } from '@sparkpost/matchbox';
-import { Error, Radio, Box } from 'src/components/matchbox';
+import { Error, Radio, Box, Grid } from 'src/components/matchbox';
 import useHibanaToggle from 'src/hooks/useHibanaToggle';
 import styles from './RadioGroup.module.scss';
 

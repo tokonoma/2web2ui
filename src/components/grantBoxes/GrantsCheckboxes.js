@@ -2,8 +2,7 @@ import classnames from 'classnames/bind';
 import React from 'react';
 import _ from 'lodash';
 import { Field } from 'redux-form';
-import { Grid } from '@sparkpost/matchbox';
-import { Tooltip } from 'src/components/matchbox';
+import { Grid, Tooltip } from 'src/components/matchbox';
 import { CheckboxWrapper } from 'src/components/reduxFormWrappers';
 import styles from './GrantsCheckboxes.module.scss';
 

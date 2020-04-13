@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid } from '@sparkpost/matchbox';
+import { Grid } from 'src/components/matchbox';
 import { ExternalLink } from 'src/components/links';
 import styles from './OverviewHelpCopy.module.scss';
 

@@ -45,13 +45,13 @@ exports[`EditSection renders tabs and section 1`] = `
       }
     />
     <Popover
-      bottom={true}
+      id="popover-action-list"
       left={true}
       onClose={[Function]}
       open={false}
-      right={true}
       trigger={
         <Button
+          aria-controls="popover-action-list"
           className="MoreButton"
           data-id="popover-trigger-more"
           flat={true}

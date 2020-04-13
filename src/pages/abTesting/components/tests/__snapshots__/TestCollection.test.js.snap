@@ -124,11 +124,11 @@ Array [
     }
   >
     <Popover
-      bottom={true}
+      id="popover-actions-for-id-1"
       left={true}
-      right={true}
       trigger={
         <Button
+          aria-controls="popover-actions-for-id-1"
           flat={true}
           size="large"
         >
@@ -229,11 +229,11 @@ Array [
     }
   >
     <Popover
-      bottom={true}
+      id="popover-actions-for-id-2"
       left={true}
-      right={true}
       trigger={
         <Button
+          aria-controls="popover-actions-for-id-2"
           flat={true}
           size="large"
         >
@@ -342,11 +342,11 @@ Array [
     }
   >
     <Popover
-      bottom={true}
+      id="popover-actions-for-id-3"
       left={true}
-      right={true}
       trigger={
         <Button
+          aria-controls="popover-actions-for-id-3"
           flat={true}
           size="large"
         >

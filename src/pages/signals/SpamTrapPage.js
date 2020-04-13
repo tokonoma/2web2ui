@@ -2,9 +2,8 @@
 import React, { Component } from 'react';
 import { getSpamHits } from 'src/actions/signals';
 import { selectSpamHitsDetails } from 'src/selectors/signals';
-import { Grid } from '@sparkpost/matchbox';
 import { PageLink } from 'src/components/links';
-import { Panel } from 'src/components/matchbox';
+import { Grid, Panel } from 'src/components/matchbox';
 import Page from './components/SignalsPage';
 import BarChart from './components/charts/barchart/BarChart';
 import SpamTrapActions from './components/actionContent/SpamTrapActions';

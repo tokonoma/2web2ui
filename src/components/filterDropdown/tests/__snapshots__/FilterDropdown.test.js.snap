@@ -3,9 +3,8 @@
 exports[`Component: FilterDropdown renders correctly 1`] = `
 <div>
   <Popover
-    bottom={true}
+    id="filter-dropdown-popover-my-filter-dropdown"
     onClose={[Function]}
-    right={true}
     trigger={
       <React.Fragment>
         <label
@@ -82,9 +81,8 @@ exports[`Component: FilterDropdown renders correctly 1`] = `
 exports[`Component: FilterDropdown renders selected correctly 1`] = `
 <div>
   <Popover
-    bottom={true}
+    id="filter-dropdown-popover-my-filter-dropdown"
     onClose={[Function]}
-    right={true}
     trigger={
       <React.Fragment>
         <label

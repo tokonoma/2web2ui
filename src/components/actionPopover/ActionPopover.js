@@ -1,23 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Popover } from '@sparkpost/matchbox';
-import { Button, ActionList } from 'src/components/matchbox';
 import { MoreHoriz } from '@sparkpost/matchbox-icons';
+import { ActionList, Button, Popover } from 'src/components/matchbox';
+import useUniqueId from 'src/hooks/useUniqueId';
 
-const ActionPopover = ({ actions }) => (
-  <div style={{ textAlign: 'right' }}>
-    <Popover
-      left
-      trigger={
-        <Button flat>
-          <MoreHoriz size={20} />
-        </Button>
-      }
-    >
-      <ActionList actions={actions} />
-    </Popover>
-  </div>
-);
+const ActionPopover = ({ actions }) => {
+  const uniqueId = useUniqueId('action-popover');
+
+  return (
+    <div style={{ textAlign: 'right' }}>
+      <Popover
+        id={uniqueId}
+        left
+        trigger={
+          <Button aria-controls={uniqueId} flat>
+            <MoreHoriz size={20} />
+          </Button>
+        }
+      >
+        <ActionList actions={actions} />
+      </Popover>
+    </div>
+  );
+};
 
 ActionPopover.propTypes = {
   actions: PropTypes.array,

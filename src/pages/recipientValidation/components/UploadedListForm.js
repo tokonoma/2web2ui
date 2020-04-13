@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { Grid } from '@sparkpost/matchbox';
 import { getUsage } from 'src/actions/account';
 import { LoadingSVG } from 'src/components/loading/Loading';
-import { UnstyledLink } from 'src/components/matchbox';
+import { Grid, UnstyledLink } from 'src/components/matchbox';
 import { selectMonthlyRecipientValidationUsage } from 'src/selectors/accountBillingInfo';
 import { calculateNewCost } from 'src/pages/billing/helpers/totalRecipientValidationCost';
 import styles from './UploadedListForm.module.scss';

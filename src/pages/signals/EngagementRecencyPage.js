@@ -2,9 +2,8 @@
 import React, { Component, Fragment } from 'react';
 import { getEngagementRecency } from 'src/actions/signals';
 import { selectEngagementRecencyDetails } from 'src/selectors/signals';
-import { Grid } from '@sparkpost/matchbox';
 import { PageLink } from 'src/components/links';
-import { Panel } from 'src/components/matchbox';
+import { Grid, Panel } from 'src/components/matchbox';
 import BarChart from './components/charts/barchart/BarChart';
 import Callout from 'src/components/callout';
 import DateFilter from './components/filters/DateFilter';

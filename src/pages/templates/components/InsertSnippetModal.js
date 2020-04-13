@@ -1,7 +1,6 @@
 /* eslint-disable */
 import React, { useState, useEffect } from 'react';
-import { Modal } from '@sparkpost/matchbox';
-import { Button, Label, Panel } from 'src/components/matchbox';
+import { Button, Label, Modal, Panel, Stack } from 'src/components/matchbox';
 import copy from 'copy-to-clipboard';
 import { PageLink } from 'src/components/links';
 import { Typeahead, TypeaheadItem } from 'src/components/typeahead/Typeahead';
@@ -60,50 +59,54 @@ const InsertSnippetModal = props => {
   if (areSnippetsLoading) {
     return (
       <ModalWrapper {...modalProps}>
-        <PanelLoading accent />
+        <PanelLoading />
       </ModalWrapper>
     );
   }
 
   return (
     <ModalWrapper {...modalProps}>
-      <Panel title="Add a snippet" accent sectioned>
+      <Panel title="Add a snippet" sectioned>
         <form onSubmit={handleSubmit}>
-          <p>
-            Snippets are a great way to manage sections like headers or footers that are used across
-            multiple templates. Simply edit your snippet, and that change will populate across all
-            your templates.
-          </p>
+          <Stack space="500">
+            <p>
+              Snippets are a great way to manage sections like headers or footers that are used
+              across multiple templates. Simply edit your snippet, and that change will populate
+              across all your templates.
+            </p>
 
-          <Typeahead
-            label="Find a Snippet"
-            disabled={snippets.length === 0}
-            helpText={
-              snippets.length === 0 ? (
-                <span>
-                  You have not created a snippet.
-                  <PageLink to="/snippets/create">Create your first snippet</PageLink>
-                </span>
-              ) : (
-                ''
-              )
-            }
-            itemToString={snippet =>
-              snippet ? `${snippet.name || slugToFriendly(snippet.id)} (${snippet.id})` : ''
-            }
-            name="snippetTypeahead"
-            onChange={handleTypeaheadChange}
-            placeholder={snippets.length === 0 ? '' : 'Type to search...'}
-            renderItem={({ id, name }) => (
-              <TypeaheadItem id={id} label={name || slugToFriendly(id)} />
-            )}
-            results={snippets}
-            data-id="snippet-typeahead"
-          />
+            <Typeahead
+              label="Find a Snippet"
+              disabled={snippets.length === 0}
+              helpText={
+                snippets.length === 0 ? (
+                  <span>
+                    You have not created a snippet.
+                    <PageLink to="/snippets/create">Create your first snippet</PageLink>
+                  </span>
+                ) : (
+                  ''
+                )
+              }
+              itemToString={snippet =>
+                snippet ? `${snippet.name || slugToFriendly(snippet.id)} (${snippet.id})` : ''
+              }
+              name="snippetTypeahead"
+              onChange={handleTypeaheadChange}
+              placeholder={snippets.length === 0 ? '' : 'Type to search...'}
+              renderItem={({ id, name }) => (
+                <TypeaheadItem id={id} label={name || slugToFriendly(id)} />
+              )}
+              results={snippets}
+              data-id="snippet-typeahead"
+            />
 
-          <Label id="snippet-copy-field">Snippet Code</Label>
+            <div>
+              <Label id="snippet-copy-field">Snippet Code</Label>
 
-          <CopyField id="snippet-copy-field" value={copyFieldValue} />
+              <CopyField id="snippet-copy-field" value={copyFieldValue} />
+            </div>
+          </Stack>
 
           <ButtonWrapper>
             <Button color="orange" onClick={handleSubmit}>

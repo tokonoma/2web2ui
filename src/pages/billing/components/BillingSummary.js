@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Modal, LabelledValue } from 'src/components';
+import { LabelledValue } from 'src/components';
 import { PageLink } from 'src/components/links';
-import { Panel, UnstyledLink } from 'src/components/matchbox';
+import { Panel, UnstyledLink, Modal } from 'src/components/matchbox';
 import {
   PremiumBanner,
   EnterpriseBanner,

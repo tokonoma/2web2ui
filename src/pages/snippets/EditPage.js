@@ -1,7 +1,6 @@
 import React from 'react';
 import { Field, Form } from 'redux-form';
-import { Grid } from '@sparkpost/matchbox';
-import { Button, Page, Panel } from 'src/components/matchbox';
+import { Grid, Button, Page, Panel } from 'src/components/matchbox';
 import ContentEditor from 'src/components/contentEditor';
 import CopyField from 'src/components/copyField';
 import { RedirectAndAlert } from 'src/components/globalAlert';

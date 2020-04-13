@@ -6,7 +6,6 @@ exports[`Detail renders correctly (hides) on initial loading 1`] = `
   open={false}
 >
   <Panel
-    accent={true}
     sectioned={true}
     title="Suppression Details"
   >
@@ -74,7 +73,6 @@ exports[`Detail renders correctly (shows loading) when deleting 1`] = `
   open={false}
 >
   <Panel
-    accent={true}
     sectioned={true}
     title="Suppression Details"
   >
@@ -142,7 +140,6 @@ exports[`Detail renders correctly (shows) when open is true  1`] = `
   open={true}
 >
   <Panel
-    accent={true}
     sectioned={true}
     title="Suppression Details"
   >

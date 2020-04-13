@@ -5,7 +5,7 @@ import { SelectWrapper } from 'src/components/reduxFormWrappers';
 import { getFormSpec } from '../../helpers/alertForm';
 import { MAILBOX_PROVIDERS } from 'src/constants';
 import { ComboBoxTypeaheadWrapper } from 'src/components';
-import { Grid } from '@sparkpost/matchbox';
+import { Grid } from 'src/components/matchbox';
 import { getIpPools } from 'src/selectors/ipPools';
 import { selectVerifiedDomains } from 'src/selectors/sendingDomains';
 import { FORM_NAME } from '../../constants/formConstants';

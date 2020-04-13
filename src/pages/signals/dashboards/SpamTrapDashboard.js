@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { list as getSubaccounts } from 'src/actions/subaccounts';
-import { Grid } from '@sparkpost/matchbox';
-import { Panel } from 'src/components/matchbox';;
+import { Grid, Panel } from 'src/components/matchbox';
 import Page from '../components/SignalsPage';
 import SpamTrapOverview from '../containers/SpamTrapOverviewContainer';
 import FacetFilter from '../components/filters/FacetFilter';
@@ -22,19 +21,22 @@ export class SpamTrapDashboard extends Component {
     const { subaccounts } = this.props;
 
     return (
-      <Page title={
+      <Page
+        title={
           <>
             Spam Trap Monitoring
             <InfoTooltip content={SPAM_TRAP_INFO} />
           </>
-      }>
+        }
+      >
         <Panel sectioned>
           <Grid>
             <Grid.Column xs={4}>
               <DateFilter />
             </Grid.Column>
             <SubaccountFilter />
-            <FacetFilter facets={_.reject(facets, (facet) => facet.key === 'mb_provider')}/>
+            {/* eslint-disable-next-line */}
+            <FacetFilter facets={_.reject(facets, facet => facet.key === 'mb_provider')} />
           </Grid>
         </Panel>
         <SpamTrapOverview defaults={{ perPage: 25 }} subaccounts={subaccounts} hideTitle />
@@ -43,12 +45,12 @@ export class SpamTrapDashboard extends Component {
   }
 }
 
-const mapStateToProps = (state, props) => ({
-  subaccounts: state.subaccounts.list
+const mapStateToProps = state => ({
+  subaccounts: state.subaccounts.list,
 });
 
 const mapDispatchToProps = {
-  getSubaccounts
+  getSubaccounts,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SpamTrapDashboard);

@@ -1,20 +1,14 @@
+import React, { Component } from 'react';
 import classnames from 'classnames/bind';
 import Downshift from 'downshift';
 import debounce from 'lodash/debounce';
-import React, { Component } from 'react';
-import { ActionList, Button, TextField } from 'src/components/matchbox';
-
+import { Search } from '@sparkpost/matchbox-icons';
+import { ActionList, Box, Button, Text, TextField } from 'src/components/matchbox';
+import useHibanaToggle from 'src/hooks/useHibanaToggle';
 import sortMatch from 'src/helpers/sortMatch';
 import styles from './Typeahead.module.scss';
 
 const cx = classnames.bind(styles);
-
-export const TypeaheadItem = ({ id, label }) => (
-  <div className={styles.Item}>
-    {label}
-    <span className={styles.id}>{id}</span>
-  </div>
-);
 
 export class Typeahead extends Component {
   static defaultProps = {
@@ -79,7 +73,7 @@ export class Typeahead extends Component {
     const { matches } = this.state;
     const items = matches.map((item, index) =>
       getItemProps({
-        content: renderItem ? renderItem(item) : <div className={styles.Item}>{item}</div>,
+        content: renderItem ? renderItem(item) : <TypeaheadItem label={item} />,
         highlighted: highlightedIndex === index,
         index,
         item,
@@ -109,13 +103,14 @@ export class Typeahead extends Component {
     return (
       <div className={cx('Typeahead')}>
         <ActionList className={listClasses} actions={items} maxHeight={maxHeight} />
-        <TextField {...textFieldProps} onFocus={openMenu} />
+
+        <TextField {...textFieldProps} onFocus={openMenu} suffix={<Search />} />
       </div>
     );
   };
 
   renderClearButton(clearSelection) {
-    return <Button onClick={clearSelection}>Clear</Button>;
+    return <ClearButton onClick={clearSelection} />;
   }
 
   render() {
@@ -133,4 +128,50 @@ export class Typeahead extends Component {
       </Downshift>
     );
   }
+}
+
+function OGTypeaheadItem({ label, id }) {
+  return (
+    <div className={styles.Item}>
+      {label}
+
+      {id && <span className={styles.id}>{id}</span>}
+    </div>
+  );
+}
+
+function HibanaTypeaheadItem({ label, id }) {
+  return (
+    <Box display="flex" alignItems="center" justifyContent="space-between">
+      <Text as="span" color="gray.1000" fontSize="200">
+        {label}
+      </Text>
+
+      {id && (
+        <Text color="gray.700" fontSize="100" as="span">
+          {id}
+        </Text>
+      )}
+    </Box>
+  );
+}
+
+function OGClearButton({ onClick }) {
+  return <Button onClick={onClick}>Clear</Button>;
+}
+
+function HibanaClearButton({ onClick }) {
+  return (
+    <Button onClick={onClick} color="blue" outline>
+      Clear
+    </Button>
+  );
+}
+
+export function ClearButton(props) {
+  return useHibanaToggle(OGClearButton, HibanaClearButton)(props);
+}
+
+export function TypeaheadItem(props) {
+  return useHibanaToggle(OGTypeaheadItem, HibanaTypeaheadItem)(props);
 }

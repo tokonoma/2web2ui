@@ -5,7 +5,6 @@ exports[`EnableTfaModal tests should render correctly 1`] = `
   open={false}
 >
   <Panel
-    accent={true}
     title="Enable Two-Factor Authentication"
   >
     <Connect(EnableTfaForm)

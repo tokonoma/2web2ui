@@ -2,9 +2,8 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Grid } from '@sparkpost/matchbox';
 import { ExternalLink, PageLink, SupportTicketLink } from 'src/components/links';
-import { Button, Page, Panel, ScreenReaderOnly } from 'src/components/matchbox';
+import { Grid, Button, Page, Panel, ScreenReaderOnly } from 'src/components/matchbox';
 import styles from './SingleResult.module.scss';
 import CodeBlock from './components/CodeBlock';
 import {

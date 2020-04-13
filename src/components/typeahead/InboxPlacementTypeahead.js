@@ -1,10 +1,8 @@
 import React, { useEffect, useMemo } from 'react';
 import { connect } from 'react-redux';
 import { formatApiDate } from 'src/helpers/date';
-import { Typeahead } from './Typeahead';
+import { Typeahead, TypeaheadItem } from 'src/components/typeahead/Typeahead';
 import { getInboxPlacementTrendsFilterValues } from 'src/actions/inboxPlacement';
-
-import styles from './Typeahead.module.scss';
 
 const TAG_LABELS = {
   from_domains: 'Domain',
@@ -12,13 +10,6 @@ const TAG_LABELS = {
   regions: 'Region',
   sending_ips: 'IP',
 };
-
-const Item = ({ value, type }) => (
-  <div className={styles.Item}>
-    <span className={styles.Value}>{value}</span>
-    <span className={styles.id}>{TAG_LABELS[type]}</span>
-  </div>
-);
 
 export const InboxPlacementTypeahead = ({
   filters,
@@ -63,7 +54,7 @@ export const InboxPlacementTypeahead = ({
 
   return (
     <Typeahead
-      renderItem={item => <Item value={item.value} type={item.type} />}
+      renderItem={item => <TypeaheadItem label={item.value} id={TAG_LABELS[item.type]} />}
       itemToString={item => (item ? item.value : '')}
       placeholder="Filter by Domain, IP, Mailbox Provider and Region"
       errorInLabel={false}
