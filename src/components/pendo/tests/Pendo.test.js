@@ -20,6 +20,7 @@ describe('Component: Pendo', () => {
         username="fredo-mcgurk"
         userAccessLevel="admin"
         status="active"
+        companyName="Company Inc."
         {...props}
       />,
     );
