@@ -9,7 +9,7 @@ import styles from './SearchPanel.module.scss';
 
 const searchCfg = config.support.algolia;
 
-const OGSearchPanel = ({ defaultSearchText }) => (
+export const OGSearchPanel = ({ defaultSearchText }) => (
   <InstantSearch appId={searchCfg.appID} apiKey={searchCfg.apiKey} indexName={searchCfg.index}>
     <Panel.Section>
       <AlgoliaSearch defaultSearchText={defaultSearchText} />

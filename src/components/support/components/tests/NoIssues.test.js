@@ -1,6 +1,6 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-
+import { mount } from 'enzyme';
+import TestApp from 'src/__testHelpers__/TestApp';
 import NoIssues from '../NoIssues';
 
 describe('NoIssues View Component', () => {
@@ -9,17 +9,25 @@ describe('NoIssues View Component', () => {
 
   beforeEach(() => {
     props = {
-      onCancel: jest.fn()
+      onCancel: jest.fn(),
     };
-    wrapper = shallow(<NoIssues {...props} />);
+    wrapper = mount(
+      <TestApp>
+        <NoIssues {...props} />
+      </TestApp>,
+    );
   });
 
   it('should render', () => {
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper).toHaveTextContent('Sorry, you are not authorized to submit a support ticket.');
+    expect(wrapper).toHaveTextContent('Search support articles');
   });
 
   it('should cancel', () => {
-    wrapper.find('Button').simulate('click');
+    wrapper
+      .find('Button')
+      .first()
+      .simulate('click');
     expect(props.onCancel).toHaveBeenCalled();
   });
 });

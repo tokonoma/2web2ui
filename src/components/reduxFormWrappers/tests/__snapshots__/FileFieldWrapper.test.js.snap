@@ -4,10 +4,10 @@ exports[`FileFieldWrapper renders disabled file input 1`] = `
 <fieldset
   className="Field"
 >
-  <Label>
+  <label>
     Test File Input
      *
-  </Label>
+  </label>
   <div
     className="InputWrapper"
   >
@@ -45,10 +45,10 @@ exports[`FileFieldWrapper renders file input 1`] = `
 <fieldset
   className="Field"
 >
-  <Label>
+  <label>
     Test File Input
      *
-  </Label>
+  </label>
   <div
     className="InputWrapper"
   >
@@ -86,7 +86,7 @@ exports[`FileFieldWrapper renders file input with error message 1`] = `
 <fieldset
   className="Field"
 >
-  <Label>
+  <label>
     Test File Input
      *
     <span>
@@ -96,7 +96,7 @@ exports[`FileFieldWrapper renders file input with error message 1`] = `
         wrapper="span"
       />
     </span>
-  </Label>
+  </label>
   <div
     className="InputWrapper"
   >
@@ -134,10 +134,10 @@ exports[`FileFieldWrapper renders file input with help message 1`] = `
 <fieldset
   className="Field"
 >
-  <Label>
+  <label>
     Test File Input
      *
-  </Label>
+  </label>
   <div
     className="InputWrapper"
   >
@@ -180,10 +180,10 @@ exports[`FileFieldWrapper renders file input with multiple allowed file types 1`
 <fieldset
   className="Field"
 >
-  <Label>
+  <label>
     Test File Input
      *
-  </Label>
+  </label>
   <div
     className="InputWrapper"
   >
@@ -220,10 +220,10 @@ exports[`FileFieldWrapper renders file input with no specified type 1`] = `
 <fieldset
   className="Field"
 >
-  <Label>
+  <label>
     Test File Input
      *
-  </Label>
+  </label>
   <div
     className="InputWrapper"
   >
@@ -261,10 +261,10 @@ exports[`FileFieldWrapper renders file input with selected filename 1`] = `
 <fieldset
   className="Field"
 >
-  <Label>
+  <label>
     Test File Input
      *
-  </Label>
+  </label>
   <div
     className="InputWrapper"
   >
@@ -297,7 +297,7 @@ exports[`FileFieldWrapper renders with a hidden label 1`] = `
 <fieldset
   className="Field"
 >
-  <Label />
+  <label />
   <div
     className="InputWrapper"
   >
