@@ -116,4 +116,24 @@ describe('Component: Report Options', () => {
     expect(wrapper.find('Select')).toExist();
     expect(wrapper.find('Select')).toHaveValue('hour');
   });
+
+  it('should set the disabledAndUTCOnly prop when shownPrecision is day, month, or week', () => {
+    wrapper.setProps({ featureFlaggedMetrics: { useMetricsRollup: true } });
+    wrapper.setState({ shownPrecision: 'day' });
+    wrapper.update();
+
+    expect(wrapper.find('TimezoneTypeahead')).toHaveProp('disabledAndUTCOnly', true);
+
+    wrapper.setState({ shownPrecision: 'week' });
+    wrapper.update();
+    expect(wrapper.find('TimezoneTypeahead')).toHaveProp('disabledAndUTCOnly', true);
+
+    wrapper.setState({ shownPrecision: 'month' });
+    wrapper.update();
+    expect(wrapper.find('TimezoneTypeahead')).toHaveProp('disabledAndUTCOnly', true);
+
+    wrapper.setState({ shownPrecision: '' });
+    wrapper.update();
+    expect(wrapper.find('TimezoneTypeahead')).toHaveProp('disabledAndUTCOnly', false);
+  });
 });
