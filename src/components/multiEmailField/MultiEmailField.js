@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ComboBoxTextField } from 'src/components/matchbox';
+import { ComboBoxTextField } from '@sparkpost/matchbox';
 
-const MultiEmailField = props => {
+const MultiEmailField = (props) => {
   const {
     id,
     label,
@@ -12,7 +12,7 @@ const MultiEmailField = props => {
     onChange,
     onKeyDownAndBlur,
     onRemoveEmail,
-    error,
+    error
   } = props;
 
   return (
@@ -41,13 +41,13 @@ MultiEmailField.propTypes = {
   onChange: PropTypes.func,
   onKeyDownAndBlur: PropTypes.func,
   onRemoveEmail: PropTypes.func,
-  error: PropTypes.string,
+  error: PropTypes.string
 };
 
 MultiEmailField.defaultProps = {
   emailList: [],
   value: '',
-  error: '',
+  error: ''
 };
 
 export default MultiEmailField;

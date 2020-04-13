@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ComboBox, ComboBoxTextField, ComboBoxMenu } from 'src/components/matchbox';
+import { ComboBox, ComboBoxTextField, ComboBoxMenu } from '@sparkpost/matchbox';
 import Downshift from 'downshift';
 import PropTypes from 'prop-types';
 import { useDebouncedCallback } from 'use-debounce';
