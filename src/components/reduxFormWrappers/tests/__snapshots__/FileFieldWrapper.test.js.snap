@@ -42,15 +42,18 @@ exports[`FileFieldWrapper renders disabled file input 1`] = `
 `;
 
 exports[`FileFieldWrapper renders disabled file input 2`] = `
-<Box
-  as="fieldset"
-  border="none"
-  ml="0"
-  mr="0"
-  p="0"
->
+<Box>
   <Label
-    label="Test File Input *"
+    label={
+      <span>
+        Test File Input
+        <span
+          aria-hidden="true"
+        >
+           *
+        </span>
+      </span>
+    }
   />
   <Box
     display="flex"
@@ -94,9 +97,10 @@ exports[`FileFieldWrapper renders disabled file input 2`] = `
                a file, or 
             </Text>
             <Text
-              as="u"
+              as="a"
               color="blue.700"
               fontWeight="medium"
+              role="presentation"
             >
               select a file
             </Text>
@@ -155,15 +159,18 @@ exports[`FileFieldWrapper renders file input 1`] = `
 `;
 
 exports[`FileFieldWrapper renders file input 2`] = `
-<Box
-  as="fieldset"
-  border="none"
-  ml="0"
-  mr="0"
-  p="0"
->
+<Box>
   <Label
-    label="Test File Input *"
+    label={
+      <span>
+        Test File Input
+        <span
+          aria-hidden="true"
+        >
+           *
+        </span>
+      </span>
+    }
   />
   <Box
     display="flex"
@@ -207,9 +214,10 @@ exports[`FileFieldWrapper renders file input 2`] = `
                a file, or 
             </Text>
             <Text
-              as="u"
+              as="a"
               color="blue.700"
               fontWeight="medium"
+              role="presentation"
             >
               select a file
             </Text>
@@ -275,15 +283,25 @@ exports[`FileFieldWrapper renders file input with error message 1`] = `
 `;
 
 exports[`FileFieldWrapper renders file input with error message 2`] = `
-<Box
-  as="fieldset"
-  border="none"
-  ml="0"
-  mr="0"
-  p="0"
->
+<Box>
   <Label
-    label="Test File Input *[object Object]"
+    label={
+      <span>
+        <span>
+          Test File Input
+          <span
+            aria-hidden="true"
+          >
+             *
+          </span>
+        </span>
+         
+        <Error
+          error="Oh no!"
+          wrapper="span"
+        />
+      </span>
+    }
   />
   <Box
     display="flex"
@@ -327,9 +345,10 @@ exports[`FileFieldWrapper renders file input with error message 2`] = `
                a file, or 
             </Text>
             <Text
-              as="u"
+              as="a"
               color="blue.700"
               fontWeight="medium"
+              role="presentation"
             >
               select a file
             </Text>
@@ -393,15 +412,18 @@ exports[`FileFieldWrapper renders file input with help message 1`] = `
 `;
 
 exports[`FileFieldWrapper renders file input with help message 2`] = `
-<Box
-  as="fieldset"
-  border="none"
-  ml="0"
-  mr="0"
-  p="0"
->
+<Box>
   <Label
-    label="Test File Input *"
+    label={
+      <span>
+        Test File Input
+        <span
+          aria-hidden="true"
+        >
+           *
+        </span>
+      </span>
+    }
   />
   <Box
     display="flex"
@@ -445,9 +467,10 @@ exports[`FileFieldWrapper renders file input with help message 2`] = `
                a file, or 
             </Text>
             <Text
-              as="u"
+              as="a"
               color="blue.700"
               fontWeight="medium"
+              role="presentation"
             >
               select a file
             </Text>
@@ -513,15 +536,18 @@ exports[`FileFieldWrapper renders file input with multiple allowed file types 1`
 `;
 
 exports[`FileFieldWrapper renders file input with multiple allowed file types 2`] = `
-<Box
-  as="fieldset"
-  border="none"
-  ml="0"
-  mr="0"
-  p="0"
->
+<Box>
   <Label
-    label="Test File Input *"
+    label={
+      <span>
+        Test File Input
+        <span
+          aria-hidden="true"
+        >
+           *
+        </span>
+      </span>
+    }
   />
   <Box
     display="flex"
@@ -602,15 +628,18 @@ exports[`FileFieldWrapper renders file input with no specified type 1`] = `
 `;
 
 exports[`FileFieldWrapper renders file input with no specified type 2`] = `
-<Box
-  as="fieldset"
-  border="none"
-  ml="0"
-  mr="0"
-  p="0"
->
+<Box>
   <Label
-    label="Test File Input *"
+    label={
+      <span>
+        Test File Input
+        <span
+          aria-hidden="true"
+        >
+           *
+        </span>
+      </span>
+    }
   />
   <Box
     display="flex"
@@ -654,9 +683,10 @@ exports[`FileFieldWrapper renders file input with no specified type 2`] = `
                a file, or 
             </Text>
             <Text
-              as="u"
+              as="a"
               color="blue.700"
               fontWeight="medium"
+              role="presentation"
             >
               select a file
             </Text>
@@ -710,15 +740,18 @@ exports[`FileFieldWrapper renders file input with selected filename 1`] = `
 `;
 
 exports[`FileFieldWrapper renders file input with selected filename 2`] = `
-<Box
-  as="fieldset"
-  border="none"
-  ml="0"
-  mr="0"
-  p="0"
->
+<Box>
   <Label
-    label="Test File Input *"
+    label={
+      <span>
+        Test File Input
+        <span
+          aria-hidden="true"
+        >
+           *
+        </span>
+      </span>
+    }
   />
   <Box
     display="flex"
@@ -792,15 +825,20 @@ exports[`FileFieldWrapper renders with a hidden label 1`] = `
 `;
 
 exports[`FileFieldWrapper renders with a hidden label 2`] = `
-<Box
-  as="fieldset"
-  border="none"
-  ml="0"
-  mr="0"
-  p="0"
->
+<Box>
   <Label
-    label=""
+    label={
+      <ScreenReaderOnly>
+        <span>
+          a label
+          <span
+            aria-hidden="true"
+          >
+             *
+          </span>
+        </span>
+      </ScreenReaderOnly>
+    }
   />
   <Box
     display="flex"
@@ -844,9 +882,10 @@ exports[`FileFieldWrapper renders with a hidden label 2`] = `
                a file, or 
             </Text>
             <Text
-              as="u"
+              as="a"
               color="blue.700"
               fontWeight="medium"
+              role="presentation"
             >
               select a file
             </Text>

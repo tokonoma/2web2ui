@@ -55,51 +55,53 @@ exports[`RadioGroup renders error state (bottom) 1`] = `
 `;
 
 exports[`RadioGroup renders error state (bottom) 2`] = `
-<Box>
-  <Radio.Group
-    label="Choose one"
-  >
-    <Grid>
-      <Grid.Column
-        key="example-one"
-        lg={12}
-        md={12}
-        sm={12}
-        xl={12}
-        xs={12}
-      >
-        <Radio
-          checked={false}
-          disabled={false}
-          id="example-one"
-          label="Option One"
-          name="example"
-          value="one"
-        />
-      </Grid.Column>
-      <Grid.Column
-        key="example-two"
-        lg={12}
-        md={12}
-        sm={12}
-        xl={12}
-        xs={12}
-      >
-        <Radio
-          checked={false}
-          disabled={false}
-          id="example-two"
-          label="Option Two"
-          name="example"
-          value="two"
-        />
-      </Grid.Column>
-    </Grid>
-    <Error
-      error="error message"
-    />
-  </Radio.Group>
-</Box>
+<Radio.Group
+  label="Choose one"
+>
+  <Grid>
+    <Box
+      as={[Function]}
+      key="example-one"
+      lg={12}
+      mb="100"
+      md={12}
+      sm={12}
+      xl={12}
+      xs={12}
+    >
+      <Radio
+        checked={false}
+        disabled={false}
+        id="example-one"
+        label="Option One"
+        name="example"
+        value="one"
+      />
+    </Box>
+    <Box
+      as={[Function]}
+      key="example-two"
+      lg={12}
+      mb="100"
+      md={12}
+      sm={12}
+      xl={12}
+      xs={12}
+    >
+      <Radio
+        checked={false}
+        disabled={false}
+        id="example-two"
+        label="Option Two"
+        name="example"
+        value="two"
+      />
+    </Box>
+  </Grid>
+  <Error
+    error="error message"
+  />
+</Radio.Group>
 `;
 
 exports[`RadioGroup renders error state (top) 1`] = `
@@ -157,51 +159,53 @@ exports[`RadioGroup renders error state (top) 1`] = `
 `;
 
 exports[`RadioGroup renders error state (top) 2`] = `
-<Box>
-  <Radio.Group
-    label="Choose one"
-  >
-    <Error
-      error="error message"
-    />
-    <Grid>
-      <Grid.Column
-        key="example-one"
-        lg={12}
-        md={12}
-        sm={12}
-        xl={12}
-        xs={12}
-      >
-        <Radio
-          checked={false}
-          disabled={false}
-          id="example-one"
-          label="Option One"
-          name="example"
-          value="one"
-        />
-      </Grid.Column>
-      <Grid.Column
-        key="example-two"
-        lg={12}
-        md={12}
-        sm={12}
-        xl={12}
-        xs={12}
-      >
-        <Radio
-          checked={false}
-          disabled={false}
-          id="example-two"
-          label="Option Two"
-          name="example"
-          value="two"
-        />
-      </Grid.Column>
-    </Grid>
-  </Radio.Group>
-</Box>
+<Radio.Group
+  label="Choose one"
+>
+  <Error
+    error="error message"
+  />
+  <Grid>
+    <Box
+      as={[Function]}
+      key="example-one"
+      lg={12}
+      mb="100"
+      md={12}
+      sm={12}
+      xl={12}
+      xs={12}
+    >
+      <Radio
+        checked={false}
+        disabled={false}
+        id="example-one"
+        label="Option One"
+        name="example"
+        value="one"
+      />
+    </Box>
+    <Box
+      as={[Function]}
+      key="example-two"
+      lg={12}
+      mb="100"
+      md={12}
+      sm={12}
+      xl={12}
+      xs={12}
+    >
+      <Radio
+        checked={false}
+        disabled={false}
+        id="example-two"
+        label="Option Two"
+        name="example"
+        value="two"
+      />
+    </Box>
+  </Grid>
+</Radio.Group>
 `;
 
 exports[`RadioGroup renders radio buttons 1`] = `
@@ -256,48 +260,50 @@ exports[`RadioGroup renders radio buttons 1`] = `
 `;
 
 exports[`RadioGroup renders radio buttons 2`] = `
-<Box>
-  <Radio.Group
-    label="Choose one"
-  >
-    <Grid>
-      <Grid.Column
-        key="example-one"
-        lg={12}
-        md={12}
-        sm={12}
-        xl={12}
-        xs={12}
-      >
-        <Radio
-          checked={false}
-          disabled={false}
-          id="example-one"
-          label="Option One"
-          name="example"
-          value="one"
-        />
-      </Grid.Column>
-      <Grid.Column
-        key="example-two"
-        lg={12}
-        md={12}
-        sm={12}
-        xl={12}
-        xs={12}
-      >
-        <Radio
-          checked={false}
-          disabled={false}
-          id="example-two"
-          label="Option Two"
-          name="example"
-          value="two"
-        />
-      </Grid.Column>
-    </Grid>
-  </Radio.Group>
-</Box>
+<Radio.Group
+  label="Choose one"
+>
+  <Grid>
+    <Box
+      as={[Function]}
+      key="example-one"
+      lg={12}
+      mb="100"
+      md={12}
+      sm={12}
+      xl={12}
+      xs={12}
+    >
+      <Radio
+        checked={false}
+        disabled={false}
+        id="example-one"
+        label="Option One"
+        name="example"
+        value="one"
+      />
+    </Box>
+    <Box
+      as={[Function]}
+      key="example-two"
+      lg={12}
+      mb="100"
+      md={12}
+      sm={12}
+      xl={12}
+      xs={12}
+    >
+      <Radio
+        checked={false}
+        disabled={false}
+        id="example-two"
+        label="Option Two"
+        name="example"
+        value="two"
+      />
+    </Box>
+  </Grid>
+</Radio.Group>
 `;
 
 exports[`RadioGroup renders radio buttons with first option checked 1`] = `
@@ -352,48 +358,50 @@ exports[`RadioGroup renders radio buttons with first option checked 1`] = `
 `;
 
 exports[`RadioGroup renders radio buttons with first option checked 2`] = `
-<Box>
-  <Radio.Group
-    label="Choose one"
-  >
-    <Grid>
-      <Grid.Column
-        key="example-one"
-        lg={12}
-        md={12}
-        sm={12}
-        xl={12}
-        xs={12}
-      >
-        <Radio
-          checked={true}
-          disabled={false}
-          id="example-one"
-          label="Option One"
-          name="example"
-          value="one"
-        />
-      </Grid.Column>
-      <Grid.Column
-        key="example-two"
-        lg={12}
-        md={12}
-        sm={12}
-        xl={12}
-        xs={12}
-      >
-        <Radio
-          checked={false}
-          disabled={false}
-          id="example-two"
-          label="Option Two"
-          name="example"
-          value="two"
-        />
-      </Grid.Column>
-    </Grid>
-  </Radio.Group>
-</Box>
+<Radio.Group
+  label="Choose one"
+>
+  <Grid>
+    <Box
+      as={[Function]}
+      key="example-one"
+      lg={12}
+      mb="100"
+      md={12}
+      sm={12}
+      xl={12}
+      xs={12}
+    >
+      <Radio
+        checked={true}
+        disabled={false}
+        id="example-one"
+        label="Option One"
+        name="example"
+        value="one"
+      />
+    </Box>
+    <Box
+      as={[Function]}
+      key="example-two"
+      lg={12}
+      mb="100"
+      md={12}
+      sm={12}
+      xl={12}
+      xs={12}
+    >
+      <Radio
+        checked={false}
+        disabled={false}
+        id="example-two"
+        label="Option Two"
+        name="example"
+        value="two"
+      />
+    </Box>
+  </Grid>
+</Radio.Group>
 `;
 
 exports[`RadioGroup renders radio buttons with second option disabled 1`] = `
@@ -448,46 +456,48 @@ exports[`RadioGroup renders radio buttons with second option disabled 1`] = `
 `;
 
 exports[`RadioGroup renders radio buttons with second option disabled 2`] = `
-<Box>
-  <Radio.Group
-    label="Choose one"
-  >
-    <Grid>
-      <Grid.Column
-        key="example-one"
-        lg={12}
-        md={12}
-        sm={12}
-        xl={12}
-        xs={12}
-      >
-        <Radio
-          checked={false}
-          disabled={false}
-          id="example-one"
-          label="Option One"
-          name="example"
-          value="one"
-        />
-      </Grid.Column>
-      <Grid.Column
-        key="example-two"
-        lg={12}
-        md={12}
-        sm={12}
-        xl={12}
-        xs={12}
-      >
-        <Radio
-          checked={false}
-          disabled={true}
-          id="example-two"
-          label="Option Two"
-          name="example"
-          value="two"
-        />
-      </Grid.Column>
-    </Grid>
-  </Radio.Group>
-</Box>
+<Radio.Group
+  label="Choose one"
+>
+  <Grid>
+    <Box
+      as={[Function]}
+      key="example-one"
+      lg={12}
+      mb="100"
+      md={12}
+      sm={12}
+      xl={12}
+      xs={12}
+    >
+      <Radio
+        checked={false}
+        disabled={false}
+        id="example-one"
+        label="Option One"
+        name="example"
+        value="one"
+      />
+    </Box>
+    <Box
+      as={[Function]}
+      key="example-two"
+      lg={12}
+      mb="100"
+      md={12}
+      sm={12}
+      xl={12}
+      xs={12}
+    >
+      <Radio
+        checked={false}
+        disabled={true}
+        id="example-two"
+        label="Option Two"
+        name="example"
+        value="two"
+      />
+    </Box>
+  </Grid>
+</Radio.Group>
 `;
