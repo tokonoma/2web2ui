@@ -1,14 +1,25 @@
-import React, { Component } from 'react';
-import { Pagination } from 'src/components/matchbox';
+import React from 'react';
+import { Box, Pagination } from 'src/components/matchbox';
 import styles from './Pagination.module.scss';
 import { DEFAULT_PER_PAGE_BUTTONS } from 'src/constants';
 import PerPageButtons from './PerPageButtons';
 import SaveCSVButton from './SaveCSVButton';
+import { useHibana } from 'src/context/HibanaContext';
 
-class CollectionPagination extends Component {
-  renderPageButtons() {
-    const { data, perPage, currentPage, pageRange, onPageChange } = this.props;
+const CollectionPagination = ({
+  currentPage,
+  data,
+  onPageChange,
+  onPerPageChange,
+  pageRange,
+  perPage,
+  perPageButtons,
+  saveCsv,
+}) => {
+  const [state] = useHibana();
+  const { isHibanaEnabled } = state;
 
+  const renderPageButtons = () => {
     if (data.length <= perPage) {
       return null;
     }
@@ -21,17 +32,16 @@ class CollectionPagination extends Component {
         onChange={onPageChange}
       />
     );
+  };
+
+  if (!currentPage) {
+    return null;
   }
 
-  render() {
-    const { data, perPage, perPageButtons, onPerPageChange, saveCsv, currentPage } = this.props;
-    if (!currentPage) {
-      return null;
-    }
-
+  if (!isHibanaEnabled) {
     return (
       <div>
-        <div className={styles.PageButtons}>{this.renderPageButtons()}</div>
+        <div className={styles.PageButtons}>{renderPageButtons()}</div>
         <div className={styles.PerPageButtons}>
           <PerPageButtons
             totalCount={data.length}
@@ -45,7 +55,23 @@ class CollectionPagination extends Component {
       </div>
     );
   }
-}
+
+  return (
+    <Box display="flex" justifyContent="space-between">
+      <Box>{renderPageButtons()}</Box>
+      <Box display="flex" alignItems="center">
+        <PerPageButtons
+          totalCount={data.length}
+          data={data}
+          perPage={perPage}
+          perPageButtons={perPageButtons}
+          onPerPageChange={onPerPageChange}
+        />
+        <SaveCSVButton size="small" outline data={data} saveCsv={saveCsv} />
+      </Box>
+    </Box>
+  );
+};
 
 CollectionPagination.defaultProps = {
   pageRange: 5,

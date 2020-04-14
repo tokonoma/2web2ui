@@ -37,6 +37,14 @@ exports[`JoinForm render disables form when loading 1`] = `
     </Grid.Column>
   </Grid>
   <Field
+    autoComplete="organization"
+    component={[Function]}
+    disabled={true}
+    label="Company"
+    name="company_name"
+    placeholder="Knope Industries LLC"
+  />
+  <Field
     autoComplete="username email"
     component={[Function]}
     disabled={true}
@@ -53,6 +61,13 @@ exports[`JoinForm render disables form when loading 1`] = `
   <Field
     autoComplete="new-password"
     component={[Function]}
+    connectRight={
+      <ShowPasswordButton
+        onClick={[Function]}
+      >
+        Show
+      </ShowPasswordButton>
+    }
     disabled={true}
     label="Password"
     name="password"
@@ -100,6 +115,7 @@ exports[`JoinForm render disables form when loading 1`] = `
   </Checkbox.Group>
   <Button
     disabled={true}
+    id="submit"
     onClick={[Function]}
     primary={true}
   >
@@ -161,6 +177,14 @@ exports[`JoinForm render disables form when recaptcha is not loaded 1`] = `
     </Grid.Column>
   </Grid>
   <Field
+    autoComplete="organization"
+    component={[Function]}
+    disabled={true}
+    label="Company"
+    name="company_name"
+    placeholder="Knope Industries LLC"
+  />
+  <Field
     autoComplete="username email"
     component={[Function]}
     disabled={true}
@@ -177,6 +201,13 @@ exports[`JoinForm render disables form when recaptcha is not loaded 1`] = `
   <Field
     autoComplete="new-password"
     component={[Function]}
+    connectRight={
+      <ShowPasswordButton
+        onClick={[Function]}
+      >
+        Show
+      </ShowPasswordButton>
+    }
     disabled={true}
     label="Password"
     name="password"
@@ -224,6 +255,7 @@ exports[`JoinForm render disables form when recaptcha is not loaded 1`] = `
   </Checkbox.Group>
   <Button
     disabled={true}
+    id="submit"
     onClick={[Function]}
     primary={true}
   >
@@ -285,6 +317,14 @@ exports[`JoinForm render enables form correctly 1`] = `
     </Grid.Column>
   </Grid>
   <Field
+    autoComplete="organization"
+    component={[Function]}
+    disabled={false}
+    label="Company"
+    name="company_name"
+    placeholder="Knope Industries LLC"
+  />
+  <Field
     autoComplete="username email"
     component={[Function]}
     disabled={false}
@@ -301,6 +341,13 @@ exports[`JoinForm render enables form correctly 1`] = `
   <Field
     autoComplete="new-password"
     component={[Function]}
+    connectRight={
+      <ShowPasswordButton
+        onClick={[Function]}
+      >
+        Show
+      </ShowPasswordButton>
+    }
     disabled={false}
     label="Password"
     name="password"
@@ -348,6 +395,7 @@ exports[`JoinForm render enables form correctly 1`] = `
   </Checkbox.Group>
   <Button
     disabled={false}
+    id="submit"
     onClick={[Function]}
     primary={true}
   >

@@ -15,6 +15,7 @@ function ComboBoxTextField(props) {
   return <HibanaComboBoxTextField {...props} />;
 }
 
+ComboBoxTextField.displayName = 'ComboBoxTextField'; // needs to be set for matchbox
 HibanaComboBoxTextField.displayName = 'HibanaComboBoxTextField';
 
 export default ComboBoxTextField;

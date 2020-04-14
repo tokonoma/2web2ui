@@ -9,6 +9,7 @@ import { TextFieldWrapper, CheckboxWrapper } from 'src/components/reduxFormWrapp
 import { ExternalLink } from 'src/components/links';
 import { Grid, Button, Checkbox } from 'src/components/matchbox';
 import { required, minLength, email, endsWithWhitespace } from 'src/helpers/validation';
+import useHibanaToggle from 'src/hooks/useHibanaToggle';
 import styles from './JoinForm.module.scss';
 const { recaptcha } = config;
 
@@ -34,6 +35,7 @@ export class JoinForm extends Component {
     reCaptchaReady: false,
     reCaptchaInstance: null,
     recaptcha_response: null,
+    showPassword: false,
   };
 
   reCaptchaLoaded = () => {
@@ -64,7 +66,7 @@ export class JoinForm extends Component {
   render() {
     const { loading, pristine, invalid, submitting } = this.props;
 
-    const { reCaptchaReady } = this.state;
+    const { reCaptchaReady, showPassword } = this.state;
 
     const pending = loading || submitting || !reCaptchaReady;
 
@@ -95,6 +97,14 @@ export class JoinForm extends Component {
           </Grid.Column>
         </Grid>
         <Field
+          name="company_name"
+          component={TextFieldWrapper}
+          label="Company"
+          disabled={pending}
+          autoComplete="organization"
+          placeholder="Knope Industries LLC"
+        />
+        <Field
           name="email"
           component={TextFieldWrapper}
           label="Email"
@@ -109,9 +119,14 @@ export class JoinForm extends Component {
           label="Password"
           validate={[required, minLength(12), endsWithWhitespace]}
           disabled={!reCaptchaReady || loading}
-          type="password"
+          type={showPassword ? 'text' : 'password'}
           autoComplete="new-password"
           placeholder="••••••••••••"
+          connectRight={
+            <ShowPasswordButton onClick={() => this.setState({ showPassword: !showPassword })}>
+              {showPassword ? 'Hide' : 'Show'}
+            </ShowPasswordButton>
+          }
         />
 
         <Checkbox.Group>
@@ -139,7 +154,12 @@ export class JoinForm extends Component {
           />
         </Checkbox.Group>
 
-        <Button primary disabled={pending || pristine || invalid} onClick={this.executeRecaptcha}>
+        <Button
+          id="submit"
+          primary
+          disabled={pending || pristine || invalid}
+          onClick={this.executeRecaptcha}
+        >
           {loading ? 'Loading' : 'Create Account'}
         </Button>
 
@@ -156,6 +176,25 @@ export class JoinForm extends Component {
   }
 }
 
+function OGShowPasswordButton({ children, onClick }) {
+  return (
+    <Button onClick={onClick} data-id="show-password-button">
+      {children}
+    </Button>
+  );
+}
+
+function HibanaShowPasswordButton({ children, onClick }) {
+  return (
+    <Button primary outline onClick={onClick} data-id="show-password-button">
+      {children}
+    </Button>
+  );
+}
+
+function ShowPasswordButton(props) {
+  return useHibanaToggle(OGShowPasswordButton, HibanaShowPasswordButton)(props);
+}
 const mapStateToProps = state => ({
   initialValues: {
     tou_accepted: false,

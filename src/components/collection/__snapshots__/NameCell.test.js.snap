@@ -1,45 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NameCell renders with a name 1`] = `
-Array [
-  <p
-    className="Name"
-    key="name"
-  >
-    <PageLink
+<Providers
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+>
+  <MemoryRouter>
+    <NameCell
+      id="example-item"
+      name="The Example Item"
       to="/example/item"
-    >
-      The Example Item
-    </PageLink>
-  </p>,
-  <p
-    className="Id"
-    key="id"
-  >
-    ID: 
-    example-item
-  </p>,
-]
+    />
+  </MemoryRouter>
+</Providers>
 `;
 
 exports[`NameCell renders with id as name 1`] = `
-Array [
-  <p
-    className="Name"
-    key="name"
-  >
-    <PageLink
+<Providers
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+>
+  <MemoryRouter>
+    <NameCell
+      id="example-item"
       to="/example/item"
-    >
-      Example Item
-    </PageLink>
-  </p>,
-  <p
-    className="Id"
-    key="id"
-  >
-    ID: 
-    example-item
-  </p>,
-]
+    />
+  </MemoryRouter>
+</Providers>
 `;
