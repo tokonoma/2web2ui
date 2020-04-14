@@ -93,14 +93,21 @@ export class ReportOptions extends Component {
       const isForcedUTC =
         reportOptions.precision && isForcedUTCRollupPrecision(reportOptions.precision);
 
+      const isShownForcedUTC =
+        this.state.shownPrecision && isForcedUTCRollupPrecision(this.state.shownPrecision);
+
+      const timezoneDisabled = reportLoading || (isForcedUTC && this.state.shownPrecision === '');
+
       const timezoneTypeahead = (
         <TimezoneTypeahead
           initialValue={reportOptions.timezone}
           onChange={this.handleTimezoneSelect}
-          disabled={reportLoading || isForcedUTC}
           isForcedUTC={isForcedUTC}
+          disabledAndUTCOnly={!!isShownForcedUTC}
+          disabled={timezoneDisabled}
         />
       );
+
       return (
         <>
           <Panel.Section>
@@ -136,15 +143,14 @@ export class ReportOptions extends Component {
                 </div>
               </Grid.Column>
               <Grid.Column xs={6} md={4}>
-                {isForcedUTC ? (
-                  <div className={styles.TimezoneTooltipWrapper}>
-                    <Tooltip content="Day, week, and month precision only support UTC.">
-                      {timezoneTypeahead}
-                    </Tooltip>
-                  </div>
-                ) : (
-                  timezoneTypeahead
-                )}
+                <div className={styles.TimezoneTooltipWrapper}>
+                  <Tooltip
+                    disabled={!isShownForcedUTC && !timezoneDisabled}
+                    content="Day, week, and month precision only support UTC."
+                  >
+                    {timezoneTypeahead}
+                  </Tooltip>
+                </div>
               </Grid.Column>
               <Grid.Column xs={6} md={2}>
                 {//We will show a fake selector that shows the temporary precision when the user
