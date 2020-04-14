@@ -41,6 +41,82 @@ exports[`FileFieldWrapper renders disabled file input 1`] = `
 </fieldset>
 `;
 
+exports[`FileFieldWrapper renders disabled file input 2`] = `
+<Box>
+  <Label
+    label={
+      <span>
+        Test File Input
+        <span
+          aria-hidden="true"
+        >
+           *
+        </span>
+      </span>
+    }
+  />
+  <Box
+    display="flex"
+    justifyContent="space-between"
+  >
+    <n
+      accept=".csv"
+      activeClassName="DropzoneActive"
+      className="Dropzone"
+      disableClick={false}
+      disabled={true}
+      disabledClassName="DropzoneDisabled"
+      getDataTransferItems={[Function]}
+      inputProps={Object {}}
+      maxSize={Infinity}
+      minSize={0}
+      multiple={false}
+      onDrop={[Function]}
+      onFileDialogCancel={[Function]}
+      preventDropOnDocument={true}
+      style={Object {}}
+    >
+      <Box
+        py="500"
+      >
+        <Box
+          as="span"
+          display="flex"
+          justifyContent="center"
+        >
+          <Text>
+            <Text
+              as="span"
+              fontWeight="medium"
+            >
+              Drag and drop
+            </Text>
+            <Text
+              as="span"
+            >
+               a file, or 
+            </Text>
+            <Text
+              as="a"
+              color="blue.700"
+              fontWeight="medium"
+              role="presentation"
+            >
+              select a file
+            </Text>
+            <Text
+              as="span"
+            >
+               to upload
+            </Text>
+          </Text>
+        </Box>
+      </Box>
+    </n>
+  </Box>
+</Box>
+`;
+
 exports[`FileFieldWrapper renders file input 1`] = `
 <fieldset
   className="Field"
@@ -80,6 +156,82 @@ exports[`FileFieldWrapper renders file input 1`] = `
     </n>
   </div>
 </fieldset>
+`;
+
+exports[`FileFieldWrapper renders file input 2`] = `
+<Box>
+  <Label
+    label={
+      <span>
+        Test File Input
+        <span
+          aria-hidden="true"
+        >
+           *
+        </span>
+      </span>
+    }
+  />
+  <Box
+    display="flex"
+    justifyContent="space-between"
+  >
+    <n
+      accept=".csv"
+      activeClassName="DropzoneActive"
+      className="Dropzone"
+      disableClick={false}
+      disabled={false}
+      disabledClassName="DropzoneDisabled"
+      getDataTransferItems={[Function]}
+      inputProps={Object {}}
+      maxSize={Infinity}
+      minSize={0}
+      multiple={false}
+      onDrop={[Function]}
+      onFileDialogCancel={[Function]}
+      preventDropOnDocument={true}
+      style={Object {}}
+    >
+      <Box
+        py="500"
+      >
+        <Box
+          as="span"
+          display="flex"
+          justifyContent="center"
+        >
+          <Text>
+            <Text
+              as="span"
+              fontWeight="medium"
+            >
+              Drag and drop
+            </Text>
+            <Text
+              as="span"
+            >
+               a file, or 
+            </Text>
+            <Text
+              as="a"
+              color="blue.700"
+              fontWeight="medium"
+              role="presentation"
+            >
+              select a file
+            </Text>
+            <Text
+              as="span"
+            >
+               to upload
+            </Text>
+          </Text>
+        </Box>
+      </Box>
+    </n>
+  </Box>
+</Box>
 `;
 
 exports[`FileFieldWrapper renders file input with error message 1`] = `
@@ -130,6 +282,89 @@ exports[`FileFieldWrapper renders file input with error message 1`] = `
 </fieldset>
 `;
 
+exports[`FileFieldWrapper renders file input with error message 2`] = `
+<Box>
+  <Label
+    label={
+      <span>
+        <span>
+          Test File Input
+          <span
+            aria-hidden="true"
+          >
+             *
+          </span>
+        </span>
+         
+        <Error
+          error="Oh no!"
+          wrapper="span"
+        />
+      </span>
+    }
+  />
+  <Box
+    display="flex"
+    justifyContent="space-between"
+  >
+    <n
+      accept=".csv"
+      activeClassName="DropzoneActive"
+      className="Dropzone"
+      disableClick={false}
+      disabled={false}
+      disabledClassName="DropzoneDisabled"
+      getDataTransferItems={[Function]}
+      inputProps={Object {}}
+      maxSize={Infinity}
+      minSize={0}
+      multiple={false}
+      onDrop={[Function]}
+      onFileDialogCancel={[Function]}
+      preventDropOnDocument={true}
+      style={Object {}}
+    >
+      <Box
+        py="500"
+      >
+        <Box
+          as="span"
+          display="flex"
+          justifyContent="center"
+        >
+          <Text>
+            <Text
+              as="span"
+              fontWeight="medium"
+            >
+              Drag and drop
+            </Text>
+            <Text
+              as="span"
+            >
+               a file, or 
+            </Text>
+            <Text
+              as="a"
+              color="blue.700"
+              fontWeight="medium"
+              role="presentation"
+            >
+              select a file
+            </Text>
+            <Text
+              as="span"
+            >
+               to upload
+            </Text>
+          </Text>
+        </Box>
+      </Box>
+    </n>
+  </Box>
+</Box>
+`;
+
 exports[`FileFieldWrapper renders file input with help message 1`] = `
 <fieldset
   className="Field"
@@ -176,6 +411,90 @@ exports[`FileFieldWrapper renders file input with help message 1`] = `
 </fieldset>
 `;
 
+exports[`FileFieldWrapper renders file input with help message 2`] = `
+<Box>
+  <Label
+    label={
+      <span>
+        Test File Input
+        <span
+          aria-hidden="true"
+        >
+           *
+        </span>
+      </span>
+    }
+  />
+  <Box
+    display="flex"
+    justifyContent="space-between"
+  >
+    <n
+      accept=".csv"
+      activeClassName="DropzoneActive"
+      className="Dropzone"
+      disableClick={false}
+      disabled={false}
+      disabledClassName="DropzoneDisabled"
+      getDataTransferItems={[Function]}
+      inputProps={Object {}}
+      maxSize={Infinity}
+      minSize={0}
+      multiple={false}
+      onDrop={[Function]}
+      onFileDialogCancel={[Function]}
+      preventDropOnDocument={true}
+      style={Object {}}
+    >
+      <Box
+        py="500"
+      >
+        <Box
+          as="span"
+          display="flex"
+          justifyContent="center"
+        >
+          <Text>
+            <Text
+              as="span"
+              fontWeight="medium"
+            >
+              Drag and drop
+            </Text>
+            <Text
+              as="span"
+            >
+               a file, or 
+            </Text>
+            <Text
+              as="a"
+              color="blue.700"
+              fontWeight="medium"
+              role="presentation"
+            >
+              select a file
+            </Text>
+            <Text
+              as="span"
+            >
+               to upload
+            </Text>
+          </Text>
+        </Box>
+      </Box>
+    </n>
+  </Box>
+  <Text
+    color="gray.700"
+    fontSize="100"
+    lineHeight="100"
+    pt="200"
+  >
+    Ask Google!
+  </Text>
+</Box>
+`;
+
 exports[`FileFieldWrapper renders file input with multiple allowed file types 1`] = `
 <fieldset
   className="Field"
@@ -214,6 +533,57 @@ exports[`FileFieldWrapper renders file input with multiple allowed file types 1`
     </n>
   </div>
 </fieldset>
+`;
+
+exports[`FileFieldWrapper renders file input with multiple allowed file types 2`] = `
+<Box>
+  <Label
+    label={
+      <span>
+        Test File Input
+        <span
+          aria-hidden="true"
+        >
+           *
+        </span>
+      </span>
+    }
+  />
+  <Box
+    display="flex"
+    justifyContent="space-between"
+  >
+    <n
+      accept={
+        Array [
+          ".txt,.csv",
+        ]
+      }
+      activeClassName="DropzoneActive"
+      className="Dropzone"
+      disableClick={false}
+      disabled={false}
+      disabledClassName="DropzoneDisabled"
+      getDataTransferItems={[Function]}
+      inputProps={Object {}}
+      maxSize={Infinity}
+      minSize={0}
+      multiple={false}
+      onDrop={[Function]}
+      onFileDialogCancel={[Function]}
+      preventDropOnDocument={true}
+      style={Object {}}
+    >
+      <Box
+        py="500"
+      >
+        <Text>
+          test.txt
+        </Text>
+      </Box>
+    </n>
+  </Box>
+</Box>
 `;
 
 exports[`FileFieldWrapper renders file input with no specified type 1`] = `
@@ -257,6 +627,82 @@ exports[`FileFieldWrapper renders file input with no specified type 1`] = `
 </fieldset>
 `;
 
+exports[`FileFieldWrapper renders file input with no specified type 2`] = `
+<Box>
+  <Label
+    label={
+      <span>
+        Test File Input
+        <span
+          aria-hidden="true"
+        >
+           *
+        </span>
+      </span>
+    }
+  />
+  <Box
+    display="flex"
+    justifyContent="space-between"
+  >
+    <n
+      accept=""
+      activeClassName="DropzoneActive"
+      className="Dropzone"
+      disableClick={false}
+      disabled={false}
+      disabledClassName="DropzoneDisabled"
+      getDataTransferItems={[Function]}
+      inputProps={Object {}}
+      maxSize={Infinity}
+      minSize={0}
+      multiple={false}
+      onDrop={[Function]}
+      onFileDialogCancel={[Function]}
+      preventDropOnDocument={true}
+      style={Object {}}
+    >
+      <Box
+        py="500"
+      >
+        <Box
+          as="span"
+          display="flex"
+          justifyContent="center"
+        >
+          <Text>
+            <Text
+              as="span"
+              fontWeight="medium"
+            >
+              Drag and drop
+            </Text>
+            <Text
+              as="span"
+            >
+               a file, or 
+            </Text>
+            <Text
+              as="a"
+              color="blue.700"
+              fontWeight="medium"
+              role="presentation"
+            >
+              select a file
+            </Text>
+            <Text
+              as="span"
+            >
+               to upload
+            </Text>
+          </Text>
+        </Box>
+      </Box>
+    </n>
+  </Box>
+</Box>
+`;
+
 exports[`FileFieldWrapper renders file input with selected filename 1`] = `
 <fieldset
   className="Field"
@@ -291,6 +737,53 @@ exports[`FileFieldWrapper renders file input with selected filename 1`] = `
     </n>
   </div>
 </fieldset>
+`;
+
+exports[`FileFieldWrapper renders file input with selected filename 2`] = `
+<Box>
+  <Label
+    label={
+      <span>
+        Test File Input
+        <span
+          aria-hidden="true"
+        >
+           *
+        </span>
+      </span>
+    }
+  />
+  <Box
+    display="flex"
+    justifyContent="space-between"
+  >
+    <n
+      accept=".csv"
+      activeClassName="DropzoneActive"
+      className="Dropzone"
+      disableClick={false}
+      disabled={false}
+      disabledClassName="DropzoneDisabled"
+      getDataTransferItems={[Function]}
+      inputProps={Object {}}
+      maxSize={Infinity}
+      minSize={0}
+      multiple={false}
+      onDrop={[Function]}
+      onFileDialogCancel={[Function]}
+      preventDropOnDocument={true}
+      style={Object {}}
+    >
+      <Box
+        py="500"
+      >
+        <Text>
+          test.csv
+        </Text>
+      </Box>
+    </n>
+  </Box>
+</Box>
 `;
 
 exports[`FileFieldWrapper renders with a hidden label 1`] = `
@@ -329,4 +822,82 @@ exports[`FileFieldWrapper renders with a hidden label 1`] = `
     </n>
   </div>
 </fieldset>
+`;
+
+exports[`FileFieldWrapper renders with a hidden label 2`] = `
+<Box>
+  <Label
+    label={
+      <ScreenReaderOnly>
+        <span>
+          a label
+          <span
+            aria-hidden="true"
+          >
+             *
+          </span>
+        </span>
+      </ScreenReaderOnly>
+    }
+  />
+  <Box
+    display="flex"
+    justifyContent="space-between"
+  >
+    <n
+      accept=".csv"
+      activeClassName="DropzoneActive"
+      className="Dropzone"
+      disableClick={false}
+      disabled={false}
+      disabledClassName="DropzoneDisabled"
+      getDataTransferItems={[Function]}
+      inputProps={Object {}}
+      maxSize={Infinity}
+      minSize={0}
+      multiple={false}
+      onDrop={[Function]}
+      onFileDialogCancel={[Function]}
+      preventDropOnDocument={true}
+      style={Object {}}
+    >
+      <Box
+        py="500"
+      >
+        <Box
+          as="span"
+          display="flex"
+          justifyContent="center"
+        >
+          <Text>
+            <Text
+              as="span"
+              fontWeight="medium"
+            >
+              Drag and drop
+            </Text>
+            <Text
+              as="span"
+            >
+               a file, or 
+            </Text>
+            <Text
+              as="a"
+              color="blue.700"
+              fontWeight="medium"
+              role="presentation"
+            >
+              select a file
+            </Text>
+            <Text
+              as="span"
+            >
+               to upload
+            </Text>
+          </Text>
+        </Box>
+      </Box>
+    </n>
+  </Box>
+</Box>
 `;

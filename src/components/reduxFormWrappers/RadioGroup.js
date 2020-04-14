@@ -1,8 +1,9 @@
 import React from 'react';
-import { Grid, Error, Radio } from 'src/components/matchbox';
+import { Error, Radio, Box, Grid } from 'src/components/matchbox';
+import useHibanaToggle from 'src/hooks/useHibanaToggle';
 import styles from './RadioGroup.module.scss';
 
-export default function RadioGroup({
+export function OGRadioGroup({
   label,
   input,
   options,
@@ -36,4 +37,42 @@ export default function RadioGroup({
       {bottomError && touched && error && <Error error={error} />}
     </Radio.Group>
   );
+}
+
+export function HibanaRadioGroup({
+  label,
+  input,
+  options,
+  meta,
+  bottomError,
+  grid = { xs: 12, sm: 12, md: 12, lg: 12, xl: 12 },
+}) {
+  const { error, touched } = meta;
+
+  return (
+    <Radio.Group label={label}>
+      {!bottomError && touched && error && <Error error={error} />}
+      <Grid>
+        {options.map(option => (
+          <Box as={Grid.Column} mb="100" {...grid} key={`${input.name}-${option.value}`}>
+            <Radio
+              {...input}
+              id={`${input.name}-${option.value}`}
+              label={option.label}
+              checked={option.value === input.value}
+              disabled={!!option.disabled}
+              value={option.value}
+              helpText={option.helpText}
+            />
+            {option.children}
+          </Box>
+        ))}
+      </Grid>
+      {bottomError && touched && error && <Error error={error} />}
+    </Radio.Group>
+  );
+}
+
+export default function RadioGroup(props) {
+  return useHibanaToggle(OGRadioGroup, HibanaRadioGroup)(props);
 }

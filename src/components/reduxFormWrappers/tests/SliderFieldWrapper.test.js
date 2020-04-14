@@ -1,6 +1,9 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import SliderFieldWrapper from '../SliderFieldWrapper';
+import SliderFieldWrapper, {
+  HibanaSliderFieldWrapper,
+  OGSliderFieldWrapper,
+} from '../SliderFieldWrapper';
 import TestApp from 'src/__testHelpers__/TestApp';
 import { Slider, TextField } from 'src/components/matchbox';
 
@@ -49,16 +52,21 @@ describe('SliderFieldWrapper', () => {
     expect(wrapper.find(TextField)).toHaveValue(invalidValue);
   });
 
-  it('rerenders when value is updated', () => {
-    const wrapper = shallow(<SliderFieldWrapper input={{ value: 45 }} />);
+  it('updates internal state value based on prop change', () => {
+    const testWrapper = wrap => {
+      expect(wrap.find(Slider)).toHaveValue(45);
+      expect(wrap.find(TextField)).toHaveValue(45);
 
-    expect(wrapper.find(Slider)).toHaveValue(45);
-    expect(wrapper.find('TextField')).toHaveValue(45);
+      wrap.setProps({ input: { value: 79 } });
+      wrapper.update();
 
-    wrapper.setProps({ input: { value: 79 }, onChange: jest.fn() });
-    wrapper.update();
+      expect(wrap.find(Slider)).toHaveValue(79);
+      expect(wrap.find(TextField)).toHaveValue(79);
+    };
 
-    expect(wrapper.find(Slider)).toHaveValue(79);
-    expect(wrapper.find('TextField')).toHaveValue(79);
+    const wrapper = shallow(<OGSliderFieldWrapper input={{ value: 45 }} />);
+    const hibanaWrapper = shallow(<HibanaSliderFieldWrapper input={{ value: 45 }} />);
+    testWrapper(wrapper);
+    testWrapper(hibanaWrapper);
   });
 });
