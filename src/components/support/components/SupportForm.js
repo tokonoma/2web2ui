@@ -3,7 +3,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Field, formValueSelector, reduxForm } from 'redux-form';
 import { PageLink } from 'src/components/links';
-import { Button, Panel } from 'src/components/matchbox';
+import { Button, Panel, Stack } from 'src/components/matchbox';
 
 import * as supportActions from 'src/actions/support';
 import { SelectWrapper, TextFieldWrapper } from 'src/components';
@@ -71,48 +71,50 @@ export class SupportForm extends Component {
     return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
         <Panel.Section>
-          <Field
-            name="issueId"
-            label="I need help with..."
-            helpText={
-              needsOnlineSupport && (
-                <Fragment>
-                  Additional technical support is available on paid plans.{' '}
-                  <PageLink onClick={onClose} to="/account/billing/plan">
-                    Upgrade now
-                  </PageLink>
-                  .
-                </Fragment>
-              )
-            }
-            errorInLabel
-            disabled={submitting}
-            component={SelectWrapper}
-            options={[
-              { disabled: true, label: 'Select an option', value: '' },
-              ...issues.map(({ id, label }) => ({ label, value: id })),
-            ]}
-            validate={required}
-          />
-          <Field
-            name="message"
-            label={selectedIssue ? selectedIssue.messageLabel : 'Tell us more about your issue'}
-            errorInLabel
-            multiline
-            resize="none"
-            rows={10}
-            disabled={submitting}
-            component={TextFieldWrapper}
-            validate={required}
-          />
-          <Field
-            type="file"
-            name="attachment"
-            label="Attach a file"
-            disabled={submitting}
-            component={FileFieldWrapper}
-            validate={maxFileSize(config.support.maxAttachmentSizeBytes)}
-          />
+          <Stack>
+            <Field
+              name="issueId"
+              label="I need help with..."
+              helpText={
+                needsOnlineSupport && (
+                  <Fragment>
+                    Additional technical support is available on paid plans.{' '}
+                    <PageLink onClick={onClose} to="/account/billing/plan">
+                      Upgrade now
+                    </PageLink>
+                    .
+                  </Fragment>
+                )
+              }
+              errorInLabel
+              disabled={submitting}
+              component={SelectWrapper}
+              options={[
+                { disabled: true, label: 'Select an option', value: '' },
+                ...issues.map(({ id, label }) => ({ label, value: id })),
+              ]}
+              validate={required}
+            />
+            <Field
+              name="message"
+              label={selectedIssue ? selectedIssue.messageLabel : 'Tell us more about your issue'}
+              errorInLabel
+              multiline
+              resize="none"
+              rows={10}
+              disabled={submitting}
+              component={TextFieldWrapper}
+              validate={required}
+            />
+            <Field
+              type="file"
+              name="attachment"
+              label="Attach a file"
+              disabled={submitting}
+              component={FileFieldWrapper}
+              validate={maxFileSize(config.support.maxAttachmentSizeBytes)}
+            />
+          </Stack>
         </Panel.Section>
         <Panel.Section>
           <Button submit primary disabled={pristine || invalid || submitting}>

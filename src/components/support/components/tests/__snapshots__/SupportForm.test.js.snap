@@ -62,43 +62,45 @@ exports[`Support Form Component Form should render successfully created ticket m
 exports[`Support Form Component Form should render support form 1`] = `
 <form>
   <Panel.Section>
-    <Field
-      component={[Function]}
-      errorInLabel={true}
-      label="I need help with..."
-      name="issueId"
-      options={
-        Array [
-          Object {
-            "disabled": true,
-            "label": "Select an option",
-            "value": "",
-          },
-          Object {
-            "label": "I need help!",
-            "value": "technical_issues",
-          },
-        ]
-      }
-      validate={[Function]}
-    />
-    <Field
-      component={[Function]}
-      errorInLabel={true}
-      label="Tell us more about your issue"
-      multiline={true}
-      name="message"
-      resize="none"
-      rows={10}
-      validate={[Function]}
-    />
-    <Field
-      component={[Function]}
-      label="Attach a file"
-      name="attachment"
-      type="file"
-      validate={[Function]}
-    />
+    <Stack>
+      <Field
+        component={[Function]}
+        errorInLabel={true}
+        label="I need help with..."
+        name="issueId"
+        options={
+          Array [
+            Object {
+              "disabled": true,
+              "label": "Select an option",
+              "value": "",
+            },
+            Object {
+              "label": "I need help!",
+              "value": "technical_issues",
+            },
+          ]
+        }
+        validate={[Function]}
+      />
+      <Field
+        component={[Function]}
+        errorInLabel={true}
+        label="Tell us more about your issue"
+        multiline={true}
+        name="message"
+        resize="none"
+        rows={10}
+        validate={[Function]}
+      />
+      <Field
+        component={[Function]}
+        label="Attach a file"
+        name="attachment"
+        type="file"
+        validate={[Function]}
+      />
+    </Stack>
   </Panel.Section>
   <Panel.Section>
     <Button
@@ -116,43 +118,45 @@ exports[`Support Form Component Form should render unauthorized message 1`] = `<
 exports[`Support Form Component Form should render with selected issue message label 1`] = `
 <form>
   <Panel.Section>
-    <Field
-      component={[Function]}
-      errorInLabel={true}
-      label="I need help with..."
-      name="issueId"
-      options={
-        Array [
-          Object {
-            "disabled": true,
-            "label": "Select an option",
-            "value": "",
-          },
-          Object {
-            "label": "I need help!",
-            "value": "technical_issues",
-          },
-        ]
-      }
-      validate={[Function]}
-    />
-    <Field
-      component={[Function]}
-      errorInLabel={true}
-      label="Tell use more about your technical issue"
-      multiline={true}
-      name="message"
-      resize="none"
-      rows={10}
-      validate={[Function]}
-    />
-    <Field
-      component={[Function]}
-      label="Attach a file"
-      name="attachment"
-      type="file"
-      validate={[Function]}
-    />
+    <Stack>
+      <Field
+        component={[Function]}
+        errorInLabel={true}
+        label="I need help with..."
+        name="issueId"
+        options={
+          Array [
+            Object {
+              "disabled": true,
+              "label": "Select an option",
+              "value": "",
+            },
+            Object {
+              "label": "I need help!",
+              "value": "technical_issues",
+            },
+          ]
+        }
+        validate={[Function]}
+      />
+      <Field
+        component={[Function]}
+        errorInLabel={true}
+        label="Tell use more about your technical issue"
+        multiline={true}
+        name="message"
+        resize="none"
+        rows={10}
+        validate={[Function]}
+      />
+      <Field
+        component={[Function]}
+        label="Attach a file"
+        name="attachment"
+        type="file"
+        validate={[Function]}
+      />
+    </Stack>
   </Panel.Section>
   <Panel.Section>
     <Button

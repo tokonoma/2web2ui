@@ -1,7 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import useHibanaToggle from 'src/hooks/useHibanaToggle';
+import SearchPanel, { OGSearchPanel } from '../SearchPanel';
 
-import SearchPanel from '../SearchPanel';
+jest.mock('src/hooks/useHibanaToggle');
+useHibanaToggle.mockReturnValue(OGSearchPanel);
 
 describe('SearchPanel', () => {
   it('renders search panel', () => {
