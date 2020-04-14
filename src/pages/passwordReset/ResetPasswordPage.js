@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { invalidateAuthToken } from 'src/actions/auth';
 import { resetPassword } from 'src/actions/passwordReset';
 import { showAlert } from 'src/actions/globalAlert';
 import { required, minLength, endsWithWhitespace } from 'src/helpers/validation';
@@ -12,8 +13,8 @@ import { AUTH_ROUTE } from 'src/constants';
 
 export class ResetPasswordPage extends Component {
   handleResetPassword = ({ newPassword: password }) => {
-    const { resetPassword, token } = this.props;
-    return resetPassword({ password, token });
+    const { resetPassword, token, invalidateAuthToken } = this.props;
+    return resetPassword({ password, token }).then(() => invalidateAuthToken(token));
   };
 
   componentDidUpdate(prevProps) {
@@ -91,6 +92,6 @@ const mapStateToProps = (state, props) => ({
   ...state.passwordReset,
   token: props.match.params.token,
 });
-export default connect(mapStateToProps, { resetPassword, showAlert })(
+export default connect(mapStateToProps, { resetPassword, showAlert, invalidateAuthToken })(
   reduxForm(formOptions)(ResetPasswordPage),
 );
