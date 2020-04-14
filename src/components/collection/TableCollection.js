@@ -5,13 +5,27 @@ import Collection from './Collection';
 import TableHeader from './TableHeader';
 import styles from './TableCollection.module.scss';
 
-const TableWrapper = props => (
+import useHibanaToggle from 'src/hooks/useHibanaToggle';
+
+const OGTableWrapper = props => (
   <Panel>
     <div className={styles.TableWrapper}>
       <Table>{props.children}</Table>
     </div>
   </Panel>
 );
+
+const HibanaTableWrapper = props => (
+  <Panel>
+    <div>
+      <Table>{props.children}</Table>
+    </div>
+  </Panel>
+);
+
+const TableWrapper = props => {
+  return useHibanaToggle(OGTableWrapper, HibanaTableWrapper)(props);
+};
 
 const TableBody = props => <tbody>{props.children}</tbody>;
 

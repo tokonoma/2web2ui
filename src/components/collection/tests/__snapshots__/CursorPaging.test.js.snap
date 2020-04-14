@@ -43,13 +43,14 @@ exports[`CursorPaging should correctly render cursor paging when there is only o
 </div>
 `;
 
-exports[`CursorPaging should render cursor paging 1`] = `
-<div
-  className="PageButtons"
+exports[`CursorPaging should correctly render cursor paging when there is only one page 2`] = `
+<Box
+  alignItems="center"
+  display="flex"
 >
   <Button
-    className="RewindButton"
-    disabled={false}
+    disabled={true}
+    flat={true}
     key="rewind"
     onClick={[MockFunction]}
   >
@@ -60,28 +61,29 @@ exports[`CursorPaging should render cursor paging 1`] = `
   </Button>
   <Pager>
     <Pager.Previous
-      disabled={false}
+      disabled={true}
+      flat={true}
       onClick={[Function]}
     />
     <Pager.Next
-      disabled={false}
+      disabled={true}
+      flat={true}
       onClick={[Function]}
     />
   </Pager>
-  <span
-    className="PageDisplay"
+  <Text
+    as="span"
+    fontSize="200"
+    marginLeft="200"
   >
-    Page:
-     
+    Page: 
     <strong
-      className="Bold"
       data-id="pagination-current-page"
     >
-      2
+      1
     </strong>
-     
-    / 
-    4
-  </span>
-</div>
+     of 
+    1
+  </Text>
+</Box>
 `;

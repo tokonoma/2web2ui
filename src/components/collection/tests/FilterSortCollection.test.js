@@ -1,8 +1,9 @@
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import FilterSortCollection from '../FilterSortCollection';
 import { Table } from 'src/components/matchbox';
+import { render } from '@testing-library/react';
 import TestApp from 'src/__testHelpers__/TestApp';
 
 describe('FilterSortCollection Component', () => {
@@ -49,21 +50,18 @@ describe('FilterSortCollection Component', () => {
   };
 
   describe('renders', () => {
-    const subject = (props = {}) => shallow(<FilterSortCollection {...props} />);
-
-    it('renders without props', () => {
-      expect(subject()).toMatchSnapshot();
-    });
-
-    it('renders with props', () => {
-      expect(subject({ ...props })).toMatchSnapshot();
-    });
+    const subject = (props = {}) =>
+      render(
+        <TestApp>
+          <FilterSortCollection {...props} />
+        </TestApp>,
+      );
 
     it('renders with header', () => {
       const propsWithHeaderColumns = { ...props, columns: ['fruit', 'vegetables'] };
-      const headerWrapper = shallow(subject(propsWithHeaderColumns).prop('headerComponent')());
-      expect(headerWrapper).toHaveTextContent('fruit');
-      expect(headerWrapper).toHaveTextContent('vegetables');
+      const { queryByText } = subject(propsWithHeaderColumns);
+      expect(queryByText('fruit')).toBeInTheDocument();
+      expect(queryByText('vegetables')).toBeInTheDocument();
     });
   });
 

@@ -1,0 +1,21 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.SortLabel {
+  display: flex;
+  margin-left: -(spacing(400));
+}
+
+.Up:not(.selected),
+.Down:not(.selected) {
+  margin: -13px initial;
+  opacity: 0.4;
+}
+
+.SortLabel.selected .Up,
+.SortLabel.selected .Down {
+  padding: spacing(0);
+  margin-top: 0;
+  margin-bottom: 0;
+  opacity: 1;
+  color: color(blue, 700);
+}

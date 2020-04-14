@@ -3,18 +3,26 @@ import { Label, Panel, TextField, ScreenReaderOnly } from 'src/components/matchb
 import { Search } from '@sparkpost/matchbox-icons';
 import { getRandomExampleSearch } from './helpers/exampleSearch';
 import styles from './FilterBox.module.scss';
+import { useHibana } from 'src/context/HibanaContext';
 
-export default function CollectionFilterBox(props) {
+function CollectionFilterBox(props) {
+  const [state] = useHibana();
+  const { isHibanaEnabled } = state;
+
   const { initialValue, placeholder, wrapper, onChange, onBlur = () => {} } = props;
   const placeholderText = placeholder || `Filter results e.g. ${getRandomExampleSearch(props)}`;
 
   const text = (
     <>
-      <Label id="collection-filter-box" className={styles.FilterBoxLabel}>
-        <ScreenReaderOnly>Filter By</ScreenReaderOnly>
-      </Label>
+      {!isHibanaEnabled && (
+        <Label id="collection-filter-box" className={styles.FilterBoxLabel}>
+          <ScreenReaderOnly>Filter By</ScreenReaderOnly>
+        </Label>
+      )}
 
       <TextField
+        labelHidden
+        label={isHibanaEnabled ? 'Filter By' : undefined}
         id="collection-filter-box"
         name="collection-filter-box"
         suffix={<Search />}
@@ -28,3 +36,5 @@ export default function CollectionFilterBox(props) {
 
   return wrapper ? wrapper(text) : <Panel sectioned>{text}</Panel>;
 }
+
+export default CollectionFilterBox;
