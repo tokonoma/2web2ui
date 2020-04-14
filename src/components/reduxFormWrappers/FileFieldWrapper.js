@@ -174,11 +174,11 @@ export function HibanaFileFieldWrapper({
           </Box>
         </Dropzone>
       </Box>
-      {helpText ? (
+      {helpText && (
         <Text pt="200" lineHeight="100" fontSize="100" color="gray.700">
           {helpText}
         </Text>
-      ) : null}
+      )}
     </Box>
   );
 }
