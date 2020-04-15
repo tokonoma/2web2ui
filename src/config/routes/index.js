@@ -898,6 +898,20 @@ const routes = [
     category: 'Account',
   },
   {
+    path: '/error-boundary',
+    public: true,
+    component: () => {
+      throw new Error('Oops');
+    },
+  },
+  {
+    path: '/private-error-boundary',
+    layout: App,
+    component: () => {
+      throw new Error('Oops');
+    },
+  },
+  {
     path: '/logout',
     component: LogoutPage,
     title: 'Logging out...',
