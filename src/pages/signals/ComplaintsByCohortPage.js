@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { getComplaintsByCohort, getEngagementRecency } from 'src/actions/signals';
 import { selectComplaintsByCohortDetails } from 'src/selectors/signals';
 import { PageLink } from 'src/components/links';
-import { Grid, Panel } from 'src/components/matchbox';
+import { Grid, Panel, Stack } from 'src/components/matchbox';
 import LineChart from './components/charts/linechart/LineChart';
 import Legend from './components/charts/legend/Legend';
 import Callout from 'src/components/callout';
@@ -61,7 +61,7 @@ export class ComplaintsByCohortPage extends Component {
     );
 
     return (
-      <>
+      <Stack>
         {_.orderBy(metrics, 'value', 'desc').map(metric => (
           <TooltipMetric
             key={metric.key}
@@ -71,7 +71,7 @@ export class ComplaintsByCohortPage extends Component {
             value={`${roundToPlaces(metric.value * 100, 3)}%`}
           />
         ))}
-      </>
+      </Stack>
     );
   };
 

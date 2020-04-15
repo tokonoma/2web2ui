@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { getSpamHits } from 'src/actions/signals';
 import { selectSpamHitsDetails } from 'src/selectors/signals';
 import { PageLink } from 'src/components/links';
-import { Grid, Panel } from 'src/components/matchbox';
+import { Grid, Panel, Stack } from 'src/components/matchbox';
 import Page from './components/SignalsPage';
 import BarChart from './components/charts/barchart/BarChart';
 import SpamTrapActions from './components/actionContent/SpamTrapActions';
@@ -61,7 +61,7 @@ export class SpamTrapPage extends Component {
   };
 
   getTooltipContent = ({ payload = {} }) => (
-    <>
+    <Stack>
       {this.state.calculation === 'absolute' ? (
         <TooltipMetric label="Spam Trap Hits" value={formatFullNumber(payload.trap_hits)} />
       ) : (
@@ -70,20 +70,22 @@ export class SpamTrapPage extends Component {
           value={`${roundToPlaces(payload.relative_trap_hits * 100, 4)}%`}
         />
       )}
-      {spamTrapHitTypesCollection.map(({ fill, key, label }) => (
-        <TooltipMetric
-          color={fill}
-          key={key}
-          label={label}
-          value={
-            this.state.calculation === 'absolute'
-              ? `${formatFullNumber(payload[key])}`
-              : `${roundToPlaces(payload[`relative_${key}`] * 100, 4)}%`
-          }
-        />
-      ))}
+      <Stack>
+        {spamTrapHitTypesCollection.map(({ fill, key, label }) => (
+          <TooltipMetric
+            color={fill}
+            key={key}
+            label={label}
+            value={
+              this.state.calculation === 'absolute'
+                ? `${formatFullNumber(payload[key])}`
+                : `${roundToPlaces(payload[`relative_${key}`] * 100, 4)}%`
+            }
+          />
+        ))}
+      </Stack>
       <TooltipMetric label="Injections" value={formatFullNumber(payload.injections)} />
-    </>
+    </Stack>
   );
 
   renderContent = () => {

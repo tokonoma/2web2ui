@@ -13,6 +13,7 @@ import { selectTrends } from 'src/selectors/inboxPlacement';
 import Callout from 'src/components/callout';
 import { PanelLoading } from 'src/components';
 import { formatApiDate } from 'src/helpers/date';
+import { Stack } from 'src/components/matchbox';
 
 const yKeys = [
   {
@@ -46,19 +47,21 @@ const yAxisProps = {
 };
 
 const getTooltipContent = ({ payload = {} }) => (
-  <>
+  <Stack>
     <TooltipMetric label={'Total Messages'} value={payload.totalMessages} />
-    {yKeys
-      .map(({ fill, label, key }) => (
-        <TooltipMetric
-          key={key}
-          color={fill}
-          label={label}
-          value={`${(payload[key] * 100).toFixed(0)}%`}
-        />
-      ))
-      .reverse()}
-  </>
+    <Stack>
+      {yKeys
+        .map(({ fill, label, key }) => (
+          <TooltipMetric
+            key={key}
+            color={fill}
+            label={label}
+            value={`${(payload[key] * 100).toFixed(0)}%`}
+          />
+        ))
+        .reverse()}
+    </Stack>
+  </Stack>
 );
 
 export const TrendsChart = props => {
