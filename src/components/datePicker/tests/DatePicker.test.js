@@ -5,9 +5,11 @@ import * as dateHelpers from 'src/helpers/date';
 import * as metricsHelpers from 'src/helpers/metrics';
 import datefns from 'date-fns';
 import moment from 'moment';
-import DatePicker from '../DatePicker';
+import { DatePickerClassComponent as DatePicker } from '../DatePicker';
+import styles from '../DatePicker.module.scss';
 import utc from 'src/__testHelpers__/time';
 
+jest.mock('src/context/HibanaContext');
 jest.mock('src/helpers/date');
 jest.mock('react-dom');
 jest.mock('date-fns');
@@ -23,6 +25,7 @@ describe('Component: DatePicker', () => {
     mockNow = utc({ year: 2017, month: 1, day: 15, hour: 12 });
     mockFrom = utc({ year: 2017, month: 1, day: 15, hour: 11 });
     props = {
+      id: 'date-picker',
       from: mockFrom,
       to: mockNow,
       relativeRange: 'day',
@@ -31,7 +34,9 @@ describe('Component: DatePicker', () => {
       onBlur: jest.fn(),
       now: mockNow,
       disabled: false,
+      preventFuture: true,
       roundToPrecision: true,
+      styles,
     };
 
     dateHelpers.getStartOfDay = jest.fn(() => 'start-of-day');

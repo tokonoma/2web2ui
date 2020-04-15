@@ -1,5 +1,7 @@
 /* eslint-disable max-lines */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import moment from 'moment';
 import { subMonths, format } from 'date-fns';
 import {
   getStartOfDay,
@@ -10,14 +12,15 @@ import {
 } from 'src/helpers/date';
 import { roundBoundaries, getRollupPrecision, getPrecision } from 'src/helpers/metrics';
 import { Button, Error, Popover, Select, TextField, WindowEvent } from 'src/components/matchbox';
+import ButtonWrapper from 'src/components/buttonWrapper';
 import DateSelector from 'src/components/dateSelector/DateSelector';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import ManualEntryForm from './ManualEntryForm';
 import { FORMATS } from 'src/constants';
-import styles from './DatePicker.module.scss';
-import PropTypes from 'prop-types';
-import moment from 'moment';
+import OGStyles from './DatePicker.module.scss';
+import hibanaStyles from './DatePickerHibana.module.scss';
 
-export default class DatePicker extends Component {
+export class DatePickerClassComponent extends Component {
   DATE_FORMAT = FORMATS.LONG_DATETIME;
   state = {
     showDatePicker: false,
@@ -226,7 +229,8 @@ export default class DatePicker extends Component {
       hideManualEntry,
       precision,
       selectPrecision,
-      id = 'date-picker', // When multiple <DatePicker/> components are present, each one will need a unique `id`. This is a safe default.
+      id,
+      styles,
     } = this.props;
 
     const dateFormat = dateFieldFormat || this.DATE_FORMAT;
@@ -304,15 +308,22 @@ export default class DatePicker extends Component {
             defaultPrecision={selectPrecision && precision}
           />
         )}
-        <Button
-          primary
-          onClick={this.handleSubmit}
-          className={styles.Apply}
-          data-id="date-picker-custom-apply"
-        >
-          Apply
-        </Button>
-        <Button onClick={this.cancelDatePicker}>Cancel</Button>
+
+        <ButtonWrapper>
+          <Button
+            variant="primary"
+            onClick={this.handleSubmit}
+            className={styles.Apply}
+            data-id="date-picker-custom-apply"
+          >
+            Apply
+          </Button>
+
+          <Button variant="secondary" onClick={this.cancelDatePicker}>
+            Cancel
+          </Button>
+        </ButtonWrapper>
+
         {validationError && (
           <span className={styles.Error}>
             <Error wrapper="span" error={validationError}></Error>
@@ -323,6 +334,12 @@ export default class DatePicker extends Component {
       </Popover>
     );
   }
+}
+
+export default function DatePicker(props) {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+
+  return <DatePickerClassComponent styles={styles} {...props} />;
 }
 
 DatePicker.propTypes = {
@@ -339,9 +356,11 @@ DatePicker.propTypes = {
   showPresets: PropTypes.bool,
   hideManualEntry: PropTypes.bool,
   selectPrecision: PropTypes.bool,
+  id: PropTypes.string,
 };
 
 DatePicker.defaultProps = {
   preventFuture: true,
   roundToPrecision: false,
+  id: 'date-picker',
 };

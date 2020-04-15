@@ -12,6 +12,7 @@ exports[`Inbox Placement Trends Filters Matches snapshot test with default filte
       <DatePicker
         disabled={false}
         from={2019-07-11T16:30:00.000Z}
+        id="date-picker"
         onChange={[Function]}
         preventFuture={true}
         relativeDateOptions={

@@ -10,12 +10,14 @@ import {
   getRollupPrecision,
   getMomentPrecisionByDate,
 } from 'src/helpers/metrics';
-import styles from './ManualEntryForm.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
+import OGStyles from './ManualEntryForm.module.scss';
+import hibanaStyles from './ManualEntryFormHibana.module.scss';
 
 const DATE_PLACEHOLDER = '1970-01-20';
 const TIME_PLACEHOLDER = '12:00am';
 
-export default class ManualEntryForm extends Component {
+export class ManualEntryFormClassComponent extends Component {
   DEBOUNCE = 500;
 
   state = {
@@ -94,7 +96,7 @@ export default class ManualEntryForm extends Component {
 
   render() {
     const { toDate, toTime, fromDate, fromTime } = this.state;
-    const { roundToPrecision, selectedPrecision } = this.props;
+    const { roundToPrecision, selectedPrecision, styles } = this.props;
 
     let precisionLabel = null;
     let precisionLabelValue;
@@ -188,4 +190,10 @@ export default class ManualEntryForm extends Component {
       </form>
     );
   }
+}
+
+export default function ManualEntryForm(props) {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+
+  return <ManualEntryFormClassComponent styles={styles} {...props} />;
 }

@@ -1,0 +1,122 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.container {
+  margin-bottom: spacing(200);
+}
+
+.month {
+  padding: spacing(300);
+  padding-top: 0;
+
+  & + .month {
+    border-left: 1px solid color(gray, 300);
+    margin-left: spacing(400);
+  }
+}
+
+.caption {
+  height: spacing(600);
+  font-weight: font-weight(medium);
+  font-size: font-size(400);
+}
+
+.weekday {
+  padding: spacing(100) spacing(200);
+  font-size: font-size(200);
+  font-weight: font-weight(medium);
+  color: color(gray, 600);
+}
+
+.day {
+  min-width: spacing(500);
+  padding: spacing(100) spacing(200);
+  font-size: font-size(200);
+  font-weight: font-weight(normal);
+
+  &:hover:not(.disabled):not(.inBetween):not(.firstSelected):not(.lastSelected) {
+    background: color(gray, 300);
+  }
+
+  &:active:not(.disabled) {
+    box-shadow: 0 0 0 1px color(gray, 300);
+  }
+}
+
+.selected {
+  color: color(gray, 700);
+}
+
+.today {
+  color: color(gray, 800);
+  font-weight: font-weight(semibold);
+}
+
+.inBetween {
+  background: rgba(color(blue, 400), 0.3);
+  color: color(blue, 800);
+  font-weight: font-weight(medium);
+}
+
+.outside {
+  opacity: 0.5;
+  color: color(gray, 800);
+
+  &.inBetween {
+    background: rgba(color(blue, 200), 0.12) !important;
+    color: color(gray, 700) !important;
+    font-weight: font-weight(normal);
+  }
+
+  &.lastSelected,
+  &.firstSelected {
+    background: rgba(color(blue, 700), 0.4);
+    color: color(gray, 800) !important;
+  }
+}
+
+.disabled {
+  cursor: not-allowed;
+  opacity: 0.33;
+  color: color(gray, 800);
+}
+
+.firstSelected {
+  color: color(white);
+  background: color(blue, 700);
+  border-top-left-radius: border-radius(200);
+  border-bottom-left-radius: border-radius(200);
+}
+
+.lastSelected {
+  color: color(white);
+  background-color: color(blue, 700);
+  border-top-right-radius: border-radius(200);
+  border-bottom-right-radius: border-radius(200);
+}
+
+.NavbarButton {
+  position: absolute;
+  top: -#{spacing(200)};
+  padding: spacing(200);
+
+  &:hover {
+    .Prev,
+    .Next {
+      fill: color(blue, 700);
+    }
+  }
+}
+
+.NavbarButtonPrev {
+  left: spacing(400);
+}
+
+.NavbarButtonNext {
+  right: spacing(400);
+}
+
+.Prev,
+.Next {
+  position: static; // Removes position `absolute`. Applying this to a new class above.
+  fill: color(blue, 700);
+}

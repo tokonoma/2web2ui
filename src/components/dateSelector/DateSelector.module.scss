@@ -1,4 +1,5 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
+@import 'src/styles/resets';
 
 /* DayPicker styles */
 .container {
@@ -11,8 +12,6 @@
   outline: none;
   padding: 0;
 }
-
-.interactionDisabled {}
 
 .months {
   display: flex;
@@ -28,7 +27,7 @@
   flex-basis: 0;
 
   & + .month {
-    margin-left: rem(18)
+    margin-left: rem(18);
   }
 }
 
@@ -52,7 +51,6 @@
   flex: 0 0 auto;
   flex-grow: 1;
   flex-basis: 0;
-
   padding: rem(4) rem(11);
   font-size: font-size(300);
   text-align: center;
@@ -77,10 +75,8 @@
   flex-grow: 1;
   flex-basis: 0;
   min-width: rem(24);
-
   padding: 2px rem(6);
   margin: 1px 0;
-
   font-size: font-size(300);
   font-weight: 400;
   text-align: center;
@@ -101,7 +97,6 @@
   }
 }
 
-.footer {}
 .selected {
   color: color(gray, 1);
 }
@@ -128,7 +123,8 @@
     font-weight: 400;
   }
 
-  &.lastSelected, &.firstSelected {
+  &.lastSelected,
+  &.firstSelected {
     background: rgba(color(blue, dark), 0.4);
     color: color(gray, 9) !important;
   }
@@ -160,24 +156,31 @@
   right: 0;
 }
 
-.Prev, .Next {
+.NavbarButton {
+  @include button-reset();
+
+  &:hover {
+    .Prev,
+    .Next {
+      fill: color(blue, dark);
+    }
+  }
+}
+
+.Prev,
+.Next {
   position: absolute;
   top: 0;
   display: inline-block;
   cursor: pointer;
-
-  transition: 0.15s;
-  fill: rgba(color(gray, 5), 0);
-  pointer-events: none;
-
-  &:hover {
-    fill: color(blue, dark);
-  }
+  transition: 0.15s color;
+  fill: color(gray, 5);
 }
 
-.Prev { left: rem(24); }
-.Next { right: rem(24); }
-.show {
-  fill: rgba(color(gray, 5), 1);
-  pointer-events: auto;
+.Prev {
+  left: rem(24);
+}
+
+.Next {
+  right: rem(24);
 }

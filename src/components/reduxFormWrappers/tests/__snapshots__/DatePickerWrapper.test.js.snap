@@ -3,6 +3,7 @@
 exports[`DatePickerWrapper renders correctly 1`] = `
 <DatePicker
   from={2018-01-01T12:00:00.000Z}
+  id="date-picker"
   meta={Object {}}
   name="example"
   onChange={[MockFunction]}

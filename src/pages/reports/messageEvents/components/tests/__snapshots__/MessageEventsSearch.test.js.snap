@@ -22,6 +22,7 @@ exports[`Component: MessageEventsSearch renders correctly 1`] = `
           }
           disabled={false}
           from={2018-02-15T12:00:00.000Z}
+          id="date-picker"
           onChange={
             [MockFunction] {
               "calls": Array [

@@ -1,20 +1,25 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import DateSelector, { Navbar } from '../DateSelector';
+import styles from '../DateSelector.module.scss';
 import * as DayPicker from 'react-day-picker';
 import moment from 'moment';
-import { ArrowForward, ArrowBack } from '@sparkpost/matchbox-icons';
 
+jest.mock('src/hooks/useHibanaOverride');
 jest.mock('react-day-picker');
 
-describe('dateselector', () => {
+describe('DateSelector', () => {
   let wrapper;
 
   beforeEach(() => {
+    useHibanaOverride.mockImplementationOnce(() => styles);
     const testDate = moment('2018-05-20').toDate();
     DayPicker.DateUtils.isSameDay = jest.fn();
     DayPicker.DateUtils.isDayBetween = jest.fn();
-    wrapper = shallow(<DateSelector initialMonth={testDate} selectedDays={{ from: 1, to: 1000 }} />);
+    wrapper = shallow(
+      <DateSelector initialMonth={testDate} selectedDays={{ from: 1, to: 1000 }} />,
+    );
   });
 
   it('should render correctly', () => {
@@ -38,28 +43,34 @@ describe('dateselector', () => {
 });
 
 describe('Navbar', () => {
+  beforeEach(() => {
+    useHibanaOverride.mockImplementationOnce(() => styles);
+  });
 
   it('should render correctly', () => {
-    expect(shallow(<Navbar/>)).toMatchSnapshot();
+    expect(shallow(<Navbar showNextButton showPreviousButton />)).toMatchSnapshot();
   });
 
   it('should be able to show prev and next buttons', () => {
     const wrapper = shallow(<Navbar showNextButton showPreviousButton />);
-    expect(wrapper.find('ArrowForward').prop('className')).toContain('show');
-    expect(wrapper.find('ArrowBack').prop('className')).toContain('show');
+
+    expect(wrapper).toHaveTextContent('Previous Month');
+    expect(wrapper).toHaveTextContent('Next Month');
   });
 
   it('should call previous button handler', () => {
     const handlePreviousClick = jest.fn();
-    const wrapper = shallow(<Navbar onPreviousClick={handlePreviousClick} />);
-    wrapper.find(ArrowBack).simulate('click');
+    const wrapper = shallow(<Navbar showPreviousButton onPreviousClick={handlePreviousClick} />);
+
+    wrapper.find('[data-id="date-selector-previous-month"]').simulate('click');
     expect(handlePreviousClick).toHaveBeenCalled();
   });
 
   it('should call next button handler', () => {
     const handleNextClick = jest.fn();
-    const wrapper = shallow(<Navbar onNextClick={handleNextClick} />);
-    wrapper.find(ArrowForward).simulate('click');
+    const wrapper = shallow(<Navbar showNextButton onNextClick={handleNextClick} />);
+
+    wrapper.find('[data-id="date-selector-next-month"]').simulate('click');
     expect(handleNextClick).toHaveBeenCalled();
   });
 });
