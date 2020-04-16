@@ -8,34 +8,36 @@ Object {
 `;
 
 exports[`Signals Spam Trap Page bar chart props renders tooltip content 1`] = `
-<Fragment>
+<Stack>
   <TooltipMetric
     label="Spam Trap Rate"
     value="10%"
   />
-  <TooltipMetric
-    color="#50CFDA"
-    key="trap_hits_parked"
-    label="Parked"
-    value="2.5%"
-  />
-  <TooltipMetric
-    color="#29B9C7"
-    key="trap_hits_recycled"
-    label="Recycled"
-    value="2.5%"
-  />
-  <TooltipMetric
-    color="#1A838B"
-    key="trap_hits_typo"
-    label="Typo"
-    value="5%"
-  />
+  <Stack>
+    <TooltipMetric
+      color="#50CFDA"
+      key="trap_hits_parked"
+      label="Parked"
+      value="2.5%"
+    />
+    <TooltipMetric
+      color="#29B9C7"
+      key="trap_hits_recycled"
+      label="Recycled"
+      value="2.5%"
+    />
+    <TooltipMetric
+      color="#1A838B"
+      key="trap_hits_typo"
+      label="Typo"
+      value="5%"
+    />
+  </Stack>
   <TooltipMetric
     label="Injections"
     value="1,240"
   />
-</Fragment>
+</Stack>
 `;
 
 exports[`Signals Spam Trap Page renders correctly 1`] = `

@@ -11,7 +11,7 @@ Object {
 `;
 
 exports[`Signals Engagement Rate By Cohort Page bar chart props renders tooltip content 1`] = `
-<Fragment>
+<Stack>
   <TooltipMetric
     color="#88E2E7"
     description="Never engaged, first email in last 7 days"
@@ -47,7 +47,7 @@ exports[`Signals Engagement Rate By Cohort Page bar chart props renders tooltip 
     label="Never Engaged"
     value="11.1%"
   />
-</Fragment>
+</Stack>
 `;
 
 exports[`Signals Engagement Rate By Cohort Page renders correctly 1`] = `

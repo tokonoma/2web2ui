@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Signals Complaints Page bar chart props renders tooltip content 1`] = `
-<Fragment>
+<Stack>
   <TooltipMetric
     color="#88E2E7"
     description="Never engaged, first email in last 7 days"
@@ -37,7 +37,7 @@ exports[`Signals Complaints Page bar chart props renders tooltip content 1`] = `
     label="Never Engaged"
     value="11.111%"
   />
-</Fragment>
+</Stack>
 `;
 
 exports[`Signals Complaints Page renders correctly 1`] = `

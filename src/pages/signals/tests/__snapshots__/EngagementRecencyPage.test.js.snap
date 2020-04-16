@@ -11,7 +11,7 @@ Object {
 `;
 
 exports[`Signals Engagement Recency Page bar chart props renders tooltip content 1`] = `
-<Fragment>
+<Stack>
   <TooltipMetric
     color="#88E2E7"
     description="Never engaged, first email in last 7 days"
@@ -47,7 +47,7 @@ exports[`Signals Engagement Recency Page bar chart props renders tooltip content
     label="Recently Engaged"
     value="40%"
   />
-</Fragment>
+</Stack>
 `;
 
 exports[`Signals Engagement Recency Page renders correctly 1`] = `
