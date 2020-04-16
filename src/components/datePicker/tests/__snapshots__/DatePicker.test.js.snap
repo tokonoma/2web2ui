@@ -142,19 +142,22 @@ exports[`Component: DatePicker should render ok by default 1`] = `
     selectDates={[Function]}
     to={2017-01-15T12:00:00.000Z}
   />
-  <Button
-    className="Apply"
-    data-id="date-picker-custom-apply"
-    onClick={[Function]}
-    primary={true}
-  >
-    Apply
-  </Button>
-  <Button
-    onClick={[Function]}
-  >
-    Cancel
-  </Button>
+  <ButtonWrapper>
+    <Button
+      className="Apply"
+      data-id="date-picker-custom-apply"
+      onClick={[Function]}
+      variant="primary"
+    >
+      Apply
+    </Button>
+    <Button
+      onClick={[Function]}
+      variant="secondary"
+    >
+      Cancel
+    </Button>
+  </ButtonWrapper>
   <WindowEvent
     event="keydown"
     handler={[Function]}

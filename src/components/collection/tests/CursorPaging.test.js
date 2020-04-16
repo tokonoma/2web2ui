@@ -1,27 +1,27 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import CursorPaging from '../CursorPaging';
+import CursorPaging, { OGCursorPaging, HibanaCursorPaging } from '../CursorPaging';
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import TestApp from 'src/__testHelpers__/TestApp';
 
 describe('CursorPaging', () => {
-  let props;
-  let wrapper;
+  const defaultProps = {
+    currentPage: 2,
+    handlePageChange: jest.fn(),
+    previousDisabled: false,
+    nextDisabled: false,
+    handleFirstPage: jest.fn(),
+    perPage: 25,
+    totalCount: 100,
+  };
 
-  beforeEach(() => {
-    props = {
-      currentPage: 2,
-      handlePageChange: jest.fn(),
-      previousDisabled: false,
-      nextDisabled: false,
-      handleFirstPage: jest.fn(),
-      perPage: 25,
-      totalCount: 100
-    };
-    wrapper = shallow(<CursorPaging {...props} />);
-  });
-
-  it('should render cursor paging', () => {
-    expect(wrapper).toMatchSnapshot();
-  });
+  const subject = (props = {}) =>
+    render(
+      <TestApp>
+        <CursorPaging {...defaultProps} {...props} />
+      </TestApp>,
+    );
 
   it('should correctly render cursor paging when there is only one page', () => {
     const newProps = {
@@ -31,24 +31,29 @@ describe('CursorPaging', () => {
       nextDisabled: true,
       handleFirstPage: jest.fn(),
       perPage: 25,
-      totalCount: 20
+      totalCount: 20,
     };
-    wrapper = shallow(<CursorPaging {...newProps} />);
+    const wrapper = shallow(<OGCursorPaging {...newProps} />);
     expect(wrapper).toMatchSnapshot();
+    const HibanaWrapper = shallow(<HibanaCursorPaging {...newProps} />);
+    expect(HibanaWrapper).toMatchSnapshot();
   });
 
   it('should handle clicking rewind to first page', () => {
-    wrapper.find('Button').first().simulate('click');
-    expect(props.handleFirstPage).toHaveBeenCalled();
+    const { queryAllByRole } = subject();
+    userEvent.click(queryAllByRole('button')[0]);
+    expect(defaultProps.handleFirstPage).toHaveBeenCalled();
   });
 
   it('should handle clicking previous button', () => {
-    wrapper.find('Pager').children().first().simulate('click');
-    expect(props.handlePageChange).toHaveBeenCalledWith(props.currentPage - 1);
+    const { queryAllByRole } = subject();
+    userEvent.click(queryAllByRole('button')[1]);
+    expect(defaultProps.handlePageChange).toHaveBeenCalledWith(defaultProps.currentPage - 1);
   });
 
   it('should handle clicking next button', () => {
-    wrapper.find('Pager').children().last().simulate('click');
-    expect(props.handlePageChange).toHaveBeenCalledWith(props.currentPage + 1);
+    const { queryAllByRole } = subject();
+    userEvent.click(queryAllByRole('button')[2]);
+    expect(defaultProps.handlePageChange).toHaveBeenCalledWith(defaultProps.currentPage + 1);
   });
 });

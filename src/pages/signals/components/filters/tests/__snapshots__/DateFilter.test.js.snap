@@ -12,6 +12,7 @@ Object {
   },
   "from": undefined,
   "hideManualEntry": true,
+  "id": "date-picker",
   "left": true,
   "now": 2017-12-31T05:00:00.000Z,
   "onChange": [Function],

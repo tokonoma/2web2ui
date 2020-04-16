@@ -14,13 +14,13 @@ const reloadApp = () => {
 
 const Providers = ({ store = {}, children }) => (
   <Provider store={store}>
-    <ErrorBoundary onCtaClick={reloadApp} ctaLabel="Reload Page">
-      <HibanaProvider>
-        <HibanaTheme>
+    <HibanaProvider>
+      <HibanaTheme>
+        <ErrorBoundary onCtaClick={reloadApp} ctaLabel="Reload Page">
           <Poll>{children}</Poll>
-        </HibanaTheme>
-      </HibanaProvider>
-    </ErrorBoundary>
+        </ErrorBoundary>
+      </HibanaTheme>
+    </HibanaProvider>
   </Provider>
 );
 

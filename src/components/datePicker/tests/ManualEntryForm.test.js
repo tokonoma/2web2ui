@@ -2,7 +2,8 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import _ from 'lodash';
 import * as metricsHelpers from 'src/helpers/metrics';
-import ManualEntryForm from '../ManualEntryForm';
+import { ManualEntryFormClassComponent as ManualEntryForm } from '../ManualEntryForm';
+import styles from '../ManualEntryForm.module.scss';
 import { delay } from 'src/__testHelpers__';
 import moment from 'moment';
 
@@ -30,6 +31,7 @@ describe('Component: DatePicker ManualEntryForm', () => {
       to: mockTo,
       from: mockFrom,
       roundToPrecision: true,
+      styles,
     };
 
     metricsHelpers.getValidDateRange = jest.fn(() => ({ from: mockFrom, to: mockTo }));

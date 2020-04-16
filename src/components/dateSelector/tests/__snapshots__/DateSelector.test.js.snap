@@ -1,23 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Navbar should render correctly 1`] = `
-<div
-  className="Navbar"
->
-  <ArrowBack
-    className="Prev"
-    onClick={[Function]}
-    size={21}
-  />
-  <ArrowForward
-    className="Next"
-    onClick={[Function]}
-    size={21}
-  />
-</div>
-`;
-
-exports[`dateselector should render correctly 1`] = `
+exports[`DateSelector should render correctly 1`] = `
 <DayPicker
   canChangeMonth={true}
   captionElement={
@@ -110,4 +93,37 @@ exports[`dateselector should render correctly 1`] = `
   tabIndex={0}
   weekdayElement={<Weekday />}
 />
+`;
+
+exports[`Navbar should render correctly 1`] = `
+<div
+  className="Navbar"
+>
+  <button
+    className="NavbarButton NavbarButtonPrev"
+    data-id="date-selector-previous-month"
+    onClick={[Function]}
+  >
+    <ArrowBack
+      className="Prev"
+      size={21}
+    />
+    <ScreenReaderOnly>
+      Previous Month
+    </ScreenReaderOnly>
+  </button>
+  <button
+    className="NavbarButton NavbarButtonNext"
+    data-id="date-selector-next-month"
+    onClick={[Function]}
+  >
+    <ArrowForward
+      className="Next"
+      size={21}
+    />
+    <ScreenReaderOnly>
+      Next Month
+    </ScreenReaderOnly>
+  </button>
+</div>
 `;

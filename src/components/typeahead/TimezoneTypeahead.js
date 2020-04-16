@@ -33,7 +33,13 @@ const options = moment.tz
 options.unshift(UTC_OPTION);
 
 export const TimezoneTypeahead = props => {
-  const { initialValue, onChange: parentOnChange, isForcedUTC, ...rest } = props;
+  const {
+    initialValue,
+    onChange: parentOnChange,
+    isForcedUTC,
+    disabledAndUTCOnly,
+    ...rest
+  } = props;
   const [selected, setSelected] = useState(options[0]);
 
   const findOptionInList = useCallback(value => options.find(option => option.value === value), []);
@@ -59,20 +65,24 @@ export const TimezoneTypeahead = props => {
     }
   };
 
-  return (
-    <Typeahead
-      renderItem={item => <Item label={item.label} />}
-      itemToString={item => (item ? item.label : '')}
-      placeholder="Select a Timezone"
-      label="Time Zone"
-      errorInLabel={false}
-      error={false}
-      name="timezone-typeahead"
-      results={options}
-      selectedItem={selected}
-      onChange={onChange}
-      maxNumberOfResults={options.length}
-      {...rest}
-    />
-  );
+  const typeaheadProps = {
+    renderItem: item => <Item label={item.label} />,
+    itemToString: item => (item ? item.label : ''),
+    placeholder: 'Select a Timezone',
+    label: 'Time Zone',
+    errorInLabel: false,
+    error: false,
+    name: 'timezone-typeahead',
+    results: options,
+    selectedItem: selected,
+    onChange: onChange,
+    maxNumberOfResults: options.length,
+    ...rest,
+  };
+
+  if (disabledAndUTCOnly) {
+    return <Typeahead {...typeaheadProps} selectedItem={UTC_OPTION} disabled />;
+  }
+
+  return <Typeahead {...typeaheadProps} />;
 };

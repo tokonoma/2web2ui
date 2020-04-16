@@ -17,6 +17,7 @@ exports[`Component: Report Options should mount and render correctly 1`] = `
             <DatePicker
               filters={Array []}
               from={2018-02-15T12:00:00.000Z}
+              id="date-picker"
               onChange={
                 [MockFunction] {
                   "calls": Array [
@@ -109,6 +110,7 @@ exports[`Component: Report Options with active filters should render 1`] = `
                 ]
               }
               from={2018-02-15T12:00:00.000Z}
+              id="date-picker"
               onChange={
                 [MockFunction] {
                   "calls": Array [

@@ -8,15 +8,40 @@ exports[`Collection SortLabel Component should render correctly 1`] = `
   <span>
     Table Header Label
   </span>
-  <span
-    className="Up"
-  >
-    <ArrowDropUp />
-  </span>
-  <span
-    className="Down"
-  >
-    <ArrowDropDown />
+  <span>
+    <div
+      className="Up"
+    >
+      <ArrowDropUp />
+    </div>
+    <div
+      className="Down"
+    >
+      <ArrowDropDown />
+    </div>
   </span>
 </UnstyledLink>
+`;
+
+exports[`Collection SortLabel Component should render correctly 2`] = `
+<Button
+  anotherprop="anotherProp"
+  className="SortLabel selected"
+  flat={true}
+>
+  <Text
+    as="span"
+    color="gray.800"
+    fontWeight="500"
+  >
+    Table Header Label
+  </Text>
+  <Box>
+    <div
+      className="Up"
+    >
+      <ArrowDropUp />
+    </div>
+  </Box>
+</Button>
 `;

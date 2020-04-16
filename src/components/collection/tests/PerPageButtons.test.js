@@ -1,34 +1,33 @@
 import React from 'react';
 import PerPageButtons from '../PerPageButtons';
-import { shallow } from 'enzyme';
-
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import TestApp from 'src/__testHelpers__/TestApp';
 
 describe('Per Page Buttons', () => {
-  let wrapper;
-  const props = {
+  const defaultProps = {
     currentPage: 1,
     onPerPageChange: jest.fn(),
     perPage: 25,
-    totalCount: 200
+    totalCount: 200,
   };
 
-  beforeEach(() => {
-    wrapper = shallow(<PerPageButtons {...props} />);
-  });
-
-  it('should correctly render perPageButtons', () => {
-    expect(wrapper).toMatchSnapshot();
-  });
+  const subject = (props = {}) =>
+    render(
+      <TestApp>
+        <PerPageButtons {...defaultProps} {...props} />
+      </TestApp>,
+    );
 
   it('should hide PerPageButtons if data is less than minimum per page', () => {
-    wrapper.setProps({ totalCount: 10 });
-    expect(wrapper).toMatchSnapshot();
+    const { queryAllByRole } = subject({ totalCount: 10 });
+    expect(queryAllByRole('button')).toHaveLength(0);
   });
 
   it('should handle clicking per page buttons', () => {
-    wrapper.setProps({ perPageButtons: [10,25]});
-    wrapper.find('Button').first().simulate('click');
-    expect(props.onPerPageChange).toHaveBeenCalledWith(10);
-  });
+    const { queryByText } = subject({ perPageButtons: [10, 25] });
 
+    userEvent.click(queryByText('10'));
+    expect(defaultProps.onPerPageChange).toHaveBeenCalledWith(10);
+  });
 });
