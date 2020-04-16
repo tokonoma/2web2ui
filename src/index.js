@@ -1,17 +1,12 @@
 import React from 'react';
 import { render } from 'react-dom';
-
 import { unregister } from './helpers/registerServiceWorker';
-
 import configureStore from './store';
-
 import config from './config';
 import ErrorTracker from './helpers/errorTracker';
-
-// note, these must be imported before App and Providers
-import './critical.scss';
-import './index.scss';
-
+// Note: styles must be imported before the App and Providers
+import 'src/index.scss';
+import { HibanaStyleHandler } from 'src/components/hibana'; // TODO: Remove and delete component once OG theme is no longer in the app
 import App from './App';
 import Providers from './Providers';
 
@@ -20,6 +15,9 @@ const defaultStore = configureStore();
 const renderApp = () => {
   render(
     <Providers store={defaultStore}>
+      {/* TODO: Remove and delete component once OG theme is no longer in the app */}
+      <HibanaStyleHandler />
+
       <App />
     </Providers>,
     document.getElementById('root'),

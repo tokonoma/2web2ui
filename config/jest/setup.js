@@ -59,6 +59,8 @@ jest.mock('moment', () => {
   return momentTimezone;
 });
 
+jest.mock('src/components/hibana/HibanaStyleHandler', () => undefined); // TODO: Remove when OG theme is removed
+
 Object.defineProperty(global.navigator, 'userAgent', { value: 'node.js', configurable: true });
 Object.defineProperty(global.navigator, 'language', { value: 'en-US', configurable: true });
 Object.defineProperty(global.window, 'scrollTo', { value: jest.fn(), configurable: true });

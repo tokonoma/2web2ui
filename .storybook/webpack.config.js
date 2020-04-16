@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const paths = require('../config/paths');
 
-const sassRegex = /\.(scss|sass)$/;
+const sassRegex = /\.(scss|sass|css)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
 const mdxRegex = /\.(.mdx)$/;
 
