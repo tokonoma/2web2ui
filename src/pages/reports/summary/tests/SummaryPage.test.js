@@ -7,43 +7,27 @@ import { MetricsModal, ChartHeader } from '../components';
 jest.mock('src/helpers/reports');
 
 describe('Page: SummaryPage', () => {
+
   let wrapper;
   let testProps;
 
   beforeEach(() => {
     reportHelpers.getFilterSearchOptions = jest.fn(() => ({}));
-    reportHelpers.parseSearch = jest.fn(() => ({ options: {} }));
+    reportHelpers.parseSearch = jest.fn(() => ({ options: {}}));
     testProps = {
       reportOptions: [],
       chart: {
-        metrics: [1, 2, 3],
+        metrics: [1, 2, 3]
       },
       refreshSummaryReport: jest.fn(),
       refreshReportOptions: jest.fn(),
-      addFilters: jest.fn(),
-      featureFlaggedMetrics: {},
+      addFilters: jest.fn()
     };
     wrapper = shallow(<SummaryReportPage {...testProps} />);
   });
 
   it('should render correctly', () => {
     expect(wrapper).toMatchSnapshot();
-    expect(wrapper).not.toHaveTextContent('Precision - ');
-    expect(wrapper).not.toHaveTextContent('Timezone - ');
-  });
-
-  it('should render correctly with precision and timezone label', () => {
-    wrapper.setProps({
-      featureFlaggedMetrics: { useMetricsRollup: true },
-      summarySearchOptions: {
-        timezone: 'America/New_York',
-        precision: '15min',
-      },
-    });
-    expect(wrapper).toHaveTextContent('Precision - ');
-    expect(wrapper).toHaveTextContent('15 Min');
-    expect(wrapper).toHaveTextContent('Timezone - ');
-    expect(wrapper).toHaveTextContent('America/New York');
   });
 
   it('should refresh when report options reference changes', () => {
@@ -97,4 +81,5 @@ describe('Page: SummaryPage', () => {
     header.simulate('timeClick', 'test-time');
     expect(wrapper.state('eventTime')).toEqual('test-time');
   });
+
 });
