@@ -21,7 +21,7 @@ export const HibanaTooltipMetric = ({ color = '#6e6e73', description, label, val
     <Box display="flex" justifyContent="space-between">
       <Box bg={color} marginRight="100" borderRadius={8} size={16} marginTop="100" />
       <Box display="flex" height="100" flexDirection="column" flex="1 0 0">
-        <Text as="span" fontSize="100" fontWeight="300">
+        <Text as="span" fontSize="200" fontWeight="300">
           {label}
         </Text>
         {description && (
@@ -30,7 +30,7 @@ export const HibanaTooltipMetric = ({ color = '#6e6e73', description, label, val
           </Text>
         )}
       </Box>
-      <Text as="span" fontSize="100" fontWeight="600">
+      <Text as="span" fontSize="200" fontWeight="600">
         {value}
       </Text>
     </Box>
