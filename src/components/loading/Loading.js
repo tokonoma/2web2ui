@@ -1,16 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import styles from './Loading.module.scss';
+import { Box } from 'src/components/matchbox';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
+
+import OGStyles from './Loading.module.scss';
+import hibanaStyles from './LoadingHibana.module.scss';
+
 /**
  * A centered loading animation
  */
 export const Loading = function Loading(props) {
-  const { className } = props;
-
+  const { className, minHeight = '70vh' } = props;
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
   return (
     <div data-id="loading">
-      <LoadingSVG className={classnames(styles.Center, className)} />
+      <Box paddingTop={minHeight}>
+        <LoadingSVG className={classnames(styles.Center, className)} />
+      </Box>
     </div>
   );
 };
@@ -25,6 +32,8 @@ Loading.displayName = 'Loading';
  * Circle Animation
  */
 export const LoadingSVG = ({ className = '', size = '' }) => {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -42,6 +51,8 @@ LoadingSVG.displayName = 'LoadingSVG';
  * SP Logo Animation
  */
 export const LoadingLogoSVG = ({ className = '' }) => {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

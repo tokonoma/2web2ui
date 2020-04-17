@@ -1,0 +1,15 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+%LineBreakDefaults {
+  div {
+    padding: spacing(400) 0;
+  }
+
+  span {
+    padding: spacing(400);
+  }
+}
+
+hr.textless {
+  margin: spacing(400) 0;
+}

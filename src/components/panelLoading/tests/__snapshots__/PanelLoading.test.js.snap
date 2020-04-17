@@ -11,10 +11,8 @@ exports[`Panel Loading render 1`] = `
     }
   }
 >
-  <Box
+  <Loading
     minHeight="400px"
-  >
-    <Loading />
-  </Box>
+  />
 </Panel>
 `;

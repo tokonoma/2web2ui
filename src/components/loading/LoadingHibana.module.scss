@@ -1,0 +1,63 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+// Logo styles
+.Logo {
+  fill: color(blue, 700);
+}
+
+// Circle styles
+.CircleWrapper {
+  &.XSmall {
+    margin-top: 8px;
+    margin-bottom: 7px;
+  }
+}
+
+.Circle {
+  stroke: color(blue, 700);
+  animation: dash 1.5s ease-in-out infinite;
+
+  .Small & {
+    animation: dash-small 1.5s ease-in-out infinite;
+  }
+
+  .XSmall & {
+    animation: dash-small 1.5s ease-in-out infinite;
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke: adjust-hue(color(blue, 700), 15);
+    stroke-dasharray: 1 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke: color(blue, 700);
+    stroke-dasharray: 120 200;
+    stroke-dashoffset: -25;
+  }
+  100% {
+    stroke: adjust-hue(color(blue, 700), 15);
+    stroke-dasharray: 120 200;
+    stroke-dashoffset: -145;
+  }
+}
+
+@keyframes dash-small {
+  0% {
+    stroke: adjust-hue(color(blue, 700), 15);
+    stroke-dasharray: 1 100;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke: color(blue, 700);
+    stroke-dasharray: 60 100;
+    stroke-dashoffset: -15;
+  }
+  100% {
+    stroke: adjust-hue(color(blue, 700), 15);
+    stroke-dasharray: 80 100;
+    stroke-dashoffset: -70;
+  }
+}

@@ -1,11 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import LineBreak from './LineBreak';
+jest.mock('src/hooks/useHibanaOverride', () => jest.fn(a => a));
 
 describe('LineBreak', () => {
-  const subject = (props = {}) => shallow(
-    <LineBreak text='Testing' {...props} />
-  );
+  const subject = (props = {}) => shallow(<LineBreak text="Testing" {...props} />);
 
   it('renders line break with centered text', () => {
     expect(subject()).toMatchSnapshot();

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Panel } from 'src/components/matchbox';
+import { Panel } from 'src/components/matchbox';
 import { Loading } from 'src/components/loading/Loading';
 import styles from './PanelLoading.module.scss';
 
@@ -9,9 +9,7 @@ const PanelLoading = props => {
 
   return (
     <Panel className={styles.Loading} style={{ minHeight }} accent={accent} data-id="panel-loading">
-      <Box minHeight={minHeight}>
-        <Loading />
-      </Box>
+      <Loading minHeight={minHeight} />
     </Panel>
   );
 };

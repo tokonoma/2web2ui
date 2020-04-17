@@ -1,6 +1,10 @@
 import React from 'react';
 import { LoadingSVG, LoadingLogoSVG, Loading } from '../Loading';
 import { render, shallow } from 'enzyme';
+jest.mock('src/context/HibanaContext', () => ({
+  useHibana: jest.fn().mockReturnValue([{ isHibanaEnabled: false }]),
+}));
+jest.mock('src/hooks/useHibanaOverride', () => jest.fn(a => a));
 
 describe('Loading Component', () => {
   it('should have data-id tag', () => {

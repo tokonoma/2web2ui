@@ -1,0 +1,23 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.LabelledValue {
+  margin-bottom: spacing(200);
+}
+.LabelContainer {
+  min-width: 11 * spacing(400);
+}
+
+.Label {
+  line-height: line-height(300);
+  font-weight: font-weight(semibold);
+  color: color(gray, 900);
+}
+
+.Content {
+  margin-left: spacing(400);
+
+  h6 {
+    font-size: font-size(200);
+    line-height: line-height(300);
+  }
+}

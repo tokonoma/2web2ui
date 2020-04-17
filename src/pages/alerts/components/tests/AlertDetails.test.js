@@ -1,6 +1,9 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import { AlertDetails } from '../AlertDetails';
+jest.mock('src/context/HibanaContext', () => ({
+  useHibana: jest.fn().mockReturnValue([{ isHibanaEnabled: false }]),
+}));
 
 describe('Alert Details Component', () => {
   const alert = {

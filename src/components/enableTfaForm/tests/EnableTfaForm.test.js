@@ -1,6 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { EnableTfaForm } from '../EnableTfaForm';
+import { EnableTfaForm, RenderedForm } from '../EnableTfaForm';
+jest.mock('src/context/HibanaContext', () => ({
+  useHibana: jest.fn().mockReturnValue([{ isHibanaEnabled: false }]),
+}));
 
 describe('Component: EnableTfaForm', () => {
   const baseProps = {
@@ -8,82 +11,110 @@ describe('Component: EnableTfaForm', () => {
     toggleError: false,
     togglePending: false,
     secret: 'super-secret',
-    username: 'kevin-mitnick'
+    username: 'kevin-mitnick',
   };
 
-  function subject(props) {
-    const actions = {
-      getTfaSecret: jest.fn(),
-      toggleTfa: jest.fn().mockResolvedValue(),
-      showAlert: jest.fn(),
-      afterEnable: jest.fn(),
-      onClose: jest.fn()
-    };
+  const mockOnClose = jest.fn();
+  const mockAfterEnable = jest.fn();
+  const mockToggleTfa = jest.fn().mockResolvedValue();
+  const mockShowAlert = jest.fn();
+  const actions = {
+    getTfaSecret: jest.fn(),
+    toggleTfa: mockToggleTfa,
+    showAlert: mockShowAlert,
+    afterEnable: mockAfterEnable,
+    onClose: mockOnClose,
+  };
+
+  const mockHandleInputChange = jest.fn();
+  const mockOnEnable = jest.fn();
+  const formProps = {
+    ...baseProps,
+    ...actions,
+    handleInputChange: mockHandleInputChange,
+    onEnable: mockOnEnable,
+  };
+
+  function pageSubject(props) {
     return shallow(<EnableTfaForm {...baseProps} {...actions} {...props} />);
+  }
+  function formSubject(props) {
+    return shallow(<RenderedForm {...formProps} {...props} />);
   }
 
   it('should request tfa secret on mount', () => {
-    expect(subject().instance().props.getTfaSecret).toHaveBeenCalledTimes(1);
+    expect(pageSubject().instance().props.getTfaSecret).toHaveBeenCalledTimes(1);
   });
 
   it('should show panel loading while retrieving 2fa deets', () => {
-    expect(subject({ secret: null }).find('PanelLoading').exists()).toBeTruthy();
+    expect(
+      formSubject({ secret: null })
+        .find('PanelLoading')
+        .exists(),
+    ).toBeTruthy();
   });
 
   it('should show form after loading', () => {
-    expect(subject({ secret: 'sauce' })).toMatchSnapshot();
-  });
-
-  it('should handle changes to passcode', () => {
-    const wrapper = subject();
-    wrapper.find('TextField').simulate('change', { target: { value: 'pcode' }});
-    expect(wrapper.state('code')).toEqual('pcode');
-  });
-
-  it('should call toggleTfa on button click', () => {
-    const wrapper = subject();
-    wrapper.setState({ code: 'pcode' });
-    wrapper.find('Button[type="submit"]').first().simulate('click');
-    expect(wrapper.instance().props.toggleTfa).toHaveBeenCalledWith({
-      code: 'pcode',
-      enabled: true
-    });
-  });
-
-  it('should show verifying as button text when togglePending', () => {
-    expect(subject({ togglePending: true }).find('Button[type="submit"]').children().text()).toContain('Verifying');
-  });
-
-  it('should show error on TextField when toggleError', () => {
-    const wrapper = subject({ toggleError: true });
-    expect(wrapper.find('TextField').prop('error').length).toBeGreaterThan(0);
-  });
-
-  it('should show alert after toggling', () => {
-    const wrapper = subject({ togglePending: true });
-    wrapper.setProps({ togglePending: false });
-    wrapper.update();
-    expect(wrapper.instance().props.showAlert).toHaveBeenCalledTimes(1);
+    expect(pageSubject({ secret: 'sauce' }).dive()).toMatchSnapshot();
   });
 
   it('should call afterEnable after toggling', () => {
-    const wrapper = subject({ togglePending: true });
+    const wrapper = pageSubject({ togglePending: true });
     wrapper.setProps({ togglePending: false });
     wrapper.update();
-    expect(wrapper.instance().props.afterEnable).toHaveBeenCalledTimes(1);
+    expect(mockAfterEnable).toHaveBeenCalledTimes(1);
+  });
+
+  it('should show alert after toggling', () => {
+    const wrapper = pageSubject({ togglePending: true });
+    wrapper.setProps({ togglePending: false });
+    wrapper.update();
+    expect(mockShowAlert).toHaveBeenCalledTimes(1);
+  });
+
+  it('should handle changes to passcode', () => {
+    const wrapper = formSubject();
+    wrapper.find('TextField').simulate('change', { target: { value: 'pcode' } });
+    expect(mockHandleInputChange).toHaveBeenCalled();
+  });
+
+  it('should call toggleTfa(onEnable) on button click', () => {
+    const wrapper = formSubject({ code: 'pcode' });
+    wrapper
+      .find('Button[type="submit"]')
+      .first()
+      .simulate('click');
+    expect(mockOnEnable).toHaveBeenCalled();
+  });
+
+  it('should show verifying as button text when togglePending', () => {
+    expect(
+      formSubject({ togglePending: true })
+        .find('Button[type="submit"]')
+        .children()
+        .text(),
+    ).toContain('Verifying');
+  });
+
+  it('should show error on TextField when toggleError', () => {
+    const wrapper = formSubject({ toggleError: true });
+    expect(wrapper.find('TextField').prop('error').length).toBeGreaterThan(0);
   });
 
   it('should not show cancel button if onClose prop not set', () => {
-    expect(subject({ onClose: null }).find('Button')).toHaveLength(1);
+    expect(formSubject({ onClose: null }).find('Button')).toHaveLength(1);
   });
 
   it('should show cancel button if onClose prop set', () => {
-    expect(subject().find('Button')).toHaveLength(2);
+    expect(formSubject().find('Button')).toHaveLength(2);
   });
 
   it('should close on cancel', () => {
-    const wrapper = subject();
-    wrapper.find('Button').at(1).simulate('click');
-    expect(wrapper.instance().props.onClose).toHaveBeenCalled();
+    const wrapper = formSubject();
+    wrapper
+      .find('Button')
+      .at(1)
+      .simulate('click');
+    expect(mockOnClose).toHaveBeenCalled();
   });
 });

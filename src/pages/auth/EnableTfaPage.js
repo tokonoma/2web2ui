@@ -15,9 +15,9 @@ export class EnableTfaPage extends React.Component {
       authData: {
         access_token: token,
         username,
-        refresh_token: refreshToken
+        refresh_token: refreshToken,
       },
-      saveCookie: true
+      saveCookie: true,
     });
   };
 
@@ -29,26 +29,19 @@ export class EnableTfaPage extends React.Component {
     }
 
     return (
-      <React.Fragment>
-        <Panel sectioned accent title="Enable Two Factor Authentication">
-          <Panel.Section>
-            Your administrator requires all users on this account to use two factor authentication.
-          </Panel.Section>
-          <EnableTfaForm afterEnable={this.afterEnable} />
-        </Panel>
-      </React.Fragment>
+      <Panel sectioned accent title="Enable Two Factor Authentication">
+        <Panel.Section>
+          Your administrator requires all users on this account to use two factor authentication.
+        </Panel.Section>
+        <EnableTfaForm afterEnable={this.afterEnable} />
+      </Panel>
     );
   }
 }
 
 const mapStateToProps = ({ auth, tfa }) => ({
   loggedIn: auth.loggedIn,
-  tfa
+  tfa,
 });
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    { login }
-  )(EnableTfaPage)
-);
+export default withRouter(connect(mapStateToProps, { login })(EnableTfaPage));

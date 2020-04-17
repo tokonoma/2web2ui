@@ -1,6 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import LabelledValue from '../LabelledValue';
+jest.mock('src/context/HibanaContext', () => ({
+  useHibana: jest.fn().mockReturnValue([{ isHibanaEnabled: false }]),
+}));
+jest.mock('src/hooks/useHibanaOverride', () => jest.fn(a => a));
 
 describe('LabelledValue Component', () => {
   const subject = (props = {}) => shallow(<LabelledValue {...props} />);

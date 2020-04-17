@@ -1,6 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import ConfirmationModal from '../ConfirmationModal';
+jest.mock('src/context/HibanaContext', () => ({
+  useHibana: jest.fn().mockReturnValue([{ isHibanaEnabled: false }]),
+}));
 
 describe('Component: ConfirmationModal', () => {
   let onCancelMock;
@@ -29,7 +32,14 @@ describe('Component: ConfirmationModal', () => {
         confirmVerb="DESTROY"
       />,
     );
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper).toHaveTextContent('Confirmation Modal Test Title');
+    expect(wrapper.find('p')).toHaveTextContent('Some JSX content for the modal');
+    expect(
+      wrapper
+        .find('Button')
+        .at(0)
+        .prop('children'),
+    ).toEqual('DESTROY');
   });
 
   it('should cancel', () => {
@@ -72,8 +82,7 @@ describe('Component: ConfirmationModal', () => {
     const wrapper = shallow(
       <ConfirmationModal confirming={true} onCancel={onCancelMock} onConfirm={onConfirmMock} />,
     );
-
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find('Button').at(0)).toHaveProp('disabled');
   });
 
   it('should allow overriding confirm verb', () => {

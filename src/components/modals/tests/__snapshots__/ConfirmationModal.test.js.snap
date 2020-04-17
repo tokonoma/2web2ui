@@ -1,33 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component: ConfirmationModal should disable confirmation button 1`] = `
-<Modal
-  onClose={[MockFunction]}
->
-  <Panel
-    sectioned={true}
-  >
-    <div>
-      <Button
-        className="Confirm"
-        disabled={true}
-        name="confirmation-modal-confirm-button"
-        onClick={[MockFunction]}
-        primary={true}
-      >
-        Confirm
-      </Button>
-      <Button
-        className="Cancel"
-        onClick={[MockFunction]}
-      >
-        Cancel
-      </Button>
-    </div>
-  </Panel>
-</Modal>
-`;
-
 exports[`Component: ConfirmationModal should render correctly with basic props 1`] = `
 <Modal
   onClose={[MockFunction]}
@@ -36,52 +8,23 @@ exports[`Component: ConfirmationModal should render correctly with basic props 1
     sectioned={true}
   >
     <div>
-      <Button
-        className="Confirm"
-        name="confirmation-modal-confirm-button"
-        onClick={[MockFunction]}
-        primary={true}
-      >
-        Confirm
-      </Button>
-      <Button
-        className="Cancel"
-        onClick={[MockFunction]}
-      >
-        Cancel
-      </Button>
-    </div>
-  </Panel>
-</Modal>
-`;
-
-exports[`Component: ConfirmationModal should render correctly with open, content, title and custom verb 1`] = `
-<Modal
-  onClose={[MockFunction]}
-  open={true}
->
-  <Panel
-    sectioned={true}
-    title="Confirmation Modal Test Title"
-  >
-    <div>
-      <p>
-        Some JSX content for the modal
-      </p>
-      <Button
-        className="Confirm"
-        name="confirmation-modal-confirm-button"
-        onClick={[MockFunction]}
-        primary={true}
-      >
-        DESTROY
-      </Button>
-      <Button
-        className="Cancel"
-        onClick={[MockFunction]}
-      >
-        Cancel
-      </Button>
+      <ButtonWrapper>
+        <Button
+          className="Confirm"
+          name="confirmation-modal-confirm-button"
+          onClick={[MockFunction]}
+          variant="primary"
+        >
+          Confirm
+        </Button>
+        <Button
+          className="Cancel"
+          onClick={[MockFunction]}
+          variant="tertiary"
+        >
+          Cancel
+        </Button>
+      </ButtonWrapper>
     </div>
   </Panel>
 </Modal>

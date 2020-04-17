@@ -4,30 +4,36 @@ exports[`Component: EnableTfaForm should show form after loading 1`] = `
 <form
   onSubmit={[Function]}
 >
-  <Panel.Section>
+  <Panel.Section
+    margin="400"
+  >
     <Grid>
       <Grid.Column
         md={7}
         xs={12}
       >
-        <h6>
-          Step 1: Configure your 2FA app
-        </h6>
-        <p>
-          To enable 2FA, you'll need to have a 2FA auth app installed on your phone or tablet (examples include Google Authenticator, Duo Mobile, and Authy).
-        </p>
-        <p>
-          Most apps will let you get set up by scanning our QR code from within the app. If you prefer, you can type in the key manually.
-        </p>
-        <p>
-          <strong>
-            <VpnKey />
-             
-            <code>
-              sauce
-            </code>
-          </strong>
-        </p>
+        <Stack
+          space="400"
+        >
+          <h6>
+            Step 1: Configure your 2FA app
+          </h6>
+          <p>
+            To enable 2FA, you'll need to have a 2FA auth app installed on your phone or tablet (examples include Google Authenticator, Duo Mobile, and Authy).
+          </p>
+          <p>
+            Most apps will let you get set up by scanning our QR code from within the app. If you prefer, you can type in the key manually.
+          </p>
+          <p>
+            <strong>
+              <VpnKey />
+               
+              <code>
+                sauce
+              </code>
+            </strong>
+          </p>
+        </Stack>
       </Grid.Column>
       <Grid.Column
         md={5}
@@ -58,41 +64,47 @@ exports[`Component: EnableTfaForm should show form after loading 1`] = `
         md={7}
         xs={12}
       >
-        <h6>
-          Step 2: Enter a 2FA code
-        </h6>
-        <p>
-          Generate a code from your newly-activated 2FA app to confirm that you're all set up.
-        </p>
-        <TextField
-          data-lpignore={true}
-          error=""
-          id="tfa-setup-passcode"
-          label="Passcode"
-          onChange={[Function]}
-          placeholder="Enter a generated 2FA passcode"
-          required={true}
-          value=""
-        />
+        <Stack
+          space="400"
+        >
+          <h6>
+            Step 2: Enter a 2FA code
+          </h6>
+          <p>
+            Generate a code from your newly-activated 2FA app to confirm that you're all set up.
+          </p>
+          <TextField
+            data-lpignore={true}
+            error=""
+            id="tfa-setup-passcode"
+            label="Passcode"
+            onChange={[Function]}
+            placeholder="Enter a generated 2FA passcode"
+            required={true}
+            value=""
+          />
+        </Stack>
       </Grid.Column>
     </Grid>
   </Panel.Section>
   <Panel.Section>
-    <Button
-      disabled={false}
-      onClick={[Function]}
-      primary={true}
-      type="submit"
-    >
-      Enable 2FA
-    </Button>
-    <Button
-      className="Cancel"
-      disabled={false}
-      onClick={[MockFunction]}
-    >
-      Cancel
-    </Button>
+    <Inline>
+      <Button
+        disabled={false}
+        onClick={[Function]}
+        primary={true}
+        type="submit"
+      >
+        Enable 2FA
+      </Button>
+      <Button
+        className="Cancel"
+        disabled={false}
+        onClick={[MockFunction]}
+      >
+        Cancel
+      </Button>
+    </Inline>
   </Panel.Section>
 </form>
 `;

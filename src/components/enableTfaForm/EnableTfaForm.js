@@ -2,13 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { VpnKey } from '@sparkpost/matchbox-icons';
 import { QRCode } from 'react-qr-svg';
-import { Grid, Button, Panel, TextField } from 'src/components/matchbox';
+import { Button, Box, Grid, Inline, Panel, Stack, TextField } from 'src/components/matchbox';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
+import { Loading } from 'src/components/loading/Loading';
 import styles from './EnableTfaForm.module.scss';
 import { getTfaSecret, toggleTfa } from 'src/actions/tfa';
 import { showAlert } from 'src/actions/globalAlert';
 import EnableTfaFormPropTypes from './EnableTfaForm.propTypes';
 import { usernameSelector } from 'src/selectors/currentUser';
+import { useHibana } from 'src/context/HibanaContext';
 
 export class EnableTfaForm extends React.Component {
   state = {
@@ -38,16 +40,48 @@ export class EnableTfaForm extends React.Component {
   };
 
   renderForm() {
-    const { onClose, secret, username, togglePending, toggleError } = this.props;
-    const qrData = `otpauth://totp/${username}?secret=${encodeURIComponent(
-      secret,
-    )}&issuer=SparkPost`;
-
     return (
-      <form onSubmit={e => e.preventDefault()}>
-        <Panel.Section>
-          <Grid>
-            <Grid.Column xs={12} md={7}>
+      <RenderedForm
+        {...this.props}
+        code={this.state.code}
+        handleInputChange={this.handleInputChange}
+        onEnable={this.onEnable}
+      />
+    );
+  }
+
+  render() {
+    return this.renderForm();
+  }
+}
+
+export const RenderedForm = props => {
+  const {
+    code,
+    handleInputChange,
+    onClose,
+    onEnable,
+    secret,
+    togglePending,
+    toggleError,
+    username,
+  } = props;
+
+  const [state] = useHibana();
+  const { isHibanaEnabled } = state;
+  const RenderedLoading = isHibanaEnabled ? Loading : PanelLoading;
+  if (!secret) {
+    return <RenderedLoading minHeight={'500px'} />;
+  }
+
+  const qrData = `otpauth://totp/${username}?secret=${encodeURIComponent(secret)}&issuer=SparkPost`;
+  const Wrapper = isHibanaEnabled ? Box : Panel.Section;
+  return (
+    <form onSubmit={e => e.preventDefault()}>
+      <Wrapper margin={'400'}>
+        <Grid>
+          <Grid.Column xs={12} md={7}>
+            <Stack space={'400'}>
               <h6>Step 1: Configure your 2FA app</h6>
               <p>
                 To enable 2FA, you'll need to have a 2FA auth app installed on your phone or tablet
@@ -62,21 +96,23 @@ export class EnableTfaForm extends React.Component {
                   <VpnKey /> <code>{secret}</code>
                 </strong>
               </p>
-            </Grid.Column>
-            <Grid.Column xs={12} md={5} style={{ textAlign: 'center' }}>
-              <QRCode
-                bgColor="#FFFFFF"
-                fgColor="#000000"
-                level="Q"
-                style={{ width: 230 }}
-                value={qrData}
-              />
-            </Grid.Column>
-          </Grid>
-        </Panel.Section>
-        <Panel.Section>
-          <Grid>
-            <Grid.Column xs={12} md={7}>
+            </Stack>
+          </Grid.Column>
+          <Grid.Column xs={12} md={5} style={{ textAlign: 'center' }}>
+            <QRCode
+              bgColor="#FFFFFF"
+              fgColor="#000000"
+              level="Q"
+              style={{ width: 230 }}
+              value={qrData}
+            />
+          </Grid.Column>
+        </Grid>
+      </Wrapper>
+      <Panel.Section>
+        <Grid>
+          <Grid.Column xs={12} md={7}>
+            <Stack space={'400'}>
               <h6>Step 2: Enter a 2FA code</h6>
               <p>
                 Generate a code from your newly-activated 2FA app to confirm that you're all set up.
@@ -88,14 +124,16 @@ export class EnableTfaForm extends React.Component {
                 label="Passcode"
                 error={toggleError ? 'Problem verifying your code, please try again' : ''}
                 placeholder="Enter a generated 2FA passcode"
-                onChange={this.handleInputChange}
-                value={this.state.code}
+                onChange={handleInputChange}
+                value={code}
               />
-            </Grid.Column>
-          </Grid>
-        </Panel.Section>
-        <Panel.Section>
-          <Button type="submit" primary disabled={togglePending} onClick={this.onEnable}>
+            </Stack>
+          </Grid.Column>
+        </Grid>
+      </Panel.Section>
+      <Panel.Section>
+        <Inline>
+          <Button type="submit" primary disabled={togglePending} onClick={onEnable}>
             {togglePending ? 'Verifying Code...' : 'Enable 2FA'}
           </Button>
           {onClose && (
@@ -103,19 +141,11 @@ export class EnableTfaForm extends React.Component {
               Cancel
             </Button>
           )}
-        </Panel.Section>
-      </form>
-    );
-  }
-
-  render() {
-    if (!this.props.secret) {
-      return <PanelLoading />;
-    }
-
-    return this.renderForm();
-  }
-}
+        </Inline>
+      </Panel.Section>
+    </form>
+  );
+};
 
 EnableTfaForm.propTypes = EnableTfaFormPropTypes;
 
