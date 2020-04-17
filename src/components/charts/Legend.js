@@ -33,10 +33,9 @@ const HibanaItem = props => {
         as="span"
         display="inline-block"
         verticalAlign="middle"
-        marginRight="10"
-        marginTop={-10}
+        marginRight={10}
+        marginTop={-4}
         size={12}
-        borderRadius={6}
         borderStyle={hasBorder ? 'solid' : undefined}
         borderColor={hasBorder ? '#00000' : undefined}
         borderWidth={hasBorder ? '100' : undefined}
