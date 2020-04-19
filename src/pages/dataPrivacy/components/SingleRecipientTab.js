@@ -9,6 +9,7 @@ import { Button, Panel } from 'src/components/matchbox';
 import { submitRTBFRequest, submitOptOutRequest } from 'src/actions/dataPrivacy';
 import { showAlert } from 'src/actions/globalAlert';
 import ButtonWrapper from 'src/components/buttonWrapper';
+import { hasSubaccounts } from 'src/selectors/subaccounts';
 import styles from './DataPrivacy.module.scss';
 import { REQUEST_TYPES, SUBACCOUNT_ITEMS, SUBACCOUNT_OPTIONS } from '../constants';
 
@@ -55,13 +56,14 @@ export function SingleRecipientTab(props) {
             validate={[required, email, maxLength(254)]}
             normalize={(value = '') => value.trim()}
           />
-          <SubaccountSection
-            newTemplate={true}
-            disabled={props.dataPrivacyRequestPending}
-            validate={[required]}
-            createOptions={SUBACCOUNT_OPTIONS}
-          />
-
+          {props.hasSubaccounts && (
+            <SubaccountSection
+              newTemplate={true}
+              disabled={props.dataPrivacyRequestPending}
+              validate={[required]}
+              createOptions={SUBACCOUNT_OPTIONS}
+            />
+          )}
           <ButtonWrapper>
             <Button
               className={styles.submit}
@@ -85,14 +87,17 @@ const formOptions = {
   form: 'DATA_PRIVACY_SINGLE_RECIPIENT',
   enableReinitialize: true,
 };
+
 const mapStateToProps = state => {
   return {
     dataPrivacyRequestPending: state.dataPrivacy.dataPrivacyRequestPending,
+    hasSubaccounts: hasSubaccounts(state),
     initialValues: {
       assignTo: 'master',
     },
   };
 };
+
 export default connect(mapStateToProps, { submitRTBFRequest, submitOptOutRequest, showAlert })(
   reduxForm(formOptions)(SingleRecipientTab),
 );
