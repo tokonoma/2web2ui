@@ -1,30 +1,36 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import SummaryTable from '../SummaryTable';
+import { useHibana } from 'src/context/HibanaContext';
+import { SummaryTableClassComponent as SummaryTable } from '../SummaryTable';
+import styles from '../SummaryTable.module.scss';
 import Column from '../Column';
 
+jest.mock('src/context/HibanaContext');
+
 describe('SummaryTable', () => {
-  const subject = (props = {}) => shallow(
-    <SummaryTable
-      currentPage={1}
-      data={[
-        { id: 'test-example', name: 'Test Example' }
-      ]}
-      empty={false}
-      loading={false}
-      order={{
-        ascending: false,
-        dataKey: 'id'
-      }}
-      perPage={10}
-      tableName="test-table"
-      totalCount={0}
-      {...props}
-    >
-      <Column dataKey="id" label="Identifier" />
-      <Column dataKey="name" label="Name" />
-    </SummaryTable>
-  );
+  const subject = (props = {}) =>
+    shallow(
+      <SummaryTable
+        currentPage={1}
+        data={[{ id: 'test-example', name: 'Test Example' }]}
+        empty={false}
+        loading={false}
+        order={{
+          ascending: false,
+          dataKey: 'id',
+        }}
+        perPage={10}
+        tableName="test-table"
+        totalCount={0}
+        styles={styles}
+        {...props}
+      >
+        <Column dataKey="id" label="Identifier" />
+        <Column dataKey="name" label="Name" />
+      </SummaryTable>,
+    );
+
+  beforeEach(() => useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: false }]));
 
   it('renders a table', () => {
     const wrapper = subject();
@@ -43,7 +49,7 @@ describe('SummaryTable', () => {
     expect(onChange).toHaveBeenCalledWith({
       currentPage: 1,
       order: { ascending: false, dataKey: 'id' },
-      perPage: 10
+      perPage: 10,
     });
   });
 
@@ -56,7 +62,7 @@ describe('SummaryTable', () => {
     expect(onChange).toHaveBeenCalledWith({
       currentPage: 2,
       order: { ascending: false, dataKey: 'id' },
-      perPage: 10
+      perPage: 10,
     });
   });
 

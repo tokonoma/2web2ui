@@ -1,11 +1,12 @@
 import React from 'react';
 import classnames from 'classnames';
-import { Button } from 'src/components/matchbox';
+import useHibanaToggle from 'src/hooks/useHibanaToggle';
+import { Box, Button } from 'src/components/matchbox';
 import styles from './SummaryTable.module.scss';
 
 const SIZES = [10, 25, 50, 100];
 
-const PerPageControl = ({ onChange, perPage, totalCount }) => {
+function OGPerPageControl({ onChange, perPage, totalCount }) {
   if (!totalCount || totalCount < SIZES[0]) {
     return null;
   }
@@ -27,6 +28,41 @@ const PerPageControl = ({ onChange, perPage, totalCount }) => {
       </Button.Group>
     </div>
   );
-};
+}
 
-export default PerPageControl;
+function HibanaPerPageControl({ onChange, perPage, totalCount }) {
+  if (!totalCount || totalCount < SIZES[0]) {
+    return null;
+  }
+
+  return (
+    <Box p="200">
+      <Button.Group>
+        <Box as="span">Per Page</Box>
+
+        {SIZES.map(size => {
+          const isActive = perPage === size;
+
+          return (
+            <Button
+              variant={isActive ? 'primary' : 'tertiary'}
+              aria-selected={isActive ? 'true' : 'false'}
+              key={size}
+              onClick={() => onChange(size)}
+              ml="200"
+              size="small"
+              marginX="100"
+              width={[0]}
+            >
+              {size}
+            </Button>
+          );
+        })}
+      </Button.Group>
+    </Box>
+  );
+}
+
+export default function PerPageControl(props) {
+  return useHibanaToggle(OGPerPageControl, HibanaPerPageControl)(props);
+}

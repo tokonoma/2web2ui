@@ -1,5 +1,6 @@
 import React from 'react';
-import classnames from 'classnames';
+import classNames from 'classnames';
+import { useHibana } from 'src/context/HibanaContext';
 import { Table } from 'src/components/matchbox';
 import Callout from 'src/components/callout';
 import Loading from 'src/components/loading'; // todo, move to src/components
@@ -7,6 +8,8 @@ import Billboard from './Billboard';
 import styles from './SummaryTable.module.scss';
 
 const Body = ({ columns, data, empty, error, loading, perPage }) => {
+  const [state] = useHibana();
+  const { isHibanaEnabled } = state;
   const colSpan = columns.length;
 
   if (loading) {
@@ -37,18 +40,20 @@ const Body = ({ columns, data, empty, error, loading, perPage }) => {
     <tbody>
       {data.slice(0, perPage).map((rowOfData, rowIndex) => (
         <Table.Row key={`row-${rowIndex}`}>
-          {columns.map(({ align = 'left', component: Component, dataKey }) => (
-            <Table.Cell
-              className={classnames(styles.Cell, {
-                [styles.DataCell]: !Component,
-                [styles.CenterAlign]: align === 'center',
-                [styles.RightAlign]: align === 'right',
-              })}
-              key={`cell-${dataKey}`}
-            >
-              {Component ? <Component {...rowOfData} /> : rowOfData[dataKey]}
-            </Table.Cell>
-          ))}
+          {columns.map(({ align = 'left', component: Component, dataKey }) => {
+            const classes = classNames(
+              !isHibanaEnabled && classNames(styles.Cell, { [styles.DataCell]: !Component }),
+            );
+            return (
+              <Table.Cell
+                className={classes}
+                style={{ 'text-align': align }}
+                key={`cell-${dataKey}`}
+              >
+                {Component ? <Component {...rowOfData} /> : rowOfData[dataKey]}
+              </Table.Cell>
+            );
+          })}
         </Table.Row>
       ))}
     </tbody>

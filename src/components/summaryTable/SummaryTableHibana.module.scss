@@ -1,0 +1,15 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.PaginationWrapper {
+  background: none;
+  border-radius: initial;
+}
+
+.Pagination {
+  button,
+  button:active,
+  button:focus {
+    border-color: transparent;
+    background: transparent;
+  }
+}

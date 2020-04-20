@@ -1,19 +1,20 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { useHibana } from 'src/context/HibanaContext';
 import Body from '../Body';
 
+jest.mock('src/context/HibanaContext');
+
 describe('Body', () => {
-  const subject = (props = {}) => shallow(
-    <Body
-      columns={[{ dataKey: 'id' }, { dataKey: 'value' }]}
-      {...props}
-    />
-  );
+  const subject = (props = {}) =>
+    shallow(<Body columns={[{ dataKey: 'id' }, { dataKey: 'value' }]} {...props} />);
+
+  beforeEach(() => useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: false }]));
 
   it('renders a table body', () => {
     const wrapper = subject({
       data: [{ id: 'test-example', value: 123 }],
-      perPage: 1
+      perPage: 1,
     });
 
     expect(wrapper).toMatchSnapshot();
@@ -35,9 +36,9 @@ describe('Body', () => {
     const wrapper = subject({
       data: [
         { id: 'test-example', value: 123 },
-        { id: 'another-test-example', value: 234 }
+        { id: 'another-test-example', value: 234 },
       ],
-      perPage: 1
+      perPage: 1,
     });
 
     expect(wrapper).toMatchSnapshot();
@@ -45,12 +46,9 @@ describe('Body', () => {
 
   it('renders custom component', () => {
     const wrapper = subject({
-      columns: [
-        { dataKey: 'id' },
-        { dataKey: 'value', component: (row) => `${row.value}%` }
-      ],
+      columns: [{ dataKey: 'id' }, { dataKey: 'value', component: row => `${row.value}%` }],
       data: [{ id: 'test-example', value: 123 }],
-      perPage: 1
+      perPage: 1,
     });
 
     expect(wrapper).toMatchSnapshot();

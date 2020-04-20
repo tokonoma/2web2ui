@@ -7,9 +7,13 @@ exports[`Billboard renders signle cell table row 1`] = `
       className="Billboard"
       colSpan={7}
     >
-      <h1>
-        Test Example
-      </h1>
+      <Box
+        height="220px"
+      >
+        <h1>
+          Test Example
+        </h1>
+      </Box>
     </Table.Cell>
   </Table.Row>
 </tbody>

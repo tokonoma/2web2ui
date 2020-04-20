@@ -1,15 +1,22 @@
 import React from 'react';
-import { Table } from 'src/components/matchbox';
-import styles from './SummaryTable.module.scss';
+import classNames from 'classnames';
+import { Box, Table } from 'src/components/matchbox';
+import { useHibana } from 'src/context/HibanaContext';
+import styles from './SummaryTable.module.scss'; // TODO: Remove style import when OG theme is removed
 
-const Billboard = ({ children, colSpan }) => (
-  <tbody>
-    <Table.Row>
-      <Table.Cell className={styles.Billboard} colSpan={colSpan}>
-        {children}
-      </Table.Cell>
-    </Table.Row>
-  </tbody>
-);
+function Billboard({ children, colSpan }) {
+  const [state] = useHibana();
+  const { isHibanaEnabled } = state;
+
+  return (
+    <tbody>
+      <Table.Row>
+        <Table.Cell className={classNames(!isHibanaEnabled && styles.Billboard)} colSpan={colSpan}>
+          <Box height="220px">{children}</Box>
+        </Table.Cell>
+      </Table.Row>
+    </tbody>
+  );
+}
 
 export default Billboard;

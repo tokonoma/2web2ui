@@ -4,7 +4,9 @@ exports[`SummaryTable renders a table 1`] = `
 <div
   className="SummaryTable"
 >
-  <Table>
+  <Table
+    p="400"
+  >
     <Head
       columns={
         Array [

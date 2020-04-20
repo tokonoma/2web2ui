@@ -8,12 +8,22 @@ exports[`Body renders a table body 1`] = `
     <Table.Cell
       className="Cell DataCell"
       key="cell-id"
+      style={
+        Object {
+          "text-align": "left",
+        }
+      }
     >
       test-example
     </Table.Cell>
     <Table.Cell
       className="Cell DataCell"
       key="cell-value"
+      style={
+        Object {
+          "text-align": "left",
+        }
+      }
     >
       123
     </Table.Cell>
@@ -29,12 +39,22 @@ exports[`Body renders custom component 1`] = `
     <Table.Cell
       className="Cell DataCell"
       key="cell-id"
+      style={
+        Object {
+          "text-align": "left",
+        }
+      }
     >
       test-example
     </Table.Cell>
     <Table.Cell
       className="Cell"
       key="cell-value"
+      style={
+        Object {
+          "text-align": "left",
+        }
+      }
     >
       <component
         id="test-example"
@@ -83,12 +103,22 @@ exports[`Body renders max of perPage rows 1`] = `
     <Table.Cell
       className="Cell DataCell"
       key="cell-id"
+      style={
+        Object {
+          "text-align": "left",
+        }
+      }
     >
       test-example
     </Table.Cell>
     <Table.Cell
       className="Cell DataCell"
       key="cell-value"
+      style={
+        Object {
+          "text-align": "left",
+        }
+      }
     >
       123
     </Table.Cell>
