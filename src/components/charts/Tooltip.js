@@ -2,7 +2,9 @@ import React, { useLayoutEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { formatDate } from 'src/helpers/date';
 import { getBoundingClientRect } from 'src/helpers/geometry';
-import styles from './Tooltip.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
+import OGStyles from './Tooltip.module.scss';
+import HibanaStyles from './TooltipHibana.module.scss';
 import _ from 'lodash';
 import './Tooltip.scss';
 
@@ -11,7 +13,7 @@ function Tooltip(props) {
   const content = _.get(props, 'payload[0]', {});
   const date = _.get(content, 'payload.date');
   const wrapper = useRef(null);
-
+  const styles = useHibanaOverride(OGStyles, HibanaStyles);
   const [positionedOnRight, setPositionedOnRight] = useState(true);
   const [position, setPosition] = useState({ left: 0, top: 0 });
 
@@ -24,8 +26,8 @@ function Tooltip(props) {
     const newPositionedOnRight = xTarget + rect.width + offset < window.innerWidth;
 
     const coords = {
-      top: coordinate.y - (rect.height / 2),
-      left: newPositionedOnRight ? coordinate.x + offset : (coordinate.x - offset) - rect.width
+      top: coordinate.y - rect.height / 2,
+      left: newPositionedOnRight ? coordinate.x + offset : coordinate.x - offset - rect.width,
     };
 
     setPosition(coords);
@@ -33,36 +35,25 @@ function Tooltip(props) {
   }, [coordinate.x, coordinate.y, offset, positionedOnRight, wrapper]);
 
   return (
-    <div
-      className={styles.TooltipWrapper}
-      ref={wrapper}
-      style={{ width, ...position }}
-    >
-      {date && (
-        <div className={styles.TooltipDate}>
-          {formatDate(date)}
-        </div>
-      )}
-      <div className={styles.TooltipContent}>
-        {children(content)}
-      </div>
+    <div className={styles.TooltipWrapper} ref={wrapper} style={{ width, ...position }}>
+      {date && <div className={styles.TooltipDate}>{formatDate(date)}</div>}
+      <div className={styles.TooltipContent}>{children(content)}</div>
     </div>
   );
 }
-
 
 const defaultChildren = ({ value }) => value;
 
 Tooltip.propTypes = {
   children: PropTypes.func,
   width: PropTypes.string,
-  offset: PropTypes.number
+  offset: PropTypes.number,
 };
 
 Tooltip.defaultProps = {
   children: defaultChildren,
   width: '200px',
-  offset: 25
+  offset: 25,
 };
 
 export default Tooltip;

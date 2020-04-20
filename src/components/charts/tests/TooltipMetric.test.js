@@ -1,6 +1,8 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import TooltipMetric from '../TooltipMetric';
+import { OGTooltipMetric } from '../TooltipMetric';
+import { useHibana } from 'src/context/HibanaContext';
+jest.mock('src/context/HibanaContext');
 
 describe('Signals TooltipMetric Component', () => {
   let wrapper;
@@ -9,9 +11,10 @@ describe('Signals TooltipMetric Component', () => {
   beforeEach(() => {
     props = {
       label: 'Foo',
-      value: 101
+      value: 101,
     };
-    wrapper = shallow(<TooltipMetric {...props}/>);
+    useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: false }]);
+    wrapper = shallow(<OGTooltipMetric {...props} />);
   });
 
   it('renders correctly', () => {

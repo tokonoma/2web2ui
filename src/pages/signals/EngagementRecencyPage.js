@@ -1,9 +1,9 @@
 /* eslint-disable max-lines */
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { getEngagementRecency } from 'src/actions/signals';
 import { selectEngagementRecencyDetails } from 'src/selectors/signals';
 import { PageLink } from 'src/components/links';
-import { Grid, Panel } from 'src/components/matchbox';
+import { Grid, Panel, Stack } from 'src/components/matchbox';
 import BarChart from './components/charts/barchart/BarChart';
 import Callout from 'src/components/callout';
 import DateFilter from './components/filters/DateFilter';
@@ -43,7 +43,7 @@ export class EngagementRecencyPage extends Component {
   };
 
   getTooltipContent = ({ payload = {} }) => (
-    <Fragment>
+    <Stack>
       {_.keys(cohorts).map(key => (
         <TooltipMetric
           key={key}
@@ -53,7 +53,7 @@ export class EngagementRecencyPage extends Component {
           value={`${roundToPlaces(payload[`c_${key}`] * 100, 1)}%`}
         />
       ))}
-    </Fragment>
+    </Stack>
   );
 
   renderContent = () => {
