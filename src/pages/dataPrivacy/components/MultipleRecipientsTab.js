@@ -1,4 +1,6 @@
 import React from 'react';
+import _ from 'lodash';
+import Papa from 'papaparse';
 import { connect } from 'react-redux';
 import { Field } from 'redux-form';
 import { reduxForm, SubmissionError } from 'redux-form';
@@ -10,13 +12,11 @@ import { FileFieldWrapper } from 'src/components/reduxFormWrappers';
 import SubaccountSection from 'src/components/subaccountSection';
 import { required } from 'src/helpers/validation';
 import { submitRTBFRequest, submitOptOutRequest, resetDataPrivacy } from 'src/actions/dataPrivacy';
-import styles from './DataPrivacy.module.scss';
 import { showAlert } from 'src/actions/globalAlert';
-import _ from 'lodash';
 import { download } from 'src/helpers/downloading';
+import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { REQUEST_TYPES, SUBACCOUNT_ITEMS, SUBACCOUNT_OPTIONS } from '../constants';
-import Papa from 'papaparse';
-
+import styles from './DataPrivacy.module.scss';
 import exampleRecipientListPath from './example-recipients.csv';
 
 export function MultipleRecipientsTab({
@@ -25,6 +25,7 @@ export function MultipleRecipientsTab({
   showAlert,
   reset,
   handleSubmit,
+  hasSubaccounts,
   submitting,
   dataPrivacyRequestError,
   resetDataPrivacy,
@@ -130,12 +131,14 @@ export function MultipleRecipientsTab({
               </Button>
             </Panel>
           </Modal>
-          <SubaccountSection
-            newTemplate={true}
-            disabled={submitting}
-            validate={[required]}
-            createOptions={SUBACCOUNT_OPTIONS}
-          />
+          {hasSubaccounts && (
+            <SubaccountSection
+              newTemplate={true}
+              disabled={submitting}
+              validate={[required]}
+              createOptions={SUBACCOUNT_OPTIONS}
+            />
+          )}
           <ButtonWrapper>
             <Button className={styles.submit} color="orange" type="submit">
               Submit Request
@@ -155,10 +158,14 @@ const formOptions = {
   enableReinitialize: true,
 };
 
-const mapStateToProps = ({ dataPrivacy }) => {
-  const { dataPrivacyRequestError } = dataPrivacy;
+const mapStateToProps = state => {
+  const {
+    dataPrivacy: { dataPrivacyRequestError },
+  } = state;
+
   return {
     dataPrivacyRequestError,
+    hasSubaccounts: hasSubaccounts(state),
     initialValues: {
       assignTo: 'master',
     },
