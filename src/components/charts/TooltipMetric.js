@@ -16,7 +16,12 @@ export const OGTooltipMetric = ({ color = '#6e6e73', description, label, value }
     </div>
   </div>
 );
-export const HibanaTooltipMetric = ({ color = '#6e6e73', description, label, value }) => (
+export const HibanaTooltipMetric = ({
+  color = '#6e6e73',
+  description = '',
+  label = '',
+  value = '',
+}) => (
   <Box position="relative" display="inline-block" width={1} height="200">
     <Box display="flex" justifyContent="space-between">
       <Box bg={color} marginRight="100" borderRadius={8} size={16} marginTop="100" />

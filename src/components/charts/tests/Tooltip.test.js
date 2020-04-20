@@ -3,7 +3,7 @@ import React from 'react';
 import Tooltip from '../Tooltip';
 import * as geometry from 'src/helpers/geometry';
 import useHibanaOverride from 'src/hooks/useHibanaOverride';
-import styles from './TooltipHibana.module.scss';
+import styles from './Tooltip.module.scss';
 
 jest.mock('src/hooks/useHibanaOverride');
 jest.mock('src/helpers/geometry');

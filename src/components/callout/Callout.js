@@ -4,7 +4,7 @@ import styles from './Callout.module.scss';
 import useHibanaToggle from 'src/hooks/useHibanaToggle';
 import { Box, Text } from 'src/components/matchbox';
 
-const HibanaCallout = ({ children, height = '220px', title }) => (
+const HibanaCallout = ({ children, height = '220px', title = '' }) => (
   <Box height={height} display="flex" justifyContent="center" alignItems="center">
     <Box>
       <Text as="h3" mb="200" color="gray.800">
