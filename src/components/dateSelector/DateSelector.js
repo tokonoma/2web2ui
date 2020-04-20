@@ -28,29 +28,43 @@ export function Navbar(props) {
 
   return (
     <div className={styles.Navbar}>
-      {showPreviousButton && (
-        <button
-          className={classNames(styles.NavbarButton, styles.NavbarButtonPrev)}
-          onClick={() => onPreviousClick()}
-          data-id="date-selector-previous-month"
-        >
-          <ArrowBack size={21} className={styles.Prev} />
+      {/*
+        Conditionally rendering the buttons causes `react-day-picker` to behave unpredictably.
+        Instead, always rendering the elements in the DOM but conditionally applying classes
+        helps address the problem. Debugging further, it looks like the library unmounts the button
+        before Matchbox checks as to whether the clicked button came from outside the popover node.
+        As a result, the click registers as coming from outside the node as the popover no longer
+        contains said element.
+      */}
+      <button
+        className={classNames(
+          styles.NavbarButton,
+          styles.NavbarButtonPrev,
+          !showPreviousButton && styles.isHidden,
+        )}
+        onClick={() => onPreviousClick()}
+        data-id="date-selector-previous-month"
+        type="button"
+      >
+        <ArrowBack size={21} className={styles.Prev} />
 
-          <ScreenReaderOnly>Previous Month</ScreenReaderOnly>
-        </button>
-      )}
+        <ScreenReaderOnly>Previous Month</ScreenReaderOnly>
+      </button>
 
-      {showNextButton && (
-        <button
-          className={classNames(styles.NavbarButton, styles.NavbarButtonNext)}
-          onClick={() => onNextClick()}
-          data-id="date-selector-next-month"
-        >
-          <ArrowForward size={21} className={styles.Next} />
+      <button
+        className={classNames(
+          styles.NavbarButton,
+          styles.NavbarButtonNext,
+          !showNextButton && styles.isHidden,
+        )}
+        onClick={() => onNextClick()}
+        data-id="date-selector-next-month"
+        type="button"
+      >
+        <ArrowForward size={21} className={styles.Next} />
 
-          <ScreenReaderOnly>Next Month</ScreenReaderOnly>
-        </button>
-      )}
+        <ScreenReaderOnly>Next Month</ScreenReaderOnly>
+      </button>
     </div>
   );
 }

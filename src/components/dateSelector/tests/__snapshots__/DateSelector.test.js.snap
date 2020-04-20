@@ -103,6 +103,7 @@ exports[`Navbar should render correctly 1`] = `
     className="NavbarButton NavbarButtonPrev"
     data-id="date-selector-previous-month"
     onClick={[Function]}
+    type="button"
   >
     <ArrowBack
       className="Prev"
@@ -116,6 +117,7 @@ exports[`Navbar should render correctly 1`] = `
     className="NavbarButton NavbarButtonNext"
     data-id="date-selector-next-month"
     onClick={[Function]}
+    type="button"
   >
     <ArrowForward
       className="Next"

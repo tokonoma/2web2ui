@@ -51,13 +51,6 @@ describe('Navbar', () => {
     expect(shallow(<Navbar showNextButton showPreviousButton />)).toMatchSnapshot();
   });
 
-  it('should be able to show prev and next buttons', () => {
-    const wrapper = shallow(<Navbar showNextButton showPreviousButton />);
-
-    expect(wrapper).toHaveTextContent('Previous Month');
-    expect(wrapper).toHaveTextContent('Next Month');
-  });
-
   it('should call previous button handler', () => {
     const handlePreviousClick = jest.fn();
     const wrapper = shallow(<Navbar showPreviousButton onPreviousClick={handlePreviousClick} />);
@@ -72,5 +65,29 @@ describe('Navbar', () => {
 
     wrapper.find('[data-id="date-selector-next-month"]').simulate('click');
     expect(handleNextClick).toHaveBeenCalled();
+  });
+
+  it('renders the next and previous buttons without the `isHidden` styles when controlled via the `showNextButton` and `showPreviousButton` props', () => {
+    const wrapper = shallow(<Navbar showNextButton showPreviousButton />);
+
+    expect(wrapper).toHaveTextContent('Previous Month');
+    expect(wrapper).toHaveTextContent('Next Month');
+    expect(wrapper.find('.isHidden')).not.toExist();
+  });
+
+  it('should render the previous button with the `isHidden` styles when `showPreviousButton` is `false`', () => {
+    const wrapper = shallow(<Navbar showPreviousButton={false} showNextButton />);
+
+    expect(wrapper.find('[data-id="date-selector-previous-month"]')).toHaveClassName('isHidden');
+    expect(wrapper.find('[data-id="date-selector-next-month"]')).not.toHaveClassName('isHidden');
+  });
+
+  it('should render the next button with the `isHidden` styles when `showNextButton` is `false`', () => {
+    const wrapper = shallow(<Navbar showPreviousButton showNextButton={false} />);
+
+    expect(wrapper.find('[data-id="date-selector-previous-month"]')).not.toHaveClassName(
+      'isHidden',
+    );
+    expect(wrapper.find('[data-id="date-selector-next-month"]')).toHaveClassName('isHidden');
   });
 });
