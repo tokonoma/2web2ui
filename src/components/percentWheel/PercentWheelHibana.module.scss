@@ -1,0 +1,8 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+// TODO: This is an override - the media query in the OG styles should be delete-able
+// and the chaining of these two CSS classes should be able to be removed.
+.value.value {
+  font-size: font-size(300);
+  font-weight: font-weight(semibold);
+}

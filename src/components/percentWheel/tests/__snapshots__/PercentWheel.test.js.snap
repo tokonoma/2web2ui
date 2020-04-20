@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PercentWheel should render with no data 1`] = `
-<div
-  className="PercentWheel"
->
+<div>
   <ResponsiveContainer
     debounce={0}
     height={100}
@@ -63,7 +61,11 @@ exports[`PercentWheel should render with no data 1`] = `
         animationBegin={0}
         animationDuration={1500}
         animationEasing="ease"
-        background={true}
+        background={
+          Object {
+            "fill": "#fff",
+          }
+        }
         data={Array []}
         dataKey="value"
         hide={false}
@@ -75,13 +77,11 @@ exports[`PercentWheel should render with no data 1`] = `
     </RadialBarChart>
   </ResponsiveContainer>
   <div
-    className="value"
     name="percentWheel_value"
   >
     0%
   </div>
   <div
-    className="label"
     name="percentWheel_label"
   />
 </div>

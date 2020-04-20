@@ -1,60 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LegendItem:  should render 1`] = `
-<a
-  className="LegendItem enabled hasChildren hovered otherHovered"
+exports[`LegendItem:  renders the Hibana version of \`LegendItem\` when Hibana is enabled 1`] = `
+<OGLegendItem
+  breadcrumb={false}
+  count={2}
+  fill="#000"
+  hovered={true}
+  name="name"
   onClick={[MockFunction]}
-  title="View name"
+  otherHovered={true}
 >
-  <span
-    className="Color"
-    style={
-      Object {
-        "backgroundColor": "#000",
-      }
-    }
-  />
-  <span
-    className="Name"
-  >
-    name
-    <ChevronRight />
-  </span>
-  <span
-    className="Count"
-  >
-    2
-  </span>
-</a>
+  children
+</OGLegendItem>
+`;
+
+exports[`LegendItem:  renders the OG version of \`LegendItem\` when Hibana is not enabled 1`] = `
+<OGLegendItem
+  breadcrumb={false}
+  count={2}
+  fill="#000"
+  hovered={true}
+  name="name"
+  onClick={[MockFunction]}
+  otherHovered={true}
+>
+  children
+</OGLegendItem>
 `;
 
 exports[`LegendItem:  should render breadcrumb 1`] = `
-<a
-  className="LegendItem enabled hasChildren breadcrumb hovered otherHovered"
+<OGLegendItem
+  breadcrumb={true}
+  count={2}
+  fill="#000"
+  hovered={true}
+  name="name"
   onClick={[MockFunction]}
-  title="View name"
+  otherHovered={true}
 >
-  <span
-    className="Color"
-    style={
-      Object {
-        "backgroundColor": "#000",
-      }
-    }
-  />
-  <ChevronLeft
-    className="BreadcrumbIcon"
-  />
-  <span
-    className="Name"
-  >
-    name
-    <ChevronRight />
-  </span>
-  <span
-    className="Count"
-  >
-    2
-  </span>
-</a>
+  children
+</OGLegendItem>
 `;

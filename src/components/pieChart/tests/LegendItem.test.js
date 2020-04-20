@@ -1,10 +1,12 @@
 import React from 'react';
 import LegendItem from '../LegendItem';
 import { shallow } from 'enzyme';
+import { useHibana } from 'src/context/HibanaContext';
+
+jest.mock('src/context/HibanaContext');
 
 describe('LegendItem: ', () => {
-
-  const props = {
+  const defaultProps = {
     name: 'name',
     count: 2,
     fill: '#000',
@@ -12,26 +14,35 @@ describe('LegendItem: ', () => {
     breadcrumb: false,
     onClick: jest.fn(),
     hovered: true,
-    otherHovered: true
+    otherHovered: true,
   };
+  const subject = props => shallow(<LegendItem {...defaultProps} {...props} />);
 
-  let wrapper;
+  it('renders the OG version of `LegendItem` when Hibana is not enabled', () => {
+    useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: false }]);
+    const wrapper = subject();
 
-  beforeEach(() => {
-    wrapper = shallow(<LegendItem {...props} />);
+    expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render', () => {
+  it('renders the Hibana version of `LegendItem` when Hibana is enabled', () => {
+    useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: false }]);
+    const wrapper = subject();
+
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render breadcrumb', () => {
-    wrapper.setProps({ breadcrumb: true });
+    useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: false }]);
+    const wrapper = subject({ breadcrumb: true });
+
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should not render chevron without children', () => {
-    wrapper.setProps({ children: null });
+    useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: false }]);
+    const wrapper = subject({ children: null });
+
     expect(wrapper.find('Icon')).toHaveLength(0);
   });
 });

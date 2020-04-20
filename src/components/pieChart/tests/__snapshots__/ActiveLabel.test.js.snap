@@ -1,6 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ActiveLabel:  should render 1`] = `
+exports[`ActiveLabel:  should render the Hibana version 1`] = `
+<Box
+  className="ActiveLabel"
+>
+  <Text
+    as="div"
+    color="gray.700"
+    fontSize="400"
+    mb="200"
+  >
+    name
+  </Text>
+  <Text
+    as="div"
+    color="gray.900"
+    fontSize="400"
+    fontWeight="semibold"
+  >
+    123
+  </Text>
+</Box>
+`;
+
+exports[`ActiveLabel:  should render the OG version 1`] = `
 <div
   className="ActiveLabel"
 >

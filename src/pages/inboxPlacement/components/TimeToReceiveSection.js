@@ -1,7 +1,8 @@
 import React from 'react';
 import { Grid } from 'src/components/matchbox';
 import PercentWheel from 'src/components/percentWheel';
-import { PERCENT_WHEEL } from '../constants/graphs';
+import { useHibana } from 'src/context/HibanaContext';
+import { OG_PERCENT_WHEEL, HIBANA_PERCENT_WHEEL } from '../constants/graphs';
 
 const TTRM = [
   { key: 'under_3_minutes_pct', label: '0-3 min' },
@@ -12,16 +13,28 @@ const TTRM = [
   { key: 'never_pct', label: 'Never' },
 ];
 
-const TimeToReceiveSection = ({ data = {} }) => (
-  <div>
-    <Grid>
-      {TTRM.map(({ key, label }) => (
-        <Grid.Column xs={4} md={2} key={`${key}`}>
-          <PercentWheel color={PERCENT_WHEEL.color} label={label} value={data[key]} size={130} />
-        </Grid.Column>
-      ))}
-    </Grid>
-  </div>
-);
+const TimeToReceiveSection = ({ data = {} }) => {
+  const [state] = useHibana();
+  const { isHibanaEnabled } = state;
+  const colorConfig = isHibanaEnabled ? HIBANA_PERCENT_WHEEL : OG_PERCENT_WHEEL;
+
+  return (
+    <div>
+      <Grid>
+        {TTRM.map(({ key, label }) => (
+          <Grid.Column xs={4} md={2} key={`${key}`}>
+            <PercentWheel
+              color={colorConfig.color}
+              backgroundColor={colorConfig.background}
+              label={label}
+              value={data[key]}
+              size={130}
+            />
+          </Grid.Column>
+        ))}
+      </Grid>
+    </div>
+  );
+};
 
 export default TimeToReceiveSection;

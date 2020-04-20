@@ -1,0 +1,25 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.LegendItem {
+  position: relative;
+  padding: spacing(200);
+  transition: background-color motion-duration(fast) motion-ease(in-out),
+    opacity motion-duration(fast) motion-ease(in-out);
+
+  &.isClickable {
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      background-color: color(gray, 200);
+    }
+  }
+
+  &.isHovered {
+    background-color: color(gray, 200);
+  }
+
+  &.anotherIsHovered {
+    opacity: 0.7;
+  }
+}

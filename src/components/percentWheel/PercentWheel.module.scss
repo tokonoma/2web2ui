@@ -2,17 +2,20 @@
 
 .PercentWheel {
   position: relative;
+}
 
-  >.value {
-    transform: translate(-50%, -100%);
-    top: 50%;
-    left: 50%;
-    position: absolute;
-    @media screen and (min-width: breakpoint(medium)) and (max-width: breakpoint(large)) {
-      font-size: rem(10);
-    }
-  };
-  >.label {
-    text-align: center
+.value {
+  transform: translate(-50%, -100%);
+  top: 50%;
+  left: 50%;
+  position: absolute;
+
+  // TODO: Remove this media query when OG theme is removed
+  @media screen and (min-width: breakpoint(medium)) and (max-width: breakpoint(large)) {
+    font-size: rem(10);
   }
+}
+
+.label {
+  text-align: center;
 }
