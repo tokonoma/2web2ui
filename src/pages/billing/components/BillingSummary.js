@@ -110,7 +110,6 @@ export default class BillingSummary extends Component {
       canPurchaseIps,
       invoices,
       accountAgeInDays,
-      hasRecipientValidation,
     } = this.props;
     const { rvUsage, pending_cancellation, subscription, billing = {} } = account;
     const { show } = this.state;
@@ -119,7 +118,6 @@ export default class BillingSummary extends Component {
       billing !== null && !billing.credit_card && subscription.type === 'default';
 
     const volumeUsed = _.get(rvUsage, 'recipient_validation.month.used', 0);
-    const showRecipientValidation = hasRecipientValidation && rvUsage;
 
     const changePlanActions = [];
     if (!pending_cancellation && canChangePlan && !isTransitioningToSelfServe) {
@@ -143,7 +141,7 @@ export default class BillingSummary extends Component {
             </LabelledValue>
           </Panel.Section>
           {canPurchaseIps && this.renderDedicatedIpSummarySection(isTransitioningToSelfServe)}
-          {showRecipientValidation && this.renderRecipientValidationSection({ rvUsage })}
+          {rvUsage && this.renderRecipientValidationSection({ rvUsage })}
         </Panel>
 
         {canUpdateBillingInfo && this.renderSummary()}

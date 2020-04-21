@@ -79,6 +79,26 @@ exports[`Component: Billing Summary should render correctly for a paid plan 1`] 
         }
       }
     />
+    <Panel.Section>
+      <LabelledValue
+        label="Recipient Validation"
+      >
+        <h6>
+          123,123
+           emails validated for 
+          $599.37
+          <small>
+             as of 
+            Jun 9 2019, 8:00pm
+          </small>
+        </h6>
+        <UnstyledLink
+          onClick={[Function]}
+        >
+          How was this calculated?
+        </UnstyledLink>
+      </LabelledValue>
+    </Panel.Section>
   </Panel>
   <Panel
     data-id="billing-panel"
@@ -198,6 +218,26 @@ exports[`Component: Billing Summary should render correctly for a standard free 
         />
       </LabelledValue>
     </Panel.Section>
+    <Panel.Section>
+      <LabelledValue
+        label="Recipient Validation"
+      >
+        <h6>
+          123,123
+           emails validated for 
+          $599.37
+          <small>
+             as of 
+            Jun 9 2019, 8:00pm
+          </small>
+        </h6>
+        <UnstyledLink
+          onClick={[Function]}
+        >
+          How was this calculated?
+        </UnstyledLink>
+      </LabelledValue>
+    </Panel.Section>
   </Panel>
   <PremiumBanner />
   <EnterpriseBanner />
@@ -275,6 +315,26 @@ exports[`Component: Billing Summary should render correctly if you can't buy IPs
             }
           }
         />
+      </LabelledValue>
+    </Panel.Section>
+    <Panel.Section>
+      <LabelledValue
+        label="Recipient Validation"
+      >
+        <h6>
+          123,123
+           emails validated for 
+          $599.37
+          <small>
+             as of 
+            Jun 9 2019, 8:00pm
+          </small>
+        </h6>
+        <UnstyledLink
+          onClick={[Function]}
+        >
+          How was this calculated?
+        </UnstyledLink>
       </LabelledValue>
     </Panel.Section>
   </Panel>
@@ -397,6 +457,26 @@ exports[`Component: Billing Summary should render correctly if you can't change 
         }
       }
     />
+    <Panel.Section>
+      <LabelledValue
+        label="Recipient Validation"
+      >
+        <h6>
+          123,123
+           emails validated for 
+          $599.37
+          <small>
+             as of 
+            Jun 9 2019, 8:00pm
+          </small>
+        </h6>
+        <UnstyledLink
+          onClick={[Function]}
+        >
+          How was this calculated?
+        </UnstyledLink>
+      </LabelledValue>
+    </Panel.Section>
   </Panel>
   <Panel
     data-id="billing-panel"
@@ -526,6 +606,26 @@ exports[`Component: Billing Summary should render correctly if you can't update 
         }
       }
     />
+    <Panel.Section>
+      <LabelledValue
+        label="Recipient Validation"
+      >
+        <h6>
+          123,123
+           emails validated for 
+          $599.37
+          <small>
+             as of 
+            Jun 9 2019, 8:00pm
+          </small>
+        </h6>
+        <UnstyledLink
+          onClick={[Function]}
+        >
+          How was this calculated?
+        </UnstyledLink>
+      </LabelledValue>
+    </Panel.Section>
   </Panel>
   <PremiumBanner />
   <EnterpriseBanner />
@@ -615,6 +715,26 @@ exports[`Component: Billing Summary should render with IP modal open 1`] = `
         }
       }
     />
+    <Panel.Section>
+      <LabelledValue
+        label="Recipient Validation"
+      >
+        <h6>
+          123,123
+           emails validated for 
+          $599.37
+          <small>
+             as of 
+            Jun 9 2019, 8:00pm
+          </small>
+        </h6>
+        <UnstyledLink
+          onClick={[Function]}
+        >
+          How was this calculated?
+        </UnstyledLink>
+      </LabelledValue>
+    </Panel.Section>
   </Panel>
   <Panel
     data-id="billing-panel"
@@ -748,6 +868,26 @@ exports[`Component: Billing Summary should render with the billing contact modal
         }
       }
     />
+    <Panel.Section>
+      <LabelledValue
+        label="Recipient Validation"
+      >
+        <h6>
+          123,123
+           emails validated for 
+          $599.37
+          <small>
+             as of 
+            Jun 9 2019, 8:00pm
+          </small>
+        </h6>
+        <UnstyledLink
+          onClick={[Function]}
+        >
+          How was this calculated?
+        </UnstyledLink>
+      </LabelledValue>
+    </Panel.Section>
   </Panel>
   <Panel
     data-id="billing-panel"
@@ -881,6 +1021,26 @@ exports[`Component: Billing Summary should render with the payment info modal op
         }
       }
     />
+    <Panel.Section>
+      <LabelledValue
+        label="Recipient Validation"
+      >
+        <h6>
+          123,123
+           emails validated for 
+          $599.37
+          <small>
+             as of 
+            Jun 9 2019, 8:00pm
+          </small>
+        </h6>
+        <UnstyledLink
+          onClick={[Function]}
+        >
+          How was this calculated?
+        </UnstyledLink>
+      </LabelledValue>
+    </Panel.Section>
   </Panel>
   <Panel
     data-id="billing-panel"
@@ -1014,6 +1174,26 @@ exports[`Component: Billing Summary should show the invoice history if there are
         }
       }
     />
+    <Panel.Section>
+      <LabelledValue
+        label="Recipient Validation"
+      >
+        <h6>
+          123,123
+           emails validated for 
+          $599.37
+          <small>
+             as of 
+            Jun 9 2019, 8:00pm
+          </small>
+        </h6>
+        <UnstyledLink
+          onClick={[Function]}
+        >
+          How was this calculated?
+        </UnstyledLink>
+      </LabelledValue>
+    </Panel.Section>
   </Panel>
   <Panel
     data-id="billing-panel"

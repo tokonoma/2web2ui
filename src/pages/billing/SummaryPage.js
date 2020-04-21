@@ -7,7 +7,7 @@ import { selectBillingInfo, selectAccountBilling } from 'src/selectors/accountBi
 import { selectAccountAgeInDays } from 'src/selectors/accountAge';
 import ConditionSwitch, { defaultCase } from 'src/components/auth/ConditionSwitch';
 import { getSubscription } from 'src/actions/billing';
-import { isSuspendedForBilling, hasAccountOptionEnabled } from 'src/helpers/conditions/account';
+import { isSuspendedForBilling } from 'src/helpers/conditions/account';
 import { Loading } from 'src/components';
 import BillingSummary from './components/BillingSummary';
 import ManuallyBilledOrAwsBanner from './components/ManuallyBilledOrAwsBanner';
@@ -46,7 +46,6 @@ export class BillingSummaryPage extends Component {
       sendingIps,
       invoices,
       accountAgeInDays,
-      hasRecipientValidation,
       subscription,
     } = this.props;
     const suspendedBilling = (
@@ -67,7 +66,6 @@ export class BillingSummaryPage extends Component {
     const billingSummary = (
       <BillingSummary
         condition={defaultCase}
-        hasRecipientValidation={hasRecipientValidation}
         account={account}
         subscription={subscription}
         {...billingInfo}
@@ -101,7 +99,6 @@ const mapStateToProps = state => {
     billingInfo: selectBillingInfo(state),
     sendingIps: state.sendingIps.list,
     invoices: state.invoices.list,
-    hasRecipientValidation: hasAccountOptionEnabled('recipient_validation')(state),
   };
 };
 export default connect(mapStateToProps, {
