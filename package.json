@@ -193,7 +193,7 @@
     "postcss-loader": "3.0.0",
     "postcss-preset-env": "6.5.0",
     "postcss-safe-parser": "4.0.1",
-    "prettier": "^1.19.1",
+    "prettier": "^2.0.5",
     "promise": "^8.0.1",
     "prompts": "^2.2.1",
     "react-app-polyfill": "^0.2.0",
