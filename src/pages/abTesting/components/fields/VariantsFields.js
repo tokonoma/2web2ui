@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Field, FieldArray } from 'redux-form';
-import { Grid, Button, Panel } from 'src/components/matchbox';
+import { Grid, Box, Button, OGOnlyWrapper, Panel } from 'src/components/matchbox';
 import { Add } from '@sparkpost/matchbox-icons';
 import { TextFieldWrapper } from 'src/components/reduxFormWrappers';
 import { TemplateTypeaheadWrapper } from 'src/components/reduxFormWrappers';
@@ -41,7 +41,7 @@ export const SampleSizeField = ({ namespace, ...props }) => (
   If you're looking at this, refer to https://redux-form.com/7.4.2/examples/fieldarrays/
  */
 export const RenderVariants = ({ fields, formValues, disabled, subaccountId }) => (
-  <Panel>
+  <OGOnlyWrapper as={Panel}>
     {fields.map((variant, i) => {
       const CountField =
         formValues.audience_selection === 'sample_size' ? SampleSizeField : PercentField;
@@ -83,7 +83,7 @@ export const RenderVariants = ({ fields, formValues, disabled, subaccountId }) =
         <Add /> Add Another Variant
       </Button>
     </Panel.Section>
-  </Panel>
+  </OGOnlyWrapper>
 );
 
 const VariantsFields = ({ disabled, formValues, subaccountId }) => {
@@ -91,35 +91,37 @@ const VariantsFields = ({ disabled, formValues, subaccountId }) => {
     formValues.audience_selection === 'sample_size' ? SampleSizeField : PercentField;
   return (
     <Fragment>
-      <Panel sectioned>
-        <h6 className={styles.SmallHeader}>Default Template</h6>
-        <Grid>
-          <Grid.Column>
-            <Field
-              name="default_template.template_object"
-              component={TemplateTypeaheadWrapper}
-              label="Select a published template"
-              placeholder="Type to search"
-              validate={required}
-              disabled={disabled}
-              subaccountId={subaccountId}
-            />
-          </Grid.Column>
-          <Grid.Column>
-            <CountField namespace="default_template" disabled={disabled} />
-          </Grid.Column>
-        </Grid>
-      </Panel>
-      <FieldArray
-        name="variants"
-        component={RenderVariants}
-        formValues={formValues}
-        disabled={disabled}
-        subaccountId={subaccountId}
-      />
+      <Box as={Panel}>
+        <OGOnlyWrapper as={Panel}>
+          <Panel.Section>
+            <h6 className={styles.SmallHeader}>Default Template</h6>
+            <Grid>
+              <Grid.Column>
+                <Field
+                  name="default_template.template_object"
+                  component={TemplateTypeaheadWrapper}
+                  label="Select a published template"
+                  placeholder="Type to search"
+                  validate={required}
+                  disabled={disabled}
+                  subaccountId={subaccountId}
+                />
+              </Grid.Column>
+              <Grid.Column>
+                <CountField namespace="default_template" disabled={disabled} />
+              </Grid.Column>
+            </Grid>
+          </Panel.Section>
+        </OGOnlyWrapper>
 
-      {/* This is a temporary hack to make sure at least some of the last typeahead is visible on screen */}
-      <div style={{ height: '200px' }} />
+        <FieldArray
+          name="variants"
+          component={RenderVariants}
+          formValues={formValues}
+          disabled={disabled}
+          subaccountId={subaccountId}
+        />
+      </Box>
     </Fragment>
   );
 };

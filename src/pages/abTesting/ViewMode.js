@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Page } from 'src/components/matchbox';
+import { Box, Page, Panel } from 'src/components/matchbox';
 import { Save } from '@sparkpost/matchbox-icons';
 import Section from './components/Section';
 import StatusPanel from './components/StatusPanel';
@@ -90,8 +90,14 @@ export class ViewMode extends Component {
             <StatusContent test={test} />
           </Section.Left>
           <Section.Right>
-            <StatusPanel test={test} subaccountId={subaccountId} subaccountName={subaccountName} />
-            <StatusView test={test} />
+            <Box as={Panel}>
+              <StatusPanel
+                test={test}
+                subaccountId={subaccountId}
+                subaccountName={subaccountName}
+              />
+              <StatusView test={test} />
+            </Box>
           </Section.Right>
         </Section>
 
@@ -100,7 +106,9 @@ export class ViewMode extends Component {
             <SettingsContent test={test} />
           </Section.Left>
           <Section.Right>
-            <SettingsView test={test} />
+            <Box as={Panel}>
+              <SettingsView test={test} />
+            </Box>
           </Section.Right>
         </Section>
 
@@ -109,7 +117,9 @@ export class ViewMode extends Component {
             <VariantsContent test={test} />
           </Section.Left>
           <Section.Right>
-            <VariantsView test={test} subaccountId={subaccountId} />
+            <Box as={Panel}>
+              <VariantsView test={test} subaccountId={subaccountId} />
+            </Box>
           </Section.Right>
         </Section>
 

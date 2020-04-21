@@ -17,7 +17,7 @@ import { listTemplates } from 'src/actions/templates';
 import { selectEditInitialValues } from 'src/selectors/abTesting';
 import { formatFormValues } from 'src/helpers/abTesting';
 
-import { Page } from 'src/components/matchbox';
+import { Box, Page, Panel } from 'src/components/matchbox';
 import { Save } from '@sparkpost/matchbox-icons';
 import Section from './components/Section';
 import StatusPanel from './components/StatusPanel';
@@ -141,8 +141,14 @@ export class EditMode extends Component {
             <StatusContent test={test} rescheduling={rescheduling} />
           </Section.Left>
           <Section.Right>
-            <StatusPanel test={test} subaccountId={subaccountId} subaccountName={subaccountName} />
-            <StatusFields disabled={submitting} />
+            <Box as={Panel}>
+              <StatusPanel
+                test={test}
+                subaccountId={subaccountId}
+                subaccountName={subaccountName}
+              />
+              <StatusFields disabled={submitting} />
+            </Box>
           </Section.Right>
         </Section>
 
@@ -151,7 +157,9 @@ export class EditMode extends Component {
             <SettingsContent test={test} />
           </Section.Left>
           <Section.Right>
-            <SettingsFields formValues={formValues} disabled={submitting} />
+            <Box as={Panel}>
+              <SettingsFields formValues={formValues} disabled={submitting} />
+            </Box>
           </Section.Right>
         </Section>
 

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { PageLink } from 'src/components/links';
-import { Panel, Tooltip } from 'src/components/matchbox';
+import { OGOnlyWrapper, Panel, Tooltip } from 'src/components/matchbox';
 import { InfoOutline } from '@sparkpost/matchbox-icons';
 import { LabelledValue, Unit } from 'src/components';
 import { hasTestDelivered } from 'src/helpers/abTesting';
@@ -72,7 +72,7 @@ export const Engagement = ({ variant, showRate }) => {
 };
 
 export const Variant = ({ variant = {}, title, showRate }) => (
-  <Panel>
+  <OGOnlyWrapper as={Panel}>
     <Panel.Section
       actions={[
         {
@@ -94,7 +94,7 @@ export const Variant = ({ variant = {}, title, showRate }) => (
       <PercentOrSample variant={variant} />
     </Panel.Section>
     <Engagement variant={variant} showRate={showRate} />
-  </Panel>
+  </OGOnlyWrapper>
 );
 
 const VariantsView = ({ test }) => {
