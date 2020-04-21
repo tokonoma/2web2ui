@@ -14,6 +14,7 @@ export { default as Grid } from './Grid';
 export { default as Inline } from './Inline';
 export { default as Label } from './Label';
 export { default as Modal } from './Modal';
+export { default as OGOnlyWrapper } from './OGOnlyWrapper';
 export { default as Page } from './Page';
 export { default as Pager } from './Pager';
 export { default as Pagination } from './Pagination';
