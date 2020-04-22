@@ -1,18 +1,18 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import Section from '../Section';
+import { OGSection } from '../Section';
+import { useHibana } from 'src/context/HibanaContext';
+
+jest.mock('src/context/HibanaContext');
 
 describe('Section Component', () => {
   it('should render correctly', () => {
+    useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: false }]);
     const wrapper = shallow(
-      <Section title='a section'>
-        <Section.Left>
-          left
-        </Section.Left>
-        <Section.Right>
-          right
-        </Section.Right>
-      </Section>
+      <OGSection title="a section">
+        <OGSection.Left>left</OGSection.Left>
+        <OGSection.Right>right</OGSection.Right>
+      </OGSection>,
     );
 
     expect(wrapper).toMatchSnapshot();

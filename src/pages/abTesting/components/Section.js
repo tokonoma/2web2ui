@@ -3,7 +3,7 @@ import { Grid, Text } from 'src/components/matchbox';
 import styles from './Section.module.scss';
 import useHibanaToggle from 'src/hooks/useHibanaToggle';
 
-const OGLeft = ({ children }) => (
+export const OGLeft = ({ children }) => (
   <Grid.Column xs={12} lg={5}>
     <div className={styles.Left}>{children}</div>
   </Grid.Column>
@@ -13,9 +13,8 @@ const HibanaLeft = ({ children }) => (
     <div className={styles.Left}>{children}</div>
   </Grid.Column>
 );
-const Left = props => useHibanaToggle(OGLeft, HibanaLeft)(props);
 
-const OGRight = ({ children }) => (
+export const OGRight = ({ children }) => (
   <Grid.Column xs={12} lg={7}>
     <div className={styles.Right}>{children}</div>
   </Grid.Column>
@@ -27,9 +26,7 @@ const HibanaRight = ({ children }) => (
   </Grid.Column>
 );
 
-const Right = props => useHibanaToggle(OGRight, HibanaRight)(props);
-
-function OGSection(props) {
+export function OGSection(props) {
   const { title, children } = props;
 
   return (
@@ -40,6 +37,11 @@ function OGSection(props) {
     </div>
   );
 }
+
+OGSection.Left = OGLeft;
+OGSection.Right = OGRight;
+OGSection.Left.displayName = 'Left';
+OGSection.Right.displayName = 'Right';
 
 function HibanaSection(props) {
   const { title, children } = props;
@@ -54,10 +56,13 @@ function HibanaSection(props) {
   );
 }
 
+HibanaSection.Left = HibanaLeft;
+HibanaSection.Right = HibanaRight;
+HibanaSection.Left.displayName = 'Left';
+HibanaSection.Right.displayName = 'Right';
+
 function Section(props) {
   return useHibanaToggle(OGSection, HibanaSection)(props);
 }
-Section.Left = Left;
-Section.Right = Right;
 
 export default Section;
