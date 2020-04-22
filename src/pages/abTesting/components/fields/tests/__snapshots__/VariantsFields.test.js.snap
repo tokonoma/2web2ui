@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Variants Fields Component Field Array should render 1 field with disabled remove button 1`] = `
-<Panel>
+<OGOnlyWrapper
+  as={[Function]}
+>
   <Panel.Section
     key="0"
   >
-    <div
-      className="RemoveWrapper"
-    >
+    <div>
       <Button
         color="orange"
         disabled={true}
@@ -18,9 +18,7 @@ exports[`Variants Fields Component Field Array should render 1 field with disabl
         Remove Variant
       </Button>
     </div>
-    <h6
-      className="SmallHeader"
-    >
+    <h6>
       Variant 
       1
     </h6>
@@ -54,17 +52,17 @@ exports[`Variants Fields Component Field Array should render 1 field with disabl
        Add Another Variant
     </Button>
   </Panel.Section>
-</Panel>
+</OGOnlyWrapper>
 `;
 
 exports[`Variants Fields Component Field Array should render 20 fields with disabled add button 1`] = `
-<Panel>
+<OGOnlyWrapper
+  as={[Function]}
+>
   <Panel.Section
     key="0"
   >
-    <div
-      className="RemoveWrapper"
-    >
+    <div>
       <Button
         color="orange"
         disabled={false}
@@ -75,9 +73,7 @@ exports[`Variants Fields Component Field Array should render 20 fields with disa
         Remove Variant
       </Button>
     </div>
-    <h6
-      className="SmallHeader"
-    >
+    <h6>
       Variant 
       1
     </h6>
@@ -103,9 +99,7 @@ exports[`Variants Fields Component Field Array should render 20 fields with disa
   <Panel.Section
     key="1"
   >
-    <div
-      className="RemoveWrapper"
-    >
+    <div>
       <Button
         color="orange"
         disabled={false}
@@ -116,9 +110,7 @@ exports[`Variants Fields Component Field Array should render 20 fields with disa
         Remove Variant
       </Button>
     </div>
-    <h6
-      className="SmallHeader"
-    >
+    <h6>
       Variant 
       2
     </h6>
@@ -152,17 +144,17 @@ exports[`Variants Fields Component Field Array should render 20 fields with disa
        Add Another Variant
     </Button>
   </Panel.Section>
-</Panel>
+</OGOnlyWrapper>
 `;
 
 exports[`Variants Fields Component Field Array should render fields correctly with percent fields 1`] = `
-<Panel>
+<OGOnlyWrapper
+  as={[Function]}
+>
   <Panel.Section
     key="0"
   >
-    <div
-      className="RemoveWrapper"
-    >
+    <div>
       <Button
         color="orange"
         disabled={false}
@@ -173,9 +165,7 @@ exports[`Variants Fields Component Field Array should render fields correctly wi
         Remove Variant
       </Button>
     </div>
-    <h6
-      className="SmallHeader"
-    >
+    <h6>
       Variant 
       1
     </h6>
@@ -201,9 +191,7 @@ exports[`Variants Fields Component Field Array should render fields correctly wi
   <Panel.Section
     key="1"
   >
-    <div
-      className="RemoveWrapper"
-    >
+    <div>
       <Button
         color="orange"
         disabled={false}
@@ -214,9 +202,7 @@ exports[`Variants Fields Component Field Array should render fields correctly wi
         Remove Variant
       </Button>
     </div>
-    <h6
-      className="SmallHeader"
-    >
+    <h6>
       Variant 
       2
     </h6>
@@ -250,17 +236,17 @@ exports[`Variants Fields Component Field Array should render fields correctly wi
        Add Another Variant
     </Button>
   </Panel.Section>
-</Panel>
+</OGOnlyWrapper>
 `;
 
 exports[`Variants Fields Component Field Array should render fields correctly with sample size fields 1`] = `
-<Panel>
+<OGOnlyWrapper
+  as={[Function]}
+>
   <Panel.Section
     key="0"
   >
-    <div
-      className="RemoveWrapper"
-    >
+    <div>
       <Button
         color="orange"
         disabled={false}
@@ -271,9 +257,7 @@ exports[`Variants Fields Component Field Array should render fields correctly wi
         Remove Variant
       </Button>
     </div>
-    <h6
-      className="SmallHeader"
-    >
+    <h6>
       Variant 
       1
     </h6>
@@ -299,9 +283,7 @@ exports[`Variants Fields Component Field Array should render fields correctly wi
   <Panel.Section
     key="1"
   >
-    <div
-      className="RemoveWrapper"
-    >
+    <div>
       <Button
         color="orange"
         disabled={false}
@@ -312,9 +294,7 @@ exports[`Variants Fields Component Field Array should render fields correctly wi
         Remove Variant
       </Button>
     </div>
-    <h6
-      className="SmallHeader"
-    >
+    <h6>
       Variant 
       2
     </h6>
@@ -348,7 +328,7 @@ exports[`Variants Fields Component Field Array should render fields correctly wi
        Add Another Variant
     </Button>
   </Panel.Section>
-</Panel>
+</OGOnlyWrapper>
 `;
 
 exports[`Variants Fields Component Percent Field should render correctly 1`] = `
@@ -389,92 +369,88 @@ exports[`Variants Fields Component Sample Size Field should render correctly 1`]
 
 exports[`Variants Fields Component should render percent audience selection correctly 1`] = `
 <Fragment>
-  <Panel
-    sectioned={true}
+  <Box
+    as={[Function]}
+    mt="400"
   >
-    <h6
-      className="SmallHeader"
+    <OGOnlyWrapper
+      as={[Function]}
     >
-      Default Template
-    </h6>
-    <Grid>
-      <Grid.Column>
-        <Field
-          component={[Function]}
-          label="Select a published template"
-          name="default_template.template_object"
-          placeholder="Type to search"
-          validate={[Function]}
-        />
-      </Grid.Column>
-      <Grid.Column>
-        <PercentField
-          namespace="default_template"
-        />
-      </Grid.Column>
-    </Grid>
-  </Panel>
-  <FieldArray
-    component={[Function]}
-    formValues={
-      Object {
-        "audience_selection": "percent",
+      <Panel.Section>
+        <h6>
+          Default Template
+        </h6>
+        <Grid>
+          <Grid.Column>
+            <Field
+              component={[Function]}
+              label="Select a published template"
+              name="default_template.template_object"
+              placeholder="Type to search"
+              validate={[Function]}
+            />
+          </Grid.Column>
+          <Grid.Column>
+            <PercentField
+              namespace="default_template"
+            />
+          </Grid.Column>
+        </Grid>
+      </Panel.Section>
+    </OGOnlyWrapper>
+    <FieldArray
+      component={[Function]}
+      formValues={
+        Object {
+          "audience_selection": "percent",
+        }
       }
-    }
-    name="variants"
-  />
-  <div
-    style={
-      Object {
-        "height": "200px",
-      }
-    }
-  />
+      name="variants"
+    />
+  </Box>
 </Fragment>
 `;
 
 exports[`Variants Fields Component should render sample size audience selection correctly 1`] = `
 <Fragment>
-  <Panel
-    sectioned={true}
+  <Box
+    as={[Function]}
+    mt="400"
   >
-    <h6
-      className="SmallHeader"
+    <OGOnlyWrapper
+      as={[Function]}
     >
-      Default Template
-    </h6>
-    <Grid>
-      <Grid.Column>
-        <Field
-          component={[Function]}
-          label="Select a published template"
-          name="default_template.template_object"
-          placeholder="Type to search"
-          validate={[Function]}
-        />
-      </Grid.Column>
-      <Grid.Column>
-        <SampleSizeField
-          namespace="default_template"
-        />
-      </Grid.Column>
-    </Grid>
-  </Panel>
-  <FieldArray
-    component={[Function]}
-    formValues={
-      Object {
-        "audience_selection": "sample_size",
+      <Panel.Section>
+        <h6>
+          Default Template
+        </h6>
+        <Grid>
+          <Grid.Column>
+            <Field
+              component={[Function]}
+              label="Select a published template"
+              name="default_template.template_object"
+              placeholder="Type to search"
+              validate={[Function]}
+            />
+          </Grid.Column>
+          <Grid.Column>
+            <SampleSizeField
+              namespace="default_template"
+            />
+          </Grid.Column>
+        </Grid>
+      </Panel.Section>
+    </OGOnlyWrapper>
+    <FieldArray
+      component={[Function]}
+      formValues={
+        Object {
+          "audience_selection": "sample_size",
+        }
       }
-    }
-    name="variants"
-  />
-  <div
-    style={
-      Object {
-        "height": "200px",
-      }
-    }
-  />
+      name="variants"
+    />
+  </Box>
 </Fragment>
 `;
