@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { LINKS } from 'src/constants';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 
 // Actions
@@ -10,9 +9,9 @@ import { listTemplates } from 'src/actions/templates';
 
 // Components
 import { PageLink } from 'src/components/links';
-import { Panel, Page } from 'src/components/matchbox';
+import { Panel, Page, Text } from 'src/components/matchbox';
 import AbTestCreateForm from './components/AbTestCreateForm.container';
-export class CreatePage extends Component {
+export class CreatePageHibana extends Component {
   componentDidMount() {
     // Get templates here for the typeahead
     // Ensures the list is always up to date
@@ -35,23 +34,12 @@ export class CreatePage extends Component {
   render() {
     return (
       <Page
-        breadcrumbAction={{
-          content: 'Back to A/B Tests',
-          component: PageLink,
-          to: '/ab-testing',
-        }}
+        breadcrumbAction={{ content: 'Back to A/B Tests', component: PageLink, to: '/ab-testing' }}
       >
-        <Panel
-          title="Create a New A/B Test"
-          actions={[
-            {
-              content: 'Learn more about A/B tests',
-              color: 'orange',
-              to: LINKS.AB_TESTING_API,
-              external: true,
-            },
-          ]}
-        >
+        <Text as="h1" fontWeight="500" marginTop={-15} mb={20}>
+          Create a New A/B Test
+        </Text>
+        <Panel>
           <AbTestCreateForm onSubmit={this.create} />
         </Panel>
       </Page>
@@ -59,4 +47,4 @@ export class CreatePage extends Component {
   }
 }
 
-export default connect(null, { createAbTestDraft, showAlert, listTemplates })(CreatePage);
+export default connect(null, { createAbTestDraft, showAlert, listTemplates })(CreatePageHibana);
