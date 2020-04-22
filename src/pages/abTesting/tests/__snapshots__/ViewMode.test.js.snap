@@ -57,35 +57,39 @@ exports[`Page: A/B Test View Mode should render cancelled status correctly 1`] =
       />
     </Left>
     <Right>
-      <withRouter(Connect(StatusPanel))
-        subaccountId="101"
-        test={
-          Object {
-            "default_template": Object {
-              "template_id": "ab-test-1",
-            },
-            "id": "id-1",
-            "name": "my ab test 1",
-            "status": "cancelled",
-            "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": 5,
+      <Box
+        as={[Function]}
+      >
+        <withRouter(Connect(StatusPanel))
+          subaccountId="101"
+          test={
+            Object {
+              "default_template": Object {
+                "template_id": "ab-test-1",
+              },
+              "id": "id-1",
+              "name": "my ab test 1",
+              "status": "cancelled",
+              "updated_at": "2018-10-21T10:10:10.000Z",
+              "version": 5,
+            }
           }
-        }
-      />
-      <StatusView
-        test={
-          Object {
-            "default_template": Object {
-              "template_id": "ab-test-1",
-            },
-            "id": "id-1",
-            "name": "my ab test 1",
-            "status": "cancelled",
-            "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": 5,
+        />
+        <StatusView
+          test={
+            Object {
+              "default_template": Object {
+                "template_id": "ab-test-1",
+              },
+              "id": "id-1",
+              "name": "my ab test 1",
+              "status": "cancelled",
+              "updated_at": "2018-10-21T10:10:10.000Z",
+              "version": 5,
+            }
           }
-        }
-      />
+        />
+      </Box>
     </Right>
   </Section>
   <Section
@@ -108,20 +112,24 @@ exports[`Page: A/B Test View Mode should render cancelled status correctly 1`] =
       />
     </Left>
     <Right>
-      <SettingsView
-        test={
-          Object {
-            "default_template": Object {
-              "template_id": "ab-test-1",
-            },
-            "id": "id-1",
-            "name": "my ab test 1",
-            "status": "cancelled",
-            "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": 5,
+      <Box
+        as={[Function]}
+      >
+        <SettingsView
+          test={
+            Object {
+              "default_template": Object {
+                "template_id": "ab-test-1",
+              },
+              "id": "id-1",
+              "name": "my ab test 1",
+              "status": "cancelled",
+              "updated_at": "2018-10-21T10:10:10.000Z",
+              "version": 5,
+            }
           }
-        }
-      />
+        />
+      </Box>
     </Right>
   </Section>
   <Section
@@ -144,21 +152,25 @@ exports[`Page: A/B Test View Mode should render cancelled status correctly 1`] =
       />
     </Left>
     <Right>
-      <VariantsView
-        subaccountId="101"
-        test={
-          Object {
-            "default_template": Object {
-              "template_id": "ab-test-1",
-            },
-            "id": "id-1",
-            "name": "my ab test 1",
-            "status": "cancelled",
-            "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": 5,
+      <Box
+        as={[Function]}
+      >
+        <VariantsView
+          subaccountId="101"
+          test={
+            Object {
+              "default_template": Object {
+                "template_id": "ab-test-1",
+              },
+              "id": "id-1",
+              "name": "my ab test 1",
+              "status": "cancelled",
+              "updated_at": "2018-10-21T10:10:10.000Z",
+              "version": 5,
+            }
           }
-        }
-      />
+        />
+      </Box>
     </Right>
   </Section>
   <ConfirmationModal
@@ -233,35 +245,39 @@ exports[`Page: A/B Test View Mode should render completed status correctly 1`] =
       />
     </Left>
     <Right>
-      <withRouter(Connect(StatusPanel))
-        subaccountId="101"
-        test={
-          Object {
-            "default_template": Object {
-              "template_id": "ab-test-1",
-            },
-            "id": "id-1",
-            "name": "my ab test 1",
-            "status": "completed",
-            "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": 5,
+      <Box
+        as={[Function]}
+      >
+        <withRouter(Connect(StatusPanel))
+          subaccountId="101"
+          test={
+            Object {
+              "default_template": Object {
+                "template_id": "ab-test-1",
+              },
+              "id": "id-1",
+              "name": "my ab test 1",
+              "status": "completed",
+              "updated_at": "2018-10-21T10:10:10.000Z",
+              "version": 5,
+            }
           }
-        }
-      />
-      <StatusView
-        test={
-          Object {
-            "default_template": Object {
-              "template_id": "ab-test-1",
-            },
-            "id": "id-1",
-            "name": "my ab test 1",
-            "status": "completed",
-            "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": 5,
+        />
+        <StatusView
+          test={
+            Object {
+              "default_template": Object {
+                "template_id": "ab-test-1",
+              },
+              "id": "id-1",
+              "name": "my ab test 1",
+              "status": "completed",
+              "updated_at": "2018-10-21T10:10:10.000Z",
+              "version": 5,
+            }
           }
-        }
-      />
+        />
+      </Box>
     </Right>
   </Section>
   <Section
@@ -284,20 +300,24 @@ exports[`Page: A/B Test View Mode should render completed status correctly 1`] =
       />
     </Left>
     <Right>
-      <SettingsView
-        test={
-          Object {
-            "default_template": Object {
-              "template_id": "ab-test-1",
-            },
-            "id": "id-1",
-            "name": "my ab test 1",
-            "status": "completed",
-            "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": 5,
+      <Box
+        as={[Function]}
+      >
+        <SettingsView
+          test={
+            Object {
+              "default_template": Object {
+                "template_id": "ab-test-1",
+              },
+              "id": "id-1",
+              "name": "my ab test 1",
+              "status": "completed",
+              "updated_at": "2018-10-21T10:10:10.000Z",
+              "version": 5,
+            }
           }
-        }
-      />
+        />
+      </Box>
     </Right>
   </Section>
   <Section
@@ -320,21 +340,25 @@ exports[`Page: A/B Test View Mode should render completed status correctly 1`] =
       />
     </Left>
     <Right>
-      <VariantsView
-        subaccountId="101"
-        test={
-          Object {
-            "default_template": Object {
-              "template_id": "ab-test-1",
-            },
-            "id": "id-1",
-            "name": "my ab test 1",
-            "status": "completed",
-            "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": 5,
+      <Box
+        as={[Function]}
+      >
+        <VariantsView
+          subaccountId="101"
+          test={
+            Object {
+              "default_template": Object {
+                "template_id": "ab-test-1",
+              },
+              "id": "id-1",
+              "name": "my ab test 1",
+              "status": "completed",
+              "updated_at": "2018-10-21T10:10:10.000Z",
+              "version": 5,
+            }
           }
-        }
-      />
+        />
+      </Box>
     </Right>
   </Section>
   <ConfirmationModal
@@ -397,35 +421,39 @@ exports[`Page: A/B Test View Mode should render running status correctly 1`] = `
       />
     </Left>
     <Right>
-      <withRouter(Connect(StatusPanel))
-        subaccountId="101"
-        test={
-          Object {
-            "default_template": Object {
-              "template_id": "ab-test-1",
-            },
-            "id": "id-1",
-            "name": "my ab test 1",
-            "status": "running",
-            "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": 5,
+      <Box
+        as={[Function]}
+      >
+        <withRouter(Connect(StatusPanel))
+          subaccountId="101"
+          test={
+            Object {
+              "default_template": Object {
+                "template_id": "ab-test-1",
+              },
+              "id": "id-1",
+              "name": "my ab test 1",
+              "status": "running",
+              "updated_at": "2018-10-21T10:10:10.000Z",
+              "version": 5,
+            }
           }
-        }
-      />
-      <StatusView
-        test={
-          Object {
-            "default_template": Object {
-              "template_id": "ab-test-1",
-            },
-            "id": "id-1",
-            "name": "my ab test 1",
-            "status": "running",
-            "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": 5,
+        />
+        <StatusView
+          test={
+            Object {
+              "default_template": Object {
+                "template_id": "ab-test-1",
+              },
+              "id": "id-1",
+              "name": "my ab test 1",
+              "status": "running",
+              "updated_at": "2018-10-21T10:10:10.000Z",
+              "version": 5,
+            }
           }
-        }
-      />
+        />
+      </Box>
     </Right>
   </Section>
   <Section
@@ -448,20 +476,24 @@ exports[`Page: A/B Test View Mode should render running status correctly 1`] = `
       />
     </Left>
     <Right>
-      <SettingsView
-        test={
-          Object {
-            "default_template": Object {
-              "template_id": "ab-test-1",
-            },
-            "id": "id-1",
-            "name": "my ab test 1",
-            "status": "running",
-            "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": 5,
+      <Box
+        as={[Function]}
+      >
+        <SettingsView
+          test={
+            Object {
+              "default_template": Object {
+                "template_id": "ab-test-1",
+              },
+              "id": "id-1",
+              "name": "my ab test 1",
+              "status": "running",
+              "updated_at": "2018-10-21T10:10:10.000Z",
+              "version": 5,
+            }
           }
-        }
-      />
+        />
+      </Box>
     </Right>
   </Section>
   <Section
@@ -484,21 +516,25 @@ exports[`Page: A/B Test View Mode should render running status correctly 1`] = `
       />
     </Left>
     <Right>
-      <VariantsView
-        subaccountId="101"
-        test={
-          Object {
-            "default_template": Object {
-              "template_id": "ab-test-1",
-            },
-            "id": "id-1",
-            "name": "my ab test 1",
-            "status": "running",
-            "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": 5,
+      <Box
+        as={[Function]}
+      >
+        <VariantsView
+          subaccountId="101"
+          test={
+            Object {
+              "default_template": Object {
+                "template_id": "ab-test-1",
+              },
+              "id": "id-1",
+              "name": "my ab test 1",
+              "status": "running",
+              "updated_at": "2018-10-21T10:10:10.000Z",
+              "version": 5,
+            }
           }
-        }
-      />
+        />
+      </Box>
     </Right>
   </Section>
   <ConfirmationModal

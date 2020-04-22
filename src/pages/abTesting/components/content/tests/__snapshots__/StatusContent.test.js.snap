@@ -3,11 +3,17 @@
 exports[`Status Content Component should render cancelled-specific help content when test is in cancelled mode 1`] = `
 <div>
   <div>
-    <p>
+    <ContentText
+      color="gray.600"
+      fontSize="200"
+    >
       This test run was cancelled. To re-run this test, click "Edit and Reschedule Test".
-    </p>
+    </ContentText>
   </div>
-  <p>
+  <ContentText
+    color="gray.600"
+    fontSize="200"
+  >
     <span>
       You can read about the different A/B Test states 
     </span>
@@ -17,42 +23,57 @@ exports[`Status Content Component should render cancelled-specific help content 
       here
     </ExternalLink>
     .
-  </p>
+  </ContentText>
 </div>
 `;
 
 exports[`Status Content Component should render distinct help content when test is completed for bayesian mode tests and the winner was NOT found 1`] = `
 <div>
-  <p>
+  <ContentText
+    color="gray.600"
+    fontSize="200"
+  >
     This test has concluded and it now sending the default template. You may override it with a new one without starting a new test. This test was started and completed at the times shown.
-  </p>
+  </ContentText>
 </div>
 `;
 
 exports[`Status Content Component should render distinct help content when test is completed for bayesian mode tests and the winner was found 1`] = `
 <div>
-  <p>
+  <ContentText
+    color="gray.600"
+    fontSize="200"
+  >
     This test has concluded and it now sending the winning template. You may override it with a new one without starting a new test. This test was started and completed at the times shown.
-  </p>
+  </ContentText>
 </div>
 `;
 
 exports[`Status Content Component should render distinct help content when test is completed for learning mode tests 1`] = `
 <div>
-  <p>
+  <ContentText
+    color="gray.600"
+    fontSize="200"
+  >
     This test has concluded and it now sending the default template. You may override the default with a new one without starting a new test. This test was started and completed at the times shown.
-  </p>
+  </ContentText>
 </div>
 `;
 
 exports[`Status Content Component should render draft-specific help content when test is in draft mode 1`] = `
 <div>
   <div>
-    <p>
+    <ContentText
+      color="gray.600"
+      fontSize="200"
+    >
       You can update your Test Name and select a start time and end time to schedule your A/B Test.
-    </p>
+    </ContentText>
   </div>
-  <p>
+  <ContentText
+    color="gray.600"
+    fontSize="200"
+  >
     <span>
       You can read about the different A/B Test states 
     </span>
@@ -62,13 +83,16 @@ exports[`Status Content Component should render draft-specific help content when
       here
     </ExternalLink>
     .
-  </p>
+  </ContentText>
 </div>
 `;
 
 exports[`Status Content Component should render nothing when a test is malformed 1`] = `
 <div>
-  <p>
+  <ContentText
+    color="gray.600"
+    fontSize="200"
+  >
     <span>
       You can read about the different A/B Test states 
     </span>
@@ -78,18 +102,24 @@ exports[`Status Content Component should render nothing when a test is malformed
       here
     </ExternalLink>
     .
-  </p>
+  </ContentText>
 </div>
 `;
 
 exports[`Status Content Component should render rescheduling-specific help content when test is in cancelled mode and rescheduling the test 1`] = `
 <div>
   <div>
-    <p>
+    <ContentText
+      color="gray.600"
+      fontSize="200"
+    >
       You can update your Test Name and select a start time and end time to schedule your A/B Test.
-    </p>
+    </ContentText>
   </div>
-  <p>
+  <ContentText
+    color="gray.600"
+    fontSize="200"
+  >
     <span>
       You can read about the different A/B Test states 
     </span>
@@ -99,18 +129,24 @@ exports[`Status Content Component should render rescheduling-specific help conte
       here
     </ExternalLink>
     .
-  </p>
+  </ContentText>
 </div>
 `;
 
 exports[`Status Content Component should render rescheduling-specific help content when test is in completed mode and rescheduling the test 1`] = `
 <div>
   <div>
-    <p>
+    <ContentText
+      color="gray.600"
+      fontSize="200"
+    >
       You can update your Test Name and select a start time and end time to schedule your A/B Test.
-    </p>
+    </ContentText>
   </div>
-  <p>
+  <ContentText
+    color="gray.600"
+    fontSize="200"
+  >
     <span>
       You can read about the different A/B Test states 
     </span>
@@ -120,26 +156,32 @@ exports[`Status Content Component should render rescheduling-specific help conte
       here
     </ExternalLink>
     .
-  </p>
+  </ContentText>
 </div>
 `;
 
 exports[`Status Content Component should render running-specific help content when test is in running mode 1`] = `
 <div>
   <div>
-    <p>
+    <ContentText
+      color="gray.600"
+      fontSize="200"
+    >
       This test is currently running. It will conclude when either:
-    </p>
-    <ul>
-      <li>
-        the end date + engagement timeout period is reached
-      </li>
-      <li>
-        the desired sample size limit is reached + engagement timeout period is reached
-      </li>
-    </ul>
+      <ul>
+        <li>
+          the end date + engagement timeout period is reached
+        </li>
+        <li>
+          the desired sample size limit is reached + engagement timeout period is reached
+        </li>
+      </ul>
+    </ContentText>
   </div>
-  <p>
+  <ContentText
+    color="gray.600"
+    fontSize="200"
+  >
     <span>
       You can read about the different A/B Test states 
     </span>
@@ -149,18 +191,24 @@ exports[`Status Content Component should render running-specific help content wh
       here
     </ExternalLink>
     .
-  </p>
+  </ContentText>
 </div>
 `;
 
 exports[`Status Content Component should render scheduled-specific help content when test is in scheduled mode 1`] = `
 <div>
   <div>
-    <p>
+    <ContentText
+      color="gray.600"
+      fontSize="200"
+    >
       This test has been scheduled. You can update your Test Name, start time, or end time.
-    </p>
+    </ContentText>
   </div>
-  <p>
+  <ContentText
+    color="gray.600"
+    fontSize="200"
+  >
     <span>
       You can read about the different A/B Test states 
     </span>
@@ -170,6 +218,6 @@ exports[`Status Content Component should render scheduled-specific help content 
       here
     </ExternalLink>
     .
-  </p>
+  </ContentText>
 </div>
 `;
