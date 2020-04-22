@@ -140,7 +140,7 @@ export function MultipleRecipientsTab({
             />
           )}
           <ButtonWrapper>
-            <Button className={styles.submit} color="orange" type="submit">
+            <Button color="orange" type="submit">
               Submit Request
             </Button>
             <Button onClick={reset} disabled={pristine || submitting}>

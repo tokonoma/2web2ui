@@ -1,115 +1,161 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ApiErrorBanner Component should render when error prop is passed 1`] = `
-<Banner
-  my="300"
-  status="warning"
-  title="An error occurred"
->
-  <p>
-    Sorry, there was an issue loading your your resource.
-  </p>
-  <Button
-    onClick={[Function]}
-    outline={true}
+<div>
+  <div
+    class="O_Q O_W"
   >
-    Show Error Details
-  </Button>
-</Banner>
+    <div
+      class="O_a"
+    >
+      <svg
+        aria-hidden="false"
+        aria-label="Warning"
+        class="O_l O_t"
+        fill="currentColor"
+        height="30"
+        preserveAspectRatio="xMidYMid meet"
+        role="img"
+        style="vertical-align: middle;"
+        viewBox="0 0 24 24"
+        width="30"
+      >
+        <g>
+          <path
+            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
+          />
+        </g>
+      </svg>
+      <div
+        class="O_p"
+      />
+    </div>
+    <div
+      class="O_c"
+    >
+      <h5
+        class="O_h"
+      >
+        An error occurred
+      </h5>
+      <div
+        class="O_f"
+      >
+        <p>
+          Sorry, there was an issue loading your your resource.
+        </p>
+        <div
+          class="ButtonWrapper"
+        >
+          <button
+            class="AB_AE AB_AY"
+            type="button"
+          >
+            Show Error Details
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 `;
 
-exports[`ApiErrorBanner Component should render with details 1`] = `
-<Banner
-  my="300"
-  status="info"
-  title="You Have Another Mission"
->
-  <p>
-    Clean the conference room
-  </p>
-  <Button
-    onClick={[Function]}
-    outline={true}
+exports[`ApiErrorBanner Component should render with default props 1`] = `
+<div>
+  <div
+    class="O_Q O_U"
   >
-    Show Error Details
-  </Button>
-</Banner>
-`;
-
-exports[`ApiErrorBanner Component should render with details 2`] = `
-<Banner
-  my="300"
-  status="info"
-  title="You Have Another Mission"
->
-  <p>
-    Clean the conference room
-  </p>
-  <Button
-    onClick={[Function]}
-    outline={true}
-  >
-    Hide Error Details
-  </Button>
-  <p
-    style={
-      Object {
-        "marginTop": "20px",
-      }
-    }
-  >
-    <strong>
-      Details:
-    </strong>
-     
-    Got Damn!
-  </p>
-</Banner>
+    <div
+      class="O_a"
+    >
+      <svg
+        aria-hidden="false"
+        aria-label="Info"
+        class="O_l O_r"
+        fill="currentColor"
+        height="30"
+        preserveAspectRatio="xMidYMid meet"
+        role="img"
+        style="vertical-align: middle;"
+        viewBox="0 0 24 24"
+        width="30"
+      >
+        <g>
+          <path
+            d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"
+          />
+        </g>
+      </svg>
+      <div
+        class="O_p"
+      />
+    </div>
+    <div
+      class="O_c"
+    >
+      <h5
+        class="O_h"
+      >
+        You Have Another Mission
+      </h5>
+      <div
+        class="O_f"
+      >
+        <p>
+          Clean the conference room
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
 `;
 
 exports[`ApiErrorBanner Component should render with no props 1`] = `
-<Banner
-  my="300"
-  status="warning"
-  title="An error occurred"
->
-  <p>
-    Sorry, there was an issue.
-  </p>
-</Banner>
-`;
-
-exports[`ApiErrorBanner Component should render with props 1`] = `
-<Banner
-  my="300"
-  status="info"
-  title="You Have Another Mission"
->
-  <p>
-    Clean the conference room
-  </p>
-</Banner>
-`;
-
-exports[`ApiErrorBanner Component should render with reload 1`] = `
-<Banner
-  my="300"
-  status="info"
-  title="You Have Another Mission"
->
-  <p>
-    Clean the conference room
-  </p>
-  <Button
-    onClick={[Function]}
-    outline={true}
-    style={
-      Object {
-        "marginRight": "10px",
-      }
-    }
+<div>
+  <div
+    class="O_Q O_W"
   >
-    Try Again
-  </Button>
-</Banner>
+    <div
+      class="O_a"
+    >
+      <svg
+        aria-hidden="false"
+        aria-label="Warning"
+        class="O_l O_t"
+        fill="currentColor"
+        height="30"
+        preserveAspectRatio="xMidYMid meet"
+        role="img"
+        style="vertical-align: middle;"
+        viewBox="0 0 24 24"
+        width="30"
+      >
+        <g>
+          <path
+            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
+          />
+        </g>
+      </svg>
+      <div
+        class="O_p"
+      />
+    </div>
+    <div
+      class="O_c"
+    >
+      <h5
+        class="O_h"
+      >
+        An error occurred
+      </h5>
+      <div
+        class="O_f"
+      >
+        <p>
+          Sorry, there was an issue.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
 `;

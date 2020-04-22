@@ -1,58 +1,68 @@
 import React from 'react';
 import _ from 'lodash';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import TestApp from 'src/__testHelpers__/TestApp';
 import ApiErrorBanner from '../ApiErrorBanner';
 
 describe('ApiErrorBanner Component', () => {
-  const props = {
+  const defaultProps = {
     message: 'Clean the conference room',
     title: 'You Have Another Mission',
-    status: 'info'
+    status: 'info',
   };
 
+  const subject = (props = {}) =>
+    render(
+      <TestApp>
+        <ApiErrorBanner {...props} />
+      </TestApp>,
+    );
+
   it('should render with no props', () => {
-    const wrapper = shallow(<ApiErrorBanner />);
+    const { container } = render(
+      <TestApp>
+        <ApiErrorBanner />
+      </TestApp>,
+    );
 
-    expect(wrapper).toMatchSnapshot();
+    expect(container).toMatchSnapshot();
   });
 
-  it('should render with props', () => {
-    const wrapper = shallow(<ApiErrorBanner {...props} />);
+  it('should render with default props', () => {
+    const { container } = subject(defaultProps);
 
-    expect(wrapper).toMatchSnapshot();
+    expect(container).toMatchSnapshot();
   });
 
-  it('should render with reload', () => {
-    const reloadProps = _.cloneDeep(props);
-    reloadProps.reload = () => {};
+  it('should render with the reload button', () => {
+    const mockReload = jest.fn();
+    const { queryByText } = subject({ reload: mockReload });
 
-    const wrapper = shallow(<ApiErrorBanner {...reloadProps} />);
-
-    expect(wrapper).toMatchSnapshot();
+    expect(queryByText('Try Again')).toBeInTheDocument();
+    userEvent.click(queryByText('Try Again'));
+    expect(mockReload).toHaveBeenCalled();
   });
 
-  it('should render with details', () => {
-    const detailsProps = _.cloneDeep(props);
-    detailsProps.errorDetails = 'Got Damn!';
+  it('should render with error details, allowing the user to reveal those details by clicking the "Show Error Details" button', () => {
+    const { queryByText } = subject({ ...defaultProps, errorDetails: 'Hello there.' });
 
-    const wrapper = shallow(<ApiErrorBanner {...detailsProps} />);
-
-    expect(wrapper).toMatchSnapshot();
-
-    // Second t on the snapshot = show details button
-    wrapper.find('Button').simulate('click');
-    expect(wrapper).toMatchSnapshot();
+    expect(queryByText('Hello there.')).not.toBeInTheDocument();
+    userEvent.click(queryByText('Show Error Details'));
+    expect(queryByText('Hello there.')).toBeInTheDocument();
+    userEvent.click(queryByText('Hide Error Details'));
+    expect(queryByText('Hello there.')).not.toBeInTheDocument();
   });
 
   it('should render when error prop is passed', () => {
     const error = {
       payload: { message: 'error message' },
       meta: { method: 'GET' },
-      resource: 'your resource'
+      resource: 'your resource',
     };
 
-    const wrapper = shallow(<ApiErrorBanner error={error} />);
-    expect(wrapper).toMatchSnapshot();
+    const { container } = subject({ error });
 
+    expect(container).toMatchSnapshot();
   });
 });

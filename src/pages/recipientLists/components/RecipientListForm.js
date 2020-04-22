@@ -1,21 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, SubmissionError, reduxForm } from 'redux-form';
-
 import _ from 'lodash';
-
-import { Banner, Error, Button, Panel } from 'src/components/matchbox';
+import { Banner, Box, Button, Error, Panel, Stack } from 'src/components/matchbox';
 import { TextFieldWrapper } from 'src/components';
 import { DownloadLink } from 'src/components/links';
+import ButtonWrapper from 'src/components/buttonWrapper';
 import { required, maxLength } from 'src/helpers/validation';
-
 import FileFieldWrapper from 'src/components/reduxFormWrappers/FileFieldWrapper';
-
 import parseRecipientListCsv from '../helpers/csv';
-
 import exampleRecipientListPath from './example-recipient-list.csv';
 
 const formName = 'recipientListForm';
+const fieldMaxWidth = '860px'; // TODO: Once Matchbox exposes sizes via a set of design tokens, replace this
 
 export class RecipientListForm extends Component {
   parseCsv = csv =>
@@ -49,7 +46,7 @@ export class RecipientListForm extends Component {
   renderCsvErrors() {
     const { error } = this.props;
     return (
-      <Banner status="danger" title="CSV Format Errors" my="300">
+      <Banner status="danger" title="CSV Format Errors" my="400">
         {error.map((err, idx) => (
           <Error key={idx} error={err} />
         ))}
@@ -79,52 +76,62 @@ export class RecipientListForm extends Component {
         <form onSubmit={handleSubmit(this.preSubmit)}>
           <Panel>
             <Panel.Section>
-              <Field
-                name="name"
-                label="Name"
-                placeholder="My favorite recipients"
-                validate={[required, maxLength(64)]}
-                disabled={submitting}
-                component={TextFieldWrapper}
-              />
-              {!editMode && (
+              <Stack space="400">
+                <Box maxWidth={fieldMaxWidth}>
+                  <Field
+                    name="name"
+                    label="Name"
+                    placeholder="My favorite recipients"
+                    validate={[required, maxLength(64)]}
+                    disabled={submitting}
+                    component={TextFieldWrapper}
+                  />
+                </Box>
+
+                {!editMode && (
+                  <Box maxWidth={fieldMaxWidth}>
+                    <Field
+                      name="id"
+                      label="ID"
+                      placeholder="my-favorite-recipients"
+                      validate={[required, maxLength(64)]}
+                      disabled={submitting}
+                      component={TextFieldWrapper}
+                    />
+                  </Box>
+                )}
+
                 <Field
-                  name="id"
-                  label="ID"
-                  placeholder="my-favorite-recipients"
-                  validate={[required, maxLength(64)]}
+                  name="description"
+                  label="Description"
+                  placeholder="All my favorite recipients"
+                  validate={[maxLength(1024)]}
                   disabled={submitting}
                   component={TextFieldWrapper}
                 />
-              )}
-              <Field
-                name="description"
-                label="Description"
-                placeholder="All my favorite recipients"
-                validate={[maxLength(1024)]}
-                disabled={submitting}
-                component={TextFieldWrapper}
-              />
-              <Field
-                component={FileFieldWrapper}
-                disabled={submitting}
-                fileType="csv"
-                helpText={
-                  <span>
-                    You can download a{' '}
-                    <DownloadLink href={exampleRecipientListPath}>CSV template here</DownloadLink>{' '}
-                    to use when formatting your recipient list for upload.
-                  </span>
-                }
-                label={uploadHint}
-                name="csv"
-                validate={uploadValidators}
-              />
-            </Panel.Section>
-            <Panel.Section>
-              <Button primary submit disabled={submitDisabled}>
-                {actionText} Recipient List
-              </Button>
+
+                <Field
+                  component={FileFieldWrapper}
+                  disabled={submitting}
+                  fileType="csv"
+                  helpText={
+                    <span>
+                      You can download a{' '}
+                      <DownloadLink href={exampleRecipientListPath}>CSV template here</DownloadLink>{' '}
+                      to use when formatting your recipient list for upload.
+                    </span>
+                  }
+                  label={uploadHint}
+                  name="csv"
+                  validate={uploadValidators}
+                />
+              </Stack>
+
+              <ButtonWrapper>
+                <Button variant="primary" submit disabled={submitDisabled}>
+                  {actionText} Recipient List
+                </Button>
+              </ButtonWrapper>
             </Panel.Section>
           </Panel>
         </form>

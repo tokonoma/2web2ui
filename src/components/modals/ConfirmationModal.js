@@ -27,15 +27,14 @@ export default function ConfirmationModal(props) {
         {content}
         <ButtonWrapper>
           <Button
-            className={styles.Confirm}
             disabled={confirming}
             name="confirmation-modal-confirm-button"
             onClick={onConfirm}
-            variant={'primary'}
+            variant="primary"
           >
             {confirmVerb}
           </Button>
-          <Button onClick={onCancel} className={styles.Cancel} variant={'tertiary'}>
+          <Button onClick={onCancel} variant="secondary">
             {cancelVerb}
           </Button>
         </ButtonWrapper>

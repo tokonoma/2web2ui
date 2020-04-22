@@ -10,7 +10,6 @@ exports[`Component: ConfirmationModal should render correctly with basic props 1
     <div>
       <ButtonWrapper>
         <Button
-          className="Confirm"
           name="confirmation-modal-confirm-button"
           onClick={[MockFunction]}
           variant="primary"
@@ -18,9 +17,8 @@ exports[`Component: ConfirmationModal should render correctly with basic props 1
           Confirm
         </Button>
         <Button
-          className="Cancel"
           onClick={[MockFunction]}
-          variant="tertiary"
+          variant="secondary"
         >
           Cancel
         </Button>

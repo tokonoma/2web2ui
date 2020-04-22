@@ -50,9 +50,7 @@ const DeleteTemplateModal = props => {
                   Delete All Versions
                 </Button>
 
-                <Button className={styles.CancelButton} onClick={onClose}>
-                  Cancel
-                </Button>
+                <Button onClick={onClose}>Cancel</Button>
               </ButtonWrapper>
             </Panel.Section>
           </Panel>

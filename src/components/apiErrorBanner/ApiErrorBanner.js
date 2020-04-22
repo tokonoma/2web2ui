@@ -1,5 +1,8 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
+import { useHibana } from 'src/context/HibanaContext';
 import { Banner, Button } from 'src/components/matchbox';
+import ButtonWrapper from 'src/components/buttonWrapper';
+
 const methodToText = {
   GET: 'loading',
   PUT: 'updating',
@@ -16,50 +19,58 @@ const craftMessage = (method, resource) => {
   return message;
 };
 
-export default class ApiErrorBanner extends Component {
-  state = {
-    showErrorDetails: false,
+export default function ApiErrorBanner(props) {
+  const [showErrorDetails, setShowErrorDetails] = useState(false);
+  const [state] = useHibana();
+  const { isHibanaEnabled } = state;
+
+  const {
+    message,
+    errorDetails,
+    reload = false,
+    title = 'An error occurred',
+    status = 'warning',
+    error = { payload: {}, meta: {} },
+  } = props;
+
+  const { payload, meta, resource } = error;
+  const showDetailsButton = errorDetails || payload.message;
+  let buttonStyleProps = {
+    outline: true,
   };
 
-  render() {
-    const {
-      message,
-      errorDetails,
-      reload = false,
-      title = 'An error occurred',
-      status = 'warning',
-      error = { payload: {}, meta: {} },
-    } = this.props;
-
-    const { showErrorDetails } = this.state;
-    const { payload, meta, resource } = error;
-    const buttonText = showErrorDetails ? 'Hide Error Details' : 'Show Error Details';
-    const showDetailsButton = errorDetails || payload.message;
-
-    return (
-      <Banner status={status} title={title} my="300">
-        <p>{message || craftMessage(meta.method, resource)}</p>
-
-        {reload && (
-          <Button outline={true} onClick={() => reload()} style={{ marginRight: '10px' }}>
-            Try Again
-          </Button>
-        )}
-        {showDetailsButton && (
-          <Button
-            outline={true}
-            onClick={() => this.setState({ showErrorDetails: !showErrorDetails })}
-          >
-            {buttonText}
-          </Button>
-        )}
-
-        {showErrorDetails && (
-          <p style={{ marginTop: '20px' }}>
-            <strong>Details:</strong> {errorDetails || payload.message}
-          </p>
-        )}
-      </Banner>
-    );
+  if (isHibanaEnabled) {
+    buttonStyleProps = {
+      color: 'gray',
+      outlineBorder: true,
+    };
   }
+
+  return (
+    <Banner status={status} title={title} my="300">
+      <p>{message || craftMessage(meta.method, resource)}</p>
+
+      {(reload || showDetailsButton) && (
+        <ButtonWrapper>
+          {reload && (
+            <Button {...buttonStyleProps} onClick={() => reload()}>
+              Try Again
+            </Button>
+          )}
+
+          {showDetailsButton && (
+            <Button {...buttonStyleProps} onClick={() => setShowErrorDetails(!showErrorDetails)}>
+              {showErrorDetails ? 'Hide Error Details' : 'Show Error Details'}
+            </Button>
+          )}
+        </ButtonWrapper>
+      )}
+
+      {showErrorDetails && (
+        <p style={{ marginTop: '20px' }}>
+          <strong>Details:</strong> {errorDetails || payload.message}
+        </p>
+      )}
+    </Banner>
+  );
 }

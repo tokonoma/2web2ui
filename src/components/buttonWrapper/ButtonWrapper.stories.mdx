@@ -2,11 +2,13 @@ import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
 import { Button, Panel, TextField } from 'src/components/matchbox';
 import ButtonWrapper from './ButtonWrapper';
 
-<Meta title="Buttons|ButtonWrapper" component={ButtonWrapper}/>
+<Meta title="Buttons|ButtonWrapper" component={ButtonWrapper} />
 
 # ButtonWrapper
 
-Use the `<ButtonWrapper/>` to wrap Matchbox `<Button/>` components and provide consistent spacing, typically within forms.
+Use the `<ButtonWrapper/>` to wrap Matchbox `<Button/>` components and provide consistent spacing,
+typically within forms. This not only handles vertical spacing above the component, but also spacing
+between child components.
 
 ## Examples
 
@@ -15,20 +17,11 @@ Use the `<ButtonWrapper/>` to wrap Matchbox `<Button/>` components and provide c
 <Preview>
   <Panel>
     <Panel.Section>
-      <TextField
-        id="first-name"
-        name="firstName"
-        label="First Name"
-        type="text"
-      />
-      <TextField
-        id="last-name"
-        name="lastName"
-        label="Last Name"
-        type="text"
-      />
+      <TextField id="first-name" name="firstName" label="First Name" type="text" />
+      <TextField id="last-name" name="lastName" label="Last Name" type="text" />
       <ButtonWrapper>
-        <Button primary>Save</Button>
+        <Button variant="primary">Save</Button>
+        <Button variant="secondary">Cancel</Button>
       </ButtonWrapper>
     </Panel.Section>
   </Panel>
@@ -44,22 +37,12 @@ import { ButtonWrapper } from 'src/components';
 const MyComponent = () => (
   <Panel>
     <Panel.Section>
-      <TextField
-        id="first-name"
-        name="firstName"
-        label="First Name"
-        type="text"
-      />
-      <TextField
-        id="last-name"
-        name="lastName"
-        label="Last Name"
-        type="text"
-      />
+      <TextField id="first-name" name="firstName" label="First Name" type="text" />
+      <TextField id="last-name" name="lastName" label="Last Name" type="text" />
       <ButtonWrapper>
         <Button primary>Save</Button>
       </ButtonWrapper>
     </Panel.Section>
   </Panel>
-)
+);
 ```

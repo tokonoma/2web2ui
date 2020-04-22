@@ -65,12 +65,7 @@ export function SingleRecipientTab(props) {
             />
           )}
           <ButtonWrapper>
-            <Button
-              className={styles.submit}
-              color="orange"
-              type="submit"
-              disabled={props.dataPrivacyRequestPending}
-            >
+            <Button color="orange" type="submit" disabled={props.dataPrivacyRequestPending}>
               Submit Request
             </Button>
             <Button onClick={props.reset} disabled={props.pristine || props.submitting}>

@@ -5,75 +5,87 @@ exports[`RecipientListForm defaults to create mode 1`] = `
   <form>
     <Panel>
       <Panel.Section>
-        <Field
-          component={[Function]}
-          label="Name"
-          name="name"
-          placeholder="My favorite recipients"
-          validate={
-            Array [
-              [Function],
-              [Function],
-            ]
-          }
-        />
-        <Field
-          component={[Function]}
-          label="ID"
-          name="id"
-          placeholder="my-favorite-recipients"
-          validate={
-            Array [
-              [Function],
-              [Function],
-            ]
-          }
-        />
-        <Field
-          component={[Function]}
-          label="Description"
-          name="description"
-          placeholder="All my favorite recipients"
-          validate={
-            Array [
-              [Function],
-            ]
-          }
-        />
-        <Field
-          component={[Function]}
-          fileType="csv"
-          helpText={
-            <span>
-              You can download a
-               
-              <DownloadLink
-                href="example-recipient-list.csv"
-              >
-                CSV template here
-              </DownloadLink>
-               
-              to use when formatting your recipient list for upload.
-            </span>
-          }
-          label="Upload a CSV file of recipients"
-          name="csv"
-          validate={
-            Array [
-              [Function],
-            ]
-          }
-        />
-      </Panel.Section>
-      <Panel.Section>
-        <Button
-          disabled={true}
-          primary={true}
-          submit={true}
+        <Stack
+          space="400"
         >
-          Create
-           Recipient List
-        </Button>
+          <Box
+            maxWidth="860px"
+          >
+            <Field
+              component={[Function]}
+              label="Name"
+              name="name"
+              placeholder="My favorite recipients"
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </Box>
+          <Box
+            maxWidth="860px"
+          >
+            <Field
+              component={[Function]}
+              label="ID"
+              name="id"
+              placeholder="my-favorite-recipients"
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </Box>
+          <Field
+            component={[Function]}
+            label="Description"
+            name="description"
+            placeholder="All my favorite recipients"
+            validate={
+              Array [
+                [Function],
+              ]
+            }
+          />
+          <Field
+            component={[Function]}
+            fileType="csv"
+            helpText={
+              <span>
+                You can download a
+                 
+                <DownloadLink
+                  href="example-recipient-list.csv"
+                >
+                  CSV template here
+                </DownloadLink>
+                 
+                to use when formatting your recipient list for upload.
+              </span>
+            }
+            label="Upload a CSV file of recipients"
+            name="csv"
+            validate={
+              Array [
+                [Function],
+              ]
+            }
+          />
+        </Stack>
+        <ButtonWrapper>
+          <Button
+            disabled={true}
+            submit={true}
+            variant="primary"
+          >
+            Create
+             Recipient List
+          </Button>
+        </ButtonWrapper>
       </Panel.Section>
     </Panel>
   </form>
@@ -83,7 +95,7 @@ exports[`RecipientListForm defaults to create mode 1`] = `
 exports[`RecipientListForm renders CSV errors 1`] = `
 <div>
   <Banner
-    my="300"
+    my="400"
     status="danger"
     title="CSV Format Errors"
   >
@@ -99,75 +111,87 @@ exports[`RecipientListForm renders CSV errors 1`] = `
   <form>
     <Panel>
       <Panel.Section>
-        <Field
-          component={[Function]}
-          label="Name"
-          name="name"
-          placeholder="My favorite recipients"
-          validate={
-            Array [
-              [Function],
-              [Function],
-            ]
-          }
-        />
-        <Field
-          component={[Function]}
-          label="ID"
-          name="id"
-          placeholder="my-favorite-recipients"
-          validate={
-            Array [
-              [Function],
-              [Function],
-            ]
-          }
-        />
-        <Field
-          component={[Function]}
-          label="Description"
-          name="description"
-          placeholder="All my favorite recipients"
-          validate={
-            Array [
-              [Function],
-            ]
-          }
-        />
-        <Field
-          component={[Function]}
-          fileType="csv"
-          helpText={
-            <span>
-              You can download a
-               
-              <DownloadLink
-                href="example-recipient-list.csv"
-              >
-                CSV template here
-              </DownloadLink>
-               
-              to use when formatting your recipient list for upload.
-            </span>
-          }
-          label="Upload a CSV file of recipients"
-          name="csv"
-          validate={
-            Array [
-              [Function],
-            ]
-          }
-        />
-      </Panel.Section>
-      <Panel.Section>
-        <Button
-          disabled={true}
-          primary={true}
-          submit={true}
+        <Stack
+          space="400"
         >
-          Create
-           Recipient List
-        </Button>
+          <Box
+            maxWidth="860px"
+          >
+            <Field
+              component={[Function]}
+              label="Name"
+              name="name"
+              placeholder="My favorite recipients"
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </Box>
+          <Box
+            maxWidth="860px"
+          >
+            <Field
+              component={[Function]}
+              label="ID"
+              name="id"
+              placeholder="my-favorite-recipients"
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </Box>
+          <Field
+            component={[Function]}
+            label="Description"
+            name="description"
+            placeholder="All my favorite recipients"
+            validate={
+              Array [
+                [Function],
+              ]
+            }
+          />
+          <Field
+            component={[Function]}
+            fileType="csv"
+            helpText={
+              <span>
+                You can download a
+                 
+                <DownloadLink
+                  href="example-recipient-list.csv"
+                >
+                  CSV template here
+                </DownloadLink>
+                 
+                to use when formatting your recipient list for upload.
+              </span>
+            }
+            label="Upload a CSV file of recipients"
+            name="csv"
+            validate={
+              Array [
+                [Function],
+              ]
+            }
+          />
+        </Stack>
+        <ButtonWrapper>
+          <Button
+            disabled={true}
+            submit={true}
+            variant="primary"
+          >
+            Create
+             Recipient List
+          </Button>
+        </ButtonWrapper>
       </Panel.Section>
     </Panel>
   </form>
@@ -179,75 +203,87 @@ exports[`RecipientListForm renders correctly in create mode 1`] = `
   <form>
     <Panel>
       <Panel.Section>
-        <Field
-          component={[Function]}
-          label="Name"
-          name="name"
-          placeholder="My favorite recipients"
-          validate={
-            Array [
-              [Function],
-              [Function],
-            ]
-          }
-        />
-        <Field
-          component={[Function]}
-          label="ID"
-          name="id"
-          placeholder="my-favorite-recipients"
-          validate={
-            Array [
-              [Function],
-              [Function],
-            ]
-          }
-        />
-        <Field
-          component={[Function]}
-          label="Description"
-          name="description"
-          placeholder="All my favorite recipients"
-          validate={
-            Array [
-              [Function],
-            ]
-          }
-        />
-        <Field
-          component={[Function]}
-          fileType="csv"
-          helpText={
-            <span>
-              You can download a
-               
-              <DownloadLink
-                href="example-recipient-list.csv"
-              >
-                CSV template here
-              </DownloadLink>
-               
-              to use when formatting your recipient list for upload.
-            </span>
-          }
-          label="Upload a CSV file of recipients"
-          name="csv"
-          validate={
-            Array [
-              [Function],
-            ]
-          }
-        />
-      </Panel.Section>
-      <Panel.Section>
-        <Button
-          disabled={true}
-          primary={true}
-          submit={true}
+        <Stack
+          space="400"
         >
-          Create
-           Recipient List
-        </Button>
+          <Box
+            maxWidth="860px"
+          >
+            <Field
+              component={[Function]}
+              label="Name"
+              name="name"
+              placeholder="My favorite recipients"
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </Box>
+          <Box
+            maxWidth="860px"
+          >
+            <Field
+              component={[Function]}
+              label="ID"
+              name="id"
+              placeholder="my-favorite-recipients"
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </Box>
+          <Field
+            component={[Function]}
+            label="Description"
+            name="description"
+            placeholder="All my favorite recipients"
+            validate={
+              Array [
+                [Function],
+              ]
+            }
+          />
+          <Field
+            component={[Function]}
+            fileType="csv"
+            helpText={
+              <span>
+                You can download a
+                 
+                <DownloadLink
+                  href="example-recipient-list.csv"
+                >
+                  CSV template here
+                </DownloadLink>
+                 
+                to use when formatting your recipient list for upload.
+              </span>
+            }
+            label="Upload a CSV file of recipients"
+            name="csv"
+            validate={
+              Array [
+                [Function],
+              ]
+            }
+          />
+        </Stack>
+        <ButtonWrapper>
+          <Button
+            disabled={true}
+            submit={true}
+            variant="primary"
+          >
+            Create
+             Recipient List
+          </Button>
+        </ButtonWrapper>
       </Panel.Section>
     </Panel>
   </form>
@@ -259,59 +295,67 @@ exports[`RecipientListForm renders correctly in edit mode 1`] = `
   <form>
     <Panel>
       <Panel.Section>
-        <Field
-          component={[Function]}
-          label="Name"
-          name="name"
-          placeholder="My favorite recipients"
-          validate={
-            Array [
-              [Function],
-              [Function],
-            ]
-          }
-        />
-        <Field
-          component={[Function]}
-          label="Description"
-          name="description"
-          placeholder="All my favorite recipients"
-          validate={
-            Array [
-              [Function],
-            ]
-          }
-        />
-        <Field
-          component={[Function]}
-          fileType="csv"
-          helpText={
-            <span>
-              You can download a
-               
-              <DownloadLink
-                href="example-recipient-list.csv"
-              >
-                CSV template here
-              </DownloadLink>
-               
-              to use when formatting your recipient list for upload.
-            </span>
-          }
-          label="Optional: Upload a CSV file of recipients to replace the existing recipients in this list"
-          name="csv"
-          validate={Array []}
-        />
-      </Panel.Section>
-      <Panel.Section>
-        <Button
-          disabled={true}
-          primary={true}
-          submit={true}
+        <Stack
+          space="400"
         >
-          Update
-           Recipient List
-        </Button>
+          <Box
+            maxWidth="860px"
+          >
+            <Field
+              component={[Function]}
+              label="Name"
+              name="name"
+              placeholder="My favorite recipients"
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </Box>
+          <Field
+            component={[Function]}
+            label="Description"
+            name="description"
+            placeholder="All my favorite recipients"
+            validate={
+              Array [
+                [Function],
+              ]
+            }
+          />
+          <Field
+            component={[Function]}
+            fileType="csv"
+            helpText={
+              <span>
+                You can download a
+                 
+                <DownloadLink
+                  href="example-recipient-list.csv"
+                >
+                  CSV template here
+                </DownloadLink>
+                 
+                to use when formatting your recipient list for upload.
+              </span>
+            }
+            label="Optional: Upload a CSV file of recipients to replace the existing recipients in this list"
+            name="csv"
+            validate={Array []}
+          />
+        </Stack>
+        <ButtonWrapper>
+          <Button
+            disabled={true}
+            submit={true}
+            variant="primary"
+          >
+            Update
+             Recipient List
+          </Button>
+        </ButtonWrapper>
       </Panel.Section>
     </Panel>
   </form>
@@ -323,79 +367,91 @@ exports[`RecipientListForm should disable form elements on submit 1`] = `
   <form>
     <Panel>
       <Panel.Section>
-        <Field
-          component={[Function]}
-          disabled={true}
-          label="Name"
-          name="name"
-          placeholder="My favorite recipients"
-          validate={
-            Array [
-              [Function],
-              [Function],
-            ]
-          }
-        />
-        <Field
-          component={[Function]}
-          disabled={true}
-          label="ID"
-          name="id"
-          placeholder="my-favorite-recipients"
-          validate={
-            Array [
-              [Function],
-              [Function],
-            ]
-          }
-        />
-        <Field
-          component={[Function]}
-          disabled={true}
-          label="Description"
-          name="description"
-          placeholder="All my favorite recipients"
-          validate={
-            Array [
-              [Function],
-            ]
-          }
-        />
-        <Field
-          component={[Function]}
-          disabled={true}
-          fileType="csv"
-          helpText={
-            <span>
-              You can download a
-               
-              <DownloadLink
-                href="example-recipient-list.csv"
-              >
-                CSV template here
-              </DownloadLink>
-               
-              to use when formatting your recipient list for upload.
-            </span>
-          }
-          label="Upload a CSV file of recipients"
-          name="csv"
-          validate={
-            Array [
-              [Function],
-            ]
-          }
-        />
-      </Panel.Section>
-      <Panel.Section>
-        <Button
-          disabled={true}
-          primary={true}
-          submit={true}
+        <Stack
+          space="400"
         >
-          Create
-           Recipient List
-        </Button>
+          <Box
+            maxWidth="860px"
+          >
+            <Field
+              component={[Function]}
+              disabled={true}
+              label="Name"
+              name="name"
+              placeholder="My favorite recipients"
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </Box>
+          <Box
+            maxWidth="860px"
+          >
+            <Field
+              component={[Function]}
+              disabled={true}
+              label="ID"
+              name="id"
+              placeholder="my-favorite-recipients"
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </Box>
+          <Field
+            component={[Function]}
+            disabled={true}
+            label="Description"
+            name="description"
+            placeholder="All my favorite recipients"
+            validate={
+              Array [
+                [Function],
+              ]
+            }
+          />
+          <Field
+            component={[Function]}
+            disabled={true}
+            fileType="csv"
+            helpText={
+              <span>
+                You can download a
+                 
+                <DownloadLink
+                  href="example-recipient-list.csv"
+                >
+                  CSV template here
+                </DownloadLink>
+                 
+                to use when formatting your recipient list for upload.
+              </span>
+            }
+            label="Upload a CSV file of recipients"
+            name="csv"
+            validate={
+              Array [
+                [Function],
+              ]
+            }
+          />
+        </Stack>
+        <ButtonWrapper>
+          <Button
+            disabled={true}
+            submit={true}
+            variant="primary"
+          >
+            Create
+             Recipient List
+          </Button>
+        </ButtonWrapper>
       </Panel.Section>
     </Panel>
   </form>

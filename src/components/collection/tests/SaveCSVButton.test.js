@@ -1,10 +1,12 @@
 import React from 'react';
 import SaveCSVButton from '../SaveCSVButton';
 import _ from 'lodash';
+import { useHibana } from 'src/context/HibanaContext';
 import { shallow } from 'enzyme';
 import Papa from 'papaparse';
 
 jest.mock('papaparse');
+jest.mock('src/context/HibanaContext');
 
 Date.now = jest.fn(() => 1512509841582);
 
@@ -18,6 +20,7 @@ describe('Save CSV Button', () => {
 
   beforeEach(() => {
     Papa.unparse = jest.fn(() => 'mydata');
+    useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: false }]);
   });
 
   it('should render', () => {
