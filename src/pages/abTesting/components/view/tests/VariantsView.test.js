@@ -1,20 +1,25 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import VariantsView, { Variant, Engagement, PercentOrSample } from '../VariantsView';
+import { useHibana } from 'src/context/HibanaContext';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
+import styles from './View.module.scss';
+
+jest.mock('src/hooks/useHibanaOverride');
+
+jest.mock('src/context/HibanaContext');
 
 describe('Variants View Component:', () => {
-
   describe('Top level Component', () => {
     it('should render correctly', () => {
       const props = {
         test: {
           default_template: { template_id: 'default' },
-          variants: [
-            { template_id: 'var1' },
-            { template_id: 'var2' }
-          ]
-        }
+          variants: [{ template_id: 'var1' }, { template_id: 'var2' }],
+        },
       };
+      useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: false }]);
+      useHibanaOverride.mockReturnValue(styles);
       expect(shallow(<VariantsView {...props} />)).toMatchSnapshot();
     });
   });
@@ -23,7 +28,8 @@ describe('Variants View Component:', () => {
     let wrapper;
 
     beforeEach(() => {
-      wrapper = shallow(<Variant title='variant title' variant={{ template_id: 'temp_id' }} />);
+      useHibanaOverride.mockReturnValue(styles);
+      wrapper = shallow(<Variant title="variant title" variant={{ template_id: 'temp_id' }} />);
     });
 
     it('should render correctly', () => {
@@ -31,7 +37,7 @@ describe('Variants View Component:', () => {
     });
 
     it('should not render title if not supplied', () => {
-      wrapper.setProps({ title: null });
+      const wrapper = shallow(<Variant title={null} variant={{ template_id: 'temp_id' }} />);
       expect(wrapper.find('.SmallHeader')).toHaveLength(0);
     });
   });
@@ -46,9 +52,9 @@ describe('Variants View Component:', () => {
           template_id: 'temp_id',
           engagement_rate: 0.2,
           count_unique_confirmed_opened: 0,
-          count_accepted: 100
+          count_accepted: 100,
         },
-        showRate: true
+        showRate: true,
       };
       wrapper = shallow(<Engagement {...props} />);
     });
@@ -58,11 +64,13 @@ describe('Variants View Component:', () => {
     });
 
     it('should render clicks correctly', () => {
-      wrapper.setProps({ variant: {
-        ...props.variant,
-        count_unique_confirmed_opened: null,
-        count_unique_clicked: 10
-      }});
+      wrapper.setProps({
+        variant: {
+          ...props.variant,
+          count_unique_confirmed_opened: null,
+          count_unique_clicked: 10,
+        },
+      });
       expect(wrapper).toMatchSnapshot();
     });
 
