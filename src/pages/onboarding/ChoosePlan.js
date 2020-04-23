@@ -20,8 +20,6 @@ import { FORMS } from 'src/constants';
 import CreditCardSection from './components/CreditCardSection';
 import _ from 'lodash';
 
-const NEXT_STEP = '/dashboard';
-
 export function OnboardingPlanPage({
   getPlans,
   getBundles,
@@ -40,6 +38,7 @@ export function OnboardingPlanPage({
   hasError,
   bundles,
 }) {
+  const NEXT_STEP = Boolean(window.skipSendingDomain) ? '/dashboard' : '/onboarding/sending-domain';
   useEffect(() => {
     getPlans();
   }, [getPlans]);
@@ -58,7 +57,7 @@ export function OnboardingPlanPage({
     if (hasError) {
       history.push(NEXT_STEP);
     }
-  }, [hasError, history]);
+  }, [NEXT_STEP, hasError, history]);
 
   const isPlanFree = useMemo(() => Boolean(!_.get(selectedPlan, 'messaging.price', true)), [
     selectedPlan,
