@@ -1,0 +1,137 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SendingDomainPage should render correctly 1`] = `
+<Fragment>
+  <CenteredLogo />
+  <Panel
+    accent={true}
+    title="Welcome to SparkPost!"
+  >
+    <form>
+      <Panel.Section>
+        <p>
+          <Text
+            as="p"
+            mb={300}
+          >
+            Let's get you set up to send some email!
+          </Text>
+        </p>
+        <p>
+          <Text
+            as="p"
+            mb={300}
+          >
+            Which domain will you be sending from?
+             
+            <UnstyledLink
+              external={true}
+              onClick={[Function]}
+              to="https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#preparing-your-from-address"
+            >
+              Learn more about sending domains
+            </UnstyledLink>
+            .
+          </Text>
+        </p>
+        <Field
+          component={[Function]}
+          disabled={false}
+          label="Domain Name"
+          name="domain"
+          placeholder="email.example.com"
+          validate={
+            Array [
+              [Function],
+              [Function],
+            ]
+          }
+        />
+      </Panel.Section>
+      <Panel.Section>
+        <Button
+          disabled={false}
+          primary={true}
+          submit={true}
+          variant="primary"
+        >
+          Add Domain
+        </Button>
+        <SkipLink
+          to="/dashboard"
+        >
+          Skip for now
+        </SkipLink>
+      </Panel.Section>
+    </form>
+  </Panel>
+</Fragment>
+`;
+
+exports[`SendingDomainPage should render submitting state correctly 1`] = `
+<Fragment>
+  <CenteredLogo />
+  <Panel
+    accent={true}
+    title="Welcome to SparkPost!"
+  >
+    <form>
+      <Panel.Section>
+        <p>
+          <Text
+            as="p"
+            mb={300}
+          >
+            Let's get you set up to send some email!
+          </Text>
+        </p>
+        <p>
+          <Text
+            as="p"
+            mb={300}
+          >
+            Which domain will you be sending from?
+             
+            <UnstyledLink
+              external={true}
+              onClick={[Function]}
+              to="https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#preparing-your-from-address"
+            >
+              Learn more about sending domains
+            </UnstyledLink>
+            .
+          </Text>
+        </p>
+        <Field
+          component={[Function]}
+          disabled={true}
+          label="Domain Name"
+          name="domain"
+          placeholder="email.example.com"
+          validate={
+            Array [
+              [Function],
+              [Function],
+            ]
+          }
+        />
+      </Panel.Section>
+      <Panel.Section>
+        <Button
+          disabled={true}
+          primary={true}
+          submit={true}
+          variant="primary"
+        >
+          Adding Domain...
+        </Button>
+        <SkipLink
+          to="/dashboard"
+        >
+          Skip for now
+        </SkipLink>
+      </Panel.Section>
+    </form>
+  </Panel>
+</Fragment>
+`;

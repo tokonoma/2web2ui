@@ -15,7 +15,7 @@ import {
   ANALYTICS_ONBOARDING_CREATE_DOMAIN,
 } from 'src/constants';
 
-function SendingDomainPage(props) {
+export function SendingDomainPage(props) {
   const { submitSucceeded, history, handleSubmit, submitting } = props;
 
   const handleDomainCreate = values => {
