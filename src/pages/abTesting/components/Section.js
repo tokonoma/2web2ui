@@ -37,7 +37,7 @@ function HibanaSection(props) {
 
   return (
     <div className={styles.Section}>
-      <Text as="h3" fontSize="400">
+      <Text as="span" fontSize="400" fontWeight="600" role="heading" aria-level="3" mb="200">
         {title}
       </Text>
       <Grid>{children}</Grid>

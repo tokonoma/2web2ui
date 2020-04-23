@@ -9,7 +9,7 @@ import { listTemplates } from 'src/actions/templates';
 
 // Components
 import { PageLink } from 'src/components/links';
-import { Panel, Page, Text } from 'src/components/matchbox';
+import { Panel, Page } from 'src/components/matchbox';
 import AbTestCreateForm from './components/AbTestCreateForm.container';
 export class CreatePageHibana extends Component {
   componentDidMount() {
@@ -35,10 +35,8 @@ export class CreatePageHibana extends Component {
     return (
       <Page
         breadcrumbAction={{ content: 'Back to A/B Tests', component: PageLink, to: '/ab-testing' }}
+        title="Create a New A/B Test"
       >
-        <Text as="h1" fontWeight="500" marginTop={-15} mb={20}>
-          Create a New A/B Test
-        </Text>
         <Panel>
           <AbTestCreateForm onSubmit={this.create} />
         </Panel>
