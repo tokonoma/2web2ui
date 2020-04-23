@@ -8,7 +8,8 @@ import {
 } from 'src/selectors/abTesting';
 import { LabelledValue, Subaccount } from 'src/components';
 import { PageLink } from 'src/components/links';
-import { ActionList, OGOnlyWrapper, Panel, Popover } from 'src/components/matchbox';
+import { ActionList, Panel, Popover } from 'src/components/matchbox';
+import { OGOnlyWrapper } from 'src/components/hibana';
 import { ExpandMore } from '@sparkpost/matchbox-icons';
 import StatusTag from './StatusTag';
 import _ from 'lodash';

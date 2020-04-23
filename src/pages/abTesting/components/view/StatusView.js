@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
-import { OGOnlyWrapper, Panel } from 'src/components/matchbox';
+import { Panel } from 'src/components/matchbox';
+import { OGOnlyWrapper } from 'src/components/hibana';
 import { LabelledValue } from 'src/components';
 import { formatDateTime } from 'src/helpers/date';
 

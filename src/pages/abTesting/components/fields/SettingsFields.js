@@ -1,6 +1,7 @@
 import React from 'react';
 import { Field } from 'redux-form';
-import { OGOnlyWrapper, Panel } from 'src/components/matchbox';
+import { Panel } from 'src/components/matchbox';
+import { OGOnlyWrapper } from 'src/components/hibana';
 import { TextFieldWrapper, RadioGroup } from 'src/components/reduxFormWrappers';
 import { numberBetween, integer, minNumber } from 'src/helpers/validation';
 

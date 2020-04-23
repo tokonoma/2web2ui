@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box, Grid, OGOnlyWrapper, Text } from 'src/components/matchbox';
+import { Box, Grid, Text } from 'src/components/matchbox';
+import { OGOnlyWrapper } from 'src/components/hibana';
 import styles from './Section.module.scss';
 import useHibanaToggle from 'src/hooks/useHibanaToggle';
 

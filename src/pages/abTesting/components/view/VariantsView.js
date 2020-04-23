@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { PageLink } from 'src/components/links';
-import { OGOnlyWrapper, Panel, Tooltip } from 'src/components/matchbox';
+import { Panel, Tooltip } from 'src/components/matchbox';
+import { OGOnlyWrapper } from 'src/components/hibana';
 import { InfoOutline } from '@sparkpost/matchbox-icons';
 import { LabelledValue, Unit } from 'src/components';
 import { hasTestDelivered } from 'src/helpers/abTesting';
