@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
 import { Field, change } from 'redux-form';
-import { Grid } from 'src/components/matchbox';
+import { Grid, Stack } from 'src/components/matchbox';
 import _ from 'lodash';
 import config from 'src/config';
 import { TextFieldWrapper } from 'src/components';
@@ -44,48 +44,50 @@ export class PaymentForm extends Component {
     const { disabled } = this.props;
     return (
       <div>
-        <p>
-          <small>Credit Card</small>
-        </p>
-        <Field
-          label="Credit Card Number"
-          name="card.number"
-          ref={input => (this.cc = input)}
-          component={TextFieldWrapper}
-          validate={[required, this.validateType]}
-          disabled={disabled}
-        />
-        <Field
-          label="Cardholder Name"
-          name="card.name"
-          component={TextFieldWrapper}
-          validate={required}
-          disabled={disabled}
-        />
-        <Grid>
-          <Grid.Column xs={6}>
-            <Field
-              label="Expiration Date"
-              name="card.expCombined"
-              ref={input => (this.expiry = input)}
-              placeholder="MM / YY"
-              component={TextFieldWrapper}
-              validate={[required, cardExpiry]}
-              disabled={disabled}
-            />
-          </Grid.Column>
-          <Grid.Column xs={6}>
-            <Field
-              label="Security Code"
-              name="card.securityCode"
-              ref={input => (this.cvc = input)}
-              placeholder="CVV/CVC"
-              component={TextFieldWrapper}
-              validate={required}
-              disabled={disabled}
-            />
-          </Grid.Column>
-        </Grid>
+        <Stack>
+          <p>
+            <small>Credit Card</small>
+          </p>
+          <Field
+            label="Credit Card Number"
+            name="card.number"
+            ref={input => (this.cc = input)}
+            component={TextFieldWrapper}
+            validate={[required, this.validateType]}
+            disabled={disabled}
+          />
+          <Field
+            label="Cardholder Name"
+            name="card.name"
+            component={TextFieldWrapper}
+            validate={required}
+            disabled={disabled}
+          />
+          <Grid>
+            <Grid.Column xs={6}>
+              <Field
+                label="Expiration Date"
+                name="card.expCombined"
+                ref={input => (this.expiry = input)}
+                placeholder="MM / YY"
+                component={TextFieldWrapper}
+                validate={[required, cardExpiry]}
+                disabled={disabled}
+              />
+            </Grid.Column>
+            <Grid.Column xs={6}>
+              <Field
+                label="Security Code"
+                name="card.securityCode"
+                ref={input => (this.cvc = input)}
+                placeholder="CVV/CVC"
+                component={TextFieldWrapper}
+                validate={required}
+                disabled={disabled}
+              />
+            </Grid.Column>
+          </Grid>
+        </Stack>
       </div>
     );
   }

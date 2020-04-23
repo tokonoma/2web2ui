@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Field, formValueSelector, change } from 'redux-form';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { Grid } from 'src/components/matchbox';
+import { Grid, Stack } from 'src/components/matchbox';
 import { TextFieldWrapper, SelectWrapper } from 'src/components';
 import { required, email } from 'src/helpers/validation';
 import { getZipLabel } from 'src/helpers/billing';
@@ -53,50 +53,52 @@ export class BillingContactForm extends Component {
 
     return (
       <div>
-        <Grid className={styles.spacer}>
-          <Grid.Column xs={6}>
-            <Field
-              label="First Name"
-              name="billingContact.firstName"
-              component={TextFieldWrapper}
-              validate={required}
-            />
-          </Grid.Column>
-          <Grid.Column xs={6}>
-            <Field
-              label="Last Name"
-              name="billingContact.lastName"
-              component={TextFieldWrapper}
-              validate={required}
-            />
-          </Grid.Column>
-        </Grid>
-        <Field
-          label="Email"
-          name="billingContact.email"
-          component={TextFieldWrapper}
-          validate={[required, email]}
-        />
+        <Stack>
+          <Grid className={styles.spacer}>
+            <Grid.Column xs={6}>
+              <Field
+                label="First Name"
+                name="billingContact.firstName"
+                component={TextFieldWrapper}
+                validate={required}
+              />
+            </Grid.Column>
+            <Grid.Column xs={6}>
+              <Field
+                label="Last Name"
+                name="billingContact.lastName"
+                component={TextFieldWrapper}
+                validate={required}
+              />
+            </Grid.Column>
+          </Grid>
+          <Field
+            label="Email"
+            name="billingContact.email"
+            component={TextFieldWrapper}
+            validate={[required, email]}
+          />
 
-        <Field
-          label="Country"
-          name="billingContact.country"
-          placeholder="Select a country"
-          component={SelectWrapper}
-          options={countries}
-          validate={required}
-        />
-        <Grid>
-          {stateOrProvince}
-          <Grid.Column xs={6}>
-            <Field
-              label={getZipLabel(countryValue)}
-              name="billingContact.zip"
-              component={TextFieldWrapper}
-              validate={required}
-            />
-          </Grid.Column>
-        </Grid>
+          <Field
+            label="Country"
+            name="billingContact.country"
+            placeholder="Select a country"
+            component={SelectWrapper}
+            options={countries}
+            validate={required}
+          />
+          <Grid>
+            {stateOrProvince}
+            <Grid.Column xs={6}>
+              <Field
+                label={getZipLabel(countryValue)}
+                name="billingContact.zip"
+                component={TextFieldWrapper}
+                validate={required}
+              />
+            </Grid.Column>
+          </Grid>
+        </Stack>
       </div>
     );
   }

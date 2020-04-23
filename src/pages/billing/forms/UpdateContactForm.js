@@ -7,9 +7,8 @@ import { showAlert } from 'src/actions/globalAlert';
 import { updateContactInitialValues } from 'src/selectors/accountBillingForms';
 
 import { Button, Panel } from 'src/components/matchbox';
+import { ButtonWrapper } from 'src/components';
 import BillingContactForm from './fields/BillingContactForm';
-
-import styles from './Forms.module.scss';
 
 const FORMNAME = 'updateContact';
 
@@ -30,21 +29,21 @@ export class UpdateContactForm extends Component {
 
     return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
-        <Panel title="Update Billing Contact">
+        <Panel sectioned title="Update Billing Contact">
           <Panel.Section>
             <BillingContactForm
               formName={FORMNAME}
               disabled={submitting}
               countries={this.props.billing.countries}
             />
-          </Panel.Section>
-          <Panel.Section>
-            <Button type="submit" primary disabled={submitting}>
-              Update Billing Contact
-            </Button>
-            <Button onClick={onCancel} className={styles.Cancel}>
-              Cancel
-            </Button>
+            <ButtonWrapper>
+              <Button type="submit" variant="primary" disabled={submitting}>
+                Update Billing Contact
+              </Button>
+              <Button onClick={onCancel} variant="secondary">
+                Cancel
+              </Button>
+            </ButtonWrapper>
           </Panel.Section>
         </Panel>
       </form>
