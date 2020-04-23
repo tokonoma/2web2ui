@@ -29,7 +29,7 @@ export class UpdateContactForm extends Component {
 
     return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
-        <Panel title="Update Billing Contact">
+        <Panel sectioned title="Update Billing Contact">
           <Panel.Section>
             <BillingContactForm
               formName={FORMNAME}
