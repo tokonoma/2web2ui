@@ -11,7 +11,7 @@ import {
   selectRecipientValidationJobById,
   rvAddPaymentFormInitialValues,
 } from 'src/selectors/recipientValidation';
-import { selectIsSelfServeBilling } from 'src/selectors/accountBillingInfo';
+import { isManuallyBilled } from 'src/selectors/accountBillingInfo';
 import ListError from './components/ListError';
 import ListProgress from './components/ListProgress';
 import UploadedListForm from './components/UploadedListForm';
@@ -158,7 +158,7 @@ const mapStateToProps = (state, props) => {
     billingLoading: state.account.billingLoading,
     isRVonSubscription: isProductOnSubscription('recipient_validation')(state),
     initialValues: rvAddPaymentFormInitialValues(state),
-    isManuallyBilled: !selectIsSelfServeBilling(state),
+    isManuallyBilled: isManuallyBilled(state),
     addRVtoSubscriptionloading: state.addRVtoSubscription.addRVtoSubscriptionloading,
     addRVtoSubscriptionerror: state.addRVtoSubscription.addRVtoSubscriptionerror,
   };
