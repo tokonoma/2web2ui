@@ -1,12 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Section Component should render correctly 1`] = `
-<div
-  className="Section"
->
-  <hr
-    className="Hr"
-  />
+<div>
+  <hr />
   <h3>
     a section
   </h3>
@@ -32,9 +28,7 @@ exports[`Section Component should render correctly 2`] = `
     lg={3}
     xs={12}
   >
-    <div
-      className="Left"
-    >
+    <div>
       left
     </div>
   </Box>

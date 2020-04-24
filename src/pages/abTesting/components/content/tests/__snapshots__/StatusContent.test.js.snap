@@ -181,7 +181,13 @@ exports[`Status Content Component should render running-specific help content wh
       mt="300"
     >
       This test is currently running. It will conclude when either:
-      <ul>
+      <ul
+        style={
+          Object {
+            "fontSize": "inherit",
+          }
+        }
+      >
         <li>
           the end date + engagement timeout period is reached
         </li>

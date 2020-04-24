@@ -9,21 +9,10 @@ exports[`A/B Test Create Page should render the list page correctly 1`] = `
       "to": "/ab-testing",
     }
   }
+  title="Create a New A/B Test"
 >
-  <Panel
-    actions={
-      Array [
-        Object {
-          "color": "orange",
-          "content": "Learn more about A/B tests",
-          "external": true,
-          "to": "https://developers.sparkpost.com/api/ab-testing.html",
-        },
-      ]
-    }
-    title="Create a New A/B Test"
-  >
-    <AbTestCreateFormContainer
+  <Panel>
+    <Connect(ReduxForm)
       onSubmit={[Function]}
     />
   </Panel>
@@ -39,21 +28,10 @@ exports[`A/B Test Create Page should show loading component when data is loading
       "to": "/ab-testing",
     }
   }
+  title="Create a New A/B Test"
 >
-  <Panel
-    actions={
-      Array [
-        Object {
-          "color": "orange",
-          "content": "Learn more about A/B tests",
-          "external": true,
-          "to": "https://developers.sparkpost.com/api/ab-testing.html",
-        },
-      ]
-    }
-    title="Create a New A/B Test"
-  >
-    <AbTestCreateFormContainer
+  <Panel>
+    <Connect(ReduxForm)
       onSubmit={[Function]}
     />
   </Panel>
