@@ -3,7 +3,7 @@ import { setSubaccountQuery } from 'src/helpers/subaccounts';
 
 // Components
 import { PageLink } from 'src/components/links';
-import { ActionList, Button, Popover } from 'src/components/matchbox';
+import { ActionList, Button, Popover, Text } from 'src/components/matchbox';
 import { TableCollection } from 'src/components';
 import { MoreHoriz } from '@sparkpost/matchbox-icons';
 import StatusTag from './StatusTag';
@@ -96,7 +96,9 @@ export class TestCollection extends Component {
       <Fragment>
         <p className={styles.Name}>
           <strong>
-            <PageLink to={this.getDetailsLink({ id, version, subaccount_id })}>{name}</PageLink>
+            <Text fontWeight="400">
+              <PageLink to={this.getDetailsLink({ id, version, subaccount_id })}>{name}</PageLink>
+            </Text>
           </strong>
         </p>
         <p className={styles.Id}>ID: {id}</p>
