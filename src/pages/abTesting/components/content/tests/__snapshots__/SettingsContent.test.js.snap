@@ -7,6 +7,7 @@ exports[`Settings Content Component should render when test is in draft mode 1`]
   <ContentText
     color="gray.600"
     fontSize="200"
+    mt="300"
   >
     <span>
       You may continue to adjust these settings and template variants while this test is in
@@ -20,6 +21,7 @@ exports[`Settings Content Component should render when test is in draft mode 1`]
   <ContentText
     color="gray.600"
     fontSize="200"
+    mt="300"
   >
     <ExternalLink
       to="https://www.sparkpost.com/docs/tech-resources/a-b-testing-sparkpost/"
@@ -36,6 +38,7 @@ exports[`Settings Content Component should render when test is in scheduled mode
   <ContentText
     color="gray.600"
     fontSize="200"
+    mt="300"
   >
     <span>
       You may continue to adjust these settings and template variants while this test is in
@@ -49,6 +52,7 @@ exports[`Settings Content Component should render when test is in scheduled mode
   <ContentText
     color="gray.600"
     fontSize="200"
+    mt="300"
   >
     <ExternalLink
       to="https://www.sparkpost.com/docs/tech-resources/a-b-testing-sparkpost/"
