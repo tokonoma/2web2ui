@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { withRouter } from 'react-router-dom';
-import { Button, Panel } from 'src/components/matchbox';
+import { Button, Grid, Panel, Stack } from 'src/components/matchbox';
 import { SendingDomainTypeaheadWrapper, TextFieldWrapper } from 'src/components';
 import AccessControl from 'src/components/auth/AccessControl';
 import { required } from 'src/helpers/validation';
@@ -59,45 +59,57 @@ export class PoolForm extends Component {
       <Panel>
         <form onSubmit={handleSubmit}>
           <Panel.Section>
-            <Field
-              name="name"
-              component={TextFieldWrapper}
-              validate={required}
-              label="Pool Name"
-              placeholder="My IP Pool"
-              disabled={editingDefault || submitting}
-              helpText={helpText}
-            />
-
-            {!editingDefault && (
-              <AccessControl
-                condition={any(
-                  hasAccountOptionEnabled('allow_default_signing_domains_for_ip_pools'),
-                  configFlag('featureFlags.allow_default_signing_domains_for_ip_pools'),
-                )}
-              >
-                <Field
-                  name="signing_domain"
-                  component={SendingDomainTypeaheadWrapper}
-                  label="Default Signing Domain"
-                  disabled={submitting}
-                />
-              </AccessControl>
-            )}
-
-            {!editingDefault && (
-              <Field
-                name="auto_warmup_overflow_pool"
-                label="Overflow Pool"
-                component={SelectWrapper}
-                options={this.getOverflowPoolOptions()}
-                helpText="With automatic IP Warmup enabled, selected pool will be used when volume threshold for this pool has been reached."
-                disabled={submitting || (!isNew && !canEditOverflowPool)}
-              />
-            )}
+            <Stack>
+              <Grid>
+                <Grid.Column md={9} style={{ marginBottom: '20px' }}>
+                  <Field
+                    name="name"
+                    component={TextFieldWrapper}
+                    validate={required}
+                    label="Pool Name"
+                    placeholder="My IP Pool"
+                    disabled={editingDefault || submitting}
+                    helpText={helpText}
+                  />
+                </Grid.Column>
+              </Grid>
+              <Grid>
+                <Grid.Column md={9} style={{ marginBottom: '20px' }}>
+                  {!editingDefault && (
+                    <AccessControl
+                      condition={any(
+                        hasAccountOptionEnabled('allow_default_signing_domains_for_ip_pools'),
+                        configFlag('featureFlags.allow_default_signing_domains_for_ip_pools'),
+                      )}
+                    >
+                      <Field
+                        name="signing_domain"
+                        component={SendingDomainTypeaheadWrapper}
+                        label="Default Signing Domain"
+                        disabled={submitting}
+                      />
+                    </AccessControl>
+                  )}
+                </Grid.Column>
+              </Grid>
+              <Grid>
+                <Grid.Column md={9}>
+                  {!editingDefault && (
+                    <Field
+                      name="auto_warmup_overflow_pool"
+                      label="Overflow Pool"
+                      component={SelectWrapper}
+                      options={this.getOverflowPoolOptions()}
+                      helpText="With automatic IP Warmup enabled, selected pool will be used when volume threshold for this pool has been reached."
+                      disabled={submitting || (!isNew && !canEditOverflowPool)}
+                    />
+                  )}
+                </Grid.Column>
+              </Grid>
+            </Stack>
           </Panel.Section>
           <Panel.Section>
-            <Button submit primary disabled={submitting || pristine}>
+            <Button submit primary disabled={submitting || pristine} variant="primary">
               {submitting ? 'Saving' : submitText}
             </Button>
           </Panel.Section>
