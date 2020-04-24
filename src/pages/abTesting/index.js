@@ -1,6 +1,6 @@
 import ListPage from './ListPage';
 import DetailsPage from './DetailsPage';
-import CreatePage from './CreatePage.container';
+import CreatePage from './CreatePage';
 
 export default {
   ListPage,
