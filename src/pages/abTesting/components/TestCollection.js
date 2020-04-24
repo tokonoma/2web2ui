@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React from 'react';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 
 // Components
@@ -9,19 +9,21 @@ import { MoreHoriz } from '@sparkpost/matchbox-icons';
 import StatusTag from './StatusTag';
 import { formatDateTime } from 'src/helpers/date';
 
-import styles from '../ListPage.module.scss';
-
+import OGStyles from '../ListPage.module.scss';
+import HibanaStyles from '../ListPageHibana.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 const filterBoxConfig = {
   show: true,
   itemToStringKeys: ['name', 'id', 'status', 'test_mode'],
   exampleModifiers: ['id', 'status', 'test_mode'],
 };
 
-export class TestCollection extends Component {
-  getDetailsLink = ({ id, version, subaccount_id }) =>
+export function TestCollection(props) {
+  const styles = useHibanaOverride(OGStyles, HibanaStyles);
+  const getDetailsLink = ({ id, version, subaccount_id }) =>
     `/ab-testing/${id}/${version}${setSubaccountQuery(subaccount_id)}`;
 
-  getColumns() {
+  const getColumns = () => {
     const columns = [
       { label: 'Name', sortKey: 'name' },
       { label: 'Status', sortKey: 'status' },
@@ -31,9 +33,9 @@ export class TestCollection extends Component {
     ];
 
     return columns;
-  }
+  };
 
-  getRowData = ({
+  const getRowData = ({
     id,
     version,
     subaccount_id,
@@ -46,14 +48,14 @@ export class TestCollection extends Component {
     const actions = [
       {
         content: 'Edit Test',
-        to: this.getDetailsLink({ id, version, subaccount_id }),
+        to: getDetailsLink({ id, version, subaccount_id }),
         component: PageLink,
         visible: status === 'scheduled' || status === 'draft',
         section: 1,
       },
       {
         content: 'View Test',
-        to: this.getDetailsLink({ id, version, subaccount_id }),
+        to: getDetailsLink({ id, version, subaccount_id }),
         component: PageLink,
         visible: status === 'running' || status === 'cancelled' || status === 'completed',
         section: 1,
@@ -61,7 +63,7 @@ export class TestCollection extends Component {
       {
         content: 'Reschedule Test',
         to: {
-          pathname: this.getDetailsLink({ id, version }),
+          pathname: getDetailsLink({ id, version }),
           search: setSubaccountQuery(subaccount_id),
           state: {
             rescheduling: true,
@@ -75,34 +77,34 @@ export class TestCollection extends Component {
         content: 'Cancel Test',
         visible: status === 'scheduled' || status === 'running',
         section: 2,
-        onClick: () => this.props.toggleCancel(id, subaccount_id),
+        onClick: () => props.toggleCancel(id, subaccount_id),
       },
       {
         content: 'Delete Test',
         section: 2,
-        onClick: () => this.props.toggleDelete(id, subaccount_id),
+        onClick: () => props.toggleDelete(id, subaccount_id),
       },
     ];
 
     const template = winning_template_id ? (
-      <Fragment>
+      <>
         <span className={styles.Winner}>Winner:</span> {winning_template_id}
-      </Fragment>
+      </>
     ) : (
       default_template.template_id
     );
 
     return [
-      <Fragment>
+      <>
         <p className={styles.Name}>
           <strong>
             <Text fontWeight="400">
-              <PageLink to={this.getDetailsLink({ id, version, subaccount_id })}>{name}</PageLink>
+              <PageLink to={getDetailsLink({ id, version, subaccount_id })}>{name}</PageLink>
             </Text>
           </strong>
         </p>
         <p className={styles.Id}>ID: {id}</p>
-      </Fragment>,
+      </>,
       <StatusTag status={status} />,
       <p className={styles.Template}>{template}</p>,
       <p className={styles.LastUpdated}>{formatDateTime(updated_at)}</p>,
@@ -122,20 +124,18 @@ export class TestCollection extends Component {
     ];
   };
 
-  render() {
-    const { abTests } = this.props;
-    return (
-      <TableCollection
-        columns={this.getColumns()}
-        rows={abTests}
-        getRowData={this.getRowData}
-        pagination={true}
-        filterBox={filterBoxConfig}
-        defaultSortColumn="updated_at"
-        defaultSortDirection="desc"
-      />
-    );
-  }
+  const { abTests } = props;
+  return (
+    <TableCollection
+      columns={getColumns()}
+      rows={abTests}
+      getRowData={getRowData}
+      pagination={true}
+      filterBox={filterBoxConfig}
+      defaultSortColumn="updated_at"
+      defaultSortDirection="desc"
+    />
+  );
 }
 
 export default TestCollection;
