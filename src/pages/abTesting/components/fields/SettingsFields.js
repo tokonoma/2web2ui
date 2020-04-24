@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field } from 'redux-form';
-import { Box, Panel } from 'src/components/matchbox';
+import { Panel } from 'src/components/matchbox';
 import { OGOnlyWrapper } from 'src/components/hibana';
 import { TextFieldWrapper, RadioGroup } from 'src/components/reduxFormWrappers';
 import { numberBetween, integer, minNumber } from 'src/helpers/validation';
@@ -45,37 +45,35 @@ const SettingsFields = ({ disabled, formValues = {} }) => (
       )}
     </OGOnlyWrapper>
     <OGOnlyWrapper as={Panel}>
-      <OGOnlyWrapper as={Panel.Section}>
-        <Box as={Panel.Section}>
-          <Field
-            name="metric"
-            component={RadioGroup}
-            label="How should we determine a winning variant?"
-            options={[
-              { label: 'By Unique Click Rate', value: 'count_unique_clicked' },
-              { label: 'By Unique Open Rate', value: 'count_unique_confirmed_opened' },
-            ]}
-            disabled={disabled}
-          />
-        </Box>
-        <Box as={Panel.Section}>
-          <Field
-            name="engagement_timeout"
-            component={TextFieldWrapper}
-            label="How long would you like to continue to collect engagement events after the last delivery?"
-            helpText="By default, we continue to collect engagement events for 24 hours after the last delivery."
-            suffix="hours"
-            type="number"
-            validate={[integer, minNumber(1)]}
-            disabled={disabled}
-          />
-        </Box>
-      </OGOnlyWrapper>
+      <Panel.Section>
+        <Field
+          name="metric"
+          grid={{ xs: 6 }}
+          component={RadioGroup}
+          label="How should we determine a winning variant?"
+          options={[
+            { label: 'By Unique Click Rate', value: 'count_unique_clicked' },
+            { label: 'By Unique Open Rate', value: 'count_unique_confirmed_opened' },
+          ]}
+          disabled={disabled}
+        />
+        <Field
+          name="engagement_timeout"
+          component={TextFieldWrapper}
+          label="How long would you like to continue to collect engagement events after the last delivery?"
+          helpText="By default, we continue to collect engagement events for 24 hours after the last delivery."
+          suffix="hours"
+          type="number"
+          validate={[integer, minNumber(1)]}
+          disabled={disabled}
+        />
+      </Panel.Section>
     </OGOnlyWrapper>
     <OGOnlyWrapper as={Panel}>
       <Panel.Section>
         <Field
           name="audience_selection"
+          grid={{ xs: 6 }}
           component={RadioGroup}
           label={"How should we distribute this test's variants?"}
           options={[
