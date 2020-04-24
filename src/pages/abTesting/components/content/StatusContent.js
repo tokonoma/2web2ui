@@ -23,7 +23,7 @@ const StatusContent = ({ test, rescheduling }) => (
       <div>
         <ContentText fontSize="200" color="gray.600" mt="300">
           This test is currently running. It will conclude when either:
-          <ul>
+          <ul style={{ fontSize: 'inherit' }}>
             <li>the end date + engagement timeout period is reached</li>
             {test.test_mode === 'bayesian' && (
               <li>the desired confidence level has been reached</li>
