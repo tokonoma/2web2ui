@@ -40,7 +40,7 @@ describe('The templates list page', () => {
     cy.findAllByText('Stubbed Template 3').should('have.length', 2);
   });
 
-  it('renders an empty state when no templates are returned with a "Create New" button', () => {
+  it('renders an empty state when no templates are returned with a "Create Template" button', () => {
     cy.stubRequest({
       url: TEMPLATES_API_URL,
       fixture: 'templates/200.get.no-results.json',
@@ -49,9 +49,9 @@ describe('The templates list page', () => {
     cy.visit(PAGE_URL);
 
     cy.findByText('Manage your email templates').should('be.visible');
-    cy.findByText('Create New').click();
+    cy.findByText('Create Template').click();
     cy.url().should('include', '/create');
-    cy.title().should('include', 'Create New Template');
+    cy.title().should('include', 'Create Template');
   });
 
   it('it does not render the "Recent Activity" section when fewer than three template results are returned', () => {
@@ -101,8 +101,8 @@ describe('The templates list page', () => {
       .first()
       .click();
 
-    cy.findByLabelText('Template Name *').should('have.value', 'Stubbed Template 1 (COPY)');
-    cy.findByLabelText('Template ID *').should('have.value', 'stubbed-template-1-copy');
+    cy.findByLabelText(/Template Name/g).should('have.value', 'Stubbed Template 1 (COPY)');
+    cy.findByLabelText(/Template ID/g).should('have.value', 'stubbed-template-1-copy');
   });
 
   it('renders "Recent Activity" results with a delete action', () => {
@@ -264,8 +264,8 @@ describe('The templates list page', () => {
       .first()
       .click();
 
-    cy.findByLabelText('Template Name *').should('have.value', 'Stubbed Template 1 (COPY)');
-    cy.findByLabelText('Template ID *').should('have.value', 'stubbed-template-1-copy');
+    cy.findByLabelText(/Template Name/g).should('have.value', 'Stubbed Template 1 (COPY)');
+    cy.findByLabelText(/Template ID/g).should('have.value', 'stubbed-template-1-copy');
 
     cy.findByText('Duplicate').click();
 
@@ -343,12 +343,12 @@ describe('The templates list page', () => {
     });
   });
 
-  it('has a "Create New" button that navigates to the template creation page', () => {
+  it('has a "Create Template" button that navigates to the template creation page', () => {
     cy.visit(PAGE_URL);
 
-    cy.findByText('Create New').click();
+    cy.findByText('Create Template').click();
 
-    cy.title().should('include', 'Create New Template');
-    cy.findByText('Create New Template').should('be.visible');
+    cy.title().should('include', 'Create Template');
+    cy.findByText('Create Template').should('be.visible');
   });
 });

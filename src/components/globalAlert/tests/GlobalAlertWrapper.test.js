@@ -1,14 +1,22 @@
 import React from 'react';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import { GlobalAlertWrapper } from '../GlobalAlertWrapper';
 import { shallow } from 'enzyme';
+import styles from '../GlobalAlertWrapper.module.scss';
+
+jest.mock('src/hooks/useHibanaOverride');
 
 describe('GlobalAlertWrapper', () => {
+  beforeEach(() => useHibanaOverride.mockImplementationOnce(() => styles));
+
   const props = {
-    alerts: [{
-      message: 'a message',
-      id: 'alert_1'
-    }],
-    clear: jest.fn()
+    alerts: [
+      {
+        message: 'a message',
+        id: 'alert_1',
+      },
+    ],
+    clear: jest.fn(),
   };
 
   it('should render', () => {

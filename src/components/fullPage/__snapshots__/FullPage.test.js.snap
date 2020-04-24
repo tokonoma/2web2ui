@@ -5,36 +5,37 @@ exports[`FullPage renders a page 1`] = `
   <div
     className="FullPageNav"
   >
+    <PageLink
+      className="FullPageBreadcrumb"
+      to="/here"
+    >
+      <ChevronLeft
+        className="FullPageChevron"
+        size={28}
+      />
+      <Icon
+        height={28}
+        width={28}
+      />
+      <ScreenReaderOnly>
+        Back
+      </ScreenReaderOnly>
+    </PageLink>
     <div
       className="FullPageHeaderArea"
     >
-      <PageLink
-        className="FullPageBreadcrumb"
-        to="/here"
-      >
-        <ChevronLeft
-          size={28}
-        />
-        <Icon
-          height={28}
-          width={28}
-        />
-        <ScreenReaderOnly>
-          Back
-        </ScreenReaderOnly>
-      </PageLink>
       <h1
         className="FullPageTitle"
       >
         Test Example
       </h1>
-    </div>
-    <div
-      className="FullPagePrimaryArea"
-    >
-      <button>
-        Click Me
-      </button>
+      <div
+        className="FullPagePrimaryArea"
+      >
+        <button>
+          Click Me
+        </button>
+      </div>
     </div>
   </div>
   <div

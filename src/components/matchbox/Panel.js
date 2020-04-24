@@ -18,7 +18,9 @@ const Panel = props => {
   if (!isHibanaEnabled) {
     return <OGPanel {...omitSystemProps(props)} />;
   }
-  return <HibanaPanel mb={'400'} {...props} />;
+
+  // TODO: Remove baked in margin
+  return <HibanaPanel mb={props.mb ? props.mb : '400'} {...props} />;
 };
 
 const Section = props => {

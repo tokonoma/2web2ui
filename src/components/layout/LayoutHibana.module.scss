@@ -3,7 +3,7 @@
 .wrapper {
   position: relative;
   flex-direction: column;
-  background-color: color(white);
+  background: color(white);
 }
 
 .content.content {
@@ -11,6 +11,14 @@
 
   @media (min-width: media-query(md)) {
     padding: spacing(400);
+  }
+}
+
+.FullscreenContent {
+  padding: 0;
+
+  @media (min-width: media-query(md)) {
+    padding: 0;
   }
 }
 

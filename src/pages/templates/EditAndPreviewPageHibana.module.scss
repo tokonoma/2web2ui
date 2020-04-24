@@ -1,0 +1,28 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+$nav-height: spacing(800);
+
+.EditorNav {
+  // Note `top` offset by the exact height of the navigation above found in `FullPage.module.scss`
+  top: $nav-height;
+
+  @media (min-width: media-query(sm)) {
+    position: fixed;
+  }
+}
+
+.MainContent {
+  @media (min-width: media-query(sm)) {
+    margin-top: $nav-height + spacing(300);
+  }
+}
+
+.GreenColor {
+  color: color(green, 500);
+}
+
+.Status {
+  svg {
+    margin-left: spacing(200);
+  }
+}

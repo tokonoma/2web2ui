@@ -5,12 +5,14 @@ import SaveAndPublish from './SaveAndPublish';
 import SaveAndPublishConfirmationModal from './SaveAndPublishConfirmationModal';
 import ViewPublished from './ViewPublished';
 import SaveDraft from './SaveDraft';
-import styles from './Actions.module.scss';
 import useEditorContext from '../../hooks/useEditorContext';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import DuplicateTemplate from './DuplicateTemplate';
 import DuplicateTemplateModal from './DuplicateTemplateModal';
 import DeleteTemplate from './DeleteTemplate';
 import DeleteTemplateModal from './DeleteTemplateModal';
+import OGStyles from './Actions.module.scss';
+import hibanaStyles from './ActionsHibana.module.scss';
 
 const DraftModeActions = () => {
   const {
@@ -25,6 +27,7 @@ const DraftModeActions = () => {
     isCreatePending,
     isDeletePending,
   } = useEditorContext();
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
 
   // State
   const [isPopoverOpen, setPopoverOpen] = useState(false);
@@ -62,12 +65,15 @@ const DraftModeActions = () => {
 
       <div className={styles.Actions}>
         <Popover
+          className={styles.ActionPopover}
           id="popover-action-list"
           left={true}
           open={isPopoverOpen}
           onClose={() => setPopoverOpen(false)}
           trigger={
             <Button
+              variant="secondary"
+              className={styles.ActionsPopoverTrigger}
               onClick={() => setPopoverOpen(!isPopoverOpen)}
               aria-controls="popover-action-list"
               aria-expanded={isPopoverOpen ? 'true' : 'false'}

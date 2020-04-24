@@ -1,26 +1,31 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import FromEmail from '../FromEmail';
+import { FromEmailClassComponent as FromEmail } from '../FromEmail';
+import styles from '../FromEmail.module.scss';
 
-jest.mock('lodash/debounce', () => jest.fn((fn) => {
-  fn.cancel = jest.fn();
-  return fn;
-}));
+jest.mock('lodash/debounce', () =>
+  jest.fn(fn => {
+    fn.cancel = jest.fn();
+    return fn;
+  }),
+);
 
 describe('FromEmail', () => {
-  const subject = (props = {}) => shallow(
-    <FromEmail
-      domains={[
-        { domain: 'apples.com' },
-        { domain: 'apricot.com' },
-        { domain: 'aubergine.com' },
-        { domain: 'bananas.com' }
-      ]}
-      onChange={jest.fn()}
-      value="test@a"
-      {...props}
-    />
-  );
+  const subject = (props = {}) =>
+    shallow(
+      <FromEmail
+        domains={[
+          { domain: 'apples.com' },
+          { domain: 'apricot.com' },
+          { domain: 'aubergine.com' },
+          { domain: 'bananas.com' },
+        ]}
+        onChange={jest.fn()}
+        value="test@a"
+        styles={styles}
+        {...props}
+      />,
+    );
 
   it('derives selected item', () => {
     expect(subject()).toHaveProp('selectedItem', 'test@a');
@@ -30,7 +35,8 @@ describe('FromEmail', () => {
     const onChange = jest.fn();
     const wrapper = subject({ onChange });
 
-    wrapper.shallow()
+    wrapper
+      .shallow()
       .find('FromEmailInput')
       .simulate('change', 'test@b');
 
@@ -49,23 +55,28 @@ describe('FromEmail', () => {
   });
 
   it.each([
-    ['matches on value change', {
-      inputValue: 'brian@a',
-      matched: [
-        'brian@apples.com',
-        'brian@apricot.com',
-        'brian@aubergine.com'
-      ]
-    }],
-    ['excludes an exact match', {
-      inputValue: 'brian@bananas.com',
-      matched: []
-    }],
-    ['reset matches when value is missing an at sign', {
-      initialMatches: ['bananas.com'],
-      inputValue: 'brian',
-      matched: []
-    }]
+    [
+      'matches on value change',
+      {
+        inputValue: 'brian@a',
+        matched: ['brian@apples.com', 'brian@apricot.com', 'brian@aubergine.com'],
+      },
+    ],
+    [
+      'excludes an exact match',
+      {
+        inputValue: 'brian@bananas.com',
+        matched: [],
+      },
+    ],
+    [
+      'reset matches when value is missing an at sign',
+      {
+        initialMatches: ['bananas.com'],
+        inputValue: 'brian',
+        matched: [],
+      },
+    ],
   ])('%s', (testName, { initialMatches, inputValue, matched }) => {
     const wrapper = subject();
 

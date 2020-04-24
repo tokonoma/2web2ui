@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import { Button, Panel, Modal } from 'src/components/matchbox';
 import ButtonWrapper from 'src/components/buttonWrapper';
 import PanelLoading from 'src/components/panelLoading';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import { RedirectAndAlert } from 'src/components/globalAlert';
 import { routeNamespace } from '../../constants/routes';
-import styles from './DeleteTemplateModal.module.scss';
+import OGStyles from './DeleteTemplateModal.module.scss';
+import hibanaStyles from './DeleteTemplateModalHibana.module.scss';
 
 const DeleteTemplateModal = props => {
   const { open, onClose, template, deleteTemplate, isLoading, successCallback } = props;
@@ -19,6 +21,7 @@ const DeleteTemplateModal = props => {
       }
     });
   };
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
 
   return (
     <>
@@ -46,11 +49,13 @@ const DeleteTemplateModal = props => {
               </p>
 
               <ButtonWrapper>
-                <Button destructive onClick={handleDelete}>
+                <Button variant="destructive" onClick={handleDelete}>
                   Delete All Versions
                 </Button>
 
-                <Button onClick={onClose}>Cancel</Button>
+                <Button variant="secondary" onClick={onClose}>
+                  Cancel
+                </Button>
               </ButtonWrapper>
             </Panel.Section>
           </Panel>

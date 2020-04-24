@@ -6,8 +6,10 @@ exports[`Fullscreen renders children in fullscreen layout 1`] = `
     className="wrapper fullscreen"
   >
     <main
-      className="content"
+      className="FullscreenContent"
+      id="main-content"
       role="main"
+      tabIndex="-1"
     >
       <div>
         My Page

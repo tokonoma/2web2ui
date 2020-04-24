@@ -4,13 +4,16 @@ import { UnstyledLink } from 'src/components/matchbox';
 import links from '../constants/editNavigationLinks';
 import SavedIndicator from './SavedIndicator';
 import useEditorContext from '../hooks/useEditorContext';
-import styles from './EditNavigation.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
+import OGStyles from './EditNavigation.module.scss';
+import hibanaStyles from './EditNavigationHibana.module.scss';
 
 const EditNavigation = ({ primaryArea }) => {
   const { currentNavigationKey, setNavigation, hasSaved } = useEditorContext();
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
 
   return (
-    <nav className={styles.Navigation}>
+    <nav className={styles.Navigation} aria-label="Templates">
       <div className={styles.NavigationLinks}>
         {links.map(({ key, content }) => (
           <UnstyledLink

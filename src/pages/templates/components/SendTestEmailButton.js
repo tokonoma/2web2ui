@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 import React, { useState } from 'react';
-import { Button, Panel, TextField, Modal } from 'src/components/matchbox';
+import { Box, Button, Modal, Panel, Stack, TextField } from 'src/components/matchbox';
 import PanelLoading from 'src/components/panelLoading';
 import ButtonWrapper from 'src/components/buttonWrapper';
 import MultiEmailField, { useMultiEmailField } from 'src/components/multiEmailField';
@@ -135,43 +135,47 @@ const SendTestEmailButton = () => {
 
         {!isModalLoading && (
           <Panel title="Send a Test" sectioned>
-            <p>Verify your email renders as expected in the inbox by sending a quick test.</p>
+            <Box mb="300">
+              <p>Verify your email renders as expected in the inbox by sending a quick test.</p>
+            </Box>
 
             <form onSubmit={handleSubmit}>
-              <MultiEmailField
-                id="multi-email-email-to"
-                label="To"
-                name="emailTo"
-                onChange={e => handleMultiEmailChange(e)}
-                onKeyDownAndBlur={e => handleMultiEmailKeyDownAndBlur(e)}
-                onRemoveEmail={handleMultiEmailRemove}
-                error={multiEmailError}
-                value={multiEmailValue}
-                emailList={multiEmailList}
-              />
+              <Stack>
+                <MultiEmailField
+                  id="multi-email-email-to"
+                  label="To"
+                  name="emailTo"
+                  onChange={e => handleMultiEmailChange(e)}
+                  onKeyDownAndBlur={e => handleMultiEmailKeyDownAndBlur(e)}
+                  onRemoveEmail={handleMultiEmailRemove}
+                  error={multiEmailError}
+                  value={multiEmailValue}
+                  emailList={multiEmailList}
+                />
 
-              <TextField
-                id="text-field-test-email-from"
-                label="From"
-                name="emailFrom"
-                type="email"
-                disabled
-                value={fromEmail}
-                data-id="textfield-from-email"
-              />
+                <TextField
+                  id="text-field-test-email-from"
+                  label="From"
+                  name="emailFrom"
+                  type="email"
+                  disabled
+                  value={fromEmail}
+                  data-id="textfield-from-email"
+                />
 
-              <TextField
-                id="text-field-test-email-subject"
-                label="Subject"
-                name="emailSubject"
-                type="email"
-                disabled
-                value={subject}
-                data-id="textfield-from-email"
-              />
+                <TextField
+                  id="text-field-test-email-subject"
+                  label="Subject"
+                  name="emailSubject"
+                  type="email"
+                  disabled
+                  value={subject}
+                  data-id="textfield-from-email"
+                />
+              </Stack>
 
               <ButtonWrapper>
-                <Button color="orange" type="submit" data-id="button-send-email">
+                <Button variant="primary" type="submit" data-id="button-send-email">
                   Send Email
                 </Button>
               </ButtonWrapper>

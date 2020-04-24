@@ -1,0 +1,8 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.PreviewSection {
+  // Targets inner panel to stretch contents to fill grid parent
+  > div {
+    height: 100%;
+  }
+}

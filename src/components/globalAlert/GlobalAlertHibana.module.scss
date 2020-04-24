@@ -1,0 +1,15 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.Wrapper {
+  top: spacing(500) * 3;
+  right: spacing(500);
+  z-index: 9999; // Overlay all other overlays!
+
+  :global(.heroku-boomerang-loaded) & {
+    top: spacing(800) + spacing(500);
+  }
+}
+
+.Alert {
+  padding-bottom: spacing(200);
+}

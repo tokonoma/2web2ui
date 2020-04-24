@@ -1,0 +1,23 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.PreviewHeader {
+  padding: spacing(400);
+}
+
+.PreviewHeaderSubject {
+  border-bottom: 1px solid color(gray, 400);
+  font-size: font-size(300);
+  padding-bottom: spacing(400);
+}
+
+.PreviewHeaderContent {
+  padding-top: spacing(400);
+}
+
+.PreviewHeaderAvatar {
+  background: color(gray, 500);
+}
+
+.PreviewHeaderAddresses {
+  padding-left: spacing(400);
+}

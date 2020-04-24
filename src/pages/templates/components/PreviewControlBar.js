@@ -2,12 +2,15 @@ import React from 'react';
 import classNames from 'classnames';
 import { DesktopWindows, PhoneAndroid } from '@sparkpost/matchbox-icons';
 import { ScreenReaderOnly, UnstyledLink } from 'src/components/matchbox';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import useEditorContext from '../hooks/useEditorContext';
 import SendTestEmailButton from './SendTestEmailButton';
-import styles from './PreviewControlBar.module.scss';
+import OGStyles from './PreviewControlBar.module.scss';
+import hibanaStyles from './PreviewControlBarHibana.module.scss';
 
 const PreviewControlBar = () => {
   const { previewDevice, setPreviewDevice } = useEditorContext();
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
 
   return (
     <div className={styles.PreviewControlBar} data-id="preview-contol-bar">

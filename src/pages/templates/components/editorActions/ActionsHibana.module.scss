@@ -1,0 +1,45 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.Actions.Actions {
+  display: inline-flex;
+  margin-right: -1px;
+}
+
+.ActionPopover {
+  transform: translateY(spacing(200));
+}
+
+.ActionItem {
+  display: flex;
+  align-items: center;
+  transition: background motion-duration(fast) motion-ease(in-out),
+    color motion-duration(fast) motion-ease(in-out);
+
+  a {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    font-weight: font-weight(normal);
+    color: color(gray, 800);
+    text-decoration: none;
+    font-size: font-size(200);
+    padding: spacing(200) spacing(300);
+
+    &:hover {
+      background: color(blue, 200);
+      color: color(blue, 800);
+    }
+  }
+
+  svg {
+    margin-right: spacing(200);
+  }
+}
+
+.ActionsPopoverTrigger {
+  transform: translateY(4px); // Re-positions button to be lined up with the button next to it
+}
+
+.ActionsBody {
+  margin-top: 0;
+}

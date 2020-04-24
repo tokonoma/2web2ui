@@ -1,14 +1,20 @@
 import React from 'react';
 import SettingsSection from './SettingsSection';
 import PreviewSection from '../PreviewSection';
-import styles from './EditSettings.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
+import OGStyles from './EditSettings.module.scss';
+import hibanaStyles from './EditSettingsHibana.module.scss';
 
-const TemplateSettings = () => (
-  <div className={styles.EditSettings}>
-    <SettingsSection/>
+const TemplateSettings = () => {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
 
-    <PreviewSection/>
-  </div>
-);
+  return (
+    <div className={styles.EditSettings}>
+      <SettingsSection />
+
+      <PreviewSection />
+    </div>
+  );
+};
 
 export default TemplateSettings;

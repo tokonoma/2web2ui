@@ -3,12 +3,14 @@
 exports[`EditSection renders tabs and section 1`] = `
 <Panel
   className="EditSection"
+  mb="0"
 >
   <div
     className="TabsWrapper"
   >
     <Tabs
       color="blue"
+      fitted={false}
       onSelect={[Function]}
       selected={0}
       tabs={
@@ -57,7 +59,9 @@ exports[`EditSection renders tabs and section 1`] = `
           flat={true}
           onClick={[Function]}
         >
-          <MoreHoriz />
+          <MoreHoriz
+            size={25}
+          />
           <ScreenReaderOnly>
             More
           </ScreenReaderOnly>

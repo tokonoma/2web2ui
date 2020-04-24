@@ -1,8 +1,13 @@
 import { shallow } from 'enzyme';
 import React from 'react';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import { DeleteAction, DuplicateAction, LastUpdated, Name, Status } from '../ListComponents';
+import styles from '../ListComponents.module.scss';
+
+jest.mock('src/hooks/useHibanaOverride');
 
 describe('Template List Components', () => {
+  beforeEach(() => useHibanaOverride.mockReturnValue(() => styles));
   let wrapper;
 
   describe('Name', () => {

@@ -1,0 +1,50 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+$nav-height: spacing(800);
+$section-padding: spacing(500);
+$background-color: color(gray, 900);
+$border-color: color(gray, 400);
+
+.FullPageNav {
+  background: $background-color;
+  color: color(white);
+  border-bottom: 1px solid $border-color;
+  height: $nav-height;
+}
+
+.FullPageHeaderArea {
+  padding: 0 $section-padding;
+}
+
+.FullPagePrimaryArea {
+  margin: 0; // TODO: Remove when OG theme is removed
+}
+
+.FullPageBreadcrumb {
+  background: $background-color;
+  border-right: 1px solid $border-color;
+  color: color(white) !important;
+  width: auto;
+  padding: 0 $section-padding;
+  transition: background motion-duration(fast) motion-ease(in-out);
+
+  &:hover {
+    background: color(gray, 1000);
+  }
+}
+
+.FullPageChevron {
+  height: spacing(600);
+  width: spacing(600);
+}
+
+.FullPageTitle {
+  color: color(white);
+  font-size: font-size(500);
+  font-weight: font-weight(normal);
+  padding: 0; // TODO: Remove when OG theme is removed
+}
+
+.FullPageContents {
+  padding-top: $nav-height;
+}

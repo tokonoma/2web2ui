@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import copy from 'copy-to-clipboard';
-import { Tooltip } from 'src/components/matchbox';
+import { Box, Tooltip } from 'src/components/matchbox';
 import { ContentCopy } from '@sparkpost/matchbox-icons';
 import { Button, TextField } from 'src/components/matchbox';
 
@@ -45,8 +45,11 @@ class CopyField extends Component {
     if (!hideCopy) {
       connectRight = (
         <Tooltip dark content="Copied to clipboard!" disabled={!copied}>
-          <Button name="copy-field-button" onClick={this.handleCopy}>
-            <ContentCopy size={14} /> Copy
+          <Button outline name="copy-field-button" onClick={this.handleCopy}>
+            <Box as="span" mr="100">
+              <ContentCopy size={14} />
+            </Box>
+            &nbsp;Copy
           </Button>
         </Tooltip>
       );

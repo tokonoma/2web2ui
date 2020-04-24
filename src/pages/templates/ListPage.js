@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 import React, { Component } from 'react';
-import { Page } from 'src/components/matchbox';
+import { Page, ScreenReaderOnly } from 'src/components/matchbox';
 import { ApiErrorBanner, Loading, TableCollection } from 'src/components';
 import { Templates } from 'src/components/images';
 import { PageLink } from 'src/components/links';
@@ -174,7 +174,7 @@ export default class ListPage extends Component {
       <Page
         primaryAction={
           canModify
-            ? { Component: PageLink, content: 'Create New', to: `${routeNamespace}/create` }
+            ? { Component: PageLink, content: 'Create Template', to: `${routeNamespace}/create` }
             : undefined
         }
         title="Templates"
@@ -199,7 +199,9 @@ export default class ListPage extends Component {
               onToggleDuplicateModal={this.toggleDuplicateModal}
             />
 
-            <h2>All Templates</h2>
+            <ScreenReaderOnly>
+              <h2>All Templates</h2>
+            </ScreenReaderOnly>
 
             <TableCollection
               columns={columns.map(({ header, key }) => ({ ...header, key }))}

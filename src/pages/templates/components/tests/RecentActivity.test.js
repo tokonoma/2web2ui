@@ -1,5 +1,7 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import TestApp from 'src/__testHelpers__/TestApp';
 import RecentActivity from '../RecentActivity';
 
 describe('RecentActivity', () => {
@@ -7,100 +9,91 @@ describe('RecentActivity', () => {
     id: 'template-1',
     name: 'Template 1',
     last_update_time: '2019-10-18T17:30:49+00:00',
-    list_status: 'published'
+    list_status: 'published',
   };
   const publishedWithDraftTemplate = {
     id: 'template-2',
     name: 'Template 2',
     last_update_time: '2019-10-18T17:30:49+00:00',
-    list_status: 'published_with_draft'
+    list_status: 'published_with_draft',
   };
   const draftTemplate = {
     id: 'template-3',
     name: 'Template 3',
     last_update_time: '2019-10-18T17:30:49+00:00',
-    list_status: 'draft'
+    list_status: 'draft',
   };
-  const subject = (props, isShallow = true) => {
-    if (isShallow) {
-      return shallow(
-        <RecentActivity
-          onToggleDeleteModal={jest.fn()}
-          onToggleDuplicateModal={jest.fn()}
-          {...props}
-        />
-      );
-    }
 
-    return mount(
-      <RecentActivity
-        onToggleDeleteModal={jest.fn()}
-        onToggleDuplicateModal={jest.fn()}
-        {...props}
-      />
+  const subject = props => {
+    return render(
+      <TestApp>
+        <RecentActivity {...props} />
+      </TestApp>,
     );
   };
 
-  it('renders an empty fragment when fewer than 2 templates are present', function () {
-    const wrapper = subject({
-      templates: [
-        publishedTemplate,
-        draftTemplate
-      ]
-    }, false);
-
-    expect(wrapper).not.toHaveTextContent('Recent Activity');
-  });
-
-  it('renders a list of templates with relevant links when there are more than 2 templates', function () {
-    const wrapper = subject({
-      templates: [
-        publishedWithDraftTemplate,
-        publishedTemplate,
-        draftTemplate
-      ]
+  it('renders an empty fragment when fewer than 2 templates are present', () => {
+    const { queryByText } = subject({
+      templates: [publishedTemplate, draftTemplate],
     });
 
-    expect(wrapper).toHaveTextContent('Recent Activity');
-    expect(wrapper).toHaveTextContent(publishedWithDraftTemplate.name);
-    expect(wrapper.find('PageLink').at(0)).toHaveProp('to', `/templates/edit/${publishedWithDraftTemplate.id}/published/content`);
-    expect(wrapper).toHaveTextContent(publishedTemplate.name);
-    expect(wrapper.find('PageLink').at(1)).toHaveProp('to', `/templates/edit/${publishedTemplate.id}/published/content`);
-    expect(wrapper).toHaveTextContent(draftTemplate.name);
-    expect(wrapper.find('PageLink').at(2)).toHaveProp('to', `/templates/edit/${draftTemplate.id}/draft/content`);
+    expect(queryByText('Recent Activity')).not.toBeInTheDocument();
   });
 
-  it('renders a maximum of four templates when more than four are present', function () {
-    const wrapper = subject({
+  it('renders a list of templates with relevant links when there are more than 2 templates', () => {
+    const { queryByText, queryAllByRole } = subject({
+      templates: [publishedWithDraftTemplate, publishedTemplate, draftTemplate],
+    });
+
+    // expect(wrapper).toHaveTextContent('Recent Activity');
+    expect(queryByText('Recent Activity')).toBeInTheDocument();
+    expect(queryByText(publishedWithDraftTemplate.name)).toBeInTheDocument();
+    expect(queryAllByRole('link')[0]).toHaveAttribute(
+      'href',
+      `/templates/edit/${publishedWithDraftTemplate.id}/published/content`,
+    );
+    expect(queryByText(publishedWithDraftTemplate.name)).toBeInTheDocument();
+    expect(queryAllByRole('link')[1]).toHaveAttribute(
+      'href',
+      `/templates/edit/${publishedTemplate.id}/published/content`,
+    );
+    expect(queryByText(draftTemplate.name)).toBeInTheDocument();
+    expect(queryAllByRole('link')[2]).toHaveAttribute(
+      'href',
+      `/templates/edit/${draftTemplate.id}/draft/content`,
+    );
+  });
+
+  it('renders a maximum of four templates when more than four are present', () => {
+    const { queryAllByRole } = subject({
       templates: [
         publishedWithDraftTemplate,
         publishedTemplate,
         draftTemplate,
         draftTemplate,
-        draftTemplate
-      ]
+        draftTemplate,
+      ],
     });
 
-    expect(wrapper.find('Panel').length).toBe(4);
+    expect(queryAllByRole('listitem')).toHaveLength(4);
+    expect(queryAllByRole('listitem')).not.toHaveLength(5);
   });
 
-  it('invokes the `onToggleDuplicateModal` propr when `DuplicateAction` is clicked', function () {
+  it('invokes the `onToggleDuplicateModal` propr when `DuplicateAction` is clicked', () => {
     const mockToggleDeleteModal = jest.fn();
     const mockToggleDuplicateModal = jest.fn();
 
-    const wrapper = subject({
-      templates: [
-        publishedWithDraftTemplate,
-        publishedTemplate,
-        draftTemplate,
-        draftTemplate
-      ],
+    const { queryAllByText } = subject({
+      templates: [publishedWithDraftTemplate, publishedTemplate, draftTemplate, draftTemplate],
       onToggleDeleteModal: mockToggleDeleteModal,
-      onToggleDuplicateModal: mockToggleDuplicateModal
+      onToggleDuplicateModal: mockToggleDuplicateModal,
     });
 
-    wrapper.find('DuplicateAction').first().simulate('click');
-    wrapper.find('DeleteAction').first().simulate('click');
+    const firstDeleteButton = queryAllByText('Delete Template')[0];
+    const firstDuplicateButton = queryAllByText('Duplicate Template')[0];
+
+    userEvent.click(firstDeleteButton);
+    userEvent.click(firstDuplicateButton);
 
     expect(mockToggleDeleteModal).toHaveBeenCalled();
     expect(mockToggleDuplicateModal).toHaveBeenCalled();

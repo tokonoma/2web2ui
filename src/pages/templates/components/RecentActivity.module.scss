@@ -2,7 +2,7 @@
 
 .RecentActivity {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-gap: spacing();
   margin-bottom: spacing('large');
 
@@ -43,7 +43,7 @@
 }
 
 .RecentActivityPublishedIcon {
-  fill: #44D09E;
+  fill: #44d09e;
 }
 
 .RecentActivityMeta {
@@ -64,5 +64,10 @@
 }
 
 .RecentActivityAction {
-  height: spacing();
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2rem;
+  width: 2rem;
+  padding: 0;
 }
