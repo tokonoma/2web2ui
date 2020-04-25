@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { TextFieldWrapper, CheckboxWrapper } from 'src/components';
 import { PageLink } from 'src/components/links';
-import { Error, Button } from 'src/components/matchbox';
+import { Box, Button, Error, Stack } from 'src/components/matchbox';
 import { FORMS } from 'src/constants';
 import { required } from 'src/helpers/validation';
 import { trimWhitespaces } from 'src/helpers/string';
@@ -16,37 +16,38 @@ export const LoginForm = ({ loginPending, loginError, handleSubmit }) => (
       </div>
     )}
     <form onSubmit={handleSubmit}>
-      <Field
-        autoFocus
-        errorInLabel
-        name="username"
-        id="username"
-        label="Email or Username"
-        placeholder="email@example.com"
-        normalize={trimWhitespaces}
-        component={TextFieldWrapper}
-        validate={required}
-      />
+      <Stack>
+        <Field
+          autoFocus
+          name="username"
+          id="username"
+          label="Email or Username"
+          normalize={trimWhitespaces}
+          component={TextFieldWrapper}
+          validate={required}
+        />
 
-      <Field
-        type="password"
-        name="password"
-        id="password"
-        label="Password"
-        placeholder="••••••••"
-        component={TextFieldWrapper}
-        helpText={<PageLink to="/forgot-password">Forgot your password?</PageLink>}
-      />
-      <Field
-        name="rememberMe"
-        id="rememberMe"
-        label="Keep me logged in"
-        component={CheckboxWrapper}
-      />
+        <Field
+          type="password"
+          name="password"
+          id="password"
+          label="Password"
+          component={TextFieldWrapper}
+          helpText={<PageLink to="/forgot-password">Forgot your password?</PageLink>}
+        />
+        <Field
+          name="rememberMe"
+          id="rememberMe"
+          label="Keep me logged in"
+          component={CheckboxWrapper}
+        />
 
-      <Button primary submit disabled={loginPending} data-id="button-log-in">
-        {loginPending ? 'Logging In' : 'Log In'}
-      </Button>
+        <Box>
+          <Button variant="primary" submit disabled={loginPending} data-id="button-log-in">
+            {loginPending ? 'Logging In' : 'Log In'}
+          </Button>
+        </Box>
+      </Stack>
     </form>
   </React.Fragment>
 );
