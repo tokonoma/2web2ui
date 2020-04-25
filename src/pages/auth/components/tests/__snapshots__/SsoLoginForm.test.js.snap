@@ -10,7 +10,6 @@ exports[`Component: SsoLoginForm renders errors 1`] = `
       <Field
         autoFocus={true}
         component={[Function]}
-        errorInLabel={true}
         id="username"
         label="Email or Username"
         name="username"
@@ -37,7 +36,6 @@ exports[`Component: SsoLoginForm should render 1`] = `
       <Field
         autoFocus={true}
         component={[Function]}
-        errorInLabel={true}
         id="username"
         label="Email or Username"
         name="username"
@@ -64,7 +62,6 @@ exports[`Component: SsoLoginForm should render during login 1`] = `
       <Field
         autoFocus={true}
         component={[Function]}
-        errorInLabel={true}
         id="username"
         label="Email or Username"
         name="username"

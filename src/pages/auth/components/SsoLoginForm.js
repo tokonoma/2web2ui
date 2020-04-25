@@ -22,7 +22,6 @@ export class SsoLoginForm extends React.Component {
           <Stack>
             <Field
               autoFocus
-              errorInLabel
               name="username"
               id="username"
               label="Email or Username"
