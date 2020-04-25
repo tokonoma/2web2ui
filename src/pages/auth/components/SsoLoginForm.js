@@ -5,7 +5,7 @@ import { TextFieldWrapper } from 'src/components';
 import { FORMS } from 'src/constants';
 import { required } from 'src/helpers/validation';
 import { trimWhitespaces } from 'src/helpers/string';
-import { Button, Error } from 'src/components/matchbox';
+import { Box, Button, Error, Stack } from 'src/components/matchbox';
 
 export class SsoLoginForm extends React.Component {
   render() {
@@ -19,20 +19,23 @@ export class SsoLoginForm extends React.Component {
           />
         )}
         <form onSubmit={handleSubmit}>
-          <Field
-            autoFocus
-            errorInLabel
-            name="username"
-            id="username"
-            label="Email or Username"
-            placeholder="email@example.com"
-            normalize={trimWhitespaces}
-            component={TextFieldWrapper}
-            validate={required}
-          />
-          <Button primary submit disabled={loginPending || pristine}>
-            {loginPending ? 'Logging In' : 'Log In'}
-          </Button>
+          <Stack>
+            <Field
+              autoFocus
+              errorInLabel
+              name="username"
+              id="username"
+              label="Email or Username"
+              normalize={trimWhitespaces}
+              component={TextFieldWrapper}
+              validate={required}
+            />
+            <Box>
+              <Button variant="primary" submit disabled={loginPending || pristine}>
+                {loginPending ? 'Logging In' : 'Log In'}
+              </Button>
+            </Box>
+          </Stack>
         </form>
       </React.Fragment>
     );
