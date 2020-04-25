@@ -65,6 +65,7 @@ export const LINKS = {
     'https://www.sparkpost.com/docs/my-account-and-profile/enabling-two-factor-authentication/',
   RECIPIENT_VALIDATION_ACCESS: 'https://www.sparkpost.com/rv-access',
   AUTO_IP_WARMUP_SETUP: 'https://www.sparkpost.com/docs/user-guide/automated-ip-warmup/',
+  MAILBOX_PROVIDERS: 'https://www.sparkpost.com/docs/user-guide/alerts/#mailbox-providers',
 };
 
 export const ENTERPRISE_PLAN_CODES = ['ent1'];
