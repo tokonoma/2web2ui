@@ -5,14 +5,18 @@ import { getRandomExampleSearch } from './helpers/exampleSearch';
 import styles from './FilterBox.module.scss';
 import { useHibana } from 'src/context/HibanaContext';
 
-// TODO: Replace with Matchbox design tokens once exposed
-const FIELD_MAX_WIDTH = '750px';
-
 function CollectionFilterBox(props) {
   const [state] = useHibana();
   const { isHibanaEnabled } = state;
 
-  const { initialValue, placeholder, wrapper, onChange, onBlur = () => {} } = props;
+  const {
+    initialValue,
+    placeholder,
+    wrapper,
+    onChange,
+    fieldMaxWidth = '750px',
+    onBlur = () => {},
+  } = props;
   const placeholderText = placeholder || `Filter results e.g. ${getRandomExampleSearch(props)}`;
 
   const text = (
@@ -23,7 +27,7 @@ function CollectionFilterBox(props) {
         </Label>
       )}
 
-      <Box maxWidth={FIELD_MAX_WIDTH}>
+      <Box maxWidth={fieldMaxWidth}>
         <TextField
           labelHidden
           label={isHibanaEnabled ? 'Filter By' : undefined}
