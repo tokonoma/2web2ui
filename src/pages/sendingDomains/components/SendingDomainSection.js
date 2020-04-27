@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Grid } from 'src/components/matchbox';
-import { Heading } from 'src/components';
+import { Heading } from 'src/components/text';
 import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import { useHibana } from 'src/context/HibanaContext';
 import OGStyles from './SendingDomainSection.module.scss';

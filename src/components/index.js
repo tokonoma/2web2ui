@@ -31,9 +31,6 @@ export { default as MultiEmailField } from './multiEmailField';
 export { default as Abbreviation } from './abbreviation';
 export { default as RecipientValidationPriceTable } from './recipientValidation/RecipientValidationPriceTable';
 export { default as ButtonWrapper } from './buttonWrapper/ButtonWrapper';
-export { default as SubduedText } from './subduedText/SubduedText';
-export { default as Heading } from './heading/Heading';
-export { default as PageDescription } from './pageDescription/PageDescription';
 
 export * from './breadcrumbs';
 export * from './collection';
