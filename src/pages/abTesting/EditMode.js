@@ -17,7 +17,7 @@ import { listTemplates } from 'src/actions/templates';
 import { selectEditInitialValues } from 'src/selectors/abTesting';
 import { formatFormValues } from 'src/helpers/abTesting';
 
-import { Page } from 'src/components/matchbox';
+import { Box, Page, Panel, Stack } from 'src/components/matchbox';
 import { Save } from '@sparkpost/matchbox-icons';
 import Section from './components/Section';
 import StatusPanel from './components/StatusPanel';
@@ -136,37 +136,47 @@ export class EditMode extends Component {
         primaryAction={this.getPrimaryAction()}
         secondaryActions={this.getSecondaryActions()}
       >
-        <Section title="Basic Information">
-          <Section.Left>
-            <StatusContent test={test} rescheduling={rescheduling} />
-          </Section.Left>
-          <Section.Right>
-            <StatusPanel test={test} subaccountId={subaccountId} subaccountName={subaccountName} />
-            <StatusFields disabled={submitting} />
-          </Section.Right>
-        </Section>
+        <Stack>
+          <Section title="Basic Information">
+            <Section.Left>
+              <StatusContent test={test} rescheduling={rescheduling} />
+            </Section.Left>
+            <Section.Right>
+              <Box as={Panel} marginTop="400">
+                <StatusPanel
+                  test={test}
+                  subaccountId={subaccountId}
+                  subaccountName={subaccountName}
+                />
+                <StatusFields disabled={submitting} />
+              </Box>
+            </Section.Right>
+          </Section>
 
-        <Section title="Settings">
-          <Section.Left>
-            <SettingsContent test={test} />
-          </Section.Left>
-          <Section.Right>
-            <SettingsFields formValues={formValues} disabled={submitting} />
-          </Section.Right>
-        </Section>
+          <Section title="Settings">
+            <Section.Left>
+              <SettingsContent test={test} />
+            </Section.Left>
+            <Section.Right>
+              <Box as={Panel} marginTop="400">
+                <SettingsFields formValues={formValues} disabled={submitting} />
+              </Box>
+            </Section.Right>
+          </Section>
 
-        <Section title="Variants">
-          <Section.Left>
-            <VariantsContent />
-          </Section.Left>
-          <Section.Right>
-            <VariantsFields
-              formValues={formValues}
-              disabled={submitting}
-              subaccountId={subaccountId}
-            />
-          </Section.Right>
-        </Section>
+          <Section title="Variants">
+            <Section.Left>
+              <VariantsContent />
+            </Section.Left>
+            <Section.Right>
+              <VariantsFields
+                formValues={formValues}
+                disabled={submitting}
+                subaccountId={subaccountId}
+              />
+            </Section.Right>
+          </Section>
+        </Stack>
       </Page>
     );
   }

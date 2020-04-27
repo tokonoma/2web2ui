@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Settings View Component should render correctly 1`] = `
-<Panel>
+<OGOnlyWrapper
+  as={[Function]}
+>
   <Panel.Section>
     <LabelledValue
       label="Test Mode"
@@ -55,7 +57,7 @@ exports[`Settings View Component should render correctly 1`] = `
       </p>
     </LabelledValue>
   </Panel.Section>
-</Panel>
+</OGOnlyWrapper>
 `;
 
 exports[`Settings View Component should render learning mode correctly 1`] = `

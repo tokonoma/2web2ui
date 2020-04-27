@@ -5,10 +5,16 @@ import { Loading } from 'src/components/loading/Loading';
 import styles from './PanelLoading.module.scss';
 
 const PanelLoading = props => {
-  const { minHeight, accent } = props;
+  const { minHeight, accent, title } = props;
 
   return (
-    <Panel className={styles.Loading} style={{ minHeight }} accent={accent} data-id="panel-loading">
+    <Panel
+      className={styles.Loading}
+      style={{ minHeight }}
+      accent={accent}
+      data-id="panel-loading"
+      title={title}
+    >
       <Loading minHeight={minHeight} />
     </Panel>
   );

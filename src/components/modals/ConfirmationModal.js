@@ -47,7 +47,7 @@ export default function ConfirmationModal(props) {
   return (
     <Modal open={open} onClose={onCancel} showCloseButton={isHibanaEnabled || showCloseButton}>
       {isPending ? (
-        <PanelLoading />
+        <PanelLoading minHeight="200px" title={title} />
       ) : (
         <Panel title={title} sectioned>
           {renderContent()}

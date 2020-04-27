@@ -9,9 +9,9 @@ import {
 import { LabelledValue, Subaccount } from 'src/components';
 import { PageLink } from 'src/components/links';
 import { ActionList, Panel, Popover } from 'src/components/matchbox';
+import { OGOnlyWrapper } from 'src/components/hibana';
 import { ExpandMore } from '@sparkpost/matchbox-icons';
 import StatusTag from './StatusTag';
-
 import _ from 'lodash';
 
 // todo, this component is rendered as a panel action content and panel actions are buttons, this
@@ -55,7 +55,7 @@ export const StatusPanel = ({ test, version, id, subaccountId, latest, subaccoun
   }
 
   return (
-    <Panel>
+    <OGOnlyWrapper as={Panel}>
       <Panel.Section actions={panelActions}>
         <LabelledValue label="Status">
           <StatusTag status={test.status} />
@@ -67,7 +67,7 @@ export const StatusPanel = ({ test, version, id, subaccountId, latest, subaccoun
           </LabelledValue>
         )}
       </Panel.Section>
-    </Panel>
+    </OGOnlyWrapper>
   );
 };
 

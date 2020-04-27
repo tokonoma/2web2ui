@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { Panel } from 'src/components/matchbox';
+import { OGOnlyWrapper } from 'src/components/hibana';
 import { LabelledValue } from 'src/components';
 import { formatDateTime } from 'src/helpers/date';
 
@@ -16,34 +17,43 @@ const Winner = ({ test }) => {
     winningHelpText = 'No winner was found.';
   }
 
-  if (test.winning_template_id !== test.default_template.template_id && test.test_mode === 'bayesian') {
+  if (
+    test.winning_template_id !== test.default_template.template_id &&
+    test.test_mode === 'bayesian'
+  ) {
     winningHelpText = 'This variant is now being sent by default.';
   }
 
   return (
-    <Panel>
+    <OGOnlyWrapper as={Panel}>
       <Panel.Section>
-        <LabelledValue label='Winner'>
+        <LabelledValue label="Winner">
           <h6>{test.winning_template_id}</h6>
           <p className={styles.HelpText}>{winningHelpText}</p>
         </LabelledValue>
       </Panel.Section>
-    </Panel>
+    </OGOnlyWrapper>
   );
 };
 
 const StatusView = ({ test }) => (
   <Fragment>
-    <Panel sectioned>
-      <LabelledValue label='Start Date' ><p>{formatDateTime(test.start_time)}</p></LabelledValue>
-      <LabelledValue label='End Date' ><p>{formatDateTime(test.end_time)}</p></LabelledValue>
-    </Panel>
+    <OGOnlyWrapper as={Panel}>
+      <Panel.Section>
+        <LabelledValue label="Start Date">
+          <p>{formatDateTime(test.start_time)}</p>
+        </LabelledValue>
+        <LabelledValue label="End Date">
+          <p>{formatDateTime(test.end_time)}</p>
+        </LabelledValue>
+      </Panel.Section>
+    </OGOnlyWrapper>
     <Winner test={test} />
   </Fragment>
 );
 
 StatusView.defaultProps = {
-  test: {}
+  test: {},
 };
 
 export default StatusView;
