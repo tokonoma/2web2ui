@@ -51,26 +51,30 @@ export const IncidentsCollection = props => {
   const { incidents, dateOptions, updateDateRange, search, updateTextField } = props;
 
   const renderHeader = ({ textFieldComponent }) => (
-    <Grid>
-      <OGOnlyWrapper as={Grid.Column} sm={12} lg={5}>
-        <Box as={Grid.Column} xs={12} md={5}>
-          <div className={styles.DatePicker}>
-            <DatePicker
-              {...dateOptions}
-              relativeDateOptions={RELATIVE_DATE_OPTIONS}
-              onChange={updateDateRange}
-              dateFieldFormat={FORMATS.DATE}
-              hideManualEntry
-            />
-          </div>
-        </Box>
-      </OGOnlyWrapper>
-      <OGOnlyWrapper as={Grid.Column} sm={12} lg={7}>
-        <Box as={Grid.Column} xs={12} md={7}>
-          {textFieldComponent}
-        </Box>
-      </OGOnlyWrapper>
-    </Grid>
+    <>
+      <Grid>
+        <OGOnlyWrapper as={Grid.Column} sm={12} lg={5}>
+          <Box as={Grid.Column} xs={12} md={5}>
+            <div className={styles.DatePicker}>
+              <DatePicker
+                {...dateOptions}
+                relativeDateOptions={RELATIVE_DATE_OPTIONS}
+                onChange={updateDateRange}
+                dateFieldFormat={FORMATS.DATE}
+                hideManualEntry
+              />
+            </div>
+          </Box>
+        </OGOnlyWrapper>
+        <OGOnlyWrapper as={Grid.Column} sm={12} lg={7}>
+          <Box as={Grid.Column} xs={12} md={7}>
+            {textFieldComponent}
+          </Box>
+        </OGOnlyWrapper>
+      </Grid>
+
+      <Box pb="400" borderBottom="400" />
+    </>
   );
 
   const EmptyComponent = () => {
