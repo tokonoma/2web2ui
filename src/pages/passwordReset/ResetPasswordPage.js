@@ -7,7 +7,7 @@ import { required, minLength, endsWithWhitespace } from 'src/helpers/validation'
 import { reduxForm, Field } from 'redux-form';
 import { CenteredLogo, TextFieldWrapper } from 'src/components';
 import { PageLink } from 'src/components/links';
-import { Button, Panel } from 'src/components/matchbox';
+import { Box, Button, Panel, Stack } from 'src/components/matchbox';
 import _ from 'lodash';
 import { AUTH_ROUTE } from 'src/constants';
 
@@ -53,26 +53,30 @@ export class ResetPasswordPage extends Component {
     return (
       <Fragment>
         <CenteredLogo />
-        <Panel accent sectioned title="Create a New Password">
+        <Panel sectioned title="Create a New Password">
           <form onSubmit={handleSubmit(this.handleResetPassword)}>
-            <Field
-              name="newPassword"
-              type="password"
-              autoComplete="new-password"
-              label="New Password"
-              validate={[required, minLength(12), endsWithWhitespace]}
-              component={TextFieldWrapper}
-            />
-            <Field
-              name="confirmNewPassword"
-              type="password"
-              label="Confirm New Password"
-              validate={[required, minLength(12), endsWithWhitespace, this.comparePasswords]}
-              component={TextFieldWrapper}
-            />
-            <Button primary submit disabled={invalid || submitting}>
-              {buttonText}
-            </Button>
+            <Stack>
+              <Field
+                name="newPassword"
+                type="password"
+                autoComplete="new-password"
+                label="New Password"
+                validate={[required, minLength(12), endsWithWhitespace]}
+                component={TextFieldWrapper}
+              />
+              <Field
+                name="confirmNewPassword"
+                type="password"
+                label="Confirm New Password"
+                validate={[required, minLength(12), endsWithWhitespace, this.comparePasswords]}
+                component={TextFieldWrapper}
+              />
+              <Box>
+                <Button variant="primary" submit disabled={invalid || submitting}>
+                  {buttonText}
+                </Button>
+              </Box>
+            </Stack>
           </form>
         </Panel>
         <Panel.Footer
