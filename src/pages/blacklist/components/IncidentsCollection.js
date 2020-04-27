@@ -1,9 +1,10 @@
 import React from 'react';
 import { Search } from '@sparkpost/matchbox-icons';
 import { FORMATS } from 'src/constants';
+import { OGOnlyWrapper } from 'src/components/hibana';
 import { TableCollection, DisplayDate } from 'src/components';
 import { PageLink } from 'src/components/links';
-import { Grid, Panel, Table, Tag, TextField } from 'src/components/matchbox';
+import { Box, Grid, Panel, Table, Tag, TextField } from 'src/components/matchbox';
 import styles from './IncidentsCollection.module.scss';
 import DatePicker from 'src/components/datePicker/DatePicker';
 
@@ -51,20 +52,24 @@ export const IncidentsCollection = props => {
 
   const renderHeader = ({ textFieldComponent }) => (
     <Grid>
-      <Grid.Column sm={12} lg={5}>
-        <div className={styles.DatePicker}>
-          <DatePicker
-            {...dateOptions}
-            relativeDateOptions={RELATIVE_DATE_OPTIONS}
-            onChange={updateDateRange}
-            dateFieldFormat={FORMATS.DATE}
-            hideManualEntry
-          />
-        </div>
-      </Grid.Column>
-      <Grid.Column sm={12} lg={7}>
-        {textFieldComponent}
-      </Grid.Column>
+      <OGOnlyWrapper as={Grid.Column} sm={12} lg={5}>
+        <Box as={Grid.Column} xs={12} md={5}>
+          <div className={styles.DatePicker}>
+            <DatePicker
+              {...dateOptions}
+              relativeDateOptions={RELATIVE_DATE_OPTIONS}
+              onChange={updateDateRange}
+              dateFieldFormat={FORMATS.DATE}
+              hideManualEntry
+            />
+          </div>
+        </Box>
+      </OGOnlyWrapper>
+      <OGOnlyWrapper as={Grid.Column} sm={12} lg={7}>
+        <Box as={Grid.Column} xs={12} md={7}>
+          {textFieldComponent}
+        </Box>
+      </OGOnlyWrapper>
     </Grid>
   );
 

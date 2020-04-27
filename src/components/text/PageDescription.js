@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Text } from 'src/components/matchbox';
 import useHibanaToggle from 'src/hooks/useHibanaToggle';
-import styles from './PageDescription.module.scss';
+import OGStyles from './PageDescription.module.scss';
+import hibanaStyles from './PageDescriptionHibana.module.scss';
 
 export function OGPageDescription(props) {
   const { children, className } = props;
 
   return (
-    <p className={classNames(styles.PageDescription, className)} data-id={props['data-id']}>
+    <p className={classNames(OGStyles.PageDescription, className)} data-id={props['data-id']}>
       {children}
     </p>
   );
@@ -25,7 +26,7 @@ export function HibanaPageDescription(props) {
       lineHeight="300"
       mb={mb}
       maxWidth={maxWidth}
-      className={classNames(styles.PageDescription, className)}
+      className={classNames(hibanaStyles.PageDescription, className)}
       data-id={props['data-id']}
     >
       {children}
