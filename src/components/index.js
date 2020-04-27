@@ -33,6 +33,7 @@ export { default as RecipientValidationPriceTable } from './recipientValidation/
 export { default as ButtonWrapper } from './buttonWrapper/ButtonWrapper';
 export { default as SubduedText } from './subduedText/SubduedText';
 export { default as Heading } from './heading/Heading';
+export { default as PageDescription } from './pageDescription/PageDescription';
 
 export * from './breadcrumbs';
 export * from './collection';
