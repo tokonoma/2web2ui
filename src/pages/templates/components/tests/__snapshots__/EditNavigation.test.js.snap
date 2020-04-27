@@ -2,6 +2,7 @@
 
 exports[`EditNavigation renders navigation with primary area 1`] = `
 <nav
+  aria-label="Templates"
   className="Navigation"
 >
   <div

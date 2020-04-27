@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CreateForm renders correctly 1`] = `
-<Grid>
-  <Grid.Column
-    lg={7}
-    xs={12}
-  >
-    <Panel.Section>
+<Fragment>
+  <Grid>
+    <Grid.Column
+      lg={6}
+      xs={12}
+    >
       <Field
         component={[Function]}
         label="Template Name"
@@ -14,6 +14,11 @@ exports[`CreateForm renders correctly 1`] = `
         onChange={[Function]}
         validate={[Function]}
       />
+    </Grid.Column>
+    <Grid.Column
+      lg={6}
+      xs={12}
+    >
       <Field
         component={[Function]}
         helpText="A Unique ID for your template, we'll fill this in for you."
@@ -26,31 +31,40 @@ exports[`CreateForm renders correctly 1`] = `
           ]
         }
       />
-      <Field
-        component={[Function]}
-        label="Subject"
-        name="content.subject"
-        validate={[Function]}
+    </Grid.Column>
+  </Grid>
+  <Stack>
+    <Grid>
+      <Grid.Column
+        lg={6}
+        xs={12}
+      >
+        <Field
+          component={[Function]}
+          domains={Array []}
+          helpText="You do not have any verified sending domains to use."
+          label="From Email"
+          name="content.from.email"
+          placeholder="example@email.com"
+          validate={
+            Array [
+              [Function],
+              [Function],
+            ]
+          }
+        />
+      </Grid.Column>
+      <Grid.Column
+        lg={6}
+        xs={12}
       />
-      <Field
-        component={[Function]}
-        domains={Array []}
-        helpText="You do not have any verified sending domains to use."
-        label="From Email"
-        name="content.from.email"
-        placeholder="example@email.com"
-        validate={
-          Array [
-            [Function],
-            [Function],
-          ]
-        }
-      />
-    </Panel.Section>
-  </Grid.Column>
-  <Grid.Column
-    lg={5}
-    xs={12}
-  />
-</Grid>
+    </Grid>
+    <Field
+      component={[Function]}
+      label="Subject"
+      name="content.subject"
+      validate={[Function]}
+    />
+  </Stack>
+</Fragment>
 `;

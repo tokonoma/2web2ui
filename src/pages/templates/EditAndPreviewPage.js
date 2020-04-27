@@ -1,17 +1,19 @@
 import React from 'react';
 import { FileEdit, CheckCircle } from '@sparkpost/matchbox-icons';
 import { Prompt } from 'react-router';
-
 import { RedirectAndAlert } from 'src/components/globalAlert';
 import FullPage from 'src/components/fullPage';
 import Loading from 'src/components/loading';
 import EditNavigation from './components/EditNavigation';
 import links from './constants/editNavigationLinks';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import useEditorContext from './hooks/useEditorContext';
-import styles from './EditAndPreviewPage.module.scss';
+import OGStyles from './EditAndPreviewPage.module.scss';
+import hibanaStyles from './EditAndPreviewPageHibana.module.scss';
 import { routeNamespace } from './constants/routes';
 
 const EditAndPreviewPage = () => {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
   const {
     currentNavigationIndex,
     draft,

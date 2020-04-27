@@ -1,0 +1,15 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.PreviewScreen {
+  border: 1px solid color(gray, 400);
+}
+
+.PreviewMobilePhone {
+  background: color(gray, 800);
+  border: 1px solid color(gray, 400);
+}
+
+.PreviewMobilePhoneScreen {
+  background: color(white);
+  border: 1px solid color(gray, 800);
+}

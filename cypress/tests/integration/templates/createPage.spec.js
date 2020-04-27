@@ -10,7 +10,7 @@ function submitForm() {
     .should('have.value', 'hello@bounce.uat.sparkspam.com')
     .blur();
 
-  cy.findByText('Next').click();
+  cy.findByText('Create and View').click();
 }
 
 describe('The create template page', () => {
@@ -22,17 +22,16 @@ describe('The create template page', () => {
   it('has a relevant page title', () => {
     cy.visit(PAGE_URL);
 
-    cy.title().should('include', 'Create New Template');
-    cy.findByText('Create New Template').should('be.visible');
+    cy.title().should('include', 'Create Template');
+    cy.findByText('Create Template').should('be.visible');
   });
 
   it('has a link back to the templates list page', () => {
     cy.visit(PAGE_URL);
 
-    // Need to grab `<main>` to not grab the duplicated element "Templates" that is in the navigation.
-    // This should remain relatively stable as the `<nav>` and `<main>` elements are inherently distinct
-    cy.get('main').within(() => {
-      cy.findByText('Templates').should('have.attr', 'href', '/templates');
+    cy.assertLink({
+      content: 'View All Templates',
+      href: '/templates',
     });
   });
 
@@ -90,10 +89,19 @@ describe('The create template page', () => {
     cy.findAllByText('Required').should('have.length', 4);
   });
 
-  it('has a disabled "Next" button when relevant form fields have not been filled', () => {
+  it('has a disabled "Create and View" button when relevant form fields have not been filled', () => {
     cy.visit(PAGE_URL);
 
-    cy.findByText('Next').should('be.disabled');
+    cy.findByText('Create and View').should('be.disabled');
+  });
+
+  it('has a "Cancel" button that links back to the templates list page', () => {
+    cy.visit(PAGE_URL);
+
+    cy.assertLink({
+      content: 'Cancel',
+      href: '/templates',
+    });
   });
 
   it('creates a new template and redirects to the edit draft page on creation', () => {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ButtonWrapper from 'src/components/buttonWrapper';
 import PanelLoading from 'src/components/panelLoading';
-import { Button, Panel, TextField, Modal } from 'src/components/matchbox';
+import { Button, Panel, TextField, Modal, Stack } from 'src/components/matchbox';
 
 const ModalWrapper = props => {
   const { open, onClose, children } = props;
@@ -98,30 +98,32 @@ const DuplicateTemplateModal = props => {
     <ModalWrapper {...modalProps}>
       <Panel title="Duplicate Template" sectioned>
         <form onSubmit={e => handleSubmit(e)}>
-          <TextField
-            id="template-name"
-            name="templateName"
-            label="Template Name"
-            required // not working as I would expect...
-            value={draftName}
-            error={hasNameError ? 'Please enter a template name.' : undefined}
-            onChange={handleNameChange}
-            data-id="textfield-template-name"
-          />
+          <Stack>
+            <TextField
+              id="template-name"
+              name="templateName"
+              label="Template Name"
+              required // not working as I would expect...
+              value={draftName}
+              error={hasNameError ? 'Please enter a template name.' : undefined}
+              onChange={handleNameChange}
+              data-id="textfield-template-name"
+            />
 
-          <TextField
-            id="template-id"
-            name="templateId"
-            label="Template ID"
-            required // not working as I would expect...
-            value={draftId}
-            error={hasIdError ? 'Please enter a unique template ID.' : undefined}
-            onChange={handleIdChange}
-            data-id="textfield-template-id"
-          />
+            <TextField
+              id="template-id"
+              name="templateId"
+              label="Template ID"
+              required // not working as I would expect...
+              value={draftId}
+              error={hasIdError ? 'Please enter a unique template ID.' : undefined}
+              onChange={handleIdChange}
+              data-id="textfield-template-id"
+            />
+          </Stack>
 
           <ButtonWrapper>
-            <Button color="orange" submit data-id="button-duplicate">
+            <Button variant="primary" submit data-id="button-duplicate">
               Duplicate
             </Button>
           </ButtonWrapper>

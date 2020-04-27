@@ -1,0 +1,52 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+$active-link-color: color(blue, 700);
+
+.Navigation {
+  background: color(white);
+  padding: 0 spacing(500) spacing(300) spacing(500);
+  box-shadow: box-shadow(200);
+
+  @media (min-width: media-query(sm)) {
+    padding: 0 spacing(500);
+  }
+}
+
+.NavigationLink {
+  font-size: font-size(400);
+  color: color(gray, 700);
+  text-decoration: none;
+  padding: spacing(500) spacing(300);
+  transition: color motion-duration(fast) motion-ease(in-out);
+
+  &:after {
+    height: spacing(100);
+    transition: opacity motion-duration(fast) motion-ease(in-out),
+      visibility motion-duration(fast) motion-ease(in-out);
+  }
+
+  &:hover,
+  &:focus {
+    color: color(gray, 800);
+
+    &:after {
+      background-color: color(gray, 300);
+    }
+  }
+
+  &.active {
+    color: $active-link-color;
+
+    &:after {
+      background-color: $active-link-color;
+    }
+  }
+
+  @media (min-width: media-query(sm)) {
+    padding: spacing(500) spacing(300); // TODO: Remove when OG theme is removed - purely an override
+  }
+}
+
+.NavigationActiveLink {
+  color: $active-link-color;
+}

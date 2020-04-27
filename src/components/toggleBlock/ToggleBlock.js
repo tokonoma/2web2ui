@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Grid } from '@sparkpost/matchbox';
-import { Box, Label, Text, Toggle } from 'src/components/matchbox';
+import { Box, Grid, Label, Text, Toggle } from 'src/components/matchbox';
 import useHibanaToggle from 'src/hooks/useHibanaToggle';
 import styles from './ToggleBlock.module.scss';
 

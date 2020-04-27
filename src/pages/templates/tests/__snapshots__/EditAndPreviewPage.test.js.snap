@@ -6,7 +6,6 @@ exports[`EditAndPreviewPage renders a page 1`] = `
   primaryArea={
     <React.Fragment>
       <div
-        className="Status"
         data-id="template-status"
       >
         <span>
@@ -20,16 +19,12 @@ exports[`EditAndPreviewPage renders a page 1`] = `
   }
   title="Test Template (DRAFT)"
 >
-  <div
-    className="EditorNav"
-  >
+  <div>
     <EditNavigation
       primaryArea={<EditContentsPrimaryArea />}
     />
   </div>
-  <div
-    className="MainContent"
-  >
+  <div>
     <EditContents />
   </div>
   <Prompt
@@ -42,14 +37,12 @@ exports[`EditAndPreviewPage renders a page 1`] = `
 exports[`EditAndPreviewPage renders a page in published mode 1`] = `
 <React.Fragment>
   <div
-    className="Status"
     data-id="template-status"
   >
     <span>
       Published
     </span>
     <CheckCircle
-      className="GreenColor"
       size={17}
     />
   </div>

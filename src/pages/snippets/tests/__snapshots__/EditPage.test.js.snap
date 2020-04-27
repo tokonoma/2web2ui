@@ -17,7 +17,7 @@ exports[`EditPage renders disabled form when submitting 1`] = `
   breadcrumbAction={
     Object {
       "Component": [Function],
-      "content": "Snippets",
+      "content": "View All Snippets",
       "to": "/snippets",
     }
   }
@@ -51,7 +51,7 @@ exports[`EditPage renders disabled form when submitting 1`] = `
       },
     ]
   }
-  title="test-snippet"
+  title="Edit Snippet"
 >
   <Form
     onSubmit={[Function]}
@@ -61,11 +61,20 @@ exports[`EditPage renders disabled form when submitting 1`] = `
         lg={4}
         xs={12}
       >
-        <Panel>
-          <Panel.Section>
+        <Panel
+          sectioned={true}
+        >
+          <Stack>
             <Field
               component={[Function]}
               disabled={true}
+              helpText={
+                <ExternalLink
+                  to="https://developers.sparkpost.com/api/snippets/"
+                >
+                  Learn more about Snippets
+                </ExternalLink>
+              }
               label="Snippet Name"
               name="name"
               validate={
@@ -78,27 +87,21 @@ exports[`EditPage renders disabled form when submitting 1`] = `
             <Field
               component={[Function]}
               disabled={true}
-              helpText={<IdentifierHelpText />}
+              helpText="This is a unique identifier to reference your snippet in a template."
               label="Snippet ID"
               name="id"
             />
-          </Panel.Section>
-          <Panel.Section>
             <SubaccountSection
               disabled={true}
               newTemplate={false}
             />
-          </Panel.Section>
-        </Panel>
-        <Panel
-          sectioned={true}
-        >
-          <CopyField
-            helpText="Copy and use this code in your templates"
-            hideCopy={false}
-            label="Code Example"
-            value="{{ render_snippet( \\"test-snippet\\" ) }}"
-          />
+            <CopyField
+              helpText="Copy and use this code in your templates"
+              hideCopy={false}
+              label="Code Example"
+              value="{{ render_snippet( \\"test-snippet\\" ) }}"
+            />
+          </Stack>
         </Panel>
       </Grid.Column>
       <Grid.Column
@@ -120,7 +123,7 @@ exports[`EditPage renders disabled form when user does not have authorization to
   breadcrumbAction={
     Object {
       "Component": [Function],
-      "content": "Snippets",
+      "content": "View All Snippets",
       "to": "/snippets",
     }
   }
@@ -133,7 +136,7 @@ exports[`EditPage renders disabled form when user does not have authorization to
     }
   }
   secondaryActions={Array []}
-  title="test-snippet"
+  title="Edit Snippet"
 >
   <Form
     onSubmit={[Function]}
@@ -143,11 +146,20 @@ exports[`EditPage renders disabled form when user does not have authorization to
         lg={4}
         xs={12}
       >
-        <Panel>
-          <Panel.Section>
+        <Panel
+          sectioned={true}
+        >
+          <Stack>
             <Field
               component={[Function]}
               disabled={true}
+              helpText={
+                <ExternalLink
+                  to="https://developers.sparkpost.com/api/snippets/"
+                >
+                  Learn more about Snippets
+                </ExternalLink>
+              }
               label="Snippet Name"
               name="name"
               validate={
@@ -160,27 +172,21 @@ exports[`EditPage renders disabled form when user does not have authorization to
             <Field
               component={[Function]}
               disabled={true}
-              helpText={<IdentifierHelpText />}
+              helpText="This is a unique identifier to reference your snippet in a template."
               label="Snippet ID"
               name="id"
             />
-          </Panel.Section>
-          <Panel.Section>
             <SubaccountSection
               disabled={true}
               newTemplate={false}
             />
-          </Panel.Section>
-        </Panel>
-        <Panel
-          sectioned={true}
-        >
-          <CopyField
-            helpText="Copy and use this code in your templates"
-            hideCopy={false}
-            label="Code Example"
-            value="{{ render_snippet( \\"test-snippet\\" ) }}"
-          />
+            <CopyField
+              helpText="Copy and use this code in your templates"
+              hideCopy={false}
+              label="Code Example"
+              value="{{ render_snippet( \\"test-snippet\\" ) }}"
+            />
+          </Stack>
         </Panel>
       </Grid.Column>
       <Grid.Column
@@ -202,7 +208,7 @@ exports[`EditPage renders edit form 1`] = `
   breadcrumbAction={
     Object {
       "Component": [Function],
-      "content": "Snippets",
+      "content": "View All Snippets",
       "to": "/snippets",
     }
   }
@@ -236,7 +242,7 @@ exports[`EditPage renders edit form 1`] = `
       },
     ]
   }
-  title="test-snippet"
+  title="Edit Snippet"
 >
   <Form
     onSubmit={[Function]}
@@ -246,10 +252,19 @@ exports[`EditPage renders edit form 1`] = `
         lg={4}
         xs={12}
       >
-        <Panel>
-          <Panel.Section>
+        <Panel
+          sectioned={true}
+        >
+          <Stack>
             <Field
               component={[Function]}
+              helpText={
+                <ExternalLink
+                  to="https://developers.sparkpost.com/api/snippets/"
+                >
+                  Learn more about Snippets
+                </ExternalLink>
+              }
               label="Snippet Name"
               name="name"
               validate={
@@ -262,26 +277,20 @@ exports[`EditPage renders edit form 1`] = `
             <Field
               component={[Function]}
               disabled={true}
-              helpText={<IdentifierHelpText />}
+              helpText="This is a unique identifier to reference your snippet in a template."
               label="Snippet ID"
               name="id"
             />
-          </Panel.Section>
-          <Panel.Section>
             <SubaccountSection
               newTemplate={false}
             />
-          </Panel.Section>
-        </Panel>
-        <Panel
-          sectioned={true}
-        >
-          <CopyField
-            helpText="Copy and use this code in your templates"
-            hideCopy={false}
-            label="Code Example"
-            value="{{ render_snippet( \\"test-snippet\\" ) }}"
-          />
+            <CopyField
+              helpText="Copy and use this code in your templates"
+              hideCopy={false}
+              label="Code Example"
+              value="{{ render_snippet( \\"test-snippet\\" ) }}"
+            />
+          </Stack>
         </Panel>
       </Grid.Column>
       <Grid.Column

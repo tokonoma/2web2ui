@@ -57,6 +57,12 @@ function getVariantProps({ variant, isHibanaEnabled }) {
         return {
           color: 'red',
         };
+      // use when connecting a button to a TextField
+      case 'connected':
+        return {
+          color: 'blue',
+          outline: true,
+        };
       default:
         return {
           color: 'blue',
@@ -76,6 +82,7 @@ function getVariantProps({ variant, isHibanaEnabled }) {
       };
     case 'secondary':
     case 'tertiary':
+    case 'connected':
     default:
       return undefined;
   }

@@ -3,7 +3,7 @@ import CreditCardSection from 'src/components/billing/CreditCardSection';
 import { Button } from 'src/components/matchbox';
 import { connect } from 'react-redux';
 import { updatePaymentInitialValues } from 'src/selectors/accountBillingForms';
-import { selectIsSelfServeBilling } from 'src/selectors/accountBillingInfo';
+import { isManuallyBilled } from 'src/selectors/accountBillingInfo';
 import { getBillingCountries } from 'src/actions/billing';
 
 function ValidateSection({
@@ -53,7 +53,7 @@ const mapStateToProps = state => {
   return {
     initialValues: updatePaymentInitialValues(state),
     billingCountries: state.billing.countries,
-    isManuallyBilled: !selectIsSelfServeBilling(state),
+    isManuallyBilled: isManuallyBilled(state),
   };
 };
 

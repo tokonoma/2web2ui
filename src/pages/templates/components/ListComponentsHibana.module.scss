@@ -1,0 +1,18 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.Id {
+  line-height: line-height(300);
+  font-size: font-size(300);
+}
+
+.PublishedIconColor {
+  color: color(green, 700);
+}
+
+.Action {
+  height: spacing(600);
+  width: spacing(600);
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+}

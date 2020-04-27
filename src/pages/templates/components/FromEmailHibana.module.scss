@@ -1,0 +1,14 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.Typeahead {
+  margin: 0;
+}
+
+.List {
+  background: color(white);
+  border-radius: border-radius(0);
+  border: 1px solid color(gray, 400);
+  box-shadow: box-shadow(100);
+  transition: opacity motion-duration(fast) motion-ease(in),
+    transform motion-duration(fast) motion-ease(in);
+}

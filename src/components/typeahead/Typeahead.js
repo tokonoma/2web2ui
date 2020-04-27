@@ -110,7 +110,11 @@ export class Typeahead extends Component {
   };
 
   renderClearButton(clearSelection) {
-    return <ClearButton onClick={clearSelection} />;
+    return (
+      <Button variant="connected" onClick={clearSelection}>
+        Clear
+      </Button>
+    );
   }
 
   render() {
@@ -154,22 +158,6 @@ function HibanaTypeaheadItem({ label, id }) {
       )}
     </Box>
   );
-}
-
-function OGClearButton({ onClick }) {
-  return <Button onClick={onClick}>Clear</Button>;
-}
-
-function HibanaClearButton({ onClick }) {
-  return (
-    <Button onClick={onClick} color="blue" outline>
-      Clear
-    </Button>
-  );
-}
-
-export function ClearButton(props) {
-  return useHibanaToggle(OGClearButton, HibanaClearButton)(props);
 }
 
 export function TypeaheadItem(props) {

@@ -2,22 +2,28 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import SettingsView from '../SettingsView';
 import { Panel } from 'src/components/matchbox';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
+import styles from './View.module.scss';
+jest.mock('src/hooks/useHibanaOverride');
 describe('Settings View Component', () => {
   let wrapper;
-  let props;
+  let defaultProps;
+  let subject;
 
   beforeEach(() => {
-    props = {
+    defaultProps = {
       test: {
         test_mode: 'bayesian',
         confidence_level: 0.55,
         metric: 'count_unique_clicked',
         engagement_timeout: 14,
         total_sample_size: 100,
-        audience_selection: 'sample_size'
-      }
+        audience_selection: 'sample_size',
+      },
     };
-    wrapper = shallow(<SettingsView {...props} />);
+    useHibanaOverride.mockReturnValue(styles);
+    subject = props => shallow(<SettingsView {...defaultProps} {...props} />);
+    wrapper = subject();
   });
 
   it('should render correctly', () => {
@@ -25,7 +31,7 @@ describe('Settings View Component', () => {
   });
 
   it('should render learning mode correctly', () => {
-    wrapper.setProps({ test: { ...props.test, test_mode: 'learning' }});
+    wrapper = subject({ test: { ...defaultProps.test, test_mode: 'learning' } });
     expect(wrapper.find(Panel.Section).first()).toMatchSnapshot();
   });
 });

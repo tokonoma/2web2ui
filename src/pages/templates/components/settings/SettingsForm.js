@@ -83,22 +83,24 @@ export default class SettingsForm extends React.Component {
         {isPublishedMode && this.renderPublishedIntro()}
         <form onSubmit={handleSubmit(this.updateSettings)}>
           <Panel.Section>
-            <Field
-              name="name"
-              component={TextFieldWrapper}
-              label="Template Name"
-              disabled={submitting || isPublishedMode}
-              validate={required}
-            />
+            <Stack>
+              <Field
+                name="name"
+                component={TextFieldWrapper}
+                label="Template Name"
+                disabled={submitting || isPublishedMode}
+                validate={required}
+              />
 
-            <CopyField
-              name="id"
-              id="template-id-field"
-              label="Template ID"
-              value={draft.id}
-              helpText={"A Unique ID for your template, we'll fill this in for you."}
-              disabled={true}
-            />
+              <CopyField
+                name="id"
+                id="template-id-field"
+                label="Template ID"
+                value={draft.id}
+                helpText={"A Unique ID for your template, we'll fill this in for you."}
+                disabled={true}
+              />
+            </Stack>
           </Panel.Section>
 
           {canViewSubaccountSection && (
@@ -108,49 +110,51 @@ export default class SettingsForm extends React.Component {
           )}
 
           <Panel.Section>
-            <Field
-              name="content.subject"
-              component={TextFieldWrapper}
-              label="Subject"
-              validate={required}
-              disabled={submitting || isPublishedMode}
-            />
+            <Stack>
+              <Field
+                name="content.subject"
+                component={TextFieldWrapper}
+                label="Subject"
+                validate={required}
+                disabled={submitting || isPublishedMode}
+              />
 
-            <Field
-              name="content.from.email"
-              component={FromEmailWrapper}
-              placeholder="example@email.com"
-              label="From Email"
-              validate={[required, emailOrSubstitution]}
-              domains={domains}
-              helpText={fromEmailHelpText}
-              disabled={submitting || isPublishedMode}
-            />
+              <Field
+                name="content.from.email"
+                component={FromEmailWrapper}
+                placeholder="example@email.com"
+                label="From Email"
+                validate={[required, emailOrSubstitution]}
+                domains={domains}
+                helpText={fromEmailHelpText}
+                disabled={submitting || isPublishedMode}
+              />
 
-            <Field
-              name="content.from.name"
-              component={TextFieldWrapper}
-              label="From Name"
-              helpText="A friendly from for your recipients."
-              disabled={submitting || isPublishedMode}
-            />
+              <Field
+                name="content.from.name"
+                component={TextFieldWrapper}
+                label="From Name"
+                helpText="A friendly from for your recipients."
+                disabled={submitting || isPublishedMode}
+              />
 
-            <Field
-              name="content.reply_to"
-              component={TextFieldWrapper}
-              label="Reply To"
-              helpText="An email address recipients can reply to."
-              validate={emailOrSubstitution}
-              disabled={submitting || isPublishedMode}
-            />
+              <Field
+                name="content.reply_to"
+                component={TextFieldWrapper}
+                label="Reply To"
+                helpText="An email address recipients can reply to."
+                validate={emailOrSubstitution}
+                disabled={submitting || isPublishedMode}
+              />
 
-            <Field
-              name="description"
-              component={TextFieldWrapper}
-              label="Description"
-              helpText="Not visible to recipients."
-              disabled={submitting || isPublishedMode}
-            />
+              <Field
+                name="description"
+                component={TextFieldWrapper}
+                label="Description"
+                helpText="Not visible to recipients."
+                disabled={submitting || isPublishedMode}
+              />
+            </Stack>
           </Panel.Section>
           <Panel.Section>
             <Stack>
@@ -186,8 +190,8 @@ export default class SettingsForm extends React.Component {
 
           <Panel.Section>
             <Button
+              variant="primary"
               type="submit"
-              primary
               disabled={submitting || !valid || pristine || isPublishedMode}
             >
               Update Settings

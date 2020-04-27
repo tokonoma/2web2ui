@@ -7,7 +7,7 @@ import { reduxForm } from 'redux-form';
 import _ from 'lodash';
 import { prepareCardInfo, isProductOnSubscription } from 'src/helpers/billing';
 import { rvAddPaymentFormInitialValues } from 'src/selectors/recipientValidation';
-import { selectIsSelfServeBilling } from 'src/selectors/accountBillingInfo';
+import { isManuallyBilled } from 'src/selectors/accountBillingInfo';
 import { getBillingInfo } from 'src/actions/account';
 import addRVtoSubscription, { resetAddRVtoSubscription } from 'src/actions/addRVtoSubscription';
 import { getSubscription as getBillingSubscription } from 'src/actions/billing';
@@ -191,19 +191,21 @@ export function RecipientValidationPage(props) {
   );
 }
 
-const mapStateToProps = (state, props) => ({
-  tab: tabs.findIndex(({ key }) => key === props.match.params.category) || 0,
-  account: state.account,
-  billing: state.account.billing || {},
-  billingLoading: state.account.billingLoading,
-  isRVonSubscription: isProductOnSubscription('recipient_validation')(state),
-  initialValues: rvAddPaymentFormInitialValues(state),
-  isManuallyBilled: !selectIsSelfServeBilling(state),
-  addRVtoSubscriptionloading: state.addRVtoSubscription.addRVtoSubscriptionloading,
-  addRVFormValues: state.addRVtoSubscription.formValues,
-  addRVtoSubscriptionerror: state.addRVtoSubscription.addRVtoSubscriptionerror,
-  addRVtoSubscriptionsuccess: state.addRVtoSubscription.addRVtoSubscriptionsuccess,
-});
+const mapStateToProps = (state, props) => {
+  return {
+    tab: tabs.findIndex(({ key }) => key === props.match.params.category) || 0,
+    account: state.account,
+    billing: state.account.billing || {},
+    billingLoading: state.account.billingLoading,
+    isRVonSubscription: isProductOnSubscription('recipient_validation')(state),
+    initialValues: rvAddPaymentFormInitialValues(state),
+    isManuallyBilled: isManuallyBilled(state),
+    addRVtoSubscriptionloading: state.addRVtoSubscription.addRVtoSubscriptionloading,
+    addRVFormValues: state.addRVtoSubscription.formValues,
+    addRVtoSubscriptionerror: state.addRVtoSubscription.addRVtoSubscriptionerror,
+    addRVtoSubscriptionsuccess: state.addRVtoSubscription.addRVtoSubscriptionsuccess,
+  };
+};
 
 const formOptions = { form: FORMNAME, enableReinitialize: true };
 export default withRouter(

@@ -4,12 +4,14 @@ import { ArrowDropDown, FileEdit } from '@sparkpost/matchbox-icons';
 import { PageLink } from 'src/components/links';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { routeNamespace } from '../../constants/routes';
-import styles from './Actions.module.scss';
 import useEditorContext from '../../hooks/useEditorContext';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import DeleteTemplate from './DeleteTemplate';
 import DeleteTemplateModal from './DeleteTemplateModal';
 import DuplicateTemplate from './DuplicateTemplate';
 import DuplicateTemplateModal from './DuplicateTemplateModal';
+import OGStyles from './Actions.module.scss';
+import hibanaStyles from './ActionsHibana.module.scss';
 
 const PublishedModeActions = () => {
   const {
@@ -24,6 +26,7 @@ const PublishedModeActions = () => {
     isCreatePending,
     isDeletePending,
   } = useEditorContext();
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
   const editDraftTo = `/${routeNamespace}/edit/${template.id}/draft/content${setSubaccountQuery(
     template.subaccount_id,
   )}`;
@@ -51,18 +54,28 @@ const PublishedModeActions = () => {
 
   return (
     <Button.Group>
-      <Button to={editDraftTo} className={styles.Actions} role="button" data-id="button-edit-draft">
+      <PageLink
+        to={editDraftTo}
+        as={Button}
+        variant="secondary"
+        className={styles.Actions}
+        role="button"
+        data-id="button-edit-draft"
+      >
         <strong>Edit Draft</strong>
-      </Button>
+      </PageLink>
 
       <div className={styles.Actions}>
         <Popover
+          className={styles.ActionPopover}
           id="popover-action-list"
           left={true}
           open={isPopoverOpen}
           onClose={() => setPopoverOpen(false)}
           trigger={
             <Button
+              variant="secondary"
+              className={styles.ActionsPopoverTrigger}
               onClick={() => setPopoverOpen(!isPopoverOpen)}
               aria-controls="popover-action-list"
               aria-expanded={isPopoverOpen ? 'true' : 'false'}

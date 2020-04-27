@@ -1,88 +1,56 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PublishedModeActions renders published actions 1`] = `
-<Button.Group>
-  <Button
-    className="Actions"
-    data-id="button-edit-draft"
-    role="button"
-    to="/templates/edit/a-random-id-123/draft/content?subaccount=some-subaccount-id"
-  >
-    <strong>
-      Edit Draft
-    </strong>
-  </Button>
+exports[`PublishedModeActions renders draft actions 1`] = `
+<div>
   <div
-    className="Actions"
+    class="AB_AG"
   >
-    <Popover
-      id="popover-action-list"
-      left={true}
-      onClose={[Function]}
-      open={false}
-      trigger={
-        <Button
+    <a
+      class="AB_AE"
+      data-id="button-edit-draft"
+      href="/templates/edit/a-random-id-123/draft/content?subaccount=some-subaccount-id"
+      role="button"
+      variant="secondary"
+    >
+      <strong>
+        Edit Draft
+      </strong>
+    </a>
+    <div>
+      <span
+        class="KQ_KY"
+      >
+        <button
           aria-controls="popover-action-list"
           aria-expanded="false"
+          class="AB_AE"
           data-id="popover-trigger-editor-actions"
-          onClick={[Function]}
+          type="button"
+          variant="secondary"
         >
-          <ArrowDropDown />
-          <ScreenReaderOnly>
-            Open Menu
-          </ScreenReaderOnly>
-        </Button>
-      }
-    >
-      <div
-        className="ActionsBody"
-      >
-        <div
-          className="ActionItem"
-        >
-          <PageLink
-            data-id="action-edit-draft"
-            to="/templates/edit/a-random-id-123/draft/content?subaccount=some-subaccount-id"
+          <svg
+            aria-hidden="true"
+            fill="currentColor"
+            height="18"
+            preserveAspectRatio="xMidYMid meet"
+            style="vertical-align: middle;"
+            viewBox="0 0 24 24"
+            width="18"
           >
-            <FileEdit />
-            <span>
-              Edit Draft
-            </span>
-          </PageLink>
-        </div>
-        <hr
-          className="Divider"
-        />
-        <DuplicateTemplate
-          className="ActionItem"
-          onClick={[Function]}
-        />
-        <DeleteTemplate
-          className="ActionItem"
-          onClick={[Function]}
-        />
-      </div>
-    </Popover>
-    <DuplicateTemplateModal
-      onClose={[Function]}
-      open={false}
-      template={
-        Object {
-          "id": "123",
-          "subaccount_id": "abcd",
-        }
-      }
-    />
-    <DeleteTemplateModal
-      onClose={[Function]}
-      open={false}
-      template={
-        Object {
-          "id": "123",
-          "subaccount_id": "abcd",
-        }
-      }
-    />
+            <g>
+              <path
+                d="M7 10l5 5 5-5z"
+              />
+            </g>
+          </svg>
+          <span
+            class="BO_BQ"
+          >
+            Open Menu
+          </span>
+        </button>
+      </span>
+    </div>
   </div>
-</Button.Group>
+</div>
 `;

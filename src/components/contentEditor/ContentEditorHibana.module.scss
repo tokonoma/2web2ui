@@ -1,0 +1,20 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.EditorPanel {
+  // override
+  & > div {
+    border: none;
+  }
+
+  @media screen and (min-width: media-query(md)) {
+    max-height: 100%;
+  }
+}
+
+.EditorSection {
+  margin-top: spacing(300);
+
+  @media screen and (min-width: media-query(md)) {
+    margin-top: 0;
+  }
+}

@@ -5,33 +5,36 @@ exports[`CreatePage renders correctly 1`] = `
   breadcrumbAction={
     Object {
       "Component": [Function],
-      "content": "Templates",
+      "content": "View All Templates",
       "to": "/templates",
     }
   }
-  title="Create New Template"
+  title="Create Template"
 >
-  <p
-    className="LeadText"
-  >
-    To get started, first provide some basic details about your new template before adding in content.
-  </p>
   <form
     onSubmit={[Function]}
   >
     <Panel>
       <Panel.Section>
         <TemplateCreateForm />
+        <ButtonWrapper>
+          <Button
+            disabled={true}
+            type="submit"
+            variant="primary"
+          >
+            Create and View
+          </Button>
+          <PageLink
+            as={[Function]}
+            to="/templates"
+            variant="secondary"
+          >
+            Cancel
+          </PageLink>
+        </ButtonWrapper>
       </Panel.Section>
     </Panel>
-    <Button
-      className="NextButton"
-      disabled={true}
-      primary={true}
-      type="submit"
-    >
-      Next
-    </Button>
   </form>
 </Page>
 `;

@@ -1,12 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Section Component should render correctly 1`] = `
-<div
-  className="Section"
->
-  <hr
-    className="Hr"
-  />
+<div>
+  <hr />
   <h3>
     a section
   </h3>
@@ -22,27 +18,39 @@ exports[`Section Component should render correctly 1`] = `
 `;
 
 exports[`Section Component should render correctly 2`] = `
-<Grid.Column
+<OGOnlyWrapper
+  as={[Function]}
   lg={5}
   xs={12}
 >
-  <div
-    className="Left"
+  <Box
+    as={[Function]}
+    lg={3}
+    xs={12}
   >
-    left
-  </div>
-</Grid.Column>
+    <div>
+      left
+    </div>
+  </Box>
+</OGOnlyWrapper>
 `;
 
 exports[`Section Component should render correctly 3`] = `
-<Grid.Column
+<OGOnlyWrapper
+  as={[Function]}
   lg={7}
   xs={12}
 >
-  <div
-    className="Right"
+  <Box
+    as={[Function]}
+    lg={9}
+    xs={12}
   >
-    right
-  </div>
-</Grid.Column>
+    <div
+      className="Right"
+    >
+      right
+    </div>
+  </Box>
+</OGOnlyWrapper>
 `;

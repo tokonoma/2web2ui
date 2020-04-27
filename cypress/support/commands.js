@@ -165,19 +165,29 @@ Cypress.Commands.add('assertLink', ({ content, href }) => {
 /**
  * Used to interact and assert within a modal dialog
  *
- * @param {function} assertMethod - The callback function that runs inside the modal
+ * @param {function} callback - The callback function that runs inside the modal
  *
  */
-Cypress.Commands.add('withinModal', assertMethod => {
-  cy.get('[role="dialog"]:visible').within(assertMethod);
+Cypress.Commands.add('withinModal', callback => {
+  cy.get('[role="dialog"]:visible').within(callback);
 });
 
 /**
  * Used to check within the global alert view
  *
- * @param {function} assertMethod - The function that has assertions to run within the alert container
+ * @param {function} callback - The function that has assertions to run within the alert container
  *
  */
-Cypress.Commands.add('withinSnackbar', assertMethod => {
-  cy.get('#alert-portal').within(assertMethod);
+Cypress.Commands.add('withinSnackbar', callback => {
+  cy.get('#alert-portal').within(callback);
+});
+
+/**
+ * Used to interact and assert within the main content of the page
+ *
+ * @param {function} callback - The callback function that runs inside the modal
+ *
+ */
+Cypress.Commands.add('withinMainContent', callback => {
+  cy.get('main').within(callback);
 });

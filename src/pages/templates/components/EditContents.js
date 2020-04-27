@@ -1,14 +1,20 @@
 import React from 'react';
 import EditSection from './EditSection';
 import PreviewSection from './PreviewSection';
-import styles from './EditContents.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
+import OGStyles from './EditContents.module.scss';
+import hibanaStyles from './EditContentsHibana.module.scss';
 
-const EditContents = () => (
-  <div className={styles.EditContents}>
-    <EditSection />
+const EditContents = () => {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
 
-    <PreviewSection />
-  </div>
-);
+  return (
+    <div className={styles.EditContents}>
+      <EditSection />
+
+      <PreviewSection />
+    </div>
+  );
+};
 
 export default EditContents;

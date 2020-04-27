@@ -2,116 +2,124 @@
 
 exports[`Status Fields Component should disable fields correctly 1`] = `
 <Fragment>
-  <Panel
-    sectioned={true}
+  <OGOnlyWrapper
+    as={[Function]}
   >
-    <Field
-      component={[Function]}
-      disabled={true}
-      label="Test Name"
-      name="name"
-      validate={
-        Array [
-          [Function],
-          [Function],
-          [Function],
-        ]
-      }
-    />
-  </Panel>
-  <Panel
-    sectioned={true}
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        disabled={true}
+        label="Test Name"
+        name="name"
+        validate={
+          Array [
+            [Function],
+            [Function],
+            [Function],
+          ]
+        }
+      />
+    </Panel.Section>
+  </OGOnlyWrapper>
+  <OGOnlyWrapper
+    as={[Function]}
   >
-    <Field
-      component={[Function]}
-      datePickerProps={
-        Object {
-          "disabledDays": Object {
-            "before": 2018-05-15T12:00:00.000Z,
-          },
-          "fromMonth": 2018-05-15T12:00:00.000Z,
-          "initialMonth": 2018-05-15T12:00:00.000Z,
-          "toMonth": null,
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        datePickerProps={
+          Object {
+            "disabledDays": Object {
+              "before": 2018-05-15T12:00:00.000Z,
+            },
+            "fromMonth": 2018-05-15T12:00:00.000Z,
+            "initialMonth": 2018-05-15T12:00:00.000Z,
+            "toMonth": null,
+          }
         }
-      }
-      disabled={true}
-      fromSelectsNextHour={true}
-      left={true}
-      name="dates"
-      preventFuture={false}
-      roundToPrecision={false}
-      showPresets={false}
-      textFieldProps={
-        Object {
-          "helpText": "A test may run for a maximum of 30 days",
-          "label": "When should we run this test?",
-          "prefix": <AccessTime />,
+        disabled={true}
+        fromSelectsNextHour={true}
+        left={true}
+        name="dates"
+        preventFuture={false}
+        roundToPrecision={false}
+        showPresets={false}
+        textFieldProps={
+          Object {
+            "helpText": "A test may run for a maximum of 30 days",
+            "label": "When should we run this test?",
+            "prefix": <AccessTime />,
+          }
         }
-      }
-      validate={
-        Array [
-          [Function],
-          [Function],
-        ]
-      }
-    />
-  </Panel>
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+    </Panel.Section>
+  </OGOnlyWrapper>
 </Fragment>
 `;
 
 exports[`Status Fields Component should render correctly 1`] = `
 <Fragment>
-  <Panel
-    sectioned={true}
+  <OGOnlyWrapper
+    as={[Function]}
   >
-    <Field
-      component={[Function]}
-      label="Test Name"
-      name="name"
-      validate={
-        Array [
-          [Function],
-          [Function],
-          [Function],
-        ]
-      }
-    />
-  </Panel>
-  <Panel
-    sectioned={true}
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        label="Test Name"
+        name="name"
+        validate={
+          Array [
+            [Function],
+            [Function],
+            [Function],
+          ]
+        }
+      />
+    </Panel.Section>
+  </OGOnlyWrapper>
+  <OGOnlyWrapper
+    as={[Function]}
   >
-    <Field
-      component={[Function]}
-      datePickerProps={
-        Object {
-          "disabledDays": Object {
-            "before": 2018-05-15T12:00:00.000Z,
-          },
-          "fromMonth": 2018-05-15T12:00:00.000Z,
-          "initialMonth": 2018-05-15T12:00:00.000Z,
-          "toMonth": null,
+    <Panel.Section>
+      <Field
+        component={[Function]}
+        datePickerProps={
+          Object {
+            "disabledDays": Object {
+              "before": 2018-05-15T12:00:00.000Z,
+            },
+            "fromMonth": 2018-05-15T12:00:00.000Z,
+            "initialMonth": 2018-05-15T12:00:00.000Z,
+            "toMonth": null,
+          }
         }
-      }
-      fromSelectsNextHour={true}
-      left={true}
-      name="dates"
-      preventFuture={false}
-      roundToPrecision={false}
-      showPresets={false}
-      textFieldProps={
-        Object {
-          "helpText": "A test may run for a maximum of 30 days",
-          "label": "When should we run this test?",
-          "prefix": <AccessTime />,
+        fromSelectsNextHour={true}
+        left={true}
+        name="dates"
+        preventFuture={false}
+        roundToPrecision={false}
+        showPresets={false}
+        textFieldProps={
+          Object {
+            "helpText": "A test may run for a maximum of 30 days",
+            "label": "When should we run this test?",
+            "prefix": <AccessTime />,
+          }
         }
-      }
-      validate={
-        Array [
-          [Function],
-          [Function],
-        ]
-      }
-    />
-  </Panel>
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+    </Panel.Section>
+  </OGOnlyWrapper>
 </Fragment>
 `;

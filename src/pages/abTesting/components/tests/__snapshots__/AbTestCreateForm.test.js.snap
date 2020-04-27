@@ -4,74 +4,94 @@ exports[`A/B Test Create Form Component should render correctly 1`] = `
 <form
   onSubmit={[MockFunction]}
 >
-  <Panel.Section>
-    <p>
-      Give your test a name and an ID. You will need to use this ID when specifying an A/B test in your transmission's content JSON object.
-    </p>
-    <Grid>
-      <Grid.Column>
-        <Field
-          component={[Function]}
-          label="Give your test a name"
-          name="name"
-          onChange={[Function]}
-          validate={
-            Array [
-              [Function],
-              [Function],
-            ]
-          }
-        />
-      </Grid.Column>
-      <Grid.Column>
-        <Field
-          component={[Function]}
-          helpText="A Unique ID for your test, we'll fill this in for you."
-          label="ID"
-          name="id"
-          validate={
-            Array [
-              [Function],
-              [Function],
-              [Function],
-            ]
-          }
-        />
-      </Grid.Column>
-    </Grid>
-  </Panel.Section>
-  <Panel.Section>
-    <Field
-      component={[Function]}
-      errorInLabel={true}
-      helpText={
-        <span>
-          Only published templates are available. This template will be sent when the test is not running. If you need to create a new template,
-           
-          <PageLink
-            to="/templates"
+  <Box
+    as={[Function]}
+  >
+    <Stack>
+      <OGOnlyWrapper
+        as={[Function]}
+      >
+        <Grid>
+          <Grid.Column>
+            <Field
+              component={[Function]}
+              helpText={
+                <ExternalLink
+                  to="https://developers.sparkpost.com/api/ab-testing.html"
+                >
+                  Learn more about A/B tests
+                </ExternalLink>
+              }
+              label="A/B test name"
+              name="name"
+              onChange={[Function]}
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </Grid.Column>
+          <Grid.Column>
+            <Field
+              component={[Function]}
+              helpText="A Unique ID for your test, we'll fill this in for you."
+              label="A/B Test ID"
+              name="id"
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </Grid.Column>
+        </Grid>
+      </OGOnlyWrapper>
+      <OGOnlyWrapper
+        as={[Function]}
+      >
+        <Grid>
+          <Grid.Column
+            md={6}
           >
-            head over to the templates page
-          </PageLink>
-          .
-        </span>
-      }
-      label="Select this test's default template"
-      name="default_variant"
-      placeholder="Type to search"
-      validate={
-        Array [
-          [Function],
-          [Function],
-        ]
-      }
-    />
-  </Panel.Section>
+            <Field
+              component={[Function]}
+              errorInLabel={true}
+              helpText={
+                <span>
+                  Only published templates are available. Or
+                   
+                  <PageLink
+                    to="/templates"
+                  >
+                    create a new template
+                  </PageLink>
+                  .
+                </span>
+              }
+              label="Default template"
+              name="default_variant"
+              placeholder="Type to search"
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </Grid.Column>
+        </Grid>
+      </OGOnlyWrapper>
+    </Stack>
+  </Box>
   <Panel.Section>
     <Button
       disabled={true}
-      primary={true}
       submit={true}
+      variant="primary"
     >
       Continue
     </Button>
@@ -83,7 +103,7 @@ exports[`A/B Test Create Form Component should render subaccount section if suba
 <Field
   component={[Function]}
   helpText="Leaving this field blank will permanently assign the A/B test to the master account."
-  label="Select the subaccount to be used for this test"
+  label="Subaccount Assignment"
   name="subaccount"
   placeholder="Master Account"
 />
@@ -93,74 +113,94 @@ exports[`A/B Test Create Form Component should render when no available template
 <form
   onSubmit={[MockFunction]}
 >
-  <Panel.Section>
-    <p>
-      Give your test a name and an ID. You will need to use this ID when specifying an A/B test in your transmission's content JSON object.
-    </p>
-    <Grid>
-      <Grid.Column>
-        <Field
-          component={[Function]}
-          label="Give your test a name"
-          name="name"
-          onChange={[Function]}
-          validate={
-            Array [
-              [Function],
-              [Function],
-            ]
-          }
-        />
-      </Grid.Column>
-      <Grid.Column>
-        <Field
-          component={[Function]}
-          helpText="A Unique ID for your test, we'll fill this in for you."
-          label="ID"
-          name="id"
-          validate={
-            Array [
-              [Function],
-              [Function],
-              [Function],
-            ]
-          }
-        />
-      </Grid.Column>
-    </Grid>
-  </Panel.Section>
-  <Panel.Section>
-    <Field
-      component={[Function]}
-      errorInLabel={true}
-      helpText={
-        <span>
-          No published templates available.
-           
-          <PageLink
-            to="/templates"
+  <Box
+    as={[Function]}
+  >
+    <Stack>
+      <OGOnlyWrapper
+        as={[Function]}
+      >
+        <Grid>
+          <Grid.Column>
+            <Field
+              component={[Function]}
+              helpText={
+                <ExternalLink
+                  to="https://developers.sparkpost.com/api/ab-testing.html"
+                >
+                  Learn more about A/B tests
+                </ExternalLink>
+              }
+              label="A/B test name"
+              name="name"
+              onChange={[Function]}
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </Grid.Column>
+          <Grid.Column>
+            <Field
+              component={[Function]}
+              helpText="A Unique ID for your test, we'll fill this in for you."
+              label="A/B Test ID"
+              name="id"
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </Grid.Column>
+        </Grid>
+      </OGOnlyWrapper>
+      <OGOnlyWrapper
+        as={[Function]}
+      >
+        <Grid>
+          <Grid.Column
+            md={6}
           >
-            Head over to the templates page to set some up
-          </PageLink>
-          .
-        </span>
-      }
-      label="Select this test's default template"
-      name="default_variant"
-      placeholder="Type to search"
-      validate={
-        Array [
-          [Function],
-          [Function],
-        ]
-      }
-    />
-  </Panel.Section>
+            <Field
+              component={[Function]}
+              errorInLabel={true}
+              helpText={
+                <span>
+                  No published templates available.
+                   
+                  <PageLink
+                    to="/templates"
+                  >
+                    Head over to the templates page to set some up
+                  </PageLink>
+                  .
+                </span>
+              }
+              label="Default template"
+              name="default_variant"
+              placeholder="Type to search"
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+          </Grid.Column>
+        </Grid>
+      </OGOnlyWrapper>
+    </Stack>
+  </Box>
   <Panel.Section>
     <Button
       disabled={true}
-      primary={true}
       submit={true}
+      variant="primary"
     >
       Continue
     </Button>

@@ -1,16 +1,16 @@
 import React from 'react';
 import { Field, Form } from 'redux-form';
-import { Grid, Button, Page, Panel } from 'src/components/matchbox';
+import { Grid, Button, Page, Panel, Stack } from 'src/components/matchbox';
 import ContentEditor from 'src/components/contentEditor';
 import CopyField from 'src/components/copyField';
 import { RedirectAndAlert } from 'src/components/globalAlert';
-import { PageLink } from 'src/components/links';
+import { ExternalLink, PageLink } from 'src/components/links';
 import Loading from 'src/components/loading';
 import TextFieldWrapper from 'src/components/reduxFormWrappers/TextFieldWrapper';
 import SubaccountSection from 'src/components/subaccountSection';
+import { LINKS } from 'src/constants';
 import { maxLength, required } from 'src/helpers/validation';
 import DeleteSnippetLink from './components/DeleteSnippetLink';
-import IdentifierHelpText from './components/IdentifierHelpText';
 
 export default class EditPage extends React.Component {
   componentDidMount() {
@@ -95,8 +95,8 @@ export default class EditPage extends React.Component {
 
     return (
       <Page
-        title={id}
-        breadcrumbAction={{ Component: PageLink, content: 'Snippets', to: '/snippets' }}
+        title="Edit Snippet"
+        breadcrumbAction={{ Component: PageLink, content: 'View All Snippets', to: '/snippets' }}
         primaryAction={{
           Component: Button,
           content: 'Save Snippet',
@@ -108,35 +108,36 @@ export default class EditPage extends React.Component {
         <Form onSubmit={this.submitSnippet}>
           <Grid>
             <Grid.Column xs={12} lg={4}>
-              <Panel>
-                <Panel.Section>
+              <Panel sectioned>
+                <Stack>
                   <Field
                     name="name"
                     component={TextFieldWrapper}
                     disabled={disabled}
                     label="Snippet Name"
                     validate={[required, maxLength(64)]}
+                    helpText={
+                      <ExternalLink to={LINKS.SNIPPET_API_DOCS}>
+                        Learn more about Snippets
+                      </ExternalLink>
+                    }
                   />
                   <Field
                     name="id"
                     component={TextFieldWrapper}
                     disabled={true} // id cannot change after being set
-                    helpText={<IdentifierHelpText />}
+                    helpText="This is a unique identifier to reference your snippet in a template."
                     label="Snippet ID"
                   />
-                </Panel.Section>
-                {canViewSubaccountSection && (
-                  <Panel.Section>
+                  {canViewSubaccountSection && (
                     <SubaccountSection newTemplate={false} disabled={disabled} />
-                  </Panel.Section>
-                )}
-              </Panel>
-              <Panel sectioned>
-                <CopyField
-                  label="Code Example"
-                  helpText="Copy and use this code in your templates"
-                  value={`{{ render_snippet( "${id}" ) }}`}
-                />
+                  )}
+                  <CopyField
+                    label="Code Example"
+                    helpText="Copy and use this code in your templates"
+                    value={`{{ render_snippet( "${id}" ) }}`}
+                  />
+                </Stack>
               </Panel>
             </Grid.Column>
             <Grid.Column xs={12} lg={8}>

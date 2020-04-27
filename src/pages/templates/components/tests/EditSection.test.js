@@ -1,13 +1,27 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { useHibana } from 'src/context/HibanaContext';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import useEditorContext from '../../hooks/useEditorContext';
 import EditSection from '../EditSection';
+import styles from '../EditSection.module.scss';
 
+jest.mock('src/hooks/useHibanaOverride');
+jest.mock('src/context/HibanaContext');
 jest.mock('../../hooks/useEditorContext');
 
+function beforeSteps() {
+  useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: false }]);
+  useHibanaOverride.mockImplementationOnce(() => styles);
+}
+
 describe('EditSection', () => {
-  const subject = (editorState) => {
+  beforeEach(() => beforeSteps());
+
+  const subject = editorState => {
+    beforeSteps();
     useEditorContext.mockReturnValue(editorState);
+
     return shallow(<EditSection />);
   };
 
@@ -38,13 +52,13 @@ describe('EditSection', () => {
   });
 
   describe('the Popover', () => {
-    const openPopover = (wrapperComponent) => {
+    beforeEach(() => beforeSteps());
+
+    const openPopover = wrapperComponent => {
       wrapperComponent
         .find('Popover')
         .props()
-        .trigger
-        .props
-        .onClick();
+        .trigger.props.onClick();
     };
 
     it('1) opens when using the trigger onClick and 2) closes when using the Popover onClose', () => {
@@ -64,7 +78,10 @@ describe('EditSection', () => {
 
       openPopover(wrapper);
 
-      const insertSnippetAction = wrapper.find('ActionList').props().actions.filter((item) => item.content === 'Insert Snippet')[0];
+      const insertSnippetAction = wrapper
+        .find('ActionList')
+        .props()
+        .actions.filter(item => item.content === 'Insert Snippet')[0];
 
       insertSnippetAction.onClick();
 
@@ -79,7 +96,7 @@ describe('EditSection', () => {
     it('does not render when not in published mode', () => {
       const wrapper = subject({
         currentTabIndex: 0,
-        isPublishedMode: true
+        isPublishedMode: true,
       });
 
       expect(wrapper.find('Popover')).not.toExist();
@@ -88,12 +105,15 @@ describe('EditSection', () => {
     it('opens the insert amp confirmation modal via the "Insert AMP Boilerplate" action', () => {
       const wrapper = subject({
         currentTabIndex: 1,
-        currentTabKey: 'amp_html'
+        currentTabKey: 'amp_html',
       });
 
       openPopover(wrapper);
 
-      const insertAMPAction = wrapper.find('ActionList').props().actions.filter((item) => item.content === 'Insert AMP Boilerplate')[0];
+      const insertAMPAction = wrapper
+        .find('ActionList')
+        .props()
+        .actions.filter(item => item.content === 'Insert AMP Boilerplate')[0];
 
       insertAMPAction.onClick();
 

@@ -1,31 +1,60 @@
-import React, { Component } from 'react';
-import { Grid } from 'src/components/matchbox';
-import styles from './Section.module.scss';
-
+import React from 'react';
+import { Box, Grid, Text } from 'src/components/matchbox';
+import { OGOnlyWrapper } from 'src/components/hibana';
+import OGStyles from './Section.module.scss';
+import HibanaStyles from './SectionHibana.module.scss';
+import useHibanaToggle from 'src/hooks/useHibanaToggle';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
+import className from 'classnames';
 const Left = ({ children }) => (
-  <Grid.Column xs={12} lg={5}>
-    <div className={styles.Left}>{children}</div>
-  </Grid.Column>
-);
-const Right = ({ children }) => (
-  <Grid.Column xs={12} lg={7}>
-    <div className={styles.Right}>{children}</div>
-  </Grid.Column>
+  <OGOnlyWrapper as={Grid.Column} xs={12} lg={5}>
+    <Box as={Grid.Column} xs={12} lg={3}>
+      <div>{children}</div>
+    </Box>
+  </OGOnlyWrapper>
 );
 
-export default class Section extends Component {
-  static Left = Left;
-  static Right = Right;
+const Right = ({ children, variant }) => {
+  const styles = useHibanaOverride(OGStyles, HibanaStyles);
+  return (
+    <OGOnlyWrapper as={Grid.Column} xs={12} lg={7}>
+      <Box as={Grid.Column} xs={12} lg={9}>
+        <div className={className(variant === 'viewmode' ? styles.RightViewMode : styles.Right)}>
+          {children}
+        </div>
+      </Box>
+    </OGOnlyWrapper>
+  );
+};
 
-  render() {
-    const { title, children } = this.props;
-
-    return (
-      <div className={styles.Section}>
-        <hr className={styles.Hr} />
-        <h3>{title}</h3>
-        <Grid>{children}</Grid>
-      </div>
-    );
-  }
+export function OGSection(props) {
+  const { title, children } = props;
+  return (
+    <div>
+      <hr />
+      <h3>{title}</h3>
+      <Grid>{children}</Grid>
+    </div>
+  );
 }
+
+function HibanaSection(props) {
+  const { title, children } = props;
+
+  return (
+    <div>
+      <Text as="span" fontSize="400" fontWeight="600" role="heading" aria-level="3" mb="200">
+        {title}
+      </Text>
+      <Grid>{children}</Grid>
+    </div>
+  );
+}
+
+function Section(props) {
+  return useHibanaToggle(OGSection, HibanaSection)(props);
+}
+Section.Left = Left;
+Section.Right = Right;
+
+export default Section;

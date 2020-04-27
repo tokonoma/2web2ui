@@ -1,0 +1,38 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.RecentActivity {
+  grid-gap: spacing(400);
+  margin-bottom: 0;
+}
+
+.RecentActivityListItem {
+  height: 100%;
+}
+
+.RecentActivityDate {
+  color: color(gray, 700);
+  font-size: font-size(200);
+}
+
+.RecentActivityStatus {
+  color: color(gray, 700);
+  font-size: font-size(200);
+}
+
+.RecentActivityContent {
+  margin-left: spacing(200);
+}
+
+// 😬 Kind of hacky - this is to target the div following the accent
+// If the accent were ever removed, this would probably break
+.RecentActivityPanel > div:not(:first-child) {
+  height: 100%;
+}
+
+.RecentActivityPublishedIcon {
+  fill: color(green, 700);
+}
+
+.RecentActivityMeta {
+  padding: 0 spacing(300);
+}

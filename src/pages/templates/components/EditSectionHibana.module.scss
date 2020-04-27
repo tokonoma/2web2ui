@@ -1,0 +1,25 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.TabsWrapper {
+  width: 100%;
+  border-bottom: 1px solid color(gray, 400);
+
+  > div,
+  // 😔 Very hacky and probably unstable - extra tags introduced by Hibana Matchbox make the layout quite unusual
+  > span,
+  > span > span {
+    height: 55px; // Existing design tokens didn't quite look right
+  }
+
+  // TODO: Need a way to disable the bottom border on the <Tabs/> component
+  > div {
+    border-bottom: 0;
+  }
+
+  button {
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
+    margin-left: spacing(300);
+  }
+}

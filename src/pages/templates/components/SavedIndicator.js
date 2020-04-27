@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ScreenReaderOnly } from 'src/components/matchbox';
-import styles from './SavedIndicator.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
+import OGStyles from './SavedIndicator.module.scss';
+import hibanaStyles from './SavedIndicatorHibana.module.scss';
 
 const SavedIndicator = props => {
   const { hasSaved } = props;
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
 
   return (
     <span className={styles.SavedIndicator}>

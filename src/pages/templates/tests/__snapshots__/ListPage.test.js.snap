@@ -15,7 +15,7 @@ exports[`ListPage renders correctly 1`] = `
   primaryAction={
     Object {
       "Component": [Function],
-      "content": "Create New",
+      "content": "Create Template",
       "to": "templates/create",
     }
   }
@@ -50,9 +50,11 @@ exports[`ListPage renders correctly 1`] = `
       ]
     }
   />
-  <h2>
-    All Templates
-  </h2>
+  <ScreenReaderOnly>
+    <h2>
+      All Templates
+    </h2>
+  </ScreenReaderOnly>
   <TableCollection
     columns={
       Array [

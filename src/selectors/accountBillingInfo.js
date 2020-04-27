@@ -27,6 +27,7 @@ const selectIsFree1 = selectCondition(onPlan('free1'));
 const selectOnZuoraPlan = selectCondition(onZuoraPlan);
 const selectBillingSubscription = state => state.billing.subscription || {};
 const currentFreePlans = ['free500-1018', 'free15K-1018', 'free500-0419', 'free500-SPCEU-0419'];
+export const isManuallyBilled = state => _.get(state, 'billing.subscription.type') === 'manual';
 const getRecipientValidationUsage = state => _.get(state, 'account.rvUsage.recipient_validation');
 export const currentSubscriptionSelector = state => state.account.subscription;
 

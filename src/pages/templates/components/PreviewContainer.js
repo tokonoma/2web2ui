@@ -1,10 +1,13 @@
 import React from 'react';
 import classNames from 'classnames';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import useEditorContext from '../hooks/useEditorContext';
-import styles from './PreviewContainer.module.scss';
+import OGStyles from './PreviewContainer.module.scss';
+import hibanaStyles from './PreviewContainerHibana.module.scss';
 
 const PreviewContainer = ({ children }) => {
   const { previewDevice } = useEditorContext();
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
 
   if (previewDevice === 'mobile') {
     return (

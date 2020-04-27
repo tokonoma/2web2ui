@@ -8,7 +8,12 @@ const SaveAndPublish = props => {
   return (
     <div className={className}>
       {children && (
-        <Button onClick={onClick} title="Opens a dialog" data-id="action-save-and-publish">
+        <Button
+          variant="secondary"
+          onClick={onClick}
+          title="Opens a dialog"
+          data-id="action-save-and-publish"
+        >
           {children}
         </Button>
       )}

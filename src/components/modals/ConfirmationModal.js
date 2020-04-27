@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Modal, Panel } from 'src/components/matchbox';
 import ButtonWrapper from 'src/components/buttonWrapper';
-import styles from './ConfirmationModal.module.scss';
-import { Loading } from 'src/components/loading/Loading';
+import PanelLoading from 'src/components/panelLoading';
 import { useHibana } from 'src/context/HibanaContext';
 
 export default function ConfirmationModal(props) {
@@ -27,14 +26,14 @@ export default function ConfirmationModal(props) {
         {content}
         <ButtonWrapper>
           <Button
+            variant="primary"
             disabled={confirming}
             name="confirmation-modal-confirm-button"
             onClick={onConfirm}
-            variant="primary"
           >
             {confirmVerb}
           </Button>
-          <Button onClick={onCancel} variant="secondary">
+          <Button variant="secondary" onClick={onCancel}>
             {cancelVerb}
           </Button>
         </ButtonWrapper>
@@ -47,15 +46,13 @@ export default function ConfirmationModal(props) {
 
   return (
     <Modal open={open} onClose={onCancel} showCloseButton={isHibanaEnabled || showCloseButton}>
-      <Panel title={title} sectioned>
-        {isPending ? (
-          <div className={styles.Loading}>
-            <Loading />
-          </div>
-        ) : (
-          renderContent()
-        )}
-      </Panel>
+      {isPending ? (
+        <PanelLoading minHeight="200px" title={title} />
+      ) : (
+        <Panel title={title} sectioned>
+          {renderContent()}
+        </Panel>
+      )}
     </Modal>
   );
 }

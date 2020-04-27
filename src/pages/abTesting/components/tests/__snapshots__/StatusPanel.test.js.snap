@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Status Panel Component should render 1`] = `
-<Panel>
+<OGOnlyWrapper
+  as={[Function]}
+>
   <Panel.Section
     actions={
       Array [
@@ -41,7 +43,7 @@ exports[`Status Panel Component should render 1`] = `
       />
     </LabelledValue>
   </Panel.Section>
-</Panel>
+</OGOnlyWrapper>
 `;
 
 exports[`Status Panel Component version selector should render correctly 1`] = `

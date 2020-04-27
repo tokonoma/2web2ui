@@ -10,12 +10,17 @@ import {
 } from 'src/components/matchbox';
 import { MoreHoriz } from '@sparkpost/matchbox-icons';
 import ConfirmationModal from 'src/components/modals/ConfirmationModal';
+import { useHibana } from 'src/context/HibanaContext';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import tabs from '../constants/editTabs';
 import InsertSnippetModal from './InsertSnippetModal';
 import useEditorContext from '../hooks/useEditorContext';
-import styles from './EditSection.module.scss';
+import OGStyles from './EditSection.module.scss';
+import hibanaStyles from './EditSectionHibana.module.scss';
 
 const EditSection = () => {
+  const [state] = useHibana();
+  const { isHibanaEnabled } = state;
   const {
     currentTabIndex,
     currentTabKey,
@@ -24,6 +29,7 @@ const EditSection = () => {
     content,
     isPublishedMode,
   } = useEditorContext();
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
   const [isPopoverOpen, setPopoverOpen] = useState(false);
   const [isSnippetModalOpen, setSnippetModalOpen] = useState(false);
   const [isAMPModalOpen, setAMPModalOpen] = useState(false);
@@ -86,11 +92,18 @@ const EditSection = () => {
     });
   };
 
+  let tabsFitted = false;
+
+  if (isHibanaEnabled) {
+    tabsFitted = true;
+  }
+
   return (
-    <Panel className={styles.EditSection}>
+    <Panel className={styles.EditSection} mb="0">
       <div className={styles.TabsWrapper}>
         {/* eslint-disable no-unused-vars */}
         <Tabs
+          fitted={tabsFitted}
           color="blue"
           selected={currentTabIndex}
           onSelect={nextTabIndex => {
@@ -122,7 +135,7 @@ const EditSection = () => {
                 onClick={() => setPopoverOpen(!isPopoverOpen)}
                 data-id="popover-trigger-more"
               >
-                <MoreHoriz />
+                <MoreHoriz size={25} />
 
                 <ScreenReaderOnly>More</ScreenReaderOnly>
               </Button>

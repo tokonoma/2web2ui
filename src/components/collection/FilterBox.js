@@ -1,9 +1,12 @@
 import React from 'react';
-import { Label, Panel, TextField, ScreenReaderOnly } from 'src/components/matchbox';
+import { Box, Label, Panel, TextField, ScreenReaderOnly } from 'src/components/matchbox';
 import { Search } from '@sparkpost/matchbox-icons';
 import { getRandomExampleSearch } from './helpers/exampleSearch';
 import styles from './FilterBox.module.scss';
 import { useHibana } from 'src/context/HibanaContext';
+
+// TODO: Replace with Matchbox design tokens once exposed
+const FIELD_MAX_WIDTH = '750px';
 
 function CollectionFilterBox(props) {
   const [state] = useHibana();
@@ -20,17 +23,19 @@ function CollectionFilterBox(props) {
         </Label>
       )}
 
-      <TextField
-        labelHidden
-        label={isHibanaEnabled ? 'Filter By' : undefined}
-        id="collection-filter-box"
-        name="collection-filter-box"
-        suffix={<Search />}
-        placeholder={placeholderText}
-        onChange={e => onChange(e.target.value)}
-        onBlur={e => onBlur(e.target.value)}
-        defaultValue={initialValue}
-      />
+      <Box maxWidth={FIELD_MAX_WIDTH}>
+        <TextField
+          labelHidden
+          label={isHibanaEnabled ? 'Filter By' : undefined}
+          id="collection-filter-box"
+          name="collection-filter-box"
+          suffix={<Search />}
+          placeholder={placeholderText}
+          onChange={e => onChange(e.target.value)}
+          onBlur={e => onBlur(e.target.value)}
+          defaultValue={initialValue}
+        />
+      </Box>
     </>
   );
 

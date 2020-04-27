@@ -6,7 +6,8 @@ export const AUTH_ROUTE = '/auth';
 export const TFA_ROUTE = '/auth/tfa';
 export const ENABLE_TFA_AUTH_ROUTE = '/auth/enable-tfa';
 export const SSO_AUTH_ROUTE = '/auth/sso';
-
+export const DASHBOARD_ROUTE = '/dashboard';
+export const ONBOARDING_SENDINGDOMAIN_ROUTE = '/onboarding/sending-domain';
 export const COOKIE_DOMAIN = '.sparkpost.com';
 
 export const FORMATS = {
@@ -59,8 +60,7 @@ export const LINKS = {
   SSO_GUIDE: 'https://www.sparkpost.com/docs/my-account-and-profile/sso',
   ALERTS_DOCS: 'https://developers.sparkpost.com/api/alerts/#alerts-post-create-an-alert',
   ALERTS_SURVEY: 'https://goo.gl/forms/rnIuTvdVF2xhpKCy2',
-  SNIPPET_SUBSTITUTION_REFERENCE:
-    'https://developers.sparkpost.com/api/substitutions-reference/#header-snippets',
+  SNIPPET_API_DOCS: 'https://developers.sparkpost.com/api/snippets/',
   MANDATORY_TFA:
     'https://www.sparkpost.com/docs/my-account-and-profile/enabling-two-factor-authentication/',
   RECIPIENT_VALIDATION_ACCESS: 'https://www.sparkpost.com/rv-access',

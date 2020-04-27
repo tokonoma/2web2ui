@@ -38,88 +38,100 @@ exports[`Page: A/B Test Edit Mode should render draft status correctly 1`] = `
   }
   title="my ab test 1"
 >
-  <Section
-    title="Basic Information"
-  >
-    <Left>
-      <StatusContent
-        rescheduling={false}
-        test={
-          Object {
-            "default_template": Object {
-              "template_id": "ab-test-1",
-            },
-            "id": "id-1",
-            "name": "my ab test 1",
-            "status": "draft",
-            "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": 1,
+  <Stack>
+    <Section
+      title="Basic Information"
+    >
+      <Left>
+        <StatusContent
+          rescheduling={false}
+          test={
+            Object {
+              "default_template": Object {
+                "template_id": "ab-test-1",
+              },
+              "id": "id-1",
+              "name": "my ab test 1",
+              "status": "draft",
+              "updated_at": "2018-10-21T10:10:10.000Z",
+              "version": 1,
+            }
           }
-        }
-      />
-    </Left>
-    <Right>
-      <withRouter(Connect(StatusPanel))
-        subaccountId="101"
-        subaccountName={null}
-        test={
-          Object {
-            "default_template": Object {
-              "template_id": "ab-test-1",
-            },
-            "id": "id-1",
-            "name": "my ab test 1",
-            "status": "draft",
-            "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": 1,
+        />
+      </Left>
+      <Right>
+        <Box
+          as={[Function]}
+          marginTop="400"
+        >
+          <withRouter(Connect(StatusPanel))
+            subaccountId="101"
+            subaccountName={null}
+            test={
+              Object {
+                "default_template": Object {
+                  "template_id": "ab-test-1",
+                },
+                "id": "id-1",
+                "name": "my ab test 1",
+                "status": "draft",
+                "updated_at": "2018-10-21T10:10:10.000Z",
+                "version": 1,
+              }
+            }
+          />
+          <StatusFields
+            disabled={false}
+          />
+        </Box>
+      </Right>
+    </Section>
+    <Section
+      title="Settings"
+    >
+      <Left>
+        <SettingsContent
+          test={
+            Object {
+              "default_template": Object {
+                "template_id": "ab-test-1",
+              },
+              "id": "id-1",
+              "name": "my ab test 1",
+              "status": "draft",
+              "updated_at": "2018-10-21T10:10:10.000Z",
+              "version": 1,
+            }
           }
-        }
-      />
-      <StatusFields
-        disabled={false}
-      />
-    </Right>
-  </Section>
-  <Section
-    title="Settings"
-  >
-    <Left>
-      <SettingsContent
-        test={
-          Object {
-            "default_template": Object {
-              "template_id": "ab-test-1",
-            },
-            "id": "id-1",
-            "name": "my ab test 1",
-            "status": "draft",
-            "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": 1,
-          }
-        }
-      />
-    </Left>
-    <Right>
-      <SettingsFields
-        disabled={false}
-        formValues="test values"
-      />
-    </Right>
-  </Section>
-  <Section
-    title="Variants"
-  >
-    <Left>
-      <VariantsContent />
-    </Left>
-    <Right>
-      <VariantsFields
-        disabled={false}
-        formValues="test values"
-        subaccountId="101"
-      />
-    </Right>
-  </Section>
+        />
+      </Left>
+      <Right>
+        <Box
+          as={[Function]}
+          marginTop="400"
+        >
+          <SettingsFields
+            disabled={false}
+            formValues="test values"
+          />
+        </Box>
+      </Right>
+    </Section>
+    <Section
+      title="Variants"
+    >
+      <Left>
+        <VariantsContent />
+      </Left>
+      <Right>
+        <VariantsFields
+          disabled={false}
+          formValues="test values"
+          subaccountId="101"
+        />
+      </Right>
+    </Section>
+  </Stack>
 </Page>
 `;
 
@@ -153,87 +165,99 @@ exports[`Page: A/B Test Edit Mode should render scheduled status correctly 1`] =
   }
   title="my ab test 1"
 >
-  <Section
-    title="Basic Information"
-  >
-    <Left>
-      <StatusContent
-        rescheduling={false}
-        test={
-          Object {
-            "default_template": Object {
-              "template_id": "ab-test-1",
-            },
-            "id": "id-1",
-            "name": "my ab test 1",
-            "status": "scheduled",
-            "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": 1,
+  <Stack>
+    <Section
+      title="Basic Information"
+    >
+      <Left>
+        <StatusContent
+          rescheduling={false}
+          test={
+            Object {
+              "default_template": Object {
+                "template_id": "ab-test-1",
+              },
+              "id": "id-1",
+              "name": "my ab test 1",
+              "status": "scheduled",
+              "updated_at": "2018-10-21T10:10:10.000Z",
+              "version": 1,
+            }
           }
-        }
-      />
-    </Left>
-    <Right>
-      <withRouter(Connect(StatusPanel))
-        subaccountId="101"
-        subaccountName={null}
-        test={
-          Object {
-            "default_template": Object {
-              "template_id": "ab-test-1",
-            },
-            "id": "id-1",
-            "name": "my ab test 1",
-            "status": "scheduled",
-            "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": 1,
+        />
+      </Left>
+      <Right>
+        <Box
+          as={[Function]}
+          marginTop="400"
+        >
+          <withRouter(Connect(StatusPanel))
+            subaccountId="101"
+            subaccountName={null}
+            test={
+              Object {
+                "default_template": Object {
+                  "template_id": "ab-test-1",
+                },
+                "id": "id-1",
+                "name": "my ab test 1",
+                "status": "scheduled",
+                "updated_at": "2018-10-21T10:10:10.000Z",
+                "version": 1,
+              }
+            }
+          />
+          <StatusFields
+            disabled={false}
+          />
+        </Box>
+      </Right>
+    </Section>
+    <Section
+      title="Settings"
+    >
+      <Left>
+        <SettingsContent
+          test={
+            Object {
+              "default_template": Object {
+                "template_id": "ab-test-1",
+              },
+              "id": "id-1",
+              "name": "my ab test 1",
+              "status": "scheduled",
+              "updated_at": "2018-10-21T10:10:10.000Z",
+              "version": 1,
+            }
           }
-        }
-      />
-      <StatusFields
-        disabled={false}
-      />
-    </Right>
-  </Section>
-  <Section
-    title="Settings"
-  >
-    <Left>
-      <SettingsContent
-        test={
-          Object {
-            "default_template": Object {
-              "template_id": "ab-test-1",
-            },
-            "id": "id-1",
-            "name": "my ab test 1",
-            "status": "scheduled",
-            "updated_at": "2018-10-21T10:10:10.000Z",
-            "version": 1,
-          }
-        }
-      />
-    </Left>
-    <Right>
-      <SettingsFields
-        disabled={false}
-        formValues="test values"
-      />
-    </Right>
-  </Section>
-  <Section
-    title="Variants"
-  >
-    <Left>
-      <VariantsContent />
-    </Left>
-    <Right>
-      <VariantsFields
-        disabled={false}
-        formValues="test values"
-        subaccountId="101"
-      />
-    </Right>
-  </Section>
+        />
+      </Left>
+      <Right>
+        <Box
+          as={[Function]}
+          marginTop="400"
+        >
+          <SettingsFields
+            disabled={false}
+            formValues="test values"
+          />
+        </Box>
+      </Right>
+    </Section>
+    <Section
+      title="Variants"
+    >
+      <Left>
+        <VariantsContent />
+      </Left>
+      <Right>
+        <VariantsFields
+          disabled={false}
+          formValues="test values"
+          subaccountId="101"
+        />
+      </Right>
+    </Section>
+  </Stack>
 </Page>
 `;

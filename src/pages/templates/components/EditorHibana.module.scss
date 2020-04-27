@@ -1,0 +1,7 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.EditorWrapper {
+  :global(.ace_error) {
+    background: linear-gradient(to right, color(red, 700) 5px, transparent 5px) !important;
+  }
+}

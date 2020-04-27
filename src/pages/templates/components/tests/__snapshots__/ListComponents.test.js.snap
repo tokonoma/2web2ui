@@ -2,7 +2,7 @@
 
 exports[`Template List Components DeleteAction should render correctly 1`] = `
 <Button
-  className="Action"
+  className=""
   flat={true}
   onClick={[Function]}
 >
@@ -17,7 +17,7 @@ exports[`Template List Components DeleteAction should render correctly 1`] = `
 
 exports[`Template List Components DuplicateAction should render correctly 1`] = `
 <Button
-  className="Action"
+  className=""
   flat={true}
   onClick={[Function]}
 >
@@ -31,26 +31,25 @@ exports[`Template List Components DuplicateAction should render correctly 1`] = 
 `;
 
 exports[`Template List Components LastUpdated should render 1`] = `
-<p
-  className="LastUpdated"
->
+<p>
   Aug 10 2017, 10:15am
 </p>
 `;
 
 exports[`Template List Components Name should render 1`] = `
 <Fragment>
-  <p
-    className="Name"
-  >
-    <PageLink
-      to="/templates/edit/id-123/draft/content?subaccount=123"
+  <strong>
+    <Text
+      as="span"
+      fontWeight="400"
     >
-      <strong>
+      <PageLink
+        to="/templates/edit/id-123/draft/content?subaccount=123"
+      >
         template name
-      </strong>
-    </PageLink>
-  </p>
+      </PageLink>
+    </Text>
+  </strong>
 </Fragment>
 `;
 
@@ -65,12 +64,8 @@ exports[`Template List Components Status should render draft 1`] = `
 `;
 
 exports[`Template List Components Status should render published 1`] = `
-<Tag
-  className="published"
->
-  <CheckCircle
-    className="PublishedIconColor"
-  />
+<Tag>
+  <CheckCircle />
    
   <span>
     Published
@@ -82,13 +77,10 @@ exports[`Template List Components Status should render unpublished changes 1`] =
 <Tooltip
   content="Contains unpublished changes"
   dark={true}
+  id="templates-status-3"
 >
-  <Tag
-    className="PublishedWithChanges"
-  >
-    <CheckCircle
-      className="PublishedIconColor"
-    />
+  <Tag>
+    <CheckCircle />
      
     <span>
       Published

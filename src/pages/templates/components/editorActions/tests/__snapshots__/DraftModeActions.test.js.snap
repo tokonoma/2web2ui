@@ -1,88 +1,58 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DraftModeActions renders draft actions 1`] = `
-<Button.Group>
-  <SaveAndPublish
-    className="Actions"
-    onClick={[Function]}
-  >
-    <strong>
-      Save and Publish
-    </strong>
-  </SaveAndPublish>
+<div>
   <div
-    className="Actions"
+    class="AB_AG"
   >
-    <Popover
-      id="popover-action-list"
-      left={true}
-      onClose={[Function]}
-      open={false}
-      trigger={
-        <Button
+    <div>
+      <button
+        class="AB_AE"
+        data-id="action-save-and-publish"
+        title="Opens a dialog"
+        type="button"
+        variant="secondary"
+      >
+        <strong>
+          Save and Publish
+        </strong>
+      </button>
+    </div>
+    <div>
+      <span
+        class="KQ_KY"
+      >
+        <button
           aria-controls="popover-action-list"
           aria-expanded="false"
+          class="AB_AE"
           data-id="popover-actions-trigger"
-          onClick={[Function]}
+          type="button"
+          variant="secondary"
         >
-          <ArrowDropDown />
-          <ScreenReaderOnly>
+          <svg
+            aria-hidden="true"
+            fill="currentColor"
+            height="18"
+            preserveAspectRatio="xMidYMid meet"
+            style="vertical-align: middle;"
+            viewBox="0 0 24 24"
+            width="18"
+          >
+            <g>
+              <path
+                d="M7 10l5 5 5-5z"
+              />
+            </g>
+          </svg>
+          <span
+            class="BO_BQ"
+          >
             Open Menu
-          </ScreenReaderOnly>
-        </Button>
-      }
-    >
-      <div
-        className="ActionsBody"
-      >
-        <SaveAndPublish
-          className="ActionItem"
-          onClick={[Function]}
-        />
-        <SaveDraft
-          className="ActionItem"
-          onClick={[Function]}
-        />
-        <hr
-          className="Divider"
-        />
-        <_default
-          className="ActionItem"
-        />
-        <DuplicateTemplate
-          className="ActionItem"
-          onClick={[Function]}
-        />
-        <DeleteTemplate
-          className="ActionItem"
-          onClick={[Function]}
-        />
-      </div>
-    </Popover>
-    <DuplicateTemplateModal
-      onClose={[Function]}
-      open={false}
-      template={
-        Object {
-          "id": "a-random-id-123",
-          "subaccount_id": "some-subaccount-id",
-        }
-      }
-    />
-    <DeleteTemplateModal
-      onClose={[Function]}
-      open={false}
-      template={
-        Object {
-          "id": "a-random-id-123",
-          "subaccount_id": "some-subaccount-id",
-        }
-      }
-    />
-    <SaveAndPublishConfirmationModal
-      onCancel={[Function]}
-      open={false}
-    />
+          </span>
+        </button>
+      </span>
+    </div>
   </div>
-</Button.Group>
+</div>
 `;

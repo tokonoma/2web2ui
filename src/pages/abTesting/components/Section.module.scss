@@ -7,3 +7,11 @@
     margin-top: rem(-42);
   }
 }
+
+.RightViewMode {
+  margin-top: spacing();
+
+  @media screen and (min-width: breakpoint(medium)) {
+    margin-top: rem(-42);
+  }
+}

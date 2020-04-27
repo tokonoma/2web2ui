@@ -1,11 +1,14 @@
 import React from 'react';
 import classNames from 'classnames';
 import AceEditor from 'react-ace';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import useEditor from '../hooks/useEditor';
 import 'brace/ext/searchbox';
 import 'brace/mode/text';
+import 'brace/theme/eclipse';
 import 'brace/theme/tomorrow_night_eighties';
-import styles from './Editor.module.scss';
+import OGStyles from './Editor.module.scss';
+import hibanaStyles from './EditorHibana.module.scss';
 
 const Editor = ({
   editorProps = {},
@@ -16,6 +19,7 @@ const Editor = ({
   readOnly,
   ...props
 }) => {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
   const { setAnnotations, setEditor } = useEditor({ inlineErrors });
 
   return (
@@ -27,7 +31,7 @@ const Editor = ({
         cursorStart={1}
         editorProps={{
           ...editorProps,
-          $blockScrolling: Infinity
+          $blockScrolling: Infinity,
         }}
         fontSize={14}
         height="100%" // must set height on wrapper
@@ -41,7 +45,7 @@ const Editor = ({
           // see, https://github.com/securingsincity/react-ace/issues/275
           useWorker: false,
           ...setOptions,
-          displayIndentGuides: false
+          displayIndentGuides: false,
         }}
         showPrintMargin={false}
         tabSize={2}

@@ -102,14 +102,14 @@ const InsertSnippetModal = props => {
             />
 
             <div>
-              <Label id="snippet-copy-field">Snippet Code</Label>
+              <Label id="snippet-copy-field" label="Snippet Code" />
 
               <CopyField id="snippet-copy-field" value={copyFieldValue} />
             </div>
           </Stack>
 
           <ButtonWrapper>
-            <Button color="orange" onClick={handleSubmit}>
+            <Button variant="primary" onClick={handleSubmit}>
               Copy Code
             </Button>
           </ButtonWrapper>

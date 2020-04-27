@@ -23,7 +23,7 @@ const templatesRoutes = [
     component: templates.CreatePage,
     condition: hasGrants('templates/modify'),
     layout: App,
-    title: 'Create New Template',
+    title: 'Create Template',
     supportDocSearch: 'template',
     ...navCategories,
   },

@@ -114,21 +114,21 @@ describe('The templates edit draft page', () => {
       cy.findByLabelText('From Email').should('have.value', 'fake-user@bounce.uat.sparkspam.com');
 
       // NOTE: Using `.findByLabelText` for grabbing the switch isn't working as labels aren't correctly associated with inputs from an HTML POV
-      // Additionally, the switch content visibility isn't working as the content isn't actually hidden from the standpoing of Cypress, just ocluded by a decorative
+      // Additionally, the switch content visibility isn't working as the content isn't actually hidden from the standpoint of Cypress, just occluded by a decorative
       // element. Ideally when this component is refactored, these tests could be cleaner and less brittle.
-      cy.findByText('Track Opens')
+      cy.findAllByText('Track Opens') // Each `<ToggleBlock/>` has a visually hidden and screen reader hidden label - kinda confusing!
         .closest('[data-id="toggle-block"]')
         .within(() => {
           cy.get('input').should('be.checked');
         });
 
-      cy.findByText('Track Clicks')
+      cy.findAllByText('Track Clicks')
         .closest('[data-id="toggle-block"]')
         .within(() => {
           cy.get('input').should('be.checked');
         });
 
-      cy.findByText('Transactional')
+      cy.findAllByText('Transactional')
         .closest('[data-id="toggle-block"]')
         .within(() => {
           cy.get('input').should('not.be.checked');
@@ -280,6 +280,8 @@ describe('The templates edit draft page', () => {
     });
 
     describe('"Duplicate" button', () => {
+      beforeEach(() => cy.visit(PAGE_URL));
+
       it('renders a confirmation modal when clicked with default values "<TEMPLATE NAME> (COPY)" and "<template-id>-copy" in their respective fields', () => {
         cy.visit(PAGE_URL);
 
@@ -288,8 +290,8 @@ describe('The templates edit draft page', () => {
         cy.findByText('Duplicate').click();
 
         cy.findByText('Duplicate Template').should('be.visible');
-        cy.findByLabelText('Template Name *').should('have.value', 'Stubbed Template 1 (COPY)');
-        cy.findByLabelText('Template ID *').should('have.value', 'stubbed-template-1-copy');
+        cy.findByLabelText(/Template Name/g).should('have.value', 'Stubbed Template 1 (COPY)');
+        cy.findByLabelText(/Template ID/g).should('have.value', 'stubbed-template-1-copy');
       });
 
       it('renders a success message when the user confirms duplication', () => {
@@ -327,12 +329,14 @@ describe('The templates edit draft page', () => {
         cy.findByText('Something went wrong.').should('be.visible');
 
         // And the UI persists prior to throwing the error
-        cy.findByLabelText('Template Name *').should('be.visible');
-        cy.findByLabelText('Template ID *').should('be.visible');
+        cy.findByLabelText(/Template Name/g).should('be.visible');
+        cy.findByLabelText(/Template ID/g).should('be.visible');
       });
     });
 
     describe('"Delete" button', () => {
+      beforeEach(() => cy.visit(PAGE_URL));
+
       it('renders a confirmation modal when clicked', () => {
         openTemplateSettings();
 

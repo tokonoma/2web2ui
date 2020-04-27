@@ -1,16 +1,20 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import useEditorContext from '../../hooks/useEditorContext';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import PreviewSection from '../PreviewSection';
+import styles from '../PreviewSection.module.scss';
 
 jest.mock('../../hooks/useEditorContext');
+jest.mock('src/hooks/useHibanaOverride');
 
 describe('PreviewSection', () => {
-  const subject = ({ editorState = {}} = {}) => {
+  const subject = ({ editorState = {} } = {}) => {
+    useHibanaOverride.mockImplementationOnce(() => styles);
     useEditorContext.mockReturnValue({
       currentTabKey: 'html',
       preview: { html: '<h1>Test Example</h1>' },
-      ...editorState
+      ...editorState,
     });
 
     return shallow(<PreviewSection />);
@@ -21,7 +25,7 @@ describe('PreviewSection', () => {
   });
 
   it('renders empty string', () => {
-    const wrapper = subject({ editorState: { preview: {}}});
+    const wrapper = subject({ editorState: { preview: {} } });
     expect(wrapper.find('PreviewFrame')).toHaveProp('content', '');
   });
 
@@ -29,20 +33,22 @@ describe('PreviewSection', () => {
     const wrapper = subject({
       editorState: {
         currentTabKey: 'text',
-        preview: { text: 'Test Example' }
-      }
+        preview: { text: 'Test Example' },
+      },
     });
 
-    expect(wrapper.find('PreviewFrame'))
-      .toHaveProp('content', '<p style="white-space: pre-wrap">Test Example</p>');
+    expect(wrapper.find('PreviewFrame')).toHaveProp(
+      'content',
+      '<p style="white-space: pre-wrap">Test Example</p>',
+    );
   });
 
   it('sets the "PreviewFrame" content to the html preview when the "currentTabKey" is set to "test_data"', () => {
     const wrapper = subject({
       editorState: {
         currentTabKey: 'test_data',
-        preview: { html: '<h1>Test Example</h1>' }
-      }
+        preview: { html: '<h1>Test Example</h1>' },
+      },
     });
 
     expect(wrapper.find('PreviewFrame')).toHaveProp('content', '<h1>Test Example</h1>');
@@ -54,9 +60,9 @@ describe('PreviewSection', () => {
         currentTabKey: 'test_data',
         preview: {
           html: null,
-          amp_html: '<p>AMP HTML</p>'
-        }
-      }
+          amp_html: '<p>AMP HTML</p>',
+        },
+      },
     });
 
     expect(wrapper.find('PreviewFrame')).toHaveProp('content', '<p>AMP HTML</p>');
@@ -69,12 +75,15 @@ describe('PreviewSection', () => {
         preview: {
           html: null,
           amp_html: null,
-          text: 'Some text'
-        }
-      }
+          text: 'Some text',
+        },
+      },
     });
 
-    expect(wrapper.find('PreviewFrame')).toHaveProp('content', '<p style="white-space: pre-wrap">Some text</p>');
+    expect(wrapper.find('PreviewFrame')).toHaveProp(
+      'content',
+      '<p style="white-space: pre-wrap">Some text</p>',
+    );
   });
 
   it('sets the "PreviewFrame" content to "" when the "currentTabKey" is set to "test_data" and no HTML, AMP HTML, or text are present in the preview', () => {
@@ -84,22 +93,22 @@ describe('PreviewSection', () => {
         preview: {
           html: null,
           amp_html: null,
-          text: null
-        }
-      }
+          text: null,
+        },
+      },
     });
 
     expect(wrapper.find('PreviewFrame')).toHaveProp('content', '');
   });
 
   it('renders non-strict preview frame for AMP HTML', () => {
-    const wrapper = subject({ editorState: { currentTabKey: 'amp_html' }});
+    const wrapper = subject({ editorState: { currentTabKey: 'amp_html' } });
     expect(wrapper.find('PreviewFrame')).toHaveProp('strict', false);
   });
 
   it('renders error frame', () => {
     const previewLineErrors = [{ line: 1, message: 'Oh no!' }];
-    const wrapper = subject({ editorState: { hasFailedToPreview: true, previewLineErrors }});
+    const wrapper = subject({ editorState: { hasFailedToPreview: true, previewLineErrors } });
 
     expect(wrapper.find('PreviewErrorFrame')).toHaveProp('errors', previewLineErrors);
   });

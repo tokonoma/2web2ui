@@ -1,83 +1,91 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import useEditorContext from '../../../hooks/useEditorContext';
+import TestApp from 'src/__testHelpers__/TestApp';
 import DraftModeActions from '../DraftModeActions';
+import styles from '../Actions.module.scss';
 
 jest.mock('../../../hooks/useEditorContext');
+jest.mock('src/hooks/useHibanaOverride');
 
 describe('DraftModeActions', () => {
-  const subject = (editorState) => {
+  const subject = editorState => {
+    useHibanaOverride.mockReturnValue(() => styles);
     useEditorContext.mockReturnValue({
       hasPublished: true,
       draft: {
         id: 'a-random-id-123',
-        subaccount_id: 'some-subaccount-id'
+        subaccount_id: 'some-subaccount-id',
       },
-      ...editorState
+      ...editorState,
     });
 
-    return shallow(<DraftModeActions />);
+    return render(
+      <TestApp>
+        <DraftModeActions />
+      </TestApp>,
+    );
   };
 
   it('renders draft actions', () => {
-    expect(subject()).toMatchSnapshot();
+    expect(subject().container).toMatchSnapshot();
   });
 
-  it('does not render ViewPublished when hasPublished is false ', () => {
-    expect(subject({ hasPublished: false }).find('ViewPublished')).not.toExist();
+  it('opens the popover when clicking "Open Menu"', () => {
+    const { queryAllByText, queryByText } = subject();
+
+    expect(queryAllByText('Save and Publish')).toHaveLength(1);
+    expect(queryByText('Save Draft')).not.toBeInTheDocument();
+    expect(queryByText('View Published')).not.toBeInTheDocument();
+    expect(queryByText('Duplicate')).not.toBeInTheDocument();
+    expect(queryByText('Delete')).not.toBeInTheDocument();
+
+    userEvent.click(queryByText('Open Menu'));
+
+    expect(queryAllByText('Save and Publish')).toHaveLength(2);
+    expect(queryByText('Save Draft')).toBeInTheDocument();
+    expect(queryByText('View Published')).toBeInTheDocument();
+    expect(queryByText('Duplicate')).toBeInTheDocument();
+    expect(queryByText('Delete')).toBeInTheDocument();
   });
 
-  describe('the DuplicateTemplateModal', () => {
-    const wrapper = subject();
+  it('does not render the "View Published" button when editor context `hasPublished` is false', () => {
+    const { queryByText } = subject({ hasPublished: false });
 
-    it('sets the `open` prop to `true` and closes the popover when clicking on `DuplicateTemplate`', () => {
-      wrapper.find('DuplicateTemplate').simulate('click');
+    userEvent.click(queryByText('Open Menu'));
 
-      expect(wrapper.find('DuplicateTemplateModal')).toHaveProp('open', true);
-      expect(wrapper.find('Popover')).toHaveProp('open', false);
-    });
-
-    it('sets the `open` prop to `false` when invoking the `onClose` prop', () => {
-      wrapper.find('DuplicateTemplate').simulate('click');
-      wrapper.find('DuplicateTemplateModal').prop('onClose')();
-
-      expect(wrapper.find('DuplicateTemplateModal')).toHaveProp('open', false);
-    });
+    expect(queryByText('View Published')).not.toBeInTheDocument();
   });
 
-  describe('the SaveAndPublishConfirmationModal', () => {
-    const wrapper = subject();
-
-    it('sets the `open` prop to `true` and closes the popover when clicking on `SaveAndPublish`', () => {
-      wrapper.find('SaveAndPublish').first().simulate('click');
-
-      expect(wrapper.find('SaveAndPublishConfirmationModal')).toHaveProp('open', true);
-      expect(wrapper.find('Popover')).toHaveProp('open', false);
+  it('renders the duplicate template modal when clicking "Duplicate"', () => {
+    const { queryByText, queryByLabelText } = subject({
+      hasPublished: false,
     });
 
-    it('sets the `open` prop to `false` when invoking the `onCancel` prop', () => {
-      wrapper.find('SaveAndPublish').first().simulate('click');
-      wrapper.find('SaveAndPublishConfirmationModal').prop('onCancel')();
+    userEvent.click(queryByText('Open Menu'));
+    userEvent.click(queryByText('Duplicate'));
 
-      expect(wrapper.find('SaveAndPublishConfirmationModal')).toHaveProp('open', false);
-    });
+    expect(queryByLabelText(/Template Name/g)).toBeInTheDocument();
+    expect(queryByLabelText(/Template ID/g)).toBeInTheDocument();
   });
 
-  describe('the DeleteTemplateModal', () => {
-    const wrapper = subject();
+  it('renders the save and publish confirmation modal when clicking "Save and Publish"', () => {
+    const { queryByText, queryAllByText } = subject();
 
-    it('sets the `open` prop to `true` and closes the popover when clicking on `DeleteTemplate`', () => {
-      wrapper.find('DeleteTemplate').simulate('click');
+    userEvent.click(queryByText('Open Menu'));
+    userEvent.click(queryAllByText('Save and Publish')[1]);
 
-      expect(wrapper.find('DeleteTemplateModal')).toHaveProp('open', true);
-      expect(wrapper.find('Popover')).toHaveProp('open', false);
-    });
+    expect(queryByText('Are you sure you want to publish your template?')).toBeInTheDocument();
+  });
 
-    it('sets the `open` prop to `false` when invoking the `onClose` prop', () => {
-      wrapper.find('DeleteTemplate').simulate('click');
-      wrapper.find('DeleteTemplateModal').prop('onClose')();
+  it('renders the delete confirmation modal when clicking "Delete"', () => {
+    const { queryByText } = subject();
 
-      expect(wrapper.find('DeleteTemplateModal')).toHaveProp('open', false);
-    });
+    userEvent.click(queryByText('Open Menu'));
+    userEvent.click(queryByText('Delete'));
+
+    expect(queryByText('Are you sure you want to delete your template?')).toBeInTheDocument();
   });
 });

@@ -3,26 +3,34 @@ import propTypes from 'prop-types';
 import { ChevronLeft } from '@sparkpost/matchbox-icons';
 import { PageLink } from 'src/components/links';
 import { ScreenReaderOnly } from 'src/components/matchbox';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import SparkPost from 'src/components/sparkPost/SparkPost';
-import styles from './FullPage.module.scss';
+import OGStyles from './FullPage.module.scss';
+import hibanaStyles from './FullPageHibana.module.scss';
 
 // uses the entire viewport
-const FullPage = ({ breadcrumbRedirectsTo, children, primaryArea, title }) => (
-  <>
-    <div className={styles.FullPageNav}>
-      <div className={styles.FullPageHeaderArea}>
+const FullPage = ({ breadcrumbRedirectsTo, children, primaryArea, title }) => {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+
+  return (
+    <>
+      <div className={styles.FullPageNav}>
         <PageLink className={styles.FullPageBreadcrumb} to={breadcrumbRedirectsTo}>
-          <ChevronLeft size={28} />
+          <ChevronLeft size={28} className={styles.FullPageChevron} />
           <SparkPost.Icon height={28} width={28} />
           <ScreenReaderOnly>Back</ScreenReaderOnly>
         </PageLink>
-        <h1 className={styles.FullPageTitle}>{title}</h1>
+
+        <div className={styles.FullPageHeaderArea}>
+          <h1 className={styles.FullPageTitle}>{title}</h1>
+
+          <div className={styles.FullPagePrimaryArea}>{primaryArea}</div>
+        </div>
       </div>
-      <div className={styles.FullPagePrimaryArea}>{primaryArea}</div>
-    </div>
-    <div className={styles.FullPageContents}>{children}</div>
-  </>
-);
+      <div className={styles.FullPageContents}>{children}</div>
+    </>
+  );
+};
 
 FullPage.propTypes = {
   breadcrumbRedirectsTo: propTypes.string.isRequired,

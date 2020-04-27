@@ -1,10 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Settings Content Component should not render anything by default 1`] = `<div />`;
+exports[`Settings Content Component should not render anything by default 1`] = `
+<Box
+  minHeight={30}
+/>
+`;
 
 exports[`Settings Content Component should render when test is in draft mode 1`] = `
-<div>
-  <p>
+<Box
+  minHeight={30}
+>
+  <ContentText
+    color="gray.600"
+    fontSize="200"
+    mt="300"
+  >
     <span>
       You may continue to adjust these settings and template variants while this test is in
        
@@ -13,21 +23,31 @@ exports[`Settings Content Component should render when test is in draft mode 1`]
     <span>
        mode.
     </span>
-  </p>
-  <p>
+  </ContentText>
+  <ContentText
+    color="gray.600"
+    fontSize="200"
+    mt="300"
+  >
     <ExternalLink
       to="https://www.sparkpost.com/docs/tech-resources/a-b-testing-sparkpost/"
     >
       Learn more about configuring AB tests
     </ExternalLink>
     .
-  </p>
-</div>
+  </ContentText>
+</Box>
 `;
 
 exports[`Settings Content Component should render when test is in scheduled mode 1`] = `
-<div>
-  <p>
+<Box
+  minHeight={30}
+>
+  <ContentText
+    color="gray.600"
+    fontSize="200"
+    mt="300"
+  >
     <span>
       You may continue to adjust these settings and template variants while this test is in
        
@@ -36,14 +56,18 @@ exports[`Settings Content Component should render when test is in scheduled mode
     <span>
        mode.
     </span>
-  </p>
-  <p>
+  </ContentText>
+  <ContentText
+    color="gray.600"
+    fontSize="200"
+    mt="300"
+  >
     <ExternalLink
       to="https://www.sparkpost.com/docs/tech-resources/a-b-testing-sparkpost/"
     >
       Learn more about configuring AB tests
     </ExternalLink>
     .
-  </p>
-</div>
+  </ContentText>
+</Box>
 `;

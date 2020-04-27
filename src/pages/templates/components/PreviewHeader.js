@@ -1,11 +1,14 @@
 import React from 'react';
 import isEmpty from 'lodash/isEmpty';
 import { Person } from '@sparkpost/matchbox-icons';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import useEditorContext from '../hooks/useEditorContext';
-import styles from './PreviewHeader.module.scss';
+import OGStyles from './PreviewHeader.module.scss';
+import hibanaStyles from './PreviewHeaderHibana.module.scss';
 
 const PreviewHeader = () => {
   const { preview } = useEditorContext();
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
 
   if (isEmpty(preview)) {
     return null;
@@ -13,9 +16,7 @@ const PreviewHeader = () => {
 
   return (
     <div className={styles.PreviewHeader}>
-      <div className={styles.PreviewHeaderSubject}>
-        {preview.subject}
-      </div>
+      <div className={styles.PreviewHeaderSubject}>{preview.subject}</div>
       <div className={styles.PreviewHeaderContact}>
         <div className={styles.PreviewHeaderAvatar}>
           <Person color="white" size={50} />
@@ -27,14 +28,12 @@ const PreviewHeader = () => {
             ) : (
               <>
                 <strong>{preview.from.name}</strong>
-                <span>{' '}</span>
+                <span> </span>
                 <span>{`<${preview.from.email}>`}</span>
               </>
             )}
           </div>
-          <div className={styles.PreviewHeaderTo}>
-            to me
-          </div>
+          <div className={styles.PreviewHeaderTo}>to me</div>
         </div>
       </div>
     </div>
