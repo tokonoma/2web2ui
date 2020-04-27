@@ -173,6 +173,7 @@ export function RecipientValidationPage(props) {
             {selectedTab === 2 && (
               <div className={styles.SecondaryActions}>
                 <Button
+                  className={styles.ApiDocs}
                   flat
                   external
                   to="https://developers.sparkpost.com/api/recipient-validation/"

@@ -49,10 +49,10 @@ export const ApiIntegrationDocs = () => {
   );
 
   const exampleMethod = (
-    <div className={styles.SampleRequest}>
+    <div>
+      <div className={styles.SubHeader}>GET</div>
       <small>
-        <span className={styles.Method}>GET</span>
-        <code>
+        <code className={styles.ExampleMethod}>
           /api/v1/recipient-validation/single/{'{'}address{'}'}
         </code>
       </small>

@@ -4,3 +4,15 @@
   font-weight: font-weight(light);
   font-size: font-size(400);
 }
+
+.LaunchIcon {
+  color: color(gray, 400);
+  margin-left: spacing(100);
+}
+
+.ApiDocs {
+  font-weight: font-weight(normal);
+  font-size: font-size(200);
+  color: color(gray, 700) !important;
+  text-decoration: underline;
+}

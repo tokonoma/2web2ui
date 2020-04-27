@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import { useHibana } from 'src/context/HibanaContext';
 import { Error, CheckCircle, Cached, CloudUpload } from '@sparkpost/matchbox-icons';
 import { Tag } from 'src/components/matchbox';
 
@@ -38,6 +39,8 @@ function getStatusProps(styles) {
 }
 
 const JobStatusTag = ({ status }) => {
+  const [state] = useHibana();
+  const { isHibanaEnabled } = state;
   const styles = useHibanaOverride(OGStyles, hibanaStyles);
   const statusProps = getStatusProps(styles);
   const { className, icon: Icon, message } = statusProps[status] || statusProps.loading;
@@ -45,7 +48,7 @@ const JobStatusTag = ({ status }) => {
   return (
     <Tag style={{ verticalAlign: 'bottom' }}>
       <span className={classNames(styles.JobStatusTagContent, className)}>
-        <Icon />
+        {!isHibanaEnabled && <Icon />}
         &nbsp;
       </span>
       <span>{message}</span>
