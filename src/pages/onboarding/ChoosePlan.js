@@ -19,9 +19,7 @@ import PromoCodeNew from '../../components/billing/PromoCodeNew';
 import { FORMS } from 'src/constants';
 import CreditCardSection from './components/CreditCardSection';
 import _ from 'lodash';
-
-const NEXT_STEP = '/dashboard';
-
+import { DASHBOARD_ROUTE, ONBOARDING_SENDINGDOMAIN_ROUTE } from 'src/constants';
 export function OnboardingPlanPage({
   getPlans,
   getBundles,
@@ -40,6 +38,9 @@ export function OnboardingPlanPage({
   hasError,
   bundles,
 }) {
+  const next_step = Boolean(window.skipSendingDomain)
+    ? DASHBOARD_ROUTE
+    : ONBOARDING_SENDINGDOMAIN_ROUTE;
   useEffect(() => {
     getPlans();
   }, [getPlans]);
@@ -56,9 +57,9 @@ export function OnboardingPlanPage({
     // if we can't get plans or countries form is useless
     // they can pick plan later from billing
     if (hasError) {
-      history.push(NEXT_STEP);
+      history.push(next_step);
     }
-  }, [hasError, history]);
+  }, [next_step, hasError, history]);
 
   const isPlanFree = useMemo(() => Boolean(!_.get(selectedPlan, 'messaging.price', true)), [
     selectedPlan,
@@ -71,7 +72,7 @@ export function OnboardingPlanPage({
 
     // no billing updates needed since they are still on free plan
     if (isPlanFree) {
-      history.push(NEXT_STEP);
+      history.push(next_step);
       return;
     }
     const billingId = values.planpicker.messaging.billing_id;
@@ -93,7 +94,7 @@ export function OnboardingPlanPage({
         newValues.discountId = discount_id;
         return billingCreate({ ...newValues, billingId });
       })
-      .then(() => history.push(NEXT_STEP))
+      .then(() => history.push(next_step))
       .then(() => showAlert({ type: 'success', message: 'Added your plan' }));
   };
 

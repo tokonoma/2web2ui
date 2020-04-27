@@ -846,6 +846,13 @@ const routes = [
     supportDocSearch: 'upgrade account',
   },
   {
+    path: '/onboarding/sending-domain',
+    component: onboarding.SendingDomainPage,
+    condition: configFlag('featureFlags.has_signup'),
+    title: 'Create a Sending Domain | Onboarding',
+    supportDocSearch: 'sending domain',
+  },
+  {
     path: '/onboarding/recipient-validation',
     component: onboarding.RVBundlePage,
     condition: configFlag('featureFlags.has_signup'),
