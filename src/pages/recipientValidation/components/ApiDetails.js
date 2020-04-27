@@ -1,11 +1,16 @@
 import React from 'react';
 import { Grid } from 'src/components/matchbox';
-import styles from './ApiDetails.module.scss';
 import CodeBlock from './CodeBlock';
-const Tab = () => <span className={styles.tab} />;
-const White = ({ children }) => <span className={styles.white}>{children}</span>;
+
+import OGStyles from './ApiDetails.module.scss';
+import hibanaStyles from './ApiDetailsHibana.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 
 export const ApiIntegrationDocs = () => {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+  const Tab = () => <span className={styles.tab} />;
+  const White = ({ children }) => <span className={styles.white}>{children}</span>;
+
   const codeBlock = (
     <small className={styles.blue}>
       {'{'}

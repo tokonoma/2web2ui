@@ -5,9 +5,12 @@ import { DownloadLink } from 'src/components/links';
 import { Error } from 'src/components/matchbox';
 import { FileType } from '@sparkpost/matchbox-icons';
 import exampleRecipientValidationListPath from './example-recipient-validation-list.csv';
-import styles from './FileUploadWrapper.module.scss';
 
-export default class FileUploadWrapper extends Component {
+import OGStyles from './FileUploadWrapper.module.scss';
+import hibanaStyles from './FileUploadWrapperHibana.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
+
+class FileUploadWrapperClass extends Component {
   handleCancel = () => {
     this.props.input.onBlur(); // run validation
   };
@@ -28,7 +31,7 @@ export default class FileUploadWrapper extends Component {
   };
 
   render() {
-    const { input, meta, uploading } = this.props;
+    const { input, styles, meta, uploading } = this.props;
 
     if (uploading) {
       return (
@@ -77,13 +80,16 @@ export default class FileUploadWrapper extends Component {
         ) : null}
         <p className={styles.Help}>
           Format your list with single addresses on individual lines, or{' '}
-          <strong>
-            <DownloadLink href={exampleRecipientValidationListPath}>download</DownloadLink>
-          </strong>{' '}
-          our csv template. Please note, only the most recent list is only{' '}
-          <strong>kept for 10 days</strong>, so be sure to download your validated list right away!
+          <DownloadLink href={exampleRecipientValidationListPath}>download</DownloadLink> our csv
+          template. Please note, only the most recent list is only <strong>kept for 10 days</strong>
+          , so be sure to download your validated list right away!
         </p>
       </fieldset>
     );
   }
+}
+
+export default function FileUploadWrapper(props) {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+  return <FileUploadWrapperClass styles={styles} {...props} />;
 }

@@ -35,13 +35,14 @@ function ValidateSection({
       {isManuallyBilled && !isProductOnSubscription ? (
         <Button
           external
+          variant="primary"
           primary
           to="https://www.sparkpost.com/recipient-validation/#recipient-validation-form"
         >
           Contact Sales
         </Button>
       ) : (
-        <Button primary submit disabled={submitDisabled}>
+        <Button variant="primary" primary submit disabled={submitDisabled}>
           {submitButtonName}
         </Button>
       )}

@@ -16,19 +16,29 @@ import JobsTableCollection from './components/JobsTableCollection';
 import { ListTab } from './components/ListForm';
 import { SingleAddressTab } from './components/SingleAddressForm';
 import ApiDetails from './components/ApiDetails';
-import styles from './RecipientValidationPage.module.scss';
 import ValidateSection from './components/ValidateSection';
 import { FORMS } from 'src/constants';
 import RVPriceModal from './components/RVPriceModal';
+
+import OGStyles from './RecipientValidationPage.module.scss';
+import hibanaStyles from './RecipientValidationPageHibana.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
+
 const FORMNAME = FORMS.RV_ADDPAYMENTFORM;
 
+function ListContent(props) {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+  return <span className={styles.TabPadding}>{props.children}</span>;
+}
+
 const tabs = [
-  { content: <span className={styles.TabPadding}>List</span>, key: 'list' },
+  { content: <ListContent>List</ListContent>, key: 'list' },
   { content: 'Single Address', key: 'single' },
   { content: 'API Integration', key: 'api' },
 ];
 
 export function RecipientValidationPage(props) {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
   const {
     getBillingInfo,
     getBillingSubscription,
@@ -47,6 +57,7 @@ export function RecipientValidationPage(props) {
     reset,
     handleSubmit,
   } = props;
+
   const [useSavedCC, setUseSavedCC] = useState(Boolean(billing.credit_card));
   const [selectedTab, setSelectedTab] = useState(tab || 0);
   const [showPriceModal, setShowPriceModal] = useState(false);
@@ -137,7 +148,7 @@ export function RecipientValidationPage(props) {
       <Page
         title="Recipient Validation"
         primaryArea={
-          <Button size="large" onClick={() => handleModal(true)}>
+          <Button variant="secondary" onClick={() => handleModal(true)}>
             See Pricing
           </Button>
         }
@@ -151,6 +162,7 @@ export function RecipientValidationPage(props) {
         <Panel>
           <div className={styles.TabsWrapper}>
             <Tabs
+              my={[]}
               selected={selectedTab}
               connectBelow={true}
               tabs={tabs.map(({ content }, idx) => ({
