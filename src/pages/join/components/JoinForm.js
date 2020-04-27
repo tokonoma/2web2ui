@@ -7,10 +7,8 @@ import config from 'src/config';
 import { FORMS, LINKS } from 'src/constants';
 import { TextFieldWrapper, CheckboxWrapper } from 'src/components/reduxFormWrappers';
 import { ExternalLink } from 'src/components/links';
-import { Grid, Button, Checkbox } from 'src/components/matchbox';
+import { Box, Button, Checkbox, Stack } from 'src/components/matchbox';
 import { required, minLength, email, endsWithWhitespace } from 'src/helpers/validation';
-import useHibanaToggle from 'src/hooks/useHibanaToggle';
-import styles from './JoinForm.module.scss';
 const { recaptcha } = config;
 
 /** Recaptcha flow
@@ -72,96 +70,93 @@ export class JoinForm extends Component {
 
     return (
       <form>
-        <Grid className={styles.spacer}>
-          <Grid.Column xs={12} md={6} lg={6}>
-            <Field
-              name="first_name"
-              component={TextFieldWrapper}
-              label="First Name"
-              autoComplete="given-name"
-              validate={required}
-              disabled={pending}
-              placeholder="Leslie"
-            />
-          </Grid.Column>
-          <Grid.Column xs={12} md={6} lg={6}>
-            <Field
-              name="last_name"
-              component={TextFieldWrapper}
-              label="Last Name"
-              autoComplete="family-name"
-              validate={required}
-              disabled={pending}
-              placeholder="Knope"
-            />
-          </Grid.Column>
-        </Grid>
-        <Field
-          name="company_name"
-          component={TextFieldWrapper}
-          label="Company"
-          disabled={pending}
-          autoComplete="organization"
-          placeholder="Knope Industries LLC"
-        />
-        <Field
-          name="email"
-          component={TextFieldWrapper}
-          label="Email"
-          validate={[required, email]}
-          disabled={pending}
-          autoComplete="username email"
-          placeholder="leslie.knope@pawnee.indiana.state.us.gov"
-        />
-        <Field
-          name="password"
-          component={TextFieldWrapper}
-          label="Password"
-          validate={[required, minLength(12), endsWithWhitespace]}
-          disabled={!reCaptchaReady || loading}
-          type={showPassword ? 'text' : 'password'}
-          autoComplete="new-password"
-          placeholder="••••••••••••"
-          connectRight={
-            <ShowPasswordButton onClick={() => this.setState({ showPassword: !showPassword })}>
-              {showPassword ? 'Hide' : 'Show'}
-            </ShowPasswordButton>
-          }
-        />
-
-        <Checkbox.Group>
+        <Stack>
           <Field
-            name="email_opt_in"
-            id="email_opt_in"
-            component={CheckboxWrapper}
-            disabled={pending}
-            type="checkbox"
-            label={<span>I'm happy to receive marketing email from SparkPost</span>}
-          />
-
-          <Field
-            name="tou_accepted"
-            id="tou_accepted"
-            component={CheckboxWrapper}
-            type="checkbox"
-            disabled={pending}
+            name="first_name"
+            component={TextFieldWrapper}
+            label="First Name"
+            autoComplete="given-name"
             validate={required}
-            label={
-              <span>
-                I agree to SparkPost's <ExternalLink to={LINKS.TOU}>Terms of Use</ExternalLink>
-              </span>
+            disabled={pending}
+          />
+          <Field
+            name="last_name"
+            component={TextFieldWrapper}
+            label="Last Name"
+            autoComplete="family-name"
+            validate={required}
+            disabled={pending}
+          />
+          <Field
+            name="company_name"
+            component={TextFieldWrapper}
+            label="Company"
+            disabled={pending}
+            autoComplete="organization"
+          />
+          <Field
+            name="email"
+            component={TextFieldWrapper}
+            label="Email"
+            validate={[required, email]}
+            disabled={pending}
+            autoComplete="username email"
+          />
+          <Field
+            name="password"
+            component={TextFieldWrapper}
+            label="Password"
+            validate={[required, minLength(12), endsWithWhitespace]}
+            disabled={!reCaptchaReady || loading}
+            type={showPassword ? 'text' : 'password'}
+            autoComplete="new-password"
+            connectRight={
+              <Button
+                variant="connected"
+                data-id="show-password-button"
+                onClick={() => this.setState({ showPassword: !showPassword })}
+              >
+                {showPassword ? 'Hide' : 'Show'}
+              </Button>
             }
           />
-        </Checkbox.Group>
 
-        <Button
-          id="submit"
-          primary
-          disabled={pending || pristine || invalid}
-          onClick={this.executeRecaptcha}
-        >
-          {loading ? 'Loading' : 'Create Account'}
-        </Button>
+          <Checkbox.Group>
+            <Field
+              name="email_opt_in"
+              id="email_opt_in"
+              component={CheckboxWrapper}
+              disabled={pending}
+              type="checkbox"
+              label={<span>I'm happy to receive marketing email from SparkPost</span>}
+            />
+
+            <Field
+              name="tou_accepted"
+              id="tou_accepted"
+              component={CheckboxWrapper}
+              type="checkbox"
+              disabled={pending}
+              validate={required}
+              label={
+                <span>
+                  I agree to SparkPost's <ExternalLink to={LINKS.TOU}>Terms of Use</ExternalLink>
+                </span>
+              }
+            />
+          </Checkbox.Group>
+
+          <Box>
+            <Button
+              id="submit"
+              variant="primary"
+              disabled={pending || pristine || invalid}
+              onClick={this.executeRecaptcha}
+            >
+              {loading ? 'Loading' : 'Create Account'}
+            </Button>
+          </Box>
+        </Stack>
 
         <Recaptcha
           ref={this.linkRecaptcha}
@@ -176,25 +171,6 @@ export class JoinForm extends Component {
   }
 }
 
-function OGShowPasswordButton({ children, onClick }) {
-  return (
-    <Button onClick={onClick} data-id="show-password-button">
-      {children}
-    </Button>
-  );
-}
-
-function HibanaShowPasswordButton({ children, onClick }) {
-  return (
-    <Button primary outline onClick={onClick} data-id="show-password-button">
-      {children}
-    </Button>
-  );
-}
-
-function ShowPasswordButton(props) {
-  return useHibanaToggle(OGShowPasswordButton, HibanaShowPasswordButton)(props);
-}
 const mapStateToProps = state => ({
   initialValues: {
     tou_accepted: false,

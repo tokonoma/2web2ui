@@ -76,18 +76,29 @@ exports[`JoinPage render renders aws logo when signup from aws 1`] = `
   <CenteredLogo
     showAwsLogo={true}
   />
-  <Panel
-    accent={true}
-  >
+  <Panel>
+    <SignUpTabs
+      brand={
+        Object {
+          "label": "",
+          "url": "https://app.sparkpost.com",
+        }
+      }
+      location={
+        Object {
+          "pathname": "/join",
+        }
+      }
+    />
     <Panel.Section>
-      <h3
-        className="header"
-      >
-        Sign Up for SparkPost
-      </h3>
-      <Connect(ReduxForm)
-        onSubmit={[Function]}
-      />
+      <Stack>
+        <h3>
+          Sign Up for SparkPost
+        </h3>
+        <Connect(ReduxForm)
+          onSubmit={[Function]}
+        />
+      </Stack>
     </Panel.Section>
   </Panel>
   <Panel.Footer
@@ -118,18 +129,29 @@ exports[`JoinPage render renders correctly 1`] = `
   <CenteredLogo
     showAwsLogo={false}
   />
-  <Panel
-    accent={true}
-  >
+  <Panel>
+    <SignUpTabs
+      brand={
+        Object {
+          "label": "",
+          "url": "https://app.sparkpost.com",
+        }
+      }
+      location={
+        Object {
+          "pathname": "/join",
+        }
+      }
+    />
     <Panel.Section>
-      <h3
-        className="header"
-      >
-        Sign Up for SparkPost
-      </h3>
-      <Connect(ReduxForm)
-        onSubmit={[Function]}
-      />
+      <Stack>
+        <h3>
+          Sign Up for SparkPost
+        </h3>
+        <Connect(ReduxForm)
+          onSubmit={[Function]}
+        />
+      </Stack>
     </Panel.Section>
   </Panel>
   <Panel.Footer
@@ -160,28 +182,39 @@ exports[`JoinPage render renders errors 1`] = `
   <CenteredLogo
     showAwsLogo={false}
   />
-  <Panel
-    accent={true}
-  >
-    <Panel.Section>
-      <Error
-        error={
-          <JoinError
-            data={Object {}}
-            errors={Object {}}
-          />
+  <Panel>
+    <SignUpTabs
+      brand={
+        Object {
+          "label": "",
+          "url": "https://app.sparkpost.com",
         }
-      />
-    </Panel.Section>
+      }
+      location={
+        Object {
+          "pathname": "/join",
+        }
+      }
+    />
     <Panel.Section>
-      <h3
-        className="header"
-      >
-        Sign Up for SparkPost
-      </h3>
-      <Connect(ReduxForm)
-        onSubmit={[Function]}
-      />
+      <Stack>
+        <h3>
+          Sign Up for SparkPost
+        </h3>
+        <BottomPad>
+          <Error
+            error={
+              <JoinError
+                data={Object {}}
+                errors={Object {}}
+              />
+            }
+          />
+        </BottomPad>
+        <Connect(ReduxForm)
+          onSubmit={[Function]}
+        />
+      </Stack>
     </Panel.Section>
   </Panel>
   <Panel.Footer
