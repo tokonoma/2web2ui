@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { OpenInNew } from '@sparkpost/matchbox-icons';
 import { listPools } from 'src/actions/ipPools';
-import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
+import { ButtonWrapper, Loading, TableCollection, ApiErrorBanner } from 'src/components';
 import { PageLink } from 'src/components/links';
-import { Banner, Button, Page } from 'src/components/matchbox';
+import { Banner, Box, Button, Page } from 'src/components/matchbox';
 import { LINKS } from 'src/constants';
 import { openSupportTicketForm } from 'src/actions/support';
 import { not } from 'src/helpers/conditions';
@@ -13,9 +13,9 @@ import { getOrderedIpPools, shouldShowIpPurchaseCTA } from 'src/selectors/ipPool
 import { isSelfServeBilling } from 'src/helpers/conditions/account';
 
 const columns = [
-  { label: 'Name', sortKey: 'name' },
-  { label: 'ID', sortKey: 'id' },
-  { label: 'Number of IPs Assigned', sortKey: pool => pool.ips.length },
+  { label: 'Name', sortKey: 'name', width: '40%' },
+  { label: 'ID', sortKey: 'id', width: '40%' },
+  { label: 'Number of IPs Assigned', sortKey: pool => pool.ips.length, width: '20%' },
 ];
 
 export const getRowData = ({ id, name, ips }) => {
@@ -89,16 +89,18 @@ export class IpPoolsList extends Component {
 
 export const IPWarmupReminderBanner = () => (
   <Banner status="warning" title={'New dedicated IP addresses need to be warmed up'} my="300">
-    <div>
+    <Box mt="200">
       <p>
-        In order to establish a positive sending reputation, warm up new dedicated IP addresses by
-        gradually sending more emails.
+        In order to establish a positive sending reputation, warm up new dedicated IP <br />
+        addresses by gradually sending more emails.
       </p>
-      <Button outline={true} to={LINKS.IP_WARM_UP} external>
-        {'Read our IP Warm-up Overview'}
-        <OpenInNew size={15} style={{ marginLeft: 10 }} />
-      </Button>
-    </div>
+      <Box as={ButtonWrapper}>
+        <Button outline={true} to={LINKS.IP_WARM_UP} external>
+          {'Read our IP Warm-up Overview'}
+          <OpenInNew size={15} style={{ marginLeft: 10 }} />
+        </Button>
+      </Box>
+    </Box>
   </Banner>
 );
 
