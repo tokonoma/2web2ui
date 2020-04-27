@@ -69,29 +69,33 @@ export const WatchlistAddPage = ({
         component: PageLink,
       }}
     >
-      <Panel sectioned>
+      <Panel>
         <form onSubmit={handleSubmit}>
-          <TextField
-            id="watchlist-item-input"
-            label="IP or Sending Domain"
-            placeholder="Add any IPs or domains you want to keep an eye on"
-            onChange={onChange}
-            error={errorMessage}
-            value={resource}
-          />
-          <ButtonWrapper>
-            <Button variant="primary" type="submit" disabled={submitPending || !resource}>
-              Save
-            </Button>
+          <Panel.Section>
+            <TextField
+              id="watchlist-item-input"
+              label="IP or Sending Domain"
+              placeholder="Add any IPs or domains you want to keep an eye on"
+              onChange={onChange}
+              error={errorMessage}
+              value={resource}
+            />
+          </Panel.Section>
+          <Panel.Section>
+            <ButtonWrapper marginTop="0">
+              <Button variant="primary" type="submit" disabled={submitPending || !resource}>
+                Save
+              </Button>
 
-            <Button
-              variant="secondary"
-              disabled={submitPending || !resource}
-              onClick={handleSaveAndAddNew}
-            >
-              Save and Add Another
-            </Button>
-          </ButtonWrapper>
+              <Button
+                variant="secondary"
+                disabled={submitPending || !resource}
+                onClick={handleSaveAndAddNew}
+              >
+                Save and Add Another
+              </Button>
+            </ButtonWrapper>
+          </Panel.Section>
         </form>
       </Panel>
     </Page>
