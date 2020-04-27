@@ -1,9 +1,10 @@
 import React from 'react';
 import { ExternalLink } from 'src/components/links';
 import ContentText from './ContentText';
+import { Box } from 'src/components/matchbox';
 
 const SettingsContent = ({ test }) => (
-  <div>
+  <Box minHeight={30}>
     {(test.status === 'draft' || test.status === 'scheduled') && (
       <>
         <ContentText fontSize="200" color="gray.600" mt="300">
@@ -22,7 +23,7 @@ const SettingsContent = ({ test }) => (
         </ContentText>
       </>
     )}
-  </div>
+  </Box>
 );
 
 export default SettingsContent;

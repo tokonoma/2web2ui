@@ -5,7 +5,7 @@ import OGStyles from './Section.module.scss';
 import HibanaStyles from './SectionHibana.module.scss';
 import useHibanaToggle from 'src/hooks/useHibanaToggle';
 import useHibanaOverride from 'src/hooks/useHibanaOverride';
-
+import className from 'classnames';
 const Left = ({ children }) => (
   <OGOnlyWrapper as={Grid.Column} xs={12} lg={5}>
     <Box as={Grid.Column} xs={12} lg={3}>
@@ -14,12 +14,14 @@ const Left = ({ children }) => (
   </OGOnlyWrapper>
 );
 
-const Right = ({ children }) => {
+const Right = ({ children, variant }) => {
   const styles = useHibanaOverride(OGStyles, HibanaStyles);
   return (
     <OGOnlyWrapper as={Grid.Column} xs={12} lg={7}>
       <Box as={Grid.Column} xs={12} lg={9}>
-        <div className={styles.Right}>{children}</div>
+        <div className={className(variant === 'viewmode' ? styles.RightViewMode : styles.Right)}>
+          {children}
+        </div>
       </Box>
     </OGOnlyWrapper>
   );
