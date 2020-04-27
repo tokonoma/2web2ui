@@ -12,7 +12,7 @@ const reloadApp = () => {
 const Providers = ({ store = {}, children }) => (
   <Provider store={store}>
     <HibanaProvider>
-      <ThemeProvider>
+      <ThemeProvider target={document.querySelector('#styled-components-target')}>
         <ErrorBoundary onCtaClick={reloadApp} ctaLabel="Reload Page">
           <Poll>{children}</Poll>
         </ErrorBoundary>
