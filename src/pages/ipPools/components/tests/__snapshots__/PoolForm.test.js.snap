@@ -6,50 +6,81 @@ exports[`PoolForm should render form 1`] = `
     onSubmit={[MockFunction]}
   >
     <Panel.Section>
-      <Field
-        component={[Function]}
-        disabled={false}
-        helpText=""
-        label="Pool Name"
-        name="name"
-        placeholder="My IP Pool"
-        validate={[Function]}
-      />
-      <AccessControl
-        condition={[Function]}
-      >
-        <Field
-          component={[Function]}
-          disabled={false}
-          label="Default Signing Domain"
-          name="signing_domain"
-        />
-      </AccessControl>
-      <Field
-        component={[Function]}
-        disabled={false}
-        helpText="With automatic IP Warmup enabled, selected pool will be used when volume threshold for this pool has been reached."
-        label="Overflow Pool"
-        name="auto_warmup_overflow_pool"
-        options={
-          Array [
-            Object {
-              "label": "None",
-              "value": "",
-            },
-            Object {
-              "label": "Another Pool (pool-2)",
-              "value": "pool-2",
-            },
-          ]
-        }
-      />
+      <Stack>
+        <Grid>
+          <Grid.Column
+            md={9}
+            style={
+              Object {
+                "marginBottom": "20px",
+              }
+            }
+          >
+            <Field
+              component={[Function]}
+              disabled={false}
+              helpText=""
+              label="Pool Name"
+              name="name"
+              placeholder="My IP Pool"
+              validate={[Function]}
+            />
+          </Grid.Column>
+        </Grid>
+        <Grid>
+          <Grid.Column
+            md={9}
+            style={
+              Object {
+                "marginBottom": "20px",
+              }
+            }
+          >
+            <AccessControl
+              condition={[Function]}
+            >
+              <Field
+                component={[Function]}
+                disabled={false}
+                label="Default Signing Domain"
+                name="signing_domain"
+              />
+            </AccessControl>
+          </Grid.Column>
+        </Grid>
+        <Grid>
+          <Grid.Column
+            md={9}
+          >
+            <Field
+              component={[Function]}
+              disabled={false}
+              helpText="With automatic IP Warmup enabled, selected pool will be used when volume threshold for this pool has been reached."
+              label="Overflow Pool"
+              name="auto_warmup_overflow_pool"
+              options={
+                Array [
+                  Object {
+                    "label": "None",
+                    "value": "",
+                  },
+                  Object {
+                    "label": "Another Pool (pool-2)",
+                    "value": "pool-2",
+                  },
+                ]
+              }
+            />
+          </Grid.Column>
+        </Grid>
+      </Stack>
     </Panel.Section>
     <Panel.Section>
       <Button
         disabled={true}
         primary={true}
         submit={true}
+        variant="primary"
       >
         Update IP Pool
       </Button>

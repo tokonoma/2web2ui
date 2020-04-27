@@ -27,14 +27,17 @@ exports[`IP Pools List Page does not render purchase action if isAdmin is false 
         Object {
           "label": "Name",
           "sortKey": "name",
+          "width": "40%",
         },
         Object {
           "label": "ID",
           "sortKey": "id",
+          "width": "40%",
         },
         Object {
           "label": "Number of IPs Assigned",
           "sortKey": [Function],
+          "width": "20%",
         },
       ]
     }
@@ -86,14 +89,17 @@ exports[`IP Pools List Page does not render purchase action if showPurchaseCTA i
         Object {
           "label": "Name",
           "sortKey": "name",
+          "width": "40%",
         },
         Object {
           "label": "ID",
           "sortKey": "id",
+          "width": "40%",
         },
         Object {
           "label": "Number of IPs Assigned",
           "sortKey": [Function],
+          "width": "20%",
         },
       ]
     }
@@ -145,14 +151,17 @@ exports[`IP Pools List Page does not render purchase action if showPurchaseCTA i
         Object {
           "label": "Name",
           "sortKey": "name",
+          "width": "40%",
         },
         Object {
           "label": "ID",
           "sortKey": "id",
+          "width": "40%",
         },
         Object {
           "label": "Number of IPs Assigned",
           "sortKey": [Function],
+          "width": "20%",
         },
       ]
     }
@@ -205,26 +214,34 @@ exports[`IP Pools List Page should render the IP warm-up banner correctly 1`] = 
   status="warning"
   title="New dedicated IP addresses need to be warmed up"
 >
-  <div>
+  <Box
+    mt="200"
+  >
     <p>
-      In order to establish a positive sending reputation, warm up new dedicated IP addresses by gradually sending more emails.
+      In order to establish a positive sending reputation, warm up new dedicated IP 
+      <br />
+      addresses by gradually sending more emails.
     </p>
-    <Button
-      external={true}
-      outline={true}
-      to="https://support.sparkpost.com/customer/portal/articles/1972209-ip-warm-up-overview"
+    <Box
+      as={[Function]}
     >
-      Read our IP Warm-up Overview
-      <OpenInNew
-        size={15}
-        style={
-          Object {
-            "marginLeft": 10,
+      <Button
+        external={true}
+        outline={true}
+        to="https://support.sparkpost.com/customer/portal/articles/1972209-ip-warm-up-overview"
+      >
+        Read our IP Warm-up Overview
+        <OpenInNew
+          size={15}
+          style={
+            Object {
+              "marginLeft": 10,
+            }
           }
-        }
-      />
-    </Button>
-  </div>
+        />
+      </Button>
+    </Box>
+  </Box>
 </Banner>
 `;
 
@@ -255,14 +272,17 @@ exports[`IP Pools List Page should render the list page correctly 1`] = `
         Object {
           "label": "Name",
           "sortKey": "name",
+          "width": "40%",
         },
         Object {
           "label": "ID",
           "sortKey": "id",
+          "width": "40%",
         },
         Object {
           "label": "Number of IPs Assigned",
           "sortKey": [Function],
+          "width": "20%",
         },
       ]
     }
