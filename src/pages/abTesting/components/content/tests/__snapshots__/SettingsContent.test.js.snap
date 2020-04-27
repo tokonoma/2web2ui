@@ -1,9 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Settings Content Component should not render anything by default 1`] = `<div />`;
+exports[`Settings Content Component should not render anything by default 1`] = `
+<Box
+  minHeight={30}
+/>
+`;
 
 exports[`Settings Content Component should render when test is in draft mode 1`] = `
-<div>
+<Box
+  minHeight={30}
+>
   <ContentText
     color="gray.600"
     fontSize="200"
@@ -30,11 +36,13 @@ exports[`Settings Content Component should render when test is in draft mode 1`]
     </ExternalLink>
     .
   </ContentText>
-</div>
+</Box>
 `;
 
 exports[`Settings Content Component should render when test is in scheduled mode 1`] = `
-<div>
+<Box
+  minHeight={30}
+>
   <ContentText
     color="gray.600"
     fontSize="200"
@@ -61,5 +69,5 @@ exports[`Settings Content Component should render when test is in scheduled mode
     </ExternalLink>
     .
   </ContentText>
-</div>
+</Box>
 `;
