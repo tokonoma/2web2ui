@@ -2,10 +2,9 @@ import React, { useState, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { showAlert } from 'src/actions/globalAlert';
 import { watchlistAdd } from 'src/actions/blacklist';
+import { ButtonWrapper } from 'src/components';
 import { PageLink } from 'src/components/links';
 import { Button, Page, Panel, TextField } from 'src/components/matchbox';
-
-import styles from './WatchlistAddPage.module.scss';
 
 export const WatchlistAddPage = ({
   watchlistAdd,
@@ -80,19 +79,19 @@ export const WatchlistAddPage = ({
             error={errorMessage}
             value={resource}
           />
-          <div>
-            <Button
-              type="submit"
-              color="orange"
-              disabled={submitPending || !resource}
-              className={styles.SaveButton}
-            >
+          <ButtonWrapper>
+            <Button variant="primary" type="submit" disabled={submitPending || !resource}>
               Save
             </Button>
-            <Button outline disabled={submitPending || !resource} onClick={handleSaveAndAddNew}>
+
+            <Button
+              variant="secondary"
+              disabled={submitPending || !resource}
+              onClick={handleSaveAndAddNew}
+            >
               Save and Add Another
             </Button>
-          </div>
+          </ButtonWrapper>
         </form>
       </Panel>
     </Page>

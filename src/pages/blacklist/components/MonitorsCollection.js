@@ -11,7 +11,7 @@ const filterBoxConfig = {
   show: true,
   itemToStringKeys: ['resource'],
   placeholder: 'Search By: Sending Domain or IP',
-  wrapper: props => <div>{props}</div>,
+  wrapper: props => <>{props}</>,
 };
 
 const selectOptions = [
