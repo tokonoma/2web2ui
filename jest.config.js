@@ -22,12 +22,8 @@ module.exports = {
     // covered by Cypress
     '<rootDir>/src/pages/billing/forms/ChangePlanForm.js',
   ],
-  coverageThreshold: {
-    global: {
-      statements: 80,
-    },
-  },
   reporters: ['default', 'jest-junit'],
+  testResultsProcessor: './node_modules/jest-junit-reporter',
   setupFiles: ['<rootDir>/config/polyfills.js'],
   setupFilesAfterEnv: ['<rootDir>/config/jest/setup.js'],
   testMatch: ['<rootDir>/src/**/__tests__/**/*.js?(x)', '<rootDir>/(src|scripts)/**/*.test.js?(x)'],

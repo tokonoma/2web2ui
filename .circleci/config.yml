@@ -1,0 +1,127 @@
+version: 2.1
+
+defaults: &defaults
+  docker:
+    - image: circleci/node:10.17.0
+
+commands:
+  # NPM caching commands based on: https://circleci.com/docs/2.0/caching/#restoring-cache
+  restore_npm_cache:
+    description: 'Restores cached Node modules'
+    steps:
+      - restore_cache:
+          keys:
+            # From CircleCI docs:
+            #   "Caches are immutable so it is useful to start all your cache keys with a version prefix,
+            #    for example v1-.... This enables you to regenerate all of your caches by incrementing
+            #    the version in this prefix."
+            - v1-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - v1-deps-{{ .Branch }}-
+            - v1-deps-
+
+  save_npm_cache:
+    description: 'Saves Node modules for later re-use'
+    steps:
+      - save_cache:
+          key: v1-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          paths:
+            - ~/.npm
+            - ~/.cache/Cypress
+
+  setup:
+    description:
+      'Checks out the relevant branch, checks for cached dependencies, installs them if something
+      changed.'
+    steps:
+      - checkout
+      - restore_npm_cache
+      - run: npm ci
+      - save_npm_cache
+
+  cypress_dependencies:
+    steps:
+      - run:
+          name: 'Install Cypress Dependencies'
+          command: sudo apt-get install libgtk2.0-0 libgtk-3-0 libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+
+  cypress_cleanup:
+    steps:
+      - store_test_results:
+          path: /home/circleci/project/cypress/results
+      - store_artifacts:
+          path: /home/circleci/project/cypress/videos
+          destination: cypress-videos
+
+# These are what actually get run in a workflow
+jobs:
+  'Build':
+    <<: *defaults
+    steps:
+      - setup
+      - run: npm run build
+
+  'Unit Testing':
+    <<: *defaults
+    parallelism: 4
+    steps:
+      - setup
+      - run:
+          command:
+            npm run test-ci $(circleci tests glob "./src/**/*.test.js" "./scripts/**/*.test.js" |
+            circleci tests split --split-by=timings)
+      - store_test_results:
+          path: test_results
+
+  'Integration Testing':
+    <<: *defaults
+    parallelism: 4
+    steps:
+      - setup
+      - cypress_dependencies
+      - run:
+          name: 'Run Cypress Integration Tests'
+          command: |
+            function join { local IFS="$1"; shift; echo "$*"; }
+            SPECS=$(circleci tests glob "./cypress/tests/integration/**/*.spec.js" | circleci tests split --split-by=timings);spec="${SPECS[@]}"
+            echo $SPECS
+            FORMATTED_SPECS=$(join , ${SPECS[@]})
+            echo $FORMATTED_SPECS
+            npm run test-integration-ci -- --spec $FORMATTED_SPECS
+      - cypress_cleanup
+
+  'Integration Testing - Hibana':
+    <<: *defaults
+    parallelism: 4
+    steps:
+      - setup
+      - cypress_dependencies
+      - run:
+          name: 'Run Cypress Integration Tests'
+          command: |
+            function join { local IFS="$1"; shift; echo "$*"; }
+            SPECS=$(circleci tests glob "./cypress/tests/integration/**/*.spec.js" | circleci tests split --split-by=timings);spec="${SPECS[@]}"
+            echo $SPECS
+            FORMATTED_SPECS=$(join , ${SPECS[@]})
+            echo $FORMATTED_SPECS
+            npm run test-integration-ci-hibana -- --spec $FORMATTED_SPECS
+      - cypress_cleanup
+
+workflows:
+  version: 2
+  test-and-build:
+    jobs:
+      - 'Unit Testing'
+      - 'Build':
+          requires:
+            - 'Unit Testing'
+      - 'Integration Testing':
+          requires:
+            - 'Unit Testing'
+      # Manual approval required to trigger Hibana integration testing runs
+      - 'Request Hibana Integration Testing':
+          type: approval
+          requires:
+            - 'Integration Testing'
+      - 'Integration Testing - Hibana':
+           requires:
+            - 'Request Hibana Integration Testing'

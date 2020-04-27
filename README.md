@@ -1,5 +1,6 @@
 # SparkPost App
 
+[![CircleCI](https://circleci.com/gh/SparkPost/2web2ui.svg?style=svg)](https://app.circleci.com/pipelines/github/SparkPost/2web2ui)
 [![Build Status](https://travis-ci.org/SparkPost/2web2ui.svg?branch=master)](https://travis-ci.org/SparkPost/2web2ui)
 [![codecov](https://codecov.io/gh/SparkPost/2web2ui/branch/master/graph/badge.svg)](https://codecov.io/gh/SparkPost/2web2ui)
 [![Greenkeeper badge](https://badges.greenkeeper.io/SparkPost/2web2ui.svg)](https://greenkeeper.io/)
@@ -22,6 +23,14 @@ Then `npm install` to install deps.
 http://localhost:3100/ and http://app.sparkpost.test. Additionally, a Storybook dev server will
 start that provides supporting component documentation. ======= http://localhost:3100/ and
 http://app.sparkpost.test
+
+### Running the App with Hibana Enabled by default
+
+Run the app with Hibana enabled by default using an environment variable:
+
+```
+REACT_APP_DEFAULT_TO_HIBANA=true npm run start-app
+```
 
 ## Tests
 

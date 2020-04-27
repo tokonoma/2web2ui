@@ -21,4 +21,19 @@ module.exports = on => {
       return null;
     },
   });
+
+  // See: https://github.com/cypress-io/cypress/issues/3602#issuecomment-591531887
+  // Helps prevent Cypress-launched Chrome browser from crashing when using CircleCI
+  on('before:browser:launch', (browser = {}, launchOptions) => {
+    // `args` is an array of all the arguments that will
+    // be passed to browsers when it launches
+
+    if (browser.family === 'chromium' && browser.name !== 'electron') {
+      // see: https://github.com/cypress-io/cypress/issues/3633
+      launchOptions.args.push('--disable-dev-shm-usage');
+
+      // whatever you return here becomes the launchOptions
+      return launchOptions;
+    }
+  });
 };
