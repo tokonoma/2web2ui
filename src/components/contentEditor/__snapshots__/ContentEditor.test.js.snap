@@ -1,91 +1,91 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ContentEditor should render 1`] = `
-<div
-  className="EditorSection"
->
-  <Tabs
-    selected={0}
-    tabs={
-      Array [
-        Object {
-          "content": "HTML",
-          "onClick": [Function],
-        },
-        Object {
-          "content": "Text",
-          "onClick": [Function],
-        },
-        Object {
-          "content": "AMP HTML",
-          "onClick": [Function],
-        },
-        Object {
-          "content": "Test Data",
-          "onClick": [Function],
-        },
-      ]
-    }
-  />
-  <Panel
-    className="EditorPanel"
+<div>
+  <Box
+    border="400"
   >
-    <Field
-      component={[Function]}
-      mode="html"
-      name="content.html"
-      normalize={[Function]}
-      syntaxValidation={false}
-      validate={
+    <Tabs
+      selected={0}
+      tabs={
         Array [
-          [Function],
-          [Function],
+          Object {
+            "content": "HTML",
+            "onClick": [Function],
+          },
+          Object {
+            "content": "Text",
+            "onClick": [Function],
+          },
+          Object {
+            "content": "AMP HTML",
+            "onClick": [Function],
+          },
+          Object {
+            "content": "Test Data",
+            "onClick": [Function],
+          },
         ]
       }
     />
-  </Panel>
+    <Panel>
+      <Field
+        component={[Function]}
+        mode="html"
+        name="content.html"
+        normalize={[Function]}
+        syntaxValidation={false}
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+    </Panel>
+  </Box>
 </div>
 `;
 
 exports[`ContentEditor should render without test data tab 1`] = `
-<div
-  className="EditorSection"
->
-  <Tabs
-    selected={0}
-    tabs={
-      Array [
-        Object {
-          "content": "HTML",
-          "onClick": [Function],
-        },
-        Object {
-          "content": "Text",
-          "onClick": [Function],
-        },
-        Object {
-          "content": "AMP HTML",
-          "onClick": [Function],
-        },
-      ]
-    }
-  />
-  <Panel
-    className="EditorPanel"
+<div>
+  <Box
+    border="400"
   >
-    <Field
-      component={[Function]}
-      mode="html"
-      name="content.html"
-      normalize={[Function]}
-      syntaxValidation={false}
-      validate={
+    <Tabs
+      selected={0}
+      tabs={
         Array [
-          [Function],
-          [Function],
+          Object {
+            "content": "HTML",
+            "onClick": [Function],
+          },
+          Object {
+            "content": "Text",
+            "onClick": [Function],
+          },
+          Object {
+            "content": "AMP HTML",
+            "onClick": [Function],
+          },
         ]
       }
     />
-  </Panel>
+    <Panel>
+      <Field
+        component={[Function]}
+        mode="html"
+        name="content.html"
+        normalize={[Function]}
+        syntaxValidation={false}
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+    </Panel>
+  </Box>
 </div>
 `;

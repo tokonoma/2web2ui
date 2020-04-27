@@ -1,11 +1,11 @@
 import React from 'react';
 import { Field } from 'redux-form';
-import { Panel, Tabs } from 'src/components/matchbox';
+import { Box, Panel, Tabs } from 'src/components/matchbox';
 import { json } from 'src/helpers/validation';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import AceWrapper from './AceWrapper';
-
-import './ContentEditor.scss';
-import styles from './ContentEditor.module.scss';
+import OGStyles from './ContentEditor.module.scss';
+import HibanaStyles from './ContentEditorHibana.module.scss';
 
 const fields = [
   {
@@ -39,7 +39,7 @@ const fields = [
   },
 ];
 
-class ContentEditor extends React.Component {
+export class ContentEditorClass extends React.Component {
   state = {
     selectedTab: 0,
   };
@@ -72,7 +72,7 @@ class ContentEditor extends React.Component {
   };
 
   render() {
-    const { readOnly } = this.props;
+    const { readOnly, styles } = this.props;
     const { selectedTab } = this.state;
     const visibleFields = fields.filter(field => field.show(this.props));
     const tabs = visibleFields.map(({ content }, index) => ({
@@ -82,22 +82,26 @@ class ContentEditor extends React.Component {
 
     return (
       <div className={styles.EditorSection}>
-        <Tabs selected={selectedTab} tabs={tabs} />
-        {this.props.action && <div className={styles.Action}>{this.props.action}</div>}
-        <Panel className={styles.EditorPanel}>
-          <Field
-            component={AceWrapper}
-            mode={visibleFields[selectedTab].mode}
-            name={visibleFields[selectedTab].name}
-            normalize={this.normalize}
-            readOnly={readOnly && !visibleFields[selectedTab].alwaysEditable}
-            syntaxValidation={visibleFields[selectedTab].syntaxValidation}
-            validate={[this.requiredHtmlTextOrAmp, this.validTestDataJson]}
-          />
-        </Panel>
+        <Box border="400">
+          <Tabs selected={selectedTab} tabs={tabs} />
+          <Panel className={styles.EditorPanel}>
+            <Field
+              component={AceWrapper}
+              mode={visibleFields[selectedTab].mode}
+              name={visibleFields[selectedTab].name}
+              normalize={this.normalize}
+              readOnly={readOnly && !visibleFields[selectedTab].alwaysEditable}
+              syntaxValidation={visibleFields[selectedTab].syntaxValidation}
+              validate={[this.requiredHtmlTextOrAmp, this.validTestDataJson]}
+            />
+          </Panel>
+        </Box>
       </div>
     );
   }
 }
 
-export default ContentEditor;
+export default function ContentEditor(props) {
+  const styles = useHibanaOverride(OGStyles, HibanaStyles);
+  return <ContentEditorClass {...props} styles={styles} />;
+}

@@ -2,22 +2,24 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import cases from 'jest-in-case';
 
-import ContentEditor from './ContentEditor';
+import { ContentEditorClass } from './ContentEditor';
 
 describe('ContentEditor', () => {
   let wrapper;
-  let props;
+  let props = {
+    styles: {},
+  };
 
   const selectTabByContent = (wrapper, content) => {
     wrapper
       .find('Tabs')
       .prop('tabs')
-      .find((tab) => tab.content === content)
+      .find(tab => tab.content === content)
       .onClick();
   };
 
   beforeEach(() => {
-    wrapper = shallow(<ContentEditor {...props} />);
+    wrapper = shallow(<ContentEditorClass {...props} />);
   });
 
   it('should render', () => {
@@ -28,11 +30,6 @@ describe('ContentEditor', () => {
   it('should render without test data tab', () => {
     wrapper.setProps({ contentOnly: true });
     expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should render editor with an action', () => {
-    wrapper.setProps({ action: <a>Click Here</a> });
-    expect(wrapper.exists('.Action')).toEqual(true);
   });
 
   it('should select tabs', () => {
@@ -74,35 +71,41 @@ describe('ContentEditor', () => {
   });
 
   it('should set required content validation correctly for just HTML and Text', () => {
-    expect(wrapper.find('Field').props().validate[0]).toBe(wrapper.instance().requiredHtmlTextOrAmp);
+    expect(wrapper.find('Field').props().validate[0]).toBe(
+      wrapper.instance().requiredHtmlTextOrAmp,
+    );
   });
 
   it('should set required content validation correctly for HTML, Text, and AMP', () => {
     wrapper.setProps({ contentOnly: true });
-    expect(wrapper.find('Field').props().validate[0]).toBe(wrapper.instance().requiredHtmlTextOrAmp);
+    expect(wrapper.find('Field').props().validate[0]).toBe(
+      wrapper.instance().requiredHtmlTextOrAmp,
+    );
   });
 
-  cases('.normalize', ({ expected, value }) => {
-    expect(wrapper.instance().normalize(value)).toEqual(expected);
-  }, {
-    'when undefined': {
-      expected: '',
-      value: undefined
+  cases(
+    '.normalize',
+    ({ expected, value }) => {
+      expect(wrapper.instance().normalize(value)).toEqual(expected);
     },
-    'when empty': {
-      expected: '',
-      value: ' \t\n\t '
+    {
+      'when undefined': {
+        expected: '',
+        value: undefined,
+      },
+      'when empty': {
+        expected: '',
+        value: ' \t\n\t ',
+      },
+      'when filled': {
+        expected: ' <p>testing</p> ',
+        value: ' <p>testing</p> ',
+      },
     },
-    'when filled': {
-      expected: ' <p>testing</p> ',
-      value: ' <p>testing</p> '
-    }
-  });
+  );
 
   describe('.requiredHtmlTextOrAmp', () => {
-    const subject = (content) => (
-      wrapper.instance().requiredHtmlTextOrAmp(undefined, { content })
-    );
+    const subject = content => wrapper.instance().requiredHtmlTextOrAmp(undefined, { content });
 
     it('returns undefined with html content', () => {
       expect(subject({ html: '<p>test</p>' })).toBeUndefined();
@@ -117,7 +120,9 @@ describe('ContentEditor', () => {
     });
 
     it('returns undefined with all content', () => {
-      expect(subject({ html: '<p>test</p>', text: 'test', amp_html: '<span>test</span>' })).toBeUndefined();
+      expect(
+        subject({ html: '<p>test</p>', text: 'test', amp_html: '<span>test</span>' }),
+      ).toBeUndefined();
     });
 
     it('returns required validation message', () => {
@@ -134,9 +139,7 @@ describe('ContentEditor', () => {
   });
 
   describe('.validTestDataJson', () => {
-    const subject = (testData) => (
-      wrapper.instance().validTestDataJson(undefined, { testData })
-    );
+    const subject = testData => wrapper.instance().validTestDataJson(undefined, { testData });
 
     it('returns undefined with valid test data json', () => {
       expect(subject('{}')).toBeUndefined();
