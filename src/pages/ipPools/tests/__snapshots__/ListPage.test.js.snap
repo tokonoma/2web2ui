@@ -215,32 +215,21 @@ exports[`IP Pools List Page should render the IP warm-up banner correctly 1`] = 
   title="New dedicated IP addresses need to be warmed up"
 >
   <Box
+    maxWidth={600}
     mt="200"
   >
     <p>
-      In order to establish a positive sending reputation, warm up new dedicated IP 
-      <br />
-      addresses by gradually sending more emails.
+      In order to establish a positive sending reputation, warm up new dedicated IP addresses by gradually sending more emails.
     </p>
-    <Box
-      as={[Function]}
-    >
-      <Button
-        external={true}
+    <ButtonWrapper>
+      <ExternalLink
+        as={[Function]}
         outline={true}
         to="https://support.sparkpost.com/customer/portal/articles/1972209-ip-warm-up-overview"
       >
         Read our IP Warm-up Overview
-        <OpenInNew
-          size={15}
-          style={
-            Object {
-              "marginLeft": 10,
-            }
-          }
-        />
-      </Button>
-    </Box>
+      </ExternalLink>
+    </ButtonWrapper>
   </Box>
 </Banner>
 `;

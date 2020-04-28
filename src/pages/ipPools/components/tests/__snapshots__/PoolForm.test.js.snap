@@ -7,14 +7,12 @@ exports[`PoolForm should render form 1`] = `
   >
     <Panel.Section>
       <Stack>
-        <Grid>
-          <Grid.Column
+        <Box
+          as={[Function]}
+        >
+          <Box
+            as={[Function]}
             md={9}
-            style={
-              Object {
-                "marginBottom": "20px",
-              }
-            }
           >
             <Field
               component={[Function]}
@@ -25,16 +23,14 @@ exports[`PoolForm should render form 1`] = `
               placeholder="My IP Pool"
               validate={[Function]}
             />
-          </Grid.Column>
-        </Grid>
-        <Grid>
-          <Grid.Column
+          </Box>
+        </Box>
+        <Box
+          as={[Function]}
+        >
+          <Box
+            as={[Function]}
             md={9}
-            style={
-              Object {
-                "marginBottom": "20px",
-              }
-            }
           >
             <AccessControl
               condition={[Function]}
@@ -46,8 +42,8 @@ exports[`PoolForm should render form 1`] = `
                 name="signing_domain"
               />
             </AccessControl>
-          </Grid.Column>
-        </Grid>
+          </Box>
+        </Box>
         <Grid>
           <Grid.Column
             md={9}
@@ -78,7 +74,6 @@ exports[`PoolForm should render form 1`] = `
     <Panel.Section>
       <Button
         disabled={true}
-        primary={true}
         submit={true}
         variant="primary"
       >
