@@ -2,7 +2,7 @@ import React from 'react';
 import { Search } from '@sparkpost/matchbox-icons';
 import { FORMATS } from 'src/constants';
 import { OGOnlyWrapper } from 'src/components/hibana';
-import { TableCollection, DisplayDate } from 'src/components';
+import { Empty, TableCollection, DisplayDate } from 'src/components';
 import { PageLink } from 'src/components/links';
 import { Box, Grid, Panel, Table, Tag, TextField } from 'src/components/matchbox';
 import styles from './IncidentsCollection.module.scss';
@@ -51,7 +51,7 @@ export const IncidentsCollection = props => {
   const { incidents, dateOptions, updateDateRange, search, updateTextField } = props;
 
   const renderHeader = ({ textFieldComponent }) => (
-    <>
+    <Panel.Section>
       <Grid>
         <OGOnlyWrapper as={Grid.Column} sm={12} lg={5}>
           <Box as={Grid.Column} xs={12} md={5}>
@@ -72,9 +72,7 @@ export const IncidentsCollection = props => {
           </Box>
         </OGOnlyWrapper>
       </Grid>
-
-      <Box pb="400" borderBottom="400" />
-    </>
+    </Panel.Section>
   );
 
   const EmptyComponent = () => {
@@ -86,7 +84,9 @@ export const IncidentsCollection = props => {
     return (
       <Panel>
         {renderHeader({ textFieldComponent: textFieldComponent })}
-        <h6 className={styles.Center}>There are no incidents for your date range selection</h6>
+        <Panel.Section>
+          <Empty hasPanel={false} message="There are no incidents for your date range selection" />
+        </Panel.Section>
       </Panel>
     );
   };
