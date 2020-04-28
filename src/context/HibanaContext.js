@@ -7,7 +7,7 @@ const HibanaStateContext = createContext();
 const HibanaDispatchContext = createContext();
 
 const initialState = {
-  isHibanaEnabled: true,
+  isHibanaEnabled: process.env.REACT_APP_DEFAULT_TO_HIBANA === 'true' ? true : false,
 };
 
 function useHibana() {
