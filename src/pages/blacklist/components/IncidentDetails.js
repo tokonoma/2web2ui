@@ -71,8 +71,8 @@ export default ({
               >{`No historical incidents for ${resourceName} on ${blacklistName}`}</span>
             ) : (
               historicalIncidents.map(({ id, occurred_at_formatted, resolved_at_formatted }) => (
-                <div className={styles.Value}>
-                  <PageLink to={`/blacklist/incidents/${id}`} key={id}>
+                <div className={styles.Value} key={id}>
+                  <PageLink to={`/blacklist/incidents/${id}`}>
                     {`Listed ${occurred_at_formatted} | Resolved ${resolved_at_formatted}`}
                   </PageLink>
                 </div>
