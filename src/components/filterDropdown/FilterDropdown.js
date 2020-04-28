@@ -72,6 +72,7 @@ export class FilterDropdown extends Component {
     return (
       <div>
         <Popover
+          as="div"
           id={`filter-dropdown-popover-${id}`}
           className={popoverClassName}
           trigger={

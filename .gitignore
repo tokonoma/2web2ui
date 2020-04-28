@@ -9,6 +9,7 @@ junit.xml
 /cypress/screenshots
 /cypress/results
 cypress.env.json
+test-report.xml
 
 # build report artifacts
 /build-reports

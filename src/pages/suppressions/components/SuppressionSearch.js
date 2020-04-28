@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { reduxForm } from 'redux-form';
-import { Grid } from 'src/components/matchbox';
+import { Box, Grid } from 'src/components/matchbox';
 import { FilterDropdown } from 'src/components';
 import * as suppressionActions from 'src/actions/suppressions';
 import DatePicker from 'src/components/datePicker/DatePicker';
@@ -39,7 +39,7 @@ export class SuppressionSearch extends Component {
     return (
       <Grid>
         <Grid.Column xs={12} md={6}>
-          <div>
+          <Box mb={['300', null, null, '0']}>
             {dateOptions.from && dateOptions.to && (
               <DatePicker
                 {...dateOptions}
@@ -48,36 +48,32 @@ export class SuppressionSearch extends Component {
                 disabled={this.props.loading}
               />
             )}
-          </div>
+          </Box>
         </Grid.Column>
         <Grid.Column xs={6} md={3}>
-          <div>
-            <FilterDropdown
-              label="Type"
-              id="types-filter-dropdown"
-              popoverClassName={styles.suppresionPopver}
-              formName="filterForm"
-              options={TYPES}
-              namespace="types"
-              displayValue="Type"
-              onClose={this.handleTypesSelection}
-            />
-          </div>
+          <FilterDropdown
+            label="Type"
+            id="types-filter-dropdown"
+            popoverClassName={styles.suppressionPopver}
+            formName="filterForm"
+            options={TYPES}
+            namespace="types"
+            displayValue="Type"
+            onClose={this.handleTypesSelection}
+          />
         </Grid.Column>
 
         <Grid.Column xs={6} md={3}>
-          <div>
-            <FilterDropdown
-              label="Sources"
-              id="source-filter-dropdown"
-              formName="filterForm"
-              options={SOURCES}
-              namespace="sources"
-              displayValue="Sources"
-              popoverClassName={styles.fatPopover}
-              onClose={this.handleSourcesSelection}
-            />
-          </div>
+          <FilterDropdown
+            label="Sources"
+            id="source-filter-dropdown"
+            formName="filterForm"
+            options={SOURCES}
+            namespace="sources"
+            displayValue="Sources"
+            popoverClassName={styles.fatPopover}
+            onClose={this.handleSourcesSelection}
+          />
         </Grid.Column>
       </Grid>
     );

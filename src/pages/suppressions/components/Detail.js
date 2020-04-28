@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 
-import { Button, Panel, Modal } from 'src/components/matchbox';
+import { Box, Panel, Modal } from 'src/components/matchbox';
 import { LabelledValue, CopyField, LongTextContainer } from 'src/components';
 import { formatDateTime } from 'src/helpers/date';
 import { formatSubaccountDisplay } from '../helpers';
-import styles from './Detail.module.scss';
 
 export default class Detail extends Component {
   renderContents = () => {
@@ -12,32 +11,44 @@ export default class Detail extends Component {
 
     return (
       <div>
-        <LabelledValue key="recipient" label="Recipient" value={suppression.recipient} />
-        <LabelledValue
-          key="type"
-          label="Type"
-          value={suppression.type === 'transactional' ? 'Transactional' : 'Non-transactional'}
-        />
-        <LabelledValue key="source" label="Source" value={suppression.source} />
-        <LabelledValue key="updated" label="Updated" value={formatDateTime(suppression.updated)} />
-        {hasSubaccounts && (
+        <Box paddingY="300">
+          <LabelledValue key="recipient" label="Recipient" value={suppression.recipient} />
           <LabelledValue
-            key="subaccount"
-            label="Subaccount"
-            value={formatSubaccountDisplay(suppression.subaccount_id, allSubaccounts)}
+            key="type"
+            label="Type"
+            value={suppression.type === 'transactional' ? 'Transactional' : 'Non-transactional'}
           />
-        )}
-        <LabelledValue key="created" label="Created" value={formatDateTime(suppression.created)} />
-        <LabelledValue
-          key="description"
-          label="Description"
-          value={<LongTextContainer text={suppression.description} />}
-        />
-        <LabelledValue
-          key="raw json"
-          label="Raw JSON"
-          value={<CopyField value={JSON.stringify(suppression)} />}
-        />
+          <LabelledValue key="source" label="Source" value={suppression.source} />
+          <LabelledValue
+            key="updated"
+            label="Updated"
+            value={formatDateTime(suppression.updated)}
+          />
+          {hasSubaccounts && (
+            <LabelledValue
+              key="subaccount"
+              label="Subaccount"
+              value={formatSubaccountDisplay(suppression.subaccount_id, allSubaccounts)}
+            />
+          )}
+          <LabelledValue
+            key="created"
+            label="Created"
+            value={formatDateTime(suppression.created)}
+          />
+          <LabelledValue
+            key="description"
+            label="Description"
+            value={<LongTextContainer text={suppression.description} />}
+          />
+          <LabelledValue
+            key="raw json"
+            label="Raw JSON"
+            value={
+              <CopyField id="suppression-detail-copy-field" value={JSON.stringify(suppression)} />
+            }
+          />
+        </Box>
       </div>
     );
   };
@@ -46,12 +57,9 @@ export default class Detail extends Component {
     const { open, onCancel, suppression } = this.props;
 
     return (
-      <Modal open={open} onClose={onCancel}>
+      <Modal open={open} showCloseButton onClose={onCancel}>
         <Panel title="Suppression Details" sectioned>
           {suppression && this.renderContents()}
-          <div className={styles.Buttons}>
-            <Button onClick={onCancel}>Close</Button>
-          </div>
         </Panel>
       </Modal>
     );
