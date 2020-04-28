@@ -57,6 +57,11 @@ function getVariantProps({ variant, isHibanaEnabled }) {
         return {
           color: 'red',
         };
+      case 'outline':
+        return {
+          color: 'black',
+          outlineBorder: true,
+        };
       default:
         return {
           color: 'blue',

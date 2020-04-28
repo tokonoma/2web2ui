@@ -4,7 +4,8 @@ import { formatDateTime, formatDate } from 'src/helpers/date';
 import classnames from 'classnames';
 import { fetch as getAccount } from 'src/actions/account';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
-import { ProgressBar, Panel } from 'src/components/matchbox';
+import { ProgressBar, Panel, Text, Box, Inline } from 'src/components/matchbox';
+import useHibanaToggle from 'src/hooks/useHibanaToggle';
 import styles from './UsageReport.module.scss';
 import { LINKS } from 'src/constants';
 import SendMoreCTA from './SendMoreCTA';
@@ -20,19 +21,51 @@ const actions = [
 
 const getPercent = (used, limit) => Math.floor((used / limit) * 100);
 
-const DisplayNumber = ({ label, content, orange }) => (
+const OGDisplayNumber = ({ label, content, primary }) => (
   <div className={styles.Display}>
-    <h5 className={classnames(styles.Content, orange && styles.orange)}>{content}</h5>
+    <h5 className={classnames(styles.Content, primary && styles.primary)}>{content}</h5>
     <h6 className={styles.Label}>{label}</h6>
   </div>
 );
 
-const ProgressLabel = ({ title, secondaryTitle }) => (
+const HibanaDisplayNumber = ({ label, content, primary }) => (
+  <Box display="inline-block" mr="500">
+    <Text fontSize="400" fontWeight="medium" color={primary ? 'blue.700' : undefined}>
+      {content}
+    </Text>
+    <Text fontSize="200" fontWeight="light">
+      {label}
+    </Text>
+  </Box>
+);
+
+const DisplayNumber = props => {
+  return useHibanaToggle(OGDisplayNumber, HibanaDisplayNumber)(props);
+};
+
+const OGProgressLabel = ({ title, secondaryTitle }) => (
   <div>
     <h5 className={styles.ProgressTitle}>{title}</h5>
     <h6 className={styles.ProgressSecondary}>{secondaryTitle}</h6>
   </div>
 );
+
+const HibanaProgressLabel = ({ title, secondaryTitle }) => (
+  <Box mb="200">
+    <Inline>
+      <Text fontSize="200" fontWeight="semibold">
+        {title}
+      </Text>
+      <Text fontSize="200" fontWeight="light" color="gray.600">
+        {secondaryTitle}
+      </Text>
+    </Inline>
+  </Box>
+);
+
+const ProgressLabel = props => {
+  return useHibanaToggle(OGProgressLabel, HibanaProgressLabel)(props);
+};
 
 export class UsageReport extends Component {
   componentDidMount() {
@@ -61,7 +94,7 @@ export class UsageReport extends Component {
           {hasDailyLimit && (
             <ProgressBar completed={getPercent(usage.day.used, usage.day.limit)} my="300" />
           )}
-          <DisplayNumber label="Used" content={usage.day.used.toLocaleString()} orange />
+          <DisplayNumber label="Used" content={usage.day.used.toLocaleString()} primary />
           {hasDailyLimit && (
             <DisplayNumber label="Daily Limit" content={usage.day.limit.toLocaleString()} />
           )}
@@ -77,7 +110,7 @@ export class UsageReport extends Component {
           {hasMonthlyLimit && (
             <ProgressBar completed={getPercent(usage.month.used, usage.month.limit)} my="300" />
           )}
-          <DisplayNumber label="Used" content={usage.month.used.toLocaleString()} orange />
+          <DisplayNumber label="Used" content={usage.month.used.toLocaleString()} primary />
           <DisplayNumber label="Included" content={subscription.plan_volume.toLocaleString()} />
           {overage > 0 && (
             <DisplayNumber label="Extra Emails Used" content={overage.toLocaleString()} />
