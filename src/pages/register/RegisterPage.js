@@ -6,7 +6,7 @@ import ErrorTracker from 'src/helpers/errorTracker';
 
 import { CenteredLogo } from 'src/components';
 import { PageLink } from 'src/components/links';
-import { Panel } from 'src/components/matchbox';
+import { Panel, Stack } from 'src/components/matchbox';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import RegisterUserForm from './RegisterUserForm';
 
@@ -63,10 +63,12 @@ export class RegisterPage extends Component {
 
     return (
       <Panel.Section>
-        <p>
-          <small>{invite.from} invited you to join their SparkPost account.</small>
-        </p>
-        <RegisterUserForm onSubmit={this.onSubmit} email={invite.email} />
+        <Stack>
+          <p>
+            <small>{invite.from} invited you to join their SparkPost account.</small>
+          </p>
+          <RegisterUserForm onSubmit={this.onSubmit} email={invite.email} />
+        </Stack>
       </Panel.Section>
     );
   }
@@ -82,9 +84,7 @@ export class RegisterPage extends Component {
       <div>
         <CenteredLogo />
 
-        <Panel accent title="Set Password">
-          {this.renderRegisterPanel()}
-        </Panel>
+        <Panel title="Set Password">{this.renderRegisterPanel()}</Panel>
         <Panel.Footer
           left={
             <small>
