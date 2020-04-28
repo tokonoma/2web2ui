@@ -167,6 +167,7 @@ exports[`Summary Table should render with no data 1`] = `
     />
   </Panel.Section>
   <Empty
+    hasPanel={true}
     message="There is no data to display"
   />
 </Panel>
