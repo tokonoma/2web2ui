@@ -11,26 +11,31 @@ import hibanaStyles from './JobStatusTagHibana.module.scss';
 function getStatusProps(styles) {
   return {
     error: {
+      tagColor: 'red',
       className: styles.Failed,
       icon: Error,
       message: 'Validation Error',
     },
     usage_limit_exceeded: {
+      tagColor: 'red',
       className: styles.Failed,
       icon: Error,
       message: 'Validation Error',
     },
     success: {
+      tagColor: 'green',
       className: styles.Complete,
       icon: CheckCircle,
       message: 'Complete',
     },
     queued_for_batch: {
+      tagColor: '',
       className: styles.Ready,
       icon: CloudUpload,
       message: 'Ready to validate',
     },
     loading: {
+      tagColor: '',
       className: styles.Loading,
       icon: Cached,
       message: 'Processing',
@@ -43,10 +48,10 @@ const JobStatusTag = ({ status }) => {
   const { isHibanaEnabled } = state;
   const styles = useHibanaOverride(OGStyles, hibanaStyles);
   const statusProps = getStatusProps(styles);
-  const { className, icon: Icon, message } = statusProps[status] || statusProps.loading;
+  const { tagColor, className, icon: Icon, message } = statusProps[status] || statusProps.loading;
 
   return (
-    <Tag style={{ verticalAlign: 'bottom' }}>
+    <Tag color={tagColor} style={{ verticalAlign: 'bottom' }}>
       <span className={classNames(styles.JobStatusTagContent, className)}>
         {!isHibanaEnabled && <Icon />}
         &nbsp;
