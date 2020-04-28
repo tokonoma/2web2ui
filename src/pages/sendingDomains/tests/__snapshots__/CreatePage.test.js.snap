@@ -9,10 +9,9 @@ exports[`Sending Domains Create Page renders and mounts correctly 1`] = `
       "to": "/account/sending-domains",
     }
   }
+  title="Add a Domain"
 >
-  <Panel
-    title="Add a Domain"
-  >
+  <Panel>
     <Connect(ReduxForm)
       onSubmit={[Function]}
     />

@@ -25,8 +25,9 @@ export class CreatePage extends Component {
           component: PageLink,
           to: '/account/sending-domains',
         }}
+        title="Add a Domain"
       >
-        <Panel title="Add a Domain">
+        <Panel>
           <CreateForm onSubmit={this.handleCreate} />
         </Panel>
       </Page>

@@ -1,0 +1,9 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.Right {
+  margin-top: spacing(600);
+
+  @media screen and (min-width: media-query(lg)) {
+    margin-top: -#{spacing(500)};
+  }
+}

@@ -13,7 +13,7 @@ import {
 import { showAlert } from 'src/actions/globalAlert';
 import { Loading, DeleteModal } from 'src/components';
 import { PageLink } from 'src/components/links';
-import { Page } from 'src/components/matchbox';
+import { Button, Page } from 'src/components/matchbox';
 import AssignTrackingDomain from './components/AssignTrackingDomain';
 import EditBounce from './components/EditBounce';
 import SetupSending from './components/SetupSending';
@@ -33,13 +33,6 @@ export class EditPage extends Component {
   };
 
   toggleDelete = () => this.setState({ showDelete: !this.state.showDelete });
-
-  secondaryActions = [
-    {
-      content: 'Delete',
-      onClick: this.toggleDelete,
-    },
-  ];
 
   afterDelete = () => {
     this.toggleDelete();
@@ -106,7 +99,11 @@ export class EditPage extends Component {
     return (
       <Page
         title={`Edit ${id}`}
-        secondaryActions={this.secondaryActions}
+        primaryArea={
+          <Button variant="destructive" onClick={this.toggleDelete}>
+            Delete
+          </Button>
+        }
         breadcrumbAction={breadcrumbAction}
       >
         <div>

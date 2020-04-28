@@ -10,7 +10,8 @@ const DatePickerWrapper = ({ input, meta, ...rest }) => {
       from={input.value.from}
       error={!active && touched && error ? error : undefined}
       meta={meta}
-      {...rest} />
+      {...rest}
+    />
   );
 };
 

@@ -1,21 +1,26 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import SetupInstructionPanel from '../SetupInstructionPanel';
+import styles from '../SetupInstructionPanel.module.scss';
+
+jest.mock('src/hooks/useHibanaOverride');
 
 describe('SetupInstructionPanel', () => {
-  const subject = (props = {}) => shallow(
-    <SetupInstructionPanel
-      recordType="CNAME"
-      verifyButtonIdentifier="my-verify-button"
-      {...props}
-    >
-      <p>
-        enter panel contents here...
-      </p>
-    </SetupInstructionPanel>
-  );
+  const subject = (props = {}) => {
+    useHibanaOverride.mockImplementationOnce(() => styles);
+    return shallow(
+      <SetupInstructionPanel
+        recordType="CNAME"
+        verifyButtonIdentifier="my-verify-button"
+        {...props}
+      >
+        <p>enter panel contents here...</p>
+      </SetupInstructionPanel>,
+    );
+  };
 
-  const titleFactory = (wrapper) => shallow(wrapper.prop('title'));
+  const titleFactory = wrapper => shallow(wrapper.prop('title'));
 
   it('renders panel and children', () => {
     expect(subject()).toMatchSnapshot();
@@ -43,7 +48,7 @@ describe('SetupInstructionPanel', () => {
 
     it('renders a re-verify button', () => {
       expect(wrapper).toHaveProp('actions', [
-        expect.objectContaining({ content: 'Re-verify CNAME Record' })
+        expect.objectContaining({ content: 'Re-verify CNAME Record' }),
       ]);
     });
 

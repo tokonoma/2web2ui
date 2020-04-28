@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Panel, Modal } from 'src/components/matchbox';
-import ButtonWrapper from 'src/components/buttonWrapper';
+import { ButtonWrapper } from 'src/components';
 import PanelLoading from 'src/components/panelLoading';
 import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import { RedirectAndAlert } from 'src/components/globalAlert';

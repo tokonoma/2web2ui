@@ -7,6 +7,7 @@ exports[`Component: EditBounce default bounce toggle renders correctly if assign
     <Tooltip
       content="When this is set to \\"ON\\", all future transmissions for this subaccount will use xyz.com as their bounce domain (unless otherwise specified)."
       dark={true}
+      id="sending-domains-edit-bounce-tooltip"
     >
       Default bounce domain 
        for Subaccount 101
@@ -29,6 +30,7 @@ exports[`Component: EditBounce default bounce toggle renders correctly toggle wh
     <Tooltip
       content="When this is set to \\"ON\\", all future transmissions will use xyz.com as their bounce domain (unless otherwise specified)."
       dark={true}
+      id="sending-domains-edit-bounce-tooltip"
     >
       Default bounce domain 
       <Help
@@ -50,6 +52,7 @@ exports[`Component: EditBounce default bounce toggle renders correctly toggle wh
     <Tooltip
       content="When this is set to \\"ON\\", all future transmissions will use xyz.com as their bounce domain (unless otherwise specified)."
       dark={true}
+      id="sending-domains-edit-bounce-tooltip"
     >
       Default bounce domain 
       <Help
@@ -69,9 +72,14 @@ exports[`Component: EditBounce does not show root domain warning for 3rd level d
   title="Set Up For Bounce"
 >
   <Left>
-    <p>
+    <SubduedText
+      as="p"
+      color="gray.600"
+      fontSize="300"
+      mt="300"
+    >
       To use this domain for bounces, connect your domain by setting the required DNS record(s) and verifying the connection.
-    </p>
+    </SubduedText>
   </Left>
   <Right>
     <Connect(BounceSetupInstructionPanel)
@@ -97,9 +105,14 @@ exports[`Component: EditBounce renders not ready correctly 1`] = `
   title="Set Up For Bounce"
 >
   <Left>
-    <p>
+    <SubduedText
+      as="p"
+      color="gray.600"
+      fontSize="300"
+      mt="300"
+    >
       To use this domain for bounces, connect your domain by setting the required DNS record(s) and verifying the connection.
-    </p>
+    </SubduedText>
   </Left>
   <Right>
     <Banner

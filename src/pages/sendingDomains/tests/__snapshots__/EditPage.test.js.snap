@@ -21,13 +21,13 @@ exports[`Sending Domains Edit Page should renders correctly 1`] = `
       "to": "/account/sending-domains",
     }
   }
-  secondaryActions={
-    Array [
-      Object {
-        "content": "Delete",
-        "onClick": [Function],
-      },
-    ]
+  primaryArea={
+    <Button
+      onClick={[Function]}
+      variant="destructive"
+    >
+      Delete
+    </Button>
   }
   title="Edit example.com"
 >
@@ -165,13 +165,13 @@ exports[`Sending Domains Edit Page should show a delete modal 1`] = `
       "to": "/account/sending-domains",
     }
   }
-  secondaryActions={
-    Array [
-      Object {
-        "content": "Delete",
-        "onClick": [Function],
-      },
-    ]
+  primaryArea={
+    <Button
+      onClick={[Function]}
+      variant="destructive"
+    >
+      Delete
+    </Button>
   }
   title="Edit example.com"
 >
