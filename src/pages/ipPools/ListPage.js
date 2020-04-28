@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { OpenInNew } from '@sparkpost/matchbox-icons';
 import { listPools } from 'src/actions/ipPools';
 import { ButtonWrapper, Loading, TableCollection, ApiErrorBanner } from 'src/components';
-import { PageLink } from 'src/components/links';
+import { ExternalLink, PageLink } from 'src/components/links';
 import { Banner, Box, Button, Page } from 'src/components/matchbox';
 import { LINKS } from 'src/constants';
 import { openSupportTicketForm } from 'src/actions/support';
@@ -89,17 +88,16 @@ export class IpPoolsList extends Component {
 
 export const IPWarmupReminderBanner = () => (
   <Banner status="warning" title={'New dedicated IP addresses need to be warmed up'} my="300">
-    <Box mt="200">
+    <Box mt="200" maxWidth={600}>
       <p>
-        In order to establish a positive sending reputation, warm up new dedicated IP <br />
-        addresses by gradually sending more emails.
+        In order to establish a positive sending reputation, warm up new dedicated IP addresses by
+        gradually sending more emails.
       </p>
-      <Box as={ButtonWrapper}>
-        <Button outline={true} to={LINKS.IP_WARM_UP} external>
+      <ButtonWrapper>
+        <ExternalLink as={Button} outline={true} to={LINKS.IP_WARM_UP}>
           {'Read our IP Warm-up Overview'}
-          <OpenInNew size={15} style={{ marginLeft: 10 }} />
-        </Button>
-      </Box>
+        </ExternalLink>
+      </ButtonWrapper>
     </Box>
   </Banner>
 );

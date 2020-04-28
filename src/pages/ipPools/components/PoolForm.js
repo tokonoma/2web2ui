@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { withRouter } from 'react-router-dom';
-import { Button, Grid, Panel, Stack } from 'src/components/matchbox';
+import { Box, Button, Grid, Panel, Stack } from 'src/components/matchbox';
 import { SendingDomainTypeaheadWrapper, TextFieldWrapper } from 'src/components';
 import AccessControl from 'src/components/auth/AccessControl';
 import { required } from 'src/helpers/validation';
@@ -60,8 +60,8 @@ export class PoolForm extends Component {
         <form onSubmit={handleSubmit}>
           <Panel.Section>
             <Stack>
-              <Grid>
-                <Grid.Column md={9} style={{ marginBottom: '20px' }}>
+              <Box as={Grid}>
+                <Box as={Grid.Column} md={9}>
                   <Field
                     name="name"
                     component={TextFieldWrapper}
@@ -71,10 +71,10 @@ export class PoolForm extends Component {
                     disabled={editingDefault || submitting}
                     helpText={helpText}
                   />
-                </Grid.Column>
-              </Grid>
-              <Grid>
-                <Grid.Column md={9} style={{ marginBottom: '20px' }}>
+                </Box>
+              </Box>
+              <Box as={Grid}>
+                <Box as={Grid.Column} md={9}>
                   {!editingDefault && (
                     <AccessControl
                       condition={any(
@@ -90,8 +90,8 @@ export class PoolForm extends Component {
                       />
                     </AccessControl>
                   )}
-                </Grid.Column>
-              </Grid>
+                </Box>
+              </Box>
               <Grid>
                 <Grid.Column md={9}>
                   {!editingDefault && (
@@ -109,7 +109,7 @@ export class PoolForm extends Component {
             </Stack>
           </Panel.Section>
           <Panel.Section>
-            <Button submit primary disabled={submitting || pristine} variant="primary">
+            <Button submit disabled={submitting || pristine} variant="primary">
               {submitting ? 'Saving' : submitText}
             </Button>
           </Panel.Section>
