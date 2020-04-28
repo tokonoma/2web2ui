@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import { ApiErrorBanner, Loading } from 'src/components';
+import { ApiErrorBanner, Heading, Loading } from 'src/components';
 import { PageLink } from 'src/components/links';
 import { Page, Panel } from 'src/components/matchbox';
 import PanelLoading from 'src/components/panelLoading';
@@ -17,7 +17,9 @@ import {
   selectIpForCurrentPool,
   selectIpDeliveryHistory,
 } from 'src/selectors/ipPools';
-import styles from './EditIpPage.module.scss';
+import OGStyles from './EditIpPage.module.scss';
+import HibanaStyles from './EditIpPageHibana.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 
 export function EditIpPage(props) {
   const {
@@ -116,6 +118,7 @@ function IpErrorBanner({ details, handleReload }) {
 }
 
 function DeliveryHistoryPanel({ isLoading, error, chartData, handleReloadAfterError }) {
+  const styles = useHibanaOverride(OGStyles, HibanaStyles);
   if (isLoading) {
     return <PanelLoading />;
   }
@@ -129,7 +132,9 @@ function DeliveryHistoryPanel({ isLoading, error, chartData, handleReloadAfterEr
           {!_.isEmpty(chartData) && (
             <Panel title="Delivery History">
               <Panel.Section className={styles.LineChartSection}>
-                <h3>Last 10 Days</h3>
+                <Heading as="h3" looksLike="h5">
+                  Last 10 Days
+                </Heading>
 
                 <DeliveryHistoryLineChart data={chartData} />
               </Panel.Section>
