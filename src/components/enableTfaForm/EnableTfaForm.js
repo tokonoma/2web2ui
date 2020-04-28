@@ -2,15 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { VpnKey } from '@sparkpost/matchbox-icons';
 import { QRCode } from 'react-qr-svg';
-import { Button, Box, Grid, Inline, Panel, Stack, TextField } from 'src/components/matchbox';
-import PanelLoading from 'src/components/panelLoading/PanelLoading';
+import ButtonWrapper from 'src/components/buttonWrapper';
+import { Button, Box, Grid, Stack, TextField } from 'src/components/matchbox';
 import { Loading } from 'src/components/loading/Loading';
-import styles from './EnableTfaForm.module.scss';
 import { getTfaSecret, toggleTfa } from 'src/actions/tfa';
 import { showAlert } from 'src/actions/globalAlert';
 import EnableTfaFormPropTypes from './EnableTfaForm.propTypes';
 import { usernameSelector } from 'src/selectors/currentUser';
-import { useHibana } from 'src/context/HibanaContext';
+import styles from './EnableTfaForm.module.scss';
 
 export class EnableTfaForm extends React.Component {
   state = {
@@ -67,21 +66,22 @@ export const RenderedForm = props => {
     username,
   } = props;
 
-  const [state] = useHibana();
-  const { isHibanaEnabled } = state;
-  const RenderedLoading = isHibanaEnabled ? Loading : PanelLoading;
   if (!secret) {
-    return <RenderedLoading minHeight={'500px'} />;
+    return (
+      <div className={styles.Loading}>
+        <Loading />
+      </div>
+    );
   }
 
   const qrData = `otpauth://totp/${username}?secret=${encodeURIComponent(secret)}&issuer=SparkPost`;
-  const Wrapper = isHibanaEnabled ? Box : Panel.Section;
+
   return (
     <form onSubmit={e => e.preventDefault()}>
-      <Wrapper margin={'400'}>
-        <Grid>
-          <Grid.Column xs={12} md={7}>
-            <Stack space={'400'}>
+      <Grid>
+        <Grid.Column xs={12} md={7}>
+          <Box marginBottom="600">
+            <Stack>
               <h6>Step 1: Configure your 2FA app</h6>
               <p>
                 To enable 2FA, you'll need to have a 2FA auth app installed on your phone or tablet
@@ -97,52 +97,48 @@ export const RenderedForm = props => {
                 </strong>
               </p>
             </Stack>
-          </Grid.Column>
-          <Grid.Column xs={12} md={5} style={{ textAlign: 'center' }}>
-            <QRCode
-              bgColor="#FFFFFF"
-              fgColor="#000000"
-              level="Q"
-              style={{ width: 230 }}
-              value={qrData}
+          </Box>
+        </Grid.Column>
+        <Grid.Column xs={12} md={5} style={{ textAlign: 'center' }}>
+          <QRCode
+            bgColor="#FFFFFF"
+            fgColor="#000000"
+            level="Q"
+            style={{ width: 230 }}
+            value={qrData}
+          />
+        </Grid.Column>
+      </Grid>
+      <Grid>
+        <Grid.Column xs={12} md={7}>
+          <Stack>
+            <h6>Step 2: Enter a 2FA code</h6>
+            <p>
+              Generate a code from your newly-activated 2FA app to confirm that you're all set up.
+            </p>
+            <TextField
+              id="tfa-setup-passcode"
+              required={true}
+              data-lpignore={true}
+              label="Passcode"
+              error={toggleError ? 'Problem verifying your code, please try again' : ''}
+              placeholder="Enter a generated 2FA passcode"
+              onChange={handleInputChange}
+              value={code}
             />
-          </Grid.Column>
-        </Grid>
-      </Wrapper>
-      <Panel.Section>
-        <Grid>
-          <Grid.Column xs={12} md={7}>
-            <Stack space={'400'}>
-              <h6>Step 2: Enter a 2FA code</h6>
-              <p>
-                Generate a code from your newly-activated 2FA app to confirm that you're all set up.
-              </p>
-              <TextField
-                id="tfa-setup-passcode"
-                required={true}
-                data-lpignore={true}
-                label="Passcode"
-                error={toggleError ? 'Problem verifying your code, please try again' : ''}
-                placeholder="Enter a generated 2FA passcode"
-                onChange={handleInputChange}
-                value={code}
-              />
-            </Stack>
-          </Grid.Column>
-        </Grid>
-      </Panel.Section>
-      <Panel.Section>
-        <Inline>
-          <Button type="submit" primary disabled={togglePending} onClick={onEnable}>
-            {togglePending ? 'Verifying Code...' : 'Enable 2FA'}
+          </Stack>
+        </Grid.Column>
+      </Grid>
+      <ButtonWrapper>
+        <Button type="submit" variant="primary" disabled={togglePending} onClick={onEnable}>
+          {togglePending ? 'Verifying Code...' : 'Enable 2FA'}
+        </Button>
+        {onClose && (
+          <Button variant="secondary" disabled={togglePending} onClick={onClose}>
+            Cancel
           </Button>
-          {onClose && (
-            <Button disabled={togglePending} onClick={onClose} className={styles.Cancel}>
-              Cancel
-            </Button>
-          )}
-        </Inline>
-      </Panel.Section>
+        )}
+      </ButtonWrapper>
     </form>
   );
 };
