@@ -24,7 +24,7 @@ export const DomainStatus = ({ domain, hasAutoVerifyEnabled, onShareDomainChange
             use pending our compliance check and your domain setup.
           </Banner>
         )}
-        <Panel>
+        <Panel mt="400">
           <StatusDescription domain={domain} readyFor={readyFor} status={status} />
           <ShareWithSubaccounts domain={domain} onChange={onShareDomainChange} />
         </Panel>

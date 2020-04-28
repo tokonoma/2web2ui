@@ -1,7 +1,9 @@
 import React from 'react';
-import { Panel } from 'src/components/matchbox';
+import { Box, Panel } from 'src/components/matchbox';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import { VerifiedIcon, ErrorIcon } from './Icons';
-import styles from './SetupInstructionPanel.module.scss';
+import OGStyles from './SetupInstructionPanel.module.scss';
+import hibanaStyles from './SetupInstructionPanelHibana.module.scss';
 
 const SetupInstructionPanel = ({
   children,
@@ -10,30 +12,33 @@ const SetupInstructionPanel = ({
   isVerifying = false,
   onVerify,
   recordType,
-  verifyButtonIdentifier
-}) => (
-  <Panel
-    actions={[
-      !isAutoVerified && {
-        color: 'orange',
-        content: isVerified ? `Re-verify ${recordType} Record` : `Verify ${recordType} Record`,
-        disabled: isVerifying,
-        id: verifyButtonIdentifier,
-        onClick: onVerify
+  verifyButtonIdentifier,
+}) => {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+
+  return (
+    <Panel
+      actions={[
+        !isAutoVerified && {
+          color: 'orange',
+          content: isVerified ? `Re-verify ${recordType} Record` : `Verify ${recordType} Record`,
+          disabled: isVerifying,
+          id: verifyButtonIdentifier,
+          onClick: onVerify,
+        },
+      ].filter(Boolean)}
+      title={
+        <div className={styles.Title}>
+          <span>DNS Settings</span>
+          <span className={styles.TitleIcon}>{isVerified ? <VerifiedIcon /> : <ErrorIcon />}</span>
+        </div>
       }
-    ].filter(Boolean)}
-    sectioned
-    title={(
-      <div>
-        <span className={styles.TitleIcon}>
-          {isVerified ? <VerifiedIcon /> : <ErrorIcon />}
-        </span>
-        <span>DNS Settings</span>
-      </div>
-    )}
-  >
-    {children}
-  </Panel>
-);
+    >
+      {/* TODO: Remove once the `Panel` can support a border below the `title` */}
+      <Box mt="400" as="hr" />
+      <Panel.Section>{children}</Panel.Section>
+    </Panel>
+  );
+};
 
 export default SetupInstructionPanel;

@@ -3,14 +3,17 @@ import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Field, reset, reduxForm } from 'redux-form';
-import { Button, Checkbox, Panel } from 'src/components/matchbox';
+import { Box, Button, Checkbox, Stack } from 'src/components/matchbox';
 import { TextFieldWrapper, CheckboxWrapper } from 'src/components';
+import ButtonWrapper from 'src/components/buttonWrapper';
 
 import { showAlert } from 'src/actions/globalAlert';
 import { createOrUpdateSuppressions } from 'src/actions/suppressions';
 import SubaccountTypeaheadWrapper from 'src/components/reduxFormWrappers/SubaccountTypeaheadWrapper';
 import { required, email } from 'src/helpers/validation';
 const FORM_NAME = 'addSuppression';
+
+const maxWidth = '860px';
 
 export class AddForm extends Component {
   atLeastOne = (_value, { types }) =>
@@ -42,21 +45,24 @@ export class AddForm extends Component {
     return (
       <Fragment>
         <form onSubmit={handleSubmit(this.onSubmit)}>
-          <Panel.Section>
-            <Field
-              name="recipient"
-              component={TextFieldWrapper}
-              validate={[required, email]}
-              required
-              label="Email Address"
-            />
-            <Field name="description" component={TextFieldWrapper} label="Description" />
-            <Field
-              component={SubaccountTypeaheadWrapper}
-              disabled={submitting}
-              helpText="Leaving this field blank will add the suppressions to the master account."
-              name="subaccount"
-            />
+          <Stack>
+            <Box maxWidth={maxWidth}>
+              <Field
+                name="recipient"
+                component={TextFieldWrapper}
+                validate={[required, email]}
+                required
+                label="Email Address"
+              />
+            </Box>
+            <Box maxWidth={maxWidth}>
+              <Field
+                component={SubaccountTypeaheadWrapper}
+                disabled={submitting}
+                helpText="Leaving this field blank will add the suppressions to the master account."
+                name="subaccount"
+              />
+            </Box>
             <Checkbox.Group label="Type" required>
               <Field
                 component={CheckboxWrapper}
@@ -72,12 +78,13 @@ export class AddForm extends Component {
                 validate={this.atLeastOne}
               />
             </Checkbox.Group>
-          </Panel.Section>
-          <Panel.Section>
-            <Button primary disabled={pristine || submitting} type="submit">
+            <Field name="description" component={TextFieldWrapper} label="Description" />
+          </Stack>
+          <ButtonWrapper>
+            <Button variant="primary" disabled={pristine || submitting} type="submit">
               Add / Update
             </Button>
-          </Panel.Section>
+          </ButtonWrapper>
         </form>
       </Fragment>
     );

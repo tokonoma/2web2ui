@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import ButtonWrapper from 'src/components/buttonWrapper';
+import { ButtonWrapper } from 'src/components';
 import PanelLoading from 'src/components/panelLoading';
 import { Button, Panel, TextField, Modal, Stack } from 'src/components/matchbox';
 

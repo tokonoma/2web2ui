@@ -2,7 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { Button, Panel } from 'src/components/matchbox';
+import { Box, Button, Stack } from 'src/components/matchbox';
+import ButtonWrapper from 'src/components/buttonWrapper';
 
 import { showAlert } from 'src/actions/globalAlert';
 import { uploadSuppressions } from 'src/actions/suppressions';
@@ -12,6 +13,8 @@ import SubaccountTypeaheadWrapper from 'src/components/reduxFormWrappers/Subacco
 import config from 'src/config';
 import { fileExtension, maxFileSize, nonEmptyFile, required } from 'src/helpers/validation';
 import exampleSuppressionsListPath from './example-suppressions-list.csv';
+
+const maxWidth = '860px';
 
 export class UploadForm extends Component {
   handleSubmit = ({ subaccount, suppressionsFile }) => {
@@ -30,7 +33,7 @@ export class UploadForm extends Component {
     return (
       <Fragment>
         <form onSubmit={reduxFormSubmit(this.handleSubmit)}>
-          <Panel.Section>
+          <Stack>
             <Field
               component={FileFieldWrapper}
               disabled={submitting}
@@ -52,18 +55,20 @@ export class UploadForm extends Component {
                 nonEmptyFile,
               ]}
             />
-            <Field
-              component={SubaccountTypeaheadWrapper}
-              disabled={submitting}
-              helpText="Leaving this field blank will add the suppressions to the master account."
-              name="subaccount"
-            />
-          </Panel.Section>
-          <Panel.Section>
-            <Button primary disabled={pristine || submitting} type="submit">
+            <Box maxWidth={maxWidth}>
+              <Field
+                component={SubaccountTypeaheadWrapper}
+                disabled={submitting}
+                helpText="Leaving this field blank will add the suppressions to the master account."
+                name="subaccount"
+              />
+            </Box>
+          </Stack>
+          <ButtonWrapper>
+            <Button variant="primary" disabled={pristine || submitting} type="submit">
               Upload
             </Button>
-          </Panel.Section>
+          </ButtonWrapper>
         </form>
       </Fragment>
     );

@@ -6,9 +6,8 @@ import { Field, formValueSelector, getFormValues, reduxForm, submit, isDirty } f
 import { withRouter } from 'react-router-dom';
 import { Button, Label, Panel } from 'src/components/matchbox';
 import { SelectWrapper, RadioGroup } from 'src/components/reduxFormWrappers';
-import { ConfirmationModal, Abbreviation } from 'src/components';
+import { ButtonWrapper, ConfirmationModal, Abbreviation } from 'src/components';
 import { Card, CardTitle, CardContent } from 'src/components/card';
-import ButtonWrapper from 'src/components/buttonWrapper';
 import { ExternalLink } from 'src/components/links';
 import {
   getIpPools,

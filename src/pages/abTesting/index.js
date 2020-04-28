@@ -5,5 +5,5 @@ import CreatePage from './CreatePage';
 export default {
   ListPage,
   CreatePage,
-  DetailsPage
+  DetailsPage,
 };

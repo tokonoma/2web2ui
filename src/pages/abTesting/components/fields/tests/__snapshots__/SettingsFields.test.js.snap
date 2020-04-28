@@ -2,7 +2,9 @@
 
 exports[`Settings Fields Component should disable fields correctly 1`] = `
 <div>
-  <Panel>
+  <OGOnlyWrapper
+    as={[Function]}
+  >
     <Panel.Section>
       <Field
         component={[Function]}
@@ -36,8 +38,10 @@ exports[`Settings Fields Component should disable fields correctly 1`] = `
         validate={[Function]}
       />
     </Panel.Section>
-  </Panel>
-  <Panel>
+  </OGOnlyWrapper>
+  <OGOnlyWrapper
+    as={[Function]}
+  >
     <Panel.Section>
       <Field
         component={[Function]}
@@ -78,8 +82,10 @@ exports[`Settings Fields Component should disable fields correctly 1`] = `
         }
       />
     </Panel.Section>
-  </Panel>
-  <Panel>
+  </OGOnlyWrapper>
+  <OGOnlyWrapper
+    as={[Function]}
+  >
     <Panel.Section>
       <Field
         bottomError={true}
@@ -106,13 +112,15 @@ exports[`Settings Fields Component should disable fields correctly 1`] = `
         }
       />
     </Panel.Section>
-  </Panel>
+  </OGOnlyWrapper>
 </div>
 `;
 
 exports[`Settings Fields Component should render correctly 1`] = `
 <div>
-  <Panel>
+  <OGOnlyWrapper
+    as={[Function]}
+  >
     <Panel.Section>
       <Field
         component={[Function]}
@@ -144,8 +152,10 @@ exports[`Settings Fields Component should render correctly 1`] = `
         validate={[Function]}
       />
     </Panel.Section>
-  </Panel>
-  <Panel>
+  </OGOnlyWrapper>
+  <OGOnlyWrapper
+    as={[Function]}
+  >
     <Panel.Section>
       <Field
         component={[Function]}
@@ -184,8 +194,10 @@ exports[`Settings Fields Component should render correctly 1`] = `
         }
       />
     </Panel.Section>
-  </Panel>
-  <Panel>
+  </OGOnlyWrapper>
+  <OGOnlyWrapper
+    as={[Function]}
+  >
     <Panel.Section>
       <Field
         bottomError={true}
@@ -211,6 +223,6 @@ exports[`Settings Fields Component should render correctly 1`] = `
         }
       />
     </Panel.Section>
-  </Panel>
+  </OGOnlyWrapper>
 </div>
 `;

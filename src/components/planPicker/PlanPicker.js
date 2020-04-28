@@ -3,12 +3,11 @@ import Downshift from 'downshift';
 import { Field } from 'redux-form';
 import cx from 'classnames';
 import _ from 'lodash';
-
+import { PLAN_TIERS } from 'src/constants';
+import { ExternalLink } from 'src/components/links';
 import { ExpandMore } from '@sparkpost/matchbox-icons';
 import Plan from './Plan';
 import styles from './PlanPicker.module.scss';
-import { PLAN_TIERS } from 'src/constants';
-import { ExternalLink } from 'src/components/links';
 
 const TIERS = [
   { key: 'default' },

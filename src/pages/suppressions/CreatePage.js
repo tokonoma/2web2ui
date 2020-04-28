@@ -7,6 +7,7 @@ import AddForm from './components/AddForm';
 import UploadForm from './components/UploadForm';
 import { ErrorBanner } from './components/ErrorBanner';
 import { resetErrors } from 'src/actions/suppressions';
+import { TabsWrapper } from 'src/components';
 
 const tabs = [
   {
@@ -43,12 +44,19 @@ export class CreatePage extends Component {
         {(parseError || persistError) && (
           <ErrorBanner parseError={parseError} persistError={persistError} />
         )}
-        <Tabs
-          selected={selectedTab}
-          connectBelow={true}
-          tabs={tabs.map(({ content }, idx) => ({ content, onClick: () => this.handleTabs(idx) }))}
-        />
-        <Panel>{selectedTab === 1 ? <UploadForm /> : <AddForm />}</Panel>
+        <Panel>
+          <TabsWrapper>
+            <Tabs
+              selected={selectedTab}
+              connectBelow={true}
+              tabs={tabs.map(({ content }, idx) => ({
+                content,
+                onClick: () => this.handleTabs(idx),
+              }))}
+            />
+          </TabsWrapper>
+          <Panel.Section>{selectedTab === 1 ? <UploadForm /> : <AddForm />}</Panel.Section>
+        </Panel>
       </Page>
     );
   }

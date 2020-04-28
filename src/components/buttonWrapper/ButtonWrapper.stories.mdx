@@ -27,6 +27,23 @@ between child components.
   </Panel>
 </Preview>
 
+### With No Top Margin
+
+<Preview>
+  <Panel>
+    <Panel.Section>
+      <TextField id="first-name" name="firstName" label="First Name" type="text" />
+      <TextField id="last-name" name="lastName" label="Last Name" type="text" />
+    </Panel.Section>
+    <Panel.Section>
+      <ButtonWrapper marginTop="0">
+        <Button variant="primary">Save</Button>
+        <Button variant="secondary">Cancel</Button>
+      </ButtonWrapper>
+    </Panel.Section>
+  </Panel>
+</Preview>
+
 ## Usage
 
 ```js

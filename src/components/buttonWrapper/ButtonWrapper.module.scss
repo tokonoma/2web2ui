@@ -1,6 +1,6 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
-* + .ButtonWrapper {
+.ButtonWrapper {
   margin-top: spacing(larger);
 
   // Adds space between immediate child elements - typically `<Button>` components in this case

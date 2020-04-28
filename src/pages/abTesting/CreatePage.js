@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { LINKS } from 'src/constants';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 
 // Actions
@@ -12,7 +11,6 @@ import { listTemplates } from 'src/actions/templates';
 import { PageLink } from 'src/components/links';
 import { Panel, Page } from 'src/components/matchbox';
 import AbTestCreateForm from './components/AbTestCreateForm';
-
 export class CreatePage extends Component {
   componentDidMount() {
     // Get templates here for the typeahead
@@ -37,18 +35,9 @@ export class CreatePage extends Component {
     return (
       <Page
         breadcrumbAction={{ content: 'Back to A/B Tests', component: PageLink, to: '/ab-testing' }}
+        title="Create a New A/B Test"
       >
-        <Panel
-          title="Create a New A/B Test"
-          actions={[
-            {
-              content: 'Learn more about A/B tests',
-              color: 'orange',
-              to: LINKS.AB_TESTING_API,
-              external: true,
-            },
-          ]}
-        >
+        <Panel>
           <AbTestCreateForm onSubmit={this.create} />
         </Panel>
       </Page>

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component: SendingDomainSection should render Left section 1`] = `
+exports[`SendingDomainSection should render Left section 1`] = `
 <Grid.Column
   lg={5}
   xs={12}
@@ -14,7 +14,7 @@ exports[`Component: SendingDomainSection should render Left section 1`] = `
 </Grid.Column>
 `;
 
-exports[`Component: SendingDomainSection should render Right section 1`] = `
+exports[`SendingDomainSection should render Right section 1`] = `
 <Grid.Column
   lg={7}
   xs={12}
@@ -28,20 +28,11 @@ exports[`Component: SendingDomainSection should render Right section 1`] = `
 </Grid.Column>
 `;
 
-exports[`Component: SendingDomainSection should render sending domain section 1`] = `
-<div
-  className="SendingDomainSection"
-  data-id="sending-domain-title"
+exports[`SendingDomainSection should render sending domain section 1`] = `
+<Section
+  title="Title"
 >
-  <hr
-    className="Hr"
-  />
-  <h3>
-    Title
-  </h3>
-  <Grid>
-    Bill
-    Brasky
-  </Grid>
-</div>
+  Bill
+  Brasky
+</Section>
 `;

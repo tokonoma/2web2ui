@@ -10,7 +10,9 @@ exports[`DomainStatus renders section 1`] = `
     />
   </Left>
   <Right>
-    <Panel>
+    <Panel
+      mt="400"
+    >
       <StatusDescription
         domain={
           Object {

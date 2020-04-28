@@ -3,6 +3,8 @@ import React from 'react';
 
 import AceWrapper from './AceWrapper';
 
+jest.mock('src/hooks/useHibanaOverride', () => styles => styles);
+
 describe('AceWrapper', () => {
   let wrapper;
   let props;
@@ -15,14 +17,14 @@ describe('AceWrapper', () => {
         value: 'test',
         onBlur: jest.fn(),
         onFocus: jest.fn(),
-        onChange: jest.fn()
+        onChange: jest.fn(),
       },
       readOnly: false,
       meta: {
         submitFailed: false,
         active: false,
-        error: null
-      }
+        error: null,
+      },
     };
 
     wrapper = shallow(<AceWrapper {...props} />);
@@ -50,17 +52,17 @@ describe('AceWrapper', () => {
 
   describe('error state', () => {
     it('should not show error without a submit attempt', () => {
-      wrapper.setProps({ meta: { error: 'an error' }});
+      wrapper.setProps({ meta: { error: 'an error' } });
       expect(wrapper.find('Error').exists()).toBe(false);
     });
 
     it('should show error when submit fails', () => {
-      wrapper.setProps({ meta: { error: 'an error', submitFailed: true }});
+      wrapper.setProps({ meta: { error: 'an error', submitFailed: true } });
       expect(wrapper.find('Error').props().error).toBe('an error');
     });
 
     it('should not show error if the editor is active', () => {
-      wrapper.setProps({ meta: { error: 'an error', submitFailed: true, active: true }});
+      wrapper.setProps({ meta: { error: 'an error', submitFailed: true, active: true } });
       expect(wrapper.find('Error').exists()).toBe(false);
     });
   });

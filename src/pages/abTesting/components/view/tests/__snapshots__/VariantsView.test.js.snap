@@ -124,7 +124,9 @@ exports[`Variants View Component: Top level Component should render correctly 1`
 `;
 
 exports[`Variants View Component: Variant Component: should render correctly 1`] = `
-<Panel>
+<OGOnlyWrapper
+  as={[Function]}
+>
   <Panel.Section
     actions={
       Array [
@@ -164,5 +166,5 @@ exports[`Variants View Component: Variant Component: should render correctly 1`]
       }
     }
   />
-</Panel>
+</OGOnlyWrapper>
 `;

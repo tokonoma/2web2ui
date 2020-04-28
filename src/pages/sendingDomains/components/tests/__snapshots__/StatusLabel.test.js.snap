@@ -7,11 +7,14 @@ exports[`StatusLabel renders status tag 1`] = `
 `;
 
 exports[`StatusLabel renders verified label 1`] = `
-<div>
+<Box
+  alignItems="center"
+  display="flex"
+>
   <VerifiedIcon />
    
   <strong>
     Verified
   </strong>
-</div>
+</Box>
 `;

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import { RadioGroup, SubaccountTypeaheadWrapper } from 'src/components';
+import { Stack } from 'src/components/matchbox';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
 import { required } from 'src/helpers/validation';
 
@@ -46,7 +47,7 @@ export default class SubaccountSection extends Component {
       ) : null;
 
     return (
-      <div>
+      <Stack>
         <Field
           component={RadioGroup}
           label="Subaccount Assignment"
@@ -54,7 +55,7 @@ export default class SubaccountSection extends Component {
           options={this.props.createOptions ? this.props.createOptions : createOptions}
         />
         {typeahead}
-      </div>
+      </Stack>
     );
   }
 

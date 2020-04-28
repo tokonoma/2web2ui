@@ -1,12 +1,15 @@
 import React, { Fragment } from 'react';
 import { PageLink } from 'src/components/links';
 import { Panel, Tooltip } from 'src/components/matchbox';
+import { OGOnlyWrapper } from 'src/components/hibana';
 import { InfoOutline } from '@sparkpost/matchbox-icons';
 import { LabelledValue, Unit } from 'src/components';
 import { hasTestDelivered } from 'src/helpers/abTesting';
 import _ from 'lodash';
 
-import styles from './View.module.scss';
+import OGStyles from './View.module.scss';
+import HibanaStyles from './ViewHibana.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 
 export const PercentOrSample = ({ variant }) => {
   if (variant.sample_size) {
@@ -31,6 +34,7 @@ export const PercentOrSample = ({ variant }) => {
 };
 
 export const Engagement = ({ variant, showRate }) => {
+  const styles = useHibanaOverride(OGStyles, HibanaStyles);
   if (!showRate) {
     return null;
   }
@@ -71,31 +75,34 @@ export const Engagement = ({ variant, showRate }) => {
   );
 };
 
-export const Variant = ({ variant = {}, title, showRate }) => (
-  <Panel>
-    <Panel.Section
-      actions={[
-        {
-          content: 'View Template',
-          color: 'orange',
-          component: PageLink,
-          // BUG: No `setSubaccountQuery(subaccountId)` here
-          // Impossible to know if the template is assigned to a subaccount or not because duplicate template IDs are allowed
-          // eg { id: 'temp', shared_with_all: true } vs. { id: 'temp', subaccount_id: 101 }
-          //    both are usable from the same ab test
-          to: `/templates/edit/${variant.template_id}/published`,
-        },
-      ]}
-    >
-      {title && <h6 className={styles.SmallHeader}>{title}</h6>}
-      <LabelledValue label="Template ID">
-        <h6>{variant.template_id}</h6>
-      </LabelledValue>
-      <PercentOrSample variant={variant} />
-    </Panel.Section>
-    <Engagement variant={variant} showRate={showRate} />
-  </Panel>
-);
+export const Variant = ({ variant = {}, title, showRate }) => {
+  const styles = useHibanaOverride(OGStyles, HibanaStyles);
+  return (
+    <OGOnlyWrapper as={Panel}>
+      <Panel.Section
+        actions={[
+          {
+            content: 'View Template',
+            color: 'orange',
+            component: PageLink,
+            // BUG: No `setSubaccountQuery(subaccountId)` here
+            // Impossible to know if the template is assigned to a subaccount or not because duplicate template IDs are allowed
+            // eg { id: 'temp', shared_with_all: true } vs. { id: 'temp', subaccount_id: 101 }
+            //    both are usable from the same ab test
+            to: `/templates/edit/${variant.template_id}/published`,
+          },
+        ]}
+      >
+        {title && <h6 className={styles.SmallHeader}>{title}</h6>}
+        <LabelledValue label="Template ID">
+          <h6>{variant.template_id}</h6>
+        </LabelledValue>
+        <PercentOrSample variant={variant} />
+      </Panel.Section>
+      <Engagement variant={variant} showRate={showRate} />
+    </OGOnlyWrapper>
+  );
+};
 
 const VariantsView = ({ test }) => {
   const showEngagementRate = hasTestDelivered(test);

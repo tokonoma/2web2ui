@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { update } from 'src/actions/sendingDomains';
 
 import { Help } from '@sparkpost/matchbox-icons';
+import { SubduedText } from 'src/components';
 import { PageLink } from 'src/components/links';
 import { Banner, Panel, Tooltip } from 'src/components/matchbox';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
@@ -55,10 +56,10 @@ export class EditBounce extends Component {
     return (
       <Fragment>
         <SendingDomainSection.Left>
-          <p>
+          <SubduedText mt="300">
             To use this domain for bounces, connect your domain by setting the required DNS
             record(s) and verifying the connection.
-          </p>
+          </SubduedText>
         </SendingDomainSection.Left>
         <SendingDomainSection.Right>
           {this.renderRootDomainWarning()}
@@ -84,6 +85,7 @@ export class EditBounce extends Component {
 
     const tooltip = (
       <Tooltip
+        id="sending-domains-edit-bounce-tooltip"
         dark
         content={`When this is set to "ON", all future transmissions ${
           domain.subaccount_id ? 'for this subaccount ' : ''

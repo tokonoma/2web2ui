@@ -5,8 +5,10 @@ export default function DeleteModal({ onDelete, deleting, ...props }) {
   return (
     <ConfirmationModal
       confirming={deleting}
-      confirmVerb='Delete'
+      confirmVerb="Delete"
       onConfirm={onDelete}
+      confirmVariant="destructive"
+      cancelVariant="destructive-secondary"
       {...props}
     />
   );

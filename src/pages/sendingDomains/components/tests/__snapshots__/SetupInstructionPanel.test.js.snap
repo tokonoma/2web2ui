@@ -13,22 +13,29 @@ exports[`SetupInstructionPanel renders panel and children 1`] = `
       },
     ]
   }
-  sectioned={true}
   title={
-    <div>
+    <div
+      className="Title"
+    >
+      <span>
+        DNS Settings
+      </span>
       <span
         className="TitleIcon"
       >
         <ErrorIcon />
       </span>
-      <span>
-        DNS Settings
-      </span>
     </div>
   }
 >
-  <p>
-    enter panel contents here...
-  </p>
+  <Box
+    as="hr"
+    mt="400"
+  />
+  <Panel.Section>
+    <p>
+      enter panel contents here...
+    </p>
+  </Panel.Section>
 </Panel>
 `;

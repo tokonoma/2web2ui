@@ -1,7 +1,6 @@
 import React from 'react';
 import { Send } from '@sparkpost/matchbox-icons';
-import { Card, CardTitle, CardContent, CardActions } from 'src/components';
-import ButtonWrapper from 'src/components/buttonWrapper';
+import { ButtonWrapper, Card, CardTitle, CardContent, CardActions } from 'src/components';
 import { Grid, Button, Panel } from 'src/components/matchbox';
 import GuideBreadCrumbs from './GuideBreadCrumbs';
 import { useGuideContext } from './GettingStartedGuide';

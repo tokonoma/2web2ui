@@ -1,14 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
-import { RadioGroup, TextFieldWrapper } from 'src/components';
+import { ButtonWrapper, RadioGroup, TextFieldWrapper } from 'src/components';
 import { Field } from 'redux-form';
 import SubaccountSection from 'src/components/subaccountSection';
 import { required, email, maxLength } from 'src/helpers/validation';
 import { Button, Panel } from 'src/components/matchbox';
 import { submitRTBFRequest, submitOptOutRequest } from 'src/actions/dataPrivacy';
 import { showAlert } from 'src/actions/globalAlert';
-import ButtonWrapper from 'src/components/buttonWrapper';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 import styles from './DataPrivacy.module.scss';
 import { REQUEST_TYPES, SUBACCOUNT_ITEMS, SUBACCOUNT_OPTIONS } from '../constants';

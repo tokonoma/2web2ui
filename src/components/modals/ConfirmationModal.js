@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Modal, Panel } from 'src/components/matchbox';
-import ButtonWrapper from 'src/components/buttonWrapper';
+import { ButtonWrapper } from 'src/components';
 import PanelLoading from 'src/components/panelLoading';
 import { useHibana } from 'src/context/HibanaContext';
 
@@ -14,6 +14,8 @@ export default function ConfirmationModal(props) {
     confirming,
     content = children,
     onConfirm,
+    confirmVariant = 'primary',
+    cancelVariant = 'secondary',
     onCancel,
     confirmVerb = 'Confirm',
     cancelVerb = 'Cancel',
@@ -26,14 +28,14 @@ export default function ConfirmationModal(props) {
         {content}
         <ButtonWrapper>
           <Button
-            variant="primary"
+            variant={confirmVariant}
             disabled={confirming}
             name="confirmation-modal-confirm-button"
             onClick={onConfirm}
           >
             {confirmVerb}
           </Button>
-          <Button variant="secondary" onClick={onCancel}>
+          <Button variant={cancelVariant} onClick={onCancel}>
             {cancelVerb}
           </Button>
         </ButtonWrapper>
@@ -47,7 +49,7 @@ export default function ConfirmationModal(props) {
   return (
     <Modal open={open} onClose={onCancel} showCloseButton={isHibanaEnabled || showCloseButton}>
       {isPending ? (
-        <PanelLoading />
+        <PanelLoading minHeight="200px" title={title} />
       ) : (
         <Panel title={title} sectioned>
           {renderContent()}

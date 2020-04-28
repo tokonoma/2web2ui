@@ -1,15 +1,15 @@
 import React from 'react';
 import { Field, Form } from 'redux-form';
-import { Grid, Button, Page, Panel } from 'src/components/matchbox';
+import { Grid, Button, Page, Panel, Stack } from 'src/components/matchbox';
 import ContentEditor from 'src/components/contentEditor';
-import { PageLink } from 'src/components/links';
+import { ExternalLink, PageLink } from 'src/components/links';
 import Loading from 'src/components/loading';
 import TextFieldWrapper from 'src/components/reduxFormWrappers/TextFieldWrapper';
 import SubaccountSection from 'src/components/subaccountSection';
+import { LINKS } from 'src/constants';
 import { slugify } from 'src/helpers/string';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { maxLength, required, slug } from 'src/helpers/validation';
-import IdentifierHelpText from './components/IdentifierHelpText';
 
 export default class CreatePage extends React.Component {
   componentDidMount() {
@@ -55,8 +55,8 @@ export default class CreatePage extends React.Component {
 
     return (
       <Page
-        title={snippetToDuplicate ? 'Duplicate Snippet' : 'New Snippet'}
-        breadcrumbAction={{ Component: PageLink, content: 'Snippets', to: '/snippets' }}
+        title={snippetToDuplicate ? 'Duplicate Snippet' : 'Create a Snippet'}
+        breadcrumbAction={{ Component: PageLink, content: 'View All Snippets', to: '/snippets' }}
         primaryAction={{
           Component: Button,
           content: 'Create Snippet',
@@ -66,8 +66,8 @@ export default class CreatePage extends React.Component {
         <Form onSubmit={this.submitSnippet}>
           <Grid>
             <Grid.Column xs={12} lg={4}>
-              <Panel>
-                <Panel.Section>
+              <Panel sectioned>
+                <Stack>
                   <Field
                     name="name"
                     component={TextFieldWrapper}
@@ -75,21 +75,22 @@ export default class CreatePage extends React.Component {
                     label="Snippet Name"
                     onChange={this.fillIdField}
                     validate={[required, maxLength(64)]}
+                    helpText={
+                      <ExternalLink to={LINKS.SNIPPET_API_DOCS}>
+                        Learn more about Snippets
+                      </ExternalLink>
+                    }
                   />
                   <Field
                     name="id"
                     component={TextFieldWrapper}
                     disabled={submitting}
-                    helpText={<IdentifierHelpText />}
+                    helpText="This is a unique identifier to reference your snippet in a template."
                     label="Snippet ID"
                     validate={[required, slug, maxLength(64)]}
                   />
-                </Panel.Section>
-                {hasSubaccounts && (
-                  <Panel.Section>
-                    <SubaccountSection newTemplate={true} disabled={submitting} />
-                  </Panel.Section>
-                )}
+                  {hasSubaccounts && <SubaccountSection newTemplate={true} disabled={submitting} />}
+                </Stack>
               </Panel>
             </Grid.Column>
             <Grid.Column xs={12} lg={8}>

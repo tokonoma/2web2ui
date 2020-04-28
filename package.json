@@ -10,22 +10,24 @@
   "scripts": {
     "start": "FORCE_COLOR=true nf start --port 3100",
     "start-app": "REACT_APP_VERSION=local-$USER-$(git rev-parse HEAD) node scripts/start.js",
+    "start-app-hibana": "REACT_APP_DEFAULT_TO_HIBANA=true npm run start-app",
     "build": "node scripts/build.js",
     "analyze": "source-map-explorer build/static/js/main.*",
     "test": "node scripts/test.js --env=jsdom --config=./jest.config.js",
     "test-coverage": "npm test -- --coverage",
-    "test-ci": "CI=true npm test -- --coverage --colors",
+    "test-ci": "CI=true npm test -- --coverage --colors --maxWorkers=2",
     "test-cy-env": "node ./scripts/generateCypressEnv",
     "test-cy-run": "cypress run --config integrationFolder=cypress/tests/integration",
     "test-e2e": "npm run test-cy-env && cypress open --config integrationFolder=cypress/tests/e2e",
     "test-e2e-headless": "cypress run --config integrationFolder=cypress/tests/e2e",
     "test-e2e-ci": "npm run start-app & wait-on http://localhost:3100 && npm run test-e2e-headless",
     "test-integration": "npm run test-cy-env && cypress open --config integrationFolder=cypress/tests/integration",
-    "test-integration-headless": "node scripts/cypressIntegration.js",
-    "test-integration-ci": "npm run start-app & wait-on http://localhost:3100 && sleep 90 && node scripts/cypressIntegration.js",
+    "test-integration-hibana": "CYPRESS_DEFAULT_TO_HIBANA=true npm run test-cy-env && cypress open --config integrationFolder=cypress/tests/integration",
+    "test-integration-headless": "npm run test-cy-env && cypress run --config integrationFolder=cypress/tests/integration",
+    "test-integration-ci": "npm run start-app & wait-on http://localhost:3100 && sleep 60 && cypress run --config integrationFolder=cypress/tests/integration numTestsKeptInMemory=1",
+    "test-integration-ci-hibana": "CYPRESS_DEFAULT_TO_HIBANA=true npm run start-app-hibana & wait-on http://localhost:3100 && sleep 60 && cypress run --config integrationFolder=cypress/tests/integration numTestsKeptInMemory=1",
     "storybook-dev": "start-storybook --port 3101 --config-dir .storybook --docs --quiet",
-    "storybook-build": "build-storybook --config-dir .storybook --output-dir .out --docs",
-    "travis": "npm run test-ci && npm run build"
+    "storybook-build": "build-storybook --config-dir .storybook --output-dir .out --docs"
   },
   "husky": {
     "hooks": {
@@ -66,12 +68,15 @@
   "bugs": {
     "url": "https://github.com/SparkPost/2web2ui/issues"
   },
+  "jest-junit": {
+    "outputDirectory": "test_results/junit"
+  },
   "dependencies": {
     "@css-modules-theme/core": "^2.2.0",
     "@sparkpost/boomerang": "^1.0.6",
-    "@sparkpost/design-tokens-hibana": "npm:@sparkpost/design-tokens@^1.0.0-beta.16",
+    "@sparkpost/design-tokens-hibana": "npm:@sparkpost/design-tokens@^1.0.0-beta.19",
     "@sparkpost/matchbox": "^3.9.1",
-    "@sparkpost/matchbox-hibana": "npm:@sparkpost/matchbox@^4.0.0-hibana.16",
+    "@sparkpost/matchbox-hibana": "npm:@sparkpost/matchbox@4.0.0-hibana.17",
     "@sparkpost/matchbox-icons": "^1.2.1",
     "@styled-system/props": "^5.1.5",
     "axios": "^0.18.0",
@@ -151,6 +156,7 @@
     "cssnano": "^4.0.3",
     "cypress": "^4.4.0",
     "cypress-file-upload": "^3.5.3",
+    "cypress-multi-reporters": "^1.2.4",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.11.2",
     "enzyme-to-json": "^3.3.1",
@@ -180,10 +186,13 @@
     "jest-enzyme": "^7.0.0",
     "jest-in-case": "^1.0.2",
     "jest-junit": "^6.2.1",
+    "jest-junit-reporter": "^1.1.0",
     "lint-staged": "^8.0.4",
     "mdx-loader": "^1.1.0",
     "mdxc": "^1.1.1",
     "mini-css-extract-plugin": "0.5.0",
+    "mocha": "^7.1.2",
+    "mocha-junit-reporter": "^1.23.3",
     "moment-timezone": "^0.5.14",
     "node-sass": "^4.9.3",
     "object-assign": "^4.1.1",

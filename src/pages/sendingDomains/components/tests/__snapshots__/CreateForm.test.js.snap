@@ -5,35 +5,53 @@ exports[`Sending Domains Create Form renders correctly 1`] = `
   onSubmit={[MockFunction]}
 >
   <Panel.Section>
-    <p>
-      We recommend using a subdomain e.g. 
-      <em>
-        mail.mydomain.com
-      </em>
-      . Depending on how you want to use your domain, you may not be able to completely configure your DNS records if you use your organizational domain.
-    </p>
-    <Field
-      component={[Function]}
-      disabled={false}
-      label="Domain Name"
-      name="domain"
-      placeholder="email.example.com"
-      validate={
-        Array [
-          [Function],
-          [Function],
-        ]
-      }
-    />
+    <Box
+      maxWidth="860px"
+    >
+      <Stack>
+        <p>
+          We recommend using a subdomain e.g. 
+          <em>
+            mail.mydomain.com
+          </em>
+          . Depending on how you want to use your domain, you may not be able to completely configure your DNS records if you use your organizational domain.
+        </p>
+        <Field
+          component={[Function]}
+          disabled={false}
+          label="Domain Name"
+          name="domain"
+          placeholder="email.example.com"
+          validate={
+            Array [
+              [Function],
+              [Function],
+            ]
+          }
+        />
+      </Stack>
+    </Box>
   </Panel.Section>
   <Panel.Section>
-    <Button
-      disabled={false}
-      primary={true}
-      submit={true}
+    <ButtonWrapper
+      marginTop="0"
     >
-      Add Domain
-    </Button>
+      <Button
+        disabled={false}
+        submit={true}
+        variant="primary"
+      >
+        Add a Domain
+      </Button>
+      <PageLink
+        as={[Function]}
+        disabled={false}
+        to="/account/sending-domains"
+        variant="secondary"
+      >
+        Cancel
+      </PageLink>
+    </ButtonWrapper>
   </Panel.Section>
 </form>
 `;
@@ -43,35 +61,53 @@ exports[`Sending Domains Create Form renders submitting state correctly 1`] = `
   onSubmit={[MockFunction]}
 >
   <Panel.Section>
-    <p>
-      We recommend using a subdomain e.g. 
-      <em>
-        mail.mydomain.com
-      </em>
-      . Depending on how you want to use your domain, you may not be able to completely configure your DNS records if you use your organizational domain.
-    </p>
-    <Field
-      component={[Function]}
-      disabled={true}
-      label="Domain Name"
-      name="domain"
-      placeholder="email.example.com"
-      validate={
-        Array [
-          [Function],
-          [Function],
-        ]
-      }
-    />
+    <Box
+      maxWidth="860px"
+    >
+      <Stack>
+        <p>
+          We recommend using a subdomain e.g. 
+          <em>
+            mail.mydomain.com
+          </em>
+          . Depending on how you want to use your domain, you may not be able to completely configure your DNS records if you use your organizational domain.
+        </p>
+        <Field
+          component={[Function]}
+          disabled={true}
+          label="Domain Name"
+          name="domain"
+          placeholder="email.example.com"
+          validate={
+            Array [
+              [Function],
+              [Function],
+            ]
+          }
+        />
+      </Stack>
+    </Box>
   </Panel.Section>
   <Panel.Section>
-    <Button
-      disabled={true}
-      primary={true}
-      submit={true}
+    <ButtonWrapper
+      marginTop="0"
     >
-      Submitting...
-    </Button>
+      <Button
+        disabled={true}
+        submit={true}
+        variant="primary"
+      >
+        Submitting...
+      </Button>
+      <PageLink
+        as={[Function]}
+        disabled={true}
+        to="/account/sending-domains"
+        variant="secondary"
+      >
+        Cancel
+      </PageLink>
+    </ButtonWrapper>
   </Panel.Section>
 </form>
 `;

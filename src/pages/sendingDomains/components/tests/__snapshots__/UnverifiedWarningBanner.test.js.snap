@@ -2,13 +2,6 @@
 
 exports[`Component: Unverified Domain Warning Banner renders correctly 1`] = `
 <Banner
-  action={
-    Object {
-      "content": "Learn more about review requirements",
-      "external": true,
-      "to": "https://www.sparkpost.com/docs/getting-started/requirements-for-sending-domains",
-    }
-  }
   my="300"
   status="warning"
   title="Unverified sending domains will be removed two weeks after creation."
@@ -16,5 +9,13 @@ exports[`Component: Unverified Domain Warning Banner renders correctly 1`] = `
   <p>
     All domains will also need a clear web presence to pass verification.
   </p>
+  <ButtonWrapper>
+    <ExternalLink
+      flat={true}
+      to="https://www.sparkpost.com/docs/getting-started/requirements-for-sending-domains"
+    >
+      Learn more about review requirements
+    </ExternalLink>
+  </ButtonWrapper>
 </Banner>
 `;

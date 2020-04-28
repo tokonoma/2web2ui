@@ -28,6 +28,6 @@ describe('LabelledValue Component', () => {
 
   it('should render with unbolded value', () => {
     const wrapper = subject({ bold: false, value: 'example' });
-    expect(wrapper.find('p')).toHaveProp('children', 'example');
+    expect(wrapper.find('div[name="value"]')).toHaveProp('children', 'example');
   });
 });

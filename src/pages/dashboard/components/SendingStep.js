@@ -1,9 +1,8 @@
 import React from 'react';
 import GuideBreadCrumbs from './GuideBreadCrumbs';
 import { useGuideContext } from './GettingStartedGuide';
-import { Card, CardContent, CardActions } from 'src/components';
-import ButtonWrapper from 'src/components/buttonWrapper';
-import { Grid, Button, Panel, Box, Text } from 'src/components/matchbox';
+import { ButtonWrapper, Card, CardContent, CardActions } from 'src/components';
+import { Box, Button, Grid, Panel, Text } from 'src/components/matchbox';
 import useHibanaToggle from 'src/hooks/useHibanaToggle';
 import { SENDING_STEP_LIST } from '../constants';
 import styles from './SendingStep.module.scss';
