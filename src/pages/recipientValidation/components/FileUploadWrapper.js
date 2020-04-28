@@ -10,7 +10,7 @@ import OGStyles from './FileUploadWrapper.module.scss';
 import hibanaStyles from './FileUploadWrapperHibana.module.scss';
 import useHibanaOverride from 'src/hooks/useHibanaOverride';
 
-class FileUploadWrapperClass extends Component {
+export class FileUploadWrapperClass extends Component {
   handleCancel = () => {
     this.props.input.onBlur(); // run validation
   };

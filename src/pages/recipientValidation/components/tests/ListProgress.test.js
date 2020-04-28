@@ -1,6 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ListProgress } from '../ListProgress';
+import styles from './ListProgress.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
+
+jest.mock('src/hooks/useHibanaOverride');
 
 /* eslint-disable jest/no-test-callback */
 describe('ListProgress', () => {
@@ -20,6 +24,7 @@ describe('ListProgress', () => {
     );
 
   beforeEach(() => {
+    useHibanaOverride.mockImplementationOnce(() => styles);
     React.useEffect = jest.fn(effect => effect());
   });
 

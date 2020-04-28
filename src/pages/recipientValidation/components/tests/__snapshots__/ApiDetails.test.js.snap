@@ -21,16 +21,16 @@ exports[`ApiDetails tab should render page correctly 1`] = `
         <br />
         Block fake emails and catch typos with a single API request.
       </p>
-      <div
-        className="SampleRequest"
-      >
+      <div>
+        <div
+          className="SubHeader"
+        >
+          GET
+        </div>
         <small>
-          <span
-            className="Method"
+          <code
+            className="ExampleMethod"
           >
-            GET
-          </span>
-          <code>
             /api/v1/recipient-validation/single/
             {
             address

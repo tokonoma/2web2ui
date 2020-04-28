@@ -106,6 +106,7 @@ exports[`Support Form Component Form should render support form 1`] = `
     <Button
       primary={true}
       submit={true}
+      variant="primary"
     >
       Submit Ticket
     </Button>
@@ -162,6 +163,7 @@ exports[`Support Form Component Form should render with selected issue message l
     <Button
       primary={true}
       submit={true}
+      variant="primary"
     >
       Submit Ticket
     </Button>

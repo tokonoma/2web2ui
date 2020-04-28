@@ -53,6 +53,7 @@ exports[`ListProgress renders status and progress bar 1`] = `
     as={[Function]}
     color="orange"
     to="/recipient-validation"
+    variant="primary"
   >
     Validate Another
   </PageLink>

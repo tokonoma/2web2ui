@@ -117,7 +117,7 @@ export class SupportForm extends Component {
           </Stack>
         </Panel.Section>
         <Panel.Section>
-          <Button submit primary disabled={pristine || invalid || submitting}>
+          <Button variant="primary" submit primary disabled={pristine || invalid || submitting}>
             {submitting ? 'Submitting' : 'Submit Ticket'}
           </Button>
         </Panel.Section>
