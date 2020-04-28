@@ -72,7 +72,7 @@ export function SingleResult(props) {
 
               <ResultList data={singleResults} />
 
-              <PageLink as={Button} color="orange" to={SINGLE_RV_LINK}>
+              <PageLink as={Button} variant="primary" color="orange" to={SINGLE_RV_LINK}>
                 Validate Another
               </PageLink>
             </div>

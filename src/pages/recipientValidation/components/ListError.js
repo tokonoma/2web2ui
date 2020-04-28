@@ -40,7 +40,12 @@ const ListError = () => (
     {/* eslint-enable no-restricted-syntax */}
 
     <div className={styles.ListErrorButtonWrapper}>
-      <Button color="orange" to="/recipient-validation" className={styles.ListErrorButtonPrimary}>
+      <Button
+        variant="primary"
+        color="orange"
+        to="/recipient-validation"
+        className={styles.ListErrorButtonPrimary}
+      >
         Got It
       </Button>
     </div>

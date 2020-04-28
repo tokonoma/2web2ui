@@ -9,7 +9,10 @@ import withContext from 'src/context/withContext';
 import { lerp } from 'src/helpers/math';
 import { showAlert } from 'src/actions/globalAlert';
 import JobStatusTag from './JobStatusTag';
-import styles from './ListProgress.module.scss';
+
+import OGStyles from './ListProgress.module.scss';
+import hibanaStyles from './ListProgressHibana.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 
 const BATCH_STATUS = [
   'batch_triggered',
@@ -32,6 +35,7 @@ export const ListProgress = ({
   startPolling,
   stopPolling,
 }) => {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
   const percentage =
     BATCH_STATUS.findIndex(batchStatus => batchStatus === status) / (BATCH_STATUS.length - 1);
   const formattedPercentage = lerp(0, 100, percentage);
@@ -97,7 +101,8 @@ export const ListProgress = ({
           </div>
         )}
       </div>
-      <PageLink as={Button} color="orange" to="/recipient-validation">
+
+      <PageLink as={Button} variant="primary" color="orange" to="/recipient-validation">
         Validate Another
       </PageLink>
     </FocusContainer>
