@@ -23,21 +23,27 @@ describe('The log in page', () => {
   });
 
   it('has a link to the forgot password flow', () => {
-    cy.findByText('Forgot your password?').click();
+    cy.findByText('Forgot your password?')
+      .focus()
+      .click();
 
     cy.title().should('include', 'Reset Password');
     cy.findByText('Reset Your Password').should('be.visible');
   });
 
   it('has a link to the sign up flow', () => {
-    cy.findByText('Sign up').click();
+    cy.findByText('Sign up')
+      .focus()
+      .click();
 
     cy.title().should('include', 'Sign Up');
     cy.findByText('Sign Up for SparkPost').should('be.visible');
   });
 
   it('has a link to the single sign-on flow', () => {
-    cy.findByText('Single Sign-On').click();
+    cy.findByText('Single Sign-On')
+      .focus()
+      .click();
 
     cy.title().should('include', 'Single Sign-On');
     cy.findByText('Single Sign-On').should('be.visible');
