@@ -1,156 +1,141 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<Fragment>
-  <form>
-    <Stack>
-      <Field
-        autoFocus={true}
-        component={[Function]}
-        id="username"
-        label="Email or Username"
-        name="username"
-        normalize={[Function]}
-        validate={[Function]}
-      />
-      <Field
-        component={[Function]}
-        helpText={
-          <PageLink
-            to="/forgot-password"
-          >
-            Forgot your password?
-          </PageLink>
-        }
-        id="password"
-        label="Password"
-        name="password"
-        type="password"
-      />
-      <Field
-        component={[Function]}
-        id="rememberMe"
-        label="Keep me logged in"
-        name="rememberMe"
-      />
-      <Box>
-        <Button
-          data-id="button-log-in"
-          disabled={false}
-          submit={true}
-          variant="primary"
+<form>
+  <Stack>
+    <Field
+      component={[Function]}
+      id="username"
+      label="Email or Username"
+      name="username"
+      normalize={[Function]}
+      validate={[Function]}
+    />
+    <Field
+      component={[Function]}
+      helpText={
+        <PageLink
+          to="/forgot-password"
         >
-          Log In
-        </Button>
-      </Box>
-    </Stack>
-  </form>
-</Fragment>
+          Forgot your password?
+        </PageLink>
+      }
+      id="password"
+      label="Password"
+      name="password"
+      type="password"
+    />
+    <Field
+      component={[Function]}
+      id="rememberMe"
+      label="Keep me logged in"
+      name="rememberMe"
+    />
+    <Box>
+      <Button
+        data-id="button-log-in"
+        disabled={false}
+        submit={true}
+        variant="primary"
+      >
+        Log In
+      </Button>
+    </Box>
+  </Stack>
+</form>
 `;
 
 exports[`renders correctly when logging in 1`] = `
-<Fragment>
-  <form>
-    <Stack>
-      <Field
-        autoFocus={true}
-        component={[Function]}
-        id="username"
-        label="Email or Username"
-        name="username"
-        normalize={[Function]}
-        validate={[Function]}
-      />
-      <Field
-        component={[Function]}
-        helpText={
-          <PageLink
-            to="/forgot-password"
-          >
-            Forgot your password?
-          </PageLink>
-        }
-        id="password"
-        label="Password"
-        name="password"
-        type="password"
-      />
-      <Field
-        component={[Function]}
-        id="rememberMe"
-        label="Keep me logged in"
-        name="rememberMe"
-      />
-      <Box>
-        <Button
-          data-id="button-log-in"
-          disabled={true}
-          submit={true}
-          variant="primary"
+<form>
+  <Stack>
+    <Field
+      component={[Function]}
+      id="username"
+      label="Email or Username"
+      name="username"
+      normalize={[Function]}
+      validate={[Function]}
+    />
+    <Field
+      component={[Function]}
+      helpText={
+        <PageLink
+          to="/forgot-password"
         >
-          Logging In
-        </Button>
-      </Box>
-    </Stack>
-  </form>
-</Fragment>
+          Forgot your password?
+        </PageLink>
+      }
+      id="password"
+      label="Password"
+      name="password"
+      type="password"
+    />
+    <Field
+      component={[Function]}
+      id="rememberMe"
+      label="Keep me logged in"
+      name="rememberMe"
+    />
+    <Box>
+      <Button
+        data-id="button-log-in"
+        disabled={true}
+        submit={true}
+        variant="primary"
+      >
+        Logging In
+      </Button>
+    </Box>
+  </Stack>
+</form>
 `;
 
 exports[`renders errors 1`] = `
-<Fragment>
-  <div
-    style={
-      Object {
-        "marginBottom": "12px",
-      }
-    }
-  >
-    <Error
-      error="asplode"
+<form>
+  <Stack>
+    <BottomPad>
+      <Error
+        error="asplode"
+      />
+    </BottomPad>
+    <Field
+      component={[Function]}
+      id="username"
+      label="Email or Username"
+      name="username"
+      normalize={[Function]}
+      validate={[Function]}
     />
-  </div>
-  <form>
-    <Stack>
-      <Field
-        autoFocus={true}
-        component={[Function]}
-        id="username"
-        label="Email or Username"
-        name="username"
-        normalize={[Function]}
-        validate={[Function]}
-      />
-      <Field
-        component={[Function]}
-        helpText={
-          <PageLink
-            to="/forgot-password"
-          >
-            Forgot your password?
-          </PageLink>
-        }
-        id="password"
-        label="Password"
-        name="password"
-        type="password"
-      />
-      <Field
-        component={[Function]}
-        id="rememberMe"
-        label="Keep me logged in"
-        name="rememberMe"
-      />
-      <Box>
-        <Button
-          data-id="button-log-in"
-          disabled={false}
-          submit={true}
-          variant="primary"
+    <Field
+      component={[Function]}
+      helpText={
+        <PageLink
+          to="/forgot-password"
         >
-          Log In
-        </Button>
-      </Box>
-    </Stack>
-  </form>
-</Fragment>
+          Forgot your password?
+        </PageLink>
+      }
+      id="password"
+      label="Password"
+      name="password"
+      type="password"
+    />
+    <Field
+      component={[Function]}
+      id="rememberMe"
+      label="Keep me logged in"
+      name="rememberMe"
+    />
+    <Box>
+      <Button
+        data-id="button-log-in"
+        disabled={false}
+        submit={true}
+        variant="primary"
+      >
+        Log In
+      </Button>
+    </Box>
+  </Stack>
+</form>
 `;
