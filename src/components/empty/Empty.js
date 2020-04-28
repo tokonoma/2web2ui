@@ -42,15 +42,14 @@ function WrappingComponent(props) {
   return <>{children}</>;
 }
 
-function Empty({ title, message }) {
-  return useHibanaToggle(OGEmpty, HibanaEmpty)({ title, message });
+function Empty(props) {
+  return useHibanaToggle(OGEmpty, HibanaEmpty)(props);
 }
 
 Empty.propTypes = {
   title: PropTypes.string,
   message: PropTypes.string,
   className: PropTypes.string,
-  hasPanel: PropTypes.bool,
 };
 
 Empty.defaultProps = {
