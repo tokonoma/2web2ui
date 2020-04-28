@@ -43,11 +43,11 @@ exports[`IP Pools Edit Page render tests should not show purchase action if show
       as={[Function]}
     >
       <Box
-        border="1px solid #c5ced6"
-        borderBottom="0"
-        borderRadius={1}
-        borderTopWidth={1}
-        padding={400}
+        as={[Function]}
+        borderBottom={0}
+        marginBottom={0}
+        sectioned={true}
+        title="Sending IPs"
       >
         <p>
           <span>
@@ -116,11 +116,11 @@ exports[`IP Pools Edit Page render tests should render the edit page correctly 1
       as={[Function]}
     >
       <Box
-        border="1px solid #c5ced6"
-        borderBottom="0"
-        borderRadius={1}
-        borderTopWidth={1}
-        padding={400}
+        as={[Function]}
+        borderBottom={0}
+        marginBottom={0}
+        sectioned={true}
+        title="Sending IPs"
       >
         <p>
           <span>

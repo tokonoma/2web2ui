@@ -134,13 +134,7 @@ export class EditPage extends Component {
     return (
       <OGOnlyWrapper as={Panel} title="Sending IPs">
         <OGOnlyWrapper as={Panel.Section}>
-          <Box
-            border="1px solid #c5ced6"
-            borderRadius={1}
-            borderTopWidth={1}
-            padding={400}
-            borderBottom="0"
-          >
+          <Box as={Panel} title="Sending IPs" sectioned marginBottom={0} borderBottom={0}>
             <p>
               {!ips && <span>There are no IPs in this pool. </span>}
               Add dedicated IPs to this pool by moving them from their current pool{purchaseCTA}.

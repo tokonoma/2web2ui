@@ -165,7 +165,7 @@ export const IpForm = props => {
         </Panel.Section>
 
         <Panel.Section>
-          <ButtonWrapper>
+          <ButtonWrapper marginTop="0">
             <Button
               variant="primary"
               disabled={submitting || pristine}
