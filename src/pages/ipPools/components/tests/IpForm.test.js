@@ -1,7 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { IpForm } from '../IpForm';
-
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
+import styles from './IpForm.module.scss';
+jest.mock('src/hooks/useHibanaOverride');
+useHibanaOverride.mockReturnValue(styles);
 describe('Edit IP form', () => {
   const subject = props => {
     const defaultProps = {

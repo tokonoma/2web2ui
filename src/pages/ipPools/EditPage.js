@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ApiErrorBanner, DeleteModal, Loading } from 'src/components';
-import { Page, Panel } from 'src/components/matchbox';
+import { Box, Page, Panel } from 'src/components/matchbox';
+import { OGOnlyWrapper } from 'src/components/hibana';
 import PoolForm from './components/PoolForm';
 import IpList from './components/IpList';
 
@@ -131,16 +132,18 @@ export class EditPage extends Component {
     ) : null;
 
     return (
-      <Panel title="Sending IPs">
-        <Panel.Section>
-          <p>
-            {!ips && <span>There are no IPs in this pool. </span>}
-            Add dedicated IPs to this pool by moving them from their current pool{purchaseCTA}.
-            {ips && <span> Click on existing Sending IP to modify.</span>}
-          </p>
-        </Panel.Section>
+      <OGOnlyWrapper as={Panel} title="Sending IPs">
+        <OGOnlyWrapper as={Panel.Section}>
+          <Box as={Panel} title="Sending IPs" sectioned marginBottom={0} borderBottom={0}>
+            <p>
+              {!ips && <span>There are no IPs in this pool. </span>}
+              Add dedicated IPs to this pool by moving them from their current pool{purchaseCTA}.
+              {ips && <span> Click on existing Sending IP to modify.</span>}
+            </p>
+          </Box>
+        </OGOnlyWrapper>
         {ips && <IpList ips={ips} pool={pool} />}
-      </Panel>
+      </OGOnlyWrapper>
     );
   }
 
