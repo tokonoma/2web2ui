@@ -2,6 +2,7 @@
 
 exports[`EngagementChart renders empty panel 1`] = `
 <Empty
+  hasPanel={true}
   message="No engagement to report"
 />
 `;

@@ -251,6 +251,7 @@ exports[`BouncePage:  should render correctly with no bounces 1`] = `
     }
   />
   <Empty
+    hasPanel={true}
     message="No bounces to report"
   />
   <hr />
@@ -438,6 +439,7 @@ exports[`BouncePage:  should show empty reasons table when there are no admin re
   />
   <hr />
   <Empty
+    hasPanel={true}
     message="No bounce reasons to report"
   />
 </Page>
@@ -497,6 +499,7 @@ exports[`BouncePage:  should show empty reasons table when there are no reasons 
   />
   <hr />
   <Empty
+    hasPanel={true}
     message="No bounce reasons to report"
   />
 </Page>

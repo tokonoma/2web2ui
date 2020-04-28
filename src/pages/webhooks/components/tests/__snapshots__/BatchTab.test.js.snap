@@ -97,6 +97,7 @@ exports[`Webhook Component: Batch Status Tab should show empty message when no b
     </Button>
   </Panel.Section>
   <Empty
+    hasPanel={true}
     message="There are no batches for your webhook"
   />
 </Panel>
