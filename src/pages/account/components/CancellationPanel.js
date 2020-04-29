@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetch as fetchAccount, renewAccount } from 'src/actions/account';
 import { PageLink } from 'src/components/links';
-import { Button, Panel } from 'src/components/matchbox';
+import { Button, Panel, Stack } from 'src/components/matchbox';
 import { showAlert } from 'src/actions/globalAlert';
 import config from 'src/config';
 import Brightback from 'src/components/brightback/Brightback';
@@ -41,37 +41,43 @@ export class CancellationPanel extends React.Component {
     }
 
     return (
-      <Panel sectioned title="Request Account Cancellation">
-        <p>
-          If you choose to cancel your account, it will be cancelled at the end of your billing
-          cycle. You can change your mind at any time until 8am UTC on the date of cancellation.
-        </p>
-        <div>
-          <span>Before your cancellation date:</span>
-          <ul>
-            <li>You can continue to send up to your monthly limit.</li>
-            <li>You may not go into overage.</li>
-            <li>You may not use our recipient validation feature.</li>
-          </ul>
-        </div>
-        <div>
-          <span>After your cancellation date:</span>
-          <ul>
-            <li>You will no longer be able to log in using your account credentials.</li>
-            <li>You will no longer be able to send email or make API calls using your API keys.</li>
-            <li>
-              Any dedicated IPs on your account will be unrecoverable and may be assigned to other
-              SparkPost accounts.
-            </li>
-          </ul>
-        </div>
-        <div>
+      <Panel title="Request Account Cancellation">
+        <Panel.Section>
+          <Stack>
+            <p>
+              If you choose to cancel your account, it will be cancelled at the end of your billing
+              cycle. You can change your mind at any time until 8am UTC on the date of cancellation.
+            </p>
+            <div>
+              <span>Before your cancellation date:</span>
+              <ul>
+                <li>You can continue to send up to your monthly limit.</li>
+                <li>You may not go into overage.</li>
+                <li>You may not use our recipient validation feature.</li>
+              </ul>
+            </div>
+            <div>
+              <span>After your cancellation date:</span>
+              <ul>
+                <li>You will no longer be able to log in using your account credentials.</li>
+                <li>
+                  You will no longer be able to send email or make API calls using your API keys.
+                </li>
+                <li>
+                  Any dedicated IPs on your account will be unrecoverable and may be assigned to
+                  other SparkPost accounts.
+                </li>
+              </ul>
+            </div>
+          </Stack>
+        </Panel.Section>
+        <Panel.Section>
           <Brightback
             config={config.brightback.cancelConfig}
             condition={true}
             render={({ to, enabled }) => (
               <Button
-                destructive
+                variant="destructive"
                 to={enabled ? to : ACCOUNT_CANCEL_LINK}
                 component={enabled ? null : PageLink}
               >
@@ -79,7 +85,7 @@ export class CancellationPanel extends React.Component {
               </Button>
             )}
           />
-        </div>
+        </Panel.Section>
       </Panel>
     );
   }
