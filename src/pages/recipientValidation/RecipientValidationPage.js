@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Launch } from '@sparkpost/matchbox-icons';
+import { ExternalLink } from 'src/components/links';
 import { Button, Page, Panel, Tabs } from 'src/components/matchbox';
 import { reduxForm } from 'redux-form';
 import _ from 'lodash';
@@ -19,6 +19,7 @@ import ApiDetails from './components/ApiDetails';
 import ValidateSection from './components/ValidateSection';
 import { FORMS } from 'src/constants';
 import RVPriceModal from './components/RVPriceModal';
+import { PageDescription } from 'src/components/text';
 
 import OGStyles from './RecipientValidationPage.module.scss';
 import hibanaStyles from './RecipientValidationPageHibana.module.scss';
@@ -153,16 +154,15 @@ export function RecipientValidationPage(props) {
           </Button>
         }
       >
-        <p className={styles.LeadText}>
+        <PageDescription>
           Recipient Validation is an easy, efficient way to verify that email addresses are valid
           before you send. We run each address through a series of checks to catch many common
           problems, including syntax errors and non-existent mailboxes, to drive better
           deliverability, cut down on fraud, and capture every opportunity.
-        </p>
+        </PageDescription>
         <Panel>
           <div className={styles.TabsWrapper}>
             <Tabs
-              my={[]}
               selected={selectedTab}
               connectBelow={true}
               tabs={tabs.map(({ content }, idx) => ({
@@ -172,15 +172,14 @@ export function RecipientValidationPage(props) {
             />
             {selectedTab === 2 && (
               <div className={styles.SecondaryActions}>
-                <Button
+                <ExternalLink
                   className={styles.ApiDocs}
+                  as={Button}
                   flat
-                  external
                   to="https://developers.sparkpost.com/api/recipient-validation/"
                 >
                   API Docs
-                  <Launch className={styles.LaunchIcon} />
-                </Button>
+                </ExternalLink>
               </div>
             )}
           </div>

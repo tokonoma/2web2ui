@@ -34,7 +34,7 @@ describe('The recipient validation API integration page', () => {
   });
 
   it('renders integration instructions and add credit card form with disabled submit button', () => {
-    cy.get('main').within(() => {
+    cy.withinMainContent(() => {
       cy.findByText('Integrate Now').should('be.visible');
       cy.findByText('/api/v1/recipient-validation/single/{address}').should('be.visible');
       cy.findByText('API Docs').should(

@@ -63,13 +63,9 @@ export const ApiIntegrationDocs = () => {
     <div className={styles.Container}>
       <Grid>
         <Grid.Column xs={12} md={6} lg={5}>
-          <br />
           <div className={styles.Header}>Integrate Now</div>
-          <p>
-            Validate an email the moment you receive it, in real-time.
-            <br />
-            Block fake emails and catch typos with a single API request.
-          </p>
+          <p>Validate an email the moment you receive it, in real-time.</p>
+          <p>Block fake emails and catch typos with a single API request.</p>
           {exampleMethod}
         </Grid.Column>
         <Grid.Column xs={12} md={6} lgOffset={1}>

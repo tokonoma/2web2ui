@@ -1,1 +1,31 @@
 @import '~@sparkpost/design-tokens-hibana/tokens';
+
+.Header {
+  margin-bottom: spacing(200);
+}
+
+.ListProgress {
+  margin: spacing(200) * 3 0;
+}
+
+.ListProgressContainer {
+  padding: spacing(0);
+}
+
+.ListProgressStatus {
+  margin-bottom: spacing(300);
+}
+
+.ProgressBar {
+  height: rem(10);
+  background: color(gray, 300);
+  border-bottom: none !important;
+  border-radius: border-radius(200);
+}
+
+.Progress {
+  height: rem(10);
+  background: color(blue, 700);
+  border-radius: border-radius(200);
+  box-shadow: shadow();
+}

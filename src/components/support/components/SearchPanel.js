@@ -35,5 +35,7 @@ const HibanaSearchPanel = ({ defaultSearchText }) => (
     </Panel.Section>
   </InstantSearch>
 );
+
 const SearchPanel = props => useHibanaToggle(OGSearchPanel, HibanaSearchPanel)(props);
+
 export default SearchPanel;

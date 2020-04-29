@@ -1,0 +1,14 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.Header {
+  margin-bottom: spacing(200);
+}
+
+.Description {
+  margin: spacing(400) 0;
+  font-weight: font-weight(light);
+}
+
+.List {
+  max-width: 600px;
+}

@@ -9,7 +9,9 @@ import styles from '../Tooltip.module.scss';
 jest.mock('src/hooks/useHibanaOverride');
 
 describe('renders tooltip correctly', () => {
-  useHibanaOverride.mockImplementationOnce(() => styles);
+  beforeEach(() => {
+    useHibanaOverride.mockImplementationOnce(() => styles);
+  });
 
   it('renders correctly icon', () => {
     expect(shallow(<Tooltip content="Here is content" />)).toMatchSnapshot();

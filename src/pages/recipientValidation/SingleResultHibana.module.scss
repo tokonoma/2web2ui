@@ -1,0 +1,53 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.Heading,
+.ApiHeading.ApiHeading {
+  font-size: font-size(200);
+  margin-bottom: spacing(100);
+}
+
+.Result {
+  font-size: font-size(100);
+  margin-bottom: spacing(400);
+}
+
+.ResultValue {
+  // font-size: 1.66rem;
+  // font-weight: 500;
+}
+
+.ResultDescription {
+  margin-bottom: spacing(300);
+}
+
+.ApiHeading {
+  color: color(gray, 900);
+}
+
+.ApiDescription {
+  margin-bottom: spacing(500);
+}
+
+.ResultList {
+  margin-bottom: spacing(800);
+}
+
+.ResultListItem {
+  padding: spacing(300) 0;
+
+  + .ResultListItem {
+    border-top: 1px solid color(gray, 700);
+  }
+}
+
+.CodeSnippet {
+  color: color(blue, 100);
+}
+
+.WhiteText {
+  color: color(gray, 900);
+}
+
+.SubSection {
+  padding: spacing(500);
+}

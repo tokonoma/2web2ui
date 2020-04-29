@@ -1,18 +1,14 @@
 @import '~@sparkpost/design-tokens-hibana/tokens';
 
-.LeadText {
-  font-weight: font-weight(light);
-  font-size: font-size(400);
+.TabPadding {
+  padding: 0 spacing(300);
 }
 
-.LaunchIcon {
-  color: color(gray, 700);
-  margin-left: spacing(100);
+.SecondaryActions {
+  margin-right: spacing(300);
 }
 
 .ApiDocs {
-  font-weight: font-weight(normal);
-  font-size: font-size(200);
+  font-weight: font-weight(light);
   color: color(gray, 700) !important;
-  text-decoration: underline;
 }

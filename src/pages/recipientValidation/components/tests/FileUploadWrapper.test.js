@@ -1,8 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 
 import { FileUploadWrapperClass } from '../FileUploadWrapper';
 import styles from '../FileUploadWrapper.module.scss';
+
+jest.mock('src/hooks/useHibanaOverride');
 
 const defaults = {
   meta: {},
@@ -11,6 +14,10 @@ const defaults = {
 };
 
 describe('FileUploadWrapper', () => {
+  beforeEach(() => {
+    useHibanaOverride.mockImplementationOnce(() => styles);
+  });
+
   it('renders correctly', () => {
     const wrapper = shallow(<FileUploadWrapperClass {...defaults} />);
     expect(wrapper).toMatchSnapshot();

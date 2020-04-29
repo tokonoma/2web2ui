@@ -15,7 +15,6 @@ import { isManuallyBilled } from 'src/selectors/accountBillingInfo';
 import ListError from './components/ListError';
 import ListProgress from './components/ListProgress';
 import UploadedListForm from './components/UploadedListForm';
-import styles from './UploadedListPage.module.scss';
 import ValidateSection from './components/ValidateSection';
 import { FORMS } from 'src/constants';
 import { reduxForm } from 'redux-form';
@@ -25,9 +24,15 @@ import { getSubscription as getBillingSubscription } from 'src/actions/billing';
 import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
 
+import OGStyles from './UploadedListPage.module.scss';
+import hibanaStyles from './UploadedListPageHibana.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
+
 const FORMNAME = FORMS.RV_ADDPAYMENTFORM_UPLOADLISTPAGE;
 
 export function UploadedListPage(props) {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+
   const {
     getJobStatus,
     listId,

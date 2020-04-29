@@ -8,7 +8,7 @@ exports[`UploadedListForm should render correctly 1`] = `
     big-test.csv
   </h2>
   <p
-    className="descriptionParagraph"
+    className="DescriptionParagraph"
   >
     <span>
       Your list has been uploaded successfully and the cost to validate is below. 

@@ -82,7 +82,7 @@ export const ListProgress = ({
 
   return (
     <FocusContainer className={styles.ListProgressContainer}>
-      <h2>{filename}</h2>
+      <h2 className={styles.Header}>{filename}</h2>
       <p>
         <span>
           Your list is validating. You can track its progress on the recipient validation{' '}
@@ -102,7 +102,7 @@ export const ListProgress = ({
         )}
       </div>
 
-      <PageLink as={Button} variant="primary" color="orange" to="/recipient-validation">
+      <PageLink as={Button} variant="primary" to="/recipient-validation">
         Validate Another
       </PageLink>
     </FocusContainer>

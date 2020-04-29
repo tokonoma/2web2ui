@@ -1,0 +1,41 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.formContainer {
+}
+
+.CountBox {
+  border: none !important;
+  text-align: left;
+  font-size: font-size(300);
+  line-height: line-height(200);
+  font-weight: font-weight(normal);
+
+  .Number {
+    font-weight: 500;
+  }
+}
+
+.Cost {
+  font-size: font-size(300);
+  line-height: line-height(200);
+  font-weight: font-weight(normal);
+  display: inline-block;
+}
+
+.Header {
+  font-size: font-size(400);
+}
+
+.SubHeader {
+  font-weight: font-weight(medium);
+}
+
+.DescriptionParagraph {
+  margin-bottom: spacing(300);
+  font-size: font-size(300);
+}
+
+.LoadingCostContainer {
+  margin-top: 0.5em;
+  margin-right: 1em;
+}
