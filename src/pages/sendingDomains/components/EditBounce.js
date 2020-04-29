@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { update } from 'src/actions/sendingDomains';
 
 import { Help } from '@sparkpost/matchbox-icons';
-import { SubduedText } from 'src/components';
+import { SubduedText } from 'src/components/text';
 import { PageLink } from 'src/components/links';
 import { Banner, Panel, Tooltip } from 'src/components/matchbox';
 import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';

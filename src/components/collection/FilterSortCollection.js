@@ -4,8 +4,8 @@ import { Collection } from 'src/components/index';
 import _ from 'lodash';
 import styles from './FilterSortCollection.module.scss';
 import TableHeader from 'src/components/collection/TableHeader';
-
 import useHibanaToggle from 'src/hooks/useHibanaToggle';
+
 const OGFilterSortCollection = ({
   wrapperComponent,
   title,
@@ -163,7 +163,7 @@ const HibanaFilterSortCollection = ({
                 <h3>{title}</h3>
               </Panel.Section>
             )}
-            <Box justifyContent="center" alignItems="center" paddingTop="500" paddingY="500">
+            <Box justifyContent="center" alignItems="center" padding="500">
               <Grid>
                 <Grid.Column xs={12} md={9}>
                   {filterBox}

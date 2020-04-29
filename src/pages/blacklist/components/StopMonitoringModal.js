@@ -2,8 +2,7 @@ import React from 'react';
 import { Button, Panel, Modal } from 'src/components/matchbox';
 import { connect } from 'react-redux';
 import { domainRegex } from 'src/helpers/regex';
-import { Loading } from 'src/components';
-import styles from './StopMonitoringModal.module.scss';
+import { ButtonWrapper, PanelLoading } from 'src/components';
 import { deleteMonitor } from 'src/actions/blacklist';
 import { showAlert } from 'src/actions/globalAlert';
 
@@ -35,9 +34,12 @@ export const StopMonitoringModal = ({
           } from your watchlist means you won't get notified of changes, but don't
           worry you can always add it again later.`}
         </p>
-        <Button className={styles.Confirm} disabled={isPending} onClick={confirmAction} primary>
-          Stop Monitoring
-        </Button>
+
+        <ButtonWrapper>
+          <Button variant="primary" disabled={isPending} onClick={confirmAction}>
+            Stop Monitoring
+          </Button>
+        </ButtonWrapper>
       </>
     );
   };
@@ -46,15 +48,13 @@ export const StopMonitoringModal = ({
 
   return (
     <Modal open={Boolean(monitorToDelete)} onClose={closeModal} showCloseButton={true}>
-      <Panel title={title} sectioned>
-        {isPending ? (
-          <div className={styles.Loading}>
-            <Loading />
-          </div>
-        ) : (
-          renderContent()
-        )}
-      </Panel>
+      {isPending ? (
+        <PanelLoading minHeight="175px" />
+      ) : (
+        <Panel title={title} sectioned>
+          {renderContent()}
+        </Panel>
+      )}
     </Modal>
   );
 };

@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 // components
-import { SubduedText, LabelledValue } from 'src/components';
+import { LabelledValue } from 'src/components';
+import { SubduedText } from 'src/components/text';
 import { UnstyledLink } from 'src/components/matchbox';
 import VerifyEmail from './VerifyEmail';
 import { SendingDomainSection } from './SendingDomainSection';

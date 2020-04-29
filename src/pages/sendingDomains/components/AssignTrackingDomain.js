@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
-import { SubduedText } from 'src/components';
+import { SubduedText } from 'src/components/text';
 import { PageLink } from 'src/components/links';
 import { Button, Panel } from 'src/components/matchbox';
 import { showAlert } from 'src/actions/globalAlert';

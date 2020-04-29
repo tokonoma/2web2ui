@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { ApiErrorBanner, Loading } from 'src/components';
 import { PageLink } from 'src/components/links';
-import { Button, Page } from 'src/components/matchbox';
+import { Page } from 'src/components/matchbox';
+import { PageDescription } from 'src/components/text';
 import { selectBlacklistedCount } from 'src/selectors/blacklist';
 import { listMonitors } from 'src/actions/blacklist';
 import MonitorsCollection from './components/MonitorsCollection';
 import StopMonitoringModal from './components/StopMonitoringModal';
 import CongratsBanner from './components/CongratsBanner';
-import styles from './WatchlistPage.module.scss';
 
 export const WatchlistPage = props => {
   const { loading, listMonitors, monitors, hasBlacklisted, error } = props;
@@ -58,23 +58,21 @@ export const WatchlistPage = props => {
   return (
     <Page
       title="Watched IPs and Domains"
+      primaryAction={{
+        content: 'Add IP or Sending Domain',
+        to: '/blacklist/watchlist/add',
+        component: PageLink,
+      }}
       breadcrumbAction={{
         content: 'Blacklisting Incidents',
         to: '/blacklist/incidents',
         component: PageLink,
       }}
-      primaryArea={
-        <>
-          <PageLink as={Button} primary to={`/blacklist/watchlist/add`} className={styles.Buttons}>
-            Add IP or Sending Domain
-          </PageLink>
-        </>
-      }
     >
-      <p className={styles.Description}>
+      <PageDescription>
         Below are your watched IP addresses and domains. Select any one below to learn more or make
         updates.
-      </p>
+      </PageDescription>
       {renderContent()}
       <StopMonitoringModal monitorToDelete={monitorToDelete} closeModal={closeModal} />
     </Page>
