@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import { ApiErrorBanner, Heading, Loading } from 'src/components';
+import { ApiErrorBanner, Loading } from 'src/components';
+import { Heading } from 'src/components/text';
 import { PageLink } from 'src/components/links';
 import { Page, Panel } from 'src/components/matchbox';
 import PanelLoading from 'src/components/panelLoading';
