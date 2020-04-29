@@ -51,28 +51,26 @@ export const IncidentsCollection = props => {
   const { incidents, dateOptions, updateDateRange, search, updateTextField } = props;
 
   const renderHeader = ({ textFieldComponent }) => (
-    <Panel.Section>
-      <Grid>
-        <OGOnlyWrapper as={Grid.Column} sm={12} lg={5}>
-          <Box as={Grid.Column} xs={12} md={5}>
-            <div className={styles.DatePicker}>
-              <DatePicker
-                {...dateOptions}
-                relativeDateOptions={RELATIVE_DATE_OPTIONS}
-                onChange={updateDateRange}
-                dateFieldFormat={FORMATS.DATE}
-                hideManualEntry
-              />
-            </div>
-          </Box>
-        </OGOnlyWrapper>
-        <OGOnlyWrapper as={Grid.Column} sm={12} lg={7}>
-          <Box as={Grid.Column} xs={12} md={7}>
-            {textFieldComponent}
-          </Box>
-        </OGOnlyWrapper>
-      </Grid>
-    </Panel.Section>
+    <Grid>
+      <OGOnlyWrapper as={Grid.Column} sm={12} lg={5}>
+        <Box as={Grid.Column} xs={12} md={5}>
+          <div className={styles.DatePicker}>
+            <DatePicker
+              {...dateOptions}
+              relativeDateOptions={RELATIVE_DATE_OPTIONS}
+              onChange={updateDateRange}
+              dateFieldFormat={FORMATS.DATE}
+              hideManualEntry
+            />
+          </div>
+        </Box>
+      </OGOnlyWrapper>
+      <OGOnlyWrapper as={Grid.Column} sm={12} lg={7}>
+        <Box as={Grid.Column} xs={12} md={7}>
+          {textFieldComponent}
+        </Box>
+      </OGOnlyWrapper>
+    </Grid>
   );
 
   const EmptyComponent = () => {
@@ -83,7 +81,7 @@ export const IncidentsCollection = props => {
     );
     return (
       <Panel>
-        {renderHeader({ textFieldComponent: textFieldComponent })}
+        <Panel.Section>{renderHeader({ textFieldComponent: textFieldComponent })}</Panel.Section>
         <Panel.Section>
           <Empty hasPanel={false} message="There are no incidents for your date range selection" />
         </Panel.Section>
@@ -114,7 +112,7 @@ export const IncidentsCollection = props => {
       {({ filterBox, collection, pagination }) => (
         <>
           <Panel>
-            {renderHeader({ textFieldComponent: filterBox })}
+            <Panel.Section>{renderHeader({ textFieldComponent: filterBox })}</Panel.Section>
             {collection}
           </Panel>
           {pagination}
