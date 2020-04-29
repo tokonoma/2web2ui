@@ -149,6 +149,9 @@ export class JoinForm extends Component {
           <Box>
             <Button
               id="submit"
+              // todo, need to refactor this form to add type="submit" to the button and move
+              //  this onClick to onSubmit
+              // type="submit"
               variant="primary"
               disabled={pending || pristine || invalid}
               onClick={this.executeRecaptcha}
