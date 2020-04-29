@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import { Field, formValueSelector, change } from 'redux-form';
 import { SelectWrapper } from 'src/components/reduxFormWrappers';
 import { getFormSpec } from '../../helpers/alertForm';
-import { MAILBOX_PROVIDERS } from 'src/constants';
+import { LINKS, MAILBOX_PROVIDERS } from 'src/constants';
 import { ComboBoxTypeaheadWrapper } from 'src/components';
+import { ExternalLink } from 'src/components/links';
 import { Grid } from 'src/components/matchbox';
 import { getIpPools } from 'src/selectors/ipPools';
 import { selectVerifiedDomains } from 'src/selectors/sendingDomains';
@@ -74,6 +75,12 @@ export class FilterFields extends Component {
         disabled: disabled,
         itemToString: mbItemToString,
         placeholder: 'Type To Search',
+        helpText: (
+          <>
+            For a breadown of popular inbox providers, see our{' '}
+            <ExternalLink to={LINKS.MAILBOX_PROVIDERS}>alerts guide</ExternalLink>
+          </>
+        ),
       },
       sending_domain: {
         disabled: disabled || sendingDomainsLoading || sendingDomains.length === 0,

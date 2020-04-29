@@ -197,4 +197,9 @@ describe('ComboBoxTypeahead', () => {
 
     expect(onChange).toHaveBeenCalledWith(['apple']);
   });
+
+  it('renders help text', () => {
+    const wrapper = subject({ helpText: 'Did you know?' });
+    expect(wrapper).toHaveTextContent('Did you know?');
+  });
 });
