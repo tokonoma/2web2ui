@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tabs } from 'src/components/matchbox';
+import { Tabs, UnstyledLink } from 'src/components/matchbox';
 import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import OGStyles from './SignUpTabs.module.scss';
 import HibanaStyles from './SignUpTabsHibana.module.scss';
@@ -14,10 +14,12 @@ const SignUpTabs = ({ location, brand, isSPCEU }) => {
       fitted
       tabs={[
         {
+          Component: UnstyledLink,
           content: <span className={styles.TabContent}>SparkPost</span>,
           to: isSPCEU ? href : noop,
         },
         {
+          Component: UnstyledLink,
           content: <span className={styles.TabContent}>SparkPost EU</span>,
           to: !isSPCEU ? href : noop,
         },

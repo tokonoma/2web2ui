@@ -2,5 +2,7 @@
 
 .TabContent {
   display: inline-block;
-  padding: spacing();
+  padding: spacing(small) 0;
+  text-align: center;
+  width: 100%;
 }
