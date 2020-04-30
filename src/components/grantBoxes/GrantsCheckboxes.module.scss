@@ -1,12 +1,8 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
 .Grants {
-  display: none;
   margin-bottom: 1rem;
-
-  &.show {
-    display: flex;
-  }
+  display: flex;
 }
 
 .Grant {
