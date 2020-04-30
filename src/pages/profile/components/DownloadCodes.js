@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'src/components/matchbox';
+import { Button, Inline } from 'src/components/matchbox';
 import { FileDownload } from '@sparkpost/matchbox-icons';
 
 export const downloadCodes = codes => {
@@ -9,8 +9,10 @@ export const downloadCodes = codes => {
 
 const DownloadCodes = ({ codes }) => (
   <Button variant="secondary" download={'sparkpost-backup-codes.txt'} to={downloadCodes(codes)}>
-    <FileDownload size={14} />
-    Download
+    <Inline space="100">
+      <FileDownload size={14} />
+      Download
+    </Inline>
   </Button>
 );
 
