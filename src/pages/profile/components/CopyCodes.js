@@ -21,7 +21,7 @@ export default class CopyCodes extends Component {
 
     return (
       <Tooltip dark content="Copied to clipboard!" disabled={!copied}>
-        <Button onClick={this.copyToClipboard}>
+        <Button variant="secondary" onClick={this.copyToClipboard}>
           <ContentCopy size={14} />
           Copy
         </Button>

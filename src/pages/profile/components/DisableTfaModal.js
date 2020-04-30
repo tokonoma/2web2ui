@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import styles from './TfaModals.module.scss';
 import { Grid, Button, Panel, TextField, Modal } from 'src/components/matchbox';
+import { ButtonWrapper } from 'src/components';
 
 export default class DisableTfaModal extends Component {
   state = {
@@ -56,17 +56,20 @@ export default class DisableTfaModal extends Component {
               </Grid>
             </Panel.Section>
             <Panel.Section>
-              <Button
-                type="submit"
-                primary
-                disabled={togglePending}
-                onClick={() => this.props.disable(this.state.password)}
-              >
-                {togglePending ? 'Disabling...' : 'Disable 2FA'}
-              </Button>
-              <Button disabled={togglePending} onClick={onClose} className={styles.Cancel}>
-                Cancel
-              </Button>
+              <ButtonWrapper marginTop="0">
+                <Button
+                  type="submit"
+                  variant="primary"
+                  disabled={togglePending}
+                  onClick={() => this.props.disable(this.state.password)}
+                >
+                  {togglePending ? 'Disabling...' : 'Disable 2FA'}
+                </Button>
+
+                <Button variant="seconary" disabled={togglePending} onClick={onClose}>
+                  Cancel
+                </Button>
+              </ButtonWrapper>
             </Panel.Section>
           </form>
         </Panel>

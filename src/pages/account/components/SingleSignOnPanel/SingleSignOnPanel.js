@@ -23,12 +23,10 @@ export class SingleSignOnPanel extends React.Component {
     return (
       <React.Fragment>
         {tfaRequired && (
-          <Panel.Section>
-            <p>
-              Single sign-on is not available while two-factor authentication is required on this
-              account.
-            </p>
-          </Panel.Section>
+          <p>
+            Single sign-on is not available while two-factor authentication is required on this
+            account.
+          </p>
         )}
         <ProviderSection readOnly={tfaRequired} provider={provider} />
         <StatusSection readOnly={tfaRequired} {...this.props} />

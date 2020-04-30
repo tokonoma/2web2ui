@@ -7,6 +7,10 @@ export const printCodes = codes => {
   print({ printable: formattedCodes, properties: ['code'], type: 'json' });
 };
 
-const PrintCodes = ({ codes }) => <Button onClick={() => printCodes(codes)}>Print</Button>;
+const PrintCodes = ({ codes }) => (
+  <Button variant="secondary" onClick={() => printCodes(codes)}>
+    Print
+  </Button>
+);
 
 export default PrintCodes;

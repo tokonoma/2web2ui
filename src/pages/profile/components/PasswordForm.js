@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
-import { Button } from 'src/components/matchbox';
-
+import { Button, Panel, Stack } from 'src/components/matchbox';
 import { required, minLength } from 'src/helpers/validation';
-
 import { TextFieldWrapper } from 'src/components';
 
 export class PasswordForm extends Component {
@@ -18,38 +16,45 @@ export class PasswordForm extends Component {
 
     return (
       <form onSubmit={handleSubmit}>
-        <Field
-          type="password"
-          autoComplete="current-password"
-          name="currentPassword"
-          component={TextFieldWrapper}
-          id="currentPassword"
-          label="Current Password"
-          validate={required}
-        />
+        <Panel.Section>
+          <Stack>
+            <Field
+              type="password"
+              autoComplete="current-password"
+              name="currentPassword"
+              component={TextFieldWrapper}
+              id="currentPassword"
+              label="Current Password"
+              validate={required}
+            />
 
-        <Field
-          type="password"
-          autoComplete="new-password"
-          name="newPassword"
-          id="newPassword"
-          label="New Password"
-          component={TextFieldWrapper}
-          validate={[required, minLength(12), this.validatePasswords]}
-        />
+            <Field
+              type="password"
+              autoComplete="new-password"
+              name="newPassword"
+              id="newPassword"
+              label="New Password"
+              component={TextFieldWrapper}
+              validate={[required, minLength(12), this.validatePasswords]}
+            />
+          </Stack>
+        </Panel.Section>
 
-        <Button
-          submit
-          disabled={
-            submitting ||
-            pristine ||
-            !currentPassword ||
-            !newPassword ||
-            currentPassword === newPassword
-          }
-        >
-          {submitting ? 'Updating Password' : 'Update Password'}
-        </Button>
+        <Panel.Section>
+          <Button
+            variant="secondary"
+            submit
+            disabled={
+              submitting ||
+              pristine ||
+              !currentPassword ||
+              !newPassword ||
+              currentPassword === newPassword
+            }
+          >
+            {submitting ? 'Updating Password' : 'Update Password'}
+          </Button>
+        </Panel.Section>
       </form>
     );
   }

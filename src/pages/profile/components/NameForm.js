@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { Button } from 'src/components/matchbox';
+import { Button, Panel, Stack } from 'src/components/matchbox';
 import { required } from 'src/helpers/validation';
-
 import { TextFieldWrapper } from 'src/components';
 
 export class NameForm extends Component {
@@ -12,29 +11,35 @@ export class NameForm extends Component {
 
     return (
       <form onSubmit={handleSubmit}>
-        <Field
-          // for redux-form
-          name="firstName"
-          component={TextFieldWrapper}
-          // for the matchbox component
-          id="firstName"
-          label="First Name"
-          validate={required}
-          autoComplete="given-name"
-        />
+        <Panel.Section>
+          <Stack>
+            <Field
+              // for redux-form
+              name="firstName"
+              component={TextFieldWrapper}
+              // for the matchbox component
+              id="firstName"
+              label="First Name"
+              validate={required}
+              autoComplete="given-name"
+            />
 
-        <Field
-          name="lastName"
-          id="lastName"
-          label="Last Name"
-          component={TextFieldWrapper}
-          validate={required}
-          autoComplete="family-name"
-        />
+            <Field
+              name="lastName"
+              id="lastName"
+              label="Last Name"
+              component={TextFieldWrapper}
+              validate={required}
+              autoComplete="family-name"
+            />
+          </Stack>
+        </Panel.Section>
 
-        <Button submit disabled={submitting || pristine}>
-          {submitting ? 'Updating Profile' : 'Update Profile'}
-        </Button>
+        <Panel.Section>
+          <Button variant="secondary" submit disabled={submitting || pristine}>
+            {submitting ? 'Updating Profile' : 'Update Profile'}
+          </Button>
+        </Panel.Section>
       </form>
     );
   }

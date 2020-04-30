@@ -8,7 +8,7 @@ export const downloadCodes = codes => {
 };
 
 const DownloadCodes = ({ codes }) => (
-  <Button download={'sparkpost-backup-codes.txt'} to={downloadCodes(codes)}>
+  <Button variant="secondary" download={'sparkpost-backup-codes.txt'} to={downloadCodes(codes)}>
     <FileDownload size={14} />
     Download
   </Button>

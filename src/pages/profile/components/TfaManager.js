@@ -10,9 +10,8 @@ import { LINKS } from 'src/constants';
 import { logout } from 'src/actions/auth';
 import { showAlert } from 'src/actions/globalAlert';
 export class TfaManager extends Component {
-
   state = {
-    openModal: null
+    openModal: null,
   };
 
   componentDidMount() {
@@ -32,9 +31,9 @@ export class TfaManager extends Component {
   onEnable = () => {
     this.closeModals();
     this.props.getTfaBackupStatus();
-  }
+  };
 
-  disable = (password) => {
+  disable = password => {
     const { showAlert, required, toggleTfa, logout } = this.props;
     return toggleTfa({ enabled: false, password }).then(() => {
       if (required) {
@@ -42,10 +41,10 @@ export class TfaManager extends Component {
       }
       showAlert({ type: 'success', message: 'Profile Updated.' });
     });
-  }
+  };
 
-  generateBackupCodes = (password) => this.props.generateBackupCodes(password)
-    .then(this.props.getTfaBackupStatus);
+  generateBackupCodes = password =>
+    this.props.generateBackupCodes(password).then(this.props.getTfaBackupStatus);
 
   renderBackupCodesStatus() {
     const { enabled, backupCodes } = this.props;
@@ -55,9 +54,16 @@ export class TfaManager extends Component {
     }
 
     return (
-      <LabelledValue label='Active Codes'>
+      <LabelledValue label="Active Codes">
         <h6>{backupCodes.activeCount}</h6>
-        {(backupCodes.activeCount === 0) && <p><small>We recommend saving a set of backup codes in case you lose or misplace your current device.</small></p>}
+        {backupCodes.activeCount === 0 && (
+          <p>
+            <small>
+              We recommend saving a set of backup codes in case you lose or misplace your current
+              device.
+            </small>
+          </p>
+        )}
       </LabelledValue>
     );
   }
@@ -66,36 +72,43 @@ export class TfaManager extends Component {
     const { statusUnknown, enabled } = this.props;
 
     if (statusUnknown) {
-      return <PanelLoading minHeight='100px' />;
+      return <PanelLoading minHeight="100px" />;
     }
 
-    const disabledActions = [{
-      content: 'Enable 2FA',
-      onClick: () => this.setState({ openModal: 'enable' }),
-      color: 'orange'
-    }, {
-      content: 'Learn More',
-      to: LINKS.LEARN_MORE_TFA,
-      external: true,
-      color: 'orange'
-    }];
+    const disabledActions = [
+      {
+        content: 'Enable 2FA',
+        onClick: () => this.setState({ openModal: 'enable' }),
+        color: 'orange',
+      },
+      {
+        content: 'Learn More',
+        to: LINKS.LEARN_MORE_TFA,
+        external: true,
+        color: 'orange',
+      },
+    ];
 
-    const enabledActions = [{
-      content: 'Generate New Backup Codes',
-      onClick: () => this.setState({ openModal: 'backupCodes' }),
-      color: 'orange'
-    },
-    {
-      content: 'Disable 2FA',
-      onClick: () => this.setState({ openModal: 'disable' }),
-      color: 'orange'
-    }];
+    const enabledActions = [
+      {
+        content: 'Generate New Backup Codes',
+        onClick: () => this.setState({ openModal: 'backupCodes' }),
+        color: 'orange',
+      },
+      {
+        content: 'Disable 2FA',
+        onClick: () => this.setState({ openModal: 'disable' }),
+        color: 'orange',
+      },
+    ];
 
     return (
-      <Panel sectioned title='Two-factor Authentication' actions={enabled ? enabledActions : disabledActions}>
-        <LabelledValue label='Status'>
-          <h6>{enabled ? 'Enabled' : 'Disabled'}</h6>
-        </LabelledValue>
+      <Panel
+        sectioned
+        title="Two-factor Authentication"
+        actions={enabled ? enabledActions : disabledActions}
+      >
+        <LabelledValue label="Status">{enabled ? 'Enabled' : 'Disabled'}</LabelledValue>
         {this.renderBackupCodesStatus()}
         <BackupCodesModal
           open={this.state.openModal === 'backupCodes'}
@@ -121,7 +134,6 @@ export class TfaManager extends Component {
       </Panel>
     );
   }
-
 }
 
 const mapStateToProps = ({ account, tfa, tfaBackupCodes }) => ({
@@ -129,7 +141,7 @@ const mapStateToProps = ({ account, tfa, tfaBackupCodes }) => ({
   statusUnknown: tfa.enabled === null,
   enabled: tfa.enabled === true,
   required: account.tfa_required,
-  backupCodes: tfaBackupCodes
+  backupCodes: tfaBackupCodes,
 });
 
 export default connect(mapStateToProps, { logout, showAlert, ...tfaActions })(TfaManager);
