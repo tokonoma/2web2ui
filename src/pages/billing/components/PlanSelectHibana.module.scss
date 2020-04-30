@@ -7,3 +7,10 @@
 .tierLabel {
   font-weight: font-weight(medium);
 }
+
+.tierPlans {
+  & > *:not(:last-child) {
+    border-bottom: 1px solid color(gray, 400);
+  }
+  margin: 0;
+}

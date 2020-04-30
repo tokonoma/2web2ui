@@ -2,8 +2,8 @@
 
 .banner {
   background-color: color(blue, 700);
-  height: 3rem;
-  line-height: 3rem;
+  height: line-height(600); // hmm
+  line-height: line-height(600);
 }
 
 .banner {
