@@ -24,6 +24,8 @@ import { getSubscription as getBillingSubscription } from 'src/actions/billing';
 import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
 
+import { OGOnlyWrapper } from 'src/components/hibana';
+
 import OGStyles from './UploadedListPage.module.scss';
 import hibanaStyles from './UploadedListPageHibana.module.scss';
 import useHibanaOverride from 'src/hooks/useHibanaOverride';
@@ -117,15 +119,14 @@ export function UploadedListPage(props) {
         breadcrumbAction={{ content: 'Back', component: PageLink, to: '/recipient-validation' }}
       >
         <Panel>
-          <Panel.Section>
+          <OGOnlyWrapper as={Panel.Section}>
             <div className={styles.dateHeader}>
               <strong>{formatDate(job.updatedAt)}</strong>
               <span> at </span>
               <strong>{formatTime(job.updatedAt)}</strong>
             </div>
-          </Panel.Section>
-
-          <Panel.Section>
+          </OGOnlyWrapper>
+          <OGOnlyWrapper as={Panel.Section}>
             {job.status === 'queued_for_batch' && (
               <UploadedListForm job={job} onSubmit={handleSubmit} />
             )}
@@ -135,7 +136,7 @@ export function UploadedListPage(props) {
             {job.status !== 'queued_for_batch' && job.status !== 'error' && (
               <ListProgress job={job} />
             )}
-          </Panel.Section>
+          </OGOnlyWrapper>
         </Panel>
         {job.status === 'queued_for_batch' && !billingLoading && (
           <ValidateSection
