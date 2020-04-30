@@ -3,7 +3,6 @@
 exports[`Form Container: Update Contact should render 1`] = `
 <form>
   <Panel
-    sectioned={true}
     title="Update Billing Contact"
   >
     <Panel.Section>
