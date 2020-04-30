@@ -1,13 +1,15 @@
 import React, { Fragment } from 'react';
-import { Grid, Stack, Button } from 'src/components/matchbox';
+import { Box, Grid, Stack, Button } from 'src/components/matchbox';
 import { AddCircleOutline, HighlightOff } from '@sparkpost/matchbox-icons';
-import styles from './SearchForm.module.scss';
+import _ from 'lodash';
 import { Field } from 'redux-form';
+import OGStyles from './SearchForm.module.scss';
+import hibanaStyles from './SearchFormHibana.module.scss';
 import { getFiltersAsArray } from '../helpers/transformData.js';
 import { SelectWrapper, TextFieldWrapper } from 'src/components/reduxFormWrappers';
 import { eventsQuery } from 'src/helpers/validation';
 import { EVENTS_SEARCH_FILTERS } from 'src/constants';
-import _ from 'lodash';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 
 const EVENTS_SELECTOR = [
   { disabled: true, value: '', label: 'Select a Filter' },
@@ -32,55 +34,57 @@ const getPlaceholderText = _.memoize(key => {
   return EVENTS_SEARCH_FILTERS[key].placeholder;
 });
 
-export default ({ fields }) => (
-  <Fragment>
-    <Stack space="400">
-      {fields.map((member, index) => (
-        <Grid key={index}>
-          <Grid.Column xs={3} md={3} lg={3}>
-            <div className={styles.Selector}>
-              <label htmlFor={`select-a-filter-${index}`} className={styles.ScreenReaderOnly}>
-                Filter By
+export default ({ fields }) => {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+  return (
+    <Fragment>
+      <Stack space="400">
+        {fields.map((member, index) => (
+          <Grid key={index}>
+            <Grid.Column xs={3} md={3} lg={3}>
+              <div className={styles.Selector}>
+                <label htmlFor={`select-a-filter-${index}`} className={styles.ScreenReaderOnly}>
+                  Filter By
+                </label>
+
+                <Field
+                  id={`select-a-filter-${index}`}
+                  name={`${member}.key`}
+                  component={SelectWrapper}
+                  options={getAvailableOptions(fields.getAll(), index)}
+                />
+              </div>
+            </Grid.Column>
+            <Grid.Column xs={12} md={12} lg={7}>
+              <label htmlFor={`filter-field-${index}`} className={styles.ScreenReaderOnly}>
+                Filter
               </label>
 
               <Field
-                id={`select-a-filter-${index}`}
-                name={`${member}.key`}
-                component={SelectWrapper}
-                options={getAvailableOptions(fields.getAll(), index)}
+                id={`filter-field-${index}`}
+                name={`${member}.value`}
+                type="text"
+                placeholder={getPlaceholderText(fields.get(index).key)}
+                component={TextFieldWrapper}
+                validate={makeQueryValidator(fields.get(index))}
               />
-            </div>
-          </Grid.Column>
-          <Grid.Column xs={12} md={12} lg={7}>
-            <label htmlFor={`filter-field-${index}`} className={styles.ScreenReaderOnly}>
-              Filter
-            </label>
-
-            <Field
-              id={`filter-field-${index}`}
-              name={`${member}.value`}
-              type="text"
-              placeholder={getPlaceholderText(fields.get(index).key)}
-              component={TextFieldWrapper}
-              validate={makeQueryValidator(fields.get(index))}
-            />
-          </Grid.Column>
-          <Grid.Column xs={12} md={12} lg={2}>
-            <p>
-              <Button color="red" flat onClick={() => fields.remove(index)}>
-                Remove
-                <HighlightOff className={styles.Icon} />
-              </Button>
-            </p>
-          </Grid.Column>
-        </Grid>
-      ))}
-    </Stack>
-
-    <Button className={styles.AddButton} color="blue" flat onClick={() => fields.push({})}>
-      {' '}
-      Add Filter
-      <AddCircleOutline className={styles.Icon} />
-    </Button>
-  </Fragment>
-);
+            </Grid.Column>
+            <Grid.Column xs={12} md={12} lg={2}>
+              <p>
+                <Button color="red" flat onClick={() => fields.remove(index)}>
+                  Remove
+                  <HighlightOff className={styles.Icon} />
+                </Button>
+              </p>
+            </Grid.Column>
+          </Grid>
+        ))}
+      </Stack>
+      <Box marginBottom="400" />
+      <Button className={styles.AddButton} color="blue" flat onClick={() => fields.push({})}>
+        Add Filter
+        <AddCircleOutline className={styles.Icon} />
+      </Button>
+    </Fragment>
+  );
+};

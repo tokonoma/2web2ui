@@ -106,57 +106,69 @@ exports[`Page: Message Events tests should render page correctly 1`] = `
         ]
       }
     />
-    <CursorPaging
-      currentPage={2}
-      handleFirstPage={[Function]}
-      handlePageChange={[Function]}
-      nextDisabled={false}
-      perPage={25}
-      previousDisabled={false}
-      totalCount={100}
-    />
-    <div
-      className="RightAlignedButtons"
+    <Box
+      display="flex"
+      justifyContent="space-between"
     >
-      <PerPageButtons
-        data={
-          Array [
-            Object {
-              "formattedDate": "so-formatted",
-              "friendly_from": "hi@friendly",
-              "rcpt_to": "ron.swanson@pawnee.state.in.us",
-              "subject": "Cool",
-              "type": "delivery",
-            },
-            Object {
-              "formattedDate": "formatted",
-              "friendly_from": "mean@friendly",
-              "rcpt_to": "tom.haverford@pawnee.state.in.us",
-              "subject": "More Title",
-              "type": "injection",
-            },
-          ]
-        }
-        onPerPageChange={[Function]}
-        perPage={25}
-        perPageButtons={
-          Array [
-            10,
-            25,
-            50,
-            100,
-          ]
-        }
-        saveCsv={true}
-        totalCount={100}
-      />
-      <Button
-        disabled={false}
-        onClick={[Function]}
+      <Box>
+        <CursorPaging
+          currentPage={2}
+          handleFirstPage={[Function]}
+          handlePageChange={[Function]}
+          nextDisabled={false}
+          perPage={25}
+          previousDisabled={false}
+          totalCount={100}
+        />
+      </Box>
+      <div
+        className="RightAlignedButtons"
       >
-        Save as CSV
-      </Button>
-    </div>
+        <Box
+          alignItems="center"
+          display="flex"
+        >
+          <PerPageButtons
+            data={
+              Array [
+                Object {
+                  "formattedDate": "so-formatted",
+                  "friendly_from": "hi@friendly",
+                  "rcpt_to": "ron.swanson@pawnee.state.in.us",
+                  "subject": "Cool",
+                  "type": "delivery",
+                },
+                Object {
+                  "formattedDate": "formatted",
+                  "friendly_from": "mean@friendly",
+                  "rcpt_to": "tom.haverford@pawnee.state.in.us",
+                  "subject": "More Title",
+                  "type": "injection",
+                },
+              ]
+            }
+            onPerPageChange={[Function]}
+            perPage={25}
+            perPageButtons={
+              Array [
+                10,
+                25,
+                50,
+                100,
+              ]
+            }
+            saveCsv={true}
+            totalCount={100}
+          />
+          <Button
+            disabled={false}
+            onClick={[Function]}
+          >
+            Save as CSV
+          </Button>
+        </Box>
+      </div>
+    </Box>
   </div>
 </Page>
 `;

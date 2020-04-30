@@ -13,8 +13,7 @@ const SaveCSVButton = ({ data, saveCsv, caption = 'Save As CSV', filename, ...pr
 
   if (isHibanaEnabled) {
     buttonStyleProps = {
-      color: 'gray',
-      outlineBorder: true,
+      variant: 'monochrome',
     };
   }
 

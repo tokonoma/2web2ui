@@ -6,6 +6,7 @@ exports[`Component: ShareModal should render correctly when open 1`] = `
     fullWidth={true}
     id="shareModalButton"
     onClick={[Function]}
+    variant="monochrome"
   >
     Share
   </Button>
@@ -21,26 +22,33 @@ exports[`Component: ShareModal should render correctly when open 1`] = `
       title="Share this report"
     >
       <Panel.Section>
-        <CopyField
-          hideCopy={false}
-          value="http://phoenix.test/?range=custom&recipients=one%40test.com&recipients=two%2B2%40test.com"
-        />
-        <Checkbox
-          checked={true}
-          helpText={
-            <span>
-              Pins this report's relative time range to its calculated dates (this is usually what you want when sharing a report).
-            </span>
-          }
-          id="pin-relative-link"
-          label="Pin dates for this link"
-          onChange={[Function]}
-        />
+        <Stack>
+          <CopyField
+            hideCopy={false}
+            value="http://phoenix.test/?range=custom&recipients=one%40test.com&recipients=two%2B2%40test.com"
+          />
+          <Checkbox
+            checked={true}
+            helpText={
+              <span>
+                <Box
+                  marginLeft="500"
+                  marginTop="100"
+                >
+                  Pins this report's relative time range to its calculated dates (this is usually what you want when sharing a report).
+                </Box>
+              </span>
+            }
+            id="pin-relative-link"
+            label="Pin dates for this link"
+            onChange={[Function]}
+          />
+        </Stack>
       </Panel.Section>
       <Panel.Section>
         <Button
           onClick={[Function]}
-          primary={true}
+          variant="primary"
         >
           Done
         </Button>
@@ -56,6 +64,7 @@ exports[`Component: ShareModal should render with a valid relative range 1`] = `
     fullWidth={true}
     id="shareModalButton"
     onClick={[Function]}
+    variant="monochrome"
   >
     Share
   </Button>
@@ -67,26 +76,33 @@ exports[`Component: ShareModal should render with a valid relative range 1`] = `
       title="Share this report"
     >
       <Panel.Section>
-        <CopyField
-          hideCopy={false}
-          value="http://phoenix.test/?range=custom&recipients=one%40test.com&recipients=two%2B2%40test.com"
-        />
-        <Checkbox
-          checked={true}
-          helpText={
-            <span>
-              Pins this report's relative time range to its calculated dates (this is usually what you want when sharing a report).
-            </span>
-          }
-          id="pin-relative-link"
-          label="Pin dates for this link"
-          onChange={[Function]}
-        />
+        <Stack>
+          <CopyField
+            hideCopy={false}
+            value="http://phoenix.test/?range=custom&recipients=one%40test.com&recipients=two%2B2%40test.com"
+          />
+          <Checkbox
+            checked={true}
+            helpText={
+              <span>
+                <Box
+                  marginLeft="500"
+                  marginTop="100"
+                >
+                  Pins this report's relative time range to its calculated dates (this is usually what you want when sharing a report).
+                </Box>
+              </span>
+            }
+            id="pin-relative-link"
+            label="Pin dates for this link"
+            onChange={[Function]}
+          />
+        </Stack>
       </Panel.Section>
       <Panel.Section>
         <Button
           onClick={[Function]}
-          primary={true}
+          variant="primary"
         >
           Done
         </Button>

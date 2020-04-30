@@ -1,6 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ActiveFilters } from '../ActiveFilters';
+import { Panel } from 'src/components/matchbox';
+jest.mock('src/hooks/useHibanaOverride', () => jest.fn(a => a));
 
 describe('Component: ActiveFilters', () => {
   let wrapper;
@@ -10,10 +12,10 @@ describe('Component: ActiveFilters', () => {
     search: {
       dateOptions: {
         to: 'to-date',
-        from: 'from-date'
+        from: 'from-date',
       },
-      message_ids: []
-    }
+      message_ids: [],
+    },
   };
 
   beforeEach(() => {
@@ -28,25 +30,32 @@ describe('Component: ActiveFilters', () => {
     const events = ['bounce', 'click', 'spam_complaint'];
     const messages = ['101', 102];
     const campaigns = [];
-    wrapper.setProps({ search: { events, messages, campaigns }});
+    wrapper.setProps({ search: { events, messages, campaigns } });
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should handle remove', () => {
     const events = ['bounce', 'click', 'spam_complaint'];
-    wrapper.setProps({ search: { events }});
-    wrapper.find('Tag').at(1).simulate('remove');
+    wrapper.setProps({ search: { events } });
+    wrapper
+      .find('Tag')
+      .at(1)
+      .simulate('remove');
     expect(props.removeFilter).toHaveBeenCalledWith({ item: 'click', key: 'events' });
   });
 
   it('should handle remove all', () => {
     const events = ['bounce', 'click', 'spam_complaint'];
-    wrapper.setProps({ search: { ...props.search, events }});
-    wrapper.instance().handleRemoveAll();
+    wrapper.setProps({ search: { ...props.search, events } });
+    wrapper
+      .find(Panel.Section)
+      .prop('actions')[0]
+      .onClick();
+
     expect(props.updateMessageEventsSearchOptions).toHaveBeenCalledWith({
       ...props.search,
       events: [],
-      message_ids: []
+      message_ids: [],
     });
   });
 });

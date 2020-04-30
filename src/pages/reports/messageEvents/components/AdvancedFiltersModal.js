@@ -5,7 +5,6 @@ import { Button, WindowEvent, Modal } from 'src/components/matchbox';
 import { onEscape } from 'src/helpers/keyEvents';
 import { getFiltersFromSearchQueries } from '../helpers/transformData.js';
 import SearchForm from './SearchForm';
-import _ from 'lodash';
 
 export class AdvancedFiltersModal extends Component {
   state = {
@@ -41,7 +40,9 @@ export class AdvancedFiltersModal extends Component {
     const { modalOpen } = this.state;
     return (
       <Fragment>
-        <Button onClick={this.toggleModal}>Add Filters</Button>
+        <Button onClick={this.toggleModal} variant="monochrome">
+          Add Filters
+        </Button>
         <Modal open={modalOpen} onClose={this.toggleModal}>
           <WindowEvent event="keydown" handler={this.handleKeyDown} />
           <SearchForm handleApply={this.handleApply} handleCancel={this.toggleModal} />

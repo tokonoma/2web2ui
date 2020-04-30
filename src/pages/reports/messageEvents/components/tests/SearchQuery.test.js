@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import SearchQuery from '../SearchQuery';
 
+jest.mock('src/hooks/useHibanaOverride', () => jest.fn(a => a));
 jest.mock('src/constants', () => ({
   EVENTS_SEARCH_FILTERS: {
     recipient_domains: {

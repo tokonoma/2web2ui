@@ -234,22 +234,30 @@ describe('The events page', () => {
       it('renders documentation about each event type when hovering over a check box label', () => {
         cy.findByText('Delay').trigger('mouseover');
 
-        cy.findByText('Remote MTA has temporarily rejected a message.').should('be.visible');
+        cy.findAllByText('Remote MTA has temporarily rejected a message.')
+          .last()
+          .should('be.visible');
 
         cy.findByText('Delay').trigger('mouseout');
 
         // This is a Matchbox bug - this should be passing but is not due to a CSS issue.
         // This has already been addressed, though has not yet been part of a formal release:
         // https://github.com/SparkPost/matchbox/pull/320
-        // cy.queryByText('Remote MTA has temporarily rejected a message.').should('not.be.visible');
+        cy.queryAllByText('Remote MTA has temporarily rejected a message.')
+          .last()
+          .should('not.be.visible');
 
         cy.findByText('SMS Status').trigger('mouseover');
 
-        cy.findByText('SMPP/SMS message produced a status log output').should('be.visible');
+        cy.queryAllByText('SMPP/SMS message produced a status log output')
+          .last()
+          .should('be.visible');
 
         cy.findByText('SMS Status').trigger('mouseout');
 
-        // cy.queryByText('SMPP/SMS message produced a status log output').should('not.be.visible');
+        cy.queryAllByText('SMPP/SMS message produced a status log output')
+          .last()
+          .should('not.be.visible');
       });
 
       it('allows the addition and removal of other filters via the "Add Filter" and "Remove" buttons', () => {
@@ -274,14 +282,14 @@ describe('The events page', () => {
         removePresetFilters();
         cy.findByText('Remove').click();
 
-        cy.findByLabelText(selectLabel).should('not.be.visible');
-        cy.findByLabelText(textFieldLabel).should('not.be.visible');
+        cy.queryByLabelText(selectLabel).should('not.be.visible');
+        cy.queryByLabelText(textFieldLabel).should('not.be.visible');
       });
 
       it('closes the modal when clicking "Cancel"', () => {
         cy.findByText('Cancel').click();
 
-        cy.findByText('Advanced Filters').should('not.be.visible');
+        cy.queryByText('Advanced Filters').should('not.be.visible');
       });
 
       it('does not add in default filters if there are alreday filters', () => {
@@ -297,8 +305,8 @@ describe('The events page', () => {
 
       it('closes the modal and applies filters when clicking "Apply Filters" by re-requesting events data', () => {
         // `force` shouldn't be necessary, but due to component markup it is - Hibana component redesign may make this unnecessary
-        cy.findByLabelText('AMP Click').check({ force: true });
-        cy.findByLabelText('Out of Band').check({ force: true });
+        cy.findByText('AMP Click').click({ force: true });
+        cy.findByText('Out of Band').click({ force: true });
         removePresetFilters();
         cy.findByLabelText('Filter By').select('Recipient Domains');
         cy.findByLabelText('Filter').type('gmail.com');
@@ -317,7 +325,7 @@ describe('The events page', () => {
 
         cy.findByText('Apply Filters').click();
 
-        cy.findByText('Advanced Filters').should('not.be.visible');
+        cy.queryByText('Advanced Filters').should('not.be.visible');
         cy.findByText('Event: Amp Click').should('be.visible');
         cy.url().should('include', 'events=amp_click');
         cy.findByText('Event: Out Of Band').should('be.visible');
@@ -329,8 +337,8 @@ describe('The events page', () => {
       });
 
       it('removes all filters when clicking "Clear All Filters"', () => {
-        cy.findByLabelText('AMP Click').check({ force: true });
-        cy.findByLabelText('Out of Band').check({ force: true });
+        cy.findByText('AMP Click').click({ force: true });
+        cy.findByText('Out of Band').click({ force: true });
         removePresetFilters();
         cy.findByLabelText('Filter By').select('Recipient Domains');
         cy.findByLabelText('Filter').type('gmail.com');
@@ -379,7 +387,7 @@ describe('The events page', () => {
 
         cy.findByText('different-results@hotmail.com').should('be.visible');
         cy.get(CURRENT_PAGE_SELECTOR).should('contain', '2');
-        cy.findByText('Previous')
+        cy.queryByText('Previous')
           .closest('button')
           .should('not.be.disabled');
       });

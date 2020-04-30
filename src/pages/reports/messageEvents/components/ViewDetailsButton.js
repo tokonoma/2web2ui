@@ -14,7 +14,7 @@ export class ViewDetailsButton extends Component {
 
     return (
       <div className={styles.AlignRight}>
-        <PageLink as={Button} to={to} size="small">
+        <PageLink as={Button} variant="tertiary" to={to} size="small">
           View Details
         </PageLink>
       </div>

@@ -7,34 +7,44 @@ exports[`EventTypeFilters should render from a list of event types 1`] = `
   <div
     className="CheckBoxGrid"
   >
-    <Field
-      component={[Function]}
+    <Box
       key="amp_open"
-      label={
-        <Tooltip
-          content="AMP open desc"
-          dark={true}
-        >
-          AMP Open
-        </Tooltip>
-      }
-      name="amp_open"
-      type="checkbox"
-    />
-    <Field
-      component={[Function]}
+      marginTop="100"
+    >
+      <Field
+        component={[Function]}
+        key="amp_open"
+        label={
+          <Tooltip
+            content="AMP open desc"
+            dark={true}
+          >
+            AMP Open
+          </Tooltip>
+        }
+        name="amp_open"
+        type="checkbox"
+      />
+    </Box>
+    <Box
       key="bounce"
-      label={
-        <Tooltip
-          content="Bounce desc"
-          dark={true}
-        >
-          Bounce
-        </Tooltip>
-      }
-      name="bounce"
-      type="checkbox"
-    />
+      marginTop="100"
+    >
+      <Field
+        component={[Function]}
+        key="bounce"
+        label={
+          <Tooltip
+            content="Bounce desc"
+            dark={true}
+          >
+            Bounce
+          </Tooltip>
+        }
+        name="bounce"
+        type="checkbox"
+      />
+    </Box>
   </div>
 </Checkbox.Group>
 `;

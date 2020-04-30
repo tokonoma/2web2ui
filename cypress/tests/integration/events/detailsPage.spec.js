@@ -67,11 +67,15 @@ describe('The events details page', () => {
 
     cy.findByText('template_version').trigger('mouseover');
 
-    cy.findByText('Version of the template used to construct this message').should('be.visible');
+    cy.findAllByText('Version of the template used to construct this message')
+      .last()
+      .should('be.visible');
 
     cy.findByText('campaign_id').trigger('mouseover');
 
-    cy.findByText('Campaign of which this message was a part').should('be.visible');
+    cy.findAllByText('Campaign of which this message was a part')
+      .last()
+      .should('be.visible');
   });
 
   it('has a "Refresh" button that re-requests events data', () => {
