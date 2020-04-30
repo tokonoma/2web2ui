@@ -1,9 +1,14 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import { shallow } from 'enzyme';
 import userEvent from '@testing-library/user-event';
 import TestApp from 'src/__testHelpers__/TestApp';
-
+import styles from '../PlanSelect.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import PlanSelect, { SelectedPlan, useModal } from '../PlanSelect';
+
+jest.mock('src/hooks/useHibanaOverride');
+useHibanaOverride.mockReturnValue(styles);
 
 describe('Plan Select:', () => {
   const defaultProps = {
@@ -51,16 +56,10 @@ describe('Plan Select:', () => {
     ],
   };
 
-  const subject = props =>
-    render(
-      <TestApp>
-        <PlanSelect {...defaultProps} {...props} />
-      </TestApp>,
-    );
+  const subject = props => shallow(<PlanSelect {...defaultProps} {...props} />);
 
   it('should render correctly', () => {
-    const { container } = subject();
-    expect(container).toMatchSnapshot();
+    expect(subject()).toMatchSnapshot();
   });
 });
 
