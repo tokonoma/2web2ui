@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Field, formValueSelector, reduxForm } from 'redux-form';
 import { PageLink } from 'src/components/links';
 import { Button, Panel, Stack } from 'src/components/matchbox';
-
+import { ButtonWrapper } from 'src/components';
 import * as supportActions from 'src/actions/support';
 import { SelectWrapper, TextFieldWrapper } from 'src/components';
 import FileFieldWrapper from 'src/components/reduxFormWrappers/FileFieldWrapper';
@@ -20,7 +20,6 @@ import {
 } from 'src/selectors/support';
 import NoIssues from './NoIssues';
 import HerokuMessage from './HerokuMessage';
-
 import styles from '../Support.module.scss';
 
 export class SupportForm extends Component {
@@ -44,7 +43,7 @@ export class SupportForm extends Component {
         <h6>Your Ticket Has Been Submitted</h6>
         <p>Ticket #{ticketId}</p>
         <p>Please check your email for updates on your support ticket.</p>
-        <Button primary onClick={onClose}>
+        <Button variant="primary" onClick={onClose}>
           Continue
         </Button>
       </div>
@@ -117,9 +116,15 @@ export class SupportForm extends Component {
           </Stack>
         </Panel.Section>
         <Panel.Section>
-          <Button variant="primary" submit disabled={pristine || invalid || submitting}>
-            {submitting ? 'Submitting' : 'Submit Ticket'}
-          </Button>
+          <ButtonWrapper marginTop="0">
+            <Button variant="primary" submit disabled={pristine || invalid || submitting}>
+              {submitting ? 'Submitting' : 'Submit Ticket'}
+            </Button>
+
+            <Button variant="secondary" disabled={submitting} onClick={() => onClose()}>
+              Cancel
+            </Button>
+          </ButtonWrapper>
         </Panel.Section>
       </form>
     );
