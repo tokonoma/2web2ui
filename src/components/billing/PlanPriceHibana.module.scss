@@ -1,0 +1,18 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.MainLabel {
+  display: block;
+  font-size: font-size(500);
+  font-weight: 300;
+}
+
+.DiscountedLabel {
+  color: 'gray.400';
+  padding-right: rem(8);
+}
+
+.SupportLabel {
+  display: block;
+  font-size: font-size(300);
+  font-weight: 300;
+}
