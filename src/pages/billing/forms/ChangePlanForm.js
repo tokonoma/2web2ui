@@ -12,6 +12,7 @@ import ApiErrorBanner from 'src/components/apiErrorBanner';
 import Loading from 'src/components/loading';
 import { prepareCardInfo } from 'src/helpers/billing';
 import useRouter from 'src/hooks/useRouter';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import {
   currentPlanSelector,
   canUpdateBillingInfoSelector,
@@ -25,7 +26,8 @@ import PlanSelectSection, { SelectedPlan } from '../components/PlanSelect';
 import SubmitSection from '../components/SubmitSection';
 import { useChangePlanContext } from '../context/ChangePlanContext';
 import { FeatureChangeContextProvider } from '../context/FeatureChangeContext';
-import styles from './ChangePlanForm.module.scss';
+import OGStyles from './ChangePlanForm.module.scss';
+import HibanaStyles from './ChangePlanFormHibana.module.scss';
 
 export const ChangePlanForm = ({
   location,
@@ -45,6 +47,7 @@ export const ChangePlanForm = ({
   billingCreate,
   showAlert,
 }) => {
+  const styles = useHibanaOverride(OGStyles, HibanaStyles);
   const { billingCountries, account, bundles, loading, error } = useChangePlanContext();
   const { requestParams: { code, promo } = {}, updateRoute } = useRouter();
   const [selectedBundleCode, selectBundle] = useState(code);
