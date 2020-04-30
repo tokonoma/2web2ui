@@ -1,7 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import PlanPrice from '../PlanPrice';
+import styles from './PlanPrice.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 
+jest.mock('src/hooks/useHibanaOverride');
+useHibanaOverride.mockReturnValue(styles);
 describe('PlanPrice', () => {
   let wrapper;
   let plan;
@@ -10,11 +14,11 @@ describe('PlanPrice', () => {
     plan = {
       monthly: 9,
       volume: 50000,
-      overage: 0.75
+      overage: 0.75,
     };
 
     const props = {
-      plan
+      plan,
     };
 
     wrapper = shallow(<PlanPrice {...props} />);
@@ -55,7 +59,7 @@ describe('PlanPrice', () => {
   });
 
   it('renders nothing when no plan', () => {
-    wrapper.setProps({ plan: {}});
+    wrapper.setProps({ plan: {} });
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -64,7 +68,7 @@ describe('PlanPrice', () => {
       ...plan,
       monthly: 0,
       isFree: true,
-      code: 'free15K-banana'
+      code: 'free15K-banana',
     };
 
     wrapper.setProps({ plan: free15kPlan });
@@ -76,7 +80,7 @@ describe('PlanPrice', () => {
       ...plan,
       monthly: 0,
       isFree: true,
-      code: 'free500-banana'
+      code: 'free500-banana',
     };
 
     wrapper.setProps({ plan: eternalFree });
@@ -90,17 +94,17 @@ describe('PlanPrice', () => {
   });
 
   it('renders flat discount', () => {
-    wrapper.setProps({ selectedPromo: { discount_amount: 5 }});
+    wrapper.setProps({ selectedPromo: { discount_amount: 5 } });
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders as 0 if flat discount is greater than price', () => {
-    wrapper.setProps({ selectedPromo: { discount_amount: 15 }});
+    wrapper.setProps({ selectedPromo: { discount_amount: 15 } });
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders percent discount', () => {
-    wrapper.setProps({ selectedPromo: { discount_percentage: 25 }});
+    wrapper.setProps({ selectedPromo: { discount_percentage: 25 } });
     expect(wrapper).toMatchSnapshot();
   });
 });

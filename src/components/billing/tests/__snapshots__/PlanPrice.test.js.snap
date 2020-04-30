@@ -8,7 +8,12 @@ exports[`PlanPrice allows class name overriding 1`] = `
     className="MainLabel"
   >
     <strong>
-      50,000
+      <Text
+        as="span"
+        fontWeight="400"
+      >
+        50,000
+      </Text>
     </strong>
     <span>
        emails/month 
@@ -36,7 +41,12 @@ exports[`PlanPrice renders as 0 if flat discount is greater than price 1`] = `
     className="MainLabel"
   >
     <strong>
-      50,000
+      <Text
+        as="span"
+        fontWeight="400"
+      >
+        50,000
+      </Text>
     </strong>
     <span>
        emails/month 
@@ -70,7 +80,12 @@ exports[`PlanPrice renders correctly 1`] = `
     className="MainLabel"
   >
     <strong>
-      50,000
+      <Text
+        as="span"
+        fontWeight="400"
+      >
+        50,000
+      </Text>
     </strong>
     <span>
        emails/month 
@@ -98,7 +113,12 @@ exports[`PlanPrice renders correctly for 30 day free plan 1`] = `
     className="MainLabel"
   >
     <strong>
-      50,000
+      <Text
+        as="span"
+        fontWeight="400"
+      >
+        50,000
+      </Text>
     </strong>
     <span>
        emails/month 
@@ -121,7 +141,12 @@ exports[`PlanPrice renders correctly for CSM inclusion 1`] = `
     className="MainLabel"
   >
     <strong>
-      50,000
+      <Text
+        as="span"
+        fontWeight="400"
+      >
+        50,000
+      </Text>
     </strong>
     <span>
        emails/month 
@@ -154,7 +179,12 @@ exports[`PlanPrice renders correctly for eternal free plan 1`] = `
     className="MainLabel"
   >
     <strong>
-      50,000
+      <Text
+        as="span"
+        fontWeight="400"
+      >
+        50,000
+      </Text>
     </strong>
     <span>
        emails/month 
@@ -177,7 +207,12 @@ exports[`PlanPrice renders correctly with hourly plans 1`] = `
     className="MainLabel"
   >
     <strong>
-      50,000
+      <Text
+        as="span"
+        fontWeight="400"
+      >
+        50,000
+      </Text>
     </strong>
     <span>
        emails/month 
@@ -205,7 +240,12 @@ exports[`PlanPrice renders flat discount 1`] = `
     className="MainLabel"
   >
     <strong>
-      50,000
+      <Text
+        as="span"
+        fontWeight="400"
+      >
+        50,000
+      </Text>
     </strong>
     <span>
        emails/month 
@@ -239,7 +279,12 @@ exports[`PlanPrice renders free ip 1`] = `
     className="MainLabel"
   >
     <strong>
-      50,000
+      <Text
+        as="span"
+        fontWeight="400"
+      >
+        50,000
+      </Text>
     </strong>
     <span>
        emails/month 
@@ -269,7 +314,12 @@ exports[`PlanPrice renders free ip and overage correct 1`] = `
     className="MainLabel"
   >
     <strong>
-      50,000
+      <Text
+        as="span"
+        fontWeight="400"
+      >
+        50,000
+      </Text>
     </strong>
     <span>
        emails/month 
@@ -302,7 +352,12 @@ exports[`PlanPrice renders percent discount 1`] = `
     className="MainLabel"
   >
     <strong>
-      50,000
+      <Text
+        as="span"
+        fontWeight="400"
+      >
+        50,000
+      </Text>
     </strong>
     <span>
        emails/month 
@@ -336,7 +391,12 @@ exports[`PlanPrice renders with overage 1`] = `
     className="MainLabel"
   >
     <strong>
-      50,000
+      <Text
+        as="span"
+        fontWeight="400"
+      >
+        50,000
+      </Text>
     </strong>
     <span>
        emails/month 

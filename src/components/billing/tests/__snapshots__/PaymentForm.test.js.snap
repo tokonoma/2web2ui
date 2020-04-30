@@ -4,9 +4,7 @@ exports[`Payment Form:  should render 1`] = `
 <div>
   <Stack>
     <p>
-      <small>
-        Credit Card
-      </small>
+      Credit Card
     </p>
     <Field
       component={[Function]}
