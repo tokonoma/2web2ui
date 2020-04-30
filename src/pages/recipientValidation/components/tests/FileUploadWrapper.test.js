@@ -15,7 +15,7 @@ const defaults = {
 
 describe('FileUploadWrapper', () => {
   beforeEach(() => {
-    useHibanaOverride.mockImplementationOnce(() => styles);
+    useHibanaOverride.mockReturnValue(() => styles);
   });
 
   it('renders correctly', () => {

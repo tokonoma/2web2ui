@@ -5,18 +5,20 @@ import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import { UploadedListForm } from '../UploadedListForm';
 import styles from '../UploadedListForm.module.scss';
 
+const { log } = console;
+
+log(styles);
+
 jest.mock('src/hooks/useHibanaOverride');
 
 describe('UploadedListForm', () => {
   beforeEach(() => {
-    useHibanaOverride.mockImplementationOnce(() => styles);
-    jest.mock('src/context/HibanaContext');
+    useHibanaOverride.mockReturnValue(() => styles);
   });
 
   const subject = (props = {}, method = shallow) => {
     const component = (
       <UploadedListForm
-        styles={styles}
         currentUsage={12345}
         getUsage={jest.fn()}
         job={{
@@ -28,7 +30,7 @@ describe('UploadedListForm', () => {
       />
     );
 
-    if (method == mount) {
+    if (method === mount) {
       return mount(<TestApp>{component}</TestApp>);
     }
 
@@ -53,6 +55,7 @@ describe('UploadedListForm', () => {
 
   it('should render cost loader', () => {
     const wrapper = subject({ loading: true });
+    log(wrapper.debug());
     expect(wrapper.find('.LoadingCostContainer')).toExist();
   });
 });
