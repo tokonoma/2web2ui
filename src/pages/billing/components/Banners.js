@@ -1,7 +1,8 @@
 import React from 'react';
 import { format } from 'date-fns';
 import { PageLink } from 'src/components/links';
-import { Banner } from 'src/components/matchbox';
+import { Banner, Box } from 'src/components/matchbox';
+import { OGOnlyWrapper } from 'src/components/hibana';
 import { LINKS } from 'src/constants';
 import { pluralString } from 'src/helpers/string';
 import * as conversions from 'src/helpers/conversionTracking';
@@ -23,23 +24,31 @@ export const PendingPlanBanner = ({ account, subscription }) => {
 
   if (pendingDowngrades.length > 0) {
     return (
-      <Banner status="info" title="Pending Plan Change" my="300">
-        <p>
-          You're scheduled for a pending downgrade and can't update your plan until that switch
-          happens.
-        </p>
-      </Banner>
+      <OGOnlyWrapper as={Banner} status="info" title="Pending Plan Change" my="300">
+        <Box as={Banner} status="warning" title="Pending Plan Change" my="300">
+          <p>
+            <Box maxWidth={600}>
+              You're scheduled for a pending downgrade and can't update your plan until that switch
+              happens.
+            </Box>
+          </p>
+        </Box>
+      </OGOnlyWrapper>
     );
   }
 
   return (
-    <Banner status="info" title="Pending Plan Change" my="300">
-      <p>
-        You're scheduled to switch to the {account.pending_subscription.name} plan on{' '}
-        {dateFormat(account.pending_subscription.effective_date)}, and can't update your plan until
-        that switch happens.
-      </p>
-    </Banner>
+    <OGOnlyWrapper as={Banner} status="warning" title="Pending Plan Change" my="300">
+      <Box as={Banner} status="warning" title="Pending Plan Change" my="300">
+        <p>
+          <Box maxWidth={600}>
+            You're scheduled to switch to the {account.pending_subscription.name} plan on{' '}
+            {dateFormat(account.pending_subscription.effective_date)}, and can't update your plan
+            until that switch happens.
+          </Box>
+        </p>
+      </Box>
+    </OGOnlyWrapper>
   );
 };
 
@@ -51,6 +60,8 @@ export const PremiumBanner = () => (
       to: LINKS.PREMIUM_SUPPORT,
       external: true,
       onClick: () => conversions.trackAddonRequest(ANALYTICS_PREMIUM_SUPPORT),
+      color: 'gray',
+      outlineBorder: true,
     }}
     my="300"
   >
@@ -80,6 +91,8 @@ export const EnterpriseBanner = () => (
       content: 'Contact Us',
       to: LINKS.ENTERPRISE_SUPPORT,
       external: true,
+      color: 'gray',
+      outlineBorder: true,
       onClick: () => conversions.trackAddonRequest(ANALYTICS_ENTERPRISE_SUPPORT),
     }}
     my="300"
