@@ -181,7 +181,7 @@ describe('The health score dashboard page', () => {
       });
     });
 
-    it.skip('renders tooltips when clicking on bars within the history chart', () => {
+    it('renders tooltips when clicking on bars within the history chart', () => {
       const rechartsSelector = '.recharts-wrapper';
       const barSelector = '.recharts-rectangle';
 
@@ -221,7 +221,7 @@ describe('The health score dashboard page', () => {
       cy.wait('@getHealthScore');
     });
 
-    it.skip('renders each subaccount along with the current health score for that subaccount', () => {
+    it('renders each subaccount along with the current health score for that subaccount', () => {
       function assertTableRow({
         rowIndex,
         subaccount,
