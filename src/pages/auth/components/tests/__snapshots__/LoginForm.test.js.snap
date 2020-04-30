@@ -1,17 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<Fragment>
-  <form>
+<form>
+  <Stack>
     <Field
-      autoFocus={true}
       component={[Function]}
-      errorInLabel={true}
       id="username"
       label="Email or Username"
       name="username"
       normalize={[Function]}
-      placeholder="email@example.com"
       validate={[Function]}
     />
     <Field
@@ -26,7 +23,6 @@ exports[`renders correctly 1`] = `
       id="password"
       label="Password"
       name="password"
-      placeholder="••••••••"
       type="password"
     />
     <Field
@@ -35,30 +31,29 @@ exports[`renders correctly 1`] = `
       label="Keep me logged in"
       name="rememberMe"
     />
-    <Button
-      data-id="button-log-in"
-      disabled={false}
-      primary={true}
-      submit={true}
-    >
-      Log In
-    </Button>
-  </form>
-</Fragment>
+    <Box>
+      <Button
+        data-id="button-log-in"
+        disabled={false}
+        submit={true}
+        variant="primary"
+      >
+        Log In
+      </Button>
+    </Box>
+  </Stack>
+</form>
 `;
 
 exports[`renders correctly when logging in 1`] = `
-<Fragment>
-  <form>
+<form>
+  <Stack>
     <Field
-      autoFocus={true}
       component={[Function]}
-      errorInLabel={true}
       id="username"
       label="Email or Username"
       name="username"
       normalize={[Function]}
-      placeholder="email@example.com"
       validate={[Function]}
     />
     <Field
@@ -73,7 +68,6 @@ exports[`renders correctly when logging in 1`] = `
       id="password"
       label="Password"
       name="password"
-      placeholder="••••••••"
       type="password"
     />
     <Field
@@ -82,41 +76,34 @@ exports[`renders correctly when logging in 1`] = `
       label="Keep me logged in"
       name="rememberMe"
     />
-    <Button
-      data-id="button-log-in"
-      disabled={true}
-      primary={true}
-      submit={true}
-    >
-      Logging In
-    </Button>
-  </form>
-</Fragment>
+    <Box>
+      <Button
+        data-id="button-log-in"
+        disabled={true}
+        submit={true}
+        variant="primary"
+      >
+        Logging In
+      </Button>
+    </Box>
+  </Stack>
+</form>
 `;
 
 exports[`renders errors 1`] = `
-<Fragment>
-  <div
-    style={
-      Object {
-        "marginBottom": "12px",
-      }
-    }
-  >
-    <Error
-      error="asplode"
-    />
-  </div>
-  <form>
+<form>
+  <Stack>
+    <BottomPad>
+      <Error
+        error="asplode"
+      />
+    </BottomPad>
     <Field
-      autoFocus={true}
       component={[Function]}
-      errorInLabel={true}
       id="username"
       label="Email or Username"
       name="username"
       normalize={[Function]}
-      placeholder="email@example.com"
       validate={[Function]}
     />
     <Field
@@ -131,7 +118,6 @@ exports[`renders errors 1`] = `
       id="password"
       label="Password"
       name="password"
-      placeholder="••••••••"
       type="password"
     />
     <Field
@@ -140,14 +126,16 @@ exports[`renders errors 1`] = `
       label="Keep me logged in"
       name="rememberMe"
     />
-    <Button
-      data-id="button-log-in"
-      disabled={false}
-      primary={true}
-      submit={true}
-    >
-      Log In
-    </Button>
-  </form>
-</Fragment>
+    <Box>
+      <Button
+        data-id="button-log-in"
+        disabled={false}
+        submit={true}
+        variant="primary"
+      >
+        Log In
+      </Button>
+    </Box>
+  </Stack>
+</form>
 `;

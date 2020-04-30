@@ -2,8 +2,11 @@
 
 .wrapper {
   position: relative;
-  flex-direction: column;
   background: color(white);
+
+  &.app {
+    flex-direction: column;
+  }
 }
 
 .content.content {
@@ -25,5 +28,13 @@
 .container {
   .app & {
     max-width: media-query(lg);
+  }
+
+  .form & {
+    max-width: media-query(sm);
+  }
+
+  .largeForm & {
+    max-width: media-query(sm);
   }
 }

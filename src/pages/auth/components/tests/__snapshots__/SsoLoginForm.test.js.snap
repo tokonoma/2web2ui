@@ -6,23 +6,25 @@ exports[`Component: SsoLoginForm renders errors 1`] = `
     error="asplode. Please contact login.issues@sparkpost.com for assistance."
   />
   <form>
-    <Field
-      autoFocus={true}
-      component={[Function]}
-      errorInLabel={true}
-      id="username"
-      label="Email or Username"
-      name="username"
-      normalize={[Function]}
-      placeholder="email@example.com"
-      validate={[Function]}
-    />
-    <Button
-      primary={true}
-      submit={true}
-    >
-      Log In
-    </Button>
+    <Stack>
+      <Field
+        autoFocus={true}
+        component={[Function]}
+        id="username"
+        label="Email or Username"
+        name="username"
+        normalize={[Function]}
+        validate={[Function]}
+      />
+      <Box>
+        <Button
+          submit={true}
+          variant="primary"
+        >
+          Log In
+        </Button>
+      </Box>
+    </Stack>
   </form>
 </Fragment>
 `;
@@ -30,23 +32,25 @@ exports[`Component: SsoLoginForm renders errors 1`] = `
 exports[`Component: SsoLoginForm should render 1`] = `
 <Fragment>
   <form>
-    <Field
-      autoFocus={true}
-      component={[Function]}
-      errorInLabel={true}
-      id="username"
-      label="Email or Username"
-      name="username"
-      normalize={[Function]}
-      placeholder="email@example.com"
-      validate={[Function]}
-    />
-    <Button
-      primary={true}
-      submit={true}
-    >
-      Log In
-    </Button>
+    <Stack>
+      <Field
+        autoFocus={true}
+        component={[Function]}
+        id="username"
+        label="Email or Username"
+        name="username"
+        normalize={[Function]}
+        validate={[Function]}
+      />
+      <Box>
+        <Button
+          submit={true}
+          variant="primary"
+        >
+          Log In
+        </Button>
+      </Box>
+    </Stack>
   </form>
 </Fragment>
 `;
@@ -54,24 +58,26 @@ exports[`Component: SsoLoginForm should render 1`] = `
 exports[`Component: SsoLoginForm should render during login 1`] = `
 <Fragment>
   <form>
-    <Field
-      autoFocus={true}
-      component={[Function]}
-      errorInLabel={true}
-      id="username"
-      label="Email or Username"
-      name="username"
-      normalize={[Function]}
-      placeholder="email@example.com"
-      validate={[Function]}
-    />
-    <Button
-      disabled={true}
-      primary={true}
-      submit={true}
-    >
-      Logging In
-    </Button>
+    <Stack>
+      <Field
+        autoFocus={true}
+        component={[Function]}
+        id="username"
+        label="Email or Username"
+        name="username"
+        normalize={[Function]}
+        validate={[Function]}
+      />
+      <Box>
+        <Button
+          disabled={true}
+          submit={true}
+          variant="primary"
+        >
+          Logging In
+        </Button>
+      </Box>
+    </Stack>
   </form>
 </Fragment>
 `;

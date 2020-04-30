@@ -22,10 +22,10 @@
     "test-e2e-headless": "cypress run --config integrationFolder=cypress/tests/e2e",
     "test-e2e-ci": "npm run start-app & wait-on http://localhost:3100 && npm run test-e2e-headless",
     "test-integration": "npm run test-cy-env && cypress open --config integrationFolder=cypress/tests/integration",
-    "test-integration-hibana": "CYPRESS_DEFAULT_TO_HIBANA=true npm run test-cy-env && cypress open --config integrationFolder=cypress/tests/integration",
+    "test-integration-hibana": "npm run test-cy-env && cypress open --config integrationFolder=cypress/tests/integration --env CYPRESS_DEFAULT_TO_HIBANA=true",
     "test-integration-headless": "npm run test-cy-env && cypress run --config integrationFolder=cypress/tests/integration",
     "test-integration-ci": "npm run start-app & wait-on http://localhost:3100 && sleep 60 && cypress run --config integrationFolder=cypress/tests/integration numTestsKeptInMemory=1",
-    "test-integration-ci-hibana": "CYPRESS_DEFAULT_TO_HIBANA=true npm run start-app-hibana & wait-on http://localhost:3100 && sleep 60 && cypress run --config integrationFolder=cypress/tests/integration numTestsKeptInMemory=1",
+    "test-integration-ci-hibana": "npm run start-app-hibana & wait-on http://localhost:3100 && sleep 60 && cypress run --config integrationFolder=cypress/tests/integration numTestsKeptInMemory=1 --env CYPRESS_DEFAULT_TO_HIBANA=true",
     "storybook-dev": "start-storybook --port 3101 --config-dir .storybook --docs --quiet",
     "storybook-build": "build-storybook --config-dir .storybook --output-dir .out --docs"
   },

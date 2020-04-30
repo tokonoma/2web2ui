@@ -4,7 +4,6 @@ exports[`should render 1`] = `
 <Fragment>
   <CenteredLogo />
   <Panel
-    accent={true}
     sectioned={true}
     title="Two-factor Authentication"
   >

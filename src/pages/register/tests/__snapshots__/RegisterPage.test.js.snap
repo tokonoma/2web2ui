@@ -4,20 +4,21 @@ exports[`Page: RegisterPage happy path render 1`] = `
 <div>
   <CenteredLogo />
   <Panel
-    accent={true}
     title="Set Password"
   >
     <Panel.Section>
-      <p>
-        <small>
-          jose@example.com
-           invited you to join their SparkPost account.
-        </small>
-      </p>
-      <Connect(ReduxForm)
-        email="newperson@example.com"
-        onSubmit={[Function]}
-      />
+      <Stack>
+        <p>
+          <small>
+            jose@example.com
+             invited you to join their SparkPost account.
+          </small>
+        </p>
+        <Connect(ReduxForm)
+          email="newperson@example.com"
+          onSubmit={[Function]}
+        />
+      </Stack>
     </Panel.Section>
   </Panel>
   <Panel.Footer
@@ -38,7 +39,6 @@ exports[`Page: RegisterPage loading 1`] = `
 <div>
   <CenteredLogo />
   <Panel
-    accent={true}
     title="Set Password"
   >
     <PanelLoading
@@ -71,7 +71,6 @@ exports[`Page: RegisterPage token expired 1`] = `
 <div>
   <CenteredLogo />
   <Panel
-    accent={true}
     title="Set Password"
   >
     <Panel.Section>

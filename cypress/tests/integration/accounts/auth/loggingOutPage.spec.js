@@ -15,8 +15,16 @@ describe('logging out', () => {
       status: 200,
     });
 
-    cy.findByText('mockuser@example.com').click();
-    cy.findByText('Log Out').click();
+    if (Cypress.env('CYPRESS_DEFAULT_TO_HIBANA')) {
+      cy.findByText('UT').click();
+      cy.get('[data-id="desktop-navigation-account-popover"]').within(() => {
+        cy.findByText('Log Out').click();
+      });
+    } else {
+      cy.findByText('mockuser@example.com').click();
+      cy.findByText('Log Out').click();
+    }
+
     cy.url().should('include', '/auth');
     cy.visit('/dashboard');
     cy.url().should('include', '/auth');

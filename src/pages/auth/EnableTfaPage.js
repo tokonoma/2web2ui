@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Panel } from 'src/components/matchbox';
+import { Panel, Stack } from 'src/components/matchbox';
 import EnableTfaForm from 'src/components/enableTfaForm/EnableTfaForm';
 import RedirectAfterLogin from './components/RedirectAfterLogin';
 import { login } from 'src/actions/auth';
@@ -29,11 +29,13 @@ export class EnableTfaPage extends React.Component {
     }
 
     return (
-      <Panel sectioned accent title="Enable Two Factor Authentication">
-        <Panel.Section>
-          Your administrator requires all users on this account to use two factor authentication.
-        </Panel.Section>
-        <EnableTfaForm afterEnable={this.afterEnable} />
+      <Panel sectioned title="Enable Two Factor Authentication">
+        <Stack>
+          <p>
+            Your administrator requires all users on this account to use two factor authentication.
+          </p>
+          <EnableTfaForm afterEnable={this.afterEnable} />
+        </Stack>
       </Panel>
     );
   }
