@@ -29,14 +29,16 @@ export class UpdateContactForm extends Component {
 
     return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
-        <Panel sectioned title="Update Billing Contact">
+        <Panel title="Update Billing Contact">
           <Panel.Section>
             <BillingContactForm
               formName={FORMNAME}
               disabled={submitting}
               countries={this.props.billing.countries}
             />
-            <ButtonWrapper>
+          </Panel.Section>
+          <Panel.Section>
+            <ButtonWrapper marginTop="0">
               <Button type="submit" variant="primary" disabled={submitting}>
                 Update Billing Contact
               </Button>
