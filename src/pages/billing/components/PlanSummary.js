@@ -1,26 +1,31 @@
 import React from 'react';
-import styles from './PlanSummary.module.scss';
+import { Heading } from 'src/components';
 import { formatDate } from 'src/helpers/date';
+import styles from './PlanSummary.module.scss';
 const PlanSummary = ({
   plan: {
     period,
     plan_volume: planVolume,
     plan_volume_per_period: planVolumePerPeriod,
     overage,
-    recurring_charge: recurringCharge
+    recurring_charge: recurringCharge,
   },
-  pendingCancellation = {}
+  pendingCancellation = {},
 }) => {
-  const cost = recurringCharge === 0
-    ? 'free'
-    : `$${recurringCharge.toLocaleString()} per ${period || 'month'}`;
+  const cost =
+    recurringCharge === 0
+      ? 'free'
+      : `$${recurringCharge.toLocaleString()} per ${period || 'month'}`;
   const volume = (planVolumePerPeriod || planVolume).toLocaleString();
   const { effective_date } = pendingCancellation;
   return (
     <React.Fragment>
-      <h6 className={styles.Headline}>
-        {volume} emails for {cost}{effective_date && <small> to end {formatDate(effective_date)} when your account will be cancelled</small>}
-      </h6>
+      <Heading as="h6" className={styles.Headline} looksLike="h4">
+        {volume} emails for {cost}
+        {effective_date && (
+          <small> to end {formatDate(effective_date)} when your account will be cancelled</small>
+        )}
+      </Heading>
       {overage && <p>${overage.toFixed(2)} per thousand extra emails</p>}
     </React.Fragment>
   );
