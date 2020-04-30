@@ -1,7 +1,9 @@
-import React, { Fragment, Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Panel } from 'src/components/matchbox';
-import { TableCollection } from 'src/components';
+import { Box, Button, Panel } from 'src/components/matchbox';
+import { FileDownload } from '@sparkpost/matchbox-icons';
+import { OGOnlyWrapper } from 'src/components/hibana';
+import { SubduedText, TableCollection } from 'src/components';
 import { formatDate } from 'src/helpers/date';
 import { get as getInvoice } from 'src/actions/invoices';
 import { showAlert } from 'src/actions/globalAlert';
@@ -27,7 +29,13 @@ export class InvoiceHistory extends Component {
           disabled={invoiceLoading}
           onClick={() => this.props.getInvoice(id)}
         >
-          {invoiceLoading && thisInvoiceLoading ? 'Downloading...' : 'Download'}
+          {invoiceLoading && thisInvoiceLoading ? (
+            'Downloading...'
+          ) : (
+            <>
+              Download <FileDownload />
+            </>
+          )}
         </Button>
       </div>,
     ];
@@ -57,20 +65,21 @@ export class InvoiceHistory extends Component {
       invoices.length >= 20 ? (
         <Panel.Footer
           left={
-            <p>
+            <SubduedText>
               <small>Only your last 20 invoices are available to be viewed</small>
-            </p>
+            </SubduedText>
           }
         />
       ) : null;
 
     return (
-      <Fragment>
-        <Panel title="Invoice History">
+      <>
+        <OGOnlyWrapper as={Panel} title="Invoice History">
+          <Box as={Panel} title="Invoice History" sectioned marginBottom={0} borderBottom={0} />
           <TableCollection rows={invoices} columns={columns} getRowData={this.getRowData} />
-        </Panel>
+        </OGOnlyWrapper>
         {maxWarning}
-      </Fragment>
+      </>
     );
   }
 }
