@@ -20,7 +20,7 @@ const LabelledValue = ({ label, value, children, bold = true }) => {
   }
   const childrenMarkup = value ? (
     !bold || isHibanaEnabled ? (
-      <p>{value}</p>
+      <div name="value">{value}</div>
     ) : (
       <h6>{value}</h6>
     )

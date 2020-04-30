@@ -1,5 +1,12 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
+.Title {
+  display: flex;
+  height: 100%;
+}
+
 .TitleIcon {
+  display: flex;
+  align-items: center;
   margin-right: spacing(small);
 }

@@ -1,0 +1,7 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.PageDescription {
+  @media (min-width: media-query(md)) {
+    transform: translateY(-#{spacing(200)});
+  }
+}

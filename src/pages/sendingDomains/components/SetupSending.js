@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 
 // components
 import { LabelledValue } from 'src/components';
+import { SubduedText } from 'src/components/text';
 import { UnstyledLink } from 'src/components/matchbox';
 import VerifyEmail from './VerifyEmail';
 import { SendingDomainSection } from './SendingDomainSection';
@@ -55,10 +56,10 @@ export class SetupSending extends Component {
 
     if (!readyFor.sending && !readyFor.dkim) {
       content = (
-        <p>
+        <SubduedText>
           <strong>To use this domain for sending</strong>, add this TXT record to your DNS settings,
           paying close attention to the specified hostname.
-        </p>
+        </SubduedText>
       );
 
       // Append second paragraph for mailbox verification
@@ -66,13 +67,13 @@ export class SetupSending extends Component {
         content = (
           <React.Fragment>
             {content}
-            <p>
+            <SubduedText mt="300">
               We recommend DNS verification, but if you don't have DNS access, you can{' '}
               <UnstyledLink id="verify-with-email" onClick={this.toggleVerifyViaEmailModal}>
                 {' '}
                 set this domain up for sending via email.
               </UnstyledLink>
-            </p>
+            </SubduedText>
             {this.state.open && (
               <VerifyEmail
                 id={domain.id}
@@ -88,11 +89,11 @@ export class SetupSending extends Component {
 
     if (readyFor.sending && !readyFor.dkim) {
       content = (
-        <p>
+        <SubduedText mt="300">
           This domain is <strong>ready for sending</strong>, but if you plan to use it for sending,
           we still recommend that you add this TXT record to make it <strong>ready for DKIM</strong>{' '}
           as well.
-        </p>
+        </SubduedText>
       );
     }
 

@@ -3,30 +3,33 @@
 exports[`AddForm tests should disable fields when submitting 1`] = `
 <Fragment>
   <form>
-    <Panel.Section>
-      <Field
-        component={[Function]}
-        label="Email Address"
-        name="recipient"
-        required={true}
-        validate={
-          Array [
-            [Function],
-            [Function],
-          ]
-        }
-      />
-      <Field
-        component={[Function]}
-        label="Description"
-        name="description"
-      />
-      <Field
-        component={[Function]}
-        disabled={true}
-        helpText="Leaving this field blank will add the suppressions to the master account."
-        name="subaccount"
-      />
+    <Stack>
+      <Box
+        maxWidth="860px"
+      >
+        <Field
+          component={[Function]}
+          label="Email Address"
+          name="recipient"
+          required={true}
+          validate={
+            Array [
+              [Function],
+              [Function],
+            ]
+          }
+        />
+      </Box>
+      <Box
+        maxWidth="860px"
+      >
+        <Field
+          component={[Function]}
+          disabled={true}
+          helpText="Leaving this field blank will add the suppressions to the master account."
+          name="subaccount"
+        />
+      </Box>
       <Checkbox.Group
         label="Type"
         required={true}
@@ -45,16 +48,21 @@ exports[`AddForm tests should disable fields when submitting 1`] = `
           validate={[Function]}
         />
       </Checkbox.Group>
-    </Panel.Section>
-    <Panel.Section>
+      <Field
+        component={[Function]}
+        label="Description"
+        name="description"
+      />
+    </Stack>
+    <ButtonWrapper>
       <Button
         disabled={true}
-        primary={true}
         type="submit"
+        variant="primary"
       >
         Add / Update
       </Button>
-    </Panel.Section>
+    </ButtonWrapper>
   </form>
 </Fragment>
 `;
@@ -62,30 +70,33 @@ exports[`AddForm tests should disable fields when submitting 1`] = `
 exports[`AddForm tests should make form submitable when dirty and not submitting 1`] = `
 <Fragment>
   <form>
-    <Panel.Section>
-      <Field
-        component={[Function]}
-        label="Email Address"
-        name="recipient"
-        required={true}
-        validate={
-          Array [
-            [Function],
-            [Function],
-          ]
-        }
-      />
-      <Field
-        component={[Function]}
-        label="Description"
-        name="description"
-      />
-      <Field
-        component={[Function]}
-        disabled={false}
-        helpText="Leaving this field blank will add the suppressions to the master account."
-        name="subaccount"
-      />
+    <Stack>
+      <Box
+        maxWidth="860px"
+      >
+        <Field
+          component={[Function]}
+          label="Email Address"
+          name="recipient"
+          required={true}
+          validate={
+            Array [
+              [Function],
+              [Function],
+            ]
+          }
+        />
+      </Box>
+      <Box
+        maxWidth="860px"
+      >
+        <Field
+          component={[Function]}
+          disabled={false}
+          helpText="Leaving this field blank will add the suppressions to the master account."
+          name="subaccount"
+        />
+      </Box>
       <Checkbox.Group
         label="Type"
         required={true}
@@ -104,16 +115,21 @@ exports[`AddForm tests should make form submitable when dirty and not submitting
           validate={[Function]}
         />
       </Checkbox.Group>
-    </Panel.Section>
-    <Panel.Section>
+      <Field
+        component={[Function]}
+        label="Description"
+        name="description"
+      />
+    </Stack>
+    <ButtonWrapper>
       <Button
         disabled={false}
-        primary={true}
         type="submit"
+        variant="primary"
       >
         Add / Update
       </Button>
-    </Panel.Section>
+    </ButtonWrapper>
   </form>
 </Fragment>
 `;
@@ -121,30 +137,33 @@ exports[`AddForm tests should make form submitable when dirty and not submitting
 exports[`AddForm tests should render add form 1`] = `
 <Fragment>
   <form>
-    <Panel.Section>
-      <Field
-        component={[Function]}
-        label="Email Address"
-        name="recipient"
-        required={true}
-        validate={
-          Array [
-            [Function],
-            [Function],
-          ]
-        }
-      />
-      <Field
-        component={[Function]}
-        label="Description"
-        name="description"
-      />
-      <Field
-        component={[Function]}
-        disabled={false}
-        helpText="Leaving this field blank will add the suppressions to the master account."
-        name="subaccount"
-      />
+    <Stack>
+      <Box
+        maxWidth="860px"
+      >
+        <Field
+          component={[Function]}
+          label="Email Address"
+          name="recipient"
+          required={true}
+          validate={
+            Array [
+              [Function],
+              [Function],
+            ]
+          }
+        />
+      </Box>
+      <Box
+        maxWidth="860px"
+      >
+        <Field
+          component={[Function]}
+          disabled={false}
+          helpText="Leaving this field blank will add the suppressions to the master account."
+          name="subaccount"
+        />
+      </Box>
       <Checkbox.Group
         label="Type"
         required={true}
@@ -163,16 +182,21 @@ exports[`AddForm tests should render add form 1`] = `
           validate={[Function]}
         />
       </Checkbox.Group>
-    </Panel.Section>
-    <Panel.Section>
+      <Field
+        component={[Function]}
+        label="Description"
+        name="description"
+      />
+    </Stack>
+    <ButtonWrapper>
       <Button
         disabled={true}
-        primary={true}
         type="submit"
+        variant="primary"
       >
         Add / Update
       </Button>
-    </Panel.Section>
+    </ButtonWrapper>
   </form>
 </Fragment>
 `;

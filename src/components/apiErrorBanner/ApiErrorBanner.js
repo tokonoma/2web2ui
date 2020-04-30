@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHibana } from 'src/context/HibanaContext';
 import { Banner, Button } from 'src/components/matchbox';
-import ButtonWrapper from 'src/components/buttonWrapper';
+import { ButtonWrapper } from 'src/components';
 
 const methodToText = {
   GET: 'loading',

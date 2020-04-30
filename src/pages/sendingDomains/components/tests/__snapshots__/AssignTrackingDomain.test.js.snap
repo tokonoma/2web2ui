@@ -5,46 +5,56 @@ exports[`Component: AssignTrackingDomain form should have button disabled when f
   title="Select a Tracking Domain"
 >
   <Left>
-    <p>
-      Link to a tracking domain to track opens, clicks, and unsubscribes.
-    </p>
-    <PageLink
-      to="/account/tracking-domains/create"
+    <SubduedText
+      as="p"
+      color="gray.600"
+      fontSize="300"
+      mt="300"
     >
-      Create a tracking domain.
-    </PageLink>
+      <span>
+        Link to a tracking domain to track opens, clicks, and unsubscribes.
+      </span>
+      <br />
+      <PageLink
+        to="/account/tracking-domains/create"
+      >
+        Create a tracking domain.
+      </PageLink>
+    </SubduedText>
   </Left>
   <Right>
-    <Panel
-      sectioned={true}
-    >
+    <Panel>
       <form>
-        <Field
-          component={[Function]}
-          disabled={false}
-          helpText="Domains must be verified to be linked to a sending domain."
-          label="Linked Tracking Domain"
-          name="trackingDomain"
-          options={
-            Array [
-              Object {
-                "label": "track.me",
-                "value": "track",
-              },
-              Object {
-                "label": "dont.track.me",
-                "value": "dont-track",
-              },
-            ]
-          }
-        />
-        <Button
-          disabled={true}
-          primary={true}
-          submit={true}
-        >
-          Update Tracking Domain
-        </Button>
+        <Panel.Section>
+          <Field
+            component={[Function]}
+            disabled={false}
+            helpText="Domains must be verified to be linked to a sending domain."
+            label="Linked Tracking Domain"
+            name="trackingDomain"
+            options={
+              Array [
+                Object {
+                  "label": "track.me",
+                  "value": "track",
+                },
+                Object {
+                  "label": "dont.track.me",
+                  "value": "dont-track",
+                },
+              ]
+            }
+          />
+        </Panel.Section>
+        <Panel.Section>
+          <Button
+            disabled={true}
+            submit={true}
+            variant="primary"
+          >
+            Update Tracking Domain
+          </Button>
+        </Panel.Section>
       </form>
     </Panel>
   </Right>
@@ -56,46 +66,56 @@ exports[`Component: AssignTrackingDomain form should have button disabled when s
   title="Select a Tracking Domain"
 >
   <Left>
-    <p>
-      Link to a tracking domain to track opens, clicks, and unsubscribes.
-    </p>
-    <PageLink
-      to="/account/tracking-domains/create"
+    <SubduedText
+      as="p"
+      color="gray.600"
+      fontSize="300"
+      mt="300"
     >
-      Create a tracking domain.
-    </PageLink>
+      <span>
+        Link to a tracking domain to track opens, clicks, and unsubscribes.
+      </span>
+      <br />
+      <PageLink
+        to="/account/tracking-domains/create"
+      >
+        Create a tracking domain.
+      </PageLink>
+    </SubduedText>
   </Left>
   <Right>
-    <Panel
-      sectioned={true}
-    >
+    <Panel>
       <form>
-        <Field
-          component={[Function]}
-          disabled={true}
-          helpText="Domains must be verified to be linked to a sending domain."
-          label="Linked Tracking Domain"
-          name="trackingDomain"
-          options={
-            Array [
-              Object {
-                "label": "track.me",
-                "value": "track",
-              },
-              Object {
-                "label": "dont.track.me",
-                "value": "dont-track",
-              },
-            ]
-          }
-        />
-        <Button
-          disabled={true}
-          primary={true}
-          submit={true}
-        >
-          Updating...
-        </Button>
+        <Panel.Section>
+          <Field
+            component={[Function]}
+            disabled={true}
+            helpText="Domains must be verified to be linked to a sending domain."
+            label="Linked Tracking Domain"
+            name="trackingDomain"
+            options={
+              Array [
+                Object {
+                  "label": "track.me",
+                  "value": "track",
+                },
+                Object {
+                  "label": "dont.track.me",
+                  "value": "dont-track",
+                },
+              ]
+            }
+          />
+        </Panel.Section>
+        <Panel.Section>
+          <Button
+            disabled={true}
+            submit={true}
+            variant="primary"
+          >
+            Updating...
+          </Button>
+        </Panel.Section>
       </form>
     </Panel>
   </Right>
@@ -107,46 +127,56 @@ exports[`Component: AssignTrackingDomain form should render form with initial va
   title="Select a Tracking Domain"
 >
   <Left>
-    <p>
-      Link to a tracking domain to track opens, clicks, and unsubscribes.
-    </p>
-    <PageLink
-      to="/account/tracking-domains/create"
+    <SubduedText
+      as="p"
+      color="gray.600"
+      fontSize="300"
+      mt="300"
     >
-      Create a tracking domain.
-    </PageLink>
+      <span>
+        Link to a tracking domain to track opens, clicks, and unsubscribes.
+      </span>
+      <br />
+      <PageLink
+        to="/account/tracking-domains/create"
+      >
+        Create a tracking domain.
+      </PageLink>
+    </SubduedText>
   </Left>
   <Right>
-    <Panel
-      sectioned={true}
-    >
+    <Panel>
       <form>
-        <Field
-          component={[Function]}
-          disabled={false}
-          helpText="Domains must be verified to be linked to a sending domain."
-          label="Linked Tracking Domain"
-          name="trackingDomain"
-          options={
-            Array [
-              Object {
-                "label": "track.me",
-                "value": "track",
-              },
-              Object {
-                "label": "dont.track.me",
-                "value": "dont-track",
-              },
-            ]
-          }
-        />
-        <Button
-          disabled={false}
-          primary={true}
-          submit={true}
-        >
-          Update Tracking Domain
-        </Button>
+        <Panel.Section>
+          <Field
+            component={[Function]}
+            disabled={false}
+            helpText="Domains must be verified to be linked to a sending domain."
+            label="Linked Tracking Domain"
+            name="trackingDomain"
+            options={
+              Array [
+                Object {
+                  "label": "track.me",
+                  "value": "track",
+                },
+                Object {
+                  "label": "dont.track.me",
+                  "value": "dont-track",
+                },
+              ]
+            }
+          />
+        </Panel.Section>
+        <Panel.Section>
+          <Button
+            disabled={false}
+            submit={true}
+            variant="primary"
+          >
+            Update Tracking Domain
+          </Button>
+        </Panel.Section>
       </form>
     </Panel>
   </Right>
@@ -158,14 +188,22 @@ exports[`Component: AssignTrackingDomain form should render panel loading compon
   title="Select a Tracking Domain"
 >
   <Left>
-    <p>
-      Link to a tracking domain to track opens, clicks, and unsubscribes.
-    </p>
-    <PageLink
-      to="/account/tracking-domains/create"
+    <SubduedText
+      as="p"
+      color="gray.600"
+      fontSize="300"
+      mt="300"
     >
-      Create a tracking domain.
-    </PageLink>
+      <span>
+        Link to a tracking domain to track opens, clicks, and unsubscribes.
+      </span>
+      <br />
+      <PageLink
+        to="/account/tracking-domains/create"
+      >
+        Create a tracking domain.
+      </PageLink>
+    </SubduedText>
   </Left>
   <Right>
     <PanelLoading

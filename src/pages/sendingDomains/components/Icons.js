@@ -1,10 +1,21 @@
 import React from 'react';
 import { Check, Error } from '@sparkpost/matchbox-icons';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
+import OGStyles from './Icons.module.scss';
+import hibanaStyles from './IconsHibana.module.scss';
 
-import styles from './Icons.module.scss';
+export function VerifiedIcon() {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
 
-export const VerifiedIcon = () => <Check size={16} className={styles.GreenCheck}/>;
+  return <Check size={16} className={styles.GreenCheck} />;
+}
+
 VerifiedIcon.displayName = 'VerifiedIcon';
 
-export const ErrorIcon = () => <Error size={16} className={styles.RedError}/>;
+export function ErrorIcon() {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+
+  return <Error size={16} className={styles.RedError} />;
+}
+
 ErrorIcon.displayName = 'ErrorIcon';

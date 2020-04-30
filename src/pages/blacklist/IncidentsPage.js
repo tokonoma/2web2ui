@@ -4,13 +4,13 @@ import moment from 'moment';
 import { ApiErrorBanner, Loading } from 'src/components';
 import { Users } from 'src/components/images';
 import { PageLink } from 'src/components/links';
+import { PageDescription } from 'src/components/text';
 import { Page } from 'src/components/matchbox';
 import { listMonitors, listIncidents } from 'src/actions/blacklist';
 import { selectIncidentsList } from 'src/selectors/blacklist';
 import { getRelativeDates } from 'src/helpers/date';
 import usePageFilters from 'src/hooks/usePageFilters';
 import IncidentsCollection from './components/IncidentsCollection';
-import styles from './IncidentsPage.module.scss';
 
 const filterWhitelist = {
   search: {},
@@ -118,10 +118,10 @@ export const IncidentsPage = props => {
         component: PageLink,
       }}
     >
-      <p className={styles.Description}>
+      <PageDescription>
         Check the current status of blacklists and learn more about what actions you can take to
         remedy and prevent future blacklisting.
-      </p>
+      </PageDescription>
       {renderContent()}
     </Page>
   );

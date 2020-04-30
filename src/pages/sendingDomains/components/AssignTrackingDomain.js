@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
+import { SubduedText } from 'src/components/text';
 import { PageLink } from 'src/components/links';
 import { Button, Panel } from 'src/components/matchbox';
 import { showAlert } from 'src/actions/globalAlert';
@@ -47,19 +48,23 @@ export class AssignTrackingDomain extends Component {
     }
 
     return (
-      <Panel sectioned>
+      <Panel>
         <form onSubmit={this.props.handleSubmit(this.updateTrackingDomain)}>
-          <Field
-            component={SelectWrapper}
-            name="trackingDomain"
-            options={trackingDomains}
-            disabled={submitting}
-            label="Linked Tracking Domain"
-            helpText="Domains must be verified to be linked to a sending domain."
-          />
-          <Button submit primary disabled={submitting || pristine}>
-            {submitting ? 'Updating...' : 'Update Tracking Domain'}
-          </Button>
+          <Panel.Section>
+            <Field
+              component={SelectWrapper}
+              name="trackingDomain"
+              options={trackingDomains}
+              disabled={submitting}
+              label="Linked Tracking Domain"
+              helpText="Domains must be verified to be linked to a sending domain."
+            />
+          </Panel.Section>
+          <Panel.Section>
+            <Button variant="primary" submit disabled={submitting || pristine}>
+              {submitting ? 'Updating...' : 'Update Tracking Domain'}
+            </Button>
+          </Panel.Section>
         </form>
       </Panel>
     );
@@ -69,8 +74,11 @@ export class AssignTrackingDomain extends Component {
     return (
       <SendingDomainSection title="Select a Tracking Domain">
         <SendingDomainSection.Left>
-          <p>Link to a tracking domain to track opens, clicks, and unsubscribes.</p>
-          <PageLink to={'/account/tracking-domains/create'}>Create a tracking domain.</PageLink>
+          <SubduedText mt="300">
+            <span>Link to a tracking domain to track opens, clicks, and unsubscribes.</span>
+            <br />
+            <PageLink to={'/account/tracking-domains/create'}>Create a tracking domain.</PageLink>
+          </SubduedText>
         </SendingDomainSection.Left>
         <SendingDomainSection.Right>{this.renderTrackingDomains()}</SendingDomainSection.Right>
       </SendingDomainSection>

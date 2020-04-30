@@ -6,7 +6,16 @@ exports[`EmailSearch renders correctly 1`] = `
     md={12}
     xs={12}
   >
-    <div>
+    <Box
+      mb={
+        Array [
+          "300",
+          null,
+          null,
+          "0",
+        ]
+      }
+    >
       <label
         className="ScreenReaderOnly"
         htmlFor="email"
@@ -27,7 +36,7 @@ exports[`EmailSearch renders correctly 1`] = `
           ]
         }
       />
-    </div>
+    </Box>
   </Grid.Column>
 </Grid>
 `;
@@ -38,7 +47,16 @@ exports[`EmailSearch renders correctly with subaccounts 1`] = `
     md={6}
     xs={12}
   >
-    <div>
+    <Box
+      mb={
+        Array [
+          "300",
+          null,
+          null,
+          "0",
+        ]
+      }
+    >
       <label
         className="ScreenReaderOnly"
         htmlFor="email"
@@ -59,13 +77,13 @@ exports[`EmailSearch renders correctly with subaccounts 1`] = `
           ]
         }
       />
-    </div>
+    </Box>
   </Grid.Column>
   <Grid.Column
     md={6}
     xs={12}
   >
-    <div>
+    <Box>
       <label
         className="ScreenReaderOnly"
         htmlFor="subaccount"
@@ -79,7 +97,7 @@ exports[`EmailSearch renders correctly with subaccounts 1`] = `
         onChange={[Function]}
         placeholder="Subaccount"
       />
-    </div>
+    </Box>
   </Grid.Column>
 </Grid>
 `;

@@ -26,11 +26,12 @@ export { default as StatusTooltipHeader } from './domainStatus/StatusTooltipHead
 export { default as DomainStatusCell } from './domainStatus/DomainStatusCell';
 export { default as CookieConsent } from './cookieConsent/CookieConsent';
 export { default as Subaccount } from './labels/Subaccount';
-export { default as ButtonWrapper } from './buttonWrapper';
+export { default as TabsWrapper } from './tabsWrapper';
 export { default as IconButton } from './iconButton';
 export { default as MultiEmailField } from './multiEmailField';
 export { default as Abbreviation } from './abbreviation';
 export { default as RecipientValidationPriceTable } from './recipientValidation/RecipientValidationPriceTable';
+export { default as ButtonWrapper } from './buttonWrapper/ButtonWrapper';
 
 export * from './breadcrumbs';
 export * from './collection';

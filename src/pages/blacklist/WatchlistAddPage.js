@@ -2,10 +2,9 @@ import React, { useState, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { showAlert } from 'src/actions/globalAlert';
 import { watchlistAdd } from 'src/actions/blacklist';
+import { ButtonWrapper } from 'src/components';
 import { PageLink } from 'src/components/links';
 import { Button, Page, Panel, TextField } from 'src/components/matchbox';
-
-import styles from './WatchlistAddPage.module.scss';
 
 export const WatchlistAddPage = ({
   watchlistAdd,
@@ -70,29 +69,33 @@ export const WatchlistAddPage = ({
         component: PageLink,
       }}
     >
-      <Panel sectioned>
+      <Panel>
         <form onSubmit={handleSubmit}>
-          <TextField
-            id="watchlist-item-input"
-            label="IP or Sending Domain"
-            placeholder="Add any IPs or domains you want to keep an eye on"
-            onChange={onChange}
-            error={errorMessage}
-            value={resource}
-          />
-          <div>
-            <Button
-              type="submit"
-              color="orange"
-              disabled={submitPending || !resource}
-              className={styles.SaveButton}
-            >
-              Save
-            </Button>
-            <Button outline disabled={submitPending || !resource} onClick={handleSaveAndAddNew}>
-              Save and Add Another
-            </Button>
-          </div>
+          <Panel.Section>
+            <TextField
+              id="watchlist-item-input"
+              label="IP or Sending Domain"
+              placeholder="Add any IPs or domains you want to keep an eye on"
+              onChange={onChange}
+              error={errorMessage}
+              value={resource}
+            />
+          </Panel.Section>
+          <Panel.Section>
+            <ButtonWrapper marginTop="0">
+              <Button variant="primary" type="submit" disabled={submitPending || !resource}>
+                Save
+              </Button>
+
+              <Button
+                variant="secondary"
+                disabled={submitPending || !resource}
+                onClick={handleSaveAndAddNew}
+              >
+                Save and Add Another
+              </Button>
+            </ButtonWrapper>
+          </Panel.Section>
         </form>
       </Panel>
     </Page>

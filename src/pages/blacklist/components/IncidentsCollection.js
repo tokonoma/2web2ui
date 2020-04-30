@@ -1,9 +1,10 @@
 import React from 'react';
 import { Search } from '@sparkpost/matchbox-icons';
 import { FORMATS } from 'src/constants';
-import { TableCollection, DisplayDate } from 'src/components';
+import { OGOnlyWrapper } from 'src/components/hibana';
+import { Empty, TableCollection, DisplayDate } from 'src/components';
 import { PageLink } from 'src/components/links';
-import { Grid, Panel, Table, Tag, TextField } from 'src/components/matchbox';
+import { Box, Grid, Panel, Table, Tag, TextField } from 'src/components/matchbox';
 import styles from './IncidentsCollection.module.scss';
 import DatePicker from 'src/components/datePicker/DatePicker';
 
@@ -51,20 +52,24 @@ export const IncidentsCollection = props => {
 
   const renderHeader = ({ textFieldComponent }) => (
     <Grid>
-      <Grid.Column sm={12} lg={5}>
-        <div className={styles.DatePicker}>
-          <DatePicker
-            {...dateOptions}
-            relativeDateOptions={RELATIVE_DATE_OPTIONS}
-            onChange={updateDateRange}
-            dateFieldFormat={FORMATS.DATE}
-            hideManualEntry
-          />
-        </div>
-      </Grid.Column>
-      <Grid.Column sm={12} lg={7}>
-        {textFieldComponent}
-      </Grid.Column>
+      <OGOnlyWrapper as={Grid.Column} sm={12} lg={5}>
+        <Box as={Grid.Column} xs={12} md={5}>
+          <div className={styles.DatePicker}>
+            <DatePicker
+              {...dateOptions}
+              relativeDateOptions={RELATIVE_DATE_OPTIONS}
+              onChange={updateDateRange}
+              dateFieldFormat={FORMATS.DATE}
+              hideManualEntry
+            />
+          </div>
+        </Box>
+      </OGOnlyWrapper>
+      <OGOnlyWrapper as={Grid.Column} sm={12} lg={7}>
+        <Box as={Grid.Column} xs={12} md={7}>
+          {textFieldComponent}
+        </Box>
+      </OGOnlyWrapper>
     </Grid>
   );
 
@@ -76,8 +81,10 @@ export const IncidentsCollection = props => {
     );
     return (
       <Panel>
-        {renderHeader({ textFieldComponent: textFieldComponent })}
-        <h6 className={styles.Center}>There are no incidents for your date range selection</h6>
+        <Panel.Section>{renderHeader({ textFieldComponent: textFieldComponent })}</Panel.Section>
+        <Panel.Section>
+          <Empty hasPanel={false} message="There are no incidents for your date range selection" />
+        </Panel.Section>
       </Panel>
     );
   };
@@ -105,7 +112,7 @@ export const IncidentsCollection = props => {
       {({ filterBox, collection, pagination }) => (
         <>
           <Panel>
-            {renderHeader({ textFieldComponent: filterBox })}
+            <Panel.Section>{renderHeader({ textFieldComponent: filterBox })}</Panel.Section>
             {collection}
           </Panel>
           {pagination}

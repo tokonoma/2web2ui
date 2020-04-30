@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
-import { Grid } from 'src/components/matchbox';
+import { Grid, Box } from 'src/components/matchbox';
 import { TextFieldWrapper, SubaccountTypeaheadWrapper } from 'src/components';
 import { email as emailValidator, required } from 'src/helpers/validation';
 import { onEnter } from 'src/helpers/keyEvents';
@@ -40,7 +40,7 @@ export class FilterForm extends Component {
     return (
       <Grid>
         <Grid.Column xs={12} md={hasSubaccounts ? 6 : 12}>
-          <div>
+          <Box mb={['300', null, null, '0']}>
             <label htmlFor="email" className={styles.ScreenReaderOnly}>
               Recipient Email
             </label>
@@ -54,11 +54,11 @@ export class FilterForm extends Component {
               validate={[required, emailValidator]}
               placeholder="Recipient Email"
             />
-          </div>
+          </Box>
         </Grid.Column>
         {hasSubaccounts && (
           <Grid.Column xs={12} md={6}>
-            <div>
+            <Box>
               <label htmlFor="subaccount" className={styles.ScreenReaderOnly}>
                 Subaccount
               </label>
@@ -70,7 +70,7 @@ export class FilterForm extends Component {
                 onChange={this.handleSubaccountSelect}
                 placeholder="Subaccount"
               />
-            </div>
+            </Box>
           </Grid.Column>
         )}
       </Grid>

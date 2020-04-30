@@ -1,0 +1,13 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.GreenCheck {
+  color: color(green, 700);
+
+  path {
+    stroke: color(green, 700);
+  }
+}
+
+.RedError {
+  color: color(red, 700);
+}

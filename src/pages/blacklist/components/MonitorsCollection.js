@@ -1,14 +1,18 @@
 import React, { useCallback } from 'react';
+import classNames from 'classnames';
 import { PageLink } from 'src/components/links';
 import { Button } from 'src/components/matchbox';
-import styles from './MonitorsCollection.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import FilterSortCollection from 'src/components/collection/FilterSortCollection';
+import OGStyles from './MonitorsCollection.module.scss';
+import hibanaStyles from './MonitorsCollectionHibana.module.scss';
 
 const filterBoxConfig = {
   show: true,
   itemToStringKeys: ['resource'],
   placeholder: 'Search By: Sending Domain or IP',
   wrapper: props => <div>{props}</div>,
+  fieldMaxWidth: '100%',
 };
 
 const selectOptions = [
@@ -20,15 +24,16 @@ const selectOptions = [
   { value: 'total_listing_count', label: 'Historic Listings' },
 ];
 
-const columns = [
-  { label: 'Watched' },
-  { label: 'Current Blacklistings', width: '15%', className: styles.ListingDetails },
-  { label: 'Historic Blacklistings', width: '15%', className: styles.ListingDetails },
-  { label: '', width: '20%' },
-];
-
 export const MonitorsCollection = props => {
   const { monitors, handleDelete } = props;
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+
+  const columns = [
+    { label: 'Watched' },
+    { label: 'Current Blacklistings', width: '15%', className: styles.ListingDetails },
+    { label: 'Historic Blacklistings', width: '15%', className: styles.ListingDetails },
+    { label: '', width: '20%' },
+  ];
 
   const getRowData = useCallback(
     ({ resource, active_listing_count, total_listing_count }) => {
@@ -36,8 +41,12 @@ export const MonitorsCollection = props => {
         <div className={styles.NameDetails}>
           <PageLink to={`/blacklist/incidents?search=${resource}`}>{resource}</PageLink>
         </div>,
-        <div className={styles.ListingDetails}>{active_listing_count}</div>,
-        <div className={styles.ListingDetails}>{total_listing_count}</div>,
+        <div className={classNames(styles.ListingDetails, styles.ListingDetailsCell)}>
+          {active_listing_count}
+        </div>,
+        <div className={classNames(styles.ListingDetails, styles.ListingDetailsCell)}>
+          {total_listing_count}
+        </div>,
         <div className={styles.Delete}>
           <Button outline onClick={() => handleDelete(resource)}>
             Stop Monitoring
@@ -45,7 +54,13 @@ export const MonitorsCollection = props => {
         </div>,
       ];
     },
-    [handleDelete],
+    [
+      handleDelete,
+      styles.Delete,
+      styles.ListingDetails,
+      styles.ListingDetailsCell,
+      styles.NameDetails,
+    ],
   );
 
   return (

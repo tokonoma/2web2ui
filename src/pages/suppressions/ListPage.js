@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { PageLink } from 'src/components/links';
 import { Page, Panel, Tabs } from 'src/components/matchbox';
+import { TabsWrapper } from 'src/components';
 import { searchRecipient } from 'src/actions/suppressions';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
@@ -48,13 +49,17 @@ export class ListPage extends Component {
           to: '/lists/suppressions/create',
         }}
       >
-        <Tabs
-          selected={selectedTab}
-          connectBelow={true}
-          tabs={tabs.map(({ content }, idx) => ({ content, onClick: () => this.handleTabs(idx) }))}
-        />
-
         <Panel>
+          <TabsWrapper>
+            <Tabs
+              selected={selectedTab}
+              connectBelow={true}
+              tabs={tabs.map(({ content }, idx) => ({
+                content,
+                onClick: () => this.handleTabs(idx),
+              }))}
+            />
+          </TabsWrapper>
           <Panel.Section>
             {selectedTab === 1 ? (
               <EmailSearch onSubmit={searchRecipient} hasSubaccounts={hasSubaccounts} />

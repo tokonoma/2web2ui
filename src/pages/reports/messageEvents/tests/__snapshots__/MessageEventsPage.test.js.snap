@@ -167,6 +167,7 @@ exports[`Page: Message Events tests should render the empty message when 0 resul
 >
   <withRouter(Connect(MessageEventsSearch)) />
   <Empty
+    hasPanel={true}
     message="There are no message events for your current query"
   />
 </Page>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { formValueSelector, change, Field } from 'redux-form';
 import PropTypes from 'prop-types';
+import { Box } from 'src/components/matchbox';
 import { RadioGroup, SubaccountTypeaheadWrapper } from 'src/components';
 import { required } from 'src/helpers/validation';
 
@@ -31,7 +32,9 @@ export class SubaccountForm extends Component {
 
     const typeahead =
       assignTo === 'subaccount' ? (
-        <Field name="subaccount" component={SubaccountTypeaheadWrapper} validate={required} />
+        <Box ml="500">
+          <Field name="subaccount" component={SubaccountTypeaheadWrapper} validate={required} />
+        </Box>
       ) : null;
 
     return (

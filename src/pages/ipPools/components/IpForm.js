@@ -6,9 +6,8 @@ import { Field, formValueSelector, getFormValues, reduxForm, submit, isDirty } f
 import { withRouter } from 'react-router-dom';
 import { Button, Label, Panel } from 'src/components/matchbox';
 import { SelectWrapper, RadioGroup } from 'src/components/reduxFormWrappers';
-import { ConfirmationModal, Abbreviation } from 'src/components';
+import { ButtonWrapper, ConfirmationModal, Abbreviation } from 'src/components';
 import { Card, CardTitle, CardContent } from 'src/components/card';
-import ButtonWrapper from 'src/components/buttonWrapper';
 import { ExternalLink } from 'src/components/links';
 import {
   getIpPools,
@@ -17,7 +16,9 @@ import {
   selectIpFormInitialValues,
 } from 'src/selectors/ipPools';
 import { IP_WARMUP_STAGES } from '../constants';
-import styles from './IpForm.module.scss';
+import OGStyles from './IpForm.module.scss';
+import HibanaStyles from './IpFormHibana.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 
 export const IpForm = props => {
   const {
@@ -32,7 +33,7 @@ export const IpForm = props => {
     pristine,
   } = props;
   const [isConfirmationModalOpen, setConfirmationModalOpen] = useState(false);
-
+  const styles = useHibanaOverride(OGStyles, HibanaStyles);
   const reAssignPoolsOptions = pools.map(currentPool => ({
     value: currentPool.id,
     label:
@@ -68,25 +69,23 @@ export const IpForm = props => {
         <Panel.Section>
           <div className={styles.FieldGroup}>
             {/* NOTE: This should not be using the HTML <label> element - just a <div> with the same styles. This is a limitation of the existing component */}
-            <Label>Hostname</Label>
+            <Label label="Hostname" />
 
             <p>{ip.hostname}</p>
           </div>
 
           <div className={classNames(styles.MaxWidthSM, styles.FieldGroup)}>
-            <Label id="ip_pool">Reassign IP Pool</Label>
-
             <Field
               name="ip_pool"
               component={SelectWrapper}
               options={reAssignPoolsOptions}
               disabled={submitting}
+              label="Reassign IP Pool"
             />
           </div>
 
           <fieldset className={styles.RadioGroup}>
             {/* NOTE: This *should* be a `<legend>` inside of a `<fieldset>` */}
-            <Label>Auto IP Warmup</Label>
 
             <Field
               name="auto_warmup_enabled"
@@ -94,6 +93,7 @@ export const IpForm = props => {
               type="radio"
               parse={val => (val === 'true' ? true : false)}
               value={isAutoWarmupEnabled ? 'true' : 'false'}
+              label={'Auto IP Warmup'}
               options={[
                 {
                   label: <strong>Auto IP Warmup</strong>,
@@ -165,8 +165,12 @@ export const IpForm = props => {
         </Panel.Section>
 
         <Panel.Section>
-          <ButtonWrapper>
-            <Button primary disabled={submitting || pristine} onClick={handleUpdateSendingIPClick}>
+          <ButtonWrapper marginTop="0">
+            <Button
+              variant="primary"
+              disabled={submitting || pristine}
+              onClick={handleUpdateSendingIPClick}
+            >
               {submitting ? 'Saving' : 'Update Sending IP'}
             </Button>
           </ButtonWrapper>

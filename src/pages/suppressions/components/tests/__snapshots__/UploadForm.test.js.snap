@@ -3,7 +3,7 @@
 exports[`UploadForm tests should disable fields when submitting 1`] = `
 <Fragment>
   <form>
-    <Panel.Section>
+    <Stack>
       <Field
         component={[Function]}
         disabled={true}
@@ -33,22 +33,26 @@ exports[`UploadForm tests should disable fields when submitting 1`] = `
           ]
         }
       />
-      <Field
-        component={[Function]}
-        disabled={true}
-        helpText="Leaving this field blank will add the suppressions to the master account."
-        name="subaccount"
-      />
-    </Panel.Section>
-    <Panel.Section>
+      <Box
+        maxWidth="860px"
+      >
+        <Field
+          component={[Function]}
+          disabled={true}
+          helpText="Leaving this field blank will add the suppressions to the master account."
+          name="subaccount"
+        />
+      </Box>
+    </Stack>
+    <ButtonWrapper>
       <Button
         disabled={true}
-        primary={true}
         type="submit"
+        variant="primary"
       >
         Upload
       </Button>
-    </Panel.Section>
+    </ButtonWrapper>
   </form>
 </Fragment>
 `;
@@ -56,7 +60,7 @@ exports[`UploadForm tests should disable fields when submitting 1`] = `
 exports[`UploadForm tests should render upload form 1`] = `
 <Fragment>
   <form>
-    <Panel.Section>
+    <Stack>
       <Field
         component={[Function]}
         disabled={false}
@@ -86,22 +90,26 @@ exports[`UploadForm tests should render upload form 1`] = `
           ]
         }
       />
-      <Field
-        component={[Function]}
-        disabled={false}
-        helpText="Leaving this field blank will add the suppressions to the master account."
-        name="subaccount"
-      />
-    </Panel.Section>
-    <Panel.Section>
+      <Box
+        maxWidth="860px"
+      >
+        <Field
+          component={[Function]}
+          disabled={false}
+          helpText="Leaving this field blank will add the suppressions to the master account."
+          name="subaccount"
+        />
+      </Box>
+    </Stack>
+    <ButtonWrapper>
       <Button
         disabled={false}
-        primary={true}
         type="submit"
+        variant="primary"
       >
         Upload
       </Button>
-    </Panel.Section>
+    </ButtonWrapper>
   </form>
 </Fragment>
 `;

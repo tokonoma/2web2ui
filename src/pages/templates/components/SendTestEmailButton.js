@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Box, Button, Modal, Panel, Stack, TextField } from 'src/components/matchbox';
 import PanelLoading from 'src/components/panelLoading';
-import ButtonWrapper from 'src/components/buttonWrapper';
+import { ButtonWrapper } from 'src/components';
 import MultiEmailField, { useMultiEmailField } from 'src/components/multiEmailField';
 import useEditorContext from '../hooks/useEditorContext';
 
