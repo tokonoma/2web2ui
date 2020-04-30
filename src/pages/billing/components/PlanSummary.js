@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heading } from 'src/components';
+import { Heading } from 'src/components/text';
 import { formatDate } from 'src/helpers/date';
 import styles from './PlanSummary.module.scss';
 const PlanSummary = ({
