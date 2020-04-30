@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Panel } from 'src/components/matchbox';
 import { PanelLoading, LabelledValue } from 'src/components';
+import { ExternalLink } from 'src/components/links';
 import * as tfaActions from 'src/actions/tfa';
 import BackupCodesModal from './BackupCodesModal';
 import EnableTfaModal from './EnableTfaModal';
@@ -86,6 +87,7 @@ export class TfaManager extends Component {
         to: LINKS.LEARN_MORE_TFA,
         external: true,
         color: 'orange',
+        as: ExternalLink,
       },
     ];
 

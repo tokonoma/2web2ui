@@ -1,0 +1,20 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.List {
+  padding: 0;
+  column-count: 2;
+  column-gap: spacing(500);
+
+  li {
+    padding: 0 spacing(500);
+    font-family: font-family(monospace);
+    font-weight: font-weight(semibold);
+    font-size: font-size(200);
+    line-height: line-height(500);
+
+    &:before {
+      left: spacing(100);
+      color: color(gray, 700);
+    }
+  }
+}
