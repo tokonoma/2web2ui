@@ -94,9 +94,7 @@ export class BillingAddressForm extends Component {
     return (
       <div>
         <Stack>
-          <p>
-            <small>Billing Address</small>
-          </p>
+          <p>Billing Address</p>
           {nameFields}
           <Field
             label="Country"

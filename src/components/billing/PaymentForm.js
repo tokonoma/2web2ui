@@ -45,9 +45,7 @@ export class PaymentForm extends Component {
     return (
       <div>
         <Stack>
-          <p>
-            <small>Credit Card</small>
-          </p>
+          <p>Credit Card</p>
           <Field
             label="Credit Card Number"
             name="card.number"
