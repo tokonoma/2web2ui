@@ -21,14 +21,14 @@ const actions = [
 
 const getPercent = (used, limit) => Math.floor((used / limit) * 100);
 
-const OGDisplayNumber = ({ label, content, primary }) => (
+export const OGDisplayNumber = ({ label, content, primary }) => (
   <div className={styles.Display}>
     <h5 className={classnames(styles.Content, primary && styles.primary)}>{content}</h5>
     <h6 className={styles.Label}>{label}</h6>
   </div>
 );
 
-const HibanaDisplayNumber = ({ label, content, primary }) => (
+export const HibanaDisplayNumber = ({ label, content, primary }) => (
   <Box display="inline-block" mr="500">
     <Text fontSize="400" fontWeight="medium" color={primary ? 'blue.700' : undefined}>
       {content}
@@ -43,14 +43,14 @@ const DisplayNumber = props => {
   return useHibanaToggle(OGDisplayNumber, HibanaDisplayNumber)(props);
 };
 
-const OGProgressLabel = ({ title, secondaryTitle }) => (
+export const OGProgressLabel = ({ title, secondaryTitle }) => (
   <div>
     <h5 className={styles.ProgressTitle}>{title}</h5>
     <h6 className={styles.ProgressSecondary}>{secondaryTitle}</h6>
   </div>
 );
 
-const HibanaProgressLabel = ({ title, secondaryTitle }) => (
+export const HibanaProgressLabel = ({ title, secondaryTitle }) => (
   <Box mb="200">
     <Inline>
       <Text fontSize="200" fontWeight="semibold">

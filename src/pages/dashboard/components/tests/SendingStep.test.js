@@ -1,6 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import SendingStep, { SendingStepList, SendingStepListItem } from '../SendingStep';
+import SendingStep, {
+  SendingStepList,
+  OGSendingStepListItem,
+  HibanaSendingStepListItem,
+} from '../SendingStep';
 import { SENDING_STEP_LIST } from 'src/pages/dashboard/constants';
 import { useGuideContext } from '../GettingStartedGuide';
 
@@ -38,12 +42,17 @@ describe('SendingListItem', () => {
     ...SENDING_STEP_LIST['Show Me SparkPost'],
   };
 
-  const subject = (props, func = shallow) =>
-    func(<SendingStepListItem {...defaultProps} {...props} />);
-
   it('should call setAndStoreStepName when action button is clicked', () => {
-    const instance = subject();
-    instance.find('Button').simulate('click');
+    const OGInstance = shallow(<OGSendingStepListItem {...defaultProps} />);
+
+    OGInstance.find('Button').simulate('click');
+    expect(defaultProps.setAndStoreStepName).toHaveBeenCalledWith(defaultProps.name);
+  });
+
+  it('should call setAndStoreStepName when action button is clicked in hibana', () => {
+    const hibanaInstance = shallow(<HibanaSendingStepListItem {...defaultProps} />);
+
+    hibanaInstance.find('Button').simulate('click');
     expect(defaultProps.setAndStoreStepName).toHaveBeenCalledWith(defaultProps.name);
   });
 });

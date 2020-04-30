@@ -21,7 +21,7 @@ export default function SendingStep() {
   );
 }
 
-const OGSendingStepListItem = ({ setAndStoreStepName, name, label = name, content }) => (
+export const OGSendingStepListItem = ({ setAndStoreStepName, name, label = name, content }) => (
   <Grid.Column xs={12} md={6} key={name}>
     <Card textAlign="center">
       <CardContent>
@@ -42,7 +42,13 @@ const OGSendingStepListItem = ({ setAndStoreStepName, name, label = name, conten
   </Grid.Column>
 );
 
-const HibanaSendingStepListItem = ({ setAndStoreStepName, name, label = name, content, mb }) => (
+export const HibanaSendingStepListItem = ({
+  setAndStoreStepName,
+  name,
+  label = name,
+  content,
+  mb,
+}) => (
   <Grid.Column xs={12} md={6} key={name}>
     <Box mb={mb}>
       <Card textAlign="center">

@@ -31,3 +31,52 @@ exports[`SendMoreCTA Component renders correctly 1`] = `
   </p>
 </AccessControl>
 `;
+
+exports[`SendMoreCTA Component renders correctly 2`] = `
+<AccessControl
+  condition={[Function]}
+>
+  <Box
+    display="flex"
+    justifyContent="space-between"
+    mt="200"
+  >
+    <Box
+      alignItems="center"
+      display="flex"
+    >
+      <Text
+        mr="400"
+      >
+        Need to send more?
+      </Text>
+      <Connect(ConditionSwitch)>
+        <Case
+          condition={[Function]}
+        >
+          <PageLink
+            as={[Function]}
+            to="/account/billing"
+            variant="outline"
+          >
+            Switch to a new plan.
+          </PageLink>
+        </Case>
+        <Case
+          condition={[Function]}
+        >
+          <PageLink
+            as={[Function]}
+            to="/account/billing"
+            variant="outline"
+          >
+            Upgrade your account.
+          </PageLink>
+        </Case>
+      </Connect(ConditionSwitch)>
+       
+    </Box>
+    <div />
+  </Box>
+</AccessControl>
+`;
