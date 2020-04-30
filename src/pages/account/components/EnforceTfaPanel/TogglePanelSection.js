@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, Panel, Toggle } from 'src/components/matchbox';
 import LabelledValue from 'src/components/labelledValue/LabelledValue';
 
-export const TogglePanel = ({ readOnly, tfaRequired, toggleTfaRequired }) => {
+export const TogglePanelSection = ({ readOnly, tfaRequired, toggleTfaRequired }) => {
   const tfaRequiredMsg = tfaRequired
     ? 'All users must have two-factor authentication enabled to login to this account.'
     : 'Each user can manage their own two-factor authentication settings.';
@@ -12,11 +12,11 @@ export const TogglePanel = ({ readOnly, tfaRequired, toggleTfaRequired }) => {
       <Grid>
         <Grid.Column xs={11}>
           <LabelledValue label="Status">
-            <h6>{tfaRequired ? 'Required' : 'Optional'}</h6>
+            <strong>{tfaRequired ? 'Required' : 'Optional'}</strong>
             <p>{tfaRequiredMsg}</p>
           </LabelledValue>
         </Grid.Column>
-        <Grid.Column xs={1}>
+        <Grid.Column xs={1} style={{ textAlign: 'right' }}>
           <Toggle
             id="enforceTfa"
             disabled={readOnly}
@@ -29,4 +29,4 @@ export const TogglePanel = ({ readOnly, tfaRequired, toggleTfaRequired }) => {
   );
 };
 
-export default TogglePanel;
+export default TogglePanelSection;

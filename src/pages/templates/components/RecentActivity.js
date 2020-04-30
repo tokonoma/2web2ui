@@ -22,7 +22,7 @@ const RecentActivity = props => {
 
   return (
     <Box mb="500">
-      <Stack spacing="400">
+      <Stack space="400">
         <h2>Recent Activity</h2>
 
         <div className={styles.RecentActivity} role="list">

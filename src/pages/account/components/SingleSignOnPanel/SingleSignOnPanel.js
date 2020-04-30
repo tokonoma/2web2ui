@@ -10,18 +10,15 @@ import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import { LINKS } from 'src/constants';
 import ProviderSection from './ProviderSection';
 import StatusSection from './StatusSection';
+import { PANEL_LOADING_HEIGHT } from 'src/pages/account/constants';
 
 export class SingleSignOnPanel extends React.Component {
   componentDidMount() {
     this.props.getAccountSingleSignOnDetails();
   }
 
-  renderContents() {
-    const { loading, provider, tfaRequired } = this.props;
-
-    if (loading) {
-      return <PanelLoading minHeight="130px" />;
-    }
+  renderContent() {
+    const { provider, tfaRequired } = this.props;
 
     return (
       <React.Fragment>
@@ -40,6 +37,12 @@ export class SingleSignOnPanel extends React.Component {
   }
 
   render() {
+    const { loading } = this.props;
+
+    if (loading) {
+      return <PanelLoading minHeight={PANEL_LOADING_HEIGHT} />;
+    }
+
     return (
       <Panel
         title="Single Sign-On"
@@ -52,7 +55,7 @@ export class SingleSignOnPanel extends React.Component {
           },
         ]}
       >
-        {this.renderContents()}
+        {this.renderContent()}
       </Panel>
     );
   }
