@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Field, formValueSelector } from 'redux-form';
 import { listPools } from 'src/actions/ipPools';
 import { RadioGroup, SelectWrapper, TextFieldWrapper } from 'src/components';
+import { Stack } from 'src/components/matchbox';
 import { ExternalLink } from 'src/components/links';
 import { required } from 'src/helpers/validation';
 import { getOrderedIpPools } from 'src/selectors/ipPools';
@@ -81,9 +82,11 @@ export class IpPoolSelect extends Component {
 
     return (
       <div>
-        <ActionSelect {...this.props} />
-        {action === EXISTING && <ExistingIpPoolField {...this.props} />}
-        {action === NEW && <NewIpPoolField {...this.props} />}
+        <Stack>
+          <ActionSelect {...this.props} />
+          {action === EXISTING && <ExistingIpPoolField {...this.props} />}
+          {action === NEW && <NewIpPoolField {...this.props} />}
+        </Stack>
       </div>
     );
   }

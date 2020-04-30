@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import { PageLink } from 'src/components/links';
-import { Error, Button, Panel } from 'src/components/matchbox';
+import { Error, Button, Panel, Stack } from 'src/components/matchbox';
 import { addDedicatedIps } from 'src/actions/billing';
 import { showAlert } from 'src/actions/globalAlert';
 import { createPool } from 'src/actions/ipPools';
@@ -90,45 +90,47 @@ export class AddIps extends Component {
       <form onSubmit={handleSubmit(this.onSubmit)} noValidate>
         <Panel title="Add Dedicated IPs" actions={[action]}>
           <Panel.Section>
-            <p>
-              {'Dedicated IPs give you better control over your sending reputation. '}
-              {currentPlan.includesIp && (
-                <span>
-                  <strong>{'Your plan includes one free dedicated IP address. '}</strong>
-                </span>
-              )}
-            </p>
-
-            <Field
-              component={TextFieldWrapper}
-              disabled={isDisabled}
-              label="Quantity"
-              name="quantity"
-              min="1"
-              max={remainingCount}
-              required={true}
-              type="number"
-              validate={[required, integer, minNumber(1), maxNumber(remainingCount)]}
-              errorInLabel
-              autoFocus={true}
-              helpText={
-                remainingCount === 0 ? (
-                  <span>You cannot currently add any more IPs</span>
-                ) : (
+            <Stack>
+              <p>
+                {'Dedicated IPs give you better control over your sending reputation. '}
+                {currentPlan.includesIp && (
                   <span>
-                    You can add up to {maxPerAccount} total dedicated IPs to your plan for{' '}
-                    <DedicatedIpCost plan={currentPlan} quantity="1" /> each.
+                    <strong>{'Your plan includes one free dedicated IP address. '}</strong>
                   </span>
-                )
-              }
-            />
-            <IpPoolSelect disabled={isDisabled} formName={FORM_NAME} />
+                )}
+              </p>
+
+              <Field
+                component={TextFieldWrapper}
+                disabled={isDisabled}
+                label="Quantity"
+                name="quantity"
+                min="1"
+                max={remainingCount}
+                required={true}
+                type="number"
+                validate={[required, integer, minNumber(1), maxNumber(remainingCount)]}
+                errorInLabel
+                autoFocus={true}
+                helpText={
+                  remainingCount === 0 ? (
+                    <span>You cannot currently add any more IPs</span>
+                  ) : (
+                    <span>
+                      You can add up to {maxPerAccount} total dedicated IPs to your plan for{' '}
+                      <DedicatedIpCost plan={currentPlan} quantity="1" /> each.
+                    </span>
+                  )
+                }
+              />
+              <IpPoolSelect disabled={isDisabled} formName={FORM_NAME} />
+            </Stack>
           </Panel.Section>
           <Panel.Section>
-            <Button type="submit" primary disabled={isDisabled}>
+            <Button type="submit" variant="primary" disabled={isDisabled}>
               Add Dedicated IPs
             </Button>
-            <Button onClick={onClose} className={styles.Cancel}>
+            <Button onClick={onClose} className={styles.Cancel} variant="secondary">
               Cancel
             </Button>
             {error && (
