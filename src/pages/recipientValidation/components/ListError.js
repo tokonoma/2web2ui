@@ -11,7 +11,7 @@ const ListError = () => {
   const styles = useHibanaOverride(OGStyles, hibanaStyles);
 
   return (
-    <FocusContainer>
+    <FocusContainer className={styles.Container}>
       <h3 className={styles.Header}>Oh no! There seems to be an issue with your list...</h3>
 
       <p className={styles.Description}>

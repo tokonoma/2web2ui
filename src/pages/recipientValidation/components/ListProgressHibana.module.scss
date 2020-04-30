@@ -1,15 +1,16 @@
 @import '~@sparkpost/design-tokens-hibana/tokens';
 
+.Container {
+  padding: spacing(0);
+  padding: spacing(400);
+}
+
 .Header {
   margin-bottom: spacing(200);
 }
 
 .ListProgress {
   margin: spacing(200) * 3 0;
-}
-
-.ListProgressContainer {
-  padding: spacing(0);
 }
 
 .ListProgressStatus {

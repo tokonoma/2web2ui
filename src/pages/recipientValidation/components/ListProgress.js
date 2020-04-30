@@ -81,7 +81,7 @@ export const ListProgress = ({
   }, [filename, getJobStatus, jobId, showAlert, startPolling, stopPolling]);
 
   return (
-    <FocusContainer className={styles.ListProgressContainer}>
+    <FocusContainer className={styles.Container}>
       <h2 className={styles.Header}>{filename}</h2>
       <p>
         <span>
