@@ -24,16 +24,16 @@ describe('PendingCancelGlobalBanner', () => {
     );
 
   it('should call renewAccount, showAlert, and fetchAccount on renewAccount', async () => {
-    const { queryAllByRole } = subject();
-    await userEvent.click(queryAllByRole('button')[0]);
+    const { queryByText } = subject();
+    await userEvent.click(queryByText("Don't Cancel"));
     expect(mockFunctions.renewAccount).toHaveBeenCalled();
     expect(mockFunctions.showAlert).toHaveBeenCalled();
     expect(mockFunctions.fetchAccount).toHaveBeenCalled();
   });
 
   it('should call hideGlobalBanner on clicking close', () => {
-    const { queryAllByRole } = subject();
-    userEvent.click(queryAllByRole('button')[1]);
+    const { queryByRole } = subject();
+    userEvent.click(queryByRole('button'));
     expect(mockFunctions.hideGlobalBanner).toHaveBeenCalled();
   });
 });

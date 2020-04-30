@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { formatDate } from 'src/helpers/date';
-import { Button } from 'src/components/matchbox';
+import { Button, UnstyledLink } from 'src/components/matchbox';
 import { Close, AccessTime } from '@sparkpost/matchbox-icons';
 import OGStyles from './PendingCancelGlobalBanner.module.scss';
 import HibanaStyles from './PendingCancelGlobalBannerHibana.module.scss';
@@ -43,9 +43,9 @@ export function PendingCancelGlobalBanner(props) {
         <span> Your account will be cancelled on </span>
         {formatDate(pending_cancellation.effective_date)}
         <span>, and you will no longer be able to send email or login. Changed your mind? </span>
-        <Button className={styles.RenewButton} flat onClick={handleRenewAccount}>
+        <UnstyledLink className={styles.RenewButton} onClick={handleRenewAccount}>
           Don't Cancel
-        </Button>
+        </UnstyledLink>
       </span>
       <span className={styles.RightContainer}>
         <Button className={styles.Close} flat onClick={handleClose}>

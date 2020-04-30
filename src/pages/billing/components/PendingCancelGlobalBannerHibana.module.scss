@@ -2,4 +2,15 @@
 
 .banner {
   background-color: color(blue, 700);
+  height: 3rem;
+  line-height: 3rem;
+}
+
+.banner {
+  top: 0;
+}
+
+.RenewButton {
+  margin-left: spacing(400);
+  font-weight: font-weight(medium);
 }
