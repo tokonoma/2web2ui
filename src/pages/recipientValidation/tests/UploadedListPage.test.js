@@ -1,7 +1,11 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import TestApp from 'src/__testHelpers__/TestApp';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import { UploadedListPage } from '../UploadedListPage';
+import styles from '../UploadedListPage.module.scss';
+
+jest.mock('src/hooks/useHibanaOverride');
 
 jest.mock('src/pages/recipientValidation/components/ListProgress', () => {
   return () => {
@@ -10,6 +14,10 @@ jest.mock('src/pages/recipientValidation/components/ListProgress', () => {
 });
 
 describe('UploadedListPage', () => {
+  beforeEach(() => {
+    useHibanaOverride.mockReturnValue(() => styles);
+  });
+
   const subject = (props = {}, method = shallow) => {
     const component = (
       <UploadedListPage

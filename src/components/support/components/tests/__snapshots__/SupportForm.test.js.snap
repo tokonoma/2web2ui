@@ -104,7 +104,6 @@ exports[`Support Form Component Form should render support form 1`] = `
   </Panel.Section>
   <Panel.Section>
     <Button
-      primary={true}
       submit={true}
       variant="primary"
     >
@@ -161,7 +160,6 @@ exports[`Support Form Component Form should render with selected issue message l
   </Panel.Section>
   <Panel.Section>
     <Button
-      primary={true}
       submit={true}
       variant="primary"
     >

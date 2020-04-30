@@ -1,12 +1,22 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import TestApp from 'src/__testHelpers__/TestApp';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import { UploadedListForm } from '../UploadedListForm';
+import styles from '../UploadedListForm.module.scss';
+
+jest.mock('src/hooks/useHibanaOverride');
 
 describe('UploadedListForm', () => {
+  beforeEach(() => {
+    useHibanaOverride.mockImplementationOnce(() => styles);
+    jest.mock('src/context/HibanaContext');
+  });
+
   const subject = (props = {}, method = shallow) => {
     const component = (
       <UploadedListForm
+        styles={styles}
         currentUsage={12345}
         getUsage={jest.fn()}
         job={{

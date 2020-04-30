@@ -27,7 +27,7 @@ export function UploadedListForm({
   }, [getUsage]);
 
   return (
-    <div className={styles.formContainer}>
+    <div className={styles.FormContainer}>
       <h2 className={styles.Header}>{filename}</h2>
       <p className={styles.DescriptionParagraph}>
         <span>Your list has been uploaded successfully and the cost to validate is below. </span>
