@@ -27,51 +27,69 @@ exports[`Billing Address Form: should render 1`] = `
         />
       </Grid.Column>
     </Grid>
-    <Field
-      component={[Function]}
-      label="Email"
-      name="billingContact.email"
-      validate={
-        Array [
-          [Function],
-          [Function],
-        ]
-      }
-    />
-    <Field
-      component={[Function]}
-      label="Country"
-      name="billingContact.country"
-      options={
-        Array [
-          Object {
-            "label": "USOFA",
-            "states": Array [
+    <Box
+      as={[Function]}
+    >
+      <Box
+        as={[Function]}
+        xs={6}
+      >
+        <Field
+          component={[Function]}
+          label="Email"
+          name="billingContact.email"
+          validate={
+            Array [
+              [Function],
+              [Function],
+            ]
+          }
+        />
+      </Box>
+    </Box>
+    <Box
+      as={[Function]}
+    >
+      <Box
+        as={[Function]}
+        xs={6}
+      >
+        <Field
+          component={[Function]}
+          label="Country"
+          name="billingContact.country"
+          options={
+            Array [
               Object {
-                "name": "mrylnd",
-                "value": "MD",
+                "label": "USOFA",
+                "states": Array [
+                  Object {
+                    "name": "mrylnd",
+                    "value": "MD",
+                  },
+                ],
+                "value": "US",
               },
-            ],
-            "value": "US",
-          },
-          Object {
-            "label": "CANADA",
-            "states": Array [
               Object {
-                "name": "alberta",
-                "value": "AB",
+                "label": "CANADA",
+                "states": Array [
+                  Object {
+                    "name": "alberta",
+                    "value": "AB",
+                  },
+                ],
+                "value": "CA",
               },
-            ],
-            "value": "CA",
-          },
-        ]
-      }
-      placeholder="Select a country"
-      validate={[Function]}
-    />
+            ]
+          }
+          placeholder="Select a country"
+          validate={[Function]}
+        />
+      </Box>
+    </Box>
     <Grid>
       <Grid.Column
-        xs={6}
+        xs={3}
       >
         <Field
           component={[Function]}
@@ -112,48 +130,66 @@ exports[`Billing Address Form: should show states 1`] = `
         />
       </Grid.Column>
     </Grid>
-    <Field
-      component={[Function]}
-      label="Email"
-      name="billingContact.email"
-      validate={
-        Array [
-          [Function],
-          [Function],
-        ]
-      }
-    />
-    <Field
-      component={[Function]}
-      label="Country"
-      name="billingContact.country"
-      options={
-        Array [
-          Object {
-            "label": "USOFA",
-            "states": Array [
+    <Box
+      as={[Function]}
+    >
+      <Box
+        as={[Function]}
+        xs={6}
+      >
+        <Field
+          component={[Function]}
+          label="Email"
+          name="billingContact.email"
+          validate={
+            Array [
+              [Function],
+              [Function],
+            ]
+          }
+        />
+      </Box>
+    </Box>
+    <Box
+      as={[Function]}
+    >
+      <Box
+        as={[Function]}
+        xs={6}
+      >
+        <Field
+          component={[Function]}
+          label="Country"
+          name="billingContact.country"
+          options={
+            Array [
               Object {
-                "name": "mrylnd",
-                "value": "MD",
+                "label": "USOFA",
+                "states": Array [
+                  Object {
+                    "name": "mrylnd",
+                    "value": "MD",
+                  },
+                ],
+                "value": "US",
               },
-            ],
-            "value": "US",
-          },
-          Object {
-            "label": "CANADA",
-            "states": Array [
               Object {
-                "name": "alberta",
-                "value": "AB",
+                "label": "CANADA",
+                "states": Array [
+                  Object {
+                    "name": "alberta",
+                    "value": "AB",
+                  },
+                ],
+                "value": "CA",
               },
-            ],
-            "value": "CA",
-          },
-        ]
-      }
-      placeholder="Select a country"
-      validate={[Function]}
-    />
+            ]
+          }
+          placeholder="Select a country"
+          validate={[Function]}
+        />
+      </Box>
+    </Box>
     <Grid>
       <Grid.Column
         xs={6}
@@ -174,7 +210,7 @@ exports[`Billing Address Form: should show states 1`] = `
         />
       </Grid.Column>
       <Grid.Column
-        xs={6}
+        xs={3}
       >
         <Field
           component={[Function]}

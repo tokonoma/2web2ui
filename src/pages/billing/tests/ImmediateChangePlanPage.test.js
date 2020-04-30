@@ -64,7 +64,7 @@ describe('Component: ImmediateChangePlanPage', () => {
 
   it('should render after plan changed', () => {
     wrapper.setState({ loading: LOAD_STATE.SUCCESS });
-    expect(wrapper.exists('PageLink')).toBe(true);
+    expect(wrapper).toHaveTextContent('Your subscription has been updated.');
   });
 
   it('should render after plan change failed', async () => {

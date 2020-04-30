@@ -35,16 +35,27 @@ exports[`Component: Invoice History should deactivate download buttons while an 
     plain={true}
     size="small"
   >
-    Download
+    <React.Fragment>
+      Download 
+      <FileDownload />
+    </React.Fragment>
   </Button>
 </div>
 `;
 
 exports[`Component: Invoice History should show a list of invoices 1`] = `
 <Fragment>
-  <Panel
+  <OGOnlyWrapper
+    as={[Function]}
     title="Invoice History"
   >
+    <Box
+      as={[Function]}
+      borderBottom={0}
+      marginBottom={0}
+      sectioned={true}
+      title="Invoice History"
+    />
     <TableCollection
       columns={
         Array [
@@ -101,15 +112,23 @@ exports[`Component: Invoice History should show a list of invoices 1`] = `
         ]
       }
     />
-  </Panel>
+  </OGOnlyWrapper>
 </Fragment>
 `;
 
 exports[`Component: Invoice History should show a message that only 20 invoices are available if there are 20 invoices 1`] = `
 <Fragment>
-  <Panel
+  <OGOnlyWrapper
+    as={[Function]}
     title="Invoice History"
   >
+    <Box
+      as={[Function]}
+      borderBottom={0}
+      marginBottom={0}
+      sectioned={true}
+      title="Invoice History"
+    />
     <TableCollection
       columns={
         Array [
@@ -270,14 +289,18 @@ exports[`Component: Invoice History should show a message that only 20 invoices 
         ]
       }
     />
-  </Panel>
+  </OGOnlyWrapper>
   <Panel.Footer
     left={
-      <p>
+      <SubduedText
+        as="p"
+        color="gray.600"
+        fontSize="300"
+      >
         <small>
           Only your last 20 invoices are available to be viewed
         </small>
-      </p>
+      </SubduedText>
     }
   />
 </Fragment>
@@ -302,7 +325,10 @@ Array [
       plain={true}
       size="small"
     >
-      Download
+      <React.Fragment>
+        Download 
+        <FileDownload />
+      </React.Fragment>
     </Button>
   </div>,
 ]

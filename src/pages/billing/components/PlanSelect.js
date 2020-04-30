@@ -114,8 +114,7 @@ const PlanSelectSection = ({ bundles, currentPlan, onSelect }) => {
                       onClick={() => onSelect(bundleCode)}
                       data-id={`select-plan-${bundleCode}`}
                       size="small"
-                      color="gray"
-                      outlineBorder={true}
+                      variant="dull"
                     >
                       Select
                     </Button>

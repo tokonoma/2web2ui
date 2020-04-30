@@ -4,9 +4,11 @@ exports[`Billing Banners:  Enterprise banner renders 1`] = `
 <Banner
   action={
     Object {
+      "color": "gray",
       "content": "Contact Us",
       "external": true,
       "onClick": [Function],
+      "outlineBorder": true,
       "to": "https://www.sparkpost.com/contact-enterprise",
     }
   }
@@ -95,28 +97,42 @@ exports[`Billing Banners:  Free Plan Downgrade warning banner should not render 
 exports[`Billing Banners:  Free Plan Downgrade warning banner should not render if past 30 days of creation date 1`] = `""`;
 
 exports[`Billing Banners:  PendingPlanBanner should render with pending_subscription 1`] = `
-<Banner
+<OGOnlyWrapper
+  as={[Function]}
   my="300"
-  status="info"
+  status="warning"
   title="Pending Plan Change"
 >
-  <p>
-    You're scheduled to switch to the 
-     plan on
-     
-    Oct 05, 2020
-    , and can't update your plan until that switch happens.
-  </p>
-</Banner>
+  <Box
+    as={[Function]}
+    my="300"
+    status="warning"
+    title="Pending Plan Change"
+  >
+    <p>
+      <Box
+        maxWidth={600}
+      >
+        You're scheduled to switch to the 
+         plan on
+         
+        Oct 05, 2020
+        , and can't update your plan until that switch happens.
+      </Box>
+    </p>
+  </Box>
+</OGOnlyWrapper>
 `;
 
 exports[`Billing Banners:  Premium banner renders 1`] = `
 <Banner
   action={
     Object {
+      "color": "gray",
       "content": "Contact Us",
       "external": true,
       "onClick": [Function],
+      "outlineBorder": true,
       "to": "https://www.sparkpost.com/contact-premium",
     }
   }

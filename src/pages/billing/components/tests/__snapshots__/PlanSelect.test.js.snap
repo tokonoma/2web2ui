@@ -51,16 +51,21 @@ exports[`Plan Select: should render correctly 1`] = `
       <div
         class="Jl_KB"
       >
-        <div>
+        <div
+          class="tierLabel"
+        >
           Test Account
         </div>
-        <div>
+        <div
+          class="tierPlans"
+        >
           <div
-            class=""
+            class="PlanRow SelectedPlan"
           >
             <div>
               <svg
                 aria-hidden="true"
+                class="CheckIcon"
                 fill="currentColor"
                 height="18"
                 preserveAspectRatio="xMidYMid meet"
@@ -99,11 +104,11 @@ exports[`Plan Select: should render correctly 1`] = `
             </div>
             <div>
               <button
-                class="AB_AE AB_AK AB_Aa"
+                class="AB_AE AB_AK AB_Aa selectButton"
                 data-id="select-plan-2"
                 disabled=""
                 type="button"
-                variant="secondary"
+                variant="dull"
               >
                 Select
               </button>
@@ -118,12 +123,16 @@ exports[`Plan Select: should render correctly 1`] = `
       <div
         class="Jl_KB"
       >
-        <div>
+        <div
+          class="tierLabel"
+        >
           Starter
         </div>
-        <div>
+        <div
+          class="tierPlans"
+        >
           <div
-            class=""
+            class="PlanRow"
           >
             <div>
               <span
@@ -156,10 +165,10 @@ exports[`Plan Select: should render correctly 1`] = `
             </div>
             <div>
               <button
-                class="AB_AE AB_Aa"
+                class="AB_AE AB_Aa selectButton"
                 data-id="select-plan-3"
                 type="button"
-                variant="secondary"
+                variant="dull"
               >
                 Select
               </button>
@@ -174,12 +183,16 @@ exports[`Plan Select: should render correctly 1`] = `
       <div
         class="Jl_KB"
       >
-        <div>
+        <div
+          class="tierLabel"
+        >
           Premier
         </div>
-        <div>
+        <div
+          class="tierPlans"
+        >
           <div
-            class=""
+            class="PlanRow"
           >
             <div>
               <span
@@ -213,10 +226,10 @@ exports[`Plan Select: should render correctly 1`] = `
             </div>
             <div>
               <button
-                class="AB_AE AB_Aa"
+                class="AB_AE AB_Aa selectButton"
                 data-id="select-plan-4"
                 type="button"
-                variant="secondary"
+                variant="dull"
               >
                 Select
               </button>
