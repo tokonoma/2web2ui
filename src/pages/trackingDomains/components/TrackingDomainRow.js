@@ -8,7 +8,7 @@ import {
   verifyTrackingDomain,
 } from 'src/actions/trackingDomains';
 import { Subaccount } from 'src/components';
-import { Button, Grid, Inline, Panel, Tag } from 'src/components/matchbox';
+import { Button, Grid, Panel, Tag } from 'src/components/matchbox';
 import { DeleteModal, ConfirmationModal } from 'src/components/modals';
 import { DomainStatusTag } from 'src/components/tags';
 import styles from './TrackingDomainRow.module.scss';
@@ -153,14 +153,12 @@ export class TrackingDomainRow extends Component {
           </Grid.Column>
           <Grid.Column xs={12} md={4}>
             <Button.Group className={styles.ButtonColumn}>
-              <Inline>
-                {this.renderDefaultOrVerifyButton()}
-                {status !== 'pending' && status !== 'blocked' && (
-                  <Button destructive size="small" onClick={this.toggleDeleteModal}>
-                    Delete
-                  </Button>
-                )}
-              </Inline>
+              {this.renderDefaultOrVerifyButton()}
+              {status !== 'pending' && status !== 'blocked' && (
+                <Button destructive size="small" onClick={this.toggleDeleteModal}>
+                  Delete
+                </Button>
+              )}
             </Button.Group>
           </Grid.Column>
         </Grid>

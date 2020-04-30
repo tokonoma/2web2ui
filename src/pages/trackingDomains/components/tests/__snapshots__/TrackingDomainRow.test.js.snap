@@ -37,21 +37,19 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       <Button.Group
         className="ButtonColumn"
       >
-        <Inline>
-          <Button
-            onClick={[Function]}
-            size="small"
-          >
-            Verifying...
-          </Button>
-          <Button
-            destructive={true}
-            onClick={[Function]}
-            size="small"
-          >
-            Delete
-          </Button>
-        </Inline>
+        <Button
+          onClick={[Function]}
+          size="small"
+        >
+          Verifying...
+        </Button>
+        <Button
+          destructive={true}
+          onClick={[Function]}
+          size="small"
+        >
+          Delete
+        </Button>
       </Button.Group>
     </Grid.Column>
   </Grid>
@@ -113,14 +111,12 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       <Button.Group
         className="ButtonColumn"
       >
-        <Inline>
-          <Button
-            onClick={[Function]}
-            size="small"
-          >
-            Retry Verification
-          </Button>
-        </Inline>
+        <Button
+          onClick={[Function]}
+          size="small"
+        >
+          Retry Verification
+        </Button>
       </Button.Group>
     </Grid.Column>
   </Grid>
@@ -183,21 +179,19 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       <Button.Group
         className="ButtonColumn"
       >
-        <Inline>
-          <Button
-            onClick={[Function]}
-            size="small"
-          >
-            Retry Verification
-          </Button>
-          <Button
-            destructive={true}
-            onClick={[Function]}
-            size="small"
-          >
-            Delete
-          </Button>
-        </Inline>
+        <Button
+          onClick={[Function]}
+          size="small"
+        >
+          Retry Verification
+        </Button>
+        <Button
+          destructive={true}
+          onClick={[Function]}
+          size="small"
+        >
+          Delete
+        </Button>
       </Button.Group>
     </Grid.Column>
   </Grid>
@@ -262,22 +256,20 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       <Button.Group
         className="ButtonColumn"
       >
-        <Inline>
-          <Button
-            destructive={true}
-            onClick={[Function]}
-            size="small"
-          >
-            Remove Default
-          </Button>
-          <Button
-            destructive={true}
-            onClick={[Function]}
-            size="small"
-          >
-            Delete
-          </Button>
-        </Inline>
+        <Button
+          destructive={true}
+          onClick={[Function]}
+          size="small"
+        >
+          Remove Default
+        </Button>
+        <Button
+          destructive={true}
+          onClick={[Function]}
+          size="small"
+        >
+          Delete
+        </Button>
       </Button.Group>
     </Grid.Column>
   </Grid>
@@ -345,21 +337,19 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       <Button.Group
         className="ButtonColumn"
       >
-        <Inline>
-          <Button
-            onClick={[Function]}
-            size="small"
-          >
-            Retry Verification
-          </Button>
-          <Button
-            destructive={true}
-            onClick={[Function]}
-            size="small"
-          >
-            Delete
-          </Button>
-        </Inline>
+        <Button
+          onClick={[Function]}
+          size="small"
+        >
+          Retry Verification
+        </Button>
+        <Button
+          destructive={true}
+          onClick={[Function]}
+          size="small"
+        >
+          Delete
+        </Button>
       </Button.Group>
     </Grid.Column>
   </Grid>
@@ -416,22 +406,20 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       <Button.Group
         className="ButtonColumn"
       >
-        <Inline>
-          <Button
-            destructive={false}
-            onClick={[Function]}
-            size="small"
-          >
-            Set as Default
-          </Button>
-          <Button
-            destructive={true}
-            onClick={[Function]}
-            size="small"
-          >
-            Delete
-          </Button>
-        </Inline>
+        <Button
+          destructive={false}
+          onClick={[Function]}
+          size="small"
+        >
+          Set as Default
+        </Button>
+        <Button
+          destructive={true}
+          onClick={[Function]}
+          size="small"
+        >
+          Delete
+        </Button>
       </Button.Group>
     </Grid.Column>
   </Grid>
@@ -493,14 +481,12 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       <Button.Group
         className="ButtonColumn"
       >
-        <Inline>
-          <Button
-            onClick={[Function]}
-            size="small"
-          >
-            Retry Verification
-          </Button>
-        </Inline>
+        <Button
+          onClick={[Function]}
+          size="small"
+        >
+          Retry Verification
+        </Button>
       </Button.Group>
     </Grid.Column>
   </Grid>
@@ -570,21 +556,19 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       <Button.Group
         className="ButtonColumn"
       >
-        <Inline>
-          <Button
-            onClick={[Function]}
-            size="small"
-          >
-            Verifying...
-          </Button>
-          <Button
-            destructive={true}
-            onClick={[Function]}
-            size="small"
-          >
-            Delete
-          </Button>
-        </Inline>
+        <Button
+          onClick={[Function]}
+          size="small"
+        >
+          Verifying...
+        </Button>
+        <Button
+          destructive={true}
+          onClick={[Function]}
+          size="small"
+        >
+          Delete
+        </Button>
       </Button.Group>
     </Grid.Column>
   </Grid>
@@ -654,14 +638,12 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       <Button.Group
         className="ButtonColumn"
       >
-        <Inline>
-          <Button
-            onClick={[Function]}
-            size="small"
-          >
-            Retry Verification
-          </Button>
-        </Inline>
+        <Button
+          onClick={[Function]}
+          size="small"
+        >
+          Retry Verification
+        </Button>
       </Button.Group>
     </Grid.Column>
   </Grid>
@@ -731,21 +713,19 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       <Button.Group
         className="ButtonColumn"
       >
-        <Inline>
-          <Button
-            onClick={[Function]}
-            size="small"
-          >
-            Retry Verification
-          </Button>
-          <Button
-            destructive={true}
-            onClick={[Function]}
-            size="small"
-          >
-            Delete
-          </Button>
-        </Inline>
+        <Button
+          onClick={[Function]}
+          size="small"
+        >
+          Retry Verification
+        </Button>
+        <Button
+          destructive={true}
+          onClick={[Function]}
+          size="small"
+        >
+          Delete
+        </Button>
       </Button.Group>
     </Grid.Column>
   </Grid>
@@ -817,22 +797,20 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       <Button.Group
         className="ButtonColumn"
       >
-        <Inline>
-          <Button
-            destructive={true}
-            onClick={[Function]}
-            size="small"
-          >
-            Remove Default
-          </Button>
-          <Button
-            destructive={true}
-            onClick={[Function]}
-            size="small"
-          >
-            Delete
-          </Button>
-        </Inline>
+        <Button
+          destructive={true}
+          onClick={[Function]}
+          size="small"
+        >
+          Remove Default
+        </Button>
+        <Button
+          destructive={true}
+          onClick={[Function]}
+          size="small"
+        >
+          Delete
+        </Button>
       </Button.Group>
     </Grid.Column>
   </Grid>
@@ -908,21 +886,19 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       <Button.Group
         className="ButtonColumn"
       >
-        <Inline>
-          <Button
-            onClick={[Function]}
-            size="small"
-          >
-            Retry Verification
-          </Button>
-          <Button
-            destructive={true}
-            onClick={[Function]}
-            size="small"
-          >
-            Delete
-          </Button>
-        </Inline>
+        <Button
+          onClick={[Function]}
+          size="small"
+        >
+          Retry Verification
+        </Button>
+        <Button
+          destructive={true}
+          onClick={[Function]}
+          size="small"
+        >
+          Delete
+        </Button>
       </Button.Group>
     </Grid.Column>
   </Grid>
@@ -988,22 +964,20 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       <Button.Group
         className="ButtonColumn"
       >
-        <Inline>
-          <Button
-            destructive={false}
-            onClick={[Function]}
-            size="small"
-          >
-            Set as Default
-          </Button>
-          <Button
-            destructive={true}
-            onClick={[Function]}
-            size="small"
-          >
-            Delete
-          </Button>
-        </Inline>
+        <Button
+          destructive={false}
+          onClick={[Function]}
+          size="small"
+        >
+          Set as Default
+        </Button>
+        <Button
+          destructive={true}
+          onClick={[Function]}
+          size="small"
+        >
+          Delete
+        </Button>
       </Button.Group>
     </Grid.Column>
   </Grid>
@@ -1073,14 +1047,12 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       <Button.Group
         className="ButtonColumn"
       >
-        <Inline>
-          <Button
-            onClick={[Function]}
-            size="small"
-          >
-            Retry Verification
-          </Button>
-        </Inline>
+        <Button
+          onClick={[Function]}
+          size="small"
+        >
+          Retry Verification
+        </Button>
       </Button.Group>
     </Grid.Column>
   </Grid>
