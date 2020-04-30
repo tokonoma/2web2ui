@@ -62,11 +62,6 @@ function getVariantProps({ variant, isHibanaEnabled }) {
           color: 'red',
           outlineBorder: true,
         };
-      case 'destructive-secondary':
-        return {
-          color: 'red',
-          outlineBorder: true,
-        };
       // use when connecting a button to a TextField
       case 'connected':
         return {

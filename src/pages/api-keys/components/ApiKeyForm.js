@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
-import { Button, Panel } from 'src/components/matchbox';
+import { Box, Button, Panel, Stack } from 'src/components/matchbox';
 
 import {
   RadioGroup,
@@ -23,6 +23,7 @@ import { required } from 'src/helpers/validation';
 import GrantsCheckboxes from 'src/components/grantBoxes/GrantsCheckboxes';
 
 const formName = 'apiKeyForm';
+const maxWidth = '860px'; //TODO: Remove once Hibana tokens are available
 
 export class ApiKeyForm extends Component {
   get availableGrants() {
@@ -65,49 +66,61 @@ export class ApiKeyForm extends Component {
     return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
         <Panel.Section>
-          <Field
-            name="label"
-            component={TextFieldWrapper}
-            validate={required}
-            label="API Key Name"
-            disabled={isReadOnly}
-          />
-          <Field
-            name="subaccount"
-            helpText={
-              isReadOnly
-                ? ''
-                : 'This assignment is permanent. Leave blank to assign to master account.'
-            }
-            component={SubaccountTypeaheadWrapper}
-            disabled={!isNew}
-          />
+          <Stack>
+            <Box maxWidth={maxWidth}>
+              <Field
+                name="label"
+                component={TextFieldWrapper}
+                validate={required}
+                label="API Key Name"
+                disabled={isReadOnly}
+              />
+            </Box>
+            <Box maxWidth={maxWidth}>
+              <Field
+                name="subaccount"
+                helpText={
+                  isReadOnly
+                    ? ''
+                    : 'This assignment is permanent. Leave blank to assign to master account.'
+                }
+                component={SubaccountTypeaheadWrapper}
+                disabled={!isNew}
+              />
+            </Box>
+          </Stack>
         </Panel.Section>
         <Panel.Section>
-          <Field
-            name="grantsRadio"
-            component={RadioGroup}
-            label="API Permissions"
-            options={this.getGrantOptions()}
-          />
-          <GrantsCheckboxes grants={this.availableGrants} show={showGrants} disabled={isReadOnly} />
-          <Field
-            name="validIps"
-            component={TextFieldWrapper}
-            label="Allowed IPs"
-            helpText={
-              isReadOnly
-                ? ''
-                : 'Leaving the field blank will allow access by valid API keys from any IP address.'
-            }
-            placeholder={isReadOnly ? '' : '10.20.30.40, 10.20.30.0/24'}
-            validate={validIpList}
-            disabled={isReadOnly}
-          />
+          <Stack>
+            <Field
+              name="grantsRadio"
+              component={RadioGroup}
+              label="API Permissions"
+              options={this.getGrantOptions()}
+            />
+            <GrantsCheckboxes
+              grants={this.availableGrants}
+              show={showGrants}
+              disabled={isReadOnly}
+            />
+            <Field
+              name="validIps"
+              component={TextFieldWrapper}
+              label="Allowed IPs"
+              helpText={
+                isReadOnly
+                  ? ''
+                  : 'Leaving the field blank will allow access by valid API keys from any IP address.'
+              }
+              placeholder={isReadOnly ? '' : '10.20.30.40, 10.20.30.0/24'}
+              validate={validIpList}
+              disabled={isReadOnly}
+            />
+          </Stack>
         </Panel.Section>
         {!isReadOnly && (
           <Panel.Section>
-            <Button submit primary disabled={submitting || pristine}>
+            <Button submit variant="primary" disabled={submitting || pristine}>
               {submitting ? 'Loading...' : submitText}
             </Button>
           </Panel.Section>

@@ -3,73 +3,85 @@
 exports[`renders correctly - new and no subaccounts 1`] = `
 <form>
   <Panel.Section>
-    <Field
-      component={[Function]}
-      disabled={false}
-      label="API Key Name"
-      name="label"
-      validate={[Function]}
-    />
-    <Field
-      component={[Function]}
-      disabled={false}
-      helpText="This assignment is permanent. Leave blank to assign to master account."
-      name="subaccount"
-    />
+    <Stack>
+      <Box
+        maxWidth="860px"
+      >
+        <Field
+          component={[Function]}
+          disabled={false}
+          label="API Key Name"
+          name="label"
+          validate={[Function]}
+        />
+      </Box>
+      <Box
+        maxWidth="860px"
+      >
+        <Field
+          component={[Function]}
+          disabled={false}
+          helpText="This assignment is permanent. Leave blank to assign to master account."
+          name="subaccount"
+        />
+      </Box>
+    </Stack>
   </Panel.Section>
   <Panel.Section>
-    <Field
-      component={[Function]}
-      label="API Permissions"
-      name="grantsRadio"
-      options={
-        Array [
-          Object {
-            "disabled": false,
-            "label": "All",
-            "value": "all",
-          },
-          Object {
-            "disabled": false,
-            "label": "Select",
-            "value": "select",
-          },
-        ]
-      }
-    />
-    <GrantsCheckboxes
-      disabled={false}
-      grants={
-        Object {
-          "grant1": Object {
-            "key": "value",
-          },
-          "grant2": Object {
-            "key": "value",
-          },
-          "grant3": Object {
-            "key": "value",
-          },
-          "grant4": Object {
-            "key": "value",
-          },
+    <Stack>
+      <Field
+        component={[Function]}
+        label="API Permissions"
+        name="grantsRadio"
+        options={
+          Array [
+            Object {
+              "disabled": false,
+              "label": "All",
+              "value": "all",
+            },
+            Object {
+              "disabled": false,
+              "label": "Select",
+              "value": "select",
+            },
+          ]
         }
-      }
-    />
-    <Field
-      component={[Function]}
-      disabled={false}
-      helpText="Leaving the field blank will allow access by valid API keys from any IP address."
-      label="Allowed IPs"
-      name="validIps"
-      placeholder="10.20.30.40, 10.20.30.0/24"
-      validate={[Function]}
-    />
+      />
+      <GrantsCheckboxes
+        disabled={false}
+        grants={
+          Object {
+            "grant1": Object {
+              "key": "value",
+            },
+            "grant2": Object {
+              "key": "value",
+            },
+            "grant3": Object {
+              "key": "value",
+            },
+            "grant4": Object {
+              "key": "value",
+            },
+          }
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        helpText="Leaving the field blank will allow access by valid API keys from any IP address."
+        label="Allowed IPs"
+        name="validIps"
+        placeholder="10.20.30.40, 10.20.30.0/24"
+        validate={[Function]}
+      />
+    </Stack>
   </Panel.Section>
   <Panel.Section>
     <Button
-      primary={true}
       submit={true}
+      variant="primary"
     >
       Create API Key
     </Button>
@@ -80,68 +92,80 @@ exports[`renders correctly - new and no subaccounts 1`] = `
 exports[`renders correctly - readonly mode 1`] = `
 <form>
   <Panel.Section>
-    <Field
-      component={[Function]}
-      disabled={true}
-      label="API Key Name"
-      name="label"
-      validate={[Function]}
-    />
-    <Field
-      component={[Function]}
-      disabled={false}
-      helpText=""
-      name="subaccount"
-    />
+    <Stack>
+      <Box
+        maxWidth="860px"
+      >
+        <Field
+          component={[Function]}
+          disabled={true}
+          label="API Key Name"
+          name="label"
+          validate={[Function]}
+        />
+      </Box>
+      <Box
+        maxWidth="860px"
+      >
+        <Field
+          component={[Function]}
+          disabled={false}
+          helpText=""
+          name="subaccount"
+        />
+      </Box>
+    </Stack>
   </Panel.Section>
   <Panel.Section>
-    <Field
-      component={[Function]}
-      label="API Permissions"
-      name="grantsRadio"
-      options={
-        Array [
-          Object {
-            "disabled": true,
-            "label": "All",
-            "value": "all",
-          },
-          Object {
-            "disabled": true,
-            "label": "Select",
-            "value": "select",
-          },
-        ]
-      }
-    />
-    <GrantsCheckboxes
-      disabled={true}
-      grants={
-        Object {
-          "grant1": Object {
-            "key": "value",
-          },
-          "grant2": Object {
-            "key": "value",
-          },
-          "grant3": Object {
-            "key": "value",
-          },
-          "grant4": Object {
-            "key": "value",
-          },
+    <Stack>
+      <Field
+        component={[Function]}
+        label="API Permissions"
+        name="grantsRadio"
+        options={
+          Array [
+            Object {
+              "disabled": true,
+              "label": "All",
+              "value": "all",
+            },
+            Object {
+              "disabled": true,
+              "label": "Select",
+              "value": "select",
+            },
+          ]
         }
-      }
-    />
-    <Field
-      component={[Function]}
-      disabled={true}
-      helpText=""
-      label="Allowed IPs"
-      name="validIps"
-      placeholder=""
-      validate={[Function]}
-    />
+      />
+      <GrantsCheckboxes
+        disabled={true}
+        grants={
+          Object {
+            "grant1": Object {
+              "key": "value",
+            },
+            "grant2": Object {
+              "key": "value",
+            },
+            "grant3": Object {
+              "key": "value",
+            },
+            "grant4": Object {
+              "key": "value",
+            },
+          }
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        helpText=""
+        label="Allowed IPs"
+        name="validIps"
+        placeholder=""
+        validate={[Function]}
+      />
+    </Stack>
   </Panel.Section>
 </form>
 `;
@@ -149,67 +173,79 @@ exports[`renders correctly - readonly mode 1`] = `
 exports[`renders correctly - update and subaccounts 1`] = `
 <form>
   <Panel.Section>
-    <Field
-      component={[Function]}
-      disabled={false}
-      label="API Key Name"
-      name="label"
-      validate={[Function]}
-    />
-    <Field
-      component={[Function]}
-      disabled={true}
-      helpText="This assignment is permanent. Leave blank to assign to master account."
-      name="subaccount"
-    />
+    <Stack>
+      <Box
+        maxWidth="860px"
+      >
+        <Field
+          component={[Function]}
+          disabled={false}
+          label="API Key Name"
+          name="label"
+          validate={[Function]}
+        />
+      </Box>
+      <Box
+        maxWidth="860px"
+      >
+        <Field
+          component={[Function]}
+          disabled={true}
+          helpText="This assignment is permanent. Leave blank to assign to master account."
+          name="subaccount"
+        />
+      </Box>
+    </Stack>
   </Panel.Section>
   <Panel.Section>
-    <Field
-      component={[Function]}
-      label="API Permissions"
-      name="grantsRadio"
-      options={
-        Array [
-          Object {
-            "disabled": false,
-            "label": "All",
-            "value": "all",
-          },
-          Object {
-            "disabled": false,
-            "label": "Select",
-            "value": "select",
-          },
-        ]
-      }
-    />
-    <GrantsCheckboxes
-      disabled={false}
-      grants={
-        Object {
-          "grant1": Object {
-            "key": "value",
-          },
-          "grant2": Object {
-            "key": "value",
-          },
+    <Stack>
+      <Field
+        component={[Function]}
+        label="API Permissions"
+        name="grantsRadio"
+        options={
+          Array [
+            Object {
+              "disabled": false,
+              "label": "All",
+              "value": "all",
+            },
+            Object {
+              "disabled": false,
+              "label": "Select",
+              "value": "select",
+            },
+          ]
         }
-      }
-    />
-    <Field
-      component={[Function]}
-      disabled={false}
-      helpText="Leaving the field blank will allow access by valid API keys from any IP address."
-      label="Allowed IPs"
-      name="validIps"
-      placeholder="10.20.30.40, 10.20.30.0/24"
-      validate={[Function]}
-    />
+      />
+      <GrantsCheckboxes
+        disabled={false}
+        grants={
+          Object {
+            "grant1": Object {
+              "key": "value",
+            },
+            "grant2": Object {
+              "key": "value",
+            },
+          }
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        helpText="Leaving the field blank will allow access by valid API keys from any IP address."
+        label="Allowed IPs"
+        name="validIps"
+        placeholder="10.20.30.40, 10.20.30.0/24"
+        validate={[Function]}
+      />
+    </Stack>
   </Panel.Section>
   <Panel.Section>
     <Button
-      primary={true}
       submit={true}
+      variant="primary"
     >
       Update API Key
     </Button>
@@ -220,74 +256,86 @@ exports[`renders correctly - update and subaccounts 1`] = `
 exports[`submits correctly 1`] = `
 <form>
   <Panel.Section>
-    <Field
-      component={[Function]}
-      disabled={false}
-      label="API Key Name"
-      name="label"
-      validate={[Function]}
-    />
-    <Field
-      component={[Function]}
-      disabled={false}
-      helpText="This assignment is permanent. Leave blank to assign to master account."
-      name="subaccount"
-    />
+    <Stack>
+      <Box
+        maxWidth="860px"
+      >
+        <Field
+          component={[Function]}
+          disabled={false}
+          label="API Key Name"
+          name="label"
+          validate={[Function]}
+        />
+      </Box>
+      <Box
+        maxWidth="860px"
+      >
+        <Field
+          component={[Function]}
+          disabled={false}
+          helpText="This assignment is permanent. Leave blank to assign to master account."
+          name="subaccount"
+        />
+      </Box>
+    </Stack>
   </Panel.Section>
   <Panel.Section>
-    <Field
-      component={[Function]}
-      label="API Permissions"
-      name="grantsRadio"
-      options={
-        Array [
-          Object {
-            "disabled": false,
-            "label": "All",
-            "value": "all",
-          },
-          Object {
-            "disabled": false,
-            "label": "Select",
-            "value": "select",
-          },
-        ]
-      }
-    />
-    <GrantsCheckboxes
-      disabled={false}
-      grants={
-        Object {
-          "grant1": Object {
-            "key": "value",
-          },
-          "grant2": Object {
-            "key": "value",
-          },
-          "grant3": Object {
-            "key": "value",
-          },
-          "grant4": Object {
-            "key": "value",
-          },
+    <Stack>
+      <Field
+        component={[Function]}
+        label="API Permissions"
+        name="grantsRadio"
+        options={
+          Array [
+            Object {
+              "disabled": false,
+              "label": "All",
+              "value": "all",
+            },
+            Object {
+              "disabled": false,
+              "label": "Select",
+              "value": "select",
+            },
+          ]
         }
-      }
-    />
-    <Field
-      component={[Function]}
-      disabled={false}
-      helpText="Leaving the field blank will allow access by valid API keys from any IP address."
-      label="Allowed IPs"
-      name="validIps"
-      placeholder="10.20.30.40, 10.20.30.0/24"
-      validate={[Function]}
-    />
+      />
+      <GrantsCheckboxes
+        disabled={false}
+        grants={
+          Object {
+            "grant1": Object {
+              "key": "value",
+            },
+            "grant2": Object {
+              "key": "value",
+            },
+            "grant3": Object {
+              "key": "value",
+            },
+            "grant4": Object {
+              "key": "value",
+            },
+          }
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        helpText="Leaving the field blank will allow access by valid API keys from any IP address."
+        label="Allowed IPs"
+        name="validIps"
+        placeholder="10.20.30.40, 10.20.30.0/24"
+        validate={[Function]}
+      />
+    </Stack>
   </Panel.Section>
   <Panel.Section>
     <Button
       disabled={true}
-      primary={true}
       submit={true}
+      variant="primary"
     >
       Loading...
     </Button>

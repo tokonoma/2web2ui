@@ -7,33 +7,43 @@ exports[`Component: Tracking Domains Create Form should render correctly when su
   <form
     onSubmit={[MockFunction]}
   >
-    <Panel.Section>
-      <Field
-        component={[Function]}
-        disabled={false}
-        label="Domain Name"
-        name="domain"
-        validate={
-          Array [
-            [Function],
-            [Function],
-          ]
-        }
-      />
-      <Field
-        component={[Function]}
-        disabled={false}
-        helpText="Leaving this field blank will permanently assign the tracking domain to the master account."
-        name="subaccount"
-      />
+    <Stack>
+      <Box
+        maxWidth="860px"
+      >
+        <Field
+          component={[Function]}
+          disabled={false}
+          label="Domain Name"
+          name="domain"
+          validate={
+            Array [
+              [Function],
+              [Function],
+            ]
+          }
+        />
+      </Box>
+      <Box
+        maxWidth="860px"
+      >
+        <Field
+          component={[Function]}
+          disabled={false}
+          helpText="Leaving this field blank will permanently assign the tracking domain to the master account."
+          name="subaccount"
+        />
+      </Box>
+    </Stack>
+    <ButtonWrapper>
       <Button
         disabled={false}
-        primary={true}
         submit={true}
+        variant="primary"
       >
         Add Tracking Domain
       </Button>
-    </Panel.Section>
+    </ButtonWrapper>
   </form>
 </Panel>
 `;
@@ -45,33 +55,43 @@ exports[`Component: Tracking Domains Create Form should render correctly when su
   <form
     onSubmit={[MockFunction]}
   >
-    <Panel.Section>
-      <Field
-        component={[Function]}
-        disabled={true}
-        label="Domain Name"
-        name="domain"
-        validate={
-          Array [
-            [Function],
-            [Function],
-          ]
-        }
-      />
-      <Field
-        component={[Function]}
-        disabled={true}
-        helpText="Leaving this field blank will permanently assign the tracking domain to the master account."
-        name="subaccount"
-      />
+    <Stack>
+      <Box
+        maxWidth="860px"
+      >
+        <Field
+          component={[Function]}
+          disabled={true}
+          label="Domain Name"
+          name="domain"
+          validate={
+            Array [
+              [Function],
+              [Function],
+            ]
+          }
+        />
+      </Box>
+      <Box
+        maxWidth="860px"
+      >
+        <Field
+          component={[Function]}
+          disabled={true}
+          helpText="Leaving this field blank will permanently assign the tracking domain to the master account."
+          name="subaccount"
+        />
+      </Box>
+    </Stack>
+    <ButtonWrapper>
       <Button
         disabled={true}
-        primary={true}
         submit={true}
+        variant="primary"
       >
         Submitting...
       </Button>
-    </Panel.Section>
+    </ButtonWrapper>
   </form>
 </Panel>
 `;

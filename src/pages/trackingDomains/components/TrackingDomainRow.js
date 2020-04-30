@@ -1,7 +1,6 @@
 /* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Refresh } from '@sparkpost/matchbox-icons';
 import {
   listTrackingDomains,
   updateTrackingDomain,
@@ -9,7 +8,7 @@ import {
   verifyTrackingDomain,
 } from 'src/actions/trackingDomains';
 import { Subaccount } from 'src/components';
-import { Grid, Button, Panel, Tag } from 'src/components/matchbox';
+import { Button, Grid, Inline, Panel, Tag } from 'src/components/matchbox';
 import { DeleteModal, ConfirmationModal } from 'src/components/modals';
 import { DomainStatusTag } from 'src/components/tags';
 import styles from './TrackingDomainRow.module.scss';
@@ -83,7 +82,7 @@ export class TrackingDomainRow extends Component {
     const verifyText = verifying.indexOf(domain) >= 0 ? 'Verifying...' : 'Retry Verification';
     return (
       <Button size="small" onClick={this.retryVerification}>
-        <Refresh /> {verifyText}
+        {verifyText}
       </Button>
     );
   }
@@ -138,7 +137,7 @@ export class TrackingDomainRow extends Component {
     return (
       <Panel.Section>
         <Grid>
-          <Grid.Column xs={12} md={9}>
+          <Grid.Column xs={12} md={8}>
             <span className={styles.DomainHeading}>{domain}</span>
             <div className={styles.TagRow}>
               {status !== 'verified' && <DomainStatusTag className={styles.Tag} status={status} />}
@@ -152,14 +151,16 @@ export class TrackingDomainRow extends Component {
               )}
             </div>
           </Grid.Column>
-          <Grid.Column xs={12} md={3}>
+          <Grid.Column xs={12} md={4}>
             <Button.Group className={styles.ButtonColumn}>
-              {this.renderDefaultOrVerifyButton()}
-              {status !== 'pending' && status !== 'blocked' && (
-                <Button destructive size="small" onClick={this.toggleDeleteModal}>
-                  Delete
-                </Button>
-              )}
+              <Inline>
+                {this.renderDefaultOrVerifyButton()}
+                {status !== 'pending' && status !== 'blocked' && (
+                  <Button destructive size="small" onClick={this.toggleDeleteModal}>
+                    Delete
+                  </Button>
+                )}
+              </Inline>
             </Button.Group>
           </Grid.Column>
         </Grid>
