@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { LabelledValue } from 'src/components';
 import { PageLink } from 'src/components/links';
-import { Panel, UnstyledLink, Modal } from 'src/components/matchbox';
+import { Box, Panel, UnstyledLink, Modal } from 'src/components/matchbox';
+import { OGOnlyWrapper } from 'src/components/hibana';
 import {
   PremiumBanner,
   EnterpriseBanner,
@@ -155,10 +156,17 @@ export default class BillingSummary extends Component {
           {show === PAYMENT_MODAL && <UpdatePaymentForm onCancel={this.handleModal} />}
           {show === CONTACT_MODAL && <UpdateContactForm onCancel={this.handleModal} />}
           {show === IP_MODAL && <AddIps onClose={this.handleModal} />}
-          {show === RV_MODAL && (
-            <RecipientValidationModal volumeUsed={volumeUsed} onClose={this.handleModal} />
-          )}
         </Modal>
+        <OGOnlyWrapper as={Modal} open={show === RV_MODAL} onClose={this.handleModal}>
+          <Box
+            as={Modal}
+            open={show === RV_MODAL}
+            onClose={this.handleModal}
+            showCloseButton={true}
+          >
+            <RecipientValidationModal volumeUsed={volumeUsed} onClose={this.handleModal} />
+          </Box>
+        </OGOnlyWrapper>
       </div>
     );
   }
