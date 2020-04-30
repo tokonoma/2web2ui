@@ -8,7 +8,7 @@ jest.mock('src/hooks/useHibanaOverride');
 
 describe('JobFileName', () => {
   beforeEach(() => {
-    useHibanaOverride.mockImplementationOnce(() => styles);
+    useHibanaOverride.mockReturnValue(styles);
   });
 
   const subject = (props = {}) => shallow(<JobFileName {...props} />);

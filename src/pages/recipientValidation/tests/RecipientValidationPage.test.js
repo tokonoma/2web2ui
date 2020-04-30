@@ -36,7 +36,7 @@ const defaultProps = {
 
 describe('Page: Recipient Email Verification (shallow)', () => {
   beforeEach(() => {
-    useHibanaOverride.mockReturnValue(() => styles);
+    useHibanaOverride.mockReturnValue(styles);
     jest.mock('src/context/HibanaContext');
   });
 
@@ -83,7 +83,7 @@ describe('Page: Recipient Email Verification (shallow)', () => {
 
 describe('Page: Recipient Email Verification (full)', () => {
   beforeEach(() => {
-    useHibanaOverride.mockReturnValue(() => styles);
+    useHibanaOverride.mockReturnValue(styles);
   });
   const subject_mount = props =>
     mount(

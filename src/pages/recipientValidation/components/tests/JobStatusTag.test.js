@@ -11,7 +11,7 @@ jest.mock('src/context/HibanaContext');
 describe('JobStatusTag', () => {
   beforeEach(() => {
     useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: false }]);
-    useHibanaOverride.mockImplementationOnce(() => styles);
+    useHibanaOverride.mockReturnValue(styles);
   });
 
   const subject = (props = {}) => shallow(<JobStatusTag {...props} />);

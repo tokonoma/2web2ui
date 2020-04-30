@@ -15,7 +15,7 @@ jest.mock('src/pages/recipientValidation/components/ListProgress', () => {
 
 describe('UploadedListPage', () => {
   beforeEach(() => {
-    useHibanaOverride.mockReturnValue(() => styles);
+    useHibanaOverride.mockReturnValue(styles);
   });
 
   const subject = (props = {}, method = shallow) => {

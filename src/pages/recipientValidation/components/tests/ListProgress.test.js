@@ -24,7 +24,7 @@ describe('ListProgress', () => {
     );
 
   beforeEach(() => {
-    useHibanaOverride.mockImplementationOnce(() => styles);
+    useHibanaOverride.mockReturnValue(styles);
     React.useEffect = jest.fn(effect => effect());
   });
 

@@ -9,7 +9,7 @@ jest.mock('src/hooks/useHibanaOverride');
 
 describe('ApiDetails tab', () => {
   beforeEach(() => {
-    useHibanaOverride.mockImplementationOnce(() => styles);
+    useHibanaOverride.mockReturnValue(styles);
   });
 
   it('should render page correctly', () => {

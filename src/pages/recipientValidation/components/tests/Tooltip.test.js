@@ -10,7 +10,7 @@ jest.mock('src/hooks/useHibanaOverride');
 
 describe('renders tooltip correctly', () => {
   beforeEach(() => {
-    useHibanaOverride.mockImplementationOnce(() => styles);
+    useHibanaOverride.mockReturnValue(styles);
   });
 
   it('renders correctly icon', () => {

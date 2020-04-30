@@ -1,11 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`UploadedListForm should render correctly 1`] = `
-<div>
-  <h2>
+<div
+  className="FormContainer"
+>
+  <h2
+    className="Header"
+  >
     big-test.csv
   </h2>
-  <p>
+  <p
+    className="DescriptionParagraph"
+  >
     <span>
       Your list has been uploaded successfully and the cost to validate is below. 
     </span>
@@ -18,11 +24,16 @@ exports[`UploadedListForm should render correctly 1`] = `
       md={4}
       xs={12}
     >
-      <div>
+      <div
+        className="SubHeader"
+      >
         Your list has
       </div>
-      <div>
+      <div
+        className="CountBox"
+      >
         <span
+          className="Number"
           data-id="recipient-list-address-count"
         >
           123
@@ -35,10 +46,14 @@ exports[`UploadedListForm should render correctly 1`] = `
       mdOffset={1}
       xs={12}
     >
-      <div>
+      <div
+        className="SubHeader"
+      >
         and will cost
       </div>
-      <div>
+      <div
+        className="Cost"
+      >
         $0.74
       </div>
       <UnstyledLink

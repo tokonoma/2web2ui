@@ -29,7 +29,9 @@ exports[`UploadedListPage renders the list error when the job status is error 1`
       <OGOnlyWrapper
         as={[Function]}
       >
-        <div>
+        <div
+          className="dateHeader"
+        >
           <strong>
             Nov 21 1997
           </strong>
@@ -68,7 +70,9 @@ exports[`UploadedListPage renders with list progress 1`] = `
       <OGOnlyWrapper
         as={[Function]}
       >
-        <div>
+        <div
+          className="dateHeader"
+        >
           <strong>
             Nov 21 1997
           </strong>
