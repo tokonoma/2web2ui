@@ -23,7 +23,6 @@ import { required } from 'src/helpers/validation';
 import GrantsCheckboxes from 'src/components/grantBoxes/GrantsCheckboxes';
 
 const formName = 'apiKeyForm';
-const maxWidth = '860px'; //TODO: Remove once Hibana tokens are available
 
 export class ApiKeyForm extends Component {
   get availableGrants() {
@@ -67,7 +66,7 @@ export class ApiKeyForm extends Component {
       <form onSubmit={handleSubmit(this.onSubmit)}>
         <Panel.Section>
           <Stack>
-            <Box maxWidth={maxWidth}>
+            <Box maxWidth="1200">
               <Field
                 name="label"
                 component={TextFieldWrapper}
@@ -76,7 +75,7 @@ export class ApiKeyForm extends Component {
                 disabled={isReadOnly}
               />
             </Box>
-            <Box maxWidth={maxWidth}>
+            <Box maxWidth="1200">
               <Field
                 name="subaccount"
                 helpText={

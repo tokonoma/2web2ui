@@ -5,7 +5,7 @@ exports[`renders correctly - new and no subaccounts 1`] = `
   <Panel.Section>
     <Stack>
       <Box
-        maxWidth="860px"
+        maxWidth="1200"
       >
         <Field
           component={[Function]}
@@ -16,7 +16,7 @@ exports[`renders correctly - new and no subaccounts 1`] = `
         />
       </Box>
       <Box
-        maxWidth="860px"
+        maxWidth="1200"
       >
         <Field
           component={[Function]}
@@ -94,7 +94,7 @@ exports[`renders correctly - readonly mode 1`] = `
   <Panel.Section>
     <Stack>
       <Box
-        maxWidth="860px"
+        maxWidth="1200"
       >
         <Field
           component={[Function]}
@@ -105,7 +105,7 @@ exports[`renders correctly - readonly mode 1`] = `
         />
       </Box>
       <Box
-        maxWidth="860px"
+        maxWidth="1200"
       >
         <Field
           component={[Function]}
@@ -175,7 +175,7 @@ exports[`renders correctly - update and subaccounts 1`] = `
   <Panel.Section>
     <Stack>
       <Box
-        maxWidth="860px"
+        maxWidth="1200"
       >
         <Field
           component={[Function]}
@@ -186,7 +186,7 @@ exports[`renders correctly - update and subaccounts 1`] = `
         />
       </Box>
       <Box
-        maxWidth="860px"
+        maxWidth="1200"
       >
         <Field
           component={[Function]}
@@ -258,7 +258,7 @@ exports[`submits correctly 1`] = `
   <Panel.Section>
     <Stack>
       <Box
-        maxWidth="860px"
+        maxWidth="1200"
       >
         <Field
           component={[Function]}
@@ -269,7 +269,7 @@ exports[`submits correctly 1`] = `
         />
       </Box>
       <Box
-        maxWidth="860px"
+        maxWidth="1200"
       >
         <Field
           component={[Function]}
