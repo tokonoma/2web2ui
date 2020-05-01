@@ -2,9 +2,11 @@
 
 exports[`ListProgress renders status and progress bar 1`] = `
 <FocusContainer
-  className="ListProgressContainer"
+  className="Container"
 >
-  <h2>
+  <h2
+    className="Header"
+  >
     big-test.csv
   </h2>
   <p>
@@ -51,8 +53,8 @@ exports[`ListProgress renders status and progress bar 1`] = `
   </div>
   <PageLink
     as={[Function]}
-    color="orange"
     to="/recipient-validation"
+    variant="primary"
   >
     Validate Another
   </PageLink>

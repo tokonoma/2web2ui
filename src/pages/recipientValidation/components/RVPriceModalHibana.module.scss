@@ -1,0 +1,18 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.modalContainer {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.bodyContainer {
+  max-width: 800px;
+}
+
+.rvModalCell {
+  padding: 8px 0 4px 0;
+}
+
+.Close {
+  color: color(gray, 900);
+}

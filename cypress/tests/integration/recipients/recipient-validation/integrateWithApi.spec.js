@@ -34,15 +34,17 @@ describe('The recipient validation API integration page', () => {
   });
 
   it('renders integration instructions and add credit card form with disabled submit button', () => {
-    cy.findByText('Integrate Now').should('be.visible');
-    cy.findByText('/api/v1/recipient-validation/single/{address}').should('be.visible');
-    cy.findByText('API Docs').should(
-      'have.attr',
-      'href',
-      'https://developers.sparkpost.com/api/recipient-validation/',
-    );
-    cy.findByText('Add a Credit Card').should('be.visible');
-    cy.findByText('Create API Key').should('be.disabled');
+    cy.withinMainContent(() => {
+      cy.findByText('Integrate Now').should('be.visible');
+      cy.findByText('/api/v1/recipient-validation/single/{address}').should('be.visible');
+      cy.findByText('API Docs').should(
+        'have.attr',
+        'href',
+        'https://developers.sparkpost.com/api/recipient-validation/',
+      );
+      cy.findByText('Add a Credit Card').should('be.visible');
+      cy.findByText('Create API Key').should('be.disabled');
+    });
   });
 
   it('adds credit card', () => {

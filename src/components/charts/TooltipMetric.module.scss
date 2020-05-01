@@ -1,6 +1,5 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
-
 .Wrapper {
   position: relative;
   display: inline-block;
@@ -47,7 +46,7 @@
 .Description {
   font-size: rem(12);
   line-height: 1em;
-  color: rgba(color(gray, 5), 0.8)
+  color: rgba(color(gray, 5), 0.8);
 }
 
 .Value {

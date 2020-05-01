@@ -2,27 +2,31 @@
 
 exports[`UploadedListForm should render correctly 1`] = `
 <div
-  className="formContainer"
+  className="FormContainer"
 >
-  <h2>
+  <h2
+    className="Header"
+  >
     big-test.csv
   </h2>
   <p
-    className="descriptionParagraph"
+    className="DescriptionParagraph"
   >
     <span>
       Your list has been uploaded successfully and the cost to validate is below. 
     </span>
-    <strong>
+    <span>
       Would you like to proceed?
-    </strong>
+    </span>
   </p>
   <Grid>
     <Grid.Column
       md={4}
       xs={12}
     >
-      <div>
+      <div
+        className="SubHeader"
+      >
         Your list has
       </div>
       <div
@@ -34,8 +38,7 @@ exports[`UploadedListForm should render correctly 1`] = `
         >
           123
         </span>
-         
-        emails
+          emails
       </div>
     </Grid.Column>
     <Grid.Column
@@ -43,7 +46,9 @@ exports[`UploadedListForm should render correctly 1`] = `
       mdOffset={1}
       xs={12}
     >
-      <div>
+      <div
+        className="SubHeader"
+      >
         and will cost
       </div>
       <div

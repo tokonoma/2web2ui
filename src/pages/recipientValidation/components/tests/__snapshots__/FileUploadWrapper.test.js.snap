@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `
+exports[`FileUploadWrapper renders correctly 1`] = `
 <fieldset
   className="Field"
 >
@@ -66,16 +66,12 @@ exports[`renders correctly 1`] = `
   >
     Format your list with single addresses on individual lines, or
      
-    <strong>
-      <DownloadLink
-        href="example-recipient-validation-list.csv"
-      >
-        download
-      </DownloadLink>
-    </strong>
-     
-    our csv template. Please note, only the most recent list is only
-     
+    <DownloadLink
+      href="example-recipient-validation-list.csv"
+    >
+      download
+    </DownloadLink>
+     our csv template. Please note, only the most recent list is only 
     <strong>
       kept for 10 days
     </strong>
@@ -84,7 +80,7 @@ exports[`renders correctly 1`] = `
 </fieldset>
 `;
 
-exports[`renders uploading state correctly 1`] = `
+exports[`FileUploadWrapper renders uploading state correctly 1`] = `
 <fieldset
   className="Field"
 >

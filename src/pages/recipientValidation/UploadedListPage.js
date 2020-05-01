@@ -15,7 +15,6 @@ import { isManuallyBilled } from 'src/selectors/accountBillingInfo';
 import ListError from './components/ListError';
 import ListProgress from './components/ListProgress';
 import UploadedListForm from './components/UploadedListForm';
-import styles from './UploadedListPage.module.scss';
 import ValidateSection from './components/ValidateSection';
 import { FORMS } from 'src/constants';
 import { reduxForm } from 'redux-form';
@@ -25,9 +24,17 @@ import { getSubscription as getBillingSubscription } from 'src/actions/billing';
 import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
 
+import { OGOnlyWrapper } from 'src/components/hibana';
+
+import OGStyles from './UploadedListPage.module.scss';
+import hibanaStyles from './UploadedListPageHibana.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
+
 const FORMNAME = FORMS.RV_ADDPAYMENTFORM_UPLOADLISTPAGE;
 
 export function UploadedListPage(props) {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+
   const {
     getJobStatus,
     listId,
@@ -112,15 +119,14 @@ export function UploadedListPage(props) {
         breadcrumbAction={{ content: 'Back', component: PageLink, to: '/recipient-validation' }}
       >
         <Panel>
-          <Panel.Section>
+          <OGOnlyWrapper as={Panel.Section}>
             <div className={styles.dateHeader}>
               <strong>{formatDate(job.updatedAt)}</strong>
               <span> at </span>
               <strong>{formatTime(job.updatedAt)}</strong>
             </div>
-          </Panel.Section>
-
-          <Panel.Section>
+          </OGOnlyWrapper>
+          <OGOnlyWrapper as={Panel.Section}>
             {job.status === 'queued_for_batch' && (
               <UploadedListForm job={job} onSubmit={handleSubmit} />
             )}
@@ -130,7 +136,7 @@ export function UploadedListPage(props) {
             {job.status !== 'queued_for_batch' && job.status !== 'error' && (
               <ListProgress job={job} />
             )}
-          </Panel.Section>
+          </OGOnlyWrapper>
         </Panel>
         {job.status === 'queued_for_batch' && !billingLoading && (
           <ValidateSection

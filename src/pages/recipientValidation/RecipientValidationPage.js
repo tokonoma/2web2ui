@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Launch } from '@sparkpost/matchbox-icons';
+import { ExternalLink } from 'src/components/links';
 import { Button, Page, Panel, Tabs } from 'src/components/matchbox';
 import { reduxForm } from 'redux-form';
 import _ from 'lodash';
@@ -16,19 +16,30 @@ import JobsTableCollection from './components/JobsTableCollection';
 import { ListTab } from './components/ListForm';
 import { SingleAddressTab } from './components/SingleAddressForm';
 import ApiDetails from './components/ApiDetails';
-import styles from './RecipientValidationPage.module.scss';
 import ValidateSection from './components/ValidateSection';
 import { FORMS } from 'src/constants';
 import RVPriceModal from './components/RVPriceModal';
+import { PageDescription } from 'src/components/text';
+
+import OGStyles from './RecipientValidationPage.module.scss';
+import hibanaStyles from './RecipientValidationPageHibana.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
+
 const FORMNAME = FORMS.RV_ADDPAYMENTFORM;
 
+function ListContent(props) {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+  return <span className={styles.TabPadding}>{props.children}</span>;
+}
+
 const tabs = [
-  { content: <span className={styles.TabPadding}>List</span>, key: 'list' },
+  { content: <ListContent>List</ListContent>, key: 'list' },
   { content: 'Single Address', key: 'single' },
   { content: 'API Integration', key: 'api' },
 ];
 
 export function RecipientValidationPage(props) {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
   const {
     getBillingInfo,
     getBillingSubscription,
@@ -47,6 +58,7 @@ export function RecipientValidationPage(props) {
     reset,
     handleSubmit,
   } = props;
+
   const [useSavedCC, setUseSavedCC] = useState(Boolean(billing.credit_card));
   const [selectedTab, setSelectedTab] = useState(tab || 0);
   const [showPriceModal, setShowPriceModal] = useState(false);
@@ -137,17 +149,17 @@ export function RecipientValidationPage(props) {
       <Page
         title="Recipient Validation"
         primaryArea={
-          <Button size="large" onClick={() => handleModal(true)}>
+          <Button variant="secondary" onClick={() => handleModal(true)}>
             See Pricing
           </Button>
         }
       >
-        <p className={styles.LeadText}>
+        <PageDescription>
           Recipient Validation is an easy, efficient way to verify that email addresses are valid
           before you send. We run each address through a series of checks to catch many common
           problems, including syntax errors and non-existent mailboxes, to drive better
           deliverability, cut down on fraud, and capture every opportunity.
-        </p>
+        </PageDescription>
         <Panel>
           <div className={styles.TabsWrapper}>
             <Tabs
@@ -160,14 +172,14 @@ export function RecipientValidationPage(props) {
             />
             {selectedTab === 2 && (
               <div className={styles.SecondaryActions}>
-                <Button
+                <ExternalLink
+                  className={styles.ApiDocs}
+                  as={Button}
                   flat
-                  external
                   to="https://developers.sparkpost.com/api/recipient-validation/"
                 >
                   API Docs
-                  <Launch className={styles.LaunchIcon} />
-                </Button>
+                </ExternalLink>
               </div>
             )}
           </div>

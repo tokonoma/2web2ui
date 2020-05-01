@@ -2,7 +2,10 @@ import { shallow, mount } from 'enzyme';
 import React from 'react';
 import TestApp from 'src/__testHelpers__/TestApp';
 import { RecipientValidationPage } from '../RecipientValidationPage';
-import { Launch } from '@sparkpost/matchbox-icons';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
+import styles from '../RecipientValidationPage.module.scss';
+
+jest.mock('src/hooks/useHibanaOverride');
 
 jest.mock('src/pages/recipientValidation/components/ValidateSection', () => {
   return function ValidateSection() {
@@ -33,6 +36,7 @@ const defaultProps = {
 
 describe('Page: Recipient Email Verification (shallow)', () => {
   beforeEach(() => {
+    useHibanaOverride.mockReturnValue(styles);
     jest.mock('src/context/HibanaContext');
   });
 
@@ -63,13 +67,12 @@ describe('Page: Recipient Email Verification (shallow)', () => {
 
   it('renders a API Docs button in Panel when API Integration Tab is selected', () => {
     const instance = subject({ tab: 2 });
-
     expect(
       instance
-        .find('Button')
+        .find('ExternalLink')
         .first()
         .prop('children'),
-    ).toEqual(['API Docs', <Launch className="LaunchIcon" />]);
+    ).toEqual('API Docs');
   });
 
   it('renders a ValidateSection', () => {
@@ -79,6 +82,9 @@ describe('Page: Recipient Email Verification (shallow)', () => {
 });
 
 describe('Page: Recipient Email Verification (full)', () => {
+  beforeEach(() => {
+    useHibanaOverride.mockReturnValue(styles);
+  });
   const subject_mount = props =>
     mount(
       <TestApp>

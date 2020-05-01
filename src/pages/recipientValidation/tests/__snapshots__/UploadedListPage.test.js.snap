@@ -26,7 +26,9 @@ exports[`UploadedListPage renders the list error when the job status is error 1`
     title="Recipient Validation"
   >
     <Panel>
-      <Panel.Section>
+      <OGOnlyWrapper
+        as={[Function]}
+      >
         <div
           className="dateHeader"
         >
@@ -40,10 +42,12 @@ exports[`UploadedListPage renders the list error when the job status is error 1`
             10:55am
           </strong>
         </div>
-      </Panel.Section>
-      <Panel.Section>
+      </OGOnlyWrapper>
+      <OGOnlyWrapper
+        as={[Function]}
+      >
         <ListError />
-      </Panel.Section>
+      </OGOnlyWrapper>
     </Panel>
   </Page>
 </form>
@@ -63,7 +67,9 @@ exports[`UploadedListPage renders with list progress 1`] = `
     title="Recipient Validation"
   >
     <Panel>
-      <Panel.Section>
+      <OGOnlyWrapper
+        as={[Function]}
+      >
         <div
           className="dateHeader"
         >
@@ -77,8 +83,10 @@ exports[`UploadedListPage renders with list progress 1`] = `
             10:55am
           </strong>
         </div>
-      </Panel.Section>
-      <Panel.Section>
+      </OGOnlyWrapper>
+      <OGOnlyWrapper
+        as={[Function]}
+      >
         <Component
           job={
             Object {
@@ -88,7 +96,7 @@ exports[`UploadedListPage renders with list progress 1`] = `
             }
           }
         />
-      </Panel.Section>
+      </OGOnlyWrapper>
     </Panel>
   </Page>
 </form>

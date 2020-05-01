@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { ExternalLink, PageLink, SupportTicketLink } from 'src/components/links';
 import { Grid, Button, Page, Panel, ScreenReaderOnly } from 'src/components/matchbox';
-import styles from './SingleResult.module.scss';
 import CodeBlock from './components/CodeBlock';
 import {
   ROLE_TOOLTIP,
@@ -18,9 +17,14 @@ import { showAlert } from 'src/actions/globalAlert';
 import Loading from 'src/components/loading';
 import Tooltip from './components/Tooltip';
 
+import OGStyles from './SingleResult.module.scss';
+import hibanaStyles from './SingleResultHibana.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
+
 const SINGLE_RV_LINK = '/recipient-validation/single';
 
 export function SingleResult(props) {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
   const { singleResults = {}, loading, address, history, showAlert, singleAddress } = props;
 
   useEffect(() => {
@@ -72,7 +76,7 @@ export function SingleResult(props) {
 
               <ResultList data={singleResults} />
 
-              <PageLink as={Button} color="orange" to={SINGLE_RV_LINK}>
+              <PageLink as={Button} variant="primary" to={SINGLE_RV_LINK}>
                 Validate Another
               </PageLink>
             </div>
@@ -108,10 +112,12 @@ export function SingleResult(props) {
 }
 
 function TabCharacter() {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
   return <span className={styles.TabCharacter} />;
 }
 
 function WhiteText(props) {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
   return (
     <span className={styles.WhiteText} data-id={props['data-id']}>
       {props.children}
@@ -120,6 +126,7 @@ function WhiteText(props) {
 }
 
 function ResultList({ data }) {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
   const { is_role, is_disposable, is_free, did_you_mean } = data;
 
   return (
@@ -162,6 +169,7 @@ function ResultList({ data }) {
 }
 
 function ResultListItem({ children }) {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
   return (
     <div className={styles.ResultListItem} role="listitem">
       {children}
@@ -170,6 +178,7 @@ function ResultListItem({ children }) {
 }
 
 function ResultListKey({ children }) {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
   return (
     <span className={styles.ResultListKey}>
       {children}
@@ -183,6 +192,7 @@ function ResultListValue({ value }) {
 }
 
 function Result({ children }) {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
   return (
     <div className={styles.Result}>
       <ScreenReaderOnly>Status:</ScreenReaderOnly>
@@ -195,6 +205,7 @@ function Result({ children }) {
 }
 
 function ResultCodeBlock({ data }) {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
   const { result, valid, reason, is_role, is_disposable, is_free, did_you_mean } = data;
 
   return (

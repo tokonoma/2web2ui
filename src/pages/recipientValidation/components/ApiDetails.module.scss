@@ -10,15 +10,20 @@
   font-weight: 600;
 }
 
-.ApiDocsLink {
-  margin-left: spacing();
+.SubHeader {
+  margin: spacing(larger) 0 0 0;
+  font-size: rem(16);
+  font-weight: 600;
 }
 
-.SampleRequest {
-  border-top: 1px solid color(gray, 9);
-  border-bottom: 1px solid color(gray, 9);
-  padding: rem(15) 0;
-  margin: rem(40) 0;
+.ExampleMethod {
+  font-size: rem(13);
+  background-color: color(gray, 9);
+  padding: 4px;
+}
+
+.ApiDocsLink {
+  margin-left: spacing();
 }
 
 .Method {
@@ -42,7 +47,7 @@
 }
 
 .blue {
-  color: #8FC4FE;
+  color: #8fc4fe;
 }
 
 .white {

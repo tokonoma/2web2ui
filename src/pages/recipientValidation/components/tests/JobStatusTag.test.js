@@ -1,8 +1,19 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import JobStatusTag from '../JobStatusTag';
+import styles from '../JobStatusTag.module.scss';
+import { useHibana } from 'src/context/HibanaContext';
+
+jest.mock('src/hooks/useHibanaOverride');
+jest.mock('src/context/HibanaContext');
 
 describe('JobStatusTag', () => {
+  beforeEach(() => {
+    useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: false }]);
+    useHibanaOverride.mockReturnValue(styles);
+  });
+
   const subject = (props = {}) => shallow(<JobStatusTag {...props} />);
 
   it('renders a loading tag', () => {
