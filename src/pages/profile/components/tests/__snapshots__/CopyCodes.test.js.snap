@@ -8,11 +8,16 @@ exports[`CopyCodes Component should render 1`] = `
 >
   <Button
     onClick={[Function]}
+    variant="secondary"
   >
-    <ContentCopy
-      size={14}
-    />
-    Copy
+    <Inline
+      space="100"
+    >
+      <ContentCopy
+        size={14}
+      />
+      Copy
+    </Inline>
   </Button>
 </Tooltip>
 `;
@@ -25,11 +30,16 @@ exports[`CopyCodes Component should show tooltip when copied state is true 1`] =
 >
   <Button
     onClick={[Function]}
+    variant="secondary"
   >
-    <ContentCopy
-      size={14}
-    />
-    Copy
+    <Inline
+      space="100"
+    >
+      <ContentCopy
+        size={14}
+      />
+      Copy
+    </Inline>
   </Button>
 </Tooltip>
 `;

@@ -14,7 +14,7 @@ exports[`Component: EnforceTfaPanel renders fully after loading 1`] = `
   }
   title="Two-factor Authentication"
 >
-  <TogglePanel
+  <TogglePanelSection
     readOnly={false}
     tfaRequired={false}
     toggleTfaRequired={[Function]}
@@ -22,7 +22,7 @@ exports[`Component: EnforceTfaPanel renders fully after loading 1`] = `
   <ConfirmationModal
     confirming={false}
     content={
-      <React.Fragment>
+      <Stack>
         <p>
           Enforcing two-factor authentication account-wide will have the following effects:
         </p>
@@ -41,7 +41,7 @@ exports[`Component: EnforceTfaPanel renders fully after loading 1`] = `
              don't have two-factor authentication enabled, you will be logged out.
           </li>
         </ul>
-      </React.Fragment>
+      </Stack>
     }
     onCancel={[Function]}
     onConfirm={[Function]}
@@ -51,7 +51,7 @@ exports[`Component: EnforceTfaPanel renders fully after loading 1`] = `
   <ConfirmationModal
     confirming={false}
     content={
-      <React.Fragment>
+      <Stack>
         <p>
           Making two-factor authentication optional will allow users to manage their own two-factor authentication settings.
         </p>
@@ -62,7 +62,7 @@ exports[`Component: EnforceTfaPanel renders fully after loading 1`] = `
           </em>
            disable two-factor authentication for any user.
         </p>
-      </React.Fragment>
+      </Stack>
     }
     onCancel={[Function]}
     onConfirm={[Function]}
@@ -75,7 +75,7 @@ exports[`Component: EnforceTfaPanel renders fully after loading 1`] = `
 exports[`Component: EnforceTfaPanel renders loading state 1`] = `
 <PanelLoading
   accent={false}
-  minHeight="400px"
+  minHeight="200px"
 />
 `;
 
@@ -98,7 +98,7 @@ exports[`Component: EnforceTfaPanel renders with sso enabled 1`] = `
       Mandatory two-factor authentication is not available while single sign-on is enabled.
     </p>
   </Panel.Section>
-  <TogglePanel
+  <TogglePanelSection
     readOnly={true}
     tfaRequired={false}
     toggleTfaRequired={[Function]}
@@ -106,7 +106,7 @@ exports[`Component: EnforceTfaPanel renders with sso enabled 1`] = `
   <ConfirmationModal
     confirming={false}
     content={
-      <React.Fragment>
+      <Stack>
         <p>
           Enforcing two-factor authentication account-wide will have the following effects:
         </p>
@@ -125,7 +125,7 @@ exports[`Component: EnforceTfaPanel renders with sso enabled 1`] = `
              don't have two-factor authentication enabled, you will be logged out.
           </li>
         </ul>
-      </React.Fragment>
+      </Stack>
     }
     onCancel={[Function]}
     onConfirm={[Function]}
@@ -135,7 +135,7 @@ exports[`Component: EnforceTfaPanel renders with sso enabled 1`] = `
   <ConfirmationModal
     confirming={false}
     content={
-      <React.Fragment>
+      <Stack>
         <p>
           Making two-factor authentication optional will allow users to manage their own two-factor authentication settings.
         </p>
@@ -146,7 +146,7 @@ exports[`Component: EnforceTfaPanel renders with sso enabled 1`] = `
           </em>
            disable two-factor authentication for any user.
         </p>
-      </React.Fragment>
+      </Stack>
     }
     onCancel={[Function]}
     onConfirm={[Function]}
@@ -170,7 +170,7 @@ exports[`Component: EnforceTfaPanel renders with tfa enabled 1`] = `
   }
   title="Two-factor Authentication"
 >
-  <TogglePanel
+  <TogglePanelSection
     readOnly={false}
     tfaRequired={false}
     toggleTfaRequired={[Function]}
@@ -178,7 +178,7 @@ exports[`Component: EnforceTfaPanel renders with tfa enabled 1`] = `
   <ConfirmationModal
     confirming={false}
     content={
-      <React.Fragment>
+      <Stack>
         <p>
           Enforcing two-factor authentication account-wide will have the following effects:
         </p>
@@ -197,7 +197,7 @@ exports[`Component: EnforceTfaPanel renders with tfa enabled 1`] = `
              don't have two-factor authentication enabled, you will be logged out.
           </li>
         </ul>
-      </React.Fragment>
+      </Stack>
     }
     onCancel={[Function]}
     onConfirm={[Function]}
@@ -207,7 +207,7 @@ exports[`Component: EnforceTfaPanel renders with tfa enabled 1`] = `
   <ConfirmationModal
     confirming={false}
     content={
-      <React.Fragment>
+      <Stack>
         <p>
           Making two-factor authentication optional will allow users to manage their own two-factor authentication settings.
         </p>
@@ -218,7 +218,7 @@ exports[`Component: EnforceTfaPanel renders with tfa enabled 1`] = `
           </em>
            disable two-factor authentication for any user.
         </p>
-      </React.Fragment>
+      </Stack>
     }
     onCancel={[Function]}
     onConfirm={[Function]}

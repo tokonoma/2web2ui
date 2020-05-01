@@ -4,21 +4,28 @@ exports[`Component: TogglePanel should render 1`] = `
 <Panel.Section>
   <Grid>
     <Grid.Column
-      xs={11}
+      md={11}
+      xs={12}
     >
       <LabelledValue
         label="Status"
       >
-        <h6>
+        <strong>
           Optional
-        </h6>
+        </strong>
         <p>
           Each user can manage their own two-factor authentication settings.
         </p>
       </LabelledValue>
     </Grid.Column>
     <Grid.Column
-      xs={1}
+      md={1}
+      style={
+        Object {
+          "textAlign": "right",
+        }
+      }
+      xs={12}
     >
       <Toggle
         checked={false}
