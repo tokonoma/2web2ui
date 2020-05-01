@@ -44,7 +44,7 @@ exports[`JobStatusTag renders a ready tag 1`] = `
 
 exports[`JobStatusTag renders a success tag 1`] = `
 <Tag
-  color="green"
+  color=""
   style={
     Object {
       "verticalAlign": "bottom",
@@ -65,7 +65,7 @@ exports[`JobStatusTag renders a success tag 1`] = `
 
 exports[`JobStatusTag renders an error tag 1`] = `
 <Tag
-  color="red"
+  color=""
   style={
     Object {
       "verticalAlign": "bottom",

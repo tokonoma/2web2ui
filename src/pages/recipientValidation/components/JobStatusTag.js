@@ -51,7 +51,7 @@ const JobStatusTag = ({ status }) => {
   const { tagColor, className, icon: Icon, message } = statusProps[status] || statusProps.loading;
 
   return (
-    <Tag color={tagColor} style={{ verticalAlign: 'bottom' }}>
+    <Tag color={isHibanaEnabled ? tagColor : ''} style={{ verticalAlign: 'bottom' }}>
       <span className={classNames(styles.JobStatusTagContent, className)}>
         {!isHibanaEnabled && <Icon />}
         &nbsp;
