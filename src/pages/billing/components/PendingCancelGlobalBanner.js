@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { formatDate } from 'src/helpers/date';
-import { Box, Button, UnstyledLink } from 'src/components/matchbox';
+import { Box, Button, ScreenReaderOnly, UnstyledLink } from 'src/components/matchbox';
 import { Close, AccessTime } from '@sparkpost/matchbox-icons';
 import OGStyles from './PendingCancelGlobalBanner.module.scss';
 import HibanaStyles from './PendingCancelGlobalBannerHibana.module.scss';
@@ -60,6 +60,8 @@ export function PendingCancelGlobalBanner(props) {
       <span className={styles.RightContainer}>
         <Button className={styles.Close} flat onClick={handleClose}>
           <Close />
+
+          <ScreenReaderOnly>Close</ScreenReaderOnly>
         </Button>
       </span>
     </div>
