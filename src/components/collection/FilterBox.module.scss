@@ -1,3 +1,10 @@
 .FilterBoxLabel {
   margin: 0;
 }
+
+.Panel {
+  // Kind of a hacky way to override Matchbox - ideally the component could expose this through props or composition
+  > div {
+    border-bottom: 0;
+  }
+}

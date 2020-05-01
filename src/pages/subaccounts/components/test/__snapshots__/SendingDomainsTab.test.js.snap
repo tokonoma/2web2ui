@@ -18,48 +18,52 @@ Array [
 `;
 
 exports[`SendingDomainsTab should load domains in tab 1`] = `
-<Panel>
+<Fragment>
   <div>
     <Panel.Section>
       <p>
         Sending Domains assigned to this subaccount.
       </p>
     </Panel.Section>
-    <TableCollection
-      columns={
-        Array [
-          Object {
-            "label": "Domain",
-            "sortKey": "domain",
-            "width": "30%",
-          },
-          Object {
-            "label": <StatusTooltipHeader />,
-            "width": "40%",
-          },
-        ]
-      }
-      defaultSortColumn={null}
-      defaultSortDirection="asc"
-      getRowData={[Function]}
-      pagination={true}
-      rows={
-        Array [
-          Object {
-            "domain": "foo.com",
-          },
-          Object {
-            "domain": "bar.com",
-          },
-        ]
-      }
-    />
+    <Box
+      as={[Function]}
+    >
+      <TableCollection
+        columns={
+          Array [
+            Object {
+              "label": "Domain",
+              "sortKey": "domain",
+              "width": "30%",
+            },
+            Object {
+              "label": <StatusTooltipHeader />,
+              "width": "40%",
+            },
+          ]
+        }
+        defaultSortColumn={null}
+        defaultSortDirection="asc"
+        getRowData={[Function]}
+        pagination={true}
+        rows={
+          Array [
+            Object {
+              "domain": "foo.com",
+            },
+            Object {
+              "domain": "bar.com",
+            },
+          ]
+        }
+      />
+    </Box>
   </div>
-</Panel>
+</Fragment>
 `;
 
 exports[`SendingDomainsTab should show empty message when 0 domains exist 1`] = `
-<Panel>
+<Fragment>
   <Panel.Section
     style={
       Object {
@@ -67,24 +71,27 @@ exports[`SendingDomainsTab should show empty message when 0 domains exist 1`] = 
       }
     }
   >
-    <p>
-      This subaccount has no sending domains assigned to it. You can assign an existing one, or create a new one.
-    </p>
-    <PageLink
-      as={[Function]}
-      color="orange"
-      plain={true}
-      to="/account/sending-domains"
-    >
-      Manage Sending Domains
-    </PageLink>
+    <Stack>
+      <p>
+        This subaccount has no sending domains assigned to it. You can assign an existing one, or create a new one.
+      </p>
+      <div>
+        <PageLink
+          as={[Function]}
+          color="orange"
+          plain={true}
+          to="/account/sending-domains"
+        >
+          Manage Sending Domains
+        </PageLink>
+      </div>
+    </Stack>
   </Panel.Section>
-</Panel>
+</Fragment>
 `;
 
 exports[`SendingDomainsTab should show panel loading while loading domains 1`] = `
-<PanelLoading
-  accent={false}
-  minHeight="400px"
+<Loading
+  minHeight="300px"
 />
 `;

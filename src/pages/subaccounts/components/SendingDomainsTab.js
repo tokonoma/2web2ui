@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { PageLink } from 'src/components/links';
-import { Button, Panel } from 'src/components/matchbox';
+import { Box, Button, Panel, Stack } from 'src/components/matchbox';
+import { Loading } from 'src/components';
 import { TableCollection, DomainStatusCell, StatusTooltipHeader } from 'src/components';
 import { selectSendingDomainsForSubaccount } from 'src/selectors/sendingDomains';
-import PanelLoading from 'src/components/panelLoading/PanelLoading';
 
 const columns = [
   { label: 'Domain', width: '30%', sortKey: 'domain' },
@@ -25,12 +25,15 @@ export class SendingDomainsTab extends Component {
         <Panel.Section>
           <p>Sending Domains assigned to this subaccount.</p>
         </Panel.Section>
-        <TableCollection
-          columns={columns}
-          getRowData={getRowData}
-          pagination={true}
-          rows={domains}
-        />
+        {/* TODO: Box is only used here to control Hibana rendering - can just be Panel.Section when OG theme is removed */}
+        <Box as={Panel.Section}>
+          <TableCollection
+            columns={columns}
+            getRowData={getRowData}
+            pagination={true}
+            rows={domains}
+          />
+        </Box>
       </div>
     );
   }
@@ -38,13 +41,18 @@ export class SendingDomainsTab extends Component {
   renderEmpty() {
     return (
       <Panel.Section style={{ textAlign: 'center' }}>
-        <p>
-          This subaccount has no sending domains assigned to it. You can assign an existing one, or
-          create a new one.
-        </p>
-        <PageLink as={Button} plain color="orange" to="/account/sending-domains">
-          Manage Sending Domains
-        </PageLink>
+        <Stack>
+          <p>
+            This subaccount has no sending domains assigned to it. You can assign an existing one,
+            or create a new one.
+          </p>
+
+          <div>
+            <PageLink as={Button} plain color="orange" to="/account/sending-domains">
+              Manage Sending Domains
+            </PageLink>
+          </div>
+        </Stack>
       </Panel.Section>
     );
   }
@@ -53,12 +61,12 @@ export class SendingDomainsTab extends Component {
     const { loading } = this.props;
 
     if (loading) {
-      return <PanelLoading />;
+      return <Loading minHeight="300px" />;
     }
 
     const showEmpty = this.props.domains.length === 0;
 
-    return <Panel>{showEmpty ? this.renderEmpty() : this.renderCollection()}</Panel>;
+    return <>{showEmpty ? this.renderEmpty() : this.renderCollection()}</>;
   }
 }
 

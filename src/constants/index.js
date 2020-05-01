@@ -40,6 +40,7 @@ export const LINKS = {
   ENTERPRISE_SUPPORT: 'https://www.sparkpost.com/contact-enterprise',
   RECIP_API: 'https://developers.sparkpost.com/api/recipient-lists.html',
   AB_TESTING_API: 'https://developers.sparkpost.com/api/ab-testing.html',
+  SUBACCOUNTS: 'https://sparkpost.com/docs/user-guide/subaccounts/',
   SUBACCOUNTS_API: 'https://developers.sparkpost.com/api/subaccounts.html',
   TOU: 'https://www.sparkpost.com/policies/tou',
   DOMAIN_VERIFICATION:

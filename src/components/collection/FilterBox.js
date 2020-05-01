@@ -1,6 +1,7 @@
 import React from 'react';
-import { Box, Label, Panel, TextField, ScreenReaderOnly } from 'src/components/matchbox';
 import { Search } from '@sparkpost/matchbox-icons';
+import { tokens } from '@sparkpost/design-tokens-hibana';
+import { Box, Label, Panel, TextField, ScreenReaderOnly } from 'src/components/matchbox';
 import { getRandomExampleSearch } from './helpers/exampleSearch';
 import styles from './FilterBox.module.scss';
 import { useHibana } from 'src/context/HibanaContext';
@@ -13,8 +14,8 @@ function CollectionFilterBox(props) {
     initialValue,
     placeholder,
     wrapper,
+    maxWidth = tokens.sizing_1200,
     onChange,
-    fieldMaxWidth = '750px',
     onBlur = () => {},
   } = props;
   const placeholderText = placeholder || `Filter results e.g. ${getRandomExampleSearch(props)}`;
@@ -27,7 +28,7 @@ function CollectionFilterBox(props) {
         </Label>
       )}
 
-      <Box maxWidth={fieldMaxWidth}>
+      <Box maxWidth={maxWidth}>
         <TextField
           labelHidden
           label={isHibanaEnabled ? 'Filter By' : undefined}
@@ -43,7 +44,13 @@ function CollectionFilterBox(props) {
     </>
   );
 
-  return wrapper ? wrapper(text) : <Panel sectioned>{text}</Panel>;
+  return wrapper ? (
+    wrapper(text)
+  ) : (
+    <Panel mb="0" className={styles.Panel} sectioned>
+      {text}
+    </Panel>
+  );
 }
 
 export default CollectionFilterBox;
