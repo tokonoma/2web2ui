@@ -5,7 +5,7 @@ import { GettingStartedGuide } from './components/GettingStartedGuide';
 import VerifyEmailBanner from 'src/components/verifyEmailBanner/VerifyEmailBanner';
 import { FreePlanWarningBanner } from 'src/pages/billing/components/Banners';
 
-const DashboardPage = props => {
+export default function DashboardPage(props) {
   const {
     accountAgeInDays,
     currentUser,
@@ -84,6 +84,4 @@ const DashboardPage = props => {
       {displayGuideAndReport()}
     </Page>
   );
-};
-
-export default DashboardPage;
+}
