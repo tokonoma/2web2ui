@@ -18,7 +18,7 @@ const PromoCodeNew = ({ promoCodeObj, handlePromoCode }) => {
       return <Button onClick={clearPromoCode}>Remove</Button>;
     }
     return (
-      <Button onClick={handleClick} disabled={promoPending}>
+      <Button variant="secondary" onClick={handleClick} disabled={promoPending}>
         Apply
       </Button>
     );

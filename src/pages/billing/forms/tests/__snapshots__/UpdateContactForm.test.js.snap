@@ -10,20 +10,20 @@ exports[`Form Container: Update Contact should render 1`] = `
         countries={Array []}
         formName="updateContact"
       />
-    </Panel.Section>
-    <Panel.Section>
-      <Button
-        primary={true}
-        type="submit"
-      >
-        Update Billing Contact
-      </Button>
-      <Button
-        className="Cancel"
-        onClick={[MockFunction]}
-      >
-        Cancel
-      </Button>
+      <ButtonWrapper>
+        <Button
+          type="submit"
+          variant="primary"
+        >
+          Update Billing Contact
+        </Button>
+        <Button
+          onClick={[MockFunction]}
+          variant="secondary"
+        >
+          Cancel
+        </Button>
+      </ButtonWrapper>
     </Panel.Section>
   </Panel>
 </form>

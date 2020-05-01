@@ -6,6 +6,7 @@ exports[`promoCode should render correctly 1`] = `
     <Button
       disabled={false}
       onClick={[Function]}
+      variant="secondary"
     >
       Apply
     </Button>

@@ -19,7 +19,7 @@ const SubmitSection = ({ brightbackCondition, loading }) => {
           type={enabled ? 'button' : 'submit'}
           to={enabled ? to : null}
           disabled={loading}
-          color="orange"
+          variant="primary"
         >
           Change Plan
         </Button>

@@ -9,11 +9,17 @@
   }
 }
 
-.content.content {
+.content {
   padding: spacing(800) spacing(400);
 
   @media (min-width: media-query(md)) {
     padding: spacing(400);
+  }
+
+  .app & {
+    &.bannerOpen {
+      padding: initial;
+    }
   }
 }
 

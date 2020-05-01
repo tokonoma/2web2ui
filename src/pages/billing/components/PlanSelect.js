@@ -6,7 +6,9 @@ import PlanPrice from 'src/components/billing/PlanPrice';
 import FeatureComparisonModal from './FeatureComparisonModal';
 import cx from 'classnames';
 import _ from 'lodash';
-import styles from './PlanSelect.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
+import OGStyles from './PlanSelect.module.scss';
+import HibanaStyles from './PlanSelectHibana.module.scss';
 import { useState } from 'react';
 import PromoCodeNew from 'src/components/billing/PromoCodeNew';
 
@@ -22,6 +24,8 @@ export const useModal = () => {
 };
 
 export const SelectedPlan = ({ bundle, onChange, promoCodeObj, handlePromoCode }) => {
+  const styles = useHibanaOverride(OGStyles, HibanaStyles);
+
   const { messaging: plan, tier } = bundle;
   const { price } = plan;
 
@@ -74,6 +78,7 @@ export const SelectedPlan = ({ bundle, onChange, promoCodeObj, handlePromoCode }
 };
 
 const PlanSelectSection = ({ bundles, currentPlan, onSelect }) => {
+  const styles = useHibanaOverride(OGStyles, HibanaStyles);
   const publicBundlesByTier = useMemo(
     () =>
       _.groupBy(
@@ -109,6 +114,7 @@ const PlanSelectSection = ({ bundles, currentPlan, onSelect }) => {
                       onClick={() => onSelect(bundleCode)}
                       data-id={`select-plan-${bundleCode}`}
                       size="small"
+                      variant="secondary"
                     >
                       Select
                     </Button>

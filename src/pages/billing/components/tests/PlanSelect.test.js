@@ -1,15 +1,20 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
-import { act } from 'react-dom/test-utils';
-
+import { render } from '@testing-library/react';
+import { shallow } from 'enzyme';
+import userEvent from '@testing-library/user-event';
+import TestApp from 'src/__testHelpers__/TestApp';
+import styles from '../PlanSelect.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import PlanSelect, { SelectedPlan, useModal } from '../PlanSelect';
 
-describe('Plan Select:', () => {
+jest.mock('src/hooks/useHibanaOverride');
+useHibanaOverride.mockReturnValue(styles);
 
+describe('Plan Select:', () => {
   const defaultProps = {
     onSelect: jest.fn(),
     currentPlan: {
-      code: '2'
+      code: '2',
     },
     bundles: [
       {
@@ -22,8 +27,8 @@ describe('Plan Select:', () => {
           name: 'Two',
           overage: 0.2,
           volume: 2,
-          isFree: true
-        }
+          isFree: true,
+        },
       },
       {
         bundle: '3',
@@ -33,8 +38,8 @@ describe('Plan Select:', () => {
           price: 300,
           name: 'Three',
           overage: 0.3,
-          volume: 3
-        }
+          volume: 3,
+        },
       },
       {
         bundle: '4',
@@ -45,22 +50,17 @@ describe('Plan Select:', () => {
           price: 400,
           name: 'Four',
           overage: 0.4,
-          volume: 4
-        }
-      }
-    ]
+          volume: 4,
+        },
+      },
+    ],
   };
 
-  const subject = (props) => shallow(
-    <PlanSelect
-      {...defaultProps}
-      {...props}
-    />);
+  const subject = props => shallow(<PlanSelect {...defaultProps} {...props} />);
 
   it('should render correctly', () => {
     expect(subject()).toMatchSnapshot();
   });
-
 });
 
 describe('Selected Plan:', () => {
@@ -75,62 +75,56 @@ describe('Selected Plan:', () => {
         name: 'Two',
         overage: 0.2,
         volume: 2,
-        isFree: true
-      }
+        isFree: true,
+      },
     },
     promoCodeObj: {
       selectedPromo: {},
       promoPending: false,
-      promoError: false
+      promoError: false,
     },
     handlePromoCode: {
       applyPromoCode: jest.fn(),
-      clearPromoCode: jest.fn()
-    }
+      clearPromoCode: jest.fn(),
+    },
   };
 
-  const subject = (props) => shallow(
-    <SelectedPlan
-      {...defaultProps}
-      {...props}
-    />
-  );
-
-  it('should render plan price with the plan', () => {
-    expect(subject()).toMatchSnapshot();
-  });
+  const subject = props =>
+    render(
+      <TestApp>
+        <SelectedPlan {...defaultProps} {...props} />
+      </TestApp>,
+    );
 
   it('should render promo code if price is not 0', () => {
-    const wrapper = subject({
+    const { queryByText } = subject({
       bundle: {
         ...defaultProps.bundle,
         messaging: {
           ...defaultProps.bundle.messaging,
-          price: 3
-        }
-      }
+          price: 3,
+        },
+      },
     });
-    expect(wrapper.find('PromoCodeNew')).toExist();
+    expect(queryByText('Promo Code')).toBeInTheDocument();
   });
 });
 
 describe('useModal:', () => {
-  const TestModal = (props) => {
+  const TestModal = props => {
     const { isShowing, toggle } = useModal(props.isShowing);
     return (
-      <div open={isShowing} onClick={toggle} />
+      <div open={isShowing} onClick={toggle}>
+        Test
+      </div>
     );
   };
-  const subject = (isShowing) => mount(
-    <TestModal isShowing={isShowing}/>
-  );
+  const subject = isShowing => render(<TestModal isShowing={isShowing} />);
 
   it('toggles open when clicked', () => {
-    const wrapper = subject(false);
-    act(() => {
-      wrapper.children().props().onClick();
-    });
-    wrapper.update();
-    expect(wrapper.children().props().open).toBe(true);
+    const { queryByText } = subject(false);
+    expect(queryByText('Test')).not.toHaveAttribute('open');
+    userEvent.click(queryByText('Test'));
+    expect(queryByText('Test')).toHaveAttribute('open');
   });
 });

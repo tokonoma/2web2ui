@@ -1,8 +1,8 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
 .PlanRow {
-  margin: .5rem 1rem;
-  padding: .5rem 0;
+  margin: 0.5rem 1rem;
+  padding: 0.5rem 0;
   display: flex;
 
   :first-child {
@@ -10,7 +10,7 @@
   }
 }
 
-.tierPlans{
+.tierPlans {
   & > *:not(:last-child) {
     border-bottom: 1px solid color(gray, 8);
   }
@@ -34,4 +34,3 @@
   position: absolute;
   transform: translate(-20px, 2px);
 }
-
