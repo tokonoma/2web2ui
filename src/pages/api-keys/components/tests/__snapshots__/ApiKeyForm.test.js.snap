@@ -67,15 +67,19 @@ exports[`renders correctly - new and no subaccounts 1`] = `
           }
         }
       />
-      <Field
-        component={[Function]}
-        disabled={false}
-        helpText="Leaving the field blank will allow access by valid API keys from any IP address."
-        label="Allowed IPs"
-        name="validIps"
-        placeholder="10.20.30.40, 10.20.30.0/24"
-        validate={[Function]}
-      />
+      <Box
+        maxWidth="1200"
+      >
+        <Field
+          component={[Function]}
+          disabled={false}
+          helpText="Leaving the field blank will allow access by valid API keys from any IP address."
+          label="Allowed IPs"
+          name="validIps"
+          placeholder="10.20.30.40, 10.20.30.0/24"
+          validate={[Function]}
+        />
+      </Box>
     </Stack>
   </Panel.Section>
   <Panel.Section>
@@ -156,15 +160,19 @@ exports[`renders correctly - readonly mode 1`] = `
           }
         }
       />
-      <Field
-        component={[Function]}
-        disabled={true}
-        helpText=""
-        label="Allowed IPs"
-        name="validIps"
-        placeholder=""
-        validate={[Function]}
-      />
+      <Box
+        maxWidth="1200"
+      >
+        <Field
+          component={[Function]}
+          disabled={true}
+          helpText=""
+          label="Allowed IPs"
+          name="validIps"
+          placeholder=""
+          validate={[Function]}
+        />
+      </Box>
     </Stack>
   </Panel.Section>
 </form>
@@ -231,15 +239,19 @@ exports[`renders correctly - update and subaccounts 1`] = `
           }
         }
       />
-      <Field
-        component={[Function]}
-        disabled={false}
-        helpText="Leaving the field blank will allow access by valid API keys from any IP address."
-        label="Allowed IPs"
-        name="validIps"
-        placeholder="10.20.30.40, 10.20.30.0/24"
-        validate={[Function]}
-      />
+      <Box
+        maxWidth="1200"
+      >
+        <Field
+          component={[Function]}
+          disabled={false}
+          helpText="Leaving the field blank will allow access by valid API keys from any IP address."
+          label="Allowed IPs"
+          name="validIps"
+          placeholder="10.20.30.40, 10.20.30.0/24"
+          validate={[Function]}
+        />
+      </Box>
     </Stack>
   </Panel.Section>
   <Panel.Section>
@@ -320,15 +332,19 @@ exports[`submits correctly 1`] = `
           }
         }
       />
-      <Field
-        component={[Function]}
-        disabled={false}
-        helpText="Leaving the field blank will allow access by valid API keys from any IP address."
-        label="Allowed IPs"
-        name="validIps"
-        placeholder="10.20.30.40, 10.20.30.0/24"
-        validate={[Function]}
-      />
+      <Box
+        maxWidth="1200"
+      >
+        <Field
+          component={[Function]}
+          disabled={false}
+          helpText="Leaving the field blank will allow access by valid API keys from any IP address."
+          label="Allowed IPs"
+          name="validIps"
+          placeholder="10.20.30.40, 10.20.30.0/24"
+          validate={[Function]}
+        />
+      </Box>
     </Stack>
   </Panel.Section>
   <Panel.Section>

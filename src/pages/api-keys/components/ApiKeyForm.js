@@ -102,19 +102,21 @@ export class ApiKeyForm extends Component {
               show={showGrants}
               disabled={isReadOnly}
             />
-            <Field
-              name="validIps"
-              component={TextFieldWrapper}
-              label="Allowed IPs"
-              helpText={
-                isReadOnly
-                  ? ''
-                  : 'Leaving the field blank will allow access by valid API keys from any IP address.'
-              }
-              placeholder={isReadOnly ? '' : '10.20.30.40, 10.20.30.0/24'}
-              validate={validIpList}
-              disabled={isReadOnly}
-            />
+            <Box maxWidth="1200">
+              <Field
+                name="validIps"
+                component={TextFieldWrapper}
+                label="Allowed IPs"
+                helpText={
+                  isReadOnly
+                    ? ''
+                    : 'Leaving the field blank will allow access by valid API keys from any IP address.'
+                }
+                placeholder={isReadOnly ? '' : '10.20.30.40, 10.20.30.0/24'}
+                validate={validIpList}
+                disabled={isReadOnly}
+              />
+            </Box>
           </Stack>
         </Panel.Section>
         {!isReadOnly && (
