@@ -18,49 +18,52 @@ exports[`AddIps renders correctly when user reaches max ip limit 1`] = `
     title="Add Dedicated IPs"
   >
     <Panel.Section>
-      <p>
-        Dedicated IPs give you better control over your sending reputation. 
-      </p>
-      <Field
-        autoFocus={true}
-        component={[Function]}
-        disabled={true}
-        errorInLabel={true}
-        helpText={
-          <span>
-            You cannot currently add any more IPs
-          </span>
-        }
-        label="Quantity"
-        max={0}
-        min="1"
-        name="quantity"
-        required={true}
-        type="number"
-        validate={
-          Array [
-            [Function],
-            [Function],
-            [Function],
-            [Function],
-          ]
-        }
-      />
-      <Connect(IpPoolSelect)
-        disabled={true}
-        formName="add-sending-ips"
-      />
+      <Stack>
+        <p>
+          Dedicated IPs give you better control over your sending reputation. 
+        </p>
+        <Field
+          autoFocus={true}
+          component={[Function]}
+          disabled={true}
+          errorInLabel={true}
+          helpText={
+            <span>
+              You cannot currently add any more IPs
+            </span>
+          }
+          label="Quantity"
+          max={0}
+          min="1"
+          name="quantity"
+          required={true}
+          type="number"
+          validate={
+            Array [
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+            ]
+          }
+        />
+        <Connect(IpPoolSelect)
+          disabled={true}
+          formName="add-sending-ips"
+        />
+      </Stack>
     </Panel.Section>
     <Panel.Section>
       <Button
         disabled={true}
-        primary={true}
         type="submit"
+        variant="primary"
       >
         Add Dedicated IPs
       </Button>
       <Button
         className="Cancel"
+        variant="secondary"
       >
         Cancel
       </Button>
@@ -87,57 +90,60 @@ exports[`AddIps renders correctly with default props 1`] = `
     title="Add Dedicated IPs"
   >
     <Panel.Section>
-      <p>
-        Dedicated IPs give you better control over your sending reputation. 
-      </p>
-      <Field
-        autoFocus={true}
-        component={[Function]}
-        disabled={false}
-        errorInLabel={true}
-        helpText={
-          <span>
-            You can add up to 
-            4
-             total dedicated IPs to your plan for
-             
-            <DedicatedIpCost
-              plan={Object {}}
-              quantity="1"
-            />
-             each.
-          </span>
-        }
-        label="Quantity"
-        max={4}
-        min="1"
-        name="quantity"
-        required={true}
-        type="number"
-        validate={
-          Array [
-            [Function],
-            [Function],
-            [Function],
-            [Function],
-          ]
-        }
-      />
-      <Connect(IpPoolSelect)
-        disabled={false}
-        formName="add-sending-ips"
-      />
+      <Stack>
+        <p>
+          Dedicated IPs give you better control over your sending reputation. 
+        </p>
+        <Field
+          autoFocus={true}
+          component={[Function]}
+          disabled={false}
+          errorInLabel={true}
+          helpText={
+            <span>
+              You can add up to 
+              4
+               total dedicated IPs to your plan for
+               
+              <DedicatedIpCost
+                plan={Object {}}
+                quantity="1"
+              />
+               each.
+            </span>
+          }
+          label="Quantity"
+          max={4}
+          min="1"
+          name="quantity"
+          required={true}
+          type="number"
+          validate={
+            Array [
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+            ]
+          }
+        />
+        <Connect(IpPoolSelect)
+          disabled={false}
+          formName="add-sending-ips"
+        />
+      </Stack>
     </Panel.Section>
     <Panel.Section>
       <Button
         disabled={false}
-        primary={true}
         type="submit"
+        variant="primary"
       >
         Add Dedicated IPs
       </Button>
       <Button
         className="Cancel"
+        variant="secondary"
       >
         Cancel
       </Button>
@@ -164,66 +170,69 @@ exports[`AddIps renders free ip elements when included in plan 1`] = `
     title="Add Dedicated IPs"
   >
     <Panel.Section>
-      <p>
-        Dedicated IPs give you better control over your sending reputation. 
-        <span>
-          <strong>
-            Your plan includes one free dedicated IP address. 
-          </strong>
-        </span>
-      </p>
-      <Field
-        autoFocus={true}
-        component={[Function]}
-        disabled={false}
-        errorInLabel={true}
-        helpText={
+      <Stack>
+        <p>
+          Dedicated IPs give you better control over your sending reputation. 
           <span>
-            You can add up to 
-            4
-             total dedicated IPs to your plan for
-             
-            <DedicatedIpCost
-              plan={
-                Object {
-                  "includesIp": true,
-                }
-              }
-              quantity="1"
-            />
-             each.
+            <strong>
+              Your plan includes one free dedicated IP address. 
+            </strong>
           </span>
-        }
-        label="Quantity"
-        max={4}
-        min="1"
-        name="quantity"
-        required={true}
-        type="number"
-        validate={
-          Array [
-            [Function],
-            [Function],
-            [Function],
-            [Function],
-          ]
-        }
-      />
-      <Connect(IpPoolSelect)
-        disabled={false}
-        formName="add-sending-ips"
-      />
+        </p>
+        <Field
+          autoFocus={true}
+          component={[Function]}
+          disabled={false}
+          errorInLabel={true}
+          helpText={
+            <span>
+              You can add up to 
+              4
+               total dedicated IPs to your plan for
+               
+              <DedicatedIpCost
+                plan={
+                  Object {
+                    "includesIp": true,
+                  }
+                }
+                quantity="1"
+              />
+               each.
+            </span>
+          }
+          label="Quantity"
+          max={4}
+          min="1"
+          name="quantity"
+          required={true}
+          type="number"
+          validate={
+            Array [
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+            ]
+          }
+        />
+        <Connect(IpPoolSelect)
+          disabled={false}
+          formName="add-sending-ips"
+        />
+      </Stack>
     </Panel.Section>
     <Panel.Section>
       <Button
         disabled={false}
-        primary={true}
         type="submit"
+        variant="primary"
       >
         Add Dedicated IPs
       </Button>
       <Button
         className="Cancel"
+        variant="secondary"
       >
         Cancel
       </Button>

@@ -4,11 +4,9 @@ exports[`Billing Banners:  Enterprise banner renders 1`] = `
 <Banner
   action={
     Object {
-      "color": "gray",
       "content": "Contact Us",
       "external": true,
       "onClick": [Function],
-      "outlineBorder": true,
       "to": "https://www.sparkpost.com/contact-enterprise",
     }
   }
@@ -128,11 +126,9 @@ exports[`Billing Banners:  Premium banner renders 1`] = `
 <Banner
   action={
     Object {
-      "color": "gray",
       "content": "Contact Us",
       "external": true,
       "onClick": [Function],
-      "outlineBorder": true,
       "to": "https://www.sparkpost.com/contact-premium",
     }
   }

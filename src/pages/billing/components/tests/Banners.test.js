@@ -8,7 +8,9 @@ import {
 import * as conversions from 'src/helpers/conversionTracking';
 import * as constants from 'src/constants';
 import { shallow } from 'enzyme';
-
+import { useHibana } from 'src/context/HibanaContext';
+jest.mock('src/context/HibanaContext');
+useHibana.mockImplementation(() => [{ isHibanaEnabled: false }]);
 jest.mock('src/helpers/conversionTracking');
 
 describe('Billing Banners: ', () => {

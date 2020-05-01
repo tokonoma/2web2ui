@@ -9,7 +9,7 @@ import * as conversions from 'src/helpers/conversionTracking';
 import { Abbreviation } from 'src/components';
 import { ANALYTICS_PREMIUM_SUPPORT, ANALYTICS_ENTERPRISE_SUPPORT } from 'src/constants';
 import _ from 'lodash';
-
+import { useHibana } from 'src/context/HibanaContext';
 const dateFormat = date => format(date, 'MMM DD, YYYY');
 
 /**
@@ -52,64 +52,73 @@ export const PendingPlanBanner = ({ account, subscription }) => {
   );
 };
 
-export const PremiumBanner = () => (
-  <Banner
-    title="Premium Addon Plan"
-    action={{
-      content: 'Contact Us',
-      to: LINKS.PREMIUM_SUPPORT,
-      external: true,
-      onClick: () => conversions.trackAddonRequest(ANALYTICS_PREMIUM_SUPPORT),
-      color: 'gray',
-      outlineBorder: true,
-    }}
-    my="300"
-  >
-    <p>
-      Full-service account advocacy with a dedicated Customer Success Manager. Including proactive
-      reporting, planning, and reviews.
-    </p>
-    <ul>
-      <li>Includes all standard SparkPost features</li>
-      <li>Dedicated Customer Success Manager</li>
-      <li>
-        Global <Abbreviation title="Internet Service Provider">ISP</Abbreviation> support and
-        mediation
-      </li>
-      <li>Deliverability data analysis and guidance with powerful integrated tools</li>
-    </ul>
-  </Banner>
-);
+export const PremiumBanner = () => {
+  const [state] = useHibana();
+  const { isHibanaEnabled } = state;
+  const buttonStyle = isHibanaEnabled ? { color: 'gray', outlineBorder: true } : {};
+
+  return (
+    <Banner
+      title="Premium Addon Plan"
+      action={{
+        content: 'Contact Us',
+        to: LINKS.PREMIUM_SUPPORT,
+        external: true,
+        onClick: () => conversions.trackAddonRequest(ANALYTICS_PREMIUM_SUPPORT),
+        ...buttonStyle,
+      }}
+      my="300"
+    >
+      <p>
+        Full-service account advocacy with a dedicated Customer Success Manager. Including proactive
+        reporting, planning, and reviews.
+      </p>
+      <ul>
+        <li>Includes all standard SparkPost features</li>
+        <li>Dedicated Customer Success Manager</li>
+        <li>
+          Global <Abbreviation title="Internet Service Provider">ISP</Abbreviation> support and
+          mediation
+        </li>
+        <li>Deliverability data analysis and guidance with powerful integrated tools</li>
+      </ul>
+    </Banner>
+  );
+};
 
 /**
  * Enterprise CTA
  */
-export const EnterpriseBanner = () => (
-  <Banner
-    title="Enterprise"
-    action={{
-      content: 'Contact Us',
-      to: LINKS.ENTERPRISE_SUPPORT,
-      external: true,
-      color: 'gray',
-      outlineBorder: true,
-      onClick: () => conversions.trackAddonRequest(ANALYTICS_ENTERPRISE_SUPPORT),
-    }}
-    my="300"
-  >
-    <p>
-      Enterprise-grade financial guarantees with 99.9% uptime{' '}
-      <Abbreviation title="Service Level Agreement">SLA</Abbreviation> and guaranteed burst rates,
-      and a dedicated Technical Account Manager.
-    </p>
-    <ul>
-      <li>Includes all standard SparkPost and Premium features</li>
-      <li>Comprehensive uptime SLAs with service credits</li>
-      <li>The industry's only burst-rate guarantee</li>
-      <li>Support of iOS Universal Links and Android App Links</li>
-    </ul>
-  </Banner>
-);
+export const EnterpriseBanner = () => {
+  const [state] = useHibana();
+  const { isHibanaEnabled } = state;
+  const buttonStyle = isHibanaEnabled ? { color: 'gray', outlineBorder: true } : {};
+  return (
+    <Banner
+      title="Enterprise"
+      action={{
+        content: 'Contact Us',
+        to: LINKS.ENTERPRISE_SUPPORT,
+        external: true,
+        onClick: () => conversions.trackAddonRequest(ANALYTICS_ENTERPRISE_SUPPORT),
+        ...buttonStyle,
+      }}
+      my="300"
+    >
+      <p>
+        Enterprise-grade financial guarantees with 99.9% uptime{' '}
+        <Abbreviation title="Service Level Agreement">SLA</Abbreviation> and guaranteed burst rates,
+        and a dedicated Technical Account Manager.
+      </p>
+      <ul>
+        <li>Includes all standard SparkPost and Premium features</li>
+        <li>Comprehensive uptime SLAs with service credits</li>
+        <li>The industry's only burst-rate guarantee</li>
+        <li>Support of iOS Universal Links and Android App Links</li>
+      </ul>
+    </Banner>
+  );
+};
 
 export const FreePlanWarningBanner = ({
   account = {},
