@@ -1,243 +1,168 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Plan Select: should render correctly 1`] = `
-<div>
-  <div
-    class="Jl_Jn"
+<Panel
+  actions={
+    Array [
+      Object {
+        "color": "orange",
+        "content": <span>
+          Compare Features 
+          <ViewModule />
+        </span>,
+        "onClick": [Function],
+      },
+    ]
+  }
+  title="Select a Plan"
+>
+  <ComparisonModal
+    handleClose={[Function]}
+    open={false}
+  />
+  <Panel.Section
+    key="tier_section_test"
   >
     <div
-      class="Jl_CE"
+      className="tierLabel"
     >
-      <div
-        class="Jl_J9"
-      >
-        Select a Plan
-      </div>
-      <div
-        class="Jl_j"
-      >
-        <div
-          class="AB_AG"
-        >
-          <button
-            class="AB_AE AB_AM AB_AI AB_Aa"
-            type="button"
-          >
-            <span>
-              Compare Features 
-              <svg
-                aria-hidden="true"
-                fill="currentColor"
-                height="18"
-                preserveAspectRatio="xMidYMid meet"
-                style="vertical-align: middle;"
-                viewBox="0 0 24 24"
-                width="18"
-              >
-                <g>
-                  <path
-                    d="M4 11h5V5H4v6zm0 7h5v-6H4v6zm6 0h5v-6h-5v6zm6 0h5v-6h-5v6zm-6-7h5V5h-5v6zm6-6v6h5V5h-5z"
-                  />
-                </g>
-              </svg>
-            </span>
-          </button>
-        </div>
-      </div>
+      Test Account
     </div>
     <div
-      class="Jl_J7"
+      className="tierPlans"
     >
       <div
-        class="Jl_KB"
+        className="PlanRow SelectedPlan"
+        key="plan_row_2"
       >
-        <div
-          class="tierLabel"
-        >
-          Test Account
+        <div>
+          <Check
+            className="CheckIcon"
+          />
+          <PlanPrice
+            plan={
+              Object {
+                "code": "2",
+                "includesIp": false,
+                "isFree": true,
+                "name": "Two",
+                "overage": 0.2,
+                "price": 0,
+                "volume": 2,
+              }
+            }
+            showCsm={true}
+            showIp={true}
+            showOverage={true}
+          />
         </div>
-        <div
-          class="tierPlans"
-        >
-          <div
-            class="PlanRow SelectedPlan"
+        <div>
+          <Button
+            className="selectButton"
+            data-id="select-plan-2"
+            disabled={true}
+            onClick={[Function]}
+            size="small"
+            variant="dull"
           >
-            <div>
-              <svg
-                aria-hidden="true"
-                class="CheckIcon"
-                fill="currentColor"
-                height="18"
-                preserveAspectRatio="xMidYMid meet"
-                style="vertical-align: middle;"
-                viewBox="0 0 24 24"
-                width="18"
-              >
-                <g>
-                  <path
-                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
-                  />
-                </g>
-              </svg>
-              <span
-                class="notranslate"
-              >
-                <span
-                  class="MainLabel"
-                >
-                  <strong>
-                    2
-                  </strong>
-                  <span>
-                     emails/month 
-                  </span>
-                  <span>
-                     FREE 
-                  </span>
-                </span>
-                <span
-                  class="SupportLabel"
-                >
-                  Full-featured developer account
-                </span>
-              </span>
-            </div>
-            <div>
-              <button
-                class="AB_AE AB_AK AB_Aa selectButton"
-                data-id="select-plan-2"
-                disabled=""
-                type="button"
-                variant="dull"
-              >
-                Select
-              </button>
-            </div>
-          </div>
+            Select
+          </Button>
         </div>
       </div>
+    </div>
+  </Panel.Section>
+  <Panel.Section
+    key="tier_section_starter"
+  >
+    <div
+      className="tierLabel"
+    >
+      Starter
     </div>
     <div
-      class="Jl_J7"
+      className="tierPlans"
     >
       <div
-        class="Jl_KB"
+        className="PlanRow"
+        key="plan_row_3"
       >
-        <div
-          class="tierLabel"
-        >
-          Starter
+        <div>
+          <PlanPrice
+            plan={
+              Object {
+                "code": "3",
+                "name": "Three",
+                "overage": 0.3,
+                "price": 300,
+                "volume": 3,
+              }
+            }
+            showCsm={true}
+            showIp={true}
+            showOverage={true}
+          />
         </div>
-        <div
-          class="tierPlans"
-        >
-          <div
-            class="PlanRow"
+        <div>
+          <Button
+            className="selectButton"
+            data-id="select-plan-3"
+            disabled={false}
+            onClick={[Function]}
+            size="small"
+            variant="dull"
           >
-            <div>
-              <span
-                class="notranslate"
-              >
-                <span
-                  class="MainLabel"
-                >
-                  <strong>
-                    3
-                  </strong>
-                  <span>
-                     emails/month 
-                  </span>
-                  <span>
-                     at 
-                    <strong>
-                      $300
-                    </strong>
-                    /
-                    mo
-                  </span>
-                </span>
-                <span
-                  class="SupportLabel"
-                >
-                  $0.30/ thousand extra emails. 
-                </span>
-              </span>
-            </div>
-            <div>
-              <button
-                class="AB_AE AB_Aa selectButton"
-                data-id="select-plan-3"
-                type="button"
-                variant="dull"
-              >
-                Select
-              </button>
-            </div>
-          </div>
+            Select
+          </Button>
         </div>
       </div>
+    </div>
+  </Panel.Section>
+  <Panel.Section
+    key="tier_section_premier"
+  >
+    <div
+      className="tierLabel"
+    >
+      Premier
     </div>
     <div
-      class="Jl_J7"
+      className="tierPlans"
     >
       <div
-        class="Jl_KB"
+        className="PlanRow"
+        key="plan_row_4"
       >
-        <div
-          class="tierLabel"
-        >
-          Premier
+        <div>
+          <PlanPrice
+            plan={
+              Object {
+                "code": "4",
+                "includesIp": true,
+                "name": "Four",
+                "overage": 0.4,
+                "price": 400,
+                "volume": 4,
+              }
+            }
+            showCsm={true}
+            showIp={true}
+            showOverage={true}
+          />
         </div>
-        <div
-          class="tierPlans"
-        >
-          <div
-            class="PlanRow"
+        <div>
+          <Button
+            className="selectButton"
+            data-id="select-plan-4"
+            disabled={false}
+            onClick={[Function]}
+            size="small"
+            variant="dull"
           >
-            <div>
-              <span
-                class="notranslate"
-              >
-                <span
-                  class="MainLabel"
-                >
-                  <strong>
-                    4
-                  </strong>
-                  <span>
-                     emails/month 
-                  </span>
-                  <span>
-                     at 
-                    <strong>
-                      $400
-                    </strong>
-                    /
-                    mo
-                  </span>
-                </span>
-                <span
-                  class="SupportLabel"
-                >
-                  $0.40/ thousand extra emails. 
-                  First dedicated IP address is free
-                </span>
-              </span>
-            </div>
-            <div>
-              <button
-                class="AB_AE AB_Aa selectButton"
-                data-id="select-plan-4"
-                type="button"
-                variant="dull"
-              >
-                Select
-              </button>
-            </div>
-          </div>
+            Select
+          </Button>
         </div>
       </div>
     </div>
-  </div>
-</div>
+  </Panel.Section>
+</Panel>
 `;

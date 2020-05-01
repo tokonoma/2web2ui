@@ -23,7 +23,7 @@ export const useModal = () => {
   };
 };
 
-export const SelectedPlan = ({ bundle, onChange, promoCodeObj, handlePromoCode }) => {
+export function SelectedPlan({ bundle, onChange, promoCodeObj, handlePromoCode }) {
   const styles = useHibanaOverride(OGStyles, HibanaStyles);
 
   const { messaging: plan, tier } = bundle;
@@ -75,9 +75,9 @@ export const SelectedPlan = ({ bundle, onChange, promoCodeObj, handlePromoCode }
       )}
     </Panel>
   );
-};
+}
 
-const PlanSelectSection = ({ bundles, currentPlan, onSelect }) => {
+export default function PlanSelectSection({ bundles, currentPlan, onSelect }) {
   const styles = useHibanaOverride(OGStyles, HibanaStyles);
   const publicBundlesByTier = useMemo(
     () =>
@@ -146,5 +146,4 @@ const PlanSelectSection = ({ bundles, currentPlan, onSelect }) => {
       {planList}
     </Panel>
   );
-};
-export default PlanSelectSection;
+}

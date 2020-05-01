@@ -58,8 +58,7 @@ describe('Plan Select:', () => {
   const subject = props => shallow(<PlanSelect {...defaultProps} {...props} />);
 
   it('should render correctly', () => {
-    const { container } = subject();
-    expect(container).toMatchSnapshot();
+    expect(subject()).toMatchSnapshot();
   });
 });
 
