@@ -27,11 +27,9 @@ export class UIOptionsPanel extends Component {
       <Panel title="Account Options">
         <Panel.Section>
           {uiOptions.map(({ label, description, value, key }) => (
-            <Grid>
+            <Grid key={`ui-option-${key}`}>
               <Grid.Column xs={12} md={11}>
-                <LabelledValue label={label} key={`ui-option-${key}`}>
-                  {description}
-                </LabelledValue>
+                <LabelledValue label={label}>{description}</LabelledValue>
               </Grid.Column>
               <Grid.Column xs={12} md={1} style={{ textAlign: 'right' }}>
                 <Toggle
