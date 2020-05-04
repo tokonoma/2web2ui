@@ -1,0 +1,13 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.Icon {
+  fill: color(blue, 700);
+}
+
+.AlertNameLink {
+  font-weight: font-weight(semibold);
+}
+
+.FilterBox {
+  padding: spacing(400);
+}

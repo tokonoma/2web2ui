@@ -6,7 +6,7 @@ import { getFormSpec } from '../../helpers/alertForm';
 import { LINKS, MAILBOX_PROVIDERS } from 'src/constants';
 import { ComboBoxTypeaheadWrapper } from 'src/components';
 import { ExternalLink } from 'src/components/links';
-import { Grid } from 'src/components/matchbox';
+import { Box, Grid, Stack } from 'src/components/matchbox';
 import { getIpPools } from 'src/selectors/ipPools';
 import { selectVerifiedDomains } from 'src/selectors/sendingDomains';
 import { FORM_NAME } from '../../constants/formConstants';
@@ -14,7 +14,6 @@ import { listBlacklists, listMonitors } from 'src/actions/blacklist';
 import { listPools } from 'src/actions/ipPools';
 import { list as listSendingDomains } from 'src/actions/sendingDomains';
 import { list as listSendingIps } from 'src/actions/sendingIps';
-import styles from '../AlertForm.module.scss';
 
 const mbItemToString = item => MAILBOX_PROVIDERS[item] || '';
 
@@ -106,6 +105,7 @@ export class FilterFields extends Component {
 
     const renderSingleFilter = () => (
       <Grid>
+        <Box marginTop="400" />
         <Grid.Column sm={12} md={3} lg={3}>
           <Field
             name="single_filter.filter_type"
@@ -117,15 +117,14 @@ export class FilterFields extends Component {
           />
         </Grid.Column>
         <Grid.Column sm={12} md={9} lg={9}>
-          <div className={styles.SingleFilter}>
-            <Field
-              name="single_filter.filter_values"
-              component={ComboBoxTypeaheadWrapper}
-              results={filterTypeaheadResults[single_filter.filter_type] || []}
-              key={single_filter.filter_type}
-              {...extraProps[single_filter.filter_type]}
-            />
-          </div>
+          <Field
+            name="single_filter.filter_values"
+            component={ComboBoxTypeaheadWrapper}
+            results={filterTypeaheadResults[single_filter.filter_type] || []}
+            key={single_filter.filter_type}
+            {...extraProps[single_filter.filter_type]}
+            label="&nbsp;"
+          />
         </Grid.Column>
       </Grid>
     );
@@ -141,8 +140,8 @@ export class FilterFields extends Component {
       return !emptyIP;
     };
 
-    const renderMultiFilters = () =>
-      formSpec.filterOptions
+    const renderMultiFilters = () => {
+      const multiFilters = formSpec.filterOptions
         .filter(option => shouldRenderFilter(option))
         .map(({ label, value }) => (
           <Field
@@ -154,12 +153,14 @@ export class FilterFields extends Component {
             {...extraProps[value]}
           />
         ));
+      return <Stack space="500">{multiFilters}</Stack>;
+    };
 
     return (
-      <>
+      <Box marginBottom="400">
         {formSpec.filterType === 'single' && renderSingleFilter()}
         {formSpec.filterType === 'multi' && renderMultiFilters()}
-      </>
+      </Box>
     );
   }
 }

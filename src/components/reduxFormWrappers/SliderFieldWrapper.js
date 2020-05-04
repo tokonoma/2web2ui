@@ -102,7 +102,7 @@ export function HibanaSliderFieldWrapper({
   });
   return (
     <Box flexDirection="column">
-      <Box as="label" htmlFor={`${id}Slider`}>
+      <Box as="label" htmlFor={`${id}`}>
         {label}
       </Box>
       <Box display="flex" mb="400">
@@ -120,7 +120,7 @@ export function HibanaSliderFieldWrapper({
             value={value}
           />
         </Box>
-        <Box flexBasis="25%">
+        <Box flexBasis="25%" maxWidth="200px">
           <TextField
             id={id}
             {...input}

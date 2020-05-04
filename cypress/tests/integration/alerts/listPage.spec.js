@@ -276,6 +276,10 @@ describe('The alerts list page', () => {
       });
 
       cy.withinModal(() => cy.findByText('Delete').click());
+      //Needed to fix visibility issue with Hibana Cypress test
+      cy.withinModal(() => {
+        cy.findByText('Cancel').click();
+      });
 
       cy.findByText('Something went wrong.').should('be.visible');
       cy.findByText('View Details').click();

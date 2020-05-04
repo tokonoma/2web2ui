@@ -1,0 +1,31 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.Title {
+  top: spacing(200);
+}
+
+.ValueLabel {
+  display: inline;
+  font-weight: font-weight(normal);
+  font-size: font-size(300);
+}
+
+.Tags,
+.FirstTag,
+.TagsWithIcon {
+  margin: 0 spacing(100) spacing(300);
+}
+
+.Icon {
+  margin: 0 spacing(200) spacing(100);
+}
+
+.TagsWithIcon {
+  .Icon {
+    height: spacing(400);
+    width: spacing(400);
+  }
+  .TagText {
+    margin: 0 0 0 spacing(100);
+  }
+}

@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { DetailsPage } from '../DetailsPage';
+import { DetailsPageComponent as DetailsPage } from '../DetailsPage';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -21,6 +21,7 @@ describe('Page: Alert Details', () => {
     id: 'alert-id',
     deletePending: false,
     history: { push: jest.fn() },
+    isHibanaEnabled: false,
   };
 
   let wrapper;

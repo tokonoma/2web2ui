@@ -26,18 +26,7 @@ exports[`TestCollection Component should render 1`] = `
   }
   defaultSortColumn="last_triggered_timestamp"
   defaultSortDirection="desc"
-  filterBox={
-    Object {
-      "exampleModifiers": Array [
-        "name",
-      ],
-      "itemToStringKeys": Array [
-        "name",
-      ],
-      "show": true,
-      "wrapper": [Function],
-    }
-  }
+  filterBox={Object {}}
   getRowData={[Function]}
   pagination={true}
   rows={
@@ -101,6 +90,7 @@ Array [
     content="Delete"
     dark={true}
     horizontalOffset="-8px"
+    id="delete-alert-id-1"
     width="auto"
   >
     <Button
@@ -141,6 +131,7 @@ Array [
     content="Delete"
     dark={true}
     horizontalOffset="-8px"
+    id="delete-alert-id-2"
     width="auto"
   >
     <Button
@@ -181,6 +172,7 @@ Array [
     content="Delete"
     dark={true}
     horizontalOffset="-8px"
+    id="delete-alert-id-3"
     width="auto"
   >
     <Button
