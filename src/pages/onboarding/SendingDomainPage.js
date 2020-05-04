@@ -2,16 +2,15 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field, SubmissionError } from 'redux-form';
 import { create as createDomain } from 'src/actions/sendingDomains';
-import { Button, Panel, Text, UnstyledLink } from 'src/components/matchbox';
-import { TextFieldWrapper, CenteredLogo } from 'src/components';
-import SkipLink from './components/SkipLink';
+import { ButtonWrapper, TextFieldWrapper, CenteredLogo } from 'src/components';
+import { ExternalLink, PageLink } from 'src/components/links';
+import { Button, Panel, Stack } from 'src/components/matchbox';
 import { required, domain } from 'src/helpers/validation';
 import * as analytics from 'src/helpers/analytics';
 import {
   FORMS,
   LINKS,
   ANALYTICS_ONBOARDING,
-  ANALYTICS_ONBOARDING_LEARN_MORE,
   ANALYTICS_ONBOARDING_CREATE_DOMAIN,
 } from 'src/constants';
 
@@ -38,47 +37,38 @@ export function SendingDomainPage(props) {
     }
   }, [history, submitSucceeded]);
 
-  const trackLearnMoreClick = () =>
-    analytics.trackEvent({
-      category: ANALYTICS_ONBOARDING,
-      action: ANALYTICS_ONBOARDING_LEARN_MORE,
-      data: { action: ANALYTICS_ONBOARDING_LEARN_MORE },
-    });
-
   return (
     <>
       <CenteredLogo />
-      <Panel accent title="Welcome to SparkPost!">
+      <Panel title="Welcome to SparkPost!">
         <form onSubmit={handleSubmit(handleDomainCreate)}>
           <Panel.Section>
-            <p>
-              <Text as="p" mb={300}>
-                Let's get you set up to send some email!
-              </Text>
-            </p>
-            <p>
-              <Text as="p" mb={300}>
+            <Stack>
+              <p>Let's get you set up to send some email!</p>
+              <p>
                 Which domain will you be sending from?{' '}
-                <UnstyledLink to={LINKS.ONBOARDING_SENDING} onClick={trackLearnMoreClick} external>
+                <ExternalLink to={LINKS.ONBOARDING_SENDING}>
                   Learn more about sending domains
-                </UnstyledLink>
-                .
-              </Text>
-            </p>
-            <Field
-              component={TextFieldWrapper}
-              label="Domain Name"
-              placeholder="email.example.com"
-              name="domain"
-              validate={[required, domain]}
-              disabled={submitting}
-            />
+                </ExternalLink>
+              </p>
+              <Field
+                component={TextFieldWrapper}
+                label="Domain Name"
+                name="domain"
+                validate={[required, domain]}
+                disabled={submitting}
+              />
+            </Stack>
           </Panel.Section>
           <Panel.Section>
-            <Button primary submit disabled={submitting} variant="primary">
-              {submitting ? 'Adding Domain...' : 'Add Domain'}
-            </Button>
-            <SkipLink to="/dashboard">Skip for now</SkipLink>
+            <ButtonWrapper marginTop="0">
+              <Button submit disabled={submitting} variant="primary">
+                {submitting ? 'Adding Domain...' : 'Add Domain'}
+              </Button>
+              <PageLink as={Button} to="/dashboard" variant="secondary">
+                Skip for now
+              </PageLink>
+            </ButtonWrapper>
           </Panel.Section>
         </form>
       </Panel>

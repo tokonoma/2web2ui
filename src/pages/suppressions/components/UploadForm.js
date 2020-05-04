@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { tokens } from '@sparkpost/design-tokens-hibana';
 import { Box, Button, Stack } from 'src/components/matchbox';
 import ButtonWrapper from 'src/components/buttonWrapper';
 import { showAlert } from 'src/actions/globalAlert';
@@ -53,7 +52,7 @@ export class UploadForm extends Component {
                 nonEmptyFile,
               ]}
             />
-            <Box maxWidth={tokens.sizing_1200}>
+            <Box maxWidth="1200">
               <Field
                 component={SubaccountTypeaheadWrapper}
                 disabled={submitting}

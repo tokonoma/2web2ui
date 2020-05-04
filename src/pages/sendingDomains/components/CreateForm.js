@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
-import { tokens } from '@sparkpost/design-tokens-hibana';
 import { Box, Button, Panel, Stack } from 'src/components/matchbox';
 import { ButtonWrapper, TextFieldWrapper } from 'src/components';
 import { PageLink } from 'src/components/links';
@@ -18,7 +17,7 @@ export class CreateForm extends Component {
     return (
       <form onSubmit={handleSubmit}>
         <Panel.Section>
-          <Box maxWidth={tokens.sizing_1200}>
+          <Box maxWidth="1200">
             <Stack>
               <p>
                 We recommend using a subdomain e.g. <em>mail.mydomain.com</em>. Depending on how you

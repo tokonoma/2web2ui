@@ -3,7 +3,6 @@ import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Field, reset, reduxForm } from 'redux-form';
-import { tokens } from '@sparkpost/design-tokens-hibana';
 import { Box, Button, Checkbox, Stack } from 'src/components/matchbox';
 import { TextFieldWrapper, CheckboxWrapper } from 'src/components';
 import ButtonWrapper from 'src/components/buttonWrapper';
@@ -45,7 +44,7 @@ export class AddForm extends Component {
       <Fragment>
         <form onSubmit={handleSubmit(this.onSubmit)}>
           <Stack>
-            <Box maxWidth={tokens.sizing_1200}>
+            <Box maxWidth="1200">
               <Field
                 name="recipient"
                 component={TextFieldWrapper}
@@ -54,7 +53,7 @@ export class AddForm extends Component {
                 label="Email Address"
               />
             </Box>
-            <Box maxWidth={tokens.sizing_1200}>
+            <Box maxWidth="1200">
               <Field
                 component={SubaccountTypeaheadWrapper}
                 disabled={submitting}

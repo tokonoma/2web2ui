@@ -6,6 +6,13 @@ exports[`ChoosePlan page tests should disable submit and plan picker when submit
   <Grid>
     <Grid.Column>
       <Panel>
+        <Panel.Section>
+          <Heading
+            as="h3"
+          >
+            Select A Plan
+          </Heading>
+        </Panel.Section>
         <_default
           bundles={
             Array [
@@ -53,10 +60,8 @@ exports[`ChoosePlan page tests should disable submit and plan picker when submit
         <Panel.Section>
           <Button
             disabled={true}
-            fullWidth={true}
-            primary={true}
-            size="large"
             type="submit"
+            variant="primary"
           >
             Updating Subscription...
           </Button>
@@ -73,6 +78,13 @@ exports[`ChoosePlan page tests should render correctly 1`] = `
   <Grid>
     <Grid.Column>
       <Panel>
+        <Panel.Section>
+          <Heading
+            as="h3"
+          >
+            Select A Plan
+          </Heading>
+        </Panel.Section>
         <_default
           bundles={
             Array [
@@ -120,10 +132,8 @@ exports[`ChoosePlan page tests should render correctly 1`] = `
         <Panel.Section>
           <Button
             disabled={false}
-            fullWidth={true}
-            primary={true}
-            size="large"
             type="submit"
+            variant="primary"
           >
             Get Started
           </Button>
@@ -140,6 +150,13 @@ exports[`ChoosePlan page tests should show free bullets when isFree is selected 
   <Grid>
     <Grid.Column>
       <Panel>
+        <Panel.Section>
+          <Heading
+            as="h3"
+          >
+            Select A Plan
+          </Heading>
+        </Panel.Section>
         <_default
           bundles={
             Array [
@@ -187,10 +204,8 @@ exports[`ChoosePlan page tests should show free bullets when isFree is selected 
         <Panel.Section>
           <Button
             disabled={false}
-            fullWidth={true}
-            primary={true}
-            size="large"
             type="submit"
+            variant="primary"
           >
             Get Started
           </Button>

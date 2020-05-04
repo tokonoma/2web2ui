@@ -1,0 +1,58 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+@import 'src/styles/resets';
+
+.PlanPicker {
+  border-bottom: 1px solid color(gray, 400);
+}
+
+.PlanPickerHeader {
+  padding: spacing(400) spacing(400) 0;
+}
+
+.PlanPickerHelpText {
+  font-size: font-size(200);
+  font-weight: font-weight(light);
+  padding: 0 spacing(400) spacing(400);
+}
+
+.PlanPickerList {
+  background: color(white);
+  border-radius: 0;
+  box-shadow: box-shadow(400);
+  max-height: sizing(1000);
+  transform: translateY(-3px);
+
+  &.open {
+    transform: translateY(0);
+  }
+}
+
+.PlanPickerOption {
+  @include button-reset();
+  padding: spacing(400);
+
+  &:hover,
+  &.highlighted {
+    background: color(gray, 100);
+  }
+
+  &.selected {
+    color: color(blue, 700);
+  }
+}
+
+.PlanPickerSelectedOption {
+  color: color(blue, 700);
+}
+
+.PlanPickerTrigger {
+  @include button-reset();
+  color: color(blue, 700);
+  padding: spacing(400);
+  width: 100%;
+
+  &:focus,
+  &:hover {
+    background: color(gray, 100);
+  }
+}

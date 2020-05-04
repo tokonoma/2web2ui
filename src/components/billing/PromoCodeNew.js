@@ -15,10 +15,14 @@ const PromoCodeNew = ({ promoCodeObj, handlePromoCode }) => {
   };
   const renderActionButton = condition => {
     if (condition) {
-      return <Button onClick={clearPromoCode}>Remove</Button>;
+      return (
+        <Button variant="connected" onClick={clearPromoCode}>
+          Remove
+        </Button>
+      );
     }
     return (
-      <Button variant="secondary" onClick={handleClick} disabled={promoPending}>
+      <Button variant="connected" onClick={handleClick} disabled={promoPending}>
         Apply
       </Button>
     );

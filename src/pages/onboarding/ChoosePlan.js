@@ -2,6 +2,7 @@ import React, { useEffect, useMemo } from 'react';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { Grid, Button, Panel } from 'src/components/matchbox';
+import { Heading } from 'src/components/text';
 import { showAlert } from 'src/actions/globalAlert';
 import { CenteredLogo, Loading, PlanPicker } from 'src/components';
 import {
@@ -20,6 +21,7 @@ import { FORMS } from 'src/constants';
 import CreditCardSection from './components/CreditCardSection';
 import _ from 'lodash';
 import { DASHBOARD_ROUTE, ONBOARDING_SENDINGDOMAIN_ROUTE } from 'src/constants';
+
 export function OnboardingPlanPage({
   getPlans,
   getBundles,
@@ -136,6 +138,9 @@ export function OnboardingPlanPage({
       <Grid>
         <Grid.Column>
           <Panel>
+            <Panel.Section>
+              <Heading as="h3">Select A Plan</Heading>
+            </Panel.Section>
             <PlanPicker
               selectedPromo={selectedPromo}
               disabled={disableSubmit}
@@ -153,13 +158,7 @@ export function OnboardingPlanPage({
             )}
             <CreditCardSection billing={billing} submitting={submitting} isPlanFree={isPlanFree} />
             <Panel.Section>
-              <Button
-                disabled={disableSubmit}
-                primary={true}
-                type="submit"
-                size="large"
-                fullWidth={true}
-              >
+              <Button disabled={disableSubmit} type="submit" variant="primary">
                 {buttonText}
               </Button>
             </Panel.Section>

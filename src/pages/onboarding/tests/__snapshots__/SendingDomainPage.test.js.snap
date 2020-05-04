@@ -4,64 +4,56 @@ exports[`SendingDomainPage should render correctly 1`] = `
 <Fragment>
   <CenteredLogo />
   <Panel
-    accent={true}
     title="Welcome to SparkPost!"
   >
     <form>
       <Panel.Section>
-        <p>
-          <Text
-            as="p"
-            mb={300}
-          >
+        <Stack>
+          <p>
             Let's get you set up to send some email!
-          </Text>
-        </p>
-        <p>
-          <Text
-            as="p"
-            mb={300}
-          >
+          </p>
+          <p>
             Which domain will you be sending from?
              
-            <UnstyledLink
-              external={true}
-              onClick={[Function]}
+            <ExternalLink
               to="https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#preparing-your-from-address"
             >
               Learn more about sending domains
-            </UnstyledLink>
-            .
-          </Text>
-        </p>
-        <Field
-          component={[Function]}
-          disabled={false}
-          label="Domain Name"
-          name="domain"
-          placeholder="email.example.com"
-          validate={
-            Array [
-              [Function],
-              [Function],
-            ]
-          }
-        />
+            </ExternalLink>
+          </p>
+          <Field
+            component={[Function]}
+            disabled={false}
+            label="Domain Name"
+            name="domain"
+            validate={
+              Array [
+                [Function],
+                [Function],
+              ]
+            }
+          />
+        </Stack>
       </Panel.Section>
       <Panel.Section>
-        <Button
-          disabled={false}
-          primary={true}
-          submit={true}
-          variant="primary"
+        <ButtonWrapper
+          marginTop="0"
         >
-          Add Domain
-        </Button>
-        <SkipLink
-          to="/dashboard"
-        >
-          Skip for now
-        </SkipLink>
+          <Button
+            disabled={false}
+            submit={true}
+            variant="primary"
+          >
+            Add Domain
+          </Button>
+          <PageLink
+            as={[Function]}
+            to="/dashboard"
+            variant="secondary"
+          >
+            Skip for now
+          </PageLink>
+        </ButtonWrapper>
       </Panel.Section>
     </form>
   </Panel>
@@ -72,64 +64,56 @@ exports[`SendingDomainPage should render submitting state correctly 1`] = `
 <Fragment>
   <CenteredLogo />
   <Panel
-    accent={true}
     title="Welcome to SparkPost!"
   >
     <form>
       <Panel.Section>
-        <p>
-          <Text
-            as="p"
-            mb={300}
-          >
+        <Stack>
+          <p>
             Let's get you set up to send some email!
-          </Text>
-        </p>
-        <p>
-          <Text
-            as="p"
-            mb={300}
-          >
+          </p>
+          <p>
             Which domain will you be sending from?
              
-            <UnstyledLink
-              external={true}
-              onClick={[Function]}
+            <ExternalLink
               to="https://www.sparkpost.com/docs/getting-started/getting-started-sparkpost/#preparing-your-from-address"
             >
               Learn more about sending domains
-            </UnstyledLink>
-            .
-          </Text>
-        </p>
-        <Field
-          component={[Function]}
-          disabled={true}
-          label="Domain Name"
-          name="domain"
-          placeholder="email.example.com"
-          validate={
-            Array [
-              [Function],
-              [Function],
-            ]
-          }
-        />
+            </ExternalLink>
+          </p>
+          <Field
+            component={[Function]}
+            disabled={true}
+            label="Domain Name"
+            name="domain"
+            validate={
+              Array [
+                [Function],
+                [Function],
+              ]
+            }
+          />
+        </Stack>
       </Panel.Section>
       <Panel.Section>
-        <Button
-          disabled={true}
-          primary={true}
-          submit={true}
-          variant="primary"
+        <ButtonWrapper
+          marginTop="0"
         >
-          Adding Domain...
-        </Button>
-        <SkipLink
-          to="/dashboard"
-        >
-          Skip for now
-        </SkipLink>
+          <Button
+            disabled={true}
+            submit={true}
+            variant="primary"
+          >
+            Adding Domain...
+          </Button>
+          <PageLink
+            as={[Function]}
+            to="/dashboard"
+            variant="secondary"
+          >
+            Skip for now
+          </PageLink>
+        </ButtonWrapper>
       </Panel.Section>
     </form>
   </Panel>
