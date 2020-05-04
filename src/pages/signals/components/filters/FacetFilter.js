@@ -56,7 +56,7 @@ export class FacetFilter extends React.Component {
     ];
 
     return (
-      <Grid.Column lg={facet ? 4 : 3} xl={facet ? 5 : 3}>
+      <Grid.Column md={facet ? 6 : 3} xs={12}>
         <div className={classnames(styles.FacetFilter, facet && styles.FacetSelected)}>
           <label className={styles.ScreenReaderOnly} htmlFor="facet-filter-select">
             Filter By
