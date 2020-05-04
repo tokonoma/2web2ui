@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { getSpamHits } from 'src/actions/signals';
 import { selectSpamHitsDetails } from 'src/selectors/signals';
 import { PageLink } from 'src/components/links';
-import { Grid, Panel, Stack } from 'src/components/matchbox';
+import { Box, Grid, Panel, Stack } from 'src/components/matchbox';
 import Page from './components/SignalsPage';
 import BarChart from './components/charts/barchart/BarChart';
 import SpamTrapActions from './components/actionContent/SpamTrapActions';
@@ -22,7 +22,6 @@ import { formatFullNumber, formatNumber, roundToPlaces } from 'src/helpers/units
 import moment from 'moment';
 import _ from 'lodash';
 import { spamTrapHitTypesCollection, spamTrapHitTypesByLabel } from './constants/spamTrapHitTypes';
-
 import EngagementRecencyPreview from './components/previews/EngagementRecencyPreview';
 import HealthScorePreview from './components/previews/HealthScorePreview';
 import styles from './DetailsPages.module.scss';
@@ -168,14 +167,16 @@ export class SpamTrapPage extends Component {
           </Panel>
         </Grid.Column>
         <Grid.Column sm={12} md={5} mdOffset={0}>
-          <div className={styles.OffsetCol}>
-            {!chartPanel && (
-              <SpamTrapActions
-                percent={selectedSpamTrapHits.relative_trap_hits}
-                date={selectedDate}
-              />
-            )}
-          </div>
+          <Box as={Panel} sectioned height={1}>
+            <div className={styles.OffsetCol} style={{ height: 'fill-parent' }}>
+              {!chartPanel && (
+                <SpamTrapActions
+                  percent={selectedSpamTrapHits.relative_trap_hits}
+                  date={selectedDate}
+                />
+              )}
+            </div>
+          </Box>
         </Grid.Column>
       </Grid>
     );
@@ -195,8 +196,16 @@ export class SpamTrapPage extends Component {
         facet={facet}
         facetId={facetId}
         subaccountId={subaccountId}
-        primaryArea={<DateFilter left />}
       >
+        <Panel title="Spam Trap Monitoring">
+          <Panel.Section>
+            <Grid>
+              <Grid.Column xs={12} md={4}>
+                <DateFilter label="Date Range" />
+              </Grid.Column>
+            </Grid>
+          </Panel.Section>
+        </Panel>
         {this.renderContent()}
         <Divider />
         <Grid>

@@ -9,8 +9,8 @@ import DateFilter from '../components/filters/DateFilter';
 import SubaccountFilter from '../components/filters/SubaccountFilter';
 import facets from '../constants/facets';
 import _ from 'lodash';
-import InfoTooltip from '../components/InfoTooltip';
 import { SPAM_TRAP_INFO } from '../constants/info';
+import { PageDescription } from 'src/components/text';
 
 export class SpamTrapDashboard extends Component {
   componentDidMount() {
@@ -21,14 +21,9 @@ export class SpamTrapDashboard extends Component {
     const { subaccounts } = this.props;
 
     return (
-      <Page
-        title={
-          <>
-            Spam Trap Monitoring
-            <InfoTooltip content={SPAM_TRAP_INFO} />
-          </>
-        }
-      >
+      <Page title={<>Spam Trap Monitoring</>}>
+        <PageDescription>{SPAM_TRAP_INFO}</PageDescription>
+
         <Panel sectioned>
           <Grid>
             <Grid.Column xs={4}>
