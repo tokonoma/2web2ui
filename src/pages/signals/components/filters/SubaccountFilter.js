@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
-import { ArrowDropDown, ChevronLeft } from '@sparkpost/matchbox-icons';
+import { ExpandMore, ChevronLeft } from '@sparkpost/matchbox-icons';
 import { Button, Grid, Popover, UnstyledLink, WindowEvent } from 'src/components/matchbox';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import SubaccountTypeahead from 'src/components/typeahead/SubaccountTypeahead';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 import withSignalOptions from '../../containers/withSignalOptions';
 import SubaccountOption from './SubaccountOption';
 import { onEscape } from 'src/helpers/keyEvents';
-import styles from './SubaccountFilter.module.scss';
+import OGStyles from './SubaccountFilter.module.scss';
+import HibanaStyles from './SubaccountFilterHibana.module.scss';
 
 const OPTIONS = [
   {
@@ -28,113 +30,110 @@ const OPTIONS = [
   },
 ];
 
-export class SubaccountFilter extends React.Component {
-  state = {
-    isOpen: false,
-    isSearchOpen: false,
+export function SubaccountFilter(props) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const contentRef = useRef(null);
+  const triggerRef = useRef(null);
+  const styles = useHibanaOverride(OGStyles, HibanaStyles);
+
+  const close = () => {
+    setIsOpen(false);
+    setIsSearchOpen(false);
   };
 
-  close = () => {
-    this.setState({ isOpen: false, isSearchOpen: false });
+  const handleChange = ({ id, name }) => {
+    close();
+    props.changeSignalOptions({ subaccount: { id, name } });
   };
 
-  handleChange = ({ id, name }) => {
-    this.close();
-    this.props.changeSignalOptions({ subaccount: { id, name } });
+  const handleSearchToggle = () => {
+    setIsSearchOpen(!isSearchOpen);
   };
 
-  handleSearchToggle = () => {
-    this.setState({ isSearchOpen: !this.state.isSearchOpen });
+  const handleVisibilityToggle = () => {
+    setIsOpen(!isOpen);
   };
 
-  handleVisibilityToggle = () => {
-    this.setState({ isOpen: !this.state.isOpen });
-  };
+  const containsTarget = (ref, e) => Boolean(ref.current && ref.current.contains(e.target));
 
-  containsTarget = (ref, e) => Boolean(ref && ref.contains(e.target));
-
-  handleWindowClick = e => {
-    if (!this.containsTarget(this.contentRef, e) && !this.containsTarget(this.triggerRef, e)) {
-      this.close();
+  const handleWindowClick = e => {
+    if (!containsTarget(contentRef, e) && !containsTarget(triggerRef, e)) {
+      close();
     }
   };
 
-  render() {
-    const {
-      hasSubaccounts,
-      signalOptions: { subaccount = OPTIONS[0] },
-    } = this.props;
-    const { isOpen, isSearchOpen } = this.state;
+  const {
+    hasSubaccounts,
+    signalOptions: { subaccount = OPTIONS[0] },
+  } = props;
 
-    if (!hasSubaccounts) {
-      return null;
-    }
+  if (!hasSubaccounts) {
+    return null;
+  }
 
-    const trigger = (
-      <div ref={node => (this.triggerRef = node)}>
-        <Button
-          aria-controls="popover-subaccount-filter"
-          fullWidth
-          onClick={this.handleVisibilityToggle}
-          className={styles.Button}
+  const trigger = (
+    <div ref={node => (triggerRef.current = node)}>
+      <Button
+        aria-controls="popover-subaccount-filter"
+        fullWidth
+        onClick={handleVisibilityToggle}
+        className={styles.Button}
+      >
+        <span className={styles.ButtonLabel}>{subaccount.name}</span>
+        {subaccount.id > 0 && <span>({subaccount.id})</span>}
+        <ExpandMore className={styles.ButtonIcon} size={22} />
+      </Button>
+    </div>
+  );
+
+  return (
+    <Grid.Column md={4} xs={12}>
+      <div className={styles.SubaccountFilter}>
+        <WindowEvent handler={handleWindowClick} event="click" />
+        <WindowEvent handler={onEscape(close)} event="keydown" />
+        <Popover
+          id="popover-subaccount-filter"
+          className={styles.Popover}
+          left
+          open={isOpen}
+          trigger={trigger}
         >
-          <span className={styles.ButtonLabel}>{subaccount.name}</span>
-          {subaccount.id > 0 && <span>({subaccount.id})</span>}
-          <ArrowDropDown className={styles.ButtonIcon} />
-        </Button>
-      </div>
-    );
-
-    return (
-      <Grid.Column md={5} lg={4} xl={3}>
-        <div className={styles.SubaccountFilter}>
-          <WindowEvent handler={this.handleWindowClick} event="click" />
-          <WindowEvent handler={onEscape(this.close)} event="keydown" />
-          <Popover
-            id="popover-subaccount-filter"
-            className={styles.Popover}
-            left
-            open={isOpen}
-            trigger={trigger}
-          >
-            <div ref={node => (this.contentRef = node)}>
-              <div className={classnames(styles.PopoverContent, isSearchOpen && styles.showSearch)}>
-                <div className={styles.SubaccountSearchHeader}>
-                  <UnstyledLink className={styles.BackButton} onClick={this.handleSearchToggle}>
-                    <ChevronLeft size={20} />
-                  </UnstyledLink>
-                  <span>Subaccount</span>
-                </div>
-                <div className={styles.SubaccountSearch}>
-                  <SubaccountTypeahead
-                    label=""
-                    onChange={this.handleChange}
-                    placeholder="Search here"
-                    unfiltered
-                  />
-                </div>
+          <div ref={node => (contentRef.current = node)}>
+            <div className={classnames(styles.PopoverContent, isSearchOpen && styles.showSearch)}>
+              <div className={styles.SubaccountSearchHeader}>
+                <UnstyledLink className={styles.BackButton} onClick={handleSearchToggle}>
+                  <ChevronLeft size={20} />
+                </UnstyledLink>
+                <span>Subaccount</span>
               </div>
-              <div
-                className={classnames(styles.PopoverContent, !isSearchOpen && styles.showOptions)}
-              >
-                {OPTIONS.map(({ condition, id, name, nested }) => (
-                  <SubaccountOption
-                    key={name}
-                    label={name}
-                    nested={nested}
-                    onChange={this.handleChange}
-                    onOpen={this.handleSearchToggle}
-                    selected={condition(subaccount)}
-                    value={{ id, name }}
-                  />
-                ))}
+              <div className={styles.SubaccountSearch}>
+                <SubaccountTypeahead
+                  label=""
+                  onChange={handleChange}
+                  placeholder="Search here"
+                  unfiltered
+                />
               </div>
             </div>
-          </Popover>
-        </div>
-      </Grid.Column>
-    );
-  }
+            <div className={classnames(styles.PopoverContent, !isSearchOpen && styles.showOptions)}>
+              {OPTIONS.map(({ condition, id, name, nested }) => (
+                <SubaccountOption
+                  key={name}
+                  label={name}
+                  nested={nested}
+                  onChange={handleChange}
+                  onOpen={handleSearchToggle}
+                  selected={condition(subaccount)}
+                  value={{ id, name }}
+                />
+              ))}
+            </div>
+          </div>
+        </Popover>
+      </div>
+    </Grid.Column>
+  );
 }
 
 const mapStateToProps = state => ({
