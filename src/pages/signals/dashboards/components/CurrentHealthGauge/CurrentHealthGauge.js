@@ -59,9 +59,8 @@ export function CurrentHealthGauge(props) {
       : 'Current Health Score';
 
   return (
-    <Panel sectioned>
+    <Panel sectioned title={title}>
       <div className={styles.Content}>
-        <h2 className={styles.Header}>{title}</h2>
         {noData && (
           <div>
             <Callout height="auto">Current Health Score Not Available</Callout>

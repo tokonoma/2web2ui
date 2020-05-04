@@ -98,11 +98,8 @@ export function HealthScoreChart(props) {
   }
 
   return (
-    <Panel sectioned>
+    <Panel sectioned title={`${formatDate(filters.from)} – ${formatDate(filters.to)}`}>
       <div className={styles.Content}>
-        <h2 className={styles.Header}>
-          {formatDate(filters.from)} – {formatDate(filters.to)}
-        </h2>
         {noData && (
           <div>
             <Callout height="auto">Health Scores Not Available</Callout>
