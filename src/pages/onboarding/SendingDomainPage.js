@@ -5,7 +5,7 @@ import { create as createDomain } from 'src/actions/sendingDomains';
 import { ButtonWrapper, TextFieldWrapper, CenteredLogo } from 'src/components';
 import { ExternalLink, PageLink } from 'src/components/links';
 import { Button, Panel, Stack } from 'src/components/matchbox';
-import { required, domain } from 'src/helpers/validation';
+import { required } from 'src/helpers/validation';
 import * as analytics from 'src/helpers/analytics';
 import {
   FORMS,
@@ -55,7 +55,8 @@ export function SendingDomainPage(props) {
                 component={TextFieldWrapper}
                 label="Domain Name"
                 name="domain"
-                validate={[required, domain]}
+                // Do not try to validate sending domains, let our API make that decision
+                validate={[required]}
                 disabled={submitting}
               />
             </Stack>

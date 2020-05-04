@@ -70,7 +70,6 @@ exports[`SettingsForm renders without subaccounts 1`] = `
           validate={
             Array [
               [Function],
-              [Function],
             ]
           }
         />
@@ -87,7 +86,6 @@ exports[`SettingsForm renders without subaccounts 1`] = `
           helpText="An email address recipients can reply to."
           label="Reply To"
           name="content.reply_to"
-          validate={[Function]}
         />
         <Field
           component={[Function]}

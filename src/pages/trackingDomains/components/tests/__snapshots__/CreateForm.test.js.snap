@@ -19,7 +19,6 @@ exports[`Component: Tracking Domains Create Form should render correctly when su
           validate={
             Array [
               [Function],
-              [Function],
             ]
           }
         />
@@ -66,7 +65,6 @@ exports[`Component: Tracking Domains Create Form should render correctly when su
           name="domain"
           validate={
             Array [
-              [Function],
               [Function],
             ]
           }

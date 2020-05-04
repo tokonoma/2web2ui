@@ -25,7 +25,6 @@ exports[`Sending Domains Create Form renders correctly 1`] = `
           validate={
             Array [
               [Function],
-              [Function],
             ]
           }
         />
@@ -80,7 +79,6 @@ exports[`Sending Domains Create Form renders submitting state correctly 1`] = `
           placeholder="email.example.com"
           validate={
             Array [
-              [Function],
               [Function],
             ]
           }

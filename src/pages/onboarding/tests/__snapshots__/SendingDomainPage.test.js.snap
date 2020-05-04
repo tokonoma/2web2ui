@@ -29,7 +29,6 @@ exports[`SendingDomainPage should render correctly 1`] = `
             validate={
               Array [
                 [Function],
-                [Function],
               ]
             }
           />
@@ -88,7 +87,6 @@ exports[`SendingDomainPage should render submitting state correctly 1`] = `
             name="domain"
             validate={
               Array [
-                [Function],
                 [Function],
               ]
             }
