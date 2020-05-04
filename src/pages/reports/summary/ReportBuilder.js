@@ -58,7 +58,7 @@ export class SummaryReportPage extends Component {
     const { scale, eventTime, metricsModal } = this.state;
 
     return (
-      <Page title="Summary Report">
+      <Page title="Analytics Report">
         <ReportOptions
           reportLoading={chart.chartLoading}
           searchOptions={summarySearchOptions}

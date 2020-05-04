@@ -1,9 +1,7 @@
 import useHibanaToggle from 'src/hooks/useHibanaToggle';
-import OGSummaryPage from './SummaryPage';
-import SummaryPageHibana from './SummaryPageHibana';
+import SummaryPage from './SummaryPage';
+import ReportBuilder from './ReportBuilder';
 
-const SummaryPage = props => {
-  return useHibanaToggle(OGSummaryPage, SummaryPageHibana)(props);
-};
-
-export default SummaryPage;
+export default function(props) {
+  return useHibanaToggle(SummaryPage, ReportBuilder)(props);
+}
