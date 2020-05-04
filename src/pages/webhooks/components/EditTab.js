@@ -3,14 +3,12 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { getWebhook, getEventDocs, updateWebhook } from 'src/actions/webhooks';
 import { showAlert } from 'src/actions/globalAlert';
-import { Panel } from 'src/components/matchbox';
-import { PanelLoading } from 'src/components';
+import Loading from 'src/components/loading';
 import WebhookForm from './WebhookForm';
 import resolveAuthUpdates from '../helpers/resolveAuthUpdates';
 import { selectWebhookEventListing } from 'src/selectors/eventListing';
 
 export class EditTab extends Component {
-
   componentDidMount() {
     this.props.getEventDocs();
   }
@@ -32,12 +30,12 @@ export class EditTab extends Component {
       name,
       target,
       active,
-      events: (eventsRadio === 'all') ? eventKeys : eventKeys.filter((e) => events[e]) // if not "all", choose only keys whose value is "true"
+      events: eventsRadio === 'all' ? eventKeys : eventKeys.filter(e => events[e]), // if not "all", choose only keys whose value is "true"
     });
 
     showAlert({ type: 'success', message: 'Update Successful' });
     getWebhook({ id, subaccount });
-  }
+  };
 
   render() {
     const { webhook, eventsLoading, eventListing } = this.props;
@@ -48,24 +46,24 @@ export class EditTab extends Component {
     }
 
     if (eventListing.length === 0 && eventsLoading) {
-      return <PanelLoading />;
+      return <Loading />;
     }
 
     return (
-      <Panel>
-        <WebhookForm
-          allChecked={webhook.events.length === eventListing.length}
-          onSubmit={(values) => this.update(values, webhook)}
-          newWebhook={false}
-        />
-      </Panel>
+      <WebhookForm
+        allChecked={webhook.events.length === eventListing.length}
+        onSubmit={values => this.update(values, webhook)}
+        newWebhook={false}
+      />
     );
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   eventsLoading: state.webhooks.docsLoading,
-  eventListing: selectWebhookEventListing(state)
+  eventListing: selectWebhookEventListing(state),
 });
 
-export default withRouter(connect(mapStateToProps, { getWebhook, getEventDocs, updateWebhook, showAlert })(EditTab));
+export default withRouter(
+  connect(mapStateToProps, { getWebhook, getEventDocs, updateWebhook, showAlert })(EditTab),
+);

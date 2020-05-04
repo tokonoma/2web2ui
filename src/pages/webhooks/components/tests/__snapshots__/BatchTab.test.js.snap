@@ -1,18 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Webhook Component: Batch Status Tab should render batch status tab with table data 1`] = `
-<Panel>
+<Fragment>
   <Panel.Section>
     <Button
       disabled={false}
       onClick={[Function]}
-      primary={true}
-      size="small"
+      variant="primary"
     >
       Refresh Batches
     </Button>
   </Panel.Section>
-  <TableCollection
+  <PanelSectionTableCollection
     columns={
       Array [
         Object {
@@ -62,43 +61,42 @@ exports[`Webhook Component: Batch Status Tab should render batch status tab with
       ]
     }
   />
-</Panel>
+</Fragment>
 `;
 
 exports[`Webhook Component: Batch Status Tab should show button text as Refreshing while refreshing data 1`] = `
-<Panel>
+<Fragment>
   <Panel.Section>
     <Button
       disabled={true}
       onClick={[Function]}
-      primary={true}
-      size="small"
+      variant="primary"
     >
       Refreshing...
     </Button>
   </Panel.Section>
-  <PanelLoading
-    accent={false}
-    minHeight="400px"
-  />
-</Panel>
+  <Panel.Section>
+    <Loading />
+  </Panel.Section>
+</Fragment>
 `;
 
 exports[`Webhook Component: Batch Status Tab should show empty message when no batches exist 1`] = `
-<Panel>
+<Fragment>
   <Panel.Section>
     <Button
       disabled={false}
       onClick={[Function]}
-      primary={true}
-      size="small"
+      variant="primary"
     >
       Refresh Batches
     </Button>
   </Panel.Section>
-  <Empty
-    hasPanel={true}
-    message="There are no batches for your webhook"
-  />
-</Panel>
+  <Panel.Section>
+    <Empty
+      hasPanel={false}
+      message="There are no batches for your webhook"
+    />
+  </Panel.Section>
+</Fragment>
 `;

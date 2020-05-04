@@ -3,56 +3,56 @@ import { Field } from 'redux-form';
 import { TextFieldWrapper, SelectWrapper, RadioGroup, CheckboxWrapper } from 'src/components';
 import { FieldSet } from 'src/components/form';
 import { ExternalLink } from 'src/components/links';
+import { Stack } from 'src/components/matchbox';
 import { required, maxLength, url } from 'src/helpers/validation';
 
 const BasicAuthFields = ({ disabled }) => (
-  <FieldSet legend="Basic Auth">
-    <Field
-      name="basicUser"
-      label="Username"
-      placeholder="username"
-      component={TextFieldWrapper}
-      validate={required}
-      disabled={disabled}
-    />
-    <Field
-      name="basicPass"
-      label="Password"
-      placeholder="password"
-      component={TextFieldWrapper}
-      validate={required}
-      type="password"
-      disabled={disabled}
-    />
+  <FieldSet legend="Basic Auth" legendHidden>
+    <Stack>
+      <Field
+        name="basicUser"
+        label="Username"
+        component={TextFieldWrapper}
+        validate={required}
+        disabled={disabled}
+      />
+      <Field
+        name="basicPass"
+        label="Password"
+        component={TextFieldWrapper}
+        validate={required}
+        type="password"
+        disabled={disabled}
+      />
+    </Stack>
   </FieldSet>
 );
 
 const OAuth2Fields = ({ disabled }) => (
-  <FieldSet legend="OAuth 2.0">
-    <Field
-      name="clientId"
-      label="Client ID"
-      placeholder="clientID"
-      component={TextFieldWrapper}
-      validate={required}
-      disabled={disabled}
-    />
-    <Field
-      name="clientSecret"
-      label="Client Secret"
-      placeholder="clientSecret"
-      component={TextFieldWrapper}
-      validate={required}
-      disabled={disabled}
-    />
-    <Field
-      name="tokenURL"
-      label="Token URL"
-      placeholder="https://www.example.com/tokens/"
-      component={TextFieldWrapper}
-      validate={required}
-      disabled={disabled}
-    />
+  <FieldSet legend="OAuth 2.0" legendHidden>
+    <Stack>
+      <Field
+        name="clientId"
+        label="Client ID"
+        component={TextFieldWrapper}
+        validate={required}
+        disabled={disabled}
+      />
+      <Field
+        name="clientSecret"
+        label="Client Secret"
+        component={TextFieldWrapper}
+        validate={required}
+        disabled={disabled}
+      />
+      <Field
+        name="tokenURL"
+        label="Token URL"
+        component={TextFieldWrapper}
+        validate={required}
+        disabled={disabled}
+      />
+    </Stack>
   </FieldSet>
 );
 
@@ -62,7 +62,6 @@ const NameField = ({ disabled }) => (
     component={TextFieldWrapper}
     validate={[required, maxLength(24)]}
     label="Webhook Name"
-    placeholder="e.g. My Opens and Clicks Webhook"
     helpText="A friendly label for your webhook, only used for display"
     disabled={disabled}
   />
@@ -74,9 +73,7 @@ const TargetField = ({ disabled }) => (
     component={TextFieldWrapper}
     validate={[required, url]}
     normalize={(value = '') => value.trim()}
-    label="Target"
-    placeholder="https://example.com/webhook-target"
-    helpText="This is the URL we'll send data to. We recommend the use of https."
+    label="Target URL"
     disabled={disabled}
   />
 );
@@ -85,7 +82,7 @@ const EventsRadioGroup = ({ disabled }) => (
   <Field
     name="eventsRadio"
     component={RadioGroup}
-    label="Events:"
+    label="Events"
     options={[
       { value: 'all', label: 'All events', disabled },
       { value: 'select', label: 'Select individual events', disabled },

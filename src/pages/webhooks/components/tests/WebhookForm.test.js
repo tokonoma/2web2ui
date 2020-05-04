@@ -3,37 +3,49 @@ import { shallow } from 'enzyme';
 import { EventCheckBoxes, AuthFields, WebhookForm } from '../WebhookForm';
 import SubaccountSection from '../SubaccountSection';
 
-describe('EventCheckboxes component', () => {
+jest.mock('src/hooks/useHibanaOverride', () => styles => styles);
 
+describe('EventCheckboxes component', () => {
   it('should return null if show is false', () => {
-    expect(shallow(<EventCheckBoxes show={false} disabled={false}/>)).toMatchSnapshot();
+    expect(shallow(<EventCheckBoxes show={false} disabled={false} />)).toMatchSnapshot();
   });
 
   it('should render with events', () => {
     const events = [
-      { key: 'testKeyA', display_name: 'Test Display Name A', description: 'A longer description for test event A' },
-      { key: 'testKeyB', display_name: 'Test Display Name B', description: 'A longer description for test event B' },
-      { key: 'testKeyC', display_name: 'Test Display Name C', description: 'A longer description for test event C' }
+      {
+        key: 'testKeyA',
+        display_name: 'Test Display Name A',
+        description: 'A longer description for test event A',
+      },
+      {
+        key: 'testKeyB',
+        display_name: 'Test Display Name B',
+        description: 'A longer description for test event B',
+      },
+      {
+        key: 'testKeyC',
+        display_name: 'Test Display Name C',
+        description: 'A longer description for test event C',
+      },
     ];
-    expect(shallow(<EventCheckBoxes show={true} events={events} disabled={false}/>)).toMatchSnapshot();
+    expect(
+      shallow(<EventCheckBoxes show={true} events={events} disabled={false} />),
+    ).toMatchSnapshot();
   });
-
 });
 
 describe('AuthFields component', () => {
-
   it('should render for basic auth', () => {
-    expect(shallow(<AuthFields authType='basic' />)).toMatchSnapshot();
+    expect(shallow(<AuthFields authType="basic" />)).toMatchSnapshot();
   });
 
   it('should render for oauth', () => {
-    expect(shallow(<AuthFields authType='oauth2' />)).toMatchSnapshot();
+    expect(shallow(<AuthFields authType="oauth2" />)).toMatchSnapshot();
   });
 
   it('should render null for unknown auth', () => {
-    expect(shallow(<AuthFields authType='bananas' />)).toMatchSnapshot();
+    expect(shallow(<AuthFields authType="bananas" />)).toMatchSnapshot();
   });
-
 });
 
 describe('Webhooks Form Component', () => {
@@ -46,7 +58,7 @@ describe('Webhooks Form Component', () => {
     eventsTree: [],
     eventsRadio: 'all',
     hasSubaccounts: false,
-    newWebhook: false
+    newWebhook: false,
   };
 
   beforeEach(() => {
@@ -71,7 +83,12 @@ describe('Webhooks Form Component', () => {
     wrapper.setProps({ eventsRadio: 'select' });
     // Ghetto sibling selector
     // 'Grid' below radio group is the checkbox group
-    expect(wrapper.find('EventsRadioGroup').parent().prop('children')).toMatchSnapshot();
+    expect(
+      wrapper
+        .find('EventsRadioGroup')
+        .parent()
+        .prop('children'),
+    ).toMatchSnapshot();
   });
 
   it('should disable input when submitting', () => {
@@ -112,12 +129,22 @@ describe('Webhooks Form Component', () => {
   describe('auth', () => {
     it('should render basic auth fields', () => {
       wrapper.setProps({ auth: 'basic', disabled: false });
-      expect(wrapper.find('AuthDropDown').parent().prop('children')).toMatchSnapshot();
+      expect(
+        wrapper
+          .find('AuthDropDown')
+          .parent()
+          .prop('children'),
+      ).toMatchSnapshot();
     });
 
     it('should render basic oauth2 fields', () => {
       wrapper.setProps({ auth: 'oauth2', disabled: false });
-      expect(wrapper.find('AuthDropDown').parent().prop('children')).toMatchSnapshot();
+      expect(
+        wrapper
+          .find('AuthDropDown')
+          .parent()
+          .prop('children'),
+      ).toMatchSnapshot();
     });
   });
 });
