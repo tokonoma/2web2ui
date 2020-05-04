@@ -7,7 +7,29 @@ import useHibanaToggle from 'src/hooks/useHibanaToggle';
 import { SENDING_STEP_LIST } from '../constants';
 import styles from './SendingStep.module.scss';
 
-export default function SendingStep() {
+export function HibanaSendingStep() {
+  return (
+    <Panel.Section>
+      <GuideBreadCrumbs />
+      <Box mb="400">
+        <Text
+          as="p"
+          role="heading"
+          aria-level="4"
+          tabIndex={-1}
+          textAlign="center"
+          fontSize="400"
+          fontWeight="medium"
+        >
+          Where Would You Like to Begin?
+        </Text>
+      </Box>
+      <SendingStepList />
+    </Panel.Section>
+  );
+}
+
+export function OGSendingStep() {
   return (
     <Panel.Section>
       <GuideBreadCrumbs />
@@ -20,6 +42,10 @@ export default function SendingStep() {
     </Panel.Section>
   );
 }
+
+export default props => {
+  return useHibanaToggle(OGSendingStep, HibanaSendingStep)(props);
+};
 
 export const OGSendingStepListItem = ({ setAndStoreStepName, name, label = name, content }) => (
   <Grid.Column xs={12} md={6} key={name}>
@@ -56,12 +82,7 @@ export const HibanaSendingStepListItem = ({
           <Text>{content}</Text>
         </CardContent>
         <CardActions>
-          <Button
-            mt="400"
-            variant="primary"
-            outlineBorder
-            onClick={() => setAndStoreStepName(name)}
-          >
+          <Button mt="400" variant="secondary" onClick={() => setAndStoreStepName(name)}>
             {label}
           </Button>
         </CardActions>

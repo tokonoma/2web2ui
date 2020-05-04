@@ -2,11 +2,15 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { render } from '@testing-library/react';
 import TestApp from 'src/__testHelpers__/TestApp';
-import ShowMeSparkpostStep from '../ShowMeSparkpostStep';
+import ShowMeSparkpostStep, {
+  OGShowMeSparkpostStep,
+  HibanaShowMeSparkpostStep,
+} from '../ShowMeSparkpostStep';
 import { GuideContext } from '../GettingStartedGuide';
 
 describe('ShowMeSparkpostStep', () => {
-  const subject_enzyme = (func = shallow) => func(<ShowMeSparkpostStep />);
+  const subject_enzyme_og = (func = shallow) => func(<OGShowMeSparkpostStep />);
+  const subject_enzyme_hibana = (func = shallow) => func(<HibanaShowMeSparkpostStep />);
   const subject_rtl = (func = render) => {
     const values = {
       stepName: 'Show Me SparkPost',
@@ -30,7 +34,8 @@ describe('ShowMeSparkpostStep', () => {
     );
   };
   it('should render breadcrumbs', () => {
-    expect(subject_enzyme().find('GuideBreadCrumbs')).toHaveLength(1);
+    expect(subject_enzyme_og().find('GuideBreadCrumbs')).toHaveLength(1);
+    expect(subject_enzyme_hibana().find('GuideBreadCrumbs')).toHaveLength(1);
   });
   it('should render Checklist with title Send Test Email', () => {
     const { queryByText } = subject_rtl(render);
