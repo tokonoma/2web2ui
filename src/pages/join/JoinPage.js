@@ -6,14 +6,15 @@ import cookie from 'js-cookie';
 import _ from 'lodash';
 
 import { CenteredLogo } from 'src/components';
+import { BottomPad } from 'src/components/hibana';
 import { PageLink } from 'src/components/links';
-import { Error, Panel } from 'src/components/matchbox';
+import { Error, Panel, Stack } from 'src/components/matchbox';
 import JoinForm from './components/JoinForm';
 import JoinError from './components/JoinError';
 import SignUpTabs from './components/SignUpTabs';
-import config from 'src/config';
 import { inSPCEU } from 'src/config/tenant';
 import { authenticate } from 'src/actions/auth';
+import getConfig from 'src/helpers/getConfig';
 import { loadScript } from 'src/helpers/loadScript';
 import * as analytics from 'src/helpers/analytics';
 import { register } from 'src/actions/account';
@@ -24,9 +25,6 @@ import {
   ANALYTICS_CREATE_ACCOUNT,
   CROSS_LINK_MAP,
 } from 'src/constants';
-import styles from './JoinPage.module.scss';
-
-const brand = CROSS_LINK_MAP[config.crossLinkTenant];
 
 export class JoinPage extends Component {
   state = {
@@ -35,13 +33,13 @@ export class JoinPage extends Component {
 
   extractQueryParams = () => {
     const { params } = this.props;
-    const existingCookie = cookie.getJSON(config.attribution.cookieName) || {};
+    const existingCookie = cookie.getJSON(getConfig('attribution.cookieName')) || {};
 
     const allData = { ...existingCookie, ...params };
 
     return {
       sfdcid: allData.sfdcid,
-      attributionData: _.pick(allData, config.salesforceDataParams),
+      attributionData: _.pick(allData, getConfig('salesforceDataParams')),
       creationParams: allData,
     };
   };
@@ -82,25 +80,26 @@ export class JoinPage extends Component {
   render() {
     const { createError } = this.props.account;
     const { formData } = this.state;
+    const brand = CROSS_LINK_MAP[getConfig('crossLinkTenant')];
 
     return (
       <div>
         {loadScript({ url: LINKS.RECAPTCHA_LIB_URL })}
         <CenteredLogo showAwsLogo={this.props.isAWSsignUp} />
-        <Panel accent={!brand}>
+        <Panel>
           {brand && (
             <SignUpTabs brand={brand} isSPCEU={this.props.isSPCEU} location={this.props.location} />
           )}
-          {createError && (
-            <Panel.Section>
-              <Error error={<JoinError errors={createError} data={formData} />} />
-            </Panel.Section>
-          )}
           <Panel.Section>
-            <h3 className={styles.header}>{`Sign Up for SparkPost${
-              this.props.isSPCEU ? ' EU' : ''
-            }`}</h3>
-            <JoinForm onSubmit={this.registerSubmit} />
+            <Stack>
+              <h3>Sign Up for SparkPost{this.props.isSPCEU ? ' EU' : ''}</h3>
+              {createError && (
+                <BottomPad>
+                  <Error error={<JoinError errors={createError} data={formData} />} />
+                </BottomPad>
+              )}
+              <JoinForm onSubmit={this.registerSubmit} />
+            </Stack>
           </Panel.Section>
         </Panel>
         <Panel.Footer

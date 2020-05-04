@@ -1,9 +1,17 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import TestApp from 'src/__testHelpers__/TestApp';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import { UploadedListForm } from '../UploadedListForm';
+import styles from '../UploadedListForm.module.scss';
+
+jest.mock('src/hooks/useHibanaOverride');
 
 describe('UploadedListForm', () => {
+  beforeEach(() => {
+    useHibanaOverride.mockReturnValue(styles);
+  });
+
   const subject = (props = {}, method = shallow) => {
     const component = (
       <UploadedListForm
@@ -18,7 +26,7 @@ describe('UploadedListForm', () => {
       />
     );
 
-    if (method == mount) {
+    if (method === mount) {
       return mount(<TestApp>{component}</TestApp>);
     }
 

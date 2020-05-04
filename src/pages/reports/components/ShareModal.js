@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
 import { relativeDateOptions } from 'src/helpers/date';
-import { Button, Checkbox, Panel, WindowEvent, Modal } from 'src/components/matchbox';
+import { Button, Checkbox, Panel, WindowEvent, Modal, Stack, Box } from 'src/components/matchbox';
 import { CopyField } from 'src/components';
 import { onEnter } from 'src/helpers/keyEvents';
 import _ from 'lodash';
@@ -81,8 +81,10 @@ export class ShareModal extends Component {
         onChange={this.handlePin}
         helpText={
           <span>
-            Pins this report's relative time range to its calculated dates (this is usually what you
-            want when sharing a report).
+            <Box marginTop="100" marginLeft="500">
+              Pins this report's relative time range to its calculated dates (this is usually what
+              you want when sharing a report).
+            </Box>
           </span>
         }
       />
@@ -107,6 +109,7 @@ export class ShareModal extends Component {
             disabled={this.props.disabled}
             fullWidth
             onClick={this.toggleModal}
+            variant="monochrome"
           >
             Share
           </Button>
@@ -115,11 +118,13 @@ export class ShareModal extends Component {
           {open && <WindowEvent event="keydown" handler={this.handleKeydown} />}
           <Panel title="Share this report">
             <Panel.Section>
-              <CopyField value={this.getLink()} />
-              {this.renderPinToggle()}
+              <Stack>
+                <CopyField value={this.getLink()} />
+                {this.renderPinToggle()}
+              </Stack>
             </Panel.Section>
             <Panel.Section>
-              <Button primary onClick={this.toggleModal}>
+              <Button variant="primary" onClick={this.toggleModal}>
                 Done
               </Button>
             </Panel.Section>

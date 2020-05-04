@@ -8,6 +8,7 @@ import sortMatch from 'src/helpers/sortMatch';
 export const ComboBoxTypeahead = ({
   disabled,
   error,
+  helpText,
   isExclusiveItem,
   itemToString,
   label,
@@ -101,6 +102,7 @@ export const ComboBoxTypeahead = ({
     const inputProps = getInputProps({
       disabled,
       error: error && !isMenuOpen ? error : undefined,
+      helpText,
       id: name,
       itemToString,
       label,

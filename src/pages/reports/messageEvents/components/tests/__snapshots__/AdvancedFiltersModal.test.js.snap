@@ -4,6 +4,7 @@ exports[`Component: AdvancedFiltersModal should render initially and sync to sta
 <Fragment>
   <Button
     onClick={[Function]}
+    variant="monochrome"
   >
     Add Filters
   </Button>

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Field, formValueSelector, change } from 'redux-form';
 import PropTypes from 'prop-types';
 
-import { Grid } from 'src/components/matchbox';
+import { Grid, Stack } from 'src/components/matchbox';
 import { TextFieldWrapper, SelectWrapper } from 'src/components';
 import { required } from 'src/helpers/validation';
 import { getZipLabel } from 'src/helpers/billing';
@@ -93,31 +93,33 @@ export class BillingAddressForm extends Component {
 
     return (
       <div>
-        <p>
-          <small>Billing Address</small>
-        </p>
-        {nameFields}
-        <Field
-          label="Country"
-          name="billingAddress.country"
-          placeholder="Select a country"
-          component={SelectWrapper}
-          options={countries}
-          validate={required}
-          disabled={disabled}
-        />
-        <Grid>
-          {stateOrProvince}
-          <Grid.Column xs={6}>
-            <Field
-              label={getZipLabel(countryValue)}
-              name="billingAddress.zip"
-              component={TextFieldWrapper}
-              validate={required}
-              disabled={disabled}
-            />
-          </Grid.Column>
-        </Grid>
+        <Stack>
+          <p>
+            <small>Billing Address</small>
+          </p>
+          {nameFields}
+          <Field
+            label="Country"
+            name="billingAddress.country"
+            placeholder="Select a country"
+            component={SelectWrapper}
+            options={countries}
+            validate={required}
+            disabled={disabled}
+          />
+          <Grid>
+            {stateOrProvince}
+            <Grid.Column xs={6}>
+              <Field
+                label={getZipLabel(countryValue)}
+                name="billingAddress.zip"
+                component={TextFieldWrapper}
+                validate={required}
+                disabled={disabled}
+              />
+            </Grid.Column>
+          </Grid>
+        </Stack>
       </div>
     );
   }

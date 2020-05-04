@@ -1,9 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { EnableTfaForm, RenderedForm } from '../EnableTfaForm';
-jest.mock('src/context/HibanaContext', () => ({
-  useHibana: jest.fn().mockReturnValue([{ isHibanaEnabled: false }]),
-}));
 
 describe('Component: EnableTfaForm', () => {
   const baseProps = {
@@ -46,12 +43,8 @@ describe('Component: EnableTfaForm', () => {
     expect(pageSubject().instance().props.getTfaSecret).toHaveBeenCalledTimes(1);
   });
 
-  it('should show panel loading while retrieving 2fa deets', () => {
-    expect(
-      formSubject({ secret: null })
-        .find('PanelLoading')
-        .exists(),
-    ).toBeTruthy();
+  it('should show loading while retrieving 2fa deets', () => {
+    expect(formSubject({ secret: null }).find('Loading')).toExist();
   });
 
   it('should show form after loading', () => {

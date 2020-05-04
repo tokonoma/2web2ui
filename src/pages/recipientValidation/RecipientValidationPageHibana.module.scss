@@ -1,0 +1,14 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.TabPadding {
+  padding: 0 spacing(300);
+}
+
+.SecondaryActions {
+  margin-right: spacing(300);
+}
+
+.ApiDocs {
+  font-weight: font-weight(light);
+  color: color(gray, 700) !important;
+}

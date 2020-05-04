@@ -2,15 +2,20 @@ import React from 'react';
 import { Close } from '@sparkpost/matchbox-icons';
 import { RecipientValidationPriceTable } from 'src/components';
 import { Button, Panel, Modal } from 'src/components/matchbox';
-import styles from './RVPriceModal.module.scss';
+
+import OGStyles from './RVPriceModal.module.scss';
+import hibanaStyles from './RVPriceModalHibana.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 
 export default function RVPriceModal({ isOpen, handleOpen }) {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+
   return (
     <Modal open={isOpen} onClose={() => handleOpen(false)}>
       <Panel className={styles.modalContainer}>
         <div style={{ float: 'right' }}>
-          <Button onClick={() => handleOpen(false)} flat>
-            <Close />
+          <Button size="large" onClick={() => handleOpen(false)} flat className={styles.Close}>
+            <Close size={30} />
           </Button>
         </div>
         <div className={styles.bodyContainer}>

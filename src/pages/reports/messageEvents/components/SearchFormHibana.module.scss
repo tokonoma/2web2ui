@@ -1,0 +1,16 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.Cancel {
+  margin-left: 0;
+}
+
+.AddButton {
+  margin-bottom: spacing(400);
+}
+
+.Selector {
+  width: 100%;
+  @media screen and (max-width: media-query(md)) {
+    margin-bottom: 5px;
+  }
+}

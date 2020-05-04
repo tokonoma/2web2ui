@@ -1,8 +1,9 @@
 import React from 'react';
 
 import { shallow } from 'enzyme';
+import styles from '../SingleAddressForm.module.scss';
 
-import { SingleAddressForm } from '../SingleAddressForm';
+import { SingleAddressFormClass } from '../SingleAddressForm';
 
 describe('SingleAddressForm', () => {
   let props;
@@ -12,12 +13,13 @@ describe('SingleAddressForm', () => {
     props = {
       handleSubmit: jest.fn(a => a),
       singleAddress: jest.fn(),
+      styles,
       history: {
         push: jest.fn(),
       },
     };
 
-    wrapper = shallow(<SingleAddressForm {...props} />);
+    wrapper = shallow(<SingleAddressFormClass {...props} />);
   });
 
   it('renders correctly', () => {

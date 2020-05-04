@@ -6,7 +6,7 @@ import { required } from 'src/helpers/validation';
 import { reduxForm, Field } from 'redux-form';
 import { CenteredLogo, TextFieldWrapper } from 'src/components';
 import { PageLink } from 'src/components/links';
-import { Button, Panel } from 'src/components/matchbox';
+import { Box, Button, Panel, Stack } from 'src/components/matchbox';
 import { AUTH_ROUTE } from 'src/constants';
 import { trimWhitespaces } from 'src/helpers/string';
 
@@ -45,17 +45,21 @@ export class ForgotPasswordPage extends Component {
         <CenteredLogo />
         <Panel sectioned title="Reset Your Password">
           <form onSubmit={handleSubmit(sendPasswordResetEmail)}>
-            <p>Provide your username or email and we'll send an email to reset your password.</p>
-            <Field
-              name="user"
-              label="Username or email address"
-              validate={required}
-              normalize={trimWhitespaces}
-              component={TextFieldWrapper}
-            />
-            <Button primary submit disabled={invalid || submitting}>
-              {buttonText}
-            </Button>
+            <Stack>
+              <p>Provide your username or email and we'll send an email to reset your password.</p>
+              <Field
+                name="user"
+                label="Username or email address"
+                validate={required}
+                normalize={trimWhitespaces}
+                component={TextFieldWrapper}
+              />
+              <Box>
+                <Button variant="primary" submit disabled={invalid || submitting}>
+                  {buttonText}
+                </Button>
+              </Box>
+            </Stack>
           </form>
         </Panel>
         <Panel.Footer

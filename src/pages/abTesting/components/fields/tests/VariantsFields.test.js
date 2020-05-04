@@ -1,11 +1,17 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import VariantsFields, { RenderVariants, PercentField, SampleSizeField } from '../VariantsFields';
+import styles from './VariantsFields.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
+
 import { useHibana } from 'src/context/HibanaContext';
+jest.mock('src/hooks/useHibanaOverride');
 
 jest.mock('src/context/HibanaContext');
+
 describe('Variants Fields Component', () => {
   beforeEach(() => {
+    useHibanaOverride.mockImplementationOnce(() => styles);
     useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: false }]);
   });
   let defaultProps = {

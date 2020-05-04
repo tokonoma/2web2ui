@@ -12,6 +12,7 @@ exports[`Component ViewDetailsButton renders correct if message_id is absent 1`]
         "pathname": "/reports/message-events/details/_noid_/456xyz",
       }
     }
+    variant="tertiary"
   >
     View Details
   </PageLink>
@@ -30,6 +31,7 @@ exports[`Component ViewDetailsButton renders correctly when message_id exists 1`
         "pathname": "/reports/message-events/details/123abc/456xyz",
       }
     }
+    variant="tertiary"
   >
     View Details
   </PageLink>

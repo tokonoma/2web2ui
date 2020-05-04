@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 import { TextFieldWrapper } from 'src/components';
 import { PageLink } from 'src/components/links';
-import { Button, Page, Panel } from 'src/components/matchbox';
+import { Button, Page, Panel, Stack } from 'src/components/matchbox';
 import { required, email } from 'src/helpers/validation';
 import { inviteUser } from 'src/actions/users';
 import { showAlert } from 'src/actions/globalAlert';
@@ -42,26 +42,33 @@ export class CreatePage extends Component {
     return (
       <Page title="Invite User" breadcrumbAction={breadcrumbAction}>
         <Panel>
-          <Panel.Section>
-            <form onSubmit={handleSubmit(this.handleSubmit)}>
-              <p>An invitation will be sent to the email address you supply</p>
-              <Field
-                name="email"
-                validate={[required, email]}
-                normalize={trimWhitespaces}
-                label="Email address"
-                component={TextFieldWrapper}
-              />
-              <Field
-                name="access"
-                component={RoleRadioGroup}
-                allowSubaccountAssignment={isSubaccountReportingLive}
-              />
-              <Button submit primary disabled={submitting || pristine}>
+          <form onSubmit={handleSubmit(this.handleSubmit)}>
+            <Panel.Section>
+              <Stack>
+                <p>An invitation will be sent to the email address you supply</p>
+
+                <Field
+                  name="email"
+                  validate={[required, email]}
+                  normalize={trimWhitespaces}
+                  label="Email address"
+                  component={TextFieldWrapper}
+                />
+
+                <Field
+                  name="access"
+                  component={RoleRadioGroup}
+                  allowSubaccountAssignment={isSubaccountReportingLive}
+                />
+              </Stack>
+            </Panel.Section>
+
+            <Panel.Section>
+              <Button variant="primary" submit disabled={submitting || pristine}>
                 {submitting ? 'Loading' : 'Add User'}
               </Button>
-            </form>
-          </Panel.Section>
+            </Panel.Section>
+          </form>
         </Panel>
       </Page>
     );

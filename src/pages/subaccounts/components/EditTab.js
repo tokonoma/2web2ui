@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Panel } from 'src/components/matchbox';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 
 import { getSubaccount, editSubaccount } from 'src/actions/subaccounts';
@@ -11,13 +10,12 @@ import { showAlert } from 'src/actions/globalAlert';
 import SubaccountEditForm from './SubaccountEditForm';
 
 export class EditTab extends Component {
-
   onSubmit = ({ ipPool, name, restrictedToIpPool, status }) => {
     const { editSubaccount, subaccount, getSubaccount, showAlert } = this.props;
     const nextSubaccount = {
       name,
       status,
-      ip_pool: restrictedToIpPool ? ipPool : '' // must pass an empty string to unset
+      ip_pool: restrictedToIpPool ? ipPool : '', // must pass an empty string to unset
     };
 
     return editSubaccount(subaccount.id, nextSubaccount).then(() => {
@@ -28,25 +26,19 @@ export class EditTab extends Component {
 
   render() {
     if (this.props.loading) {
-      return (
-        <PanelLoading />
-      );
+      return <PanelLoading />;
     }
 
-    return (
-      <Panel>
-        <SubaccountEditForm subaccount={this.props.subaccount} onSubmit={this.onSubmit}/>
-      </Panel>
-    );
+    return <SubaccountEditForm subaccount={this.props.subaccount} onSubmit={this.onSubmit} />;
   }
 }
 
 const mapStateToProps = (state, props) => ({
   loading: state.ipPools.listLoading,
   subaccount: selectSubaccount(state),
-  ...props
+  ...props,
 });
 
 export default withRouter(
-  connect(mapStateToProps, { getSubaccount, editSubaccount, showAlert })(EditTab)
+  connect(mapStateToProps, { getSubaccount, editSubaccount, showAlert })(EditTab),
 );

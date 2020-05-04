@@ -1,14 +1,16 @@
-import React, { Component } from 'react';
-import { Button, Panel } from 'src/components/matchbox';
+import React from 'react';
+import { Button, Inline, Panel } from 'src/components/matchbox';
 import { FieldArray, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import styles from './SearchForm.module.scss';
+import OGStyles from './SearchForm.module.scss';
+import hibanaStyles from './SearchFormHibana.module.scss';
 import { FORMS } from 'src/constants';
 import EventTypeFilters from './EventTypeFilters';
-import { getSearchQueriesFromFilters, getBooleanEventsObject } from '../helpers/transformData.js';
+import { getBooleanEventsObject, getSearchQueriesFromFilters } from '../helpers/transformData.js';
 import { selectMessageEventListing } from 'src/selectors/eventListing';
 import { getDocumentation, updateMessageEventsSearchOptions } from 'src/actions/messageEvents';
 import SearchQuery from './SearchQuery';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 
 const defaultFilters = [
   { key: 'recipient_domains' },
@@ -16,31 +18,33 @@ const defaultFilters = [
   { key: 'subjects' },
 ];
 
-export class SearchForm extends Component {
-  render() {
-    const { handleSubmit, handleApply, handleCancel, eventListing } = this.props;
-    return (
-      <form onSubmit={handleSubmit(handleApply)}>
-        <Panel title="Advanced Filters">
-          <Panel.Section>
-            <EventTypeFilters eventTypeDocs={eventListing} />
-          </Panel.Section>
-          <Panel.Section>
-            <FieldArray component={SearchQuery} name="searchQuery" />
-            <p>All filters accept comma-separated values.</p>
-          </Panel.Section>
-          <Panel.Section>
-            <Button primary submit>
+export function SearchForm(props) {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+
+  const { handleSubmit, handleApply, handleCancel, eventListing } = props;
+  return (
+    <form onSubmit={handleSubmit(handleApply)}>
+      <Panel title="Advanced Filters">
+        <Panel.Section>
+          <EventTypeFilters eventTypeDocs={eventListing} />
+        </Panel.Section>
+        <Panel.Section>
+          <FieldArray component={SearchQuery} name="searchQuery" />
+          <p>All filters accept comma-separated values.</p>
+        </Panel.Section>
+        <Panel.Section>
+          <Inline>
+            <Button variant="primary" submit>
               Apply Filters
             </Button>
-            <Button className={styles.Cancel} onClick={handleCancel}>
+            <Button className={styles.Cancel} variant="secondary" onClick={handleCancel}>
               Cancel
             </Button>
-          </Panel.Section>
-        </Panel>
-      </form>
-    );
-  }
+          </Inline>
+        </Panel.Section>
+      </Panel>
+    </form>
+  );
 }
 
 const mapStateToProps = state => {

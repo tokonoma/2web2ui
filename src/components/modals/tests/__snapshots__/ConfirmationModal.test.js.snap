@@ -4,11 +4,12 @@ exports[`Component: ConfirmationModal should render correctly with basic props 1
 <Modal
   onClose={[MockFunction]}
 >
-  <Panel
-    sectioned={true}
-  >
-    <div>
-      <ButtonWrapper>
+  <Panel>
+    <Panel.Section />
+    <Panel.Section>
+      <ButtonWrapper
+        marginTop="0"
+      >
         <Button
           name="confirmation-modal-confirm-button"
           onClick={[MockFunction]}
@@ -23,7 +24,7 @@ exports[`Component: ConfirmationModal should render correctly with basic props 1
           Cancel
         </Button>
       </ButtonWrapper>
-    </div>
+    </Panel.Section>
   </Panel>
 </Modal>
 `;

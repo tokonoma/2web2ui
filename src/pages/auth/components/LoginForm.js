@@ -2,38 +2,34 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { TextFieldWrapper, CheckboxWrapper } from 'src/components';
+import { BottomPad } from 'src/components/hibana';
 import { PageLink } from 'src/components/links';
-import { Error, Button } from 'src/components/matchbox';
+import { Box, Button, Error, Stack } from 'src/components/matchbox';
 import { FORMS } from 'src/constants';
 import { required } from 'src/helpers/validation';
 import { trimWhitespaces } from 'src/helpers/string';
 
 export const LoginForm = ({ loginPending, loginError, handleSubmit }) => (
-  <React.Fragment>
-    {loginError && (
-      <div style={{ marginBottom: '12px' }}>
-        <Error error={loginError} />
-      </div>
-    )}
-    <form onSubmit={handleSubmit}>
+  <form onSubmit={handleSubmit}>
+    <Stack>
+      {loginError && (
+        <BottomPad>
+          <Error error={loginError} />
+        </BottomPad>
+      )}
       <Field
-        autoFocus
-        errorInLabel
         name="username"
         id="username"
         label="Email or Username"
-        placeholder="email@example.com"
         normalize={trimWhitespaces}
         component={TextFieldWrapper}
         validate={required}
       />
-
       <Field
         type="password"
         name="password"
         id="password"
         label="Password"
-        placeholder="••••••••"
         component={TextFieldWrapper}
         helpText={<PageLink to="/forgot-password">Forgot your password?</PageLink>}
       />
@@ -43,12 +39,13 @@ export const LoginForm = ({ loginPending, loginError, handleSubmit }) => (
         label="Keep me logged in"
         component={CheckboxWrapper}
       />
-
-      <Button primary submit disabled={loginPending} data-id="button-log-in">
-        {loginPending ? 'Logging In' : 'Log In'}
-      </Button>
-    </form>
-  </React.Fragment>
+      <Box>
+        <Button variant="primary" submit disabled={loginPending} data-id="button-log-in">
+          {loginPending ? 'Logging In' : 'Log In'}
+        </Button>
+      </Box>
+    </Stack>
+  </form>
 );
 
 function mapStateToProps({ auth }) {

@@ -306,7 +306,9 @@ describe('The templates edit draft page', () => {
         openTemplateSettings();
 
         cy.findByText('Duplicate').click();
-        cy.findByText('Duplicate').click(); // Duplicate confirmation button inside the modal
+        cy.withinModal(() => {
+          cy.findByText('Duplicate').click();
+        });
 
         cy.findByText('Template duplicated.').should('be.visible');
       });
@@ -324,7 +326,9 @@ describe('The templates edit draft page', () => {
         openTemplateSettings();
 
         cy.findByText('Duplicate').click();
-        cy.findByText('Duplicate').click(); // Duplicate confirmation button inside the modal
+        cy.withinModal(() => {
+          cy.findByText('Duplicate').click();
+        });
 
         cy.findByText('Something went wrong.').should('be.visible');
 

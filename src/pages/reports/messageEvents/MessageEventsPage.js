@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { snakeToFriendly } from 'src/helpers/string';
-import { Button, Page } from 'src/components/matchbox';
+import { Box, Button, Page } from 'src/components/matchbox';
 import {
   PanelLoading,
   TableCollection,
@@ -23,8 +23,11 @@ import {
 import { selectMessageEvents, selectMessageEventsCSV } from 'src/selectors/messageEvents';
 import { formatToCsv, download } from 'src/helpers/downloading';
 import { DEFAULT_PER_PAGE_BUTTONS } from 'src/constants';
+import OGStyles from './MessageEventsPage.module.scss';
+import hibanaStyles from './MessageEventsPage.module.scss';
+import { useHibana } from 'src/context/HibanaContext';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import _ from 'lodash';
-import styles from './MessageEventsPage.module.scss';
 
 const errorMsg = 'Sorry, we seem to have had some trouble loading your message events.';
 const emptyMessage = 'There are no message events for your current query';
@@ -38,7 +41,7 @@ const columns = [
   null,
 ];
 
-export class MessageEventsPage extends Component {
+export class MessageEventsPageComponent extends Component {
   state = {
     currentPage: 1,
     perPage: 25,
@@ -101,6 +104,7 @@ export class MessageEventsPage extends Component {
   };
 
   getRowData = rowData => {
+    const { styles } = this.props;
     const { timestamp, formattedDate, type, friendly_from, rcpt_to, subject } = rowData;
     return [
       <div className={styles.WordWrap}>{snakeToFriendly(type)}</div>,
@@ -131,13 +135,22 @@ export class MessageEventsPage extends Component {
   }
 
   renderCollection() {
-    const { events, empty, loading, totalCount, eventsCSVLoading } = this.props;
+    const {
+      events,
+      empty,
+      loading,
+      totalCount,
+      styles,
+      eventsCSVLoading,
+      isHibanaEnabled,
+    } = this.props;
     const { currentPage, perPage } = this.state;
 
     if (loading) {
       return <PanelLoading />;
     }
-
+    const perPageProps = isHibanaEnabled ? {} : { className: styles.RightAlignedButtons };
+    const saveCSVProps = isHibanaEnabled ? { variant: 'monochrome' } : {};
     const content = empty ? (
       <Empty message={emptyMessage} />
     ) : (
@@ -149,28 +162,35 @@ export class MessageEventsPage extends Component {
           defaultSortColumn="timestamp"
           defaultSortDirection="desc"
         />
-        <CursorPaging
-          currentPage={currentPage}
-          handlePageChange={this.handlePageChange}
-          previousDisabled={this.isPreviousDisabled()}
-          nextDisabled={this.isNextDisabled()}
-          handleFirstPage={this.handleFirstPage}
-          perPage={perPage}
-          totalCount={totalCount}
-        />
-        <div className={styles.RightAlignedButtons}>
-          <PerPageButtons
-            totalCount={totalCount}
-            data={events}
-            onPerPageChange={this.handlePerPageChange}
-            perPageButtons={DEFAULT_PER_PAGE_BUTTONS}
-            perPage={perPage}
-            saveCsv={true}
-          />
-          <Button onClick={this.getCSV} disabled={eventsCSVLoading}>
-            {eventsCSVLoading ? 'Saving CSV...' : 'Save as CSV'}
-          </Button>
-        </div>
+
+        <Box display="flex" justifyContent="space-between">
+          <Box>
+            <CursorPaging
+              currentPage={currentPage}
+              handlePageChange={this.handlePageChange}
+              previousDisabled={this.isPreviousDisabled()}
+              nextDisabled={this.isNextDisabled()}
+              handleFirstPage={this.handleFirstPage}
+              perPage={perPage}
+              totalCount={totalCount}
+            />
+          </Box>
+          <div {...perPageProps}>
+            <Box display="flex" alignItems="center">
+              <PerPageButtons
+                totalCount={totalCount}
+                data={events}
+                onPerPageChange={this.handlePerPageChange}
+                perPageButtons={DEFAULT_PER_PAGE_BUTTONS}
+                perPage={perPage}
+                saveCsv={true}
+              />
+              <Button onClick={this.getCSV} disabled={eventsCSVLoading} {...saveCSVProps}>
+                {eventsCSVLoading ? 'Saving CSV...' : 'Save as CSV'}
+              </Button>
+            </Box>
+          </div>
+        </Box>
       </div>
     );
 
@@ -188,6 +208,18 @@ export class MessageEventsPage extends Component {
     );
   }
 }
+
+const MessageEventsPage = props => {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+  const [state] = useHibana();
+  const { isHibanaEnabled } = state;
+
+  return (
+    <>
+      <MessageEventsPageComponent {...props} styles={styles} isHibanaEnabled={isHibanaEnabled} />
+    </>
+  );
+};
 
 const mapStateToProps = state => {
   const events = selectMessageEvents(state);

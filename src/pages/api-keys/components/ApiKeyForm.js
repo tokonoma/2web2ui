@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
-import { Button, Panel } from 'src/components/matchbox';
+import { Box, Button, Panel, Stack } from 'src/components/matchbox';
 
 import {
   RadioGroup,
@@ -65,49 +65,63 @@ export class ApiKeyForm extends Component {
     return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
         <Panel.Section>
-          <Field
-            name="label"
-            component={TextFieldWrapper}
-            validate={required}
-            label="API Key Name"
-            disabled={isReadOnly}
-          />
-          <Field
-            name="subaccount"
-            helpText={
-              isReadOnly
-                ? ''
-                : 'This assignment is permanent. Leave blank to assign to master account.'
-            }
-            component={SubaccountTypeaheadWrapper}
-            disabled={!isNew}
-          />
+          <Stack>
+            <Box maxWidth="1200">
+              <Field
+                name="label"
+                component={TextFieldWrapper}
+                validate={required}
+                label="API Key Name"
+                disabled={isReadOnly}
+              />
+            </Box>
+            <Box maxWidth="1200">
+              <Field
+                name="subaccount"
+                helpText={
+                  isReadOnly
+                    ? ''
+                    : 'This assignment is permanent. Leave blank to assign to master account.'
+                }
+                component={SubaccountTypeaheadWrapper}
+                disabled={!isNew}
+              />
+            </Box>
+          </Stack>
         </Panel.Section>
         <Panel.Section>
-          <Field
-            name="grantsRadio"
-            component={RadioGroup}
-            label="API Permissions"
-            options={this.getGrantOptions()}
-          />
-          <GrantsCheckboxes grants={this.availableGrants} show={showGrants} disabled={isReadOnly} />
-          <Field
-            name="validIps"
-            component={TextFieldWrapper}
-            label="Allowed IPs"
-            helpText={
-              isReadOnly
-                ? ''
-                : 'Leaving the field blank will allow access by valid API keys from any IP address.'
-            }
-            placeholder={isReadOnly ? '' : '10.20.30.40, 10.20.30.0/24'}
-            validate={validIpList}
-            disabled={isReadOnly}
-          />
+          <Stack>
+            <Field
+              name="grantsRadio"
+              component={RadioGroup}
+              label="API Permissions"
+              options={this.getGrantOptions()}
+            />
+            <GrantsCheckboxes
+              grants={this.availableGrants}
+              show={showGrants}
+              disabled={isReadOnly}
+            />
+            <Box maxWidth="1200">
+              <Field
+                name="validIps"
+                component={TextFieldWrapper}
+                label="Allowed IPs"
+                helpText={
+                  isReadOnly
+                    ? ''
+                    : 'Leaving the field blank will allow access by valid API keys from any IP address.'
+                }
+                placeholder={isReadOnly ? '' : '10.20.30.40, 10.20.30.0/24'}
+                validate={validIpList}
+                disabled={isReadOnly}
+              />
+            </Box>
+          </Stack>
         </Panel.Section>
         {!isReadOnly && (
           <Panel.Section>
-            <Button submit primary disabled={submitting || pristine}>
+            <Button submit variant="primary" disabled={submitting || pristine}>
               {submitting ? 'Loading...' : submitText}
             </Button>
           </Panel.Section>

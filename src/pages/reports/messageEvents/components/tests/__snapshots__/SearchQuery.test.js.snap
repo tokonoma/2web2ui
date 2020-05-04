@@ -220,13 +220,15 @@ exports[`SearchForm should render correctly with existing filters 1`] = `
       </Grid.Column>
     </Grid>
   </Stack>
+  <Box
+    marginBottom="400"
+  />
   <Button
     className="AddButton"
     color="blue"
     flat={true}
     onClick={[Function]}
   >
-     
     Add Filter
     <AddCircleOutline
       className="Icon"
@@ -240,13 +242,15 @@ exports[`SearchForm should render correctly with no filters 1`] = `
   <Stack
     space="400"
   />
+  <Box
+    marginBottom="400"
+  />
   <Button
     className="AddButton"
     color="blue"
     flat={true}
     onClick={[Function]}
   >
-     
     Add Filter
     <AddCircleOutline
       className="Icon"

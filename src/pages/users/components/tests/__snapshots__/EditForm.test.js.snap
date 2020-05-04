@@ -26,10 +26,10 @@ exports[`Component: EditForm should render 1`] = `
     </Panel.Section>
     <Panel.Section>
       <Button
-        primary={true}
         submit={true}
+        variant="primary"
       >
-        Update user
+        Update User
       </Button>
     </Panel.Section>
   </form>

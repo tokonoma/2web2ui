@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, formValueSelector } from 'redux-form';
-
-import { Button, Panel } from 'src/components/matchbox';
+import { tokens } from '@sparkpost/design-tokens-hibana';
+import { Box, Button, Panel, Stack } from 'src/components/matchbox';
+import { ButtonWrapper } from 'src/components';
 import { getIpPools } from 'src/selectors/ipPools';
 import { selectFirstIpPoolId } from 'src/selectors/ipPools';
 import { NameField, StatusSelect } from './formFields';
@@ -24,26 +25,36 @@ export class SubaccountEditForm extends Component {
     return (
       <form onSubmit={handleSubmit}>
         <Panel.Section>
-          <NameField disabled={submitting || compliance} />
-          <StatusSelect disabled={submitting || compliance} compliance={compliance} />
-        </Panel.Section>
-        {Boolean(ipPools.length) && (
-          <Panel.Section>
-            <RestrictToIpPoolCheckbox disabled={submitting || compliance} />
-            {restrictedToIpPool && (
-              <IpPoolSelect disabled={submitting || compliance} options={ipPools} />
+          <Stack>
+            <Box maxWidth={tokens.sizing_1200}>
+              <NameField disabled={submitting || compliance} />
+            </Box>
+
+            <Box maxWidth={tokens.sizing_1200}>
+              <StatusSelect disabled={submitting || compliance} compliance={compliance} />
+            </Box>
+
+            {Boolean(ipPools.length) && (
+              <Stack>
+                <RestrictToIpPoolCheckbox disabled={submitting || compliance} />
+                {restrictedToIpPool && (
+                  <IpPoolSelect disabled={submitting || compliance} options={ipPools} />
+                )}
+              </Stack>
             )}
-          </Panel.Section>
-        )}
+          </Stack>
+        </Panel.Section>
         <Panel.Section>
-          <Button submit primary disabled={pristine || submitting || compliance}>
-            {submitting ? 'Updating...' : 'Update Subaccount'}
-          </Button>
-          {!pristine && (
-            <Button style={{ marginLeft: '1em' }} disabled={pristine || submitting} onClick={reset}>
-              Cancel
+          <ButtonWrapper marginTop="0">
+            <Button variant="primary" submit disabled={pristine || submitting || compliance}>
+              {submitting ? 'Updating...' : 'Update Subaccount'}
             </Button>
-          )}
+            {!pristine && (
+              <Button variant="secondary" disabled={pristine || submitting} onClick={reset}>
+                Cancel
+              </Button>
+            )}
+          </ButtonWrapper>
         </Panel.Section>
       </form>
     );

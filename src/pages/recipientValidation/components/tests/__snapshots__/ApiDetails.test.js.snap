@@ -10,7 +10,6 @@ exports[`ApiDetails tab should render page correctly 1`] = `
       md={6}
       xs={12}
     >
-      <br />
       <div
         className="Header"
       >
@@ -18,19 +17,20 @@ exports[`ApiDetails tab should render page correctly 1`] = `
       </div>
       <p>
         Validate an email the moment you receive it, in real-time.
-        <br />
+      </p>
+      <p>
         Block fake emails and catch typos with a single API request.
       </p>
-      <div
-        className="SampleRequest"
-      >
+      <div>
+        <div
+          className="SubHeader"
+        >
+          GET
+        </div>
         <small>
-          <span
-            className="Method"
+          <code
+            className="ExampleMethod"
           >
-            GET
-          </span>
-          <code>
             /api/v1/recipient-validation/single/
             {
             address

@@ -1,3 +1,4 @@
+export { default as BottomPad } from './BottomPad';
 export { default as HibanaBanner } from './HibanaBanner';
 export { default as HibanaToggle } from './HibanaToggle';
 export { default as OGOnlyWrapper } from './OGOnlyWrapper';

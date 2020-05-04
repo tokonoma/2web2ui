@@ -15,12 +15,13 @@ exports[`SingleAddressForm renders correctly 1`] = `
   <div
     className="Field"
   >
-    <Label
-      className="FieldLabel"
-      id="email-address-field"
-    >
-      Email Address
-    </Label>
+    <ScreenReaderOnly>
+      <Label
+        id="email-address-field"
+      >
+        Email Address
+      </Label>
+    </ScreenReaderOnly>
     <Field
       component={[Function]}
       id="email-address-field"

@@ -2,7 +2,7 @@
 
 exports[`GrantsCheckboxes should render 1`] = `
 <Grid
-  className="Grants show"
+  className="Grants"
 >
   <Grid.Column
     key="0"

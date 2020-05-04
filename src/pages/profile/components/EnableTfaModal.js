@@ -17,7 +17,7 @@ export default class EnableTfaModal extends React.Component {
 
     return (
       <Modal open={open}>
-        <Panel title="Enable Two-Factor Authentication">
+        <Panel sectioned title="Enable Two-Factor Authentication">
           <EnableTfaForm afterEnable={onEnable} onClose={onClose} />
         </Panel>
       </Modal>

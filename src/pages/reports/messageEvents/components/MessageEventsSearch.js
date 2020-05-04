@@ -21,9 +21,11 @@ import { stringToArray } from 'src/helpers/string';
 import { onEnter } from 'src/helpers/keyEvents';
 import { FORMATS, RELATIVE_DATE_OPTIONS, ALL_EVENTS_FILTERS } from 'src/constants';
 import config from 'src/config';
-import styles from './MessageEventsSearch.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
+import OGStyles from './MessageEventsSearch.module.scss';
+import hibanaStyles from './MessageEventsSearchHibana.module.scss';
 
-export class MessageEventsSearch extends Component {
+export class MessageEventsSearchComponent extends Component {
   state = {
     recipientError: null,
   };
@@ -75,6 +77,7 @@ export class MessageEventsSearch extends Component {
       loading,
       now = new Date(),
       searchOptions,
+      styles,
     } = this.props;
     const { retentionPeriodDays } = config.messageEvents;
     const { recipients } = ALL_EVENTS_FILTERS;
@@ -128,6 +131,15 @@ export class MessageEventsSearch extends Component {
     );
   }
 }
+const MessageEventsSearch = props => {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+
+  return (
+    <>
+      <MessageEventsSearchComponent {...props} styles={styles} />
+    </>
+  );
+};
 
 const mapStateToProps = state => ({
   search: state.messageEvents.search,

@@ -26,48 +26,67 @@ exports[`ApiKeyFields 1`] = `""`;
 
 exports[`ApiKeyFields 2`] = `
 <div>
-  <Field
-    component={[Function]}
-    disabled={false}
-    label="Key Name"
-    name="keyName"
-    validate={[Function]}
-  />
-  <Field
-    component={[Function]}
-    disabled={false}
-    label="API Permissions"
-    name="grantsRadio"
-    options={
-      Array [
-        Object {
-          "label": "All",
-          "value": "all",
-        },
-        Object {
-          "label": "Select",
-          "value": "select",
-        },
-      ]
-    }
-  />
-  <GrantsCheckboxes
-    grants={
-      Array [
-        "l0L",
-      ]
-    }
-    show={true}
-  />
-  <Field
-    component={[Function]}
-    disabled={false}
-    helpText="Leaving the field blank will allow access by valid API keys from any IP address."
-    label="Allowed IPs"
-    name="validIps"
-    placeholder="10.20.30.40, 10.20.30.0/24"
-    validate={[Function]}
-  />
+  <Stack>
+    <Box
+      maxWidth="45rem"
+    >
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Key Name"
+        name="keyName"
+        validate={[Function]}
+      />
+    </Box>
+    <Field
+      component={[Function]}
+      disabled={false}
+      label="API Permissions"
+      name="grantsRadio"
+      options={
+        Array [
+          Object {
+            "label": "All",
+            "value": "all",
+          },
+          Object {
+            "label": "Select",
+            "value": "select",
+          },
+        ]
+      }
+    />
+    <GrantsCheckboxes
+      grants={
+        Array [
+          "l0L",
+        ]
+      }
+      show={true}
+    />
+    <Box
+      maxWidth="45rem"
+    >
+      <OGOnlyWrapper
+        as="div"
+        style={
+          Object {
+            "marginBottom": "10px",
+          }
+        }
+      >
+        <Field
+          component={[Function]}
+          disabled={false}
+          helpText="Leaving the field blank will allow access by valid API keys from any IP address."
+          label="Allowed IPs"
+          name="validIps"
+          placeholder="10.20.30.40, 10.20.30.0/24"
+          validate={[Function]}
+        />
+      </OGOnlyWrapper>
+    </Box>
+  </Stack>
 </div>
 `;
 
@@ -75,7 +94,14 @@ exports[`NameField 1`] = `
 <Field
   component={[Function]}
   disabled={false}
-  label="Name"
+  helpText={
+    <ExternalLink
+      to="https://sparkpost.com/docs/user-guide/subaccounts/"
+    >
+      Learn more about Subaccounts
+    </ExternalLink>
+  }
+  label="Subaccount Name"
   name="name"
   validate={[Function]}
 />
@@ -85,7 +111,14 @@ exports[`NameField 2`] = `
 <Field
   component={[Function]}
   disabled={true}
-  label="Name"
+  helpText={
+    <ExternalLink
+      to="https://sparkpost.com/docs/user-guide/subaccounts/"
+    >
+      Learn more about Subaccounts
+    </ExternalLink>
+  }
+  label="Subaccount Name"
   name="name"
   validate={[Function]}
 />

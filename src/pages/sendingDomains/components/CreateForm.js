@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
+import { tokens } from '@sparkpost/design-tokens-hibana';
 import { Box, Button, Panel, Stack } from 'src/components/matchbox';
 import { ButtonWrapper, TextFieldWrapper } from 'src/components';
 import { PageLink } from 'src/components/links';
@@ -9,7 +10,6 @@ import { hasSubaccounts } from 'src/selectors/subaccounts';
 import SubaccountForm from './SubaccountForm';
 
 const FORM_NAME = 'createSendingDomain';
-const FIELD_MAX_WIDTH = '860px';
 
 export class CreateForm extends Component {
   render() {
@@ -18,7 +18,7 @@ export class CreateForm extends Component {
     return (
       <form onSubmit={handleSubmit}>
         <Panel.Section>
-          <Box maxWidth={FIELD_MAX_WIDTH}>
+          <Box maxWidth={tokens.sizing_1200}>
             <Stack>
               <p>
                 We recommend using a subdomain e.g. <em>mail.mydomain.com</em>. Depending on how you

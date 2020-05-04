@@ -15,42 +15,6 @@ let wrapper;
 let formValues;
 
 jest.mock('js-cookie');
-jest.mock('src/config', () => ({
-  zuora: {}, //axiosInstance throws without this
-  brightback: {}, //axiosInstance throws without this
-  authentication: {
-    //authCookie throws without this
-    app: { cookie: {} },
-    site: { cookie: {} },
-  },
-  heroku: {
-    cookieName: 'my-cookie',
-  },
-  website: {
-    domain: '',
-  },
-  support: {
-    algolia: {},
-  },
-  cookieConsent: { cookie: {} },
-  links: {
-    submitTicket: 'https://support.sparkpost.com/customer/portal/emails/new',
-  },
-  salesforceDataParams: [
-    'src',
-    'utm_source',
-    'utm_medium',
-    'utm_campaign',
-    'utm_content',
-    'utm_term',
-  ],
-  attribution: {
-    cookieName: 'attribution',
-    cookieDuration: 60 * 24 * 30,
-    cookieDomain: '.sparkpost.com',
-  },
-}));
-
 jest.mock('src/helpers/analytics');
 
 describe('JoinPage', () => {

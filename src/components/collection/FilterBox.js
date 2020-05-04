@@ -1,18 +1,23 @@
 import React from 'react';
-import { Box, Label, Panel, TextField, ScreenReaderOnly } from 'src/components/matchbox';
 import { Search } from '@sparkpost/matchbox-icons';
+import { tokens } from '@sparkpost/design-tokens-hibana';
+import { Box, Label, Panel, TextField, ScreenReaderOnly } from 'src/components/matchbox';
 import { getRandomExampleSearch } from './helpers/exampleSearch';
 import styles from './FilterBox.module.scss';
 import { useHibana } from 'src/context/HibanaContext';
-
-// TODO: Replace with Matchbox design tokens once exposed
-const FIELD_MAX_WIDTH = '750px';
 
 function CollectionFilterBox(props) {
   const [state] = useHibana();
   const { isHibanaEnabled } = state;
 
-  const { initialValue, placeholder, wrapper, onChange, onBlur = () => {} } = props;
+  const {
+    initialValue,
+    placeholder,
+    wrapper,
+    maxWidth = tokens.sizing_1200,
+    onChange,
+    onBlur = () => {},
+  } = props;
   const placeholderText = placeholder || `Filter results e.g. ${getRandomExampleSearch(props)}`;
 
   const text = (
@@ -23,7 +28,7 @@ function CollectionFilterBox(props) {
         </Label>
       )}
 
-      <Box maxWidth={FIELD_MAX_WIDTH}>
+      <Box maxWidth={maxWidth}>
         <TextField
           labelHidden
           label={isHibanaEnabled ? 'Filter By' : undefined}
@@ -39,7 +44,13 @@ function CollectionFilterBox(props) {
     </>
   );
 
-  return wrapper ? wrapper(text) : <Panel sectioned>{text}</Panel>;
+  return wrapper ? (
+    wrapper(text)
+  ) : (
+    <Panel mb="0" className={styles.Panel} sectioned>
+      {text}
+    </Panel>
+  );
 }
 
 export default CollectionFilterBox;

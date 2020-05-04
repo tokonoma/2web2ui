@@ -1,7 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`JobStatusTag renders a loading tag 1`] = `
-<Tag>
+<Tag
+  color=""
+  style={
+    Object {
+      "verticalAlign": "bottom",
+    }
+  }
+>
   <span
     className="JobStatusTagContent Loading"
   >
@@ -15,7 +22,14 @@ exports[`JobStatusTag renders a loading tag 1`] = `
 `;
 
 exports[`JobStatusTag renders a ready tag 1`] = `
-<Tag>
+<Tag
+  color=""
+  style={
+    Object {
+      "verticalAlign": "bottom",
+    }
+  }
+>
   <span
     className="JobStatusTagContent Ready"
   >
@@ -29,7 +43,14 @@ exports[`JobStatusTag renders a ready tag 1`] = `
 `;
 
 exports[`JobStatusTag renders a success tag 1`] = `
-<Tag>
+<Tag
+  color=""
+  style={
+    Object {
+      "verticalAlign": "bottom",
+    }
+  }
+>
   <span
     className="JobStatusTagContent Complete"
   >
@@ -43,7 +64,14 @@ exports[`JobStatusTag renders a success tag 1`] = `
 `;
 
 exports[`JobStatusTag renders an error tag 1`] = `
-<Tag>
+<Tag
+  color=""
+  style={
+    Object {
+      "verticalAlign": "bottom",
+    }
+  }
+>
   <span
     className="JobStatusTagContent Failed"
   >

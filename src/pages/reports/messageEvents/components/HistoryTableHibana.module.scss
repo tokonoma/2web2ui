@@ -1,0 +1,30 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.HeaderCell {
+  padding: spacing(200) spacing(400) spacing(200);
+  vertical-align: bottom;
+}
+
+.Row {
+  position: relative;
+  transition: 0.15s;
+  background: #ffffff;
+  &:not(.selected):hover {
+    cursor: pointer;
+    background: color(gray, 100);
+  }
+}
+
+.selected {
+  background: color(blue, 100);
+
+  .Bar {
+    opacity: 1;
+  }
+}
+
+.Bar {
+  background: color(blue, 700);
+  opacity: 0;
+  transition: 0.15s;
+}

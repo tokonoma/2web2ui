@@ -1,10 +1,10 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
 .ListProgress {
-  margin: spacing(larger)*3 0;
+  margin: spacing(larger) * 3 0;
 }
 
-.ListProgressContainer {
+.Container {
   width: 80%;
   padding: spacing();
 }

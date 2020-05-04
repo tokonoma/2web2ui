@@ -7,9 +7,9 @@ import { showAlert } from 'src/actions/globalAlert';
 import { updatePaymentInitialValues } from 'src/selectors/accountBillingForms';
 import { prepareCardInfo } from 'src/helpers/billing';
 import { Button, Panel } from 'src/components/matchbox';
+import { ButtonWrapper } from 'src/components';
 import PaymentForm from 'src/components/billing/PaymentForm';
 import BillingAddressForm from 'src/components/billing/BillingAddressForm';
-import styles from './UpdatePaymentForm.module.scss';
 
 const FORMNAME = 'updatePayment';
 
@@ -43,16 +43,16 @@ export class UpdatePaymentForm extends Component {
               disabled={submitting}
               countries={this.props.billing.countries}
             />
-          </Panel.Section>
-          <Panel.Section>
-            <Button type="submit" primary disabled={submitting}>
-              Update Payment Information
-            </Button>
-            {onCancel && (
-              <Button onClick={onCancel} className={styles.Cancel}>
-                Cancel
+            <ButtonWrapper>
+              <Button type="submit" variant="primary" disabled={submitting}>
+                Update Payment Information
               </Button>
-            )}
+              {onCancel && (
+                <Button onClick={onCancel} variant="secondary">
+                  Cancel
+                </Button>
+              )}
+            </ButtonWrapper>
           </Panel.Section>
         </Panel>
       </form>

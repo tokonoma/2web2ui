@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { formValueSelector, clearFields } from 'redux-form';
 import { RadioGroup } from 'src/components/reduxFormWrappers';
+import { Box } from 'src/components/matchbox';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { FORMS, ROLES, ROLE_LABELS } from 'src/constants';
 import SubaccountAssignment from './SubaccountAssignment';
@@ -66,10 +67,12 @@ export class RoleRadioGroup extends React.Component {
       {
         ...REPORTING_ROLE,
         children: allowSubaccountAssignment && hasSubaccounts && (
-          <SubaccountAssignment
-            selectedRole={selectedRole}
-            useSubaccountChecked={useSubaccountChecked}
-          />
+          <Box mt="400">
+            <SubaccountAssignment
+              selectedRole={selectedRole}
+              useSubaccountChecked={useSubaccountChecked}
+            />
+          </Box>
         ),
       },
       allowSuperUser && SUPERUSER_ROLE,

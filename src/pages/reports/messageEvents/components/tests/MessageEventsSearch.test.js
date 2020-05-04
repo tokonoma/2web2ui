@@ -1,9 +1,9 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { MessageEventsSearch } from '../MessageEventsSearch';
+import { MessageEventsSearchComponent as MessageEventsSearch } from '../MessageEventsSearch';
+import styles from '../MessageEventsSearch.module.scss';
 
 describe('Component: MessageEventsSearch', () => {
-
   let props;
   let wrapper;
   let instance;
@@ -14,7 +14,7 @@ describe('Component: MessageEventsSearch', () => {
       getMessageEvents: jest.fn(),
       search: {
         dateOptions: { from: testDate, to: testDate },
-        recipients: []
+        recipients: [],
       },
       loading: false,
       refreshMessageEventsDateRange: jest.fn(),
@@ -22,7 +22,8 @@ describe('Component: MessageEventsSearch', () => {
       updateMessageEventsSearchOptions: jest.fn(),
       now: testDate,
       searchOptions: {},
-      location: {}
+      location: {},
+      styles: styles,
     };
     wrapper = shallow(<MessageEventsSearch {...props} />);
     instance = wrapper.instance();
@@ -42,24 +43,23 @@ describe('Component: MessageEventsSearch', () => {
   });
 
   describe('recipients field', () => {
-
     it('should update recipients on blur', () => {
       const event = {
         target: {
-          value: ''
-        }
+          value: '',
+        },
       };
 
       event.target.value = 'email@domain.com';
       wrapper.find('TextField').simulate('blur', event);
       expect(props.addFilters).toHaveBeenLastCalledWith({
-        recipients: ['email@domain.com']
+        recipients: ['email@domain.com'],
       });
 
       event.target.value = 'email1@domain.com , email2@domain.com';
       wrapper.find('TextField').simulate('blur', event);
       expect(props.addFilters).toHaveBeenLastCalledWith({
-        recipients: ['email1@domain.com', 'email2@domain.com']
+        recipients: ['email1@domain.com', 'email2@domain.com'],
       });
       expect(event.target.value).toBe('');
     });
@@ -67,8 +67,8 @@ describe('Component: MessageEventsSearch', () => {
     it('does not refresh on invalid recipient', () => {
       const event = {
         target: {
-          value: 'abc'
-        }
+          value: 'abc',
+        },
       };
 
       // Single invalid
@@ -79,12 +79,14 @@ describe('Component: MessageEventsSearch', () => {
       expect(wrapper.find('TextField').props().error).toBe('abc is not a valid email address');
 
       // Multiple invalid
-      wrapper.find('TextField').simulate('blur', { target: { value: 'abc, 123' }});
+      wrapper.find('TextField').simulate('blur', { target: { value: 'abc, 123' } });
       expect(props.addFilters).not.toHaveBeenCalled();
-      expect(wrapper.find('TextField').props().error).toBe('abc, 123 are not valid email addresses');
+      expect(wrapper.find('TextField').props().error).toBe(
+        'abc, 123 are not valid email addresses',
+      );
 
       // Clears error
-      wrapper.find('TextField').simulate('blur', { target: { value: 'abc@123.com' }});
+      wrapper.find('TextField').simulate('blur', { target: { value: 'abc@123.com' } });
       expect(wrapper.find('TextField').props().error).toBe(null);
     });
 
@@ -99,17 +101,15 @@ describe('Component: MessageEventsSearch', () => {
       const event = {
         key: 'Enter',
         target: {
-          value: 'email@domain.com'
-        }
+          value: 'email@domain.com',
+        },
       };
 
       wrapper.find('TextField').simulate('keyDown', event);
       expect(props.addFilters).toHaveBeenLastCalledWith({
-        recipients: ['email@domain.com']
+        recipients: ['email@domain.com'],
       });
       expect(event.target.value).toBe('');
     });
-
   });
-
 });

@@ -13,13 +13,12 @@ function Navigation(props) {
 
   return (
     <>
+      {bannerOpen && <PendingCancelGlobalBanner style={{ position: 'sticky', top: 0 }} />}
       <header className={className}>
         <DesktopNavigation navItems={navItems} location={location} />
 
         <MobileNavigation navItems={navItems} location={location} />
       </header>
-
-      {bannerOpen && <PendingCancelGlobalBanner style={{ position: 'sticky', top: 0 }} />}
     </>
   );
 }

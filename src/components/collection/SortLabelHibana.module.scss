@@ -1,22 +1,44 @@
 @import '~@sparkpost/design-tokens-hibana/tokens';
+@import '~src/styles/resets';
 
 .SortLabel {
   display: flex;
-  margin-left: -(spacing(400));
+  align-items: center;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  padding: spacing(100) 0;
+
+  &:hover,
+  &:focus {
+    .Down,
+    .Up {
+      background-color: color(blue, 200);
+      color: color(blue, 700);
+    }
+  }
 }
 
-.Up:not(.selected),
-.Down:not(.selected) {
-  margin-top: -(spacing(300));
-  margin-bottom: -(spacing(300));
-  opacity: 0.4;
+.Down,
+.Up {
+  @include button-reset();
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: spacing(400);
+  width: spacing(400);
+  padding: 0;
+  margin: 0;
+  margin-left: spacing(200);
+  border-radius: border-radius(100);
+  color: color(gray, 700);
+  background-color: transparent;
+  transition: background-color motion-duration(fast) motion-ease(in-out),
+    color motion-duration(fast) motion-ease(in-out);
 }
 
 .SortLabel.selected .Up,
 .SortLabel.selected .Down {
-  padding: spacing(0);
-  margin-top: 0;
-  margin-bottom: 0;
-  opacity: 1;
-  color: color(blue, 700);
+  color: color(white);
+  background-color: color(blue, 700);
 }

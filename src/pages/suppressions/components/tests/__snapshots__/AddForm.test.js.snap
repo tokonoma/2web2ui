@@ -5,7 +5,7 @@ exports[`AddForm tests should disable fields when submitting 1`] = `
   <form>
     <Stack>
       <Box
-        maxWidth="860px"
+        maxWidth="45rem"
       >
         <Field
           component={[Function]}
@@ -21,7 +21,7 @@ exports[`AddForm tests should disable fields when submitting 1`] = `
         />
       </Box>
       <Box
-        maxWidth="860px"
+        maxWidth="45rem"
       >
         <Field
           component={[Function]}
@@ -72,7 +72,7 @@ exports[`AddForm tests should make form submitable when dirty and not submitting
   <form>
     <Stack>
       <Box
-        maxWidth="860px"
+        maxWidth="45rem"
       >
         <Field
           component={[Function]}
@@ -88,7 +88,7 @@ exports[`AddForm tests should make form submitable when dirty and not submitting
         />
       </Box>
       <Box
-        maxWidth="860px"
+        maxWidth="45rem"
       >
         <Field
           component={[Function]}
@@ -139,7 +139,7 @@ exports[`AddForm tests should render add form 1`] = `
   <form>
     <Stack>
       <Box
-        maxWidth="860px"
+        maxWidth="45rem"
       >
         <Field
           component={[Function]}
@@ -155,7 +155,7 @@ exports[`AddForm tests should render add form 1`] = `
         />
       </Box>
       <Box
-        maxWidth="860px"
+        maxWidth="45rem"
       >
         <Field
           component={[Function]}

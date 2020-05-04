@@ -1,8 +1,7 @@
 import React from 'react';
+import classNames from 'classnames';
 import { ArrowDropDown, ArrowDropUp } from '@sparkpost/matchbox-icons';
-import { Box, Button, Text, UnstyledLink } from 'src/components/matchbox';
-
-import cx from 'classnames';
+import { Box, Text, UnstyledLink } from 'src/components/matchbox';
 import OGStyles from './SortLabel.module.scss';
 import HibanaStyles from './SortLabelHibana.module.scss';
 import useHibanaToggle from 'src/hooks/useHibanaToggle';
@@ -10,7 +9,7 @@ import useHibanaToggle from 'src/hooks/useHibanaToggle';
 export const OGSortLabel = ({ label, direction, ...rest }) => {
   const styles = OGStyles;
 
-  const classes = cx(
+  const classes = classNames(
     styles.SortLabel,
     direction === 'asc' && styles.asc,
     direction === 'desc' && styles.desc,
@@ -32,29 +31,31 @@ export const OGSortLabel = ({ label, direction, ...rest }) => {
 };
 
 export const HibanaSortLabel = ({ label, direction, ...rest }) => {
-  const classes = cx(
+  const classes = classNames(
     HibanaStyles.SortLabel,
     (direction === 'asc' || direction === 'desc') && HibanaStyles.selected,
   );
 
   return (
-    <Button className={classes} flat {...rest}>
+    <button className={classes} {...rest}>
       <Text as="span" fontWeight="500" color="gray.800">
         {label}
       </Text>
+
       <Box>
-        {direction !== 'desc' && (
-          <div className={HibanaStyles.Up}>
-            <ArrowDropUp />
+        {(!direction || direction === 'desc') && (
+          <div className={HibanaStyles.Down}>
+            <ArrowDropDown size={22} />
           </div>
         )}
-        {direction !== 'asc' && (
-          <div className={HibanaStyles.Down}>
-            <ArrowDropDown />
+
+        {direction === 'asc' && (
+          <div className={HibanaStyles.Up}>
+            <ArrowDropUp size={22} />
           </div>
         )}
       </Box>
-    </Button>
+    </button>
   );
 };
 

@@ -2,57 +2,59 @@
 
 exports[`Payment Form:  should render 1`] = `
 <div>
-  <p>
-    <small>
-      Credit Card
-    </small>
-  </p>
-  <Field
-    component={[Function]}
-    label="Credit Card Number"
-    name="card.number"
-    validate={
-      Array [
-        [Function],
-        [Function],
-      ]
-    }
-  />
-  <Field
-    component={[Function]}
-    label="Cardholder Name"
-    name="card.name"
-    validate={[Function]}
-  />
-  <Grid>
-    <Grid.Column
-      xs={6}
-    >
-      <Field
-        component={[Function]}
-        label="Expiration Date"
-        name="card.expCombined"
-        placeholder="MM / YY"
-        validate={
-          Array [
-            [Function],
-            [Function],
-          ]
-        }
-      />
-    </Grid.Column>
-    <Grid.Column
-      xs={6}
-    >
-      <Field
-        component={[Function]}
-        label="Security Code"
-        name="card.securityCode"
-        placeholder="CVV/CVC"
-        validate={[Function]}
-      />
-    </Grid.Column>
-  </Grid>
+  <Stack>
+    <p>
+      <small>
+        Credit Card
+      </small>
+    </p>
+    <Field
+      component={[Function]}
+      label="Credit Card Number"
+      name="card.number"
+      validate={
+        Array [
+          [Function],
+          [Function],
+        ]
+      }
+    />
+    <Field
+      component={[Function]}
+      label="Cardholder Name"
+      name="card.name"
+      validate={[Function]}
+    />
+    <Grid>
+      <Grid.Column
+        xs={6}
+      >
+        <Field
+          component={[Function]}
+          label="Expiration Date"
+          name="card.expCombined"
+          placeholder="MM / YY"
+          validate={
+            Array [
+              [Function],
+              [Function],
+            ]
+          }
+        />
+      </Grid.Column>
+      <Grid.Column
+        xs={6}
+      >
+        <Field
+          component={[Function]}
+          label="Security Code"
+          name="card.securityCode"
+          placeholder="CVV/CVC"
+          validate={[Function]}
+        />
+      </Grid.Column>
+    </Grid>
+  </Stack>
 </div>
 `;
 

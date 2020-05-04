@@ -24,22 +24,24 @@ export default function ConfirmationModal(props) {
 
   const renderContent = () => {
     return (
-      <div>
-        {content}
-        <ButtonWrapper>
-          <Button
-            variant={confirmVariant}
-            disabled={confirming}
-            name="confirmation-modal-confirm-button"
-            onClick={onConfirm}
-          >
-            {confirmVerb}
-          </Button>
-          <Button variant={cancelVariant} onClick={onCancel}>
-            {cancelVerb}
-          </Button>
-        </ButtonWrapper>
-      </div>
+      <>
+        <Panel.Section>{content}</Panel.Section>
+        <Panel.Section>
+          <ButtonWrapper marginTop="0">
+            <Button
+              variant={confirmVariant}
+              disabled={confirming}
+              name="confirmation-modal-confirm-button"
+              onClick={onConfirm}
+            >
+              {confirmVerb}
+            </Button>
+            <Button variant={cancelVariant} onClick={onCancel}>
+              {cancelVerb}
+            </Button>
+          </ButtonWrapper>
+        </Panel.Section>
+      </>
     );
   };
 
@@ -51,9 +53,7 @@ export default function ConfirmationModal(props) {
       {isPending ? (
         <PanelLoading minHeight="200px" title={title} />
       ) : (
-        <Panel title={title} sectioned>
-          {renderContent()}
-        </Panel>
+        <Panel title={title}>{renderContent()}</Panel>
       )}
     </Modal>
   );

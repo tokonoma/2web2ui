@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import {
   getMessageEvents,
@@ -9,20 +9,24 @@ import { removeEmptyFilters, getFiltersAsArray } from '../helpers/transformData.
 import { snakeToFriendly } from 'src/helpers/string';
 import { ALL_EVENTS_FILTERS } from 'src/constants';
 import { Panel, Tag } from 'src/components/matchbox';
+import OGStyles from './ActiveFilters.module.scss';
+import hibanaStyles from './ActiveFiltersHibana.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import _ from 'lodash';
-import styles from './ActiveFilters.module.scss';
 
 const filterTypes = [...getFiltersAsArray(ALL_EVENTS_FILTERS)];
 
-export class ActiveFilters extends Component {
-  renderTags = () => {
-    const { search } = this.props;
+export function ActiveFilters(props) {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+
+  const renderTags = () => {
+    const { search } = props;
     const nonEmptyFilters = removeEmptyFilters(search);
     const nonEmptyFilterTypes = filterTypes.filter(filterType => nonEmptyFilters[filterType.value]);
     const activeFilters = _.flatMap(nonEmptyFilterTypes, ({ value, label }, typeIndex) =>
       nonEmptyFilters[value].map((item, valueIndex) => (
         <Tag
-          onRemove={() => this.handleRemove({ key: value, item })}
+          onRemove={() => handleRemove({ key: value, item })}
           key={`${typeIndex}-${valueIndex}`}
           className={styles.TagWrapper}
         >
@@ -33,36 +37,34 @@ export class ActiveFilters extends Component {
     return activeFilters;
   };
 
-  handleRemove = filter => {
-    this.props.removeFilter(filter);
+  const handleRemove = filter => {
+    props.removeFilter(filter);
   };
 
-  handleRemoveAll = () => {
-    const { dateOptions, ...filters } = this.props.search;
+  const handleRemoveAll = () => {
+    const { dateOptions, ...filters } = props.search;
     const clearedFilters = _.mapValues(filters, () => []);
-    this.props.updateMessageEventsSearchOptions({ dateOptions, ...clearedFilters });
+    props.updateMessageEventsSearchOptions({ dateOptions, ...clearedFilters });
   };
 
-  isEmpty() {
-    const { dateOptions, ...rest } = this.props.search;
+  const isEmpty = () => {
+    const { dateOptions, ...rest } = props.search;
     // eslint-disable-next-line lodash/matches-prop-shorthand
     return _.every(rest, arr => arr.length === 0);
+  };
+
+  if (isEmpty()) {
+    return null;
   }
 
-  render() {
-    if (this.isEmpty()) {
-      return null;
-    }
-
-    return (
-      <Panel.Section
-        actions={[{ content: 'Clear All Filters', onClick: this.handleRemoveAll, color: 'blue' }]}
-      >
-        <small>Filters: </small>
-        {this.renderTags()}
-      </Panel.Section>
-    );
-  }
+  return (
+    <Panel.Section
+      actions={[{ content: 'Clear All Filters', onClick: handleRemoveAll, color: 'blue' }]}
+    >
+      <small>Filters: </small>
+      {renderTags()}
+    </Panel.Section>
+  );
 }
 
 const mapStateToProps = state => ({

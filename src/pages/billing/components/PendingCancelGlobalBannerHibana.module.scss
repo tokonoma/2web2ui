@@ -1,0 +1,16 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.banner {
+  background-color: color(blue, 700);
+  height: line-height(600); // hmm
+  line-height: line-height(600);
+}
+
+.banner {
+  top: 0;
+}
+
+.RenewButton {
+  margin-left: spacing(400);
+  font-weight: font-weight(medium);
+}

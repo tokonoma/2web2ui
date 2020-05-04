@@ -20,18 +20,21 @@ exports[`SearchForm should render correctly 1`] = `
       </p>
     </Panel.Section>
     <Panel.Section>
-      <Button
-        primary={true}
-        submit={true}
-      >
-        Apply Filters
-      </Button>
-      <Button
-        className="Cancel"
-        onClick={[MockFunction]}
-      >
-        Cancel
-      </Button>
+      <Inline>
+        <Button
+          submit={true}
+          variant="primary"
+        >
+          Apply Filters
+        </Button>
+        <Button
+          className="Cancel"
+          onClick={[MockFunction]}
+          variant="secondary"
+        >
+          Cancel
+        </Button>
+      </Inline>
     </Panel.Section>
   </Panel>
 </form>

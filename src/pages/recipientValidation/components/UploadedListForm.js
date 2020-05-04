@@ -5,7 +5,11 @@ import { LoadingSVG } from 'src/components/loading/Loading';
 import { Grid, UnstyledLink } from 'src/components/matchbox';
 import { selectMonthlyRecipientValidationUsage } from 'src/selectors/accountBillingInfo';
 import { calculateNewCost } from 'src/pages/billing/helpers/totalRecipientValidationCost';
-import styles from './UploadedListForm.module.scss';
+
+import OGStyles from './UploadedListForm.module.scss';
+import hibanaStyles from './UploadedListFormHibana.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
+
 import { formatFullNumber } from 'src/helpers/units';
 import RVPriceModal from './RVPriceModal';
 
@@ -15,30 +19,32 @@ export function UploadedListForm({
   job: { addressCount, filename },
   loading,
 }) {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+
   const [isModalOpen, setModalisOpen] = useState(false);
   useEffect(() => {
     getUsage();
   }, [getUsage]);
 
   return (
-    <div className={styles.formContainer}>
-      <h2>{filename}</h2>
-      <p className={styles.descriptionParagraph}>
+    <div className={styles.FormContainer}>
+      <h2 className={styles.Header}>{filename}</h2>
+      <p className={styles.DescriptionParagraph}>
         <span>Your list has been uploaded successfully and the cost to validate is below. </span>
-        <strong>Would you like to proceed?</strong>
+        <span>Would you like to proceed?</span>
       </p>
       <Grid>
         <Grid.Column xs={12} md={4}>
-          <div>Your list has</div>
+          <div className={styles.SubHeader}>Your list has</div>
           <div className={styles.CountBox}>
             <span className={styles.Number} data-id="recipient-list-address-count">
               {formatFullNumber(addressCount)}
-            </span>{' '}
-            emails
+            </span>
+            &nbsp; emails
           </div>
         </Grid.Column>
         <Grid.Column xs={12} mdOffset={1} md={7}>
-          <div>and will cost</div>
+          <div className={styles.SubHeader}>and will cost</div>
           {loading ? (
             <div className={styles.LoadingCostContainer}>
               <LoadingSVG size="Small" />

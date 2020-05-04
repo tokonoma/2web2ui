@@ -1,11 +1,16 @@
 import React from 'react';
 import { Grid } from 'src/components/matchbox';
-import styles from './ApiDetails.module.scss';
 import CodeBlock from './CodeBlock';
-const Tab = () => <span className={styles.tab} />;
-const White = ({ children }) => <span className={styles.white}>{children}</span>;
+
+import OGStyles from './ApiDetails.module.scss';
+import hibanaStyles from './ApiDetailsHibana.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 
 export const ApiIntegrationDocs = () => {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+  const Tab = () => <span className={styles.tab} />;
+  const White = ({ children }) => <span className={styles.white}>{children}</span>;
+
   const codeBlock = (
     <small className={styles.blue}>
       {'{'}
@@ -44,10 +49,10 @@ export const ApiIntegrationDocs = () => {
   );
 
   const exampleMethod = (
-    <div className={styles.SampleRequest}>
+    <div>
+      <div className={styles.SubHeader}>GET</div>
       <small>
-        <span className={styles.Method}>GET</span>
-        <code>
+        <code className={styles.ExampleMethod}>
           /api/v1/recipient-validation/single/{'{'}address{'}'}
         </code>
       </small>
@@ -58,13 +63,9 @@ export const ApiIntegrationDocs = () => {
     <div className={styles.Container}>
       <Grid>
         <Grid.Column xs={12} md={6} lg={5}>
-          <br />
           <div className={styles.Header}>Integrate Now</div>
-          <p>
-            Validate an email the moment you receive it, in real-time.
-            <br />
-            Block fake emails and catch typos with a single API request.
-          </p>
+          <p>Validate an email the moment you receive it, in real-time.</p>
+          <p>Block fake emails and catch typos with a single API request.</p>
           {exampleMethod}
         </Grid.Column>
         <Grid.Column xs={12} md={6} lgOffset={1}>

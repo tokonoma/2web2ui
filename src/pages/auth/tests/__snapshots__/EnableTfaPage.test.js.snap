@@ -2,15 +2,16 @@
 
 exports[`Component: EnableTfaPage should render correctly 1`] = `
 <Panel
-  accent={true}
   sectioned={true}
   title="Enable Two Factor Authentication"
 >
-  <Panel.Section>
-    Your administrator requires all users on this account to use two factor authentication.
-  </Panel.Section>
-  <Connect(EnableTfaForm)
-    afterEnable={[Function]}
-  />
+  <Stack>
+    <p>
+      Your administrator requires all users on this account to use two factor authentication.
+    </p>
+    <Connect(EnableTfaForm)
+      afterEnable={[Function]}
+    />
+  </Stack>
 </Panel>
 `;

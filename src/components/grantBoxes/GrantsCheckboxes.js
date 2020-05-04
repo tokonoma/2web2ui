@@ -1,4 +1,3 @@
-import classnames from 'classnames/bind';
 import React from 'react';
 import _ from 'lodash';
 import { Field } from 'redux-form';
@@ -10,7 +9,10 @@ import hibanaStyles from './GrantsCheckboxesHibana.module.scss';
 
 const GrantsCheckboxes = ({ grants, show, disabled }) => {
   const styles = useHibanaOverride(OGStyles, hibanaStyles);
-  const cx = classnames.bind(styles);
+
+  if (!show) {
+    return null;
+  }
 
   const grantFields = _.map(grants, grant => (
     <div className={styles.Grant} key={grant.key}>
@@ -36,9 +38,7 @@ const GrantsCheckboxes = ({ grants, show, disabled }) => {
     </Grid.Column>
   ));
 
-  const gridClasses = cx('Grants', { show });
-
-  return <Grid className={gridClasses}>{grantCols}</Grid>;
+  return <Grid className={styles.Grants}>{grantCols}</Grid>;
 };
 
 export default GrantsCheckboxes;

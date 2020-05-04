@@ -16,17 +16,19 @@ export const TfaPage = ({ loggedIn, tfaEnabled }) => {
     return <RedirectBeforeLogin to={AUTH_ROUTE} />;
   }
 
-  return <React.Fragment>
-    <CenteredLogo />
-    <Panel sectioned accent title='Two-factor Authentication'>
-      <TfaForm />
-    </Panel>
-  </React.Fragment>;
+  return (
+    <React.Fragment>
+      <CenteredLogo />
+      <Panel sectioned title="Two-factor Authentication">
+        <TfaForm />
+      </Panel>
+    </React.Fragment>
+  );
 };
 
 const mapStateToProps = ({ auth, tfa }) => ({
   loggedIn: auth.loggedIn,
-  tfaEnabled: tfa.enabled
+  tfaEnabled: tfa.enabled,
 });
 
 export default connect(mapStateToProps)(TfaPage);

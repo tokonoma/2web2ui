@@ -4,48 +4,52 @@ exports[`render 1`] = `
 <form
   onSubmit={[MockFunction]}
 >
-  <Field
-    component={[Function]}
-    disabled={true}
-    label="Username"
-    name="username"
-    validate={[Function]}
-  />
-  <Field
-    autoComplete="new-password"
-    autoFocus={true}
-    component={[Function]}
-    data-lpignore={true}
-    disabled={false}
-    helpText="Passwords must be at least 12 characters long."
-    label="Password"
-    name="password"
-    type="password"
-    validate={
-      Array [
-        [Function],
-        [Function],
-      ]
-    }
-  />
-  <p>
-    <small>
-      By joining, you agree to SparkPost's
-       
-      <ExternalLink
-        to="https://www.sparkpost.com/policies/tou"
+  <Stack>
+    <Field
+      component={[Function]}
+      disabled={true}
+      label="Username"
+      name="username"
+      validate={[Function]}
+    />
+    <Field
+      autoComplete="new-password"
+      autoFocus={true}
+      component={[Function]}
+      data-lpignore={true}
+      disabled={false}
+      helpText="Passwords must be at least 12 characters long."
+      label="Password"
+      name="password"
+      type="password"
+      validate={
+        Array [
+          [Function],
+          [Function],
+        ]
+      }
+    />
+    <p>
+      <small>
+        By joining, you agree to SparkPost's
+         
+        <ExternalLink
+          to="https://www.sparkpost.com/policies/tou"
+        >
+          Terms of Use
+        </ExternalLink>
+      </small>
+    </p>
+    <Box>
+      <Button
+        disabled={false}
+        submit={true}
+        variant="primary"
       >
-        Terms of Use
-      </ExternalLink>
-    </small>
-  </p>
-  <Button
-    disabled={false}
-    primary={true}
-    submit={true}
-  >
-    Confirm
-  </Button>
+        Confirm
+      </Button>
+    </Box>
+  </Stack>
 </form>
 `;
 
@@ -53,47 +57,51 @@ exports[`submitting 1`] = `
 <form
   onSubmit={[MockFunction]}
 >
-  <Field
-    component={[Function]}
-    disabled={true}
-    label="Username"
-    name="username"
-    validate={[Function]}
-  />
-  <Field
-    autoComplete="new-password"
-    autoFocus={true}
-    component={[Function]}
-    data-lpignore={true}
-    disabled={true}
-    helpText="Passwords must be at least 12 characters long."
-    label="Password"
-    name="password"
-    type="password"
-    validate={
-      Array [
-        [Function],
-        [Function],
-      ]
-    }
-  />
-  <p>
-    <small>
-      By joining, you agree to SparkPost's
-       
-      <ExternalLink
-        to="https://www.sparkpost.com/policies/tou"
+  <Stack>
+    <Field
+      component={[Function]}
+      disabled={true}
+      label="Username"
+      name="username"
+      validate={[Function]}
+    />
+    <Field
+      autoComplete="new-password"
+      autoFocus={true}
+      component={[Function]}
+      data-lpignore={true}
+      disabled={true}
+      helpText="Passwords must be at least 12 characters long."
+      label="Password"
+      name="password"
+      type="password"
+      validate={
+        Array [
+          [Function],
+          [Function],
+        ]
+      }
+    />
+    <p>
+      <small>
+        By joining, you agree to SparkPost's
+         
+        <ExternalLink
+          to="https://www.sparkpost.com/policies/tou"
+        >
+          Terms of Use
+        </ExternalLink>
+      </small>
+    </p>
+    <Box>
+      <Button
+        disabled={true}
+        submit={true}
+        variant="primary"
       >
-        Terms of Use
-      </ExternalLink>
-    </small>
-  </p>
-  <Button
-    disabled={true}
-    primary={true}
-    submit={true}
-  >
-    Loading
-  </Button>
+        Loading
+      </Button>
+    </Box>
+  </Stack>
 </form>
 `;
