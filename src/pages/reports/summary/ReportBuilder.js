@@ -35,8 +35,6 @@ export function ReportBuilder({
     }
   };
 
-  const state = { metricsModal: false, eventTime: 'real', scale: 'linear' };
-
   const handleMetricsApply = selectedMetrics => {
     setMetricsModal(false);
     refreshReportOptions({ metrics: selectedMetrics });
@@ -55,7 +53,6 @@ export function ReportBuilder({
   };
 
   const { to } = summarySearchOptions;
-  const { scale, eventTime, metricsModal } = state;
   //TODO: Make sure to replace these components with new ones
   return (
     <Page title="Analytics Report">
