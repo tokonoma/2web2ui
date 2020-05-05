@@ -8,9 +8,8 @@ import FacetFilter from '../components/filters/FacetFilter';
 import DateFilter from '../components/filters/DateFilter';
 import SubaccountFilter from '../components/filters/SubaccountFilter';
 import facets from '../constants/facets';
-import InfoTooltip from '../components/InfoTooltip';
 import { ENGAGEMENT_RECENCY_INFO } from '../constants/info';
-
+import { PageDescription } from 'src/components/text';
 export class EngagementRecencyDashboard extends Component {
   componentDidMount() {
     this.props.getSubaccounts();
@@ -20,20 +19,14 @@ export class EngagementRecencyDashboard extends Component {
     const { subaccounts } = this.props;
 
     return (
-      <Page
-        title={
-          <>
-            Engagement Recency
-            <InfoTooltip content={ENGAGEMENT_RECENCY_INFO} />
-          </>
-        }
-      >
+      <Page title={<>Engagement Recency</>}>
+        <PageDescription>{ENGAGEMENT_RECENCY_INFO}</PageDescription>
         <Panel sectioned>
           <Grid>
-            <Grid.Column lg={4}>
+            <Grid.Column xs={12} md={4}>
               <DateFilter />
             </Grid.Column>
-            <Grid.Column md={4} xs={12}>
+            <Grid.Column md={3} xs={12}>
               <SubaccountFilter />
             </Grid.Column>
             <FacetFilter facets={facets} />
