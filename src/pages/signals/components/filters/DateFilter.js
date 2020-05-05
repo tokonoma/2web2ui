@@ -14,7 +14,7 @@ export function DateFilter({
   changeSignalOptions,
   left,
   now = new Date(),
-  label = '',
+  label = null,
 }) {
   // Constructs dates from relative range or custom dates
   function handleChange(updates) {
@@ -23,7 +23,7 @@ export function DateFilter({
 
   return (
     <>
-      <Label label={label} />
+      {label && <Label label={label} />}
       <DatePicker
         now={moment(now)
           .subtract(1, 'day')
