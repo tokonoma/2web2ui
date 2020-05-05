@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetch as fetchAccount, renewAccount } from 'src/actions/account';
 import { PageLink } from 'src/components/links';
+import { Heading } from 'src/components/text';
+import { ButtonWrapper } from 'src/components';
 import { Button, Panel, Stack } from 'src/components/matchbox';
 import { showAlert } from 'src/actions/globalAlert';
 import config from 'src/config';
@@ -21,21 +23,29 @@ export class CancellationPanel extends React.Component {
 
   render() {
     const { account } = this.props;
-    const { pending_cancellation, cancelLoading } = account;
+    const { cancelLoading } = account;
+
+    let pending_cancellation = true;
 
     if (pending_cancellation) {
       return (
         <Panel sectioned title="Pending Account Cancellation">
-          <h6>Account is set to cancel {formatDate(pending_cancellation.effective_date)}</h6>
-          <p>
-            You can undo your cancellation at anytime <strong>before</strong> 8:00 UTC on your
-            cancel date. We hope you decide to stay!
-          </p>
-          <div>
-            <Button color="orange" disabled={cancelLoading} onClick={this.onRenewAccount}>
+          <Stack>
+            <Heading as="h3" looksLike="h6">
+              Account is set to cancel {formatDate(pending_cancellation.effective_date)}
+            </Heading>
+
+            <p>
+              You can undo your cancellation at anytime <strong>before</strong> 8:00 UTC on your
+              cancel date. We hope you decide to stay!
+            </p>
+          </Stack>
+
+          <ButtonWrapper>
+            <Button variant="primary" disabled={cancelLoading} onClick={this.onRenewAccount}>
               Don't cancel my account!
             </Button>
-          </div>
+          </ButtonWrapper>
         </Panel>
       );
     }
