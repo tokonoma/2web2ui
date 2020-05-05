@@ -137,6 +137,8 @@ export function OGShowMeSparkpostStep() {
   );
 }
 
-export default props => {
+function ShowMeSparkpostStep(props) {
   return useHibanaToggle(OGShowMeSparkpostStep, HibanaShowMeSparkpostStep)(props);
-};
+}
+
+export default ShowMeSparkpostStep;

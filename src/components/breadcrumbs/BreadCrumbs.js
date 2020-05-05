@@ -42,9 +42,8 @@ export const HibanaBreadCrumbsItem = ({ children, active, onClick }) => (
     as="span"
     onClick={onClick}
     color={!active && 'blue.700'}
-    display="inline-block"
     fontWeight="medium"
-    cursor="pointer"
+    className={styles.HibanaBreadCrumbItem}
   >
     {children}{' '}
   </Box>

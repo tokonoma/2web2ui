@@ -1,6 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import SendingStep, {
+import {
+  OGSendingStep,
+  HibanaSendingStep,
   SendingStepList,
   OGSendingStepListItem,
   HibanaSendingStepListItem,
@@ -12,15 +14,10 @@ jest.mock('../GettingStartedGuide');
 
 describe('SendingStep', () => {
   useGuideContext.mockReturnValue({ stepName: 'Sending', setAndStoreStepName: jest.fn() });
-  const subject = (func = shallow) => {
-    return func(<SendingStep />);
-  };
-  it('should contain GuideBreadCrumbs', () => {
-    expect(subject().find('GuideBreadCrumbs')).toHaveLength(1);
-  });
 
-  it('should contain SendingStepList', () => {
-    expect(subject().find('SendingStepList')).toHaveLength(1);
+  it('should match snapshot', () => {
+    expect(shallow(<OGSendingStep />)).toMatchSnapshot();
+    expect(shallow(<HibanaSendingStep />)).toMatchSnapshot();
   });
 });
 
