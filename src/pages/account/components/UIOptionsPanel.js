@@ -28,10 +28,10 @@ export class UIOptionsPanel extends Component {
         <Panel.Section>
           {uiOptions.map(({ label, description, value, key }) => (
             <Grid key={`ui-option-${key}`}>
-              <Grid.Column xs={12} md={11}>
+              <Grid.Column xs={12} md={10}>
                 <LabelledValue label={label}>{description}</LabelledValue>
               </Grid.Column>
-              <Grid.Column xs={12} md={1} style={{ textAlign: 'right' }}>
+              <Grid.Column xs={12} md={2} style={{ textAlign: 'right' }}>
                 <Toggle
                   id={key}
                   checked={value}

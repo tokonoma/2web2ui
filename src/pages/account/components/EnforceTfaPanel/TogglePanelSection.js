@@ -10,13 +10,13 @@ export const TogglePanelSection = ({ readOnly, tfaRequired, toggleTfaRequired })
   return (
     <Panel.Section>
       <Grid>
-        <Grid.Column xs={12} md={11}>
+        <Grid.Column xs={12} md={10}>
           <LabelledValue label="Status">
             <strong>{tfaRequired ? 'Required' : 'Optional'}</strong>
             <p>{tfaRequiredMsg}</p>
           </LabelledValue>
         </Grid.Column>
-        <Grid.Column xs={12} md={1} style={{ textAlign: 'right' }}>
+        <Grid.Column xs={12} md={2} style={{ textAlign: 'right' }}>
           <Toggle
             id="enforceTfa"
             disabled={readOnly}
