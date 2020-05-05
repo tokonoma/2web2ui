@@ -23,9 +23,7 @@ export class CancellationPanel extends React.Component {
 
   render() {
     const { account } = this.props;
-    const { cancelLoading } = account;
-
-    let pending_cancellation = true;
+    const { pending_cancellation, cancelLoading } = account;
 
     if (pending_cancellation) {
       return (
