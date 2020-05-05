@@ -1,5 +1,6 @@
 import React from 'react';
-import { Panel } from 'src/components/matchbox';
+import { Panel, Box } from 'src/components/matchbox';
+import useHibanaToggle from 'src/hooks/useHibanaToggle';
 import GuideBreadCrumbs from './GuideBreadCrumbs';
 import { GuideListItem, GuideListItemTitle, GuideListItemDescription } from './GuideListItem';
 import { useGuideContext } from './GettingStartedGuide';
@@ -67,7 +68,7 @@ const ViewDeveloperDocsItem = () => {
   );
 };
 
-export default function LetsCodeStep() {
+export function OGLetsCodeStep() {
   return (
     <>
       <Panel.Section>
@@ -83,3 +84,26 @@ export default function LetsCodeStep() {
     </>
   );
 }
+
+export function HibanaLetsCodeStep() {
+  return (
+    <>
+      <Box mx="400" mb="400">
+        <GuideBreadCrumbs />
+        <AddSendingDomainItem />
+      </Box>
+      <Box mx="400" mb="400">
+        <GenerateApiKeyItem />
+      </Box>
+      <Box mx="400" mb="400">
+        <ViewDeveloperDocsItem />
+      </Box>
+    </>
+  );
+}
+
+function LetsCodeStep(props) {
+  return useHibanaToggle(OGLetsCodeStep, HibanaLetsCodeStep)(props);
+}
+
+export default LetsCodeStep;

@@ -1,10 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { SendMoreCTA } from '../SendMoreCTA';
+import { OGSendMoreCTA, HibanaSendMoreCTA } from '../SendMoreCTA';
 
 describe('SendMoreCTA Component', () => {
   let props;
-  let wrapper;
+  let ogWrapper;
+  let hibanaWrapper;
 
   beforeEach(() => {
     props = {
@@ -13,16 +14,22 @@ describe('SendMoreCTA Component', () => {
       openSupportTicketForm: jest.fn(),
     };
 
-    wrapper = shallow(<SendMoreCTA {...props} />);
+    ogWrapper = shallow(<OGSendMoreCTA {...props} />);
+    hibanaWrapper = shallow(<HibanaSendMoreCTA {...props} />);
   });
 
   it('renders correctly', () => {
-    expect(wrapper).toMatchSnapshot();
+    expect(ogWrapper).toMatchSnapshot();
+    expect(hibanaWrapper).toMatchSnapshot();
   });
 
   it('renders learn more about sending limits link', () => {
-    wrapper.setProps({ hasSendingLimits: true });
+    ogWrapper.setProps({ hasSendingLimits: true });
 
-    expect(wrapper).toHaveTextContent('Learn more about these limits.');
+    expect(ogWrapper).toHaveTextContent('Learn more about these limits.');
+
+    hibanaWrapper.setProps({ hasSendingLimits: true });
+
+    expect(hibanaWrapper).toHaveTextContent('Learn more about these limits.');
   });
 });

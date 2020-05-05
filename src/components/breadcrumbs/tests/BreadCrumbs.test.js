@@ -1,21 +1,44 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { BreadCrumbs, BreadCrumbsItem } from '../BreadCrumbs';
+import {
+  OGBreadCrumbs,
+  HibanaBreadCrumbs,
+  OGBreadCrumbsItem,
+  HibanaBreadCrumbsItem,
+} from '../BreadCrumbs';
 
 describe('BreadCrumbs', () => {
+  it('should match snapshots', () => {
+    const ogProps = {
+      children: [
+        <OGBreadCrumbsItem onClick={jest.fn()} active={false}>
+          A
+        </OGBreadCrumbsItem>,
+        <OGBreadCrumbsItem onClick={jest.fn()} active={false}>
+          B
+        </OGBreadCrumbsItem>,
+        <OGBreadCrumbsItem onClick={jest.fn()} active={false}>
+          C
+        </OGBreadCrumbsItem>,
+      ],
+    };
 
-  const defaultProps = {
-    children: [
-      <BreadCrumbsItem onClick={jest.fn()} active={false}>A</BreadCrumbsItem>,
-      <BreadCrumbsItem onClick={jest.fn()} active={false}>B</BreadCrumbsItem>,
-      <BreadCrumbsItem onClick={jest.fn()} active={false}>C</BreadCrumbsItem>
-    ]
-  };
+    expect(shallow(<OGBreadCrumbs {...ogProps} />)).toMatchSnapshot();
 
-  const subject = (props) => (shallow(<BreadCrumbs {...defaultProps} {...props}/>));
+    const hibanaProps = {
+      children: [
+        <HibanaBreadCrumbsItem onClick={jest.fn()} active={false}>
+          A
+        </HibanaBreadCrumbsItem>,
+        <HibanaBreadCrumbsItem onClick={jest.fn()} active={false}>
+          B
+        </HibanaBreadCrumbsItem>,
+        <HibanaBreadCrumbsItem onClick={jest.fn()} active={false}>
+          C
+        </HibanaBreadCrumbsItem>,
+      ],
+    };
 
-  it('should not render > after the last breadCrumb ' , () => {
-    const instance = subject();
-    expect(instance.find('div').at(0).children().last()).not.toBe('>');
+    expect(shallow(<HibanaBreadCrumbs {...hibanaProps} />)).toMatchSnapshot();
   });
 });

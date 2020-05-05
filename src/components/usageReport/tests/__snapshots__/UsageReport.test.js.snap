@@ -33,7 +33,7 @@ exports[`UsageReport Component should render with overages 1`] = `
     <DisplayNumber
       content="1,000"
       label="Used"
-      orange={true}
+      primary={true}
     />
     <DisplayNumber
       content="2,000"
@@ -55,7 +55,7 @@ exports[`UsageReport Component should render with overages 1`] = `
     <DisplayNumber
       content="11,000"
       label="Used"
-      orange={true}
+      primary={true}
     />
     <DisplayNumber
       content="10,000"
@@ -99,7 +99,7 @@ exports[`UsageReport Component should render with regular usage 1`] = `
     <DisplayNumber
       content="1,000"
       label="Used"
-      orange={true}
+      primary={true}
     />
     <DisplayNumber
       content="2,000"
@@ -121,7 +121,7 @@ exports[`UsageReport Component should render with regular usage 1`] = `
     <DisplayNumber
       content="1,000"
       label="Used"
-      orange={true}
+      primary={true}
     />
     <DisplayNumber
       content="10,000"
@@ -140,29 +140,55 @@ exports[`UsageReport Component should render with regular usage 2`] = `
   className="Display"
 >
   <h5
-    className="Content orange"
-  >
-    1,000
-  </h5>
+    className="Content"
+  />
   <h6
     className="Label"
-  >
-    Used
-  </h6>
+  />
 </div>
 `;
 
 exports[`UsageReport Component should render with regular usage 3`] = `
+<Box
+  display="inline-block"
+  mr="500"
+>
+  <Text
+    fontSize="400"
+    fontWeight="medium"
+  />
+  <Text
+    fontSize="200"
+    fontWeight="light"
+  />
+</Box>
+`;
+
+exports[`UsageReport Component should render with regular usage 4`] = `
 <div>
   <h5
     className="ProgressTitle"
-  >
-    Today
-  </h5>
+  />
   <h6
     className="ProgressSecondary"
-  >
-    Since Aug 29 2017, 8:00pm
-  </h6>
+  />
 </div>
+`;
+
+exports[`UsageReport Component should render with regular usage 5`] = `
+<Box
+  mb="200"
+>
+  <Inline>
+    <Text
+      fontSize="200"
+      fontWeight="semibold"
+    />
+    <Text
+      color="gray.600"
+      fontSize="200"
+      fontWeight="light"
+    />
+  </Inline>
+</Box>
 `;

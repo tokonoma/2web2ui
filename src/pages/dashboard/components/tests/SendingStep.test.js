@@ -1,6 +1,12 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import SendingStep, { SendingStepList, SendingStepListItem } from '../SendingStep';
+import {
+  OGSendingStep,
+  HibanaSendingStep,
+  SendingStepList,
+  OGSendingStepListItem,
+  HibanaSendingStepListItem,
+} from '../SendingStep';
 import { SENDING_STEP_LIST } from 'src/pages/dashboard/constants';
 import { useGuideContext } from '../GettingStartedGuide';
 
@@ -8,15 +14,10 @@ jest.mock('../GettingStartedGuide');
 
 describe('SendingStep', () => {
   useGuideContext.mockReturnValue({ stepName: 'Sending', setAndStoreStepName: jest.fn() });
-  const subject = (func = shallow) => {
-    return func(<SendingStep />);
-  };
-  it('should contain GuideBreadCrumbs', () => {
-    expect(subject().find('GuideBreadCrumbs')).toHaveLength(1);
-  });
 
-  it('should contain SendingStepList', () => {
-    expect(subject().find('SendingStepList')).toHaveLength(1);
+  it('should match snapshot', () => {
+    expect(shallow(<OGSendingStep />)).toMatchSnapshot();
+    expect(shallow(<HibanaSendingStep />)).toMatchSnapshot();
   });
 });
 
@@ -38,12 +39,17 @@ describe('SendingListItem', () => {
     ...SENDING_STEP_LIST['Show Me SparkPost'],
   };
 
-  const subject = (props, func = shallow) =>
-    func(<SendingStepListItem {...defaultProps} {...props} />);
-
   it('should call setAndStoreStepName when action button is clicked', () => {
-    const instance = subject();
-    instance.find('Button').simulate('click');
+    const OGInstance = shallow(<OGSendingStepListItem {...defaultProps} />);
+
+    OGInstance.find('Button').simulate('click');
+    expect(defaultProps.setAndStoreStepName).toHaveBeenCalledWith(defaultProps.name);
+  });
+
+  it('should call setAndStoreStepName when action button is clicked in hibana', () => {
+    const hibanaInstance = shallow(<HibanaSendingStepListItem {...defaultProps} />);
+
+    hibanaInstance.find('Button').simulate('click');
     expect(defaultProps.setAndStoreStepName).toHaveBeenCalledWith(defaultProps.name);
   });
 });
