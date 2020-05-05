@@ -33,7 +33,9 @@ export class EngagementRecencyDashboard extends Component {
             <Grid.Column lg={4}>
               <DateFilter />
             </Grid.Column>
-            <SubaccountFilter />
+            <Grid.Column md={4} xs={12}>
+              <SubaccountFilter />
+            </Grid.Column>
             <FacetFilter facets={facets} />
           </Grid>
         </Panel>

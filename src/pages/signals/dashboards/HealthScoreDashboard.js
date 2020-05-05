@@ -108,7 +108,9 @@ export function HealthScoreDashboard(props) {
         hideTitle
         header={
           <Grid>
-            <SubaccountFilter />
+            <Grid.Column md={4} xs={12}>
+              <SubaccountFilter />
+            </Grid.Column>
             <FacetFilter facets={facets} />
           </Grid>
         }

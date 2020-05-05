@@ -26,10 +26,12 @@ export class SpamTrapDashboard extends Component {
 
         <Panel sectioned>
           <Grid>
-            <Grid.Column xs={4}>
+            <Grid.Column xs={12} md={4}>
               <DateFilter />
             </Grid.Column>
-            <SubaccountFilter />
+            <Grid.Column md={3} xs={12}>
+              <SubaccountFilter />
+            </Grid.Column>
             {/* eslint-disable-next-line */}
             <FacetFilter facets={_.reject(facets, facet => facet.key === 'mb_provider')} />
           </Grid>

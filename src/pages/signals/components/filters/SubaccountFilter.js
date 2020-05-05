@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { ExpandMore, ChevronLeft } from '@sparkpost/matchbox-icons';
-import { Button, Grid, Popover, UnstyledLink, WindowEvent } from 'src/components/matchbox';
+import { Button, Popover, UnstyledLink, WindowEvent } from 'src/components/matchbox';
 import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import SubaccountTypeahead from 'src/components/typeahead/SubaccountTypeahead';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
@@ -88,51 +88,49 @@ export function SubaccountFilter(props) {
   );
 
   return (
-    <Grid.Column md={4} xs={12}>
-      <div className={styles.SubaccountFilter}>
-        <WindowEvent handler={handleWindowClick} event="click" />
-        <WindowEvent handler={onEscape(close)} event="keydown" />
-        <Popover
-          id="popover-subaccount-filter"
-          className={styles.Popover}
-          left
-          open={isOpen}
-          trigger={trigger}
-        >
-          <div ref={node => (contentRef.current = node)}>
-            <div className={classnames(styles.PopoverContent, isSearchOpen && styles.showSearch)}>
-              <div className={styles.SubaccountSearchHeader}>
-                <UnstyledLink className={styles.BackButton} onClick={handleSearchToggle}>
-                  <ChevronLeft size={20} />
-                </UnstyledLink>
-                <span>Subaccount</span>
-              </div>
-              <div className={styles.SubaccountSearch}>
-                <SubaccountTypeahead
-                  label=""
-                  onChange={handleChange}
-                  placeholder="Search here"
-                  unfiltered
-                />
-              </div>
+    <div className={styles.SubaccountFilter}>
+      <WindowEvent handler={handleWindowClick} event="click" />
+      <WindowEvent handler={onEscape(close)} event="keydown" />
+      <Popover
+        id="popover-subaccount-filter"
+        className={styles.Popover}
+        left
+        open={isOpen}
+        trigger={trigger}
+      >
+        <div ref={node => (contentRef.current = node)}>
+          <div className={classnames(styles.PopoverContent, isSearchOpen && styles.showSearch)}>
+            <div className={styles.SubaccountSearchHeader}>
+              <UnstyledLink className={styles.BackButton} onClick={handleSearchToggle}>
+                <ChevronLeft size={20} />
+              </UnstyledLink>
+              <span>Subaccount</span>
             </div>
-            <div className={classnames(styles.PopoverContent, !isSearchOpen && styles.showOptions)}>
-              {OPTIONS.map(({ condition, id, name, nested }) => (
-                <SubaccountOption
-                  key={name}
-                  label={name}
-                  nested={nested}
-                  onChange={handleChange}
-                  onOpen={handleSearchToggle}
-                  selected={condition(subaccount)}
-                  value={{ id, name }}
-                />
-              ))}
+            <div className={styles.SubaccountSearch}>
+              <SubaccountTypeahead
+                label=""
+                onChange={handleChange}
+                placeholder="Search here"
+                unfiltered
+              />
             </div>
           </div>
-        </Popover>
-      </div>
-    </Grid.Column>
+          <div className={classnames(styles.PopoverContent, !isSearchOpen && styles.showOptions)}>
+            {OPTIONS.map(({ condition, id, name, nested }) => (
+              <SubaccountOption
+                key={name}
+                label={name}
+                nested={nested}
+                onChange={handleChange}
+                onOpen={handleSearchToggle}
+                selected={condition(subaccount)}
+                value={{ id, name }}
+              />
+            ))}
+          </div>
+        </div>
+      </Popover>
+    </div>
   );
 }
 
