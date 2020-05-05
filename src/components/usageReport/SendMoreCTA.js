@@ -60,7 +60,7 @@ export function HibanaSendMoreCTA({ hasSendingLimits }) {
                 </PageLink>
               }
             />
-          </ConditionSwitch>{' '}
+          </ConditionSwitch>
         </Box>
 
         {hasSendingLimits ? (

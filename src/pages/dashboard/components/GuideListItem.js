@@ -16,7 +16,7 @@ export const HibanaGuideListItem = ({
   action: { name, key = name, onClick, to, external },
 }) => (
   <Box display="flex">
-    <Box width="20px" maxHeight="20px">
+    <Box>
       {itemCompleted ? (
         <CheckBox size={20} color={tokens.color_blue_700} />
       ) : (
@@ -26,7 +26,7 @@ export const HibanaGuideListItem = ({
     <Box pl="200" flexGrow="1">
       {children}
     </Box>
-    <Box float="right" ml="200">
+    <Box ml="200">
       <Button
         onClick={onClick}
         variant={itemCompleted ? 'monochrome' : 'secondary'}
