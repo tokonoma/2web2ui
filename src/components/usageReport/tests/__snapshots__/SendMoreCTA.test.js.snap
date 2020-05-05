@@ -74,7 +74,6 @@ exports[`SendMoreCTA Component renders correctly 2`] = `
           </PageLink>
         </Case>
       </Connect(ConditionSwitch)>
-       
     </Box>
     <div />
   </Box>
