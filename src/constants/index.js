@@ -216,3 +216,4 @@ export const RECIPIENT_VALIDATION_TIERS = [
 ];
 
 export { ROLES, SUBACCOUNT_ROLES, ROLE_LABELS } from './users';
+export { CAMPAIGN_IDS } from './vwo';
