@@ -2,21 +2,19 @@ import React from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import PlanPrice from 'src/components/billing/PlanPrice';
-import styles from './PlanPicker.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
+import OGStyles from './Plan.module.scss';
+import HibanaStyles from './PlanHibana.module.scss';
 
-class Plan extends React.Component {
-  render() {
-    const { plan, className, planPriceProps, ...rest } = this.props;
+const Plan = ({ plan, planPriceProps }) => {
+  const styles = useHibanaOverride(OGStyles, HibanaStyles);
 
-    return (
-      <a className={className} {...rest} >
-        <PlanPrice plan={plan} showOverage showIp showCsm className={styles.MainLabel} {...planPriceProps} />
-      </a>
-    );
-  }
-}
+  return (
+    <PlanPrice className={styles.Plan} plan={plan} showOverage showIp showCsm {...planPriceProps} />
+  );
+};
 
-function eitherMonthlyOrHourly(props, propName, componentName) {
+function eitherMonthlyOrHourly(props) {
   const hasMonthly = _.has(props, 'monthly');
   const hasHourly = _.has(props, 'hourly');
 
@@ -26,7 +24,7 @@ function eitherMonthlyOrHourly(props, propName, componentName) {
 
   // If both are provided, or neither, error
   if ((hasMonthly && hasHourly) || !(hasMonthly || hasHourly)) {
-    return new Error('Plan\'s pricing should either be hourly or monthly but not both');
+    return new Error("Plan's pricing should either be hourly or monthly but not both");
   }
 }
 
@@ -37,8 +35,8 @@ Plan.propTypes = {
     hourly: eitherMonthlyOrHourly,
     overage: PropTypes.number,
     includesIp: PropTypes.bool,
-    isFree: PropTypes.bool
-  }).isRequired
+    isFree: PropTypes.bool,
+  }).isRequired,
 };
 
 export default Plan;

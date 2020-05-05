@@ -16,6 +16,7 @@ export class Pendo extends React.Component {
       accountSvcLevel,
       accountPlanCode,
       companyName,
+      email,
       username,
       userAccessLevel,
       status,
@@ -51,8 +52,9 @@ export class Pendo extends React.Component {
         statusReasonCategory,
       },
       visitor: {
-        id: `${tenantId}_${accountId}_${username}`,
         accessLevel: userAccessLevel,
+        id: `${tenantId}_${accountId}_${username}`,
+        isInternalTestUser: /@(messagesystems|sparkpost)/.test(email),
         release,
       },
     });
@@ -72,6 +74,7 @@ const mapStateToProps = state => ({
   accountPlanCode: currentPlanCodeSelector(state),
   accountSvcLevel: state.account.service_level,
   companyName: state.account.company_name,
+  email: state.currentUser.email,
   status: state.account.status,
   statusReasonCategory: state.account.status_reason_category,
   userAccessLevel: state.currentUser.access_level,

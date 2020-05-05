@@ -3,6 +3,8 @@ import { shallow } from 'enzyme';
 
 import PlanPicker, { PlanPicker as PlanPickerComponent } from '../PlanPicker';
 
+jest.mock('src/hooks/useHibanaOverride', () => styles => styles);
+
 describe('Plan Picker: ', () => {
   let wrapper;
   let props;

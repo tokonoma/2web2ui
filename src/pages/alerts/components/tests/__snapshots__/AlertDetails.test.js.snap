@@ -4,85 +4,78 @@ exports[`Alert Details Component should render the alert details component corre
 <Panel
   data-id="alert-details-panel"
 >
-  <Panel.Section>
-    <h3
-      className="Title"
-    >
+  <Panel.Section
+    paddingLeft="500"
+    paddingTop="400"
+    width="100%"
+  >
+    <h3>
       Alert Details
     </h3>
-    <PageLink
-      as={[Function]}
-      className="Button"
-      primary={true}
-      to="/alerts/edit/alert-id"
-    >
-      Edit
-    </PageLink>
+    <div>
+      My Primary Area
+    </div>
   </Panel.Section>
   <Panel.Section
     key="0"
+    paddingBottom="400"
+    paddingLeft="500"
   >
     <LabelledValue
       label="Metric:"
     >
-      <h6>
+      <p>
         Health Score
-      </h6>
+      </p>
     </LabelledValue>
   </Panel.Section>
   <Panel.Section
     key="1"
+    paddingBottom="400"
+    paddingLeft="500"
   >
     <LabelledValue
       label="Condition:"
     >
-      <Tag
-        className="FirstTag"
-      >
+      <Tag>
         Score
       </Tag>
-      <h6
-        className="BoldInline"
-      />
-      <h6
-        className="BoldInline"
-      >
+      <p />
+      <p>
         below
-      </h6>
-      <Tag
-        className="Tags"
-      >
+      </p>
+      <Tag>
         80
       </Tag>
     </LabelledValue>
   </Panel.Section>
   <Panel.Section
     key="2"
+    paddingBottom="400"
+    paddingLeft="500"
   >
     <LabelledValue
       label="Filtered By:"
     >
-      <span
+      <Component
         key="mailbox_provider"
       >
-         
-        <h6
-          className="BoldInline"
-        >
+        <p>
           Mailbox Provider
-        </h6>
+        </p>
          
         <Tag
-          className="Tags"
           key="mailbox_provider-gmail"
         >
           Gmail
         </Tag>
-      </span>
+      </Component>
     </LabelledValue>
   </Panel.Section>
   <Panel.Section
     key="3"
+    paddingBottom="400"
+    paddingLeft="500"
   >
     <LabelledValue
       label="Notify:"
@@ -90,29 +83,21 @@ exports[`Alert Details Component should render the alert details component corre
       <div
         id="email"
       >
-        <h6
-          className="BoldInline"
-        >
+        <p>
           Email
-        </h6>
+        </p>
          
         <Tag
-          className="Tags"
           key="Myemail@email.com"
         >
-          <span
-            className="TagText"
-          >
+          <span>
             Myemail@email.com
           </span>
         </Tag>
         <Tag
-          className="Tags"
           key="email@ddress.com"
         >
-          <span
-            className="TagText"
-          >
+          <span>
             email@ddress.com
           </span>
         </Tag>
@@ -120,21 +105,13 @@ exports[`Alert Details Component should render the alert details component corre
       <div
         key="slack"
       >
-        <h6
-          className="BoldInline"
-        >
+        <p>
           Slack
-        </h6>
+        </p>
          
-        <Tag
-          className="TagsWithIcon"
-        >
-          <SlackIcon
-            className="Icon"
-          />
-          <span
-            className="TagText"
-          >
+        <Tag>
+          <SlackIcon />
+          <span>
             https://hooks.slack.com/services/X
           </span>
         </Tag>
@@ -142,21 +119,13 @@ exports[`Alert Details Component should render the alert details component corre
       <div
         key="webhook"
       >
-        <h6
-          className="BoldInline"
-        >
+        <p>
           Webhook
-        </h6>
+        </p>
          
-        <Tag
-          className="TagsWithIcon"
-        >
-          <WebhookIcon
-            className="Icon"
-          />
-          <span
-            className="TagText"
-          >
+        <Tag>
+          <WebhookIcon />
+          <span>
             target.com/200
           </span>
         </Tag>
@@ -165,6 +134,8 @@ exports[`Alert Details Component should render the alert details component corre
   </Panel.Section>
   <Panel.Section
     key="4"
+    paddingBottom="400"
+    paddingLeft="500"
   >
     <LabelledValue
       label="Mute:"

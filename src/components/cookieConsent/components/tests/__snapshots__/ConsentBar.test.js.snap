@@ -8,7 +8,7 @@ exports[`ConsentBar should render correctly 1`] = `
     className="ConsentBar"
   >
     <Snackbar
-      maxWidth={700}
+      maxWidth={1200}
       onDismiss={[MockFunction]}
       status="default"
     >

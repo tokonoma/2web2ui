@@ -7,10 +7,14 @@ import * as alertFormHelper from '../../helpers/alertForm';
 import SubaccountField from '../../components/fields/SubaccountsField';
 import FilterFields from '../../components/fields/FilterFields';
 import EvaluatorFields from '../../components/fields/EvaluatorFields';
+jest.mock('src/context/HibanaContext', () => ({
+  useHibana: jest.fn().mockReturnValue([{ isHibanaEnabled: false }]),
+}));
 
 describe('Alert Form Component', () => {
   let props;
   let wrapper;
+  const mockChange = jest.fn();
 
   beforeEach(() => {
     props = {
@@ -22,7 +26,7 @@ describe('Alert Form Component', () => {
       pristine: true,
       invalid: false,
       metric: 'health_score',
-      change: jest.fn(),
+      change: mockChange,
       formMeta: {},
       formErrors: {},
       isNewAlert: true,
@@ -46,7 +50,7 @@ describe('Alert Form Component', () => {
 
   it('should reset form values when changing metric', () => {
     wrapper.find({ name: 'metric' }).simulate('change', { target: { value: 'block_bounce_rate' } });
-    expect(wrapper.instance().props.change).toHaveBeenCalledTimes(7); //4 filters + 3 default values ;
+    expect(mockChange).toHaveBeenCalledTimes(7); //4 filters + 3 default values ;
   });
 
   it('should show filters when metric has filters', () => {

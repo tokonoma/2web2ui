@@ -11,25 +11,31 @@ exports[`Page: Alert Details should render Alert Details Page 1`] = `
   }
   primaryArea={
     <React.Fragment>
-      <PageLink
-        as={[Function]}
-        flat={true}
-        to="/alerts/create/alert-id"
+      <Box
+        bottom="28px"
+        position="relative"
+        textAlign="right"
       >
-        <ContentCopy
-          className="Icon"
-        />
-        Duplicate
-      </PageLink>
-      <Button
-        flat={true}
-        onClick={[Function]}
-      >
-        <Delete
-          className="Icon"
-        />
-        Delete
-      </Button>
+        <PageLink
+          as={[Function]}
+          flat={true}
+          to="/alerts/create/alert-id"
+        >
+          <ContentCopy
+            className="Icon"
+          />
+          Duplicate
+        </PageLink>
+        <Button
+          flat={true}
+          onClick={[Function]}
+        >
+          <Delete
+            className="Icon"
+          />
+          Delete
+        </Button>
+      </Box>
     </React.Fragment>
   }
   title="My Alert"
@@ -42,6 +48,7 @@ exports[`Page: Alert Details should render Alert Details Page 1`] = `
     }
     hasSubaccounts={true}
     id="alert-id"
+    renderPrimaryAreaComponent={[Function]}
     subaccountIdToString={[Function]}
   />
   <AlertIncidents

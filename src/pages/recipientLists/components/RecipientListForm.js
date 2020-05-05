@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, SubmissionError, reduxForm } from 'redux-form';
 import _ from 'lodash';
-import { tokens } from '@sparkpost/design-tokens-hibana';
 import { Banner, Box, Button, Error, Panel, Stack } from 'src/components/matchbox';
 import { ButtonWrapper, TextFieldWrapper } from 'src/components';
 import { DownloadLink } from 'src/components/links';
@@ -76,7 +75,7 @@ export class RecipientListForm extends Component {
           <Panel>
             <Panel.Section>
               <Stack space="400">
-                <Box maxWidth={tokens.sizing_1200}>
+                <Box maxWidth="1200">
                   <Field
                     name="name"
                     label="Name"
@@ -88,7 +87,7 @@ export class RecipientListForm extends Component {
                 </Box>
 
                 {!editMode && (
-                  <Box maxWidth={tokens.sizing_1200}>
+                  <Box maxWidth="1200">
                     <Field
                       name="id"
                       label="ID"

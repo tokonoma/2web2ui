@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { Box, Button, Panel, Stack } from 'src/components/matchbox';
 import { ButtonWrapper, TextFieldWrapper } from 'src/components';
-import { required, domain } from 'src/helpers/validation';
+import { required } from 'src/helpers/validation';
 import { SubaccountTypeaheadWrapper } from 'src/components/reduxFormWrappers';
 
 const maxWidth = '860px'; //TODO: Remove max width on adding Hibana tokens
@@ -19,7 +19,8 @@ export class CreateForm extends Component {
                 component={TextFieldWrapper}
                 label="Domain Name"
                 name="domain"
-                validate={[required, domain]}
+                // Do not try to validate tracking domains, let our API make that decision
+                validate={[required]}
                 disabled={submitting}
               />
             </Box>

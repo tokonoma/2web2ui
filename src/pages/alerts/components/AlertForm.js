@@ -1,8 +1,8 @@
 import _ from 'lodash';
-import React, { Component } from 'react';
+import React from 'react';
 import { Field, Form } from 'redux-form';
 // Components
-import { Grid, Error, Button, Expandable, Panel } from 'src/components/matchbox';
+import { Box, Grid, Error, Button, Expandable, Panel, Stack } from 'src/components/matchbox';
 import { TextFieldWrapper, SelectWrapper } from 'src/components';
 import FilterFields from './fields/FilterFields';
 import EvaluatorFields from './fields/EvaluatorFields';
@@ -18,15 +18,33 @@ import styles from './AlertForm.module.scss';
 import withAlertForm from './AlertForm.container';
 // Helpers & Validation
 import { maxLength, required } from 'src/helpers/validation';
+import { useHibana } from 'src/context/HibanaContext';
 
 const metricOptions = [
   { value: '', label: 'Select Metric', disabled: true },
   ...Object.keys(METRICS).map(key => ({ label: METRICS[key], value: key })),
 ];
 
-export class AlertForm extends Component {
-  resetFormValues = event => {
-    const { change, isNewAlert, isDuplicate } = this.props;
+export const AlertForm = props => {
+  const {
+    change,
+    featureFlaggedAlerts,
+    handleSubmit,
+    hasSubaccounts,
+    formErrors,
+    formMeta,
+    initialValues,
+    isNewAlert,
+    isDuplicate,
+    metric,
+    pristine,
+    submitting,
+  } = props;
+
+  const [state] = useHibana();
+  const { isHibanaEnabled } = state;
+
+  const resetFormValues = event => {
     const formSpec = getFormSpec(event.target.value);
     const { defaultFieldValues, defaultRecommendedValue } = formSpec;
     REALTIME_FILTERS.forEach(filter => {
@@ -42,8 +60,8 @@ export class AlertForm extends Component {
     }
   };
 
-  renderNotificationChannels = () =>
-    NOTIFICATION_CHANNELS.map(channel => (
+  const renderNotificationChannels = () => {
+    const notificationChannels = NOTIFICATION_CHANNELS.map(channel => (
       <Expandable
         icon={NOTIFICATION_CHANNEL_DATA[channel].icon}
         title={_.upperFirst(channel)}
@@ -55,13 +73,15 @@ export class AlertForm extends Component {
         <Field
           name={channel}
           component={TextFieldWrapper}
-          disabled={this.props.submitting}
+          disabled={submitting}
           {...NOTIFICATION_CHANNEL_DATA[channel].fieldProps}
         />
       </Expandable>
     ));
+    return <Stack space="100">{notificationChannels}</Stack>;
+  };
 
-  isNotificationChannelsEmpty = (formMeta, formErrors) =>
+  const isNotificationChannelsEmpty = (formMeta, formErrors) =>
     NOTIFICATION_CHANNELS.some(
       channel =>
         formMeta[channel] &&
@@ -69,25 +89,11 @@ export class AlertForm extends Component {
         formErrors[channel] === 'At least one notification channel must not be empty',
     );
 
-  render() {
-    const {
-      featureFlaggedAlerts,
-      pristine,
-      submitting,
-      metric,
-      handleSubmit,
-      hasSubaccounts,
-      formErrors,
-      formMeta,
-      isNewAlert,
-      isDuplicate,
-      initialValues,
-    } = this.props;
-
+  const renderAlertForm = () => {
     const submitText = submitting ? 'Submitting...' : isNewAlert ? 'Create Alert' : 'Update Alert';
     const isSubmitDisabled = (pristine && !isDuplicate) || submitting; //Allows user to create the same alert if if's a duplicate
     const formSpec = getFormSpec(metric);
-    const channelsError = this.isNotificationChannelsEmpty(formMeta, formErrors);
+    const channelsError = isNotificationChannelsEmpty(formMeta, formErrors);
 
     const visibleMetricOptions = metricOptions.filter(option => {
       // show all metrics when feature flag is not defined
@@ -112,30 +118,34 @@ export class AlertForm extends Component {
       return true;
     });
 
+    const columnProps = isHibanaEnabled ? { sm: 12 } : { sm: 12, md: 11, lg: 9 };
     return (
       <Form onSubmit={handleSubmit}>
-        <Panel className={styles.Form}>
+        <Panel>
           <Grid>
-            <Grid.Column sm={12} md={11} lg={9}>
+            <Grid.Column {...columnProps}>
               <Panel.Section>
-                <label htmlFor="name">Alert Name</label>
-                <Field
-                  name="name"
-                  component={TextFieldWrapper}
-                  disabled={submitting}
-                  validate={[required, maxLength(50)]}
-                />
-                <div className={styles.MetricSelector}>
-                  <label>Alert Metric</label>
+                <Box maxWidth="699px">
+                  <label htmlFor="name">Alert Name</label>
                   <Field
-                    name="metric"
-                    component={SelectWrapper}
-                    options={visibleMetricOptions}
-                    onChange={this.resetFormValues}
-                    validate={required}
-                    disabled={submitting || !isNewAlert}
+                    name="name"
+                    component={TextFieldWrapper}
+                    disabled={submitting}
+                    validate={[required, maxLength(50)]}
                   />
-                </div>
+                  <Box marginTop="300" />
+                  <div className={styles.MetricSelector}>
+                    <label>Alert Metric</label>
+                    <Field
+                      name="metric"
+                      component={SelectWrapper}
+                      options={visibleMetricOptions}
+                      onChange={resetFormValues}
+                      validate={required}
+                      disabled={submitting || !isNewAlert}
+                    />
+                  </div>
+                </Box>
                 {metric !== '' && !formSpec.hideEvaluator && (
                   <div className={styles.Evaluator}>
                     <EvaluatorFields
@@ -148,18 +158,20 @@ export class AlertForm extends Component {
                 )}
                 {formSpec.hasFilters && (
                   <div className={styles.Filters} data-id="alert-filters">
-                    <label>
-                      <h5>
-                        Filtered by{' '}
-                        <small className={styles.OptionalText}>
-                          Add up to 10 filters to your alert.
-                        </small>
-                      </h5>
-                    </label>
-                    {!formSpec.hideSubaccountFilter && hasSubaccounts && (
-                      <SubaccountField disabled={submitting} />
-                    )}
-                    <FilterFields disabled={submitting} />
+                    <Stack space="500">
+                      <label>
+                        <h4>
+                          Filtered by{' '}
+                          <small className={styles.OptionalText}>
+                            Add up to 10 filters to your alert.
+                          </small>
+                        </h4>
+                      </label>
+                      {!formSpec.hideSubaccountFilter && hasSubaccounts && (
+                        <SubaccountField disabled={submitting} />
+                      )}
+                      <FilterFields disabled={submitting} />
+                    </Stack>
                   </div>
                 )}
                 <div className={styles.Notifications}>
@@ -170,9 +182,14 @@ export class AlertForm extends Component {
                       error="At least one notification channel must be not empty"
                     />
                   )}
-                  {this.renderNotificationChannels()}
+                  {renderNotificationChannels()}
                 </div>
-                <Button submit primary disabled={isSubmitDisabled} className={styles.SubmitButton}>
+                <Button
+                  submit
+                  variant="primary"
+                  disabled={isSubmitDisabled}
+                  className={styles.SubmitButton}
+                >
                   {submitText}
                 </Button>
               </Panel.Section>
@@ -181,8 +198,10 @@ export class AlertForm extends Component {
         </Panel>
       </Form>
     );
-  }
-}
+  };
+
+  return <>{renderAlertForm()}</>;
+};
 
 AlertForm.defaultProps = { metric: '' };
 

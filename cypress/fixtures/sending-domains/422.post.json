@@ -1,0 +1,9 @@
+{
+  "errors": [
+    {
+      "message": "invalid data format/type",
+      "description": "Error domain name contains no '.'(s) for domain: 'hello'",
+      "code": "1300"
+    }
+  ]
+}

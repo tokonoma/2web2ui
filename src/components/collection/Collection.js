@@ -168,13 +168,13 @@ export class Collection extends Component {
       </OuterWrapper>
     );
     const pagination = this.renderPagination();
-    const heading = <h3>{title}</h3>;
+    const heading = title ? <h3>{title}</h3> : null;
 
     return typeof children === 'function' ? (
       children({ filterBox, collection, heading, pagination })
     ) : (
       <div>
-        {title && heading}
+        {heading}
         {filterBox}
         {collection}
         {pagination}

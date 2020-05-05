@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Field, formValueSelector, change } from 'redux-form';
 import { SelectWrapper, SliderFieldWrapper } from 'src/components/reduxFormWrappers';
 import { getFormSpec, getEvaluatorOptions } from '../../helpers/alertForm';
-import { Grid, Label } from 'src/components/matchbox';
+import { Grid } from 'src/components/matchbox';
 import { numberBetweenInclusive } from 'src/helpers/validation';
 import { FORM_NAME, RECOMMENDED_METRIC_VALUE } from '../../constants/formConstants';
 import _ from 'lodash';
@@ -50,7 +50,7 @@ export const EvaluatorFields = ({
       <Grid>
         {sourceOptions.length > 1 && (
           <Grid.Column sm={12} md={3}>
-            <Label id="alertEvaluatorSource">Evaluated</Label>
+            <label for="alertEvaluatorSource">Evaluated</label>
             <Field
               id="alertEvaluatorSource"
               name="source"
@@ -63,7 +63,7 @@ export const EvaluatorFields = ({
         )}
         {operatorOptions.length > 1 && (
           <Grid.Column sm={12} md={2}>
-            <Label id="alertEvaluatorOperator">Comparison</Label>
+            <label for="alertEvaluatorOperator">Comparison</label>
             <Field
               id="alertEvaluatorOperator"
               name="operator"

@@ -49,7 +49,6 @@ exports[`CreateForm renders correctly 1`] = `
           validate={
             Array [
               [Function],
-              [Function],
             ]
           }
         />

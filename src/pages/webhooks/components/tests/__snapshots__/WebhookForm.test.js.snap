@@ -71,29 +71,35 @@ exports[`Webhooks Form Component should render correctly 1`] = `
   onSubmit={[MockFunction]}
 >
   <Panel.Section>
-    <NameField
-      disabled={false}
-    />
-    <TargetField
-      disabled={false}
-    />
+    <Stack>
+      <NameField
+        disabled={false}
+      />
+      <TargetField
+        disabled={false}
+      />
+    </Stack>
   </Panel.Section>
   <Panel.Section>
-    <EventsRadioGroup
-      disabled={false}
-    />
-    <EventCheckBoxes
-      disabled={false}
-    />
+    <Stack>
+      <EventsRadioGroup
+        disabled={false}
+      />
+      <EventCheckBoxes
+        disabled={false}
+      />
+    </Stack>
   </Panel.Section>
   <Panel.Section>
-    <AuthDropDown
-      disabled={false}
-    />
-    <AuthFields
-      authType={null}
-      disabled={false}
-    />
+    <Stack>
+      <AuthDropDown
+        disabled={false}
+      />
+      <AuthFields
+        authType={null}
+        disabled={false}
+      />
+    </Stack>
   </Panel.Section>
   <Panel.Section>
     <ActiveField
@@ -103,8 +109,8 @@ exports[`Webhooks Form Component should render correctly 1`] = `
   <Panel.Section>
     <Button
       disabled={true}
-      primary={true}
       submit={true}
+      variant="primary"
     >
       Update Webhook
     </Button>

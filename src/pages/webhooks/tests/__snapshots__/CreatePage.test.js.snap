@@ -5,7 +5,7 @@ exports[`Page: Webhook Create should build proper events tree 1`] = `
   breadcrumbAction={
     Object {
       "Component": [Function],
-      "content": "Webhooks",
+      "content": "View All Webhooks",
       "to": "/webhooks",
     }
   }
@@ -25,7 +25,7 @@ exports[`Page: Webhook Create should not show loading component while events are
   breadcrumbAction={
     Object {
       "Component": [Function],
-      "content": "Webhooks",
+      "content": "View All Webhooks",
       "to": "/webhooks",
     }
   }
@@ -45,7 +45,7 @@ exports[`Page: Webhook Create should render happy path 1`] = `
   breadcrumbAction={
     Object {
       "Component": [Function],
-      "content": "Webhooks",
+      "content": "View All Webhooks",
       "to": "/webhooks",
     }
   }

@@ -9,11 +9,11 @@ exports[`Evaluator Fields Component renders correctly 1`] = `
       md={3}
       sm={12}
     >
-      <Label
-        id="alertEvaluatorSource"
+      <label
+        for="alertEvaluatorSource"
       >
         Evaluated
-      </Label>
+      </label>
       <Field
         component={[Function]}
         disabled={true}
@@ -42,11 +42,11 @@ exports[`Evaluator Fields Component renders correctly 1`] = `
       md={2}
       sm={12}
     >
-      <Label
-        id="alertEvaluatorOperator"
+      <label
+        for="alertEvaluatorOperator"
       >
         Comparison
-      </Label>
+      </label>
       <Field
         component={[Function]}
         disabled={false}

@@ -4,6 +4,7 @@ import { formValueSelector, change } from 'redux-form';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import { RadioGroup, SubaccountTypeaheadWrapper, TextFieldWrapper } from 'src/components';
+import { Stack } from 'src/components/matchbox';
 import { required } from 'src/helpers/validation';
 
 /**
@@ -40,15 +41,15 @@ export class SubaccountSection extends Component {
       ) : null;
 
     return (
-      <div>
+      <Stack>
         <Field
           component={RadioGroup}
           name="assignTo"
-          label="Receive events from:"
+          label="Receive events from"
           options={createOptions}
         />
         {typeahead}
-      </div>
+      </Stack>
     );
   }
 

@@ -215,7 +215,7 @@ exports[`IP Pools List Page should render the IP warm-up banner correctly 1`] = 
   title="New dedicated IP addresses need to be warmed up"
 >
   <Box
-    maxWidth={600}
+    maxWidth="1200"
     mt="200"
   >
     <p>

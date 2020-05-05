@@ -6,14 +6,16 @@ import {
   SOURCE_FRIENDLY_NAMES,
   OPERATOR_FRIENDLY_NAMES,
 } from '../constants/formConstants';
-import { Button, Panel, Tag } from 'src/components/matchbox';
+import { Box, Panel, Tag } from 'src/components/matchbox';
 import LabelledValue from 'src/components/labelledValue/LabelledValue';
 import { MAILBOX_PROVIDERS } from 'src/constants';
-import styles from './AlertDetails.module.scss';
+import OGStyles from './AlertDetails.module.scss';
+import hibanaStyles from './AlertDetailsHibana.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride/useHibanaOverride';
 import AlertToggle from './AlertToggle';
 import { SlackIcon, WebhookIcon } from 'src/components/icons';
-import { PageLink } from 'src/components/links';
 import { getEvaluatorOptions } from '../helpers/alertForm';
+import { useHibana } from 'src/context/HibanaContext';
 
 const extraChannels = [
   {
@@ -28,7 +30,21 @@ const extraChannels = [
   },
 ];
 
-export const AlertDetails = ({ alert, id, subaccountIdToString, hasSubaccounts }) => {
+export const AlertDetails = ({
+  alert,
+  id,
+  subaccountIdToString,
+  hasSubaccounts,
+  renderPrimaryAreaComponent,
+}) => {
+  const [state] = useHibana();
+  const { isHibanaEnabled } = state;
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+  const SectionComponent = isHibanaEnabled ? Box : Panel.Section;
+  const FilteredByComponent = isHibanaEnabled
+    ? ({ children }) => <div>{children}</div>
+    : ({ children }) => <span>{children}</span>;
+
   const {
     metric,
     channels = {},
@@ -70,7 +86,7 @@ export const AlertDetails = ({ alert, id, subaccountIdToString, hasSubaccounts }
       hasSubaccounts && ((subaccounts.length > 0 && subaccounts[0] !== -1) || any_subaccount);
     const subaccount = shouldShowSubaccounts ? (
       <span key={'subaccounts'}>
-        <h6 className={styles.BoldInline}>Subaccounts</h6> {getSubaccountsTags()}
+        <p className={styles.ValueLabel}>Subaccounts</p> {getSubaccountsTags()}
       </span>
     ) : (
       undefined
@@ -84,13 +100,13 @@ export const AlertDetails = ({ alert, id, subaccountIdToString, hasSubaccounts }
         !(blacklistFilters.includes(filter_type) && filter_values[0] === 'any'),
     );
 
-    //Only show 'and' if it's not the first filter or if there's a subaccounts filter
+    //Only show 'and' if it's not the first filter or if there's a subaccounts filter (linebreak for Hibana)
     const filtersTags = cleanedFilters.map((filter, i) => (
-      <span key={filter.filter_type}>
-        {(shouldShowSubaccounts || i > 0) && 'and'}{' '}
-        <h6 className={styles.BoldInline}>{FILTERS_FRIENDLY_NAMES[filter.filter_type]}</h6>{' '}
+      <FilteredByComponent key={filter.filter_type}>
+        {(shouldShowSubaccounts || i > 0) && !isHibanaEnabled && 'and '}
+        <p className={styles.ValueLabel}>{FILTERS_FRIENDLY_NAMES[filter.filter_type]}</p>{' '}
         {getFilterValuesTags(filter.filter_type, filter.filter_values)}
-      </span>
+      </FilteredByComponent>
     ));
 
     const renderedFilters = [subaccount, ...filtersTags].filter(Boolean);
@@ -129,8 +145,8 @@ export const AlertDetails = ({ alert, id, subaccountIdToString, hasSubaccounts }
     return (
       <>
         {sourceTag}
-        <h6 className={styles.BoldInline}>{percentChangeText}</h6>
-        <h6 className={styles.BoldInline}>{operatorText}</h6>
+        <p className={styles.ValueLabel}>{percentChangeText}</p>
+        <p className={styles.ValueLabel}>{operatorText}</p>
         {valueTag}
       </>
     );
@@ -146,7 +162,7 @@ export const AlertDetails = ({ alert, id, subaccountIdToString, hasSubaccounts }
       <>
         {emails && emails.length > 0 && (
           <div id="email">
-            <h6 className={styles.BoldInline}>Email</h6>{' '}
+            <p className={styles.ValueLabel}>Email</p>{' '}
             {emails.map(email => (
               <Tag key={email} className={styles.Tags}>
                 <span className={styles.TagText}>{email}</span>
@@ -156,7 +172,7 @@ export const AlertDetails = ({ alert, id, subaccountIdToString, hasSubaccounts }
         )}
         {visibleExtraChannels.map(({ icon: Icon, key, label }) => (
           <div key={key}>
-            <h6 className={styles.BoldInline}>{label}</h6>{' '}
+            <p className={styles.ValueLabel}>{label}</p>{' '}
             <Tag className={styles.TagsWithIcon}>
               <Icon className={styles.Icon} />
               <span className={styles.TagText}>{restChannels[key].target}</span>
@@ -168,7 +184,7 @@ export const AlertDetails = ({ alert, id, subaccountIdToString, hasSubaccounts }
   };
 
   const detailsMap = [
-    { label: 'Metric:', render: () => <h6>{METRICS[metric]}</h6> },
+    { label: 'Metric:', render: () => <p className={styles.ValueLabel}>{METRICS[metric]}</p> },
     { label: 'Condition:', render: renderEvaluated },
     { label: 'Filtered By:', render: renderFilteredBy },
     { label: 'Notify:', render: renderNotify },
@@ -184,20 +200,18 @@ export const AlertDetails = ({ alert, id, subaccountIdToString, hasSubaccounts }
       }
 
       return (
-        <Panel.Section key={i}>
+        <SectionComponent key={i} paddingLeft="500" paddingBottom="400">
           <LabelledValue label={label}>{renderedValue}</LabelledValue>
-        </Panel.Section>
+        </SectionComponent>
       );
     });
 
   return (
     <Panel data-id="alert-details-panel">
-      <Panel.Section>
+      <SectionComponent paddingLeft="500" paddingTop="400" width="100%">
         <h3 className={styles.Title}>Alert Details</h3>
-        <PageLink as={Button} to={`/alerts/edit/${id}`} className={styles.Button} primary>
-          Edit
-        </PageLink>
-      </Panel.Section>
+        {renderPrimaryAreaComponent()}
+      </SectionComponent>
       {renderAlertDetails()}
     </Panel>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Panel } from 'src/components/matchbox';
+import { Panel, Stack } from 'src/components/matchbox';
 import PaymentForm from 'src/components/billing/PaymentForm';
 import BillingAddressForm from 'src/components/billing/BillingAddressForm';
 import { FORMS } from 'src/constants';
@@ -8,12 +8,14 @@ const CreditCardSection = ({ billing, submitting, isPlanFree }) => {
   if (isPlanFree) {
     return (
       <Panel.Section>
-        <p>Full featured test account that includes:</p>
-        <ul>
-          <li>Limited sending volume for testing.</li>
-          <li>Access to all of our powerful API features.</li>
-          <li>Free technical support to get you up and running.</li>
-        </ul>
+        <Stack>
+          <p>Full featured test account that includes:</p>
+          <ul>
+            <li>Limited sending volume for testing.</li>
+            <li>Access to all of our powerful API features.</li>
+            <li>Free technical support to get you up and running.</li>
+          </ul>
+        </Stack>
       </Panel.Section>
     );
   }

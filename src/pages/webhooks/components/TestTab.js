@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getEventSamples, testWebhook } from 'src/actions/webhooks';
 import { showAlert } from 'src/actions/globalAlert';
-
-import { Button, Panel } from 'src/components/matchbox';
-import { PanelLoading } from 'src/components';
-import ResponseBlock from './ResponseBlock';
-import RequestBlock from './RequestBlock';
+import Loading from 'src/components/loading';
+import { Button, CodeBlock, Panel, Stack } from 'src/components/matchbox';
 
 export class TestTab extends Component {
   state = {
@@ -72,7 +69,7 @@ export class TestTab extends Component {
 
   render() {
     if (this.props.samplesLoading) {
-      return <PanelLoading />;
+      return <Loading />;
     }
 
     const { webhook, testResponse, testLoading } = this.props;
@@ -85,21 +82,29 @@ export class TestTab extends Component {
       : 'Send Test Batch';
 
     return (
-      <Panel>
+      <>
         <Panel.Section>
-          <p>
-            <Button primary size="small" disabled={testLoading} onClick={this.testWebhook}>
-              {buttonText}
-            </Button>
-          </p>
-          <RequestBlock
-            testSent={testSent}
-            testRequest={this.state.sampleEvent || 'generating...'}
-            targetURL={webhook.target}
-          />
+          <Stack>
+            <p>
+              The test sends the following request to this webhook's target URL ({webhook.target})
+            </p>
+            <CodeBlock code={this.state.sampleEvent || 'generating...'} height={300} />
+          </Stack>
         </Panel.Section>
-        {!testLoading && <ResponseBlock testSent={testSent} testResponse={testResponse} />}
-      </Panel>
+        <Panel.Section>
+          <Button variant="primary" disabled={testLoading} onClick={this.testWebhook}>
+            {buttonText}
+          </Button>
+        </Panel.Section>
+        {!testLoading && testSent && testResponse && testResponse.status <= 299 && (
+          <Panel.Section>
+            <Stack>
+              <p>The server responded like this:</p>
+              <CodeBlock code={JSON.stringify(testResponse, null, '  ')} height={300} />
+            </Stack>
+          </Panel.Section>
+        )}
+      </>
     );
   }
 }

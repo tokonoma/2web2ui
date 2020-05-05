@@ -26,14 +26,6 @@ describe('The sending domain page', () => {
     cy.queryByText('Required').should('be.visible');
   });
 
-  it('shows an "Invalid Domain" error if the user types in a domain name format that is invalid', () => {
-    cy.findByLabelText('Domain Name')
-      .type('hello')
-      .blur();
-
-    cy.queryByText('Invalid Domain').should('be.visible');
-  });
-
   it('re-routes the user to the dashboard after successfully adding a domain', () => {
     cy.server();
     cy.fixture('sending-domains/200.post.json').as('sendingDomainsPost');
@@ -46,5 +38,24 @@ describe('The sending domain page', () => {
     cy.findByLabelText('Domain Name').type('example.com');
     cy.findByText('Add Domain').click();
     cy.title().should('include', 'Dashboard');
+  });
+
+  it('shows a snackbar with error message for invalid domain', () => {
+    cy.stubRequest({
+      method: 'POST',
+      url: '/api/v1/sending-domains',
+      statusCode: 422,
+      fixture: 'sending-domains/422.post.json',
+      requestAlias: 'sendingDomainPost',
+    });
+
+    cy.findByLabelText('Domain Name').type('hello');
+    cy.findByText('Add Domain').click();
+
+    cy.wait('@sendingDomainPost');
+
+    cy.findByText('Something went wrong.').should('be.visible');
+    cy.findByText('View Details').click();
+    cy.findByText(`Error domain name contains no '.'(s) for domain: 'hello'`).should('be.visible');
   });
 });

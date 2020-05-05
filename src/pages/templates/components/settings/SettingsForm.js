@@ -9,7 +9,6 @@ import FromEmailWrapper from '../FromEmailWrapper';
 import CopyField from 'src/components/copyField/CopyField';
 import { required } from 'src/helpers/validation';
 import styles from './SettingsForm.module.scss';
-import { emailOrSubstitution } from '../validation';
 
 export default class SettingsForm extends React.Component {
   updateSettings = values => {
@@ -124,7 +123,8 @@ export default class SettingsForm extends React.Component {
                 component={FromEmailWrapper}
                 placeholder="example@email.com"
                 label="From Email"
-                validate={[required, emailOrSubstitution]}
+                // Do not try to validate email, let our API make that decision
+                validate={[required]}
                 domains={domains}
                 helpText={fromEmailHelpText}
                 disabled={submitting || isPublishedMode}
@@ -139,11 +139,11 @@ export default class SettingsForm extends React.Component {
               />
 
               <Field
+                // Do not try to validate email, let our API make that decision
                 name="content.reply_to"
                 component={TextFieldWrapper}
                 label="Reply To"
                 helpText="An email address recipients can reply to."
-                validate={emailOrSubstitution}
                 disabled={submitting || isPublishedMode}
               />
 
