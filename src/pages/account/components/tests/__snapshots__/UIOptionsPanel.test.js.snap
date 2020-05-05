@@ -9,7 +9,7 @@ exports[`UIOptionsPanel renders 1`] = `
       key="ui-option-hideTerminatedSubaccounts"
     >
       <Grid.Column
-        md={11}
+        md={10}
         xs={12}
       >
         <LabelledValue
@@ -19,7 +19,7 @@ exports[`UIOptionsPanel renders 1`] = `
         </LabelledValue>
       </Grid.Column>
       <Grid.Column
-        md={1}
+        md={2}
         style={
           Object {
             "textAlign": "right",
