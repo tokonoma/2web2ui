@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { refreshSummaryReport } from 'src/actions/summaryChart';
@@ -8,24 +8,24 @@ import { Loading } from 'src/components';
 import ReportOptions from '../components/ReportOptions';
 import { Table, MetricsModal, ChartGroup, ChartHeader } from './components';
 import { selectSummaryChartSearchOptions } from 'src/selectors/reportSearchOptions';
-import { selectReportsEnhancementsEnabled } from 'src/selectors/customReports';
 import styles from './SummaryPage.module.scss';
 
-export class SummaryReportPage extends Component {
-  state = {
-    metricsModal: false,
-    eventTime: 'real',
-    scale: 'linear',
-  };
+export function ReportBuilder({
+  chart,
+  reportOptions,
+  summarySearchOptions = {},
+  refreshSummaryReport,
+  refreshReportOptions,
+}) {
+  useEffect(() => {
+    refreshSummaryReport(reportOptions);
+  }, [refreshSummaryReport, reportOptions]);
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.reportOptions !== this.props.reportOptions) {
-      this.props.refreshSummaryReport(this.props.reportOptions);
-    }
-  }
+  const [metricsModal, setMetricsModal] = useState(false);
+  const [eventTime, setEventTime] = useState('real');
+  const [scale, setScale] = useState('linear');
 
-  renderLoading() {
-    const { chart } = this.props;
+  const renderLoading = () => {
     if (chart.chartLoading) {
       return (
         <div className={styles.Loading}>
@@ -33,76 +33,71 @@ export class SummaryReportPage extends Component {
         </div>
       );
     }
-  }
-
-  handleMetricsApply = selectedMetrics => {
-    this.setState({ metricsModal: false });
-    this.props.refreshReportOptions({ metrics: selectedMetrics });
   };
 
-  handleMetricsModal = () => {
-    this.setState({ metricsModal: !this.state.metricsModal });
+  const state = { metricsModal: false, eventTime: 'real', scale: 'linear' };
+
+  const handleMetricsApply = selectedMetrics => {
+    setMetricsModal(false);
+    refreshReportOptions({ metrics: selectedMetrics });
   };
 
-  handleTimeClick = time => {
-    this.setState({ eventTime: time });
+  const handleMetricsModal = () => {
+    setMetricsModal(!metricsModal);
   };
 
-  handleScaleClick = scale => {
-    this.setState({ scale });
+  const handleTimeClick = time => {
+    setEventTime(time);
   };
 
-  render() {
-    const { chart, summarySearchOptions = {}, enhancementsEnabled } = this.props;
-    const { to } = summarySearchOptions;
-    const { scale, eventTime, metricsModal } = this.state;
+  const handleScaleClick = scale => {
+    setScale(scale);
+  };
 
-    return (
-      <Page title="Analytics Report">
-        <ReportOptions
-          reportLoading={chart.chartLoading}
-          searchOptions={summarySearchOptions}
-          customReportsEnabled={enhancementsEnabled}
-        />
-        <div data-id="summary-chart">
-          <Panel>
-            <Panel.Section
-              className={classnames(styles.ChartSection, chart.chartLoading && styles.pending)}
-            >
-              <ChartHeader
-                selectedMetrics={chart.metrics}
-                selectedTime={eventTime}
-                selectedScale={scale}
-                onScaleClick={this.handleScaleClick}
-                onTimeClick={this.handleTimeClick}
-                onMetricsToggle={this.handleMetricsModal}
-              />
-              <ChartGroup {...chart} to={to} yScale={scale} />
-            </Panel.Section>
+  const { to } = summarySearchOptions;
+  const { scale, eventTime, metricsModal } = state;
+  //TODO: Make sure to replace these components with new ones
+  return (
+    <Page title="Analytics Report">
+      <ReportOptions reportLoading={chart.chartLoading} searchOptions={summarySearchOptions} />
+      <div data-id="summary-chart">
+        <Panel>
+          <Panel.Section
+            className={classnames(styles.ChartSection, chart.chartLoading && styles.pending)}
+          >
+            <ChartHeader
+              selectedMetrics={chart.metrics}
+              selectedTime={eventTime}
+              selectedScale={scale}
+              onScaleClick={handleScaleClick}
+              onTimeClick={handleTimeClick}
+              onMetricsToggle={handleMetricsModal}
+            />
+            <ChartGroup {...chart} to={to} yScale={scale} />
+          </Panel.Section>
 
-            {this.renderLoading()}
-          </Panel>
-        </div>
-        <div data-id="summary-table">
-          <Table />
-        </div>
+          {renderLoading()}
+        </Panel>
+      </div>
+      <div data-id="summary-table">
+        <Table />
+      </div>
 
-        <MetricsModal
-          selectedMetrics={chart.metrics}
-          open={metricsModal}
-          onCancel={this.handleMetricsModal}
-          onSubmit={this.handleMetricsApply}
-        />
-      </Page>
-    );
-  }
+      <MetricsModal
+        selectedMetrics={chart.metrics}
+        open={metricsModal}
+        onCancel={handleMetricsModal}
+        onSubmit={handleMetricsApply}
+      />
+    </Page>
+  );
 }
 
+//Redux
 const mapStateToProps = state => ({
   chart: state.summaryChart,
   reportOptions: state.reportOptions,
   summarySearchOptions: selectSummaryChartSearchOptions(state),
-  enhancementsEnabled: selectReportsEnhancementsEnabled(state),
 });
 
 const mapDispatchToProps = {
@@ -110,4 +105,4 @@ const mapDispatchToProps = {
   refreshSummaryReport,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SummaryReportPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ReportBuilder);
