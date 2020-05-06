@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Box, Button, Panel } from 'src/components/matchbox';
+import { Button, Panel } from 'src/components/matchbox';
 import { FileDownload } from '@sparkpost/matchbox-icons';
-import { OGOnlyWrapper } from 'src/components/hibana';
-import { TableCollection } from 'src/components';
-import { SubduedText } from 'src/components/text';
+import { Heading, SubduedText } from 'src/components/text';
 import { formatDate } from 'src/helpers/date';
 import { get as getInvoice } from 'src/actions/invoices';
 import { showAlert } from 'src/actions/globalAlert';
 import _ from 'lodash';
 import { formatCurrency } from 'src/helpers/units';
 import { download } from 'src/helpers/downloading';
+import { PanelSectionTableCollection } from 'src/components/collection';
 
 const columns = ['Date', 'Amount', 'Invoice Number', { label: null, width: 150 }];
 
@@ -75,10 +74,18 @@ export class InvoiceHistory extends Component {
 
     return (
       <>
-        <OGOnlyWrapper as={Panel} title="Invoice History">
-          <Box as={Panel} title="Invoice History" sectioned marginBottom={0} borderBottom={0} />
-          <TableCollection rows={invoices} columns={columns} getRowData={this.getRowData} />
-        </OGOnlyWrapper>
+        <Panel>
+          <Panel.Section>
+            <Heading as="h2" looksLike="h4">
+              Invoice History
+            </Heading>
+          </Panel.Section>
+          <PanelSectionTableCollection
+            rows={invoices}
+            columns={columns}
+            getRowData={this.getRowData}
+          />
+        </Panel>
         {maxWarning}
       </>
     );

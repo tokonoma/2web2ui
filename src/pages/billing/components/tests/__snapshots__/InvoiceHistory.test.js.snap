@@ -45,18 +45,16 @@ exports[`Component: Invoice History should deactivate download buttons while an 
 
 exports[`Component: Invoice History should show a list of invoices 1`] = `
 <Fragment>
-  <OGOnlyWrapper
-    as={[Function]}
-    title="Invoice History"
-  >
-    <Box
-      as={[Function]}
-      borderBottom={0}
-      marginBottom={0}
-      sectioned={true}
-      title="Invoice History"
-    />
-    <TableCollection
+  <Panel>
+    <Panel.Section>
+      <Heading
+        as="h2"
+        looksLike="h4"
+      >
+        Invoice History
+      </Heading>
+    </Panel.Section>
+    <PanelSectionTableCollection
       columns={
         Array [
           "Date",
@@ -68,8 +66,6 @@ exports[`Component: Invoice History should show a list of invoices 1`] = `
           },
         ]
       }
-      defaultSortColumn={null}
-      defaultSortDirection="asc"
       getRowData={[Function]}
       rows={
         Array [
@@ -112,24 +108,22 @@ exports[`Component: Invoice History should show a list of invoices 1`] = `
         ]
       }
     />
-  </OGOnlyWrapper>
+  </Panel>
 </Fragment>
 `;
 
 exports[`Component: Invoice History should show a message that only 20 invoices are available if there are 20 invoices 1`] = `
 <Fragment>
-  <OGOnlyWrapper
-    as={[Function]}
-    title="Invoice History"
-  >
-    <Box
-      as={[Function]}
-      borderBottom={0}
-      marginBottom={0}
-      sectioned={true}
-      title="Invoice History"
-    />
-    <TableCollection
+  <Panel>
+    <Panel.Section>
+      <Heading
+        as="h2"
+        looksLike="h4"
+      >
+        Invoice History
+      </Heading>
+    </Panel.Section>
+    <PanelSectionTableCollection
       columns={
         Array [
           "Date",
@@ -141,8 +135,6 @@ exports[`Component: Invoice History should show a message that only 20 invoices 
           },
         ]
       }
-      defaultSortColumn={null}
-      defaultSortDirection="asc"
       getRowData={[Function]}
       rows={
         Array [
@@ -289,7 +281,7 @@ exports[`Component: Invoice History should show a message that only 20 invoices 
         ]
       }
     />
-  </OGOnlyWrapper>
+  </Panel>
   <Panel.Footer
     left={
       <SubduedText
