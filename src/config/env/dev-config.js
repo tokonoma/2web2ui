@@ -25,6 +25,10 @@ export default {
   },
   gaTag: 'UA-111136819-2',
   gtmId: 'GTM-P87NNJ4',
+  segment: {
+    enabled: true,
+    publicKey: 'LR3TCDRu7vPZfty8FPZsg4Oe1WTmpAtt',
+  },
   sentry: {
     projectId: 232588,
     publicKey: '63149b1565df4b7199db939a4410b47a',

@@ -7,6 +7,10 @@ const productionConfig = {
       app_id: 'RYeoK4Dp3a', //Cancel Prod id
     },
   },
+  segment: {
+    enabled: true,
+    publicKey: '6NftxrUb0QfhkIaOqcpbfxjZDhvNEExm',
+  },
   sentry: {
     projectId: 237613,
     publicKey: '014f9707c27b4e7ea90aff051a82e561',
