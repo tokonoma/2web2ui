@@ -1,18 +1,18 @@
 @import '~@sparkpost/design-tokens-hibana/tokens';
 .currentPlan {
-  color: 'gray.600';
+  color: color(gray, 600);
 }
 .Title {
-  font-weight: 400;
+  font-weight: font-weight(normal);
 }
 
 .DeprecatedWarning {
-  color: 'red';
+  color: color(red, 700);
   display: flex;
   font-size: font-size(400);
-  line-height: 1.2em;
+  line-height: spacing(400);
   .content {
-    padding: 0 20px;
+    padding: 0 spacing(500);
     flex: 1 0 0;
   }
 }

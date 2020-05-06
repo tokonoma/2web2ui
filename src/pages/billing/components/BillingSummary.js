@@ -21,6 +21,7 @@ import { formatFullNumber } from 'src/helpers/units';
 import totalRVCost from '../helpers/totalRecipientValidationCost';
 import _ from 'lodash';
 import { formatDateTime } from 'src/helpers/date';
+import { Text } from 'src/components/matchbox';
 const PAYMENT_MODAL = 'payment';
 const CONTACT_MODAL = 'contact';
 const IP_MODAL = 'ip';
@@ -92,8 +93,13 @@ export default class BillingSummary extends Component {
       <Panel.Section>
         <LabelledValue label="Recipient Validation">
           <h6>
-            {formatFullNumber(volumeUsed)} emails validated for {totalRVCost(volumeUsed)}
-            <small> as of {formatDateTime(recipientValidationDate)}</small>
+            <Text fontSize="300">
+              {formatFullNumber(volumeUsed)} emails validated for {totalRVCost(volumeUsed)}
+              <Text fontWeight="200" as="span">
+                {' '}
+                as of {formatDateTime(recipientValidationDate)}
+              </Text>
+            </Text>
           </h6>
           <UnstyledLink onClick={this.handleRvModal}>How was this calculated?</UnstyledLink>
         </LabelledValue>

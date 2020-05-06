@@ -20,7 +20,7 @@ const PlanSummary = ({
   const { effective_date } = pendingCancellation;
   return (
     <React.Fragment>
-      <Heading as="h6" className={styles.Headline} looksLike="h4">
+      <Heading as="h6" className={styles.Headline} looksLike="h5">
         {volume} emails for {cost}
         {effective_date && (
           <small> to end {formatDate(effective_date)} when your account will be cancelled</small>
