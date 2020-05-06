@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import { Grid } from 'src/components/matchbox';
 import LegendItem from './LegendItem';
-
-import styles from './Legend.module.scss';
+import OGStyles from './Legend.module.scss';
+import hibanaStyles from './LegendHibana.module.scss';
 
 const Legend = ({
   headerData,
@@ -14,6 +15,7 @@ const Legend = ({
   onClick,
   hoveredItem,
 }) => {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
   const hoveredDataSet = hoveredItem && hoveredItem.dataSet;
 
   const primaryLegend = primaryData.map((item, i) => (

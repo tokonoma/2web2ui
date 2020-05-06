@@ -2,15 +2,13 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import { Grid, Panel } from 'src/components/matchbox';
 import { Loading, PieChart } from 'src/components';
+import { useHibana } from 'src/context/HibanaContext';
 import { generateColors } from 'src/helpers/color';
 import styles from './AcceptedChart.module.scss';
 import { formatPercent } from 'src/helpers/units';
 import { safeRate } from 'src/helpers/math';
 
-// Chart color palette generated from:
-const primaryColor = '#8CCA3A';
-
-export default class AcceptedChart extends Component {
+export class AcceptedChartClassComponent extends Component {
   state = {
     hoveredItem: null,
     active: null,
@@ -111,7 +109,11 @@ export default class AcceptedChart extends Component {
     }
 
     return {
-      primaryData: generateColors(data, { baseColor: primaryColor, saturate: 0, rotate: -40 }),
+      primaryData: generateColors(data, {
+        baseColor: this.props.primaryColor,
+        saturate: 0,
+        rotate: -40,
+      }),
     };
   };
 
@@ -155,4 +157,13 @@ export default class AcceptedChart extends Component {
       </Panel>
     );
   }
+}
+
+// TODO: This wrapping functional component won't be necessary when the OG theme is removed
+export default function AcceptedChart(props) {
+  const [state] = useHibana();
+  const { isHibanaEnabled } = state;
+  const primaryColor = isHibanaEnabled ? '#429BFF' : '#8CCA3A';
+
+  return <AcceptedChartClassComponent primaryColor={primaryColor} {...props} />;
 }

@@ -12,16 +12,18 @@ import ShareModal from './ShareModal';
 import PrecisionSelector from './PrecisionSelector';
 import { parseSearch } from 'src/helpers/reports';
 import { isForcedUTCRollupPrecision } from 'src/helpers/metrics';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import Typeahead from './Typeahead';
 import { Grid, Panel, Select, Tag, Tooltip } from 'src/components/matchbox';
 import DatePicker from 'src/components/datePicker/DatePicker';
 import typeaheadCacheSelector from 'src/selectors/reportFilterTypeaheadCache';
 import { TimezoneTypeahead } from 'src/components/typeahead/TimezoneTypeahead';
 import CustomReports from './CustomReports';
-import styles from './ReportOptions.module.scss';
 import { selectFeatureFlaggedMetrics } from 'src/selectors/metrics';
 import _ from 'lodash';
 import config from 'src/config';
+import OGStyles from './ReportOptions.module.scss';
+import hibanaStyles from './ReportOptionsHibana.module.scss';
 
 const { metricsRollupPrecisionMap } = config;
 const RELATIVE_DATE_OPTIONS = ['hour', 'day', '7days', '30days', '90days', 'custom'];
@@ -30,7 +32,7 @@ const PRECISION_OPTIONS = metricsRollupPrecisionMap.map(({ value }) => ({
   label: _.startCase(_.words(value).join(' ')),
 }));
 
-export class ReportOptions extends Component {
+export class ReportOptionsClassComponent extends Component {
   state = {
     shownPrecision: '',
   };
@@ -49,7 +51,8 @@ export class ReportOptions extends Component {
   };
 
   renderActiveFilters = () => {
-    const { reportOptions } = this.props;
+    const { reportOptions, styles } = this.props;
+
     return reportOptions.filters.length ? (
       <Panel.Section>
         <small>Filters:</small>
@@ -87,6 +90,7 @@ export class ReportOptions extends Component {
       refreshReportOptions,
       searchOptions,
       featureFlaggedMetrics,
+      styles,
     } = this.props;
 
     if (featureFlaggedMetrics.useMetricsRollup) {
@@ -223,6 +227,13 @@ export class ReportOptions extends Component {
       </div>
     );
   }
+}
+
+// TODO: Wrapping component just until the OG theme is removed to pass in styles - won't be needed in the future.
+function ReportOptions(props) {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+
+  return <ReportOptionsClassComponent styles={styles} {...props} />;
 }
 
 const mapStateToProps = state => ({

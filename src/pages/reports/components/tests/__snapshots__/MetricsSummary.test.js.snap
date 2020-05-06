@@ -3,7 +3,6 @@
 exports[`MetricsSummary:  should render custom date 1`] = `
 <Panel
   className="Panel"
-  p="500"
 >
   <Panel.Section>
     <Grid>
@@ -15,18 +14,20 @@ exports[`MetricsSummary:  should render custom date 1`] = `
         <div
           className="panelvertical"
         >
-          <h1
+          <Heading
+            as="h3"
             className="RateValue"
           >
             <Percent
               value={10}
             />
-          </h1>
-          <h6
+          </Heading>
+          <Heading
+            as="h4"
             className="RateTitle"
           >
             Summary Title
-          </h6>
+          </Heading>
         </div>
       </Grid.Column>
       <Grid.Column>
@@ -62,7 +63,6 @@ exports[`MetricsSummary:  should render custom date 1`] = `
 exports[`MetricsSummary:  should render relative range 1`] = `
 <Panel
   className="Panel"
-  p="500"
 >
   <Panel.Section>
     <Grid>
@@ -74,18 +74,20 @@ exports[`MetricsSummary:  should render relative range 1`] = `
         <div
           className="panelvertical"
         >
-          <h1
+          <Heading
+            as="h3"
             className="RateValue"
           >
             <Percent
               value={10}
             />
-          </h1>
-          <h6
+          </Heading>
+          <Heading
+            as="h4"
             className="RateTitle"
           >
             Summary Title
-          </h6>
+          </Heading>
         </div>
       </Grid.Column>
       <Grid.Column>
@@ -117,7 +119,6 @@ exports[`MetricsSummary:  should render relative range 1`] = `
 exports[`MetricsSummary:  should render secondary message 1`] = `
 <Panel
   className="Panel"
-  p="500"
 >
   <Panel.Section>
     <Grid>
@@ -129,18 +130,20 @@ exports[`MetricsSummary:  should render secondary message 1`] = `
         <div
           className="panelvertical"
         >
-          <h1
+          <Heading
+            as="h3"
             className="RateValue"
           >
             <Percent
               value={10}
             />
-          </h1>
-          <h6
+          </Heading>
+          <Heading
+            as="h4"
             className="RateTitle"
           >
             Summary Title
-          </h6>
+          </Heading>
         </div>
       </Grid.Column>
       <Grid.Column>

@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import React from 'react';
-import { Tooltip } from 'src/components/matchbox';
+import { Box, Tooltip } from 'src/components/matchbox';
 import { InfoOutline } from '@sparkpost/matchbox-icons';
-
+import useUniqueId from 'src/hooks/useUniqueId';
 import { Empty, PanelLoading, TableCollection } from 'src/components';
 import { map as metrics } from 'src/config/metrics';
 import { formatNumber, formatPercent } from 'src/helpers/units';
@@ -13,31 +13,21 @@ const COLUMNS = [
     key: 'link_name',
     label: 'Link',
     sortKey: 'link_name',
-    width: '40%',
+    width: '30%',
   },
   {
     key: 'count_raw_clicked_approx',
     label: (
-      <span>
+      <HeaderTooltip tooltipContent={metrics.count_raw_clicked_approx.description}>
         Unique Clicks
-        <Tooltip dark top content={metrics.count_raw_clicked_approx.description}>
-          <InfoOutline style={{ marginLeft: '5px' }} />
-        </Tooltip>
-      </span>
+      </HeaderTooltip>
     ),
     sortKey: 'count_raw_clicked_approx',
-    width: '20%',
+    width: '30%',
   },
   {
     key: 'count_clicked',
-    label: (
-      <span>
-        Clicks
-        <Tooltip dark top content={metrics.count_clicked.description}>
-          <InfoOutline style={{ marginLeft: '5px' }} />
-        </Tooltip>
-      </span>
-    ),
+    label: <HeaderTooltip tooltipContent={metrics.count_clicked.description}>Clicks</HeaderTooltip>,
     sortKey: 'count_clicked',
     width: '20%',
   },
@@ -84,5 +74,20 @@ export default function EngagementTable({ data, loading }) {
       pagination
       rows={dataWithPercentage}
     />
+  );
+}
+
+function HeaderTooltip({ children, tooltipContent }) {
+  const id = useUniqueId('header-tooltip');
+
+  return (
+    <span>
+      {children}
+      <Tooltip id={id} dark top content={tooltipContent}>
+        <Box as="span" color="blue.700">
+          <InfoOutline style={{ marginLeft: '5px', transform: 'translateY(-1px)' }} />
+        </Box>
+      </Tooltip>
+    </span>
   );
 }

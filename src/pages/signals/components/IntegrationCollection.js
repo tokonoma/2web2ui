@@ -1,33 +1,20 @@
 import React from 'react';
-import { Panel } from 'src/components/matchbox';
+import { ApiErrorBanner, Empty, PanelLoading } from 'src/components';
 import { TableCollection } from 'src/components/collection';
-import Loading from 'src/components/loading';
 import { columns } from '../constants/integration';
 import formatRow from './FormatRow';
-import styles from './IntegrationCollection.module.scss';
 
 const IntegrationCollection = ({ events = [], loadingStatus, onRetry }) => {
   if (loadingStatus === 'fail') {
-    return (
-      <Panel
-        className={styles.ErrorPanel}
-        accent='red'
-        title='Something went wrong'
-        actions={[{ content: 'Retry', onClick: onRetry }]}
-      />
-    );
+    return <ApiErrorBanner reload={onRetry} />;
   }
 
   if (loadingStatus === 'pending') {
-    return (
-      <Panel className={styles.LoadingPanel}>
-        <Loading/>
-      </Panel>
-    );
+    return <PanelLoading />;
   }
 
   if (events.length === 0) {
-    return <Panel title="No Data Found!" />;
+    return <Empty message="No Data Found!" />;
   }
 
   return (

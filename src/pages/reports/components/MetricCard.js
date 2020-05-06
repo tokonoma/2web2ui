@@ -1,26 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Tooltip } from 'src/components/matchbox';
-import { Panel } from 'src/components/matchbox';
 import { InfoOutline } from '@sparkpost/matchbox-icons';
-
-import styles from './MetricCard.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
+import useUniqueId from 'src/hooks/useUniqueId';
+import { Panel, Tooltip } from 'src/components/matchbox';
+import { Heading } from 'src/components/text';
+import OGStyles from './MetricCard.module.scss';
+import hibanaStyles from './MetricCardHibana.module.scss';
 
 const MetricCard = ({ label, value, tooltipContent, ...rest }) => {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+  const tooltipId = useUniqueId('metric-card');
   const tooltip = tooltipContent ? (
-    <Tooltip dark content={tooltipContent} horizontalOffset="-1.1rem">
-      <InfoOutline />
+    <Tooltip id={tooltipId} dark content={tooltipContent} horizontalOffset="-1.1rem">
+      <InfoOutline className={styles.TooltipIcon} />
     </Tooltip>
   ) : null;
 
   return (
     <div className={styles.MetricCard}>
-      <Panel className={styles.Panel} {...rest} p={'500'}>
-        <Panel.Section>
-          <h1 className={styles.Value}>{value}</h1>
-          <h6 className={styles.Label}>
+      <Panel className={styles.Panel} {...rest}>
+        <Panel.Section className={styles.PanelSection}>
+          <Heading as="h3" className={styles.Value}>
+            {value}
+          </Heading>
+          <Heading as="h4" className={styles.Label}>
             {label} {tooltip}
-          </h6>
+          </Heading>
         </Panel.Section>
       </Panel>
     </div>

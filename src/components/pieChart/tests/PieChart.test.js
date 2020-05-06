@@ -1,11 +1,16 @@
 import React from 'react';
 import { useHibana } from 'src/context/HibanaContext';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import { shallow } from 'enzyme';
 import PieChart from '../PieChart';
+import styles from '../Legend.module.scss';
 
 jest.mock('src/context/HibanaContext');
+jest.mock('src/hooks/useHibanaOverride');
 
 describe('Pie Chart: ', () => {
+  beforeEach(() => useHibanaOverride.mockReturnValue(styles));
+
   it('renders its children', () => {
     useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: false }]);
 
