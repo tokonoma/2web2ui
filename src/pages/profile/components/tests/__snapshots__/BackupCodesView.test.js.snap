@@ -1,22 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Component: BackupCodes should render correctly 1`] = `
-<div>
+<Stack>
   <p>
     <strong>
       Your shiny new backup codes:
     </strong>
   </p>
+  <BackupCodesList
+    codes={
+      Array [
+        "code1",
+        "code2",
+        "code3",
+      ]
+    }
+  />
   <Button.Group>
-    <BackupCodesList
-      codes={
-        Array [
-          "code1",
-          "code2",
-          "code3",
-        ]
-      }
-    />
     <DownloadCodes
       codes={
         Array [
@@ -45,5 +45,5 @@ exports[`Component: BackupCodes should render correctly 1`] = `
       }
     />
   </Button.Group>
-</div>
+</Stack>
 `;

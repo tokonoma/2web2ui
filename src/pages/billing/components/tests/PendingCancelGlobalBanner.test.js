@@ -31,9 +31,11 @@ describe('PendingCancelGlobalBanner', () => {
     expect(mockFunctions.fetchAccount).toHaveBeenCalled();
   });
 
-  it('should call hideGlobalBanner on clicking close', () => {
-    const { queryByRole } = subject();
-    userEvent.click(queryByRole('button'));
+  it('should call hideGlobalBanner on clicking close', async () => {
+    const { queryByText } = subject();
+
+    await userEvent.click(queryByText('Close'));
+
     expect(mockFunctions.hideGlobalBanner).toHaveBeenCalled();
   });
 });

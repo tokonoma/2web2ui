@@ -6,9 +6,8 @@ import { getBase64Contents } from 'src/helpers/file';
 jest.mock('src/helpers/file');
 
 describe('ProviderForm', () => {
-  const subject = (props = {}) => (
-    shallow(<ProviderForm {...props} handleSubmit={(handler) => handler} />)
-  );
+  const subject = (props = {}) =>
+    shallow(<ProviderForm {...props} handleSubmit={handler => handler} />);
 
   it('renders form', () => {
     const wrapper = subject();
@@ -24,7 +23,10 @@ describe('ProviderForm', () => {
     const onCancel = jest.fn();
     const wrapper = subject({ onCancel });
 
-    wrapper.find('Button.cancel').simulate('click');
+    wrapper
+      .find('Button')
+      .last()
+      .simulate('click');
     expect(onCancel).toHaveBeenCalled();
   });
 
@@ -56,7 +58,7 @@ describe('ProviderForm', () => {
     const wrapper = subject({
       provider: 'https://sso.sparkpost.com/redirect',
       reprovisionAccountSingleSignOn,
-      showAlert
+      showAlert,
     });
 
     getBase64Contents.mockImplementationOnce(() => Promise.resolve('abc=='));

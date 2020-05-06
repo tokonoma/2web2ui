@@ -11,59 +11,63 @@ exports[`Component: BackupCodesModal should change button text to Generating... 
       onSubmit={[Function]}
     >
       <Panel.Section>
-        <Banner
-          my="300"
-          status="warning"
-        >
-          Clicking Generate will overwrite your existing 
-          10
-           active backup codes.
-        </Banner>
-        <p>
-          Keep these single-use backup codes somewhere safe but accessible. They can be used if your authentication app is unavailable (
-          <span
-            aria-label="phone in toilet emojis"
-            role="img"
+        <Stack>
+          <Banner
+            my="300"
+            status="warning"
           >
-            📱 ➡︎🚽
-          </span>
-           
-          , etc).
-        </p>
-        <Grid>
-          <Grid.Column
-            md={6}
-            xs={12}
-          >
-            <TextField
-              error=""
-              id="tfa-backup-codes-generate-password"
-              onChange={[MockFunction]}
-              placeholder="Password"
-              required={true}
-              type="password"
-              value=""
-            />
-          </Grid.Column>
-        </Grid>
+            Clicking Generate will overwrite your existing 
+            10
+             active backup codes.
+          </Banner>
+          <p>
+            Keep these single-use backup codes somewhere safe but accessible. They can be used if your authentication app is unavailable (
+            <span
+              aria-label="phone in toilet emojis"
+              role="img"
+            >
+              📱 ➡︎ 🚽
+            </span>
+             
+            , etc).
+          </p>
+          <Grid>
+            <Grid.Column
+              md={6}
+              xs={12}
+            >
+              <TextField
+                error=""
+                id="tfa-backup-codes-generate-password"
+                onChange={[MockFunction]}
+                placeholder="Password"
+                required={true}
+                type="password"
+                value=""
+              />
+            </Grid.Column>
+          </Grid>
+        </Stack>
       </Panel.Section>
       <Panel.Section>
-        <div>
+        <ButtonWrapper
+          marginTop="0"
+        >
           <Button
             disabled={true}
             onClick={[MockFunction]}
-            primary={true}
             type="submit"
+            variant="primary"
           >
             Generating...
           </Button>
           <Button
-            className="Cancel"
             onClick={[MockFunction]}
+            variant="secondary"
           >
             Cancel
           </Button>
-        </div>
+        </ButtonWrapper>
       </Panel.Section>
     </form>
   </Panel>
@@ -81,59 +85,63 @@ exports[`Component: BackupCodesModal should render correctly 1`] = `
       onSubmit={[Function]}
     >
       <Panel.Section>
-        <Banner
-          my="300"
-          status="warning"
-        >
-          Clicking Generate will overwrite your existing 
-          10
-           active backup codes.
-        </Banner>
-        <p>
-          Keep these single-use backup codes somewhere safe but accessible. They can be used if your authentication app is unavailable (
-          <span
-            aria-label="phone in toilet emojis"
-            role="img"
+        <Stack>
+          <Banner
+            my="300"
+            status="warning"
           >
-            📱 ➡︎🚽
-          </span>
-           
-          , etc).
-        </p>
-        <Grid>
-          <Grid.Column
-            md={6}
-            xs={12}
-          >
-            <TextField
-              error=""
-              id="tfa-backup-codes-generate-password"
-              onChange={[Function]}
-              placeholder="Password"
-              required={true}
-              type="password"
-              value=""
-            />
-          </Grid.Column>
-        </Grid>
+            Clicking Generate will overwrite your existing 
+            10
+             active backup codes.
+          </Banner>
+          <p>
+            Keep these single-use backup codes somewhere safe but accessible. They can be used if your authentication app is unavailable (
+            <span
+              aria-label="phone in toilet emojis"
+              role="img"
+            >
+              📱 ➡︎ 🚽
+            </span>
+             
+            , etc).
+          </p>
+          <Grid>
+            <Grid.Column
+              md={6}
+              xs={12}
+            >
+              <TextField
+                error=""
+                id="tfa-backup-codes-generate-password"
+                onChange={[Function]}
+                placeholder="Password"
+                required={true}
+                type="password"
+                value=""
+              />
+            </Grid.Column>
+          </Grid>
+        </Stack>
       </Panel.Section>
       <Panel.Section>
-        <div>
+        <ButtonWrapper
+          marginTop="0"
+        >
           <Button
             disabled={false}
             onClick={[Function]}
-            primary={true}
             type="submit"
+            variant="primary"
           >
             Generate
           </Button>
           <Button
-            className="Cancel"
             onClick={[MockFunction]}
+            variant="secondary"
           >
             Cancel
           </Button>
-        </div>
+        </ButtonWrapper>
       </Panel.Section>
     </form>
   </Panel>
@@ -151,44 +159,48 @@ exports[`Component: BackupCodesModal should show new codes when they exist 1`] =
       onSubmit={[Function]}
     >
       <Panel.Section>
-        <p>
-          Keep these single-use backup codes somewhere safe but accessible. They can be used if your authentication app is unavailable (
-          <span
-            aria-label="phone in toilet emojis"
-            role="img"
-          >
-            📱 ➡︎🚽
-          </span>
-           
-          , etc).
-        </p>
-        <Grid>
-          <Grid.Column
-            md={6}
-            xs={12}
-          >
-            <BackupCodes
-              codes={
-                Array [
-                  1,
-                  2,
-                  3,
-                  4,
-                ]
-              }
-            />
-          </Grid.Column>
-        </Grid>
+        <Stack>
+          <p>
+            Keep these single-use backup codes somewhere safe but accessible. They can be used if your authentication app is unavailable (
+            <span
+              aria-label="phone in toilet emojis"
+              role="img"
+            >
+              📱 ➡︎ 🚽
+            </span>
+             
+            , etc).
+          </p>
+          <Grid>
+            <Grid.Column
+              md={6}
+              xs={12}
+            >
+              <BackupCodes
+                codes={
+                  Array [
+                    1,
+                    2,
+                    3,
+                    4,
+                  ]
+                }
+              />
+            </Grid.Column>
+          </Grid>
+        </Stack>
       </Panel.Section>
       <Panel.Section>
-        <div>
+        <ButtonWrapper
+          marginTop="0"
+        >
           <Button
             onClick={[MockFunction]}
-            primary={true}
+            variant="primary"
           >
             Close
           </Button>
-        </div>
+        </ButtonWrapper>
       </Panel.Section>
     </form>
   </Panel>
@@ -206,59 +218,63 @@ exports[`Component: BackupCodesModal should show password error when exists 1`] 
       onSubmit={[Function]}
     >
       <Panel.Section>
-        <Banner
-          my="300"
-          status="warning"
-        >
-          Clicking Generate will overwrite your existing 
-          10
-           active backup codes.
-        </Banner>
-        <p>
-          Keep these single-use backup codes somewhere safe but accessible. They can be used if your authentication app is unavailable (
-          <span
-            aria-label="phone in toilet emojis"
-            role="img"
+        <Stack>
+          <Banner
+            my="300"
+            status="warning"
           >
-            📱 ➡︎🚽
-          </span>
-           
-          , etc).
-        </p>
-        <Grid>
-          <Grid.Column
-            md={6}
-            xs={12}
-          >
-            <TextField
-              error="Incorrect Password"
-              id="tfa-backup-codes-generate-password"
-              onChange={[MockFunction]}
-              placeholder="Password"
-              required={true}
-              type="password"
-              value=""
-            />
-          </Grid.Column>
-        </Grid>
+            Clicking Generate will overwrite your existing 
+            10
+             active backup codes.
+          </Banner>
+          <p>
+            Keep these single-use backup codes somewhere safe but accessible. They can be used if your authentication app is unavailable (
+            <span
+              aria-label="phone in toilet emojis"
+              role="img"
+            >
+              📱 ➡︎ 🚽
+            </span>
+             
+            , etc).
+          </p>
+          <Grid>
+            <Grid.Column
+              md={6}
+              xs={12}
+            >
+              <TextField
+                error="Incorrect Password"
+                id="tfa-backup-codes-generate-password"
+                onChange={[MockFunction]}
+                placeholder="Password"
+                required={true}
+                type="password"
+                value=""
+              />
+            </Grid.Column>
+          </Grid>
+        </Stack>
       </Panel.Section>
       <Panel.Section>
-        <div>
+        <ButtonWrapper
+          marginTop="0"
+        >
           <Button
             disabled={false}
             onClick={[MockFunction]}
-            primary={true}
             type="submit"
+            variant="primary"
           >
             Generate
           </Button>
           <Button
-            className="Cancel"
             onClick={[MockFunction]}
+            variant="secondary"
           >
             Cancel
           </Button>
-        </div>
+        </ButtonWrapper>
       </Panel.Section>
     </form>
   </Panel>

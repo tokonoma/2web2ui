@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Tooltip } from 'src/components/matchbox';
+import { Button, Inline, Tooltip } from 'src/components/matchbox';
 import { ContentCopy } from '@sparkpost/matchbox-icons';
 import copy from 'copy-to-clipboard';
 
@@ -21,9 +21,11 @@ export default class CopyCodes extends Component {
 
     return (
       <Tooltip dark content="Copied to clipboard!" disabled={!copied}>
-        <Button onClick={this.copyToClipboard}>
-          <ContentCopy size={14} />
-          Copy
+        <Button variant="secondary" onClick={this.copyToClipboard}>
+          <Inline space="100">
+            <ContentCopy size={14} />
+            Copy
+          </Inline>
         </Button>
       </Tooltip>
     );

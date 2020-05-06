@@ -4,10 +4,15 @@ exports[`DownloadCodes component should render download button 1`] = `
 <Button
   download="sparkpost-backup-codes.txt"
   to="data:text/plain;base64,Y29kZTEKY29kZTI="
+  variant="secondary"
 >
-  <FileDownload
-    size={14}
-  />
-  Download
+  <Inline
+    space="100"
+  >
+    <FileDownload
+      size={14}
+    />
+    Download
+  </Inline>
 </Button>
 `;

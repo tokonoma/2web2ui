@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { LabelledValue, CopyField } from 'src/components';
+import { Stack } from 'src/components/matchbox';
 import { PageLink } from 'src/components/links';
 
 import config from 'src/config';
@@ -34,16 +35,21 @@ class SmtpDetails extends Component {
 
     return (
       <Fragment>
-        <p>{smtpDescContent}</p>
-        <LabelledValue label="Host" value={smtpAuth.host} />
-        <LabelledValue label="Port" value={smtpAuth.port} />
-        {config.smtpAuth.alternativePort && (
-          <LabelledValue label="Alternative Port" value={`${smtpAuth.alternativePort}`} />
-        )}
-        <LabelledValue label="Authentication" value="AUTH LOGIN" />
-        <LabelledValue label="Encryption" value="STARTTLS" />
-        <LabelledValue label="Username" value={smtpAuth.username} />
-        <LabelledValue label="Password">{passwordContent}</LabelledValue>
+        <Stack space="500">
+          <p>{smtpDescContent}</p>
+
+          <div>
+            <LabelledValue label="Host" value={smtpAuth.host} />
+            <LabelledValue label="Port" value={smtpAuth.port} />
+            {config.smtpAuth.alternativePort && (
+              <LabelledValue label="Alternative Port" value={`${smtpAuth.alternativePort}`} />
+            )}
+            <LabelledValue label="Authentication" value="AUTH LOGIN" />
+            <LabelledValue label="Encryption" value="STARTTLS" />
+            <LabelledValue label="Username" value={smtpAuth.username} />
+            <LabelledValue label="Password">{passwordContent}</LabelledValue>
+          </div>
+        </Stack>
       </Fragment>
     );
   }

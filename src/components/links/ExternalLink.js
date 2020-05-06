@@ -3,10 +3,6 @@ import PropTypes from 'prop-types';
 import { OpenInNew } from '@sparkpost/matchbox-icons';
 import { Button, UnstyledLink } from 'src/components/matchbox';
 
-let asButtonStyles = {
-  textDecoration: 'underline',
-};
-
 const ExternalLink = ({
   as: Component = UnstyledLink,
   children,
@@ -23,7 +19,7 @@ const ExternalLink = ({
   }
 
   return (
-    <Component style={isButton ? asButtonStyles : {}} {...props} external={true}>
+    <Component {...props} external={true}>
       {children} <OpenInNew size={iconSize} style={{ margin: iconMargin }} />
     </Component>
   );

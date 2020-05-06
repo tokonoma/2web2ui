@@ -2,9 +2,11 @@ import React from 'react';
 import { Panel } from 'src/components/matchbox';
 import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import { ConfirmationModal } from 'src/components/modals';
-import TogglePanel from './TogglePanel';
+import { Stack } from 'src/components/matchbox';
+import TogglePanelSection from './TogglePanelSection';
 import { ExternalLink } from 'src/components/links';
 import { LINKS } from 'src/constants';
+import { PANEL_LOADING_HEIGHT } from 'src/pages/account/constants';
 
 export class EnforceTFAPanel extends React.Component {
   state = {
@@ -51,7 +53,7 @@ export class EnforceTFAPanel extends React.Component {
     const { enableModal, disableModal } = this.state;
 
     if (loading) {
-      return <PanelLoading />;
+      return <PanelLoading minHeight={PANEL_LOADING_HEIGHT} />;
     }
 
     return (
@@ -73,7 +75,7 @@ export class EnforceTFAPanel extends React.Component {
             </p>
           </Panel.Section>
         )}
-        <TogglePanel
+        <TogglePanelSection
           readOnly={ssoEnabled}
           tfaRequired={tfaRequired}
           toggleTfaRequired={this.toggleTfaRequired}
@@ -83,7 +85,7 @@ export class EnforceTFAPanel extends React.Component {
           confirming={tfaUpdatePending}
           title="Are you sure you want to enforce two-factor authentication for this account?"
           content={
-            <React.Fragment>
+            <Stack>
               <p>
                 Enforcing two-factor authentication account-wide will have the following effects:
               </p>
@@ -101,7 +103,7 @@ export class EnforceTFAPanel extends React.Component {
                   out.
                 </li>
               </ul>
-            </React.Fragment>
+            </Stack>
           }
           onCancel={this.onCancel}
           onConfirm={() => this.setTfaRequired(true)}
@@ -111,7 +113,7 @@ export class EnforceTFAPanel extends React.Component {
           confirming={tfaUpdatePending}
           title="Are you sure you want to make two-factor authentication optional for this account?"
           content={
-            <React.Fragment>
+            <Stack>
               <p>
                 Making two-factor authentication optional will allow users to manage their own
                 two-factor authentication settings.
@@ -119,7 +121,7 @@ export class EnforceTFAPanel extends React.Component {
               <p>
                 Note: This will <em>not</em> disable two-factor authentication for any user.
               </p>
-            </React.Fragment>
+            </Stack>
           }
           onCancel={this.onCancel}
           onConfirm={() => this.setTfaRequired(false)}

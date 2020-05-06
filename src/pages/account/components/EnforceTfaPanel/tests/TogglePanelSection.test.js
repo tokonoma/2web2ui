@@ -1,15 +1,15 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import TogglePanel from '../TogglePanel';
+import TogglePanelSection from '../TogglePanelSection';
 
 describe('Component: TogglePanel', () => {
   const baseProps = {
     tfaRequired: false,
-    toggleTfaRequired: () => {}
+    toggleTfaRequired: () => {},
   };
 
   function subject(props) {
-    return shallow(<TogglePanel {...baseProps} {...props} />);
+    return shallow(<TogglePanelSection {...baseProps} {...props} />);
   }
 
   it('should render', () => {
@@ -17,7 +17,11 @@ describe('Component: TogglePanel', () => {
   });
 
   it('should reflect tfaRequired', () => {
-    expect(subject({ tfaRequired: true }).find('Toggle').prop('checked')).toEqual(true);
+    expect(
+      subject({ tfaRequired: true })
+        .find('Toggle')
+        .prop('checked'),
+    ).toEqual(true);
   });
 
   it('should call back on toggle', () => {
@@ -28,6 +32,10 @@ describe('Component: TogglePanel', () => {
   });
 
   it('should be disabled iff readOnly', () => {
-    expect(subject({ readOnly: true }).find('Toggle').prop('disabled')).toEqual(true);
+    expect(
+      subject({ readOnly: true })
+        .find('Toggle')
+        .prop('disabled'),
+    ).toEqual(true);
   });
 });
