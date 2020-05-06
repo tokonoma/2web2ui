@@ -6,7 +6,7 @@ import { Error, Button, Panel, Stack } from 'src/components/matchbox';
 import { addDedicatedIps } from 'src/actions/billing';
 import { showAlert } from 'src/actions/globalAlert';
 import { createPool } from 'src/actions/ipPools';
-import { TextFieldWrapper } from 'src/components';
+import { ButtonWrapper, TextFieldWrapper } from 'src/components';
 import config from 'src/config';
 import IpPoolSelect from './fields/IpPoolSelect';
 import ErrorTracker from 'src/helpers/errorTracker';
@@ -127,17 +127,20 @@ export class AddIps extends Component {
             </Stack>
           </Panel.Section>
           <Panel.Section>
-            <Button type="submit" variant="primary" disabled={isDisabled}>
-              Add Dedicated IPs
-            </Button>
-            <Button onClick={onClose} className={styles.Cancel} variant="secondary">
-              Cancel
-            </Button>
-            {error && (
-              <div className={styles.ErrorWrapper}>
-                <Error error={error} />
-              </div>
-            )}
+            <ButtonWrapper marginTop="0">
+              <Button type="submit" variant="primary" disabled={isDisabled}>
+                Add Dedicated IPs
+              </Button>
+              <Button onClick={onClose} variant="secondary">
+                Cancel
+              </Button>
+
+              {error && (
+                <div className={styles.ErrorWrapper}>
+                  <Error error={error} />
+                </div>
+              )}
+            </ButtonWrapper>
           </Panel.Section>
         </Panel>
       </form>

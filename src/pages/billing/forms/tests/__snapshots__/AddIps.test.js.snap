@@ -54,19 +54,22 @@ exports[`AddIps renders correctly when user reaches max ip limit 1`] = `
       </Stack>
     </Panel.Section>
     <Panel.Section>
-      <Button
-        disabled={true}
-        type="submit"
-        variant="primary"
+      <ButtonWrapper
+        marginTop="0"
       >
-        Add Dedicated IPs
-      </Button>
-      <Button
-        className="Cancel"
-        variant="secondary"
-      >
-        Cancel
-      </Button>
+        <Button
+          disabled={true}
+          type="submit"
+          variant="primary"
+        >
+          Add Dedicated IPs
+        </Button>
+        <Button
+          variant="secondary"
+        >
+          Cancel
+        </Button>
+      </ButtonWrapper>
     </Panel.Section>
   </Panel>
 </form>
@@ -134,19 +137,22 @@ exports[`AddIps renders correctly with default props 1`] = `
       </Stack>
     </Panel.Section>
     <Panel.Section>
-      <Button
-        disabled={false}
-        type="submit"
-        variant="primary"
+      <ButtonWrapper
+        marginTop="0"
       >
-        Add Dedicated IPs
-      </Button>
-      <Button
-        className="Cancel"
-        variant="secondary"
-      >
-        Cancel
-      </Button>
+        <Button
+          disabled={false}
+          type="submit"
+          variant="primary"
+        >
+          Add Dedicated IPs
+        </Button>
+        <Button
+          variant="secondary"
+        >
+          Cancel
+        </Button>
+      </ButtonWrapper>
     </Panel.Section>
   </Panel>
 </form>
@@ -223,19 +229,22 @@ exports[`AddIps renders free ip elements when included in plan 1`] = `
       </Stack>
     </Panel.Section>
     <Panel.Section>
-      <Button
-        disabled={false}
-        type="submit"
-        variant="primary"
+      <ButtonWrapper
+        marginTop="0"
       >
-        Add Dedicated IPs
-      </Button>
-      <Button
-        className="Cancel"
-        variant="secondary"
-      >
-        Cancel
-      </Button>
+        <Button
+          disabled={false}
+          type="submit"
+          variant="primary"
+        >
+          Add Dedicated IPs
+        </Button>
+        <Button
+          variant="secondary"
+        >
+          Cancel
+        </Button>
+      </ButtonWrapper>
     </Panel.Section>
   </Panel>
 </form>
