@@ -28,7 +28,7 @@ export class VerifyEmailBanner extends Component {
     }
 
     return (
-      <Banner action={action} status="info" title="Verify your email address" my="300">
+      <Banner action={action} status="info" title="Verify your email address" mb="400">
         <p>Please click the link in the email we sent you to verify your email address.</p>
       </Banner>
     );

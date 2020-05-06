@@ -1,21 +1,27 @@
 import React from 'react';
-import AcceptedChart from '../AcceptedChart';
+import { AcceptedChartClassComponent as AcceptedChart } from '../AcceptedChart';
 import { PieChart } from 'src/components';
 
 import { shallow } from 'enzyme';
 
 describe('Accepted ChartGroup: ', () => {
-
   const props = {
     attempts: [
       { name: 'first attempt', count: 5 },
-      { name: '2 or more attempts', count: 1, children: [{ name: '2-4', count: 2 }, { name: '5+', count: 3 }]}
+      {
+        name: '2 or more attempts',
+        count: 1,
+        children: [
+          { name: '2-4', count: 2 },
+          { name: '5+', count: 3 },
+        ],
+      },
     ],
     aggregates: {
       count_targeted: 100,
       count_accepted: 50,
-      count_sent: 80
-    }
+      count_sent: 80,
+    },
   };
 
   let wrapper;

@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SendingStep should match snapshot 1`] = `
+<Panel.Section>
+  <GuideBreadCrumbs />
+  <Box
+    mb="400"
+  >
+    <p
+      aria-level="4"
+      className="SendingStepHeading"
+      role="heading"
+      tabIndex={-1}
+    >
+      Where Would You Like to Begin?
+    </p>
+  </Box>
+  <SendingStepList />
+</Panel.Section>
+`;
+
+exports[`SendingStep should match snapshot 2`] = `
+<Panel.Section>
+  <GuideBreadCrumbs />
+  <Box
+    mb="400"
+  >
+    <Text
+      aria-level="4"
+      as="p"
+      fontSize="400"
+      fontWeight="medium"
+      role="heading"
+      tabIndex={-1}
+      textAlign="center"
+    >
+      Where Would You Like to Begin?
+    </Text>
+  </Box>
+  <SendingStepList />
+</Panel.Section>
+`;

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Panel, UnstyledLink } from 'src/components/matchbox';
+import { Panel, UnstyledLink, Box } from 'src/components/matchbox';
+import useHibanaToggle from 'src/hooks/useHibanaToggle';
 import GuideBreadCrumbs from './GuideBreadCrumbs';
 import { GuideListItem, GuideListItemTitle, GuideListItemDescription } from './GuideListItem';
 import { useGuideContext } from './GettingStartedGuide';
@@ -96,7 +97,27 @@ const InviteCollaboratorItem = () => {
   );
 };
 
-export default function ShowMeSparkpostStep() {
+export function HibanaShowMeSparkpostStep() {
+  return (
+    <>
+      <Box mx="400" mb="400">
+        <GuideBreadCrumbs />
+        <SendTestEmailItem />
+      </Box>
+      <Box mx="400" mb="400">
+        <ExploreAnalyticsItem />
+      </Box>
+      <Box mx="400" mb="400">
+        <ViewEventsItem />
+      </Box>
+      <Box mx="400" mb="400">
+        <InviteCollaboratorItem />
+      </Box>
+    </>
+  );
+}
+
+export function OGShowMeSparkpostStep() {
   return (
     <>
       <Panel.Section>
@@ -115,3 +136,9 @@ export default function ShowMeSparkpostStep() {
     </>
   );
 }
+
+function ShowMeSparkpostStep(props) {
+  return useHibanaToggle(OGShowMeSparkpostStep, HibanaShowMeSparkpostStep)(props);
+}
+
+export default ShowMeSparkpostStep;

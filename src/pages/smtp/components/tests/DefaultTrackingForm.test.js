@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { DefaultTrackingForm } from '../TrackingToggle';
+import { DefaultTrackingForm } from '../DefaultTrackingForm';
 
 describe('Page: Smtp tests', () => {
   const props = {
@@ -9,11 +9,11 @@ describe('Page: Smtp tests', () => {
     initialValues: {
       account: {
         options: {
-          smtp_tracking_default: true
-        }
-      }
+          smtp_tracking_default: true,
+        },
+      },
     },
-    toggle: jest.fn()
+    toggle: jest.fn(),
   };
 
   let wrapper;

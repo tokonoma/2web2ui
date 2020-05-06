@@ -8,66 +8,76 @@ exports[`ProviderForm disables fields and buttons when submitting 1`] = `
     accent={true}
     title="Provision Single Sign-On"
   >
-    <Panel.Section
-      className="step"
-    >
-      <h6>
-        Step 1: Setup Callback URL
-      </h6>
-      <p>
-        To complete setup with your Identity Provider (IdP), you will need to provide the following callback URL.
-      </p>
-      <div>
-        <CopyField
-          hideCopy={false}
-          value="http://fake-api-test-host.com/v1/users/saml/consume"
-        />
-      </div>
+    <Panel.Section>
+      <Stack>
+        <Heading
+          as="h3"
+          looksLike="h6"
+        >
+          Step 1: Setup Callback URL
+        </Heading>
+        <p>
+          To complete setup with your Identity Provider (IdP), you will need to provide the following callback URL.
+        </p>
+        <div>
+          <CopyField
+            hideCopy={false}
+            value="http://fake-api-test-host.com/v1/users/saml/consume"
+          />
+        </div>
+      </Stack>
     </Panel.Section>
-    <Panel.Section
-      className="step"
-    >
-      <h6>
-        Step 2: Upload your Security Assertion Markup Language (SAML)
-      </h6>
-      <p>
-        This is a configuration file that can be downloaded from your IdP.
-      </p>
-      <div>
-        <Field
-          component={[Function]}
-          disabled={true}
-          filetype="xml"
-          helpText="
+    <Panel.Section>
+      <Stack>
+        <Heading
+          as="h3"
+          looksLike="h6"
+        >
+          Step 2: Upload your Security Assertion Markup Language (SAML)
+        </Heading>
+        <p>
+          This is a configuration file that can be downloaded from your IdP.
+        </p>
+        <div>
+          <Field
+            component={[Function]}
+            disabled={true}
+            filetype="xml"
+            helpText="
                   If you already provided a file, reprovisioning will replace your current
                   configuration.
                 "
-          name="samlFile"
-          type="file"
-          validate={
-            Array [
-              [Function],
-              [Function],
-              [Function],
-            ]
-          }
-        />
-      </div>
+            name="samlFile"
+            type="file"
+            validate={
+              Array [
+                [Function],
+                [Function],
+                [Function],
+              ]
+            }
+          />
+        </div>
+      </Stack>
     </Panel.Section>
     <Panel.Section>
-      <Button
-        disabled={true}
-        primary={true}
-        type="submit"
+      <ButtonWrapper
+        marginTop="0"
       >
-        Provision SSO
-      </Button>
-      <Button
-        className="cancel"
-        onClick={[Function]}
-      >
-        Cancel
-      </Button>
+        <Button
+          disabled={true}
+          type="submit"
+          variant="primary"
+        >
+          Provision SSO
+        </Button>
+        <Button
+          onClick={[Function]}
+          variant="secondary"
+        >
+          Cancel
+        </Button>
+      </ButtonWrapper>
     </Panel.Section>
   </Panel>
 </Form>
@@ -81,64 +91,74 @@ exports[`ProviderForm renders form 1`] = `
     accent={true}
     title="Provision Single Sign-On"
   >
-    <Panel.Section
-      className="step"
-    >
-      <h6>
-        Step 1: Setup Callback URL
-      </h6>
-      <p>
-        To complete setup with your Identity Provider (IdP), you will need to provide the following callback URL.
-      </p>
-      <div>
-        <CopyField
-          hideCopy={false}
-          value="http://fake-api-test-host.com/v1/users/saml/consume"
-        />
-      </div>
+    <Panel.Section>
+      <Stack>
+        <Heading
+          as="h3"
+          looksLike="h6"
+        >
+          Step 1: Setup Callback URL
+        </Heading>
+        <p>
+          To complete setup with your Identity Provider (IdP), you will need to provide the following callback URL.
+        </p>
+        <div>
+          <CopyField
+            hideCopy={false}
+            value="http://fake-api-test-host.com/v1/users/saml/consume"
+          />
+        </div>
+      </Stack>
     </Panel.Section>
-    <Panel.Section
-      className="step"
-    >
-      <h6>
-        Step 2: Upload your Security Assertion Markup Language (SAML)
-      </h6>
-      <p>
-        This is a configuration file that can be downloaded from your IdP.
-      </p>
-      <div>
-        <Field
-          component={[Function]}
-          filetype="xml"
-          helpText="
+    <Panel.Section>
+      <Stack>
+        <Heading
+          as="h3"
+          looksLike="h6"
+        >
+          Step 2: Upload your Security Assertion Markup Language (SAML)
+        </Heading>
+        <p>
+          This is a configuration file that can be downloaded from your IdP.
+        </p>
+        <div>
+          <Field
+            component={[Function]}
+            filetype="xml"
+            helpText="
                   If you already provided a file, reprovisioning will replace your current
                   configuration.
                 "
-          name="samlFile"
-          type="file"
-          validate={
-            Array [
-              [Function],
-              [Function],
-              [Function],
-            ]
-          }
-        />
-      </div>
+            name="samlFile"
+            type="file"
+            validate={
+              Array [
+                [Function],
+                [Function],
+                [Function],
+              ]
+            }
+          />
+        </div>
+      </Stack>
     </Panel.Section>
     <Panel.Section>
-      <Button
-        primary={true}
-        type="submit"
+      <ButtonWrapper
+        marginTop="0"
       >
-        Provision SSO
-      </Button>
-      <Button
-        className="cancel"
-        onClick={[Function]}
-      >
-        Cancel
-      </Button>
+        <Button
+          type="submit"
+          variant="primary"
+        >
+          Provision SSO
+        </Button>
+        <Button
+          onClick={[Function]}
+          variant="secondary"
+        >
+          Cancel
+        </Button>
+      </ButtonWrapper>
     </Panel.Section>
   </Panel>
 </Form>

@@ -1,17 +1,21 @@
 import React from 'react';
+import { shallow } from 'enzyme';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import Legend from '../Legend';
 import LegendItem from '../LegendItem';
-import { shallow } from 'enzyme';
+import styles from '../Legend.module.scss';
+
+jest.mock('src/hooks/useHibanaOverride');
 
 describe('Legend: ', () => {
-
+  useHibanaOverride.mockReturnValue(styles);
   const props = {
     headerData: [{ name: 'header' }],
     primaryData: [{ name: 'primary' }],
     secondaryData: [{ name: 'secondary' }],
     onMouseOver: jest.fn(),
     onMouseOut: jest.fn(),
-    onClick: jest.fn()
+    onClick: jest.fn(),
   };
 
   let wrapper;
@@ -30,27 +34,45 @@ describe('Legend: ', () => {
   });
 
   it('should handle click', () => {
-    wrapper.find(LegendItem).at(1).simulate('click');
-    wrapper.find(LegendItem).at(2).simulate('click');
+    wrapper
+      .find(LegendItem)
+      .at(1)
+      .simulate('click');
+    wrapper
+      .find(LegendItem)
+      .at(2)
+      .simulate('click');
     expect(props.onClick).toHaveBeenCalledWith({ name: 'primary' });
     expect(props.onClick).toHaveBeenCalledWith({ name: 'secondary' });
   });
 
   it('should handle mouse over', () => {
-    wrapper.find(LegendItem).at(1).simulate('mouseover');
-    wrapper.find(LegendItem).at(2).simulate('mouseover');
+    wrapper
+      .find(LegendItem)
+      .at(1)
+      .simulate('mouseover');
+    wrapper
+      .find(LegendItem)
+      .at(2)
+      .simulate('mouseover');
     expect(props.onMouseOver).toHaveBeenCalledWith({ name: 'primary' }, 'primary');
     expect(props.onMouseOver).toHaveBeenCalledWith({ name: 'secondary' }, 'secondary');
   });
 
   it('should handle mouse out', () => {
-    wrapper.find(LegendItem).at(1).simulate('mouseout');
-    wrapper.find(LegendItem).at(2).simulate('mouseout');
+    wrapper
+      .find(LegendItem)
+      .at(1)
+      .simulate('mouseout');
+    wrapper
+      .find(LegendItem)
+      .at(2)
+      .simulate('mouseout');
     expect(props.onMouseOut).toHaveBeenCalledTimes(2);
   });
 
   it('should handle external hover', () => {
-    wrapper.setProps({ hoveredItem: { dataSet: 'primary', index: 0 }});
+    wrapper.setProps({ hoveredItem: { dataSet: 'primary', index: 0 } });
     expect(wrapper.find('Grid')).toMatchSnapshot();
   });
 });

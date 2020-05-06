@@ -18,11 +18,11 @@ export const OGAlgoliaResults = ({ hit }) => (
 );
 
 const HibanaAlgoliaResults = ({ hit }) => (
-  <Stack space="300">
-    <Text fontWeight="normal" as="p" fontSize="400">
-      <ExternalLink to={hit.permalink}>{hit.post_title}</ExternalLink>
+  <Stack space="100">
+    <Text as={ExternalLink} to={hit.permalink} fontWeight="normal" fontSize="200" color="gray.700">
+      {hit.post_title}
     </Text>
-    <Box mb="500">
+    <Box mb="500" fontSize="200">
       <Snippet tagName="b" attribute="post_excerpt" hit={hit} />
     </Box>
   </Stack>

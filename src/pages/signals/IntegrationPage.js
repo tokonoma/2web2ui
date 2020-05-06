@@ -2,12 +2,12 @@ import _ from 'lodash';
 import React, { useCallback, useEffect } from 'react';
 import { Page } from 'src/components/matchbox';
 import { CursorPaging, PerPageButtons } from 'src/components/collection';
+import { PageDescription } from 'src/components/text';
 import { DEFAULT_PER_PAGE_BUTTONS } from 'src/constants';
 import { batchStatusOptions } from './constants/integration';
 import IntegrationCollection from './components/IntegrationCollection';
 import IntegrationPageFilter from './components/IntegrationPageFilter';
 import usePageFilters from 'src/hooks/usePageFilters';
-import styles from './IntegrationPage.module.scss';
 
 const batchStatusOptionValues = batchStatusOptions.map(op => op.value);
 
@@ -70,7 +70,8 @@ const IntegrationPage = ({
 
   return (
     <Page title="Signals Integration">
-      <p>Review the health of your Signals integration.</p>
+      <PageDescription>Review the health of your Signals integration.</PageDescription>
+
       <IntegrationPageFilter
         disabled={loadingStatus === 'pending'}
         initialValues={filters}
@@ -98,15 +99,13 @@ const IntegrationPage = ({
         perPage={filters.perPage}
         totalCount={totalCount}
       />
-      <div className={styles.PerPageContainer}>
-        <PerPageButtons
-          onPerPageChange={nextPageSize => {
-            updateFilters({ perPage: nextPageSize, page: 0 });
-          }}
-          perPage={filters.perPage}
-          totalCount={totalCount}
-        />
-      </div>
+      <PerPageButtons
+        onPerPageChange={nextPageSize => {
+          updateFilters({ perPage: nextPageSize, page: 0 });
+        }}
+        perPage={filters.perPage}
+        totalCount={totalCount}
+      />
     </Page>
   );
 };

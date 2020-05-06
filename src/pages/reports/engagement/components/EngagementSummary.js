@@ -1,13 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { tokens } from '@sparkpost/design-tokens-hibana';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import { Grid, Box, Panel } from 'src/components/matchbox';
 import { PanelLoading } from 'src/components';
+import { Heading } from 'src/components/text';
 import { Percent } from 'src/components/formatters';
 import { formatDateTime, relativeDateOptionsIndexed } from 'src/helpers/date';
 import { formatFullNumber } from 'src/helpers/units';
 import { safeRate } from 'src/helpers/math';
-import styles from './EngagementSummary.module.scss';
+import OGStyles from './EngagementSummary.module.scss';
+import hibanaStyles from './EngagementSummaryHibana.module.scss';
 
 export function EngagementSummary({
   accepted = 0,
@@ -17,6 +19,8 @@ export function EngagementSummary({
   opens = 0,
   sent = 0,
 }) {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+
   if (loading) {
     return <PanelLoading minHeight="115px" />;
   }
@@ -40,19 +44,19 @@ export function EngagementSummary({
 
   return (
     <Panel className={styles.EngagementSummary} data-id="summary-panel">
-      <Box padding={tokens.spacing_500}>
+      <Box padding="400">
         <Grid>
           <Grid.Column xs={12} md={3} xl={2}>
-            <h1 data-id="unique-open-rate">
+            <Heading as="h3" data-id="unique-open-rate">
               <Percent value={safeRate(opens, accepted)} />
-            </h1>
-            <h6>Unique Open Rate</h6>
+            </Heading>
+            <Heading as="h6">Unique Open Rate</Heading>
           </Grid.Column>
           <Grid.Column xs={12} md={3} xl={2}>
-            <h1 data-id="unique-click-rate">
+            <Heading as="h3" data-id="unique-click-rate">
               <Percent value={safeRate(clicks, accepted)} />
-            </h1>
-            <h6>Unique Click Rate</h6>
+            </Heading>
+            <Heading as="h6">Unique Click Rate</Heading>
           </Grid.Column>
           <Grid.Column xs={12} md={6} xl={8}>
             <p>

@@ -36,21 +36,25 @@ exports[`DisableTfaModal tests should render correctly 1`] = `
         </Grid>
       </Panel.Section>
       <Panel.Section>
-        <Button
-          disabled={false}
-          onClick={[Function]}
-          primary={true}
-          type="submit"
+        <ButtonWrapper
+          marginTop="0"
         >
-          Disable 2FA
-        </Button>
-        <Button
-          className="Cancel"
-          disabled={false}
-          onClick={[MockFunction]}
-        >
-          Cancel
-        </Button>
+          <Button
+            disabled={false}
+            onClick={[Function]}
+            type="submit"
+            variant="primary"
+          >
+            Disable 2FA
+          </Button>
+          <Button
+            disabled={false}
+            onClick={[MockFunction]}
+            variant="seconary"
+          >
+            Cancel
+          </Button>
+        </ButtonWrapper>
       </Panel.Section>
     </form>
   </Panel>
@@ -93,21 +97,25 @@ exports[`DisableTfaModal tests should show disabling as button text when toggleP
         </Grid>
       </Panel.Section>
       <Panel.Section>
-        <Button
-          disabled={true}
-          onClick={[Function]}
-          primary={true}
-          type="submit"
+        <ButtonWrapper
+          marginTop="0"
         >
-          Disabling...
-        </Button>
-        <Button
-          className="Cancel"
-          disabled={true}
-          onClick={[MockFunction]}
-        >
-          Cancel
-        </Button>
+          <Button
+            disabled={true}
+            onClick={[Function]}
+            type="submit"
+            variant="primary"
+          >
+            Disabling...
+          </Button>
+          <Button
+            disabled={true}
+            onClick={[MockFunction]}
+            variant="seconary"
+          >
+            Cancel
+          </Button>
+        </ButtonWrapper>
       </Panel.Section>
     </form>
   </Panel>
@@ -150,21 +158,25 @@ exports[`DisableTfaModal tests should show error on TextField when toggleError a
         </Grid>
       </Panel.Section>
       <Panel.Section>
-        <Button
-          disabled={false}
-          onClick={[Function]}
-          primary={true}
-          type="submit"
+        <ButtonWrapper
+          marginTop="0"
         >
-          Disable 2FA
-        </Button>
-        <Button
-          className="Cancel"
-          disabled={false}
-          onClick={[MockFunction]}
-        >
-          Cancel
-        </Button>
+          <Button
+            disabled={false}
+            onClick={[Function]}
+            type="submit"
+            variant="primary"
+          >
+            Disable 2FA
+          </Button>
+          <Button
+            disabled={false}
+            onClick={[MockFunction]}
+            variant="seconary"
+          >
+            Cancel
+          </Button>
+        </ButtonWrapper>
       </Panel.Section>
     </form>
   </Panel>

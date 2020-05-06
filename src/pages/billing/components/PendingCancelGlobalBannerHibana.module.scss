@@ -1,16 +1,30 @@
 @import '~@sparkpost/design-tokens-hibana/tokens';
 
 .banner {
+  position: sticky;
   background-color: color(blue, 700);
   height: line-height(600); // hmm
   line-height: line-height(600);
+  top: 0;
 }
 
-.banner {
-  top: 0;
+.CenterContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .RenewButton {
   margin-left: spacing(400);
   font-weight: font-weight(medium);
+}
+
+.RenewButton,
+.Close {
+  &:hover,
+  &:focus {
+    background-color: transparent;
+    color: color(white);
+    outline-color: color(white);
+  }
 }

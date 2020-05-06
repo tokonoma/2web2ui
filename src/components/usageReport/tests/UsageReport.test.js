@@ -1,9 +1,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { UsageReport } from '../UsageReport';
+import {
+  UsageReport,
+  OGDisplayNumber,
+  HibanaDisplayNumber,
+  HibanaProgressLabel,
+  OGProgressLabel,
+} from '../UsageReport';
 
 describe('UsageReport Component', () => {
-
   let getAccount;
   let props;
 
@@ -12,22 +17,22 @@ describe('UsageReport Component', () => {
 
     props = {
       subscription: {
-        plan_volume: 10000
+        plan_volume: 10000,
       },
       usage: {
         month: {
           used: 1000,
           limit: 50000,
           start: '2017-08-01T08:00:00.000Z',
-          end: '2017-08-31T08:00:00.000Z'
+          end: '2017-08-31T08:00:00.000Z',
         },
         day: {
           used: 1000,
           limit: 2000,
-          start: '2017-08-30T00:00:00.000Z'
-        }
+          start: '2017-08-30T00:00:00.000Z',
+        },
       },
-      getAccount
+      getAccount,
     };
   });
 
@@ -40,8 +45,10 @@ describe('UsageReport Component', () => {
   it('should render with regular usage', () => {
     const wrapper = shallow(<UsageReport {...props} />);
     expect(wrapper).toMatchSnapshot();
-    expect(wrapper.find('DisplayNumber').at(0).dive()).toMatchSnapshot();
-    expect(wrapper.find('ProgressLabel').at(0).dive()).toMatchSnapshot();
+    expect(shallow(<OGDisplayNumber />)).toMatchSnapshot();
+    expect(shallow(<HibanaDisplayNumber />)).toMatchSnapshot();
+    expect(shallow(<OGProgressLabel />)).toMatchSnapshot();
+    expect(shallow(<HibanaProgressLabel />)).toMatchSnapshot();
   });
 
   it('should get the account including usage', () => {
@@ -61,14 +68,14 @@ describe('UsageReport Component', () => {
       day: {
         used: 1000,
         limit: null,
-        start: '2017-08-30T00:00:00.000Z'
+        start: '2017-08-30T00:00:00.000Z',
       },
       month: {
         used: 1000,
         limit: null,
         start: '2017-08-01T08:00:00.000Z',
-        end: '2017-08-31T08:00:00.000Z'
-      }
+        end: '2017-08-31T08:00:00.000Z',
+      },
     };
     const wrapper = shallow(<UsageReport {...props} usage={usage} />);
 

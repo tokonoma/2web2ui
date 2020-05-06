@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { Panel, Toggle } from 'src/components/matchbox';
+import { Grid, Panel, Toggle } from 'src/components/matchbox';
 import LabelledValue from 'src/components/labelledValue/LabelledValue';
 import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 import { selectCondition } from 'src/selectors/accessConditionState';
 import { setAccountOption } from 'src/actions/account';
 import { connect } from 'react-redux';
-import styles from './UIOptionsPanel.module.scss';
 
 const OPTIONS = [
   {
@@ -28,19 +27,19 @@ export class UIOptionsPanel extends Component {
       <Panel title="Account Options">
         <Panel.Section>
           {uiOptions.map(({ label, description, value, key }) => (
-            <LabelledValue label={label} key={`ui-option-${key}`}>
-              <div className={styles.ToggleRow}>
-                <div>{description}</div>
-                <div>
-                  <Toggle
-                    id={key}
-                    checked={value}
-                    disabled={loading}
-                    onChange={() => this.setUIOption(key, !value)}
-                  />
-                </div>
-              </div>
-            </LabelledValue>
+            <Grid key={`ui-option-${key}`}>
+              <Grid.Column xs={12} md={10}>
+                <LabelledValue label={label}>{description}</LabelledValue>
+              </Grid.Column>
+              <Grid.Column xs={12} md={2} style={{ textAlign: 'right' }}>
+                <Toggle
+                  id={key}
+                  checked={value}
+                  disabled={loading}
+                  onChange={() => this.setUIOption(key, !value)}
+                />
+              </Grid.Column>
+            </Grid>
           ))}
         </Panel.Section>
       </Panel>

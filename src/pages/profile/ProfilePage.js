@@ -57,12 +57,12 @@ export class ProfilePage extends Component {
             <TfaManager />
           </AccessControl>
 
-          <Panel sectioned title="Edit Profile">
+          <Panel title="Edit Profile">
             <NameForm onSubmit={this.updateProfile} />
           </Panel>
 
           <AccessControl condition={not(isSso)}>
-            <Panel sectioned title="Update Password">
+            <Panel title="Update Password">
               <PasswordForm onSubmit={this.updatePassword} />
             </Panel>
           </AccessControl>

@@ -6,16 +6,19 @@ exports[`MetricCard Component:  should render correctly with all props 1`] = `
 >
   <Panel
     className="Panel"
-    p="500"
     primary={true}
   >
-    <Panel.Section>
-      <h1
+    <Panel.Section
+      className="PanelSection"
+    >
+      <Heading
+        as="h3"
         className="Value"
       >
         Card Value
-      </h1>
-      <h6
+      </Heading>
+      <Heading
+        as="h4"
         className="Label"
       >
         Card Label
@@ -24,10 +27,13 @@ exports[`MetricCard Component:  should render correctly with all props 1`] = `
           content="Tooltip Content"
           dark={true}
           horizontalOffset="-1.1rem"
+          id="metric-card-1"
         >
-          <InfoOutline />
+          <InfoOutline
+            className="TooltipIcon"
+          />
         </Tooltip>
-      </h6>
+      </Heading>
     </Panel.Section>
   </Panel>
 </div>
@@ -39,21 +45,24 @@ exports[`MetricCard Component:  should render without tooltip 1`] = `
 >
   <Panel
     className="Panel"
-    p="500"
     primary={true}
   >
-    <Panel.Section>
-      <h1
+    <Panel.Section
+      className="PanelSection"
+    >
+      <Heading
+        as="h3"
         className="Value"
       >
         Card Value
-      </h1>
-      <h6
+      </Heading>
+      <Heading
+        as="h4"
         className="Label"
       >
         Card Label
          
-      </h6>
+      </Heading>
     </Panel.Section>
   </Panel>
 </div>

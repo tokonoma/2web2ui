@@ -1,15 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import { Grid, Panel } from 'src/components/matchbox';
+import { Heading } from 'src/components/text';
 import { Percent } from 'src/components';
 import { formatDateTime, relativeDateOptionsIndexed } from 'src/helpers/date';
+import OGStyles from './MetricsSummary.module.scss';
+import hibanaStyles from './MetricsSummaryHibana.module.scss';
 
-import styles from './MetricsSummary.module.scss';
+export function MetricsSummary(props) {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+  const { children, rateValue, rateTitle, secondaryMessage } = props;
 
-export class MetricsSummary extends Component {
-  renderDate() {
-    const { to, from, relativeRange } = this.props;
+  const renderDate = () => {
+    const { to, from, relativeRange } = props;
 
     if (relativeRange === 'custom') {
       return (
@@ -26,37 +31,36 @@ export class MetricsSummary extends Component {
         in the <strong>{relativeDateOptionsIndexed[relativeRange].toLowerCase()}</strong>
       </span>
     );
-  }
+  };
 
-  render() {
-    const { children, rateValue, rateTitle, secondaryMessage } = this.props;
+  return (
+    <Panel className={styles.Panel}>
+      <Panel.Section>
+        <Grid>
+          <Grid.Column xs={12} md={3} xl={2}>
+            <div className={styles.panelvertical}>
+              <Heading as="h3" className={styles.RateValue}>
+                <Percent value={rateValue} />
+              </Heading>
 
-    return (
-      <Panel className={styles.Panel} p={'500'}>
-        <Panel.Section>
-          <Grid>
-            <Grid.Column xs={12} md={3} xl={2}>
-              <div className={styles.panelvertical}>
-                <h1 className={styles.RateValue}>
-                  <Percent value={rateValue} />
-                </h1>
-                <h6 className={styles.RateTitle}>{rateTitle}</h6>
-              </div>
-            </Grid.Column>
-            <Grid.Column>
-              <div className={styles.panelvertical}>
-                <p className={styles.Description}>
-                  {children}
-                  {this.renderDate()}.
-                </p>
-                {secondaryMessage && <p className={styles.Secondary}>{secondaryMessage}</p>}
-              </div>
-            </Grid.Column>
-          </Grid>
-        </Panel.Section>
-      </Panel>
-    );
-  }
+              <Heading as="h4" className={styles.RateTitle}>
+                {rateTitle}
+              </Heading>
+            </div>
+          </Grid.Column>
+          <Grid.Column>
+            <div className={styles.panelvertical}>
+              <p className={styles.Description}>
+                {children}
+                {renderDate()}.
+              </p>
+              {secondaryMessage && <p className={styles.Secondary}>{secondaryMessage}</p>}
+            </div>
+          </Grid.Column>
+        </Grid>
+      </Panel.Section>
+    </Panel>
+  );
 }
 
 MetricsSummary.propTypes = {

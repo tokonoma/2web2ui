@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Page, Panel } from 'src/components/matchbox';
 import SmtpDetails from 'src/components/smtpDetails/SmtpDetails';
-import DefaultTrackingForm from './components/TrackingToggle';
+import DefaultTrackingForm from './components/DefaultTrackingForm';
 import { update as updateAccount } from 'src/actions/account';
 import { showAlert } from 'src/actions/globalAlert';
 
@@ -31,7 +31,7 @@ export class SmtpPage extends Component {
   render() {
     return (
       <Page title="SMTP Relay">
-        <Panel sectioned accent>
+        <Panel sectioned>
           <SmtpDetails />
         </Panel>
         <DefaultTrackingForm toggle={this.toggleTracking} />
