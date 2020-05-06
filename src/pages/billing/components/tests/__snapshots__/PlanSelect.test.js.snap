@@ -63,7 +63,7 @@ exports[`Plan Select: should render correctly 1`] = `
             disabled={true}
             onClick={[Function]}
             size="small"
-            variant="dull"
+            variant="monochrome"
           >
             Select
           </Button>
@@ -109,7 +109,7 @@ exports[`Plan Select: should render correctly 1`] = `
             disabled={false}
             onClick={[Function]}
             size="small"
-            variant="dull"
+            variant="monochrome"
           >
             Select
           </Button>
@@ -156,7 +156,7 @@ exports[`Plan Select: should render correctly 1`] = `
             disabled={false}
             onClick={[Function]}
             size="small"
-            variant="dull"
+            variant="monochrome"
           >
             Select
           </Button>
