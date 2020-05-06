@@ -14,14 +14,18 @@ exports[`Billing Banners:  Enterprise banner renders 1`] = `
   title="Enterprise"
 >
   <p>
-    Enterprise-grade financial guarantees with 99.9% uptime
-     
-    <Abbreviation
-      title="Service Level Agreement"
+    <Text
+      mb="200"
     >
-      SLA
-    </Abbreviation>
-     and guaranteed burst rates, and a dedicated Technical Account Manager.
+      Enterprise-grade financial guarantees with 99.9% uptime
+       
+      <Abbreviation
+        title="Service Level Agreement"
+      >
+        SLA
+      </Abbreviation>
+       and guaranteed burst rates, and a dedicated Technical Account Manager.
+    </Text>
   </p>
   <ul>
     <li>
@@ -136,7 +140,11 @@ exports[`Billing Banners:  Premium banner renders 1`] = `
   title="Premium Addon Plan"
 >
   <p>
-    Full-service account advocacy with a dedicated Customer Success Manager. Including proactive reporting, planning, and reviews.
+    <Text
+      mb="200"
+    >
+      Full-service account advocacy with a dedicated Customer Success Manager. Including proactive reporting, planning, and reviews.
+    </Text>
   </p>
   <ul>
     <li>

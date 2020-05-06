@@ -1,7 +1,7 @@
 import React from 'react';
 import { format } from 'date-fns';
 import { PageLink } from 'src/components/links';
-import { Banner, Box } from 'src/components/matchbox';
+import { Banner, Box, Text } from 'src/components/matchbox';
 import { OGOnlyWrapper } from 'src/components/hibana';
 import { LINKS } from 'src/constants';
 import { pluralString } from 'src/helpers/string';
@@ -70,8 +70,10 @@ export const PremiumBanner = () => {
       my="300"
     >
       <p>
-        Full-service account advocacy with a dedicated Customer Success Manager. Including proactive
-        reporting, planning, and reviews.
+        <Text mb="200">
+          Full-service account advocacy with a dedicated Customer Success Manager. Including
+          proactive reporting, planning, and reviews.
+        </Text>
       </p>
       <ul>
         <li>Includes all standard SparkPost features</li>
@@ -106,9 +108,11 @@ export const EnterpriseBanner = () => {
       my="300"
     >
       <p>
-        Enterprise-grade financial guarantees with 99.9% uptime{' '}
-        <Abbreviation title="Service Level Agreement">SLA</Abbreviation> and guaranteed burst rates,
-        and a dedicated Technical Account Manager.
+        <Text mb="200">
+          Enterprise-grade financial guarantees with 99.9% uptime{' '}
+          <Abbreviation title="Service Level Agreement">SLA</Abbreviation> and guaranteed burst
+          rates, and a dedicated Technical Account Manager.
+        </Text>
       </p>
       <ul>
         <li>Includes all standard SparkPost and Premium features</li>
