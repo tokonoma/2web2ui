@@ -114,7 +114,7 @@ export default function PlanSelectSection({ bundles, currentPlan, onSelect }) {
                       onClick={() => onSelect(bundleCode)}
                       data-id={`select-plan-${bundleCode}`}
                       size="small"
-                      variant="dull"
+                      variant="monochrome"
                     >
                       Select
                     </Button>
