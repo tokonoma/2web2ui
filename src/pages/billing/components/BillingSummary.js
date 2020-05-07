@@ -93,7 +93,7 @@ export default class BillingSummary extends Component {
       <Panel.Section>
         <LabelledValue label="Recipient Validation">
           <h6>
-            <Text fontSize="300">
+            <Text fontSize="300" as="span">
               {formatFullNumber(volumeUsed)} emails validated for {totalRVCost(volumeUsed)}
               <Text fontWeight="200" as="span">
                 {' '}

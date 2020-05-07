@@ -1,15 +1,13 @@
 import React from 'react';
 import { format } from 'date-fns';
 import { PageLink } from 'src/components/links';
-import { Banner, Box, Text } from 'src/components/matchbox';
-import { OGOnlyWrapper } from 'src/components/hibana';
+import { Banner, Box, Stack } from 'src/components/matchbox';
 import { LINKS } from 'src/constants';
 import { pluralString } from 'src/helpers/string';
 import * as conversions from 'src/helpers/conversionTracking';
 import { Abbreviation } from 'src/components';
 import { ANALYTICS_PREMIUM_SUPPORT, ANALYTICS_ENTERPRISE_SUPPORT } from 'src/constants';
 import _ from 'lodash';
-import { useHibana } from 'src/context/HibanaContext';
 const dateFormat = date => format(date, 'MMM DD, YYYY');
 
 /**
@@ -24,39 +22,31 @@ export const PendingPlanBanner = ({ account, subscription }) => {
 
   if (pendingDowngrades.length > 0) {
     return (
-      <OGOnlyWrapper as={Banner} status="info" title="Pending Plan Change" my="300">
-        <Box as={Banner} status="warning" title="Pending Plan Change" my="300">
-          <p>
-            <Box maxWidth={600}>
-              You're scheduled for a pending downgrade and can't update your plan until that switch
-              happens.
-            </Box>
-          </p>
-        </Box>
-      </OGOnlyWrapper>
+      <Banner status="warning" title="Pending Plan Change" my="300">
+        <p>
+          <Box maxWidth={600}>
+            You're scheduled for a pending downgrade and can't update your plan until that switch
+            happens.
+          </Box>
+        </p>
+      </Banner>
     );
   }
 
   return (
-    <OGOnlyWrapper as={Banner} status="warning" title="Pending Plan Change" my="300">
-      <Box as={Banner} status="warning" title="Pending Plan Change" my="300">
-        <p>
-          <Box maxWidth={600}>
-            You're scheduled to switch to the {account.pending_subscription.name} plan on{' '}
-            {dateFormat(account.pending_subscription.effective_date)}, and can't update your plan
-            until that switch happens.
-          </Box>
-        </p>
-      </Box>
-    </OGOnlyWrapper>
+    <Banner status="warning" title="Pending Plan Change" my="300">
+      <p>
+        <Box maxWidth={600}>
+          You're scheduled to switch to the {account.pending_subscription.name} plan on{' '}
+          {dateFormat(account.pending_subscription.effective_date)}, and can't update your plan
+          until that switch happens.
+        </Box>
+      </p>
+    </Banner>
   );
 };
 
 export const PremiumBanner = () => {
-  const [state] = useHibana();
-  const { isHibanaEnabled } = state;
-  const buttonStyle = isHibanaEnabled ? { color: 'gray', outlineBorder: true } : {};
-
   return (
     <Banner
       title="Premium Addon Plan"
@@ -65,25 +55,24 @@ export const PremiumBanner = () => {
         to: LINKS.PREMIUM_SUPPORT,
         external: true,
         onClick: () => conversions.trackAddonRequest(ANALYTICS_PREMIUM_SUPPORT),
-        ...buttonStyle,
       }}
       my="300"
     >
-      <p>
-        <Text mb="200">
+      <Stack>
+        <p>
           Full-service account advocacy with a dedicated Customer Success Manager. Including
           proactive reporting, planning, and reviews.
-        </Text>
-      </p>
-      <ul>
-        <li>Includes all standard SparkPost features</li>
-        <li>Dedicated Customer Success Manager</li>
-        <li>
-          Global <Abbreviation title="Internet Service Provider">ISP</Abbreviation> support and
-          mediation
-        </li>
-        <li>Deliverability data analysis and guidance with powerful integrated tools</li>
-      </ul>
+        </p>
+        <ul>
+          <li>Includes all standard SparkPost features</li>
+          <li>Dedicated Customer Success Manager</li>
+          <li>
+            Global <Abbreviation title="Internet Service Provider">ISP</Abbreviation> support and
+            mediation
+          </li>
+          <li>Deliverability data analysis and guidance with powerful integrated tools</li>
+        </ul>
+      </Stack>
     </Banner>
   );
 };
@@ -92,9 +81,6 @@ export const PremiumBanner = () => {
  * Enterprise CTA
  */
 export const EnterpriseBanner = () => {
-  const [state] = useHibana();
-  const { isHibanaEnabled } = state;
-  const buttonStyle = isHibanaEnabled ? { color: 'gray', outlineBorder: true } : {};
   return (
     <Banner
       title="Enterprise"
@@ -103,23 +89,22 @@ export const EnterpriseBanner = () => {
         to: LINKS.ENTERPRISE_SUPPORT,
         external: true,
         onClick: () => conversions.trackAddonRequest(ANALYTICS_ENTERPRISE_SUPPORT),
-        ...buttonStyle,
       }}
       my="300"
     >
-      <p>
-        <Text mb="200">
+      <Stack>
+        <p>
           Enterprise-grade financial guarantees with 99.9% uptime{' '}
           <Abbreviation title="Service Level Agreement">SLA</Abbreviation> and guaranteed burst
           rates, and a dedicated Technical Account Manager.
-        </Text>
-      </p>
-      <ul>
-        <li>Includes all standard SparkPost and Premium features</li>
-        <li>Comprehensive uptime SLAs with service credits</li>
-        <li>The industry's only burst-rate guarantee</li>
-        <li>Support of iOS Universal Links and Android App Links</li>
-      </ul>
+        </p>
+        <ul>
+          <li>Includes all standard SparkPost and Premium features</li>
+          <li>Comprehensive uptime SLAs with service credits</li>
+          <li>The industry's only burst-rate guarantee</li>
+          <li>Support of iOS Universal Links and Android App Links</li>
+        </ul>
+      </Stack>
     </Banner>
   );
 };
