@@ -26,28 +26,16 @@ exports[`Feature Change Section should render features 1`] = `
       </div>
     </div>
   </Panel.Section>
-  <Panel.Section
-    key="confirm_feature-key"
-  >
-    <div
-      className="Label"
-    >
-      My Feature
-    </div>
-    <div
-      className="Feature"
-    >
-      <div
-        className="description"
-      >
-        This is my feature but it is no good
-      </div>
-      <div>
-        <button>
-          My action
-        </button>
-      </div>
-    </div>
-  </Panel.Section>
+  <Feature
+    action={
+      <button>
+        My action
+      </button>
+    }
+    description="This is my feature but it is no good"
+    key="feature-key"
+    label="My Feature"
+    value={false}
+  />
 </Panel>
 `;

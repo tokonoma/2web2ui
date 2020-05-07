@@ -13,10 +13,8 @@ exports[`Billing Banners:  Enterprise banner renders 1`] = `
   my="300"
   title="Enterprise"
 >
-  <p>
-    <Text
-      mb="200"
-    >
+  <Stack>
+    <p>
       Enterprise-grade financial guarantees with 99.9% uptime
        
       <Abbreviation
@@ -25,22 +23,22 @@ exports[`Billing Banners:  Enterprise banner renders 1`] = `
         SLA
       </Abbreviation>
        and guaranteed burst rates, and a dedicated Technical Account Manager.
-    </Text>
-  </p>
-  <ul>
-    <li>
-      Includes all standard SparkPost and Premium features
-    </li>
-    <li>
-      Comprehensive uptime SLAs with service credits
-    </li>
-    <li>
-      The industry's only burst-rate guarantee
-    </li>
-    <li>
-      Support of iOS Universal Links and Android App Links
-    </li>
-  </ul>
+    </p>
+    <ul>
+      <li>
+        Includes all standard SparkPost and Premium features
+      </li>
+      <li>
+        Comprehensive uptime SLAs with service credits
+      </li>
+      <li>
+        The industry's only burst-rate guarantee
+      </li>
+      <li>
+        Support of iOS Universal Links and Android App Links
+      </li>
+    </ul>
+  </Stack>
 </Banner>
 `;
 
@@ -99,31 +97,23 @@ exports[`Billing Banners:  Free Plan Downgrade warning banner should not render 
 exports[`Billing Banners:  Free Plan Downgrade warning banner should not render if past 30 days of creation date 1`] = `""`;
 
 exports[`Billing Banners:  PendingPlanBanner should render with pending_subscription 1`] = `
-<OGOnlyWrapper
-  as={[Function]}
+<Banner
   my="300"
   status="warning"
   title="Pending Plan Change"
 >
-  <Box
-    as={[Function]}
-    my="300"
-    status="warning"
-    title="Pending Plan Change"
-  >
-    <p>
-      <Box
-        maxWidth={600}
-      >
-        You're scheduled to switch to the 
-         plan on
-         
-        Oct 05, 2020
-        , and can't update your plan until that switch happens.
-      </Box>
-    </p>
-  </Box>
-</OGOnlyWrapper>
+  <p>
+    <Box
+      maxWidth={600}
+    >
+      You're scheduled to switch to the 
+       plan on
+       
+      Oct 05, 2020
+      , and can't update your plan until that switch happens.
+    </Box>
+  </p>
+</Banner>
 `;
 
 exports[`Billing Banners:  Premium banner renders 1`] = `
@@ -139,32 +129,30 @@ exports[`Billing Banners:  Premium banner renders 1`] = `
   my="300"
   title="Premium Addon Plan"
 >
-  <p>
-    <Text
-      mb="200"
-    >
+  <Stack>
+    <p>
       Full-service account advocacy with a dedicated Customer Success Manager. Including proactive reporting, planning, and reviews.
-    </Text>
-  </p>
-  <ul>
-    <li>
-      Includes all standard SparkPost features
-    </li>
-    <li>
-      Dedicated Customer Success Manager
-    </li>
-    <li>
-      Global 
-      <Abbreviation
-        title="Internet Service Provider"
-      >
-        ISP
-      </Abbreviation>
-       support and mediation
-    </li>
-    <li>
-      Deliverability data analysis and guidance with powerful integrated tools
-    </li>
-  </ul>
+    </p>
+    <ul>
+      <li>
+        Includes all standard SparkPost features
+      </li>
+      <li>
+        Dedicated Customer Success Manager
+      </li>
+      <li>
+        Global 
+        <Abbreviation
+          title="Internet Service Provider"
+        >
+          ISP
+        </Abbreviation>
+         support and mediation
+      </li>
+      <li>
+        Deliverability data analysis and guidance with powerful integrated tools
+      </li>
+    </ul>
+  </Stack>
 </Banner>
 `;

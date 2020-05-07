@@ -85,6 +85,7 @@ exports[`Component: Billing Summary should render correctly for a paid plan 1`] 
       >
         <h6>
           <Text
+            as="span"
             fontSize="300"
           >
             123,123
@@ -249,6 +250,7 @@ exports[`Component: Billing Summary should render correctly for a standard free 
       >
         <h6>
           <Text
+            as="span"
             fontSize="300"
           >
             123,123
@@ -373,6 +375,7 @@ exports[`Component: Billing Summary should render correctly if you can't buy IPs
       >
         <h6>
           <Text
+            as="span"
             fontSize="300"
           >
             123,123
@@ -538,6 +541,7 @@ exports[`Component: Billing Summary should render correctly if you can't change 
       >
         <h6>
           <Text
+            as="span"
             fontSize="300"
           >
             123,123
@@ -712,6 +716,7 @@ exports[`Component: Billing Summary should render correctly if you can't update 
       >
         <h6>
           <Text
+            as="span"
             fontSize="300"
           >
             123,123
@@ -846,6 +851,7 @@ exports[`Component: Billing Summary should render with IP modal open 1`] = `
       >
         <h6>
           <Text
+            as="span"
             fontSize="300"
           >
             123,123
@@ -1024,6 +1030,7 @@ exports[`Component: Billing Summary should render with the billing contact modal
       >
         <h6>
           <Text
+            as="span"
             fontSize="300"
           >
             123,123
@@ -1202,6 +1209,7 @@ exports[`Component: Billing Summary should render with the payment info modal op
       >
         <h6>
           <Text
+            as="span"
             fontSize="300"
           >
             123,123
@@ -1380,6 +1388,7 @@ exports[`Component: Billing Summary should show the invoice history if there are
       >
         <h6>
           <Text
+            as="span"
             fontSize="300"
           >
             123,123

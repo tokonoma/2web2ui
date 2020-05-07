@@ -2,8 +2,11 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import FeatureChangeSection from '../FeatureChangeSection';
 import { useFeatureChangeContext } from '../../context/FeatureChangeContext';
-
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
+import styles from './FeatureChangeSection.module.scss';
+jest.mock('src/hooks/useHibanaOverride');
 jest.mock('../../context/FeatureChangeContext');
+useHibanaOverride.mockReturnValue(styles);
 
 const defaultContextState = {
   loading: false,
