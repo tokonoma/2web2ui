@@ -5,7 +5,7 @@ import EngagementPage from './engagement/EngagementPage';
 import EventPage from './messageEvents/EventPage';
 import MessageEventsPage from './messageEvents/MessageEventsPage';
 import RejectionPage from './rejection/RejectionPage';
-import SummaryPage from './summary/SummaryPage';
+import SummaryPage from './summary/SummaryPage.container';
 
 export default {
   AcceptedPage,
@@ -15,5 +15,5 @@ export default {
   EventPage,
   MessageEventsPage,
   RejectionPage,
-  SummaryPage
+  SummaryPage,
 };
