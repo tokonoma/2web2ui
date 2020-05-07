@@ -26,9 +26,8 @@ export const EditForm = ({
   const roleSection = subaccountReportingUser ? (
     <>
       <p>
-        {' '}
         This user has access to reporting features and read-only template access, limited to a
-        single subaccount. Its role can’t be changed.{' '}
+        single subaccount. Its role can’t be changed.
       </p>
       <LabelledValue label="Subaccount" name="subaccountInfo">
         <PageLink to={`/account/subaccounts/${subaccount.id}`}>{subaccount.name}</PageLink> (
@@ -62,8 +61,8 @@ export const EditForm = ({
         )}
 
         <Panel.Section>
-          <Button primary disabled={submitting} submit>
-            {'Update user'}
+          <Button variant="primary" disabled={submitting || user.isCurrentUser} submit>
+            Update User
           </Button>
         </Panel.Section>
       </form>

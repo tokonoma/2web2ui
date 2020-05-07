@@ -23,12 +23,14 @@ export const OGSearchPanel = ({ defaultSearchText }) => (
 const HibanaSearchPanel = ({ defaultSearchText }) => (
   <InstantSearch appId={searchCfg.appID} apiKey={searchCfg.apiKey} indexName={searchCfg.index}>
     <Panel.Section>
-      <AlgoliaSearch defaultSearchText={defaultSearchText} />
+      {/* maxWidth prevents close button from overlapping the text field here */}
+      <Box maxWidth="1200">
+        <AlgoliaSearch defaultSearchText={defaultSearchText} />
+      </Box>
     </Panel.Section>
     <Panel.Section>
       <div className={styles.ResultsHibana}>
-        <Box height={500} overflowY="scroll">
-          {/*this Box was added to fix the style for hibana */}
+        <Box height="1100" overflowY="scroll">
           <Hits hitComponent={AlgoliaResults} />
         </Box>
       </div>

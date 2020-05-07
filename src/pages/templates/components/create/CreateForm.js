@@ -10,7 +10,6 @@ import FromEmailWrapper from '../FromEmailWrapper';
 import config from 'src/config';
 import { required, slug } from 'src/helpers/validation';
 import { slugify } from 'src/helpers/string';
-import { emailOrSubstitution } from '../validation';
 import { isSubaccountUser } from 'src/helpers/conditions/user';
 import { selectCondition } from 'src/selectors/accessConditionState';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
@@ -80,7 +79,8 @@ export class CreateForm extends Component {
                 component={FromEmailWrapper}
                 placeholder="example@email.com"
                 label="From Email"
-                validate={[required, emailOrSubstitution]}
+                // Do not try to validate email, let our API make that decision
+                validate={[required]}
                 domains={domains}
                 helpText={this.fromEmailHelpText()}
               />

@@ -16,6 +16,7 @@ Array [
     "visitor": Object {
       "accessLevel": "admin",
       "id": "test_999999_fredo-mcgurk",
+      "isInternalTestUser": false,
       "release": "test-release",
     },
   },

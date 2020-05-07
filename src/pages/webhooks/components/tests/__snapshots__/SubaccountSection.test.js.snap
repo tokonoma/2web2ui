@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Webhooks SubaccountSection on create should render radio group 1`] = `
-<div>
+<Stack>
   <Field
     component={[Function]}
-    label="Receive events from:"
+    label="Receive events from"
     name="assignTo"
     options={
       Array [
@@ -26,7 +26,7 @@ exports[`Webhooks SubaccountSection on create should render radio group 1`] = `
       ]
     }
   />
-</div>
+</Stack>
 `;
 
 exports[`Webhooks SubaccountSection on create should render subaccount typeahead 1`] = `

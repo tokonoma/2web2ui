@@ -2,23 +2,27 @@
 
 exports[`Component: User renders name & email & username link 1`] = `
 <Fragment>
-  <p
+  <div
     className="Name"
   >
     <PageLink
       to="/account/users/edit/foo-bar"
     >
-      <strong>
+      <OGOnlyWrapper
+        as="strong"
+      >
         foo bar
-      </strong>
+      </OGOnlyWrapper>
     </PageLink>
-  </p>
-  <p
+  </div>
+  <div
     className="Email"
   >
-    <em>
+    <OGOnlyWrapper
+      as="em"
+    >
       foo@bar.com
-    </em>
-  </p>
+    </OGOnlyWrapper>
+  </div>
 </Fragment>
 `;

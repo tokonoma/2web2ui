@@ -4,12 +4,11 @@ import { reduxForm, Field } from 'redux-form';
 import { Box, Button, Panel, Stack } from 'src/components/matchbox';
 import { ButtonWrapper, TextFieldWrapper } from 'src/components';
 import { PageLink } from 'src/components/links';
-import { required, domain } from 'src/helpers/validation';
+import { required } from 'src/helpers/validation';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 import SubaccountForm from './SubaccountForm';
 
 const FORM_NAME = 'createSendingDomain';
-const FIELD_MAX_WIDTH = '860px';
 
 export class CreateForm extends Component {
   render() {
@@ -18,7 +17,7 @@ export class CreateForm extends Component {
     return (
       <form onSubmit={handleSubmit}>
         <Panel.Section>
-          <Box maxWidth={FIELD_MAX_WIDTH}>
+          <Box maxWidth="1200">
             <Stack>
               <p>
                 We recommend using a subdomain e.g. <em>mail.mydomain.com</em>. Depending on how you
@@ -31,7 +30,8 @@ export class CreateForm extends Component {
                 label="Domain Name"
                 placeholder="email.example.com"
                 name="domain"
-                validate={[required, domain]}
+                // Do not try to validate sending domains, let our API make that decision
+                validate={[required]}
                 disabled={submitting}
               />
 

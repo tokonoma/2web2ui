@@ -9,7 +9,7 @@ exports[`RecipientListForm defaults to create mode 1`] = `
           space="400"
         >
           <Box
-            maxWidth="860px"
+            maxWidth="1200"
           >
             <Field
               component={[Function]}
@@ -25,7 +25,7 @@ exports[`RecipientListForm defaults to create mode 1`] = `
             />
           </Box>
           <Box
-            maxWidth="860px"
+            maxWidth="1200"
           >
             <Field
               component={[Function]}
@@ -115,7 +115,7 @@ exports[`RecipientListForm renders CSV errors 1`] = `
           space="400"
         >
           <Box
-            maxWidth="860px"
+            maxWidth="1200"
           >
             <Field
               component={[Function]}
@@ -131,7 +131,7 @@ exports[`RecipientListForm renders CSV errors 1`] = `
             />
           </Box>
           <Box
-            maxWidth="860px"
+            maxWidth="1200"
           >
             <Field
               component={[Function]}
@@ -207,7 +207,7 @@ exports[`RecipientListForm renders correctly in create mode 1`] = `
           space="400"
         >
           <Box
-            maxWidth="860px"
+            maxWidth="1200"
           >
             <Field
               component={[Function]}
@@ -223,7 +223,7 @@ exports[`RecipientListForm renders correctly in create mode 1`] = `
             />
           </Box>
           <Box
-            maxWidth="860px"
+            maxWidth="1200"
           >
             <Field
               component={[Function]}
@@ -299,7 +299,7 @@ exports[`RecipientListForm renders correctly in edit mode 1`] = `
           space="400"
         >
           <Box
-            maxWidth="860px"
+            maxWidth="1200"
           >
             <Field
               component={[Function]}
@@ -371,7 +371,7 @@ exports[`RecipientListForm should disable form elements on submit 1`] = `
           space="400"
         >
           <Box
-            maxWidth="860px"
+            maxWidth="1200"
           >
             <Field
               component={[Function]}
@@ -388,7 +388,7 @@ exports[`RecipientListForm should disable form elements on submit 1`] = `
             />
           </Box>
           <Box
-            maxWidth="860px"
+            maxWidth="1200"
           >
             <Field
               component={[Function]}

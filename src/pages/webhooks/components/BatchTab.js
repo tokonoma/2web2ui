@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-
 import { getBatches } from 'src/actions/webhooks';
-import PanelLoading from 'src/components/panelLoading/PanelLoading';
-
+import { PanelSectionTableCollection } from 'src/components/collection';
+import Loading from 'src/components/loading';
 import { Button, Panel } from 'src/components/matchbox';
-import { TableCollection, Empty } from 'src/components';
+import { Empty } from 'src/components';
 import { selectWebhookBatches } from 'src/selectors/webhooks';
 
 const columns = [
@@ -41,15 +40,23 @@ export class BatchTab extends Component {
     const { batches, batchesLoading } = this.props;
 
     if (batchesLoading) {
-      return <PanelLoading />;
+      return (
+        <Panel.Section>
+          <Loading />
+        </Panel.Section>
+      );
     }
 
     if (_.isEmpty(batches)) {
-      return <Empty message="There are no batches for your webhook" />;
+      return (
+        <Panel.Section>
+          <Empty hasPanel={false} message="There are no batches for your webhook" />
+        </Panel.Section>
+      );
     }
 
     return (
-      <TableCollection
+      <PanelSectionTableCollection
         columns={columns}
         rows={batches}
         getRowData={getRowData}
@@ -65,14 +72,14 @@ export class BatchTab extends Component {
     const buttonText = batchesLoading ? 'Refreshing...' : 'Refresh Batches';
 
     return (
-      <Panel>
+      <>
         <Panel.Section>
-          <Button primary size="small" disabled={batchesLoading} onClick={this.refreshBatches}>
+          <Button variant="primary" disabled={batchesLoading} onClick={this.refreshBatches}>
             {buttonText}
           </Button>
         </Panel.Section>
         {this.renderBatches()}
-      </Panel>
+      </>
     );
   }
 }

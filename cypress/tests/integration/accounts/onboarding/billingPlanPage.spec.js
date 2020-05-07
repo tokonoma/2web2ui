@@ -1,5 +1,6 @@
 describe('The billing plan page', () => {
   beforeEach(() => {
+    // todo, this user should be joining not logging-in
     cy.stubAuth();
     cy.stubRequest({
       url: '/api/v1/account/countries?filter=billing',
@@ -39,13 +40,13 @@ describe('The billing plan page', () => {
 
   describe('the plan selection custom select', () => {
     it('opens when the title is clicked', () => {
-      cy.findByText('Select A Plan').click();
-      cy.findByText('Test Account:').should('be.visible');
-      cy.findByText('Starter:').should('be.visible');
+      cy.get('[data-id="plan-picker-trigger"]').click();
+      cy.findByText('Test Account').should('be.visible');
+      cy.findByText('Starter').should('be.visible');
     });
 
     it('hides the credit card form when the user selects the test account', () => {
-      cy.findByText('Select A Plan').click();
+      cy.get('[data-id="plan-picker-trigger"]').click();
       cy.findByText('Full-featured developer account').click();
 
       cy.queryByLabelText('Promo Code').should('not.be.visible');
@@ -58,8 +59,15 @@ describe('The billing plan page', () => {
       cy.queryByLabelText('Zip Code').should('not.be.visible');
     });
 
+    it('get started with a test account', () => {
+      cy.get('[data-id="plan-picker-trigger"]').click();
+      cy.findByText('Full-featured developer account').click();
+      cy.findByText('Get Started').click();
+      cy.title().should('include', 'Create a Sending Domain | Onboarding');
+    });
+
     it('shows the credit card form when the user selects a non free plan', () => {
-      cy.findByText('Select A Plan').click();
+      cy.get('[data-id="plan-picker-trigger"]').click();
       cy.queryAllByRole('option')
         .eq(1)
         .click();
@@ -119,8 +127,110 @@ describe('The billing plan page', () => {
 
     it('shows "Required" errors on all required fields when the user attempts to submit the form before completing relevant data', () => {
       cy.findByText('Get Started').click();
-
       cy.queryAllByText('Required').should('have.length', 5);
+    });
+
+    it('get started with a paid account', () => {
+      cy.stubRequest({
+        method: 'POST',
+        url: '/api/v1/billing/cors-data?context=create-account',
+        fixture: 'billing/cors-data/200.post.json',
+        requestAlias: 'billingCorsDataPost',
+      });
+
+      cy.stubRequest({
+        method: 'POST',
+        url: '/v1/accounts',
+        fixture: 'zuora/accounts/200.post.json',
+        requestAlias: 'zuoraAccountPost',
+      });
+
+      cy.stubRequest({
+        method: 'POST',
+        url: '/api/v1/account/subscription/check',
+        fixture: 'account/subscription/check/200.post.json',
+        requestAlias: 'accountSubscriptionCheckPost',
+      });
+
+      cy.stubRequest({
+        method: 'POST',
+        url: '/api/v1/billing/subscription/check',
+        fixture: 'billing/subscription/check/200.post.json',
+        requestAlias: 'billingSubscriptionCheckPost',
+      });
+
+      cy.stubRequest({
+        url: '/api/v1/billing',
+        fixture: 'billing/200.get.json',
+        requestAlias: 'billingGet',
+      });
+
+      cy.get('[data-id="plan-picker-trigger"]').click();
+      cy.findByText('50,000').click();
+      cy.findByLabelText('Credit Card Number').type('4321432143214321');
+      cy.findByLabelText('Cardholder Name').type('Leslie Knope');
+      cy.findByLabelText('Expiration Date').type('1/99');
+      cy.findByLabelText('Security Code').type('123');
+      cy.findByLabelText('Zip Code').type('12345');
+      cy.findByText('Get Started').click();
+
+      // should we do this, verify API requests, more often? the purpose of this experiment was to
+      // see how easy it is to confirm the values just provided above are correctly passed to the API
+      cy.wait([
+        '@billingCorsDataPost',
+        '@zuoraAccountPost',
+        '@accountSubscriptionCheckPost',
+        '@billingSubscriptionCheckPost',
+        '@billingGet',
+      ]).spread((billingCorsDataPost, zuoraAccountPost) => {
+        // eslint-disable-next-line jest/valid-expect
+        expect(billingCorsDataPost.request.body).to.include({
+          bin: '432143', // first six digits of credit card
+          cardholder_name: 'Leslie Knope',
+          country: 'US',
+          last_four: '4321', // last for digits of credit card
+          plan_id: '2c92c0f96a346078016a4ff143fb2a5a', // provided by fixture
+          state: 'AL',
+          zip_code: '12345',
+        });
+
+        // eslint-disable-next-line jest/valid-expect
+        expect(zuoraAccountPost.request.body).to.include({
+          accountNumber: '12345', // provided by fixture
+        });
+
+        // eslint-disable-next-line jest/valid-expect
+        expect(zuoraAccountPost.request.body.billToContact).to.include({
+          country: 'US',
+          state: 'AL',
+          zipCode: '12345',
+        });
+
+        // eslint-disable-next-line jest/valid-expect
+        expect(zuoraAccountPost.request.body.creditCard).to.include({
+          cardNumber: '4321 4321 4321 4321',
+          cardType: 'Visa', // determined by library
+          expirationMonth: 1,
+          expirationYear: 2099,
+          securityCode: '123',
+        });
+
+        // eslint-disable-next-line jest/valid-expect
+        expect(zuoraAccountPost.request.body.creditCard.cardHolderInfo).to.include({
+          cardHolderName: 'Leslie Knope',
+          // state: 'AL', // no state?
+          zipCode: '12345',
+        });
+
+        // eslint-disable-next-line jest/valid-expect
+        expect(zuoraAccountPost.request.body.subscription.subscribeToRatePlans).to.deep.equal([
+          {
+            productRatePlanId: '2c92c0f96a346078016a4ff143fb2a5a', // provided by fixture
+          },
+        ]);
+      });
+
+      cy.title().should('include', 'Create a Sending Domain | Onboarding');
     });
 
     describe('the promo code field', () => {

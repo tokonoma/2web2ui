@@ -1,0 +1,7 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Plan {
+  > span:first-child {
+    font-size: rem(24);
+  }
+}

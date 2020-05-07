@@ -5,27 +5,32 @@ import Brightback from 'src/components/brightback/Brightback';
 
 describe('CancellationPanel', () => {
   const accountPendingCancellation = {
-    pending_cancellation: { effective_date: '2019-07-20T00:00:00.000Z' }
+    pending_cancellation: { effective_date: '2019-07-20T00:00:00.000Z' },
   };
-  const subject = (props) => shallow(<CancellationPanel
-    account={{ pending_cancellation: null }}
-    renewAccount = {() => {}}
-    showAlert = {() => {}}
-    fetchAccount = {() => {}}
-    {...props}/>);
+  const subject = props =>
+    shallow(
+      <CancellationPanel
+        account={{ pending_cancellation: null }}
+        renewAccount={() => {}}
+        showAlert={() => {}}
+        fetchAccount={() => {}}
+        {...props}
+      />,
+    );
 
-  const getButton = ({ wrapper = subject(), enabled = false, to = '' } = {}) => wrapper
-    .find(Brightback)
-    .renderProp('render')({ enabled, to });
+  const getButton = ({ wrapper = subject(), enabled = false, to = '' } = {}) =>
+    wrapper.find(Brightback).renderProp('render')({ enabled, to });
 
   it('renders', () => {
     expect(subject()).toMatchSnapshot();
   });
 
   it('renders renew button when pending cancellation ', () => {
-    expect(subject({ account: accountPendingCancellation })
-      .find('Button')
-      .prop('children')).toEqual(expect.stringMatching(/Don't cancel my account/));
+    expect(
+      subject({ account: accountPendingCancellation })
+        .find('Button')
+        .prop('children'),
+    ).toEqual(expect.stringMatching(/Don't cancel my account/));
   });
 
   it('cancellation button goes to cancellation link when not enabled', () => {
@@ -37,8 +42,8 @@ describe('CancellationPanel', () => {
     expect(getButton({ enabled: true, to: bbUrl }).prop('to')).toEqual(bbUrl);
   });
 
-  it('cancellation button is destructive variant', () => {
-    expect(getButton().prop('destructive')).toBeTruthy();
+  it('cancellation button is the destructive variant', () => {
+    expect(getButton().prop('variant')).toBe('destructive');
   });
 
   it('refresh button renews account and retrieves new account state', async () => {
@@ -50,10 +55,13 @@ describe('CancellationPanel', () => {
       account: accountPendingCancellation,
       renewAccount,
       showAlert,
-      fetchAccount
+      fetchAccount,
     });
     await wrapper.find('Button').simulate('click');
-    expect(showAlert).toHaveBeenCalledWith({ type: 'success', message: 'Your account will not be cancelled.' });
+    expect(showAlert).toHaveBeenCalledWith({
+      type: 'success',
+      message: 'Your account will not be cancelled.',
+    });
     expect(renewAccount).toHaveBeenCalled();
     expect(fetchAccount).toHaveBeenCalled();
   });

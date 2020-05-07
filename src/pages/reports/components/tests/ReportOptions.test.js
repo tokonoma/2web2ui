@@ -1,9 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { ReportOptions } from '../ReportOptions';
+import { ReportOptionsClassComponent as ReportOptions } from '../ReportOptions';
 import Typeahead from '../Typeahead';
 import { Tag } from 'src/components/matchbox';
 import * as reportHelpers from 'src/helpers/reports';
+import styles from '../ReportOptions.module.scss';
 
 jest.mock('src/helpers/date');
 jest.mock('src/helpers/reports');
@@ -45,6 +46,7 @@ describe('Component: Report Options', () => {
       featureFlaggedMetrics: {
         useMetricsRollup: false,
       },
+      styles,
     };
     wrapper = shallow(<ReportOptions {...testProps} />);
   });

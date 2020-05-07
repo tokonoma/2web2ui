@@ -4,71 +4,54 @@ exports[`Plan Picker:  Render Function renders 1`] = `
 <div
   className="PlanPicker"
 >
-  <div
-    className="TriggerHeader"
-    onClick={[Function]}
-    plan={
-      Object {
-        "billing_id": "2c92c0f85d7d53d6015d80ed8f2b0ce5",
-        "overage": 0.4,
-        "plan": "2.5M-0817",
-        "price": 899,
-        "product": "messaging",
-        "volume": 2500000,
-      }
-    }
+  <Heading
+    as="h5"
+    className="PlanPickerHeader"
   >
-    <span>
-      Select A Plan
-    </span>
-    <ExpandMore
-      className="Chevron"
-      size={24}
-    />
-  </div>
-  <div
-    className="PlanContainer"
-  >
-    <div
-      className="DropdownLabel"
-    >
-      Premier
-    </div>
-    <Plan
-      className="TriggerPlan"
+    Premier
+  </Heading>
+  <div>
+    <button
+      className="PlanPickerTrigger"
+      data-id="plan-picker-trigger"
       onClick={[Function]}
-      plan={
-        Object {
-          "billing_id": "2c92c0f85d7d53d6015d80ed8f2b0ce5",
-          "overage": 0.4,
-          "plan": "2.5M-0817",
-          "price": 899,
-          "product": "messaging",
-          "volume": 2500000,
-        }
-      }
-      planPriceProps={
-        Object {
-          "selectedPromo": undefined,
-        }
-      }
-    />
-    <input
-      className="Input"
-      readOnly={true}
-    />
-    <div
-      className="List"
     >
-      <div
-        className="DropdownLabel"
+      <Plan
+        plan={
+          Object {
+            "billing_id": "2c92c0f85d7d53d6015d80ed8f2b0ce5",
+            "overage": 0.4,
+            "plan": "2.5M-0817",
+            "price": 899,
+            "product": "messaging",
+            "volume": 2500000,
+          }
+        }
+        planPriceProps={
+          Object {
+            "selectedPromo": undefined,
+          }
+        }
+      />
+      <ExpandMore
+        size={32}
+      />
+    </button>
+    <ol
+      className="PlanPickerList"
+    >
+      <li
+        className="PlanPickerHeader"
         key="label_test"
       >
-        Test Account
-        :
-      </div>
-      <Plan
-        className="DropdownPlan"
+        <Heading
+          as="h5"
+        >
+          Test Account
+        </Heading>
+      </li>
+      <li
+        className="PlanPickerOption"
         index={0}
         item={
           Object {
@@ -91,30 +74,37 @@ exports[`Plan Picker:  Render Function renders 1`] = `
           }
         }
         key="0"
-        plan={
-          Object {
-            "plan": "free500-0419",
-            "price": 0,
-            "product": "messaging",
-            "volume": 500,
+      >
+        <Plan
+          plan={
+            Object {
+              "plan": "free500-0419",
+              "price": 0,
+              "product": "messaging",
+              "volume": 500,
+            }
           }
-        }
-      />
-    </div>
+        />
+      </li>
+    </ol>
   </div>
-  <div
-    className="TierPlansInfo"
+  <p
+    className="PlanPickerHelpText"
   >
     <span>
       Interested in learning more about our Starter and Premier plans? Check out our
-       
     </span>
+     
     <ExternalLink
       to="https://www.sparkpost.com/docs/faq/difference-between-starter-and-premier"
     >
       Knowledge Base
     </ExternalLink>
-  </div>
+  </p>
+  <input
+    readOnly={true}
+    type="hidden"
+  />
 </div>
 `;
 

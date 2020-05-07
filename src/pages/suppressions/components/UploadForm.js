@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Box, Button, Stack } from 'src/components/matchbox';
 import ButtonWrapper from 'src/components/buttonWrapper';
-
 import { showAlert } from 'src/actions/globalAlert';
 import { uploadSuppressions } from 'src/actions/suppressions';
 import { DownloadLink } from 'src/components/links';
@@ -13,8 +12,6 @@ import SubaccountTypeaheadWrapper from 'src/components/reduxFormWrappers/Subacco
 import config from 'src/config';
 import { fileExtension, maxFileSize, nonEmptyFile, required } from 'src/helpers/validation';
 import exampleSuppressionsListPath from './example-suppressions-list.csv';
-
-const maxWidth = '860px';
 
 export class UploadForm extends Component {
   handleSubmit = ({ subaccount, suppressionsFile }) => {
@@ -55,7 +52,7 @@ export class UploadForm extends Component {
                 nonEmptyFile,
               ]}
             />
-            <Box maxWidth={maxWidth}>
+            <Box maxWidth="1200">
               <Field
                 component={SubaccountTypeaheadWrapper}
                 disabled={submitting}

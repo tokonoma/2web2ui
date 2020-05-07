@@ -11,7 +11,6 @@ import parseRecipientListCsv from '../helpers/csv';
 import exampleRecipientListPath from './example-recipient-list.csv';
 
 const formName = 'recipientListForm';
-const fieldMaxWidth = '860px'; // TODO: Once Matchbox exposes sizes via a set of design tokens, replace this
 
 export class RecipientListForm extends Component {
   parseCsv = csv =>
@@ -76,7 +75,7 @@ export class RecipientListForm extends Component {
           <Panel>
             <Panel.Section>
               <Stack space="400">
-                <Box maxWidth={fieldMaxWidth}>
+                <Box maxWidth="1200">
                   <Field
                     name="name"
                     label="Name"
@@ -88,7 +87,7 @@ export class RecipientListForm extends Component {
                 </Box>
 
                 {!editMode && (
-                  <Box maxWidth={fieldMaxWidth}>
+                  <Box maxWidth="1200">
                     <Field
                       name="id"
                       label="ID"

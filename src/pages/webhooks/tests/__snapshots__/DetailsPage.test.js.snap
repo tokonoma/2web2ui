@@ -5,7 +5,7 @@ exports[`Page: Webhook Details should render happy path 1`] = `
   breadcrumbAction={
     Object {
       "component": [Function],
-      "content": "Webhooks",
+      "content": "View All Webhooks",
       "to": "/webhooks/",
     }
   }
@@ -19,41 +19,43 @@ exports[`Page: Webhook Details should render happy path 1`] = `
   }
   title="My Hooky"
 >
-  <Tabs
-    selected={1}
-    tabs={
-      Array [
-        Object {
-          "component": [Function],
-          "content": "Settings",
-          "to": "/webhooks/details/my-id?subaccount=101",
-        },
-        Object {
-          "component": [Function],
-          "content": "Test",
-          "to": "/webhooks/details/my-id/test?subaccount=101",
-        },
-        Object {
-          "component": [Function],
-          "content": "Batch Status",
-          "to": "/webhooks/details/my-id/batches?subaccount=101",
-        },
-      ]
-    }
-  />
-  <Route
-    exact={true}
-    path="/webhooks/details/my-id"
-    render={[Function]}
-  />
-  <Route
-    path="/webhooks/details/my-id/test"
-    render={[Function]}
-  />
-  <Route
-    path="/webhooks/details/my-id/batches"
-    render={[Function]}
-  />
+  <Panel>
+    <Tabs
+      selected={1}
+      tabs={
+        Array [
+          Object {
+            "component": [Function],
+            "content": "Settings",
+            "to": "/webhooks/details/my-id?subaccount=101",
+          },
+          Object {
+            "component": [Function],
+            "content": "Test",
+            "to": "/webhooks/details/my-id/test?subaccount=101",
+          },
+          Object {
+            "component": [Function],
+            "content": "Batch Status",
+            "to": "/webhooks/details/my-id/batches?subaccount=101",
+          },
+        ]
+      }
+    />
+    <Route
+      exact={true}
+      path="/webhooks/details/my-id"
+      render={[Function]}
+    />
+    <Route
+      path="/webhooks/details/my-id/test"
+      render={[Function]}
+    />
+    <Route
+      path="/webhooks/details/my-id/batches"
+      render={[Function]}
+    />
+  </Panel>
   <DeleteModal
     content={
       <p>

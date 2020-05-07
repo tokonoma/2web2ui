@@ -6,14 +6,12 @@ import { Field, reset, reduxForm } from 'redux-form';
 import { Box, Button, Checkbox, Stack } from 'src/components/matchbox';
 import { TextFieldWrapper, CheckboxWrapper } from 'src/components';
 import ButtonWrapper from 'src/components/buttonWrapper';
-
 import { showAlert } from 'src/actions/globalAlert';
 import { createOrUpdateSuppressions } from 'src/actions/suppressions';
 import SubaccountTypeaheadWrapper from 'src/components/reduxFormWrappers/SubaccountTypeaheadWrapper';
 import { required, email } from 'src/helpers/validation';
-const FORM_NAME = 'addSuppression';
 
-const maxWidth = '860px';
+const FORM_NAME = 'addSuppression';
 
 export class AddForm extends Component {
   atLeastOne = (_value, { types }) =>
@@ -46,7 +44,7 @@ export class AddForm extends Component {
       <Fragment>
         <form onSubmit={handleSubmit(this.onSubmit)}>
           <Stack>
-            <Box maxWidth={maxWidth}>
+            <Box maxWidth="1200">
               <Field
                 name="recipient"
                 component={TextFieldWrapper}
@@ -55,7 +53,7 @@ export class AddForm extends Component {
                 label="Email Address"
               />
             </Box>
-            <Box maxWidth={maxWidth}>
+            <Box maxWidth="1200">
               <Field
                 component={SubaccountTypeaheadWrapper}
                 disabled={submitting}

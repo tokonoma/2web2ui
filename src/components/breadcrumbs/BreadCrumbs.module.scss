@@ -1,22 +1,28 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
-.InActiveItem{
-  color: color(gray,4);
+.InActiveItem {
+  color: color(gray, 4);
 }
 
-.BreadCrumbItem{
+.HibanaBreadCrumbItem {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.BreadCrumbItem {
+  display: inline-block;
   font-weight: 500;
   font-size: font-size(500);
   cursor: pointer;
 }
 
-.Arrow{
+.Arrow {
   display: inline-block;
   font-size: font-size(900);
   transform: translateY(3px);
-  color: color(gray,4);
+  color: color(gray, 4);
 }
 
-.BreadCrumbContainer{
+.BreadCrumbContainer {
   padding: 0 spacing(small) spacing(large) 0;
 }

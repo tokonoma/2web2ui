@@ -1,139 +1,80 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
+@import 'src/styles/resets';
 
 .PlanPicker {
-  position: relative;
-
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
   border-bottom: 1px solid color(gray, 9);
-
-  &:last-child {
-    border-bottom: none;
-  }
+  position: relative; // for the menu
 }
 
-.TriggerHeader {
-  display: block;
-  padding: spacing(large);
-  font-size: rem(16);
-  font-weight: 600;
-  color: color(gray, 1);
-  cursor: pointer;
-  border-bottom: 1px solid color(gray, 9);
-}
-
-.TriggerPlan {
-  position: relative;
-  z-index: 1;
-  display: block;
-  padding: spacing() rem(40);
-
-  &.triggerOpen {
-    box-shadow: shadow(deep);
-  }
-
-  .MainLabel {
-    color: color(orange);
-    font-size: font-size(700);
-  }
-
-  &.disabled {
-    opacity: 0.5;
-    pointer-events: none;
-  }
-}
-
-.DropdownLabel {
-  display: block;
-  padding: spacing() spacing() spacing(smaller);
-  background: color(gray, 10);
-  border-top: 1px solid color(gray, 9);
-  font-weight: 500;
-  color: color(gray, 1);
-}
-
-.DropdownPlan {
-  display: block;
-  padding: spacing() spacing(larger);
-  padding-left: rem(40);
-  background: color(gray, 10);
-  transition: 0.15s;
-
-  &:hover, &.highlighted {
-    background: color(gray, 9);
-  }
-
-  .MainLabel {
-    font-size: font-size(700);
-    line-height: 1em;
-    color: color(gray, 4);
-  }
-}
-
-.MainLabel {
-  display: block;
-
-  .selected & {
-    color: color(orange);
-  }
-}
-
-.PlanContainer {
-  position: relative;
-}
-
-.List {
-  position: absolute;
-  z-index: 100;
-  top: 0;
-  left: 0;
-  right: 0;
-
-  max-height: rem(300);
-  overflow: auto;
-
-  box-shadow: shadow(deep);
-  border-radius: 0 0 border-radius(large) border-radius(large);
-
-  opacity: 0;
-  pointer-events: none;
-  transform: translate(0, -18px);
-  transition: 0.15s;
-}
-
-.open {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translate(0, 0);
-}
-
-.Chevron {
-  position: absolute;
-  right: spacing(large);
-  pointer-events: none;
-  fill: color(orange);
-}
-
-.Input {
-  @include visually-hidden;
-}
-
-.ManualTitle {
-  font-size: rem(21);
-  margin: 0;
+.PlanPickerHeader {
+  margin: 0; // OG only
   padding: spacing() spacing() 0;
 }
 
-.ManualHelp {
-  font-size: rem(15);
-  margin: 0;
+.PlanPickerHelpText {
+  margin: 0; // OG only
   padding: 0 spacing() spacing();
 }
 
-.TierPlansInfo {
-  font-size: font-size(300);
-  line-height: line-height(300);
-  padding: 0 spacing(large) spacing();
+.PlanPickerList {
+  background: color(grey, 10);
+  border-radius: 0 0 border-radius(large) border-radius(large);
+  box-shadow: shadow(deep);
+  left: 0;
+  list-style-type: none;
+  max-height: rem(300);
+  opacity: 0;
+  overflow: auto;
+  padding: 0;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translate(0, -18px);
+  transition: 0.15s;
+  z-index: 100;
+
+  &.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(0, 0);
+  }
+}
+
+.PlanPickerOption {
+  @include button-reset();
+  cursor: pointer; // why?
+  padding: spacing();
+  text-align: left;
+  width: 100%;
+
+  &:hover,
+  &.highlighted {
+    background: color(gray, 9);
+  }
+
+  &.selected {
+    color: color(orange);
+  }
+}
+
+.PlanPickerSelectedOption {
+  color: color(orange);
+}
+
+.PlanPickerTrigger {
+  @include button-reset();
+  align-items: center; // to vertically center icon
+  color: color(orange);
+  cursor: pointer; // why?
+  display: flex;
+  justify-content: space-between; // to align icon to right
+  padding: spacing();
+  text-align: left;
+  width: 100%;
+
+  &:focus,
+  &:hover {
+    background: color(gray, 9);
+  }
 }

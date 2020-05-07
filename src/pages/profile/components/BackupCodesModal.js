@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import { ButtonWrapper } from 'src/components';
 import BackupCodesView from './BackupCodesView';
-import { Grid, Banner, Button, Panel, TextField, Modal } from 'src/components/matchbox';
-import styles from './TfaModals.module.scss';
+import { Grid, Banner, Button, Panel, TextField, Modal, Stack } from 'src/components/matchbox';
 
 const initialState = {
   password: '',
@@ -38,22 +38,22 @@ export default class BackupCodesModal extends Component {
     const generatedCodes = this.props.codes.length > 0;
     if (generatedCodes) {
       return (
-        <div>
-          <Button primary onClick={onClose}>
+        <ButtonWrapper marginTop="0">
+          <Button variant="primary" onClick={onClose}>
             Close
           </Button>
-        </div>
+        </ButtonWrapper>
       );
     } else {
       return (
-        <div>
-          <Button type="submit" disabled={pending} primary onClick={this.generateCodes}>
+        <ButtonWrapper marginTop="0">
+          <Button variant="primary" type="submit" disabled={pending} onClick={this.generateCodes}>
             {pending ? 'Generating...' : 'Generate'}
           </Button>
-          <Button onClick={onClose} className={styles.Cancel}>
+          <Button variant="secondary" onClick={onClose}>
             Cancel
           </Button>
-        </div>
+        </ButtonWrapper>
       );
     }
   };
@@ -68,35 +68,38 @@ export default class BackupCodesModal extends Component {
         <Panel title="Generate Two-factor Backup Codes">
           <form onSubmit={e => e.preventDefault()}>
             <Panel.Section>
-              {!generatedCodes && hasCodes && (
-                <Banner status="warning" my="300">
-                  Clicking Generate will overwrite your existing {activeCount} active backup codes.
-                </Banner>
-              )}
-              <p>
-                Keep these single-use backup codes somewhere safe but accessible. They can be used
-                if your authentication app is unavailable (
-                <span role="img" aria-label="phone in toilet emojis">
-                  📱 ➡︎🚽
-                </span>{' '}
-                , etc).
-              </p>
-              <Grid>
-                <Grid.Column xs={12} md={6}>
-                  {!generatedCodes && (
-                    <TextField
-                      id="tfa-backup-codes-generate-password"
-                      required
-                      type="password"
-                      onChange={this.handleInputChange}
-                      placeholder="Password"
-                      value={this.state.password}
-                      error={this.state.showErrors && error ? 'Incorrect Password' : ''}
-                    />
-                  )}
-                  {generatedCodes && <BackupCodesView codes={codes} />}
-                </Grid.Column>
-              </Grid>
+              <Stack>
+                {!generatedCodes && hasCodes && (
+                  <Banner status="warning" my="300">
+                    Clicking Generate will overwrite your existing {activeCount} active backup
+                    codes.
+                  </Banner>
+                )}
+                <p>
+                  Keep these single-use backup codes somewhere safe but accessible. They can be used
+                  if your authentication app is unavailable (
+                  <span role="img" aria-label="phone in toilet emojis">
+                    📱&nbsp;➡︎&nbsp;🚽
+                  </span>{' '}
+                  , etc).
+                </p>
+                <Grid>
+                  <Grid.Column xs={12} md={6}>
+                    {!generatedCodes && (
+                      <TextField
+                        id="tfa-backup-codes-generate-password"
+                        required
+                        type="password"
+                        onChange={this.handleInputChange}
+                        placeholder="Password"
+                        value={this.state.password}
+                        error={this.state.showErrors && error ? 'Incorrect Password' : ''}
+                      />
+                    )}
+                    {generatedCodes && <BackupCodesView codes={codes} />}
+                  </Grid.Column>
+                </Grid>
+              </Stack>
             </Panel.Section>
             <Panel.Section>{this.renderButtons()}</Panel.Section>
           </form>

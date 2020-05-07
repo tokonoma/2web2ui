@@ -11,22 +11,21 @@ describe('Webhook Component: Test Tab', () => {
       getEventSamples: jest.fn(),
       samples: [{ msys: 'sample' }],
       testLoading: false,
-      testResponse: 'response',
+      testResponse: { status: 200, message: 'I am hooked' },
       testWebhook: jest.fn(() => Promise.resolve()),
       showAlert: jest.fn(),
       webhook: {
         id: 'webhook-id',
         subaccount: 101,
         auth_token: '123',
-        target: 'phoenix.co'
-      }
+        target: 'phoenix.co',
+      },
     };
 
     // TestTab.buildTestRequest = jest.fn().mockImplementation(() => [{ test: 'mock' }]);
     wrapper = shallow(<TestTab {...props} />);
     // wrapper.instance().buildTestRequest = jest.fn().mockImplementation(() => { request: 'mock' });
     // wrapper.unmount();
-
   });
 
   afterEach(() => {
@@ -37,9 +36,19 @@ describe('Webhook Component: Test Tab', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders loading``', () => {
+  it('renders loading', () => {
     wrapper.setProps({ samplesLoading: true });
-    expect(wrapper.find('PanelLoading')).toHaveLength(1);
+    expect(wrapper.find('Loading')).toExist();
+  });
+
+  it('renders response', async () => {
+    await wrapper.find('Button').simulate('click');
+    expect(
+      wrapper
+        .find('CodeBlock')
+        .at(1)
+        .prop('code'),
+    ).toMatch(/hooked/);
   });
 
   describe('submit', () => {
@@ -48,12 +57,15 @@ describe('Webhook Component: Test Tab', () => {
       expect(wrapper.instance().props.testWebhook).toHaveBeenCalled();
     });
 
-    it('submits correctly', async() => {
+    it('submits correctly', async () => {
       const instance = wrapper.instance();
       await instance.testWebhook();
       expect(instance.props.testWebhook.mock.calls).toMatchSnapshot();
       expect(instance.props.testWebhook).toHaveBeenCalled();
-      expect(instance.props.showAlert).toHaveBeenCalledWith({ message: 'The test was successful!', type: 'success' });
+      expect(instance.props.showAlert).toHaveBeenCalledWith({
+        message: 'The test was successful!',
+        type: 'success',
+      });
     });
   });
 });

@@ -6,16 +6,11 @@ import { NewCollectionBody } from 'src/components/collection';
 import { PageLink } from 'src/components/links';
 import AlertToggle from './AlertToggle';
 import { METRICS } from '../constants/formConstants';
-import styles from './AlertCollection.module.scss';
+import OGStyles from './AlertCollection.module.scss';
+import hibanaStyles from './AlertCollectionHibana.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride/useHibanaOverride';
 
-const filterBoxConfig = {
-  show: true,
-  exampleModifiers: ['name'],
-  itemToStringKeys: ['name'],
-  wrapper: props => <div className={styles.FilterBox}>{props}</div>,
-};
-
-class AlertCollection extends Component {
+export class AlertCollectionComponent extends Component {
   getDetailsLink = ({ id }) => `/alerts/details/${id}`;
 
   getColumns() {
@@ -38,6 +33,7 @@ class AlertCollection extends Component {
     last_triggered_timestamp,
     last_triggered_formatted,
   }) => {
+    const { styles } = this.props;
     const deleteFn = () => this.props.handleDelete({ id, name });
     return [
       <PageLink to={this.getDetailsLink({ id })} className={styles.AlertNameLink}>
@@ -49,7 +45,7 @@ class AlertCollection extends Component {
         formattedDate={last_triggered_formatted || 'Never Triggered'}
       />,
       <AlertToggle muted={muted} id={id} />,
-      <Tooltip dark content="Delete" width="auto" horizontalOffset="-8px">
+      <Tooltip id={`delete-alert-${id}`} dark content="Delete" width="auto" horizontalOffset="-8px">
         <Button flat onClick={deleteFn}>
           <Delete className={styles.Icon} />
 
@@ -61,14 +57,14 @@ class AlertCollection extends Component {
 
   TableWrapper = props => (
     <>
-      <div className={styles.TableWrapper}>
+      <div className={this.props.styles.TableWrapper}>
         <Table>{props.children}</Table>
       </div>
     </>
   );
 
   render() {
-    const { alerts } = this.props;
+    const { alerts, filterBoxConfig } = this.props;
 
     return (
       <TableCollection
@@ -88,4 +84,14 @@ class AlertCollection extends Component {
   }
 }
 
-export default AlertCollection;
+export default function AlertCollection(props) {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+  const filterBoxConfig = {
+    show: true,
+    exampleModifiers: ['name'],
+    itemToStringKeys: ['name'],
+    wrapper: props => <div className={styles.FilterBox}>{props}</div>,
+  };
+
+  return <AlertCollectionComponent styles={styles} filterBoxConfig={filterBoxConfig} {...props} />;
+}

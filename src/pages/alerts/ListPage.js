@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { ApiErrorBanner, DeleteModal, Loading, DisplayDate } from 'src/components';
 import { PageLink } from 'src/components/links';
-import { Grid, Page, Panel, Tag } from 'src/components/matchbox';
+import { Box, Grid, Page, Panel, Tag, Stack } from 'src/components/matchbox';
 import { Templates } from 'src/components/images';
 import AlertCollection from './components/AlertCollection';
 import withAlertsList from './containers/ListPage.container';
-import styles from './ListPage.module.scss';
+import OGStyles from './ListPage.module.scss';
+import hibanaStyles from './ListPageHibana.module.scss';
 import _ from 'lodash';
 import { METRICS } from './constants/formConstants';
+import { useHibana } from 'src/context/HibanaContext';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 
 export class ListPage extends Component {
   state = {
@@ -39,53 +42,14 @@ export class ListPage extends Component {
     });
   };
 
-  renderCollection() {
-    return <AlertCollection alerts={this.props.alerts} handleDelete={this.openDeleteModal} />;
-  }
-
-  renderRecentlyTriggered() {
-    const { recentlyTriggeredAlerts } = this.props;
-    if (recentlyTriggeredAlerts.length === 0) {
-      return;
-    }
-
-    return (
-      <div data-id="recent-incidents">
-        <h3>Recent Incidents</h3>
-
-        <Grid>
-          {recentlyTriggeredAlerts.map(alert => (
-            <Grid.Column xs={12} md={6} lg={3} key={alert.id}>
-              <Panel accent>
-                <Panel.Section className={styles.LastTriggeredCard}>
-                  <PageLink className={styles.AlertName} to={`/alerts/details/${alert.id}`}>
-                    <strong data-id="link-alert-name">{alert.name}</strong>
-                  </PageLink>
-                  <Tag>{METRICS[alert.metric]}</Tag>
-                </Panel.Section>
-                <Panel.Section className={styles.Footer}>
-                  <DisplayDate
-                    timestamp={alert.last_triggered_timestamp}
-                    formattedDate={alert.last_triggered_formatted}
-                  />
-                </Panel.Section>
-              </Panel>
-            </Grid.Column>
-          ))}
-        </Grid>
-      </div>
-    );
-  }
-
   renderPage() {
     return (
       <>
-        <p className={styles.Description}>
-          Use alerts to be notified when important changes occur in your Health Score, bounce rates,
-          and email usage.
-        </p>
-        {this.renderRecentlyTriggered()}
-        {this.renderCollection()}
+        <AlertsPageComponent
+          alerts={this.props.alerts}
+          recentlyTriggeredAlerts={this.props.recentlyTriggeredAlerts}
+          handleDelete={this.openDeleteModal}
+        />
       </>
     );
   }
@@ -139,5 +103,67 @@ export class ListPage extends Component {
     );
   }
 }
+
+export const AlertsPageComponent = props => {
+  const [state] = useHibana();
+  const { isHibanaEnabled } = state;
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+  const CardSectionComponent = isHibanaEnabled ? Box : Panel.Section;
+
+  const { alerts, recentlyTriggeredAlerts, handleDelete } = props;
+
+  const renderRecentlyTriggered = () => {
+    if (recentlyTriggeredAlerts.length === 0) {
+      return;
+    }
+
+    return (
+      <div data-id="recent-incidents">
+        <Stack space="400">
+          <h3>Recent Incidents</h3>
+          <Grid>
+            {recentlyTriggeredAlerts.map(alert => (
+              <Grid.Column xs={12} md={6} lg={3} key={alert.id}>
+                <Panel accent>
+                  <CardSectionComponent className={styles.LastTriggeredCard} padding={'400'}>
+                    <Box height={'100px'}>
+                      <Stack>
+                        <PageLink className={styles.AlertName} to={`/alerts/details/${alert.id}`}>
+                          <strong data-id="link-alert-name">{alert.name}</strong>
+                        </PageLink>
+                        <Tag>{METRICS[alert.metric]}</Tag>
+                      </Stack>
+                    </Box>
+                  </CardSectionComponent>
+                  <CardSectionComponent className={styles.Footer} padding={'400'}>
+                    <Box height={'20px'}>
+                      <DisplayDate
+                        timestamp={alert.last_triggered_timestamp}
+                        formattedDate={alert.last_triggered_formatted}
+                      />
+                    </Box>
+                  </CardSectionComponent>
+                </Panel>
+              </Grid.Column>
+            ))}
+          </Grid>
+        </Stack>
+      </div>
+    );
+  };
+
+  return (
+    <>
+      <Box mb={'400'} maxWidth={'57%'}>
+        <p className={styles.Description}>
+          Use alerts to be notified when important changes occur in your Health Score, bounce rates,
+          and email usage.
+        </p>
+      </Box>
+      <Box mb={'400'}>{renderRecentlyTriggered()}</Box>
+      <AlertCollection alerts={alerts} handleDelete={handleDelete} />
+    </>
+  );
+};
 
 export default withAlertsList(ListPage);

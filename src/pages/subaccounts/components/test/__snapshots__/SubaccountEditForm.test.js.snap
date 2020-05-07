@@ -5,27 +5,41 @@ exports[`base case 1`] = `
   onSubmit={[MockFunction]}
 >
   <Panel.Section>
-    <NameField
-      disabled={false}
-    />
-    <StatusSelect
-      compliance={false}
-      disabled={false}
-    />
+    <Stack>
+      <Box
+        maxWidth="45rem"
+      >
+        <NameField
+          disabled={false}
+        />
+      </Box>
+      <Box
+        maxWidth="45rem"
+      >
+        <StatusSelect
+          compliance={false}
+          disabled={false}
+        />
+      </Box>
+      <Stack>
+        <RestrictToIpPoolCheckbox
+          disabled={false}
+        />
+      </Stack>
+    </Stack>
   </Panel.Section>
   <Panel.Section>
-    <RestrictToIpPoolCheckbox
-      disabled={false}
-    />
-  </Panel.Section>
-  <Panel.Section>
-    <Button
-      disabled={true}
-      primary={true}
-      submit={true}
+    <ButtonWrapper
+      marginTop="0"
     >
-      Update Subaccount
-    </Button>
+      <Button
+        disabled={true}
+        submit={true}
+        variant="primary"
+      >
+        Update Subaccount
+      </Button>
+    </ButtonWrapper>
   </Panel.Section>
 </form>
 `;
@@ -35,37 +49,47 @@ exports[`cancel button 1`] = `
   onSubmit={[MockFunction]}
 >
   <Panel.Section>
-    <NameField
-      disabled={false}
-    />
-    <StatusSelect
-      compliance={false}
-      disabled={false}
-    />
+    <Stack>
+      <Box
+        maxWidth="45rem"
+      >
+        <NameField
+          disabled={false}
+        />
+      </Box>
+      <Box
+        maxWidth="45rem"
+      >
+        <StatusSelect
+          compliance={false}
+          disabled={false}
+        />
+      </Box>
+      <Stack>
+        <RestrictToIpPoolCheckbox
+          disabled={false}
+        />
+      </Stack>
+    </Stack>
   </Panel.Section>
   <Panel.Section>
-    <RestrictToIpPoolCheckbox
-      disabled={false}
-    />
-  </Panel.Section>
-  <Panel.Section>
-    <Button
-      disabled={false}
-      primary={true}
-      submit={true}
+    <ButtonWrapper
+      marginTop="0"
     >
-      Update Subaccount
-    </Button>
-    <Button
-      disabled={false}
-      style={
-        Object {
-          "marginLeft": "1em",
-        }
-      }
-    >
-      Cancel
-    </Button>
+      <Button
+        disabled={false}
+        submit={true}
+        variant="primary"
+      >
+        Update Subaccount
+      </Button>
+      <Button
+        disabled={false}
+        variant="secondary"
+      >
+        Cancel
+      </Button>
+    </ButtonWrapper>
   </Panel.Section>
 </form>
 `;
@@ -75,22 +99,36 @@ exports[`no ip pools 1`] = `
   onSubmit={[MockFunction]}
 >
   <Panel.Section>
-    <NameField
-      disabled={false}
-    />
-    <StatusSelect
-      compliance={false}
-      disabled={false}
-    />
+    <Stack>
+      <Box
+        maxWidth="45rem"
+      >
+        <NameField
+          disabled={false}
+        />
+      </Box>
+      <Box
+        maxWidth="45rem"
+      >
+        <StatusSelect
+          compliance={false}
+          disabled={false}
+        />
+      </Box>
+    </Stack>
   </Panel.Section>
   <Panel.Section>
-    <Button
-      disabled={true}
-      primary={true}
-      submit={true}
+    <ButtonWrapper
+      marginTop="0"
     >
-      Update Subaccount
-    </Button>
+      <Button
+        disabled={true}
+        submit={true}
+        variant="primary"
+      >
+        Update Subaccount
+      </Button>
+    </ButtonWrapper>
   </Panel.Section>
 </form>
 `;
@@ -100,27 +138,41 @@ exports[`should disable all fields when compliance is true 1`] = `
   onSubmit={[MockFunction]}
 >
   <Panel.Section>
-    <NameField
-      disabled={true}
-    />
-    <StatusSelect
-      compliance={true}
-      disabled={true}
-    />
+    <Stack>
+      <Box
+        maxWidth="45rem"
+      >
+        <NameField
+          disabled={true}
+        />
+      </Box>
+      <Box
+        maxWidth="45rem"
+      >
+        <StatusSelect
+          compliance={true}
+          disabled={true}
+        />
+      </Box>
+      <Stack>
+        <RestrictToIpPoolCheckbox
+          disabled={true}
+        />
+      </Stack>
+    </Stack>
   </Panel.Section>
   <Panel.Section>
-    <RestrictToIpPoolCheckbox
-      disabled={true}
-    />
-  </Panel.Section>
-  <Panel.Section>
-    <Button
-      disabled={true}
-      primary={true}
-      submit={true}
+    <ButtonWrapper
+      marginTop="0"
     >
-      Update Subaccount
-    </Button>
+      <Button
+        disabled={true}
+        submit={true}
+        variant="primary"
+      >
+        Update Subaccount
+      </Button>
+    </ButtonWrapper>
   </Panel.Section>
 </form>
 `;
@@ -137,27 +189,41 @@ exports[`submits correctly 1`] = `
   }
 >
   <Panel.Section>
-    <NameField
-      disabled={true}
-    />
-    <StatusSelect
-      compliance={false}
-      disabled={true}
-    />
+    <Stack>
+      <Box
+        maxWidth="45rem"
+      >
+        <NameField
+          disabled={true}
+        />
+      </Box>
+      <Box
+        maxWidth="45rem"
+      >
+        <StatusSelect
+          compliance={false}
+          disabled={true}
+        />
+      </Box>
+      <Stack>
+        <RestrictToIpPoolCheckbox
+          disabled={true}
+        />
+      </Stack>
+    </Stack>
   </Panel.Section>
   <Panel.Section>
-    <RestrictToIpPoolCheckbox
-      disabled={true}
-    />
-  </Panel.Section>
-  <Panel.Section>
-    <Button
-      disabled={true}
-      primary={true}
-      submit={true}
+    <ButtonWrapper
+      marginTop="0"
     >
-      Updating...
-    </Button>
+      <Button
+        disabled={true}
+        submit={true}
+        variant="primary"
+      >
+        Updating...
+      </Button>
+    </ButtonWrapper>
   </Panel.Section>
 </form>
 `;
@@ -167,35 +233,49 @@ exports[`with an assigned ip pool 1`] = `
   onSubmit={[MockFunction]}
 >
   <Panel.Section>
-    <NameField
-      disabled={false}
-    />
-    <StatusSelect
-      compliance={false}
-      disabled={false}
-    />
+    <Stack>
+      <Box
+        maxWidth="45rem"
+      >
+        <NameField
+          disabled={false}
+        />
+      </Box>
+      <Box
+        maxWidth="45rem"
+      >
+        <StatusSelect
+          compliance={false}
+          disabled={false}
+        />
+      </Box>
+      <Stack>
+        <RestrictToIpPoolCheckbox
+          disabled={false}
+        />
+        <IpPoolSelect
+          disabled={false}
+          options={
+            Array [
+              "an array of ip pools",
+            ]
+          }
+        />
+      </Stack>
+    </Stack>
   </Panel.Section>
   <Panel.Section>
-    <RestrictToIpPoolCheckbox
-      disabled={false}
-    />
-    <IpPoolSelect
-      disabled={false}
-      options={
-        Array [
-          "an array of ip pools",
-        ]
-      }
-    />
-  </Panel.Section>
-  <Panel.Section>
-    <Button
-      disabled={true}
-      primary={true}
-      submit={true}
+    <ButtonWrapper
+      marginTop="0"
     >
-      Update Subaccount
-    </Button>
+      <Button
+        disabled={true}
+        submit={true}
+        variant="primary"
+      >
+        Update Subaccount
+      </Button>
+    </ButtonWrapper>
   </Panel.Section>
 </form>
 `;

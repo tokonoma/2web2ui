@@ -10,6 +10,7 @@ exports[`EnableTfaModal tests should render correctly 1`] = `
         "onClick": [Function],
       },
       Object {
+        "as": [Function],
         "color": "orange",
         "content": "Learn More",
         "external": true,
@@ -23,9 +24,7 @@ exports[`EnableTfaModal tests should render correctly 1`] = `
   <LabelledValue
     label="Status"
   >
-    <h6>
-      Disabled
-    </h6>
+    Disabled
   </LabelledValue>
   <BackupCodesModal
     activeCount={1}
@@ -73,9 +72,7 @@ exports[`EnableTfaModal tests should show a message about 0 codes 1`] = `
   <LabelledValue
     label="Status"
   >
-    <h6>
-      Enabled
-    </h6>
+    Enabled
   </LabelledValue>
   <LabelledValue
     label="Active Codes"
@@ -142,9 +139,7 @@ exports[`EnableTfaModal tests should toggle status text when enabled 1`] = `
   <LabelledValue
     label="Status"
   >
-    <h6>
-      Enabled
-    </h6>
+    Enabled
   </LabelledValue>
   <LabelledValue
     label="Active Codes"

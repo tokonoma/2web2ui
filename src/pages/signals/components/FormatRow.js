@@ -11,9 +11,7 @@ import styles from './FormatRow.module.scss';
 
 const getTooltipcontent = (timestamp, metrics) => (
   <>
-    <div className={styles.TooltipDate}>
-      {formatDate(timestamp)}
-    </div>
+    <div className={styles.TooltipDate}>{formatDate(timestamp)}</div>
     <div className={styles.TooltipMetrics}>
       {metrics.map(({ color, label, value }) => (
         <TooltipMetric
@@ -34,30 +32,25 @@ const formatRow = ({
   number_failed,
   number_succeeded,
   timestamp,
-  type
+  type,
 }) => [
-  <DisplayDate
-    timestamp={timestamp}
-    formattedDate={formatDateTime(timestamp)}
-  />,
+  <DisplayDate timestamp={timestamp} formattedDate={formatDateTime(timestamp)} />,
   <>
     <Status status={type} error={error_type} />
     {error_type === 'validation' && (
       <Tooltip
-        content={
-          getTooltipcontent(timestamp, [
-            { label: 'Accepted', color: '#8CCA3A', value: number_succeeded },
-            { label: 'Rejected', color: '#DB2F2D', value: number_failed },
-            { label: 'Duplicates', color: '#FA6423', value: number_duplicates }
-          ])
-        }
+        content={getTooltipcontent(timestamp, [
+          { label: 'Accepted', color: '#8CCA3A', value: number_succeeded },
+          { label: 'Rejected', color: '#DB2F2D', value: number_failed },
+          { label: 'Duplicates', color: '#FA6423', value: number_duplicates },
+        ])}
       >
         <InfoOutline className={styles.TooltipIcon} size={24} />
       </Tooltip>
     )}
   </>,
   formatFullNumber(sum(number_duplicates, number_failed, number_succeeded)),
-  batch_id
+  batch_id,
 ];
 
 export default formatRow;

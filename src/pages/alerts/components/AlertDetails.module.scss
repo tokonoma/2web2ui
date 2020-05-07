@@ -1,22 +1,20 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
-.Title{
+.Title {
   display: inline;
   position: relative;
   top: rem(8);
 }
 
-.BoldInline{
+.ValueLabel {
   display: inline;
+  font-weight: 600;
+  font-size: rem(15);
 }
 
-.Button {
-  float: right;
-  width: rem(100);
-  text-align: center;
-}
-
-.Tags, .FirstTag, .TagsWithIcon {
+.Tags,
+.FirstTag,
+.TagsWithIcon {
   margin: 0 rem(5) rem(10);
 }
 
@@ -25,9 +23,13 @@
 }
 
 .TagsWithIcon {
+  position: relative;
+  top: 2px;
+
   .Icon {
-    height: rem(20);
-    width: rem(20);
+    margin-left: 0;
+    height: rem(18);
+    width: rem(18);
   }
   .TagText {
     margin: 0 0 0 rem(5);

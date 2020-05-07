@@ -1,21 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Webhook Component: Test Tab renders correctly 1`] = `
-<Panel>
+<Fragment>
   <Panel.Section>
-    <p>
-      <Button
-        disabled={false}
-        onClick={[Function]}
-        primary={true}
-        size="small"
-      >
-        Send Test Batch
-      </Button>
-    </p>
-    <RequestBlock
-      targetURL="phoenix.co"
-      testRequest="POST /phoenix.co HTTP/1.1
+    <Stack>
+      <p>
+        The test sends the following request to this webhook's target URL (
+        phoenix.co
+        )
+      </p>
+      <CodeBlock
+        code="POST /phoenix.co HTTP/1.1
 Host: phoenix.test
 Content-Type: application/json
 X-MessageSystems-Batch-ID: 77c2b630-d712-11e4-9642-efc2723b99c1
@@ -27,14 +22,20 @@ Connection: close
     \\"msys\\": \\"sample\\"
   }
 ]"
-      testSent={false}
-    />
+        height={300}
+      />
+    </Stack>
   </Panel.Section>
-  <ResponseBlock
-    testResponse="response"
-    testSent={false}
-  />
-</Panel>
+  <Panel.Section>
+    <Button
+      disabled={false}
+      onClick={[Function]}
+      variant="primary"
+    >
+      Send Test Batch
+    </Button>
+  </Panel.Section>
+</Fragment>
 `;
 
 exports[`Webhook Component: Test Tab submit submits correctly 1`] = `

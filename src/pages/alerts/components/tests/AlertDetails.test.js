@@ -25,6 +25,7 @@ describe('Alert Details Component', () => {
     id: 'alert-id',
     subaccountIdToString: jest.fn(a => a),
     hasSubaccounts: true,
+    renderPrimaryAreaComponent: () => <div>My Primary Area</div>,
   };
 
   it('should render the alert details component correctly', () => {

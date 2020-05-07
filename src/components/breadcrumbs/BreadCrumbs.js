@@ -1,8 +1,11 @@
 import React from 'react';
 import styles from './BreadCrumbs.module.scss';
+import { Box, Text } from 'src/components/matchbox';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-export const BreadCrumbs = ({ children }) => (
+import useHibanaToggle from 'src/hooks/useHibanaToggle';
+
+export const OGBreadCrumbs = ({ children }) => (
   <div className={styles.BreadCrumbContainer}>
     {React.Children.map(children, (child, index) => (
       <>
@@ -15,7 +18,38 @@ export const BreadCrumbs = ({ children }) => (
   </div>
 );
 
-export const BreadCrumbsItem = ({ children, active, onClick }) => (
+export const HibanaBreadCrumbs = ({ children }) => (
+  <Box pr="200" pb="400">
+    {React.Children.map(children, (child, index) => (
+      <>
+        {child}{' '}
+        {index + 1 !== React.Children.count(children) && (
+          <Text as="span" fontWeight="semibold" fontSize="400" display="inline-block" mx="200">
+            >
+          </Text>
+        )}
+      </>
+    ))}
+  </Box>
+);
+
+export function BreadCrumbs(props) {
+  return useHibanaToggle(OGBreadCrumbs, HibanaBreadCrumbs)(props);
+}
+
+export const HibanaBreadCrumbsItem = ({ children, active, onClick }) => (
+  <Box
+    as="span"
+    onClick={onClick}
+    color={!active && 'blue.700'}
+    fontWeight="medium"
+    className={styles.HibanaBreadCrumbItem}
+  >
+    {children}{' '}
+  </Box>
+);
+
+export const OGBreadCrumbsItem = ({ children, active, onClick }) => (
   <span
     onClick={onClick}
     className={classNames(!active && styles.InActiveItem, styles.BreadCrumbItem)}
@@ -23,6 +57,10 @@ export const BreadCrumbsItem = ({ children, active, onClick }) => (
     {children}{' '}
   </span>
 );
+
+export function BreadCrumbsItem(props) {
+  return useHibanaToggle(OGBreadCrumbsItem, HibanaBreadCrumbsItem)(props);
+}
 
 BreadCrumbs.propTypes = {
   children: PropTypes.arrayOf(

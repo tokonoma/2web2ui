@@ -52,7 +52,7 @@ exports[`Support Form Component Form should render successfully created ticket m
     Please check your email for updates on your support ticket.
   </p>
   <Button
-    primary={true}
+    variant="primary"
   >
     Continue
   </Button>
@@ -103,12 +103,22 @@ exports[`Support Form Component Form should render support form 1`] = `
     </Stack>
   </Panel.Section>
   <Panel.Section>
-    <Button
-      submit={true}
-      variant="primary"
+    <ButtonWrapper
+      marginTop="0"
     >
-      Submit Ticket
-    </Button>
+      <Button
+        submit={true}
+        variant="primary"
+      >
+        Submit Ticket
+      </Button>
+      <Button
+        onClick={[Function]}
+        variant="secondary"
+      >
+        Cancel
+      </Button>
+    </ButtonWrapper>
   </Panel.Section>
 </form>
 `;
@@ -159,12 +169,22 @@ exports[`Support Form Component Form should render with selected issue message l
     </Stack>
   </Panel.Section>
   <Panel.Section>
-    <Button
-      submit={true}
-      variant="primary"
+    <ButtonWrapper
+      marginTop="0"
     >
-      Submit Ticket
-    </Button>
+      <Button
+        submit={true}
+        variant="primary"
+      >
+        Submit Ticket
+      </Button>
+      <Button
+        onClick={[Function]}
+        variant="secondary"
+      >
+        Cancel
+      </Button>
+    </ButtonWrapper>
   </Panel.Section>
 </form>
 `;

@@ -50,31 +50,32 @@ exports[`should render AuthDropDown 1`] = `
 exports[`should render BasicAuthFields 1`] = `
 <FieldSet
   legend="Basic Auth"
+  legendHidden={true}
 >
-  <Field
-    component={[Function]}
-    disabled={false}
-    label="Username"
-    name="basicUser"
-    placeholder="username"
-    validate={[Function]}
-  />
-  <Field
-    component={[Function]}
-    disabled={false}
-    label="Password"
-    name="basicPass"
-    placeholder="password"
-    type="password"
-    validate={[Function]}
-  />
+  <Stack>
+    <Field
+      component={[Function]}
+      disabled={false}
+      label="Username"
+      name="basicUser"
+      validate={[Function]}
+    />
+    <Field
+      component={[Function]}
+      disabled={false}
+      label="Password"
+      name="basicPass"
+      type="password"
+      validate={[Function]}
+    />
+  </Stack>
 </FieldSet>
 `;
 
 exports[`should render EventsRadioGroup 1`] = `
 <Field
   component={[Function]}
-  label="Events:"
+  label="Events"
   name="eventsRadio"
   options={
     Array [
@@ -100,7 +101,6 @@ exports[`should render NameField 1`] = `
   helpText="A friendly label for your webhook, only used for display"
   label="Webhook Name"
   name="name"
-  placeholder="e.g. My Opens and Clicks Webhook"
   validate={
     Array [
       [Function],
@@ -113,31 +113,31 @@ exports[`should render NameField 1`] = `
 exports[`should render OAuth2Fields 1`] = `
 <FieldSet
   legend="OAuth 2.0"
+  legendHidden={true}
 >
-  <Field
-    component={[Function]}
-    disabled={false}
-    label="Client ID"
-    name="clientId"
-    placeholder="clientID"
-    validate={[Function]}
-  />
-  <Field
-    component={[Function]}
-    disabled={false}
-    label="Client Secret"
-    name="clientSecret"
-    placeholder="clientSecret"
-    validate={[Function]}
-  />
-  <Field
-    component={[Function]}
-    disabled={false}
-    label="Token URL"
-    name="tokenURL"
-    placeholder="https://www.example.com/tokens/"
-    validate={[Function]}
-  />
+  <Stack>
+    <Field
+      component={[Function]}
+      disabled={false}
+      label="Client ID"
+      name="clientId"
+      validate={[Function]}
+    />
+    <Field
+      component={[Function]}
+      disabled={false}
+      label="Client Secret"
+      name="clientSecret"
+      validate={[Function]}
+    />
+    <Field
+      component={[Function]}
+      disabled={false}
+      label="Token URL"
+      name="tokenURL"
+      validate={[Function]}
+    />
+  </Stack>
 </FieldSet>
 `;
 
@@ -145,11 +145,9 @@ exports[`should render TargetField 1`] = `
 <Field
   component={[Function]}
   disabled={false}
-  helpText="This is the URL we'll send data to. We recommend the use of https."
-  label="Target"
+  label="Target URL"
   name="target"
   normalize={[Function]}
-  placeholder="https://example.com/webhook-target"
   validate={
     Array [
       [Function],

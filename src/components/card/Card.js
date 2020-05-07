@@ -46,7 +46,7 @@ const HibanaCardTitle = ({ children, level }) => {
   return (
     <Text
       as="div"
-      mb="100"
+      mb="400"
       color="gray.900"
       role="heading"
       aria-level={level}

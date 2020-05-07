@@ -55,13 +55,18 @@ describe('The alerts details pages', () => {
   it('renders with a link to the edit alert page', () => {
     cy.visit(PAGE_URL);
 
-    cy.findByText('Edit').should('have.attr', 'href', '/alerts/edit/2');
+    cy.findByText(/Edit.*/).should('have.attr', 'href', '/alerts/edit/2');
   });
 
   it('renders with a link back to the alerts list page', () => {
     cy.visit(PAGE_URL);
+    cy.get('a[href*="/alerts"]').should('be.visible');
 
-    cy.findByText('Back to Alerts').should('have.attr', 'href', '/alerts');
+    cy.get('main').within(() => {
+      cy.get('a[href*="/alerts"]').within(() => {
+        cy.findByText('Back to Alerts').should('be.visible');
+      });
+    });
   });
 
   describe('the duplicate and delete buttons', () => {
@@ -108,6 +113,11 @@ describe('The alerts details pages', () => {
       cy.findByText('Delete').click();
       cy.withinModal(() => {
         cy.findByText('Delete').click();
+      });
+
+      //Needed to fix visibility issue with Hibana Cypress test
+      cy.withinModal(() => {
+        cy.findByText('Cancel').click();
       });
 
       cy.findByText('Something went wrong.').should('be.visible');

@@ -349,9 +349,7 @@ exports[`Component: Collection should use custom render function when child is a
   </div>
   <div
     key="heading"
-  >
-    <h3 />
-  </div>
+  />
   <div
     key="pagination"
   />

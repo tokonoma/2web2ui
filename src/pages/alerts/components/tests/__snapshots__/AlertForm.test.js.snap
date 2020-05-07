@@ -1,203 +1,218 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Alert Form Component should render the alert form component correctly 1`] = `
-<Form
-  onSubmit={[MockFunction]}
->
-  <Panel
-    className="Form"
+<Fragment>
+  <Form
+    onSubmit={[MockFunction]}
   >
-    <Grid>
-      <Grid.Column
-        lg={9}
-        md={11}
-        sm={12}
-      >
-        <Panel.Section>
-          <label
-            htmlFor="name"
-          >
-            Alert Name
-          </label>
-          <Field
-            component={[Function]}
-            disabled={false}
-            name="name"
-            validate={
-              Array [
-                [Function],
-                [Function],
-              ]
-            }
-          />
-          <div
-            className="MetricSelector"
-          >
-            <label>
-              Alert Metric
-            </label>
-            <Field
-              component={[Function]}
-              disabled={false}
-              name="metric"
-              onChange={[Function]}
-              options={
-                Array [
-                  Object {
-                    "disabled": true,
-                    "label": "Select Metric",
-                    "value": "",
-                  },
-                  Object {
-                    "label": "Monthly Sending Limit",
-                    "value": "monthly_sending_limit",
-                  },
-                  Object {
-                    "label": "Health Score",
-                    "value": "health_score",
-                  },
-                  Object {
-                    "label": "Block Bounce Rate",
-                    "value": "block_bounce_rate",
-                  },
-                  Object {
-                    "label": "Hard Bounce Rate",
-                    "value": "hard_bounce_rate",
-                  },
-                  Object {
-                    "label": "Soft Bounce Rate",
-                    "value": "soft_bounce_rate",
-                  },
-                  Object {
-                    "label": "Blacklists",
-                    "value": "blacklist",
-                  },
-                ]
-              }
-              validate={[Function]}
-            />
-          </div>
-          <div
-            className="Evaluator"
-          >
-            <Connect(EvaluatorFields)
-              disabled={false}
-              isNewAlert={true}
-              key="health_score"
-              shouldUpdateRecommendation={true}
-            />
-          </div>
-          <div
-            className="Filters"
-            data-id="alert-filters"
-          >
-            <label>
-              <h5>
-                Filtered by
-                 
-                <small
-                  className="OptionalText"
-                >
-                  Add up to 10 filters to your alert.
-                </small>
-              </h5>
-            </label>
-            <Connect(SubaccountsField)
-              disabled={false}
-            />
-            <Connect(FilterFields)
-              disabled={false}
-            />
-          </div>
-          <div
-            className="Notifications"
-          >
-            <label>
-               Notify Me
-            </label>
-            <Expandable
-              icon={<EmailIcon />}
-              id="emails"
-              key="emails"
-              my="300"
-              subtitle="Receive notifications through email. One address per line. Up to 10 addresses."
-              title="Emails"
+    <Panel>
+      <Grid>
+        <Grid.Column
+          lg={9}
+          md={11}
+          sm={12}
+        >
+          <Panel.Section>
+            <Box
+              maxWidth="699px"
             >
+              <label
+                htmlFor="name"
+              >
+                Alert Name
+              </label>
               <Field
                 component={[Function]}
                 disabled={false}
-                multiline={true}
-                name="emails"
-                placeholder="example@email.com"
+                name="name"
                 validate={
                   Array [
-                    [Function],
                     [Function],
                     [Function],
                   ]
                 }
               />
-            </Expandable>
-            <Expandable
-              icon={<SlackIcon />}
-              id="slack"
-              key="slack"
-              my="300"
-              subtitle={
-                <React.Fragment>
-                  Integrate this alert with Slack. 
-                  <ExternalLink
-                    to="https://api.slack.com/incoming-webhooks"
-                  >
-                    How to create a Slack Incoming webhook
-                  </ExternalLink>
-                </React.Fragment>
-              }
-              title="Slack"
-            >
-              <Field
-                component={[Function]}
-                disabled={false}
-                name="slack"
-                placeholder="https://hooks.slack.com/services/T00/B00/XX "
+              <Box
+                marginTop="300"
               />
-            </Expandable>
-            <Expandable
-              icon={<WebhookIcon />}
-              id="webhook"
-              key="webhook"
-              my="300"
-              subtitle={
-                <React.Fragment>
-                  Create a webhook for this alert. 
-                  <ExternalLink
-                    to="https://www.sparkpost.com/docs/user-guide/alerts/#webhook-payload-sample"
-                  >
-                    Sample payload
-                  </ExternalLink>
-                </React.Fragment>
-              }
-              title="Webhook"
+              <div
+                className="MetricSelector"
+              >
+                <label>
+                  Alert Metric
+                </label>
+                <Field
+                  component={[Function]}
+                  disabled={false}
+                  name="metric"
+                  onChange={[Function]}
+                  options={
+                    Array [
+                      Object {
+                        "disabled": true,
+                        "label": "Select Metric",
+                        "value": "",
+                      },
+                      Object {
+                        "label": "Monthly Sending Limit",
+                        "value": "monthly_sending_limit",
+                      },
+                      Object {
+                        "label": "Health Score",
+                        "value": "health_score",
+                      },
+                      Object {
+                        "label": "Block Bounce Rate",
+                        "value": "block_bounce_rate",
+                      },
+                      Object {
+                        "label": "Hard Bounce Rate",
+                        "value": "hard_bounce_rate",
+                      },
+                      Object {
+                        "label": "Soft Bounce Rate",
+                        "value": "soft_bounce_rate",
+                      },
+                      Object {
+                        "label": "Blacklists",
+                        "value": "blacklist",
+                      },
+                    ]
+                  }
+                  validate={[Function]}
+                />
+              </div>
+            </Box>
+            <div
+              className="Evaluator"
             >
-              <Field
-                component={[Function]}
+              <Connect(EvaluatorFields)
                 disabled={false}
-                name="webhook"
-                placeholder="https://example.com/webhook-target"
+                isNewAlert={true}
+                key="health_score"
+                shouldUpdateRecommendation={true}
               />
-            </Expandable>
-          </div>
-          <Button
-            className="SubmitButton"
-            disabled={true}
-            primary={true}
-            submit={true}
-          >
-            Create Alert
-          </Button>
-        </Panel.Section>
-      </Grid.Column>
-    </Grid>
-  </Panel>
-</Form>
+            </div>
+            <div
+              className="Filters"
+              data-id="alert-filters"
+            >
+              <Stack
+                space="500"
+              >
+                <label>
+                  <h4>
+                    Filtered by
+                     
+                    <small
+                      className="OptionalText"
+                    >
+                      Add up to 10 filters to your alert.
+                    </small>
+                  </h4>
+                </label>
+                <Connect(SubaccountsField)
+                  disabled={false}
+                />
+                <Connect(FilterFields)
+                  disabled={false}
+                />
+              </Stack>
+            </div>
+            <div
+              className="Notifications"
+            >
+              <label>
+                 Notify Me
+              </label>
+              <Stack
+                space="100"
+              >
+                <Expandable
+                  icon={<EmailIcon />}
+                  id="emails"
+                  key="emails"
+                  my="300"
+                  subtitle="Receive notifications through email. One address per line. Up to 10 addresses."
+                  title="Emails"
+                >
+                  <Field
+                    component={[Function]}
+                    disabled={false}
+                    multiline={true}
+                    name="emails"
+                    placeholder="example@email.com"
+                    validate={
+                      Array [
+                        [Function],
+                        [Function],
+                        [Function],
+                      ]
+                    }
+                  />
+                </Expandable>
+                <Expandable
+                  icon={<SlackIcon />}
+                  id="slack"
+                  key="slack"
+                  my="300"
+                  subtitle={
+                    <React.Fragment>
+                      Integrate this alert with Slack. 
+                      <ExternalLink
+                        to="https://api.slack.com/incoming-webhooks"
+                      >
+                        How to create a Slack Incoming webhook
+                      </ExternalLink>
+                    </React.Fragment>
+                  }
+                  title="Slack"
+                >
+                  <Field
+                    component={[Function]}
+                    disabled={false}
+                    name="slack"
+                    placeholder="https://hooks.slack.com/services/T00/B00/XX "
+                  />
+                </Expandable>
+                <Expandable
+                  icon={<WebhookIcon />}
+                  id="webhook"
+                  key="webhook"
+                  my="300"
+                  subtitle={
+                    <React.Fragment>
+                      Create a webhook for this alert. 
+                      <ExternalLink
+                        to="https://www.sparkpost.com/docs/user-guide/alerts/#webhook-payload-sample"
+                      >
+                        Sample payload
+                      </ExternalLink>
+                    </React.Fragment>
+                  }
+                  title="Webhook"
+                >
+                  <Field
+                    component={[Function]}
+                    disabled={false}
+                    name="webhook"
+                    placeholder="https://example.com/webhook-target"
+                  />
+                </Expandable>
+              </Stack>
+            </div>
+            <Button
+              className="SubmitButton"
+              disabled={true}
+              submit={true}
+              variant="primary"
+            >
+              Create Alert
+            </Button>
+          </Panel.Section>
+        </Grid.Column>
+      </Grid>
+    </Panel>
+  </Form>
+</Fragment>
 `;

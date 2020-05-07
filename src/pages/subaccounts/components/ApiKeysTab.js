@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { TableCollection } from 'src/components';
+import { TableCollection, Loading } from 'src/components';
 import { PageLink } from 'src/components/links';
-import { Button, Panel } from 'src/components/matchbox';
+import { Button, Box, Panel, Stack } from 'src/components/matchbox';
 import { filterBoxConfig } from 'src/pages/api-keys/tableConfig';
 import { getSubaccountApiKeys } from 'src/selectors/api-keys';
-import PanelLoading from 'src/components/panelLoading/PanelLoading';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 
 const columns = [
@@ -21,13 +20,17 @@ export class ApiKeysTab extends Component {
         <Panel.Section>
           <p>API Keys assigned to this subaccount.</p>
         </Panel.Section>
-        <TableCollection
-          columns={columns}
-          getRowData={this.getRowData}
-          pagination={true}
-          rows={keys}
-          filterBox={filterBoxConfig}
-        />
+
+        {/* TODO: Box is only used here to control Hibana rendering - can just be Panel.Section when OG theme is removed */}
+        <Box as={Panel.Section}>
+          <TableCollection
+            columns={columns}
+            getRowData={this.getRowData}
+            pagination={true}
+            rows={keys}
+            filterBox={filterBoxConfig}
+          />
+        </Box>
       </div>
     );
   }
@@ -35,7 +38,7 @@ export class ApiKeysTab extends Component {
   getRowData = ({ id, label, short_key }) => {
     const subaccountId = this.props.id;
 
-    //unlike api keys page, no need to check if user can edit as that logic checks if subaccount_id exists which is always true here
+    // unlike api keys page, no need to check if user can edit as that logic checks if subaccount_id exists which is always true here
     return [
       <PageLink to={`/account/api-keys/edit/${id}${setSubaccountQuery(subaccountId)}`}>
         {label}
@@ -47,13 +50,18 @@ export class ApiKeysTab extends Component {
   renderEmpty() {
     return (
       <Panel.Section style={{ textAlign: 'center' }}>
-        <p>
-          This subaccount has no API Keys assigned to it. You can assign an existing one, or create
-          a new one.
-        </p>
-        <PageLink as={Button} color="orange" plain to="/account/api-keys">
-          Manage API Keys
-        </PageLink>
+        <Stack>
+          <p>
+            This subaccount has no API Keys assigned to it. You can assign an existing one, or
+            create a new one.
+          </p>
+
+          <div>
+            <PageLink as={Button} color="orange" plain to="/account/api-keys">
+              Manage API Keys
+            </PageLink>
+          </div>
+        </Stack>
       </Panel.Section>
     );
   }
@@ -62,13 +70,13 @@ export class ApiKeysTab extends Component {
     const { loading } = this.props;
 
     if (loading) {
-      return <PanelLoading />;
+      return <Loading minHeight="300px" />;
     }
 
     const { keys } = this.props;
     const showEmpty = keys.length === 0;
 
-    return <Panel>{showEmpty ? this.renderEmpty() : this.renderCollection(keys)}</Panel>;
+    return <>{showEmpty ? this.renderEmpty() : this.renderCollection(keys)}</>;
   }
 }
 

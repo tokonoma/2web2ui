@@ -34,7 +34,7 @@ exports[`UploadForm tests should disable fields when submitting 1`] = `
         }
       />
       <Box
-        maxWidth="860px"
+        maxWidth="1200"
       >
         <Field
           component={[Function]}
@@ -91,7 +91,7 @@ exports[`UploadForm tests should render upload form 1`] = `
         }
       />
       <Box
-        maxWidth="860px"
+        maxWidth="1200"
       >
         <Field
           component={[Function]}

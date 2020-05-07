@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 import { Delete, ContentCopy } from '@sparkpost/matchbox-icons';
 import { DeleteModal, Loading } from 'src/components';
 import { PageLink } from 'src/components/links';
-import { Button, Page } from 'src/components/matchbox';
+import { Box, Button, Page } from 'src/components/matchbox';
 import withAlert from './containers/DetailsPage.container';
 import { AlertDetails } from './components/AlertDetails';
 import AlertIncidents from './components/AlertIncidents';
 import RedirectAndAlert from 'src/components/globalAlert/RedirectAndAlert';
+import { useHibana } from 'src/context/HibanaContext';
 import styles from './DetailsPage.module.scss';
 import _ from 'lodash';
 
-export class DetailsPage extends Component {
+export class DetailsPageComponent extends Component {
   state = {
     isDeleteModalOpen: false,
   };
@@ -55,8 +56,56 @@ export class DetailsPage extends Component {
     return `${matchedSubaccount.name} (${matchedSubaccount.id})`;
   };
 
+  DuplicateDeleteAction = () => {
+    const { isHibanaEnabled, id } = this.props;
+    return (
+      <>
+        <Box textAlign={'right'} position={'relative'} bottom="28px">
+          <PageLink as={Button} flat to={`/alerts/create/${id}`}>
+            {!isHibanaEnabled && <ContentCopy className={styles.Icon} />}
+            Duplicate
+            {isHibanaEnabled && (
+              <Box marginLeft="200">
+                <ContentCopy />
+              </Box>
+            )}
+          </PageLink>
+          <Button flat onClick={this.openDeleteModal}>
+            {!isHibanaEnabled && <Delete className={styles.Icon} />}
+            Delete
+            {isHibanaEnabled && (
+              <Box marginLeft="200">
+                <Delete />
+              </Box>
+            )}
+          </Button>
+        </Box>
+      </>
+    );
+  };
+
+  EditAction = () => (
+    <PageLink
+      as={Button}
+      to={`/alerts/edit/${this.props.id}`}
+      variant={'primary'}
+      className={styles.Actions}
+    >
+      Edit Alert
+    </PageLink>
+  );
+
   render() {
-    const { loading, deletePending, alert = {}, error, id, hasSubaccounts, incidents } = this.props;
+    const {
+      loading,
+      deletePending,
+      alert = {},
+      error,
+      id,
+      hasSubaccounts,
+      incidents,
+      isHibanaEnabled,
+    } = this.props;
     const { isDeleteModalOpen } = this.state;
     const { name } = alert;
 
@@ -68,22 +117,17 @@ export class DetailsPage extends Component {
       return <RedirectAndAlert to="/alerts" alert={{ type: 'error', message: error.message }} />;
     }
 
+    const renderPagePrimaryArea = isHibanaEnabled ? this.EditAction : this.DuplicateDeleteAction;
+
+    const renderComponentPrimaryArea = isHibanaEnabled
+      ? this.DuplicateDeleteAction
+      : this.EditAction;
+
     return (
       <Page
         title={name || 'Alert'}
         breadcrumbAction={{ content: 'Back to Alerts', to: '/alerts', component: PageLink }}
-        primaryArea={
-          <>
-            <PageLink as={Button} flat to={`/alerts/create/${id}`}>
-              <ContentCopy className={styles.Icon} />
-              Duplicate
-            </PageLink>
-            <Button flat onClick={this.openDeleteModal}>
-              <Delete className={styles.Icon} />
-              Delete
-            </Button>
-          </>
-        }
+        primaryArea={renderPagePrimaryArea()}
       >
         {!_.isEmpty(alert) && (
           <AlertDetails
@@ -91,6 +135,7 @@ export class DetailsPage extends Component {
             id={id}
             subaccountIdToString={this.subaccountIdToString}
             hasSubaccounts={hasSubaccounts}
+            renderPrimaryAreaComponent={renderComponentPrimaryArea}
           />
         )}
         {alert.metric !== 'blacklist' && (
@@ -118,4 +163,9 @@ export class DetailsPage extends Component {
   }
 }
 
+const DetailsPage = props => {
+  const [state] = useHibana();
+  const { isHibanaEnabled } = state;
+  return <DetailsPageComponent isHibanaEnabled={isHibanaEnabled} {...props} />;
+};
 export default withAlert(DetailsPage);

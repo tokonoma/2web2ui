@@ -1,6 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import AlertCollection from '../AlertCollection';
+import styles from '../AlertCollection.module.scss';
+import { AlertCollectionComponent as AlertCollection } from '../AlertCollection';
 
 describe('TestCollection Component', () => {
   const props = {
@@ -12,7 +13,7 @@ describe('TestCollection Component', () => {
         metric: 'monthly_sending_limit',
         last_triggered: null,
         last_triggered_formatted: null,
-        last_triggered_timestamp: 0
+        last_triggered_timestamp: 0,
       },
       {
         id: 'id-2',
@@ -21,7 +22,7 @@ describe('TestCollection Component', () => {
         metric: 'monthly_sending_limit',
         last_triggered: '2019-06-05T14:48:00.000Z',
         last_triggered_formatted: 'Jun 5 2019, 10:48am',
-        last_triggered_timestamp: 1559746080000
+        last_triggered_timestamp: 1559746080000,
       },
       {
         id: 'id-3',
@@ -30,10 +31,12 @@ describe('TestCollection Component', () => {
         metric: 'health_score',
         last_triggered: '2019-06-015T14:48:00.000Z',
         last_triggered_formatted: 'Jun 15 2019, 10:48am',
-        last_triggered_timestamp: 1560610080000
-      }
+        last_triggered_timestamp: 1560610080000,
+      },
     ],
-    handleDelete: jest.fn()
+    filterBoxConfig: {},
+    handleDelete: jest.fn(),
+    styles,
   };
 
   let wrapper;
@@ -47,14 +50,18 @@ describe('TestCollection Component', () => {
   });
 
   it('should render row data properly', () => {
-    props.alerts.forEach((alert) => {
+    props.alerts.forEach(alert => {
       const row = wrapper.instance().getRowData(alert);
       expect(row).toMatchSnapshot();
     });
   });
 
   it('should handleDelete', () => {
-    const Component = () => wrapper.instance().getRowData(props.alerts[0]).pop();
+    const Component = () =>
+      wrapper
+        .instance()
+        .getRowData(props.alerts[0])
+        .pop();
     const actionCol = shallow(<Component />);
     actionCol.find('Button').simulate('click');
     expect(props.handleDelete).toHaveBeenCalledWith({ id: 'id-1', name: 'my alert 1' });

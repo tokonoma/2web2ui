@@ -6,7 +6,7 @@ import styles from '../CookieConsent.module.scss';
 export const ConsentBar = ({ onDismiss }) => (
   <div className={styles.CookieConsent}>
     <div className={styles.ConsentBar}>
-      <Snackbar maxWidth={700} onDismiss={onDismiss} status="default">
+      <Snackbar maxWidth={1200} onDismiss={onDismiss} status="default">
         <span>
           We use cookies to optimize your experience, analyze traffic, and personalize content. To
           learn more, please visit our

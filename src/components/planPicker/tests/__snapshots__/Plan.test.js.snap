@@ -1,58 +1,52 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Plan: renders correctly 1`] = `
-<a>
-  <PlanPrice
-    className="MainLabel"
-    plan={
-      Object {
-        "monthly": 100,
-        "overage": 0.9,
-        "volume": 200,
-      }
+<PlanPrice
+  className="Plan"
+  plan={
+    Object {
+      "monthly": 100,
+      "overage": 0.9,
+      "volume": 200,
     }
-    showCsm={true}
-    showIp={true}
-    showOverage={true}
-  />
-</a>
+  }
+  showCsm={true}
+  showIp={true}
+  showOverage={true}
+/>
 `;
 
 exports[`Plan: renders free and ip correctly 1`] = `
-<a>
-  <PlanPrice
-    className="MainLabel"
-    plan={
-      Object {
-        "includesIp": true,
-        "isFree": true,
-        "monthly": 0,
-        "overage": 0.8,
-        "volume": 300,
-      }
+<PlanPrice
+  className="Plan"
+  plan={
+    Object {
+      "includesIp": true,
+      "isFree": true,
+      "monthly": 0,
+      "overage": 0.8,
+      "volume": 300,
     }
-    showCsm={true}
-    showIp={true}
-    showOverage={true}
-  />
-</a>
+  }
+  showCsm={true}
+  showIp={true}
+  showOverage={true}
+/>
 `;
 
 exports[`Plan: renders hourly plan correctly 1`] = `
-<a>
-  <PlanPrice
-    className="MainLabel"
-    plan={
-      Object {
-        "hourly": 0.22,
-        "includesIp": true,
-        "overage": 0.8,
-        "volume": 300,
-      }
+<PlanPrice
+  className="Plan"
+  plan={
+    Object {
+      "hourly": 0.22,
+      "includesIp": true,
+      "overage": 0.8,
+      "volume": 300,
     }
-    showCsm={true}
-    showIp={true}
-    showOverage={true}
-  />
-</a>
+  }
+  showCsm={true}
+  showIp={true}
+  showOverage={true}
+/>
 `;

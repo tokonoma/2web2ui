@@ -1,5 +1,11 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
 .Icon {
-  margin: 0 rem(3) rem(5);
+  margin: 0 3px 5px;
+}
+
+.Actions {
+  float: right;
+  width: 100px;
+  text-align: center;
 }

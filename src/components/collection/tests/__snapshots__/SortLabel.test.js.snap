@@ -24,10 +24,9 @@ exports[`Collection SortLabel Component should render correctly 1`] = `
 `;
 
 exports[`Collection SortLabel Component should render correctly 2`] = `
-<Button
+<button
   anotherprop="anotherProp"
   className="SortLabel selected"
-  flat={true}
 >
   <Text
     as="span"
@@ -40,8 +39,10 @@ exports[`Collection SortLabel Component should render correctly 2`] = `
     <div
       className="Up"
     >
-      <ArrowDropUp />
+      <ArrowDropUp
+        size={22}
+      />
     </div>
   </Box>
-</Button>
+</button>
 `;

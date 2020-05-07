@@ -5,29 +5,44 @@ exports[`api key form 1`] = `
   onSubmit={[MockFunction]}
 >
   <Panel.Section>
-    <NameField />
+    <Stack>
+      <Box
+        maxWidth="45rem"
+      >
+        <NameField />
+      </Box>
+      <ApiKeyCheckBox
+        createApiKey={true}
+      />
+      <ApiKeyFields
+        grants={
+          Array [
+            "subaccount grants",
+          ]
+        }
+        show={true}
+        showGrants={false}
+      />
+    </Stack>
   </Panel.Section>
   <Panel.Section>
-    <ApiKeyCheckBox
-      createApiKey={true}
-    />
-    <ApiKeyFields
-      grants={
-        Array [
-          "subaccount grants",
-        ]
-      }
-      show={true}
-      showGrants={false}
-    />
-  </Panel.Section>
-  <Panel.Section>
-    <Button
-      primary={true}
-      submit={true}
+    <ButtonWrapper
+      marginTop="0"
     >
-      Create Subaccount
-    </Button>
+      <Button
+        submit={true}
+        variant="primary"
+      >
+        Create Subaccount
+      </Button>
+      <PageLink
+        as={[Function]}
+        to="/account/subaccounts"
+        variant="secondary"
+      >
+        Cancel
+      </PageLink>
+    </ButtonWrapper>
   </Panel.Section>
 </form>
 `;
@@ -37,29 +52,44 @@ exports[`base case 1`] = `
   onSubmit={[MockFunction]}
 >
   <Panel.Section>
-    <NameField />
+    <Stack>
+      <Box
+        maxWidth="45rem"
+      >
+        <NameField />
+      </Box>
+      <ApiKeyCheckBox
+        createApiKey={false}
+      />
+      <ApiKeyFields
+        grants={
+          Array [
+            "subaccount grants",
+          ]
+        }
+        show={false}
+        showGrants={false}
+      />
+    </Stack>
   </Panel.Section>
   <Panel.Section>
-    <ApiKeyCheckBox
-      createApiKey={false}
-    />
-    <ApiKeyFields
-      grants={
-        Array [
-          "subaccount grants",
-        ]
-      }
-      show={false}
-      showGrants={false}
-    />
-  </Panel.Section>
-  <Panel.Section>
-    <Button
-      primary={true}
-      submit={true}
+    <ButtonWrapper
+      marginTop="0"
     >
-      Create Subaccount
-    </Button>
+      <Button
+        submit={true}
+        variant="primary"
+      >
+        Create Subaccount
+      </Button>
+      <PageLink
+        as={[Function]}
+        to="/account/subaccounts"
+        variant="secondary"
+      >
+        Cancel
+      </PageLink>
+    </ButtonWrapper>
   </Panel.Section>
 </form>
 `;
@@ -69,32 +99,47 @@ exports[`has ip pools 1`] = `
   onSubmit={[MockFunction]}
 >
   <Panel.Section>
-    <NameField />
+    <Stack>
+      <Box
+        maxWidth="45rem"
+      >
+        <NameField />
+      </Box>
+      <ApiKeyCheckBox
+        createApiKey={false}
+      />
+      <ApiKeyFields
+        grants={
+          Array [
+            "subaccount grants",
+          ]
+        }
+        show={false}
+        showGrants={false}
+      />
+      <Stack>
+        <RestrictToIpPoolCheckbox />
+      </Stack>
+    </Stack>
   </Panel.Section>
   <Panel.Section>
-    <ApiKeyCheckBox
-      createApiKey={false}
-    />
-    <ApiKeyFields
-      grants={
-        Array [
-          "subaccount grants",
-        ]
-      }
-      show={false}
-      showGrants={false}
-    />
-  </Panel.Section>
-  <Panel.Section>
-    <RestrictToIpPoolCheckbox />
-  </Panel.Section>
-  <Panel.Section>
-    <Button
-      primary={true}
-      submit={true}
+    <ButtonWrapper
+      marginTop="0"
     >
-      Create Subaccount
-    </Button>
+      <Button
+        submit={true}
+        variant="primary"
+      >
+        Create Subaccount
+      </Button>
+      <PageLink
+        as={[Function]}
+        to="/account/subaccounts"
+        variant="secondary"
+      >
+        Cancel
+      </PageLink>
+    </ButtonWrapper>
   </Panel.Section>
 </form>
 `;
@@ -104,39 +149,54 @@ exports[`has ip pools and checked checkbox 1`] = `
   onSubmit={[MockFunction]}
 >
   <Panel.Section>
-    <NameField />
+    <Stack>
+      <Box
+        maxWidth="45rem"
+      >
+        <NameField />
+      </Box>
+      <ApiKeyCheckBox
+        createApiKey={false}
+      />
+      <ApiKeyFields
+        grants={
+          Array [
+            "subaccount grants",
+          ]
+        }
+        show={false}
+        showGrants={false}
+      />
+      <Stack>
+        <RestrictToIpPoolCheckbox />
+        <IpPoolSelect
+          options={
+            Array [
+              "salt water",
+            ]
+          }
+        />
+      </Stack>
+    </Stack>
   </Panel.Section>
   <Panel.Section>
-    <ApiKeyCheckBox
-      createApiKey={false}
-    />
-    <ApiKeyFields
-      grants={
-        Array [
-          "subaccount grants",
-        ]
-      }
-      show={false}
-      showGrants={false}
-    />
-  </Panel.Section>
-  <Panel.Section>
-    <RestrictToIpPoolCheckbox />
-    <IpPoolSelect
-      options={
-        Array [
-          "salt water",
-        ]
-      }
-    />
-  </Panel.Section>
-  <Panel.Section>
-    <Button
-      primary={true}
-      submit={true}
+    <ButtonWrapper
+      marginTop="0"
     >
-      Create Subaccount
-    </Button>
+      <Button
+        submit={true}
+        variant="primary"
+      >
+        Create Subaccount
+      </Button>
+      <PageLink
+        as={[Function]}
+        to="/account/subaccounts"
+        variant="secondary"
+      >
+        Cancel
+      </PageLink>
+    </ButtonWrapper>
   </Panel.Section>
 </form>
 `;
@@ -153,34 +213,50 @@ exports[`submits correctly 1`] = `
   }
 >
   <Panel.Section>
-    <NameField
-      disabled={true}
-    />
+    <Stack>
+      <Box
+        maxWidth="45rem"
+      >
+        <NameField
+          disabled={true}
+        />
+      </Box>
+      <ApiKeyCheckBox
+        createApiKey={false}
+        disabled={true}
+      />
+      <ApiKeyFields
+        grants={
+          Array [
+            "subaccount grants",
+          ]
+        }
+        show={false}
+        showGrants={false}
+        submitting={true}
+      />
+    </Stack>
   </Panel.Section>
   <Panel.Section>
-    <ApiKeyCheckBox
-      createApiKey={false}
-      disabled={true}
-    />
-    <ApiKeyFields
-      grants={
-        Array [
-          "subaccount grants",
-        ]
-      }
-      show={false}
-      showGrants={false}
-      submitting={true}
-    />
-  </Panel.Section>
-  <Panel.Section>
-    <Button
-      disabled={true}
-      primary={true}
-      submit={true}
+    <ButtonWrapper
+      marginTop="0"
     >
-      Loading...
-    </Button>
+      <Button
+        disabled={true}
+        submit={true}
+        variant="primary"
+      >
+        Loading...
+      </Button>
+      <PageLink
+        as={[Function]}
+        disabled={true}
+        to="/account/subaccounts"
+        variant="secondary"
+      >
+        Cancel
+      </PageLink>
+    </ButtonWrapper>
   </Panel.Section>
 </form>
 `;

@@ -3,7 +3,7 @@
 .EngagementSummary {
   padding: rem(30);
 
-  h1 {
+  h3 {
     @include text-style-display-heading;
     font-size: rem(36);
     margin-bottom: 0;

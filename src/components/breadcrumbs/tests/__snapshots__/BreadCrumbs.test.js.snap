@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BreadCrumbs should match snapshots 1`] = `
+<div
+  className="BreadCrumbContainer"
+>
+  <OGBreadCrumbsItem
+    active={false}
+    onClick={[MockFunction]}
+  >
+    A
+  </OGBreadCrumbsItem>
+   
+  <div
+    className="Arrow"
+  >
+     &gt; 
+  </div>
+  <OGBreadCrumbsItem
+    active={false}
+    onClick={[MockFunction]}
+  >
+    B
+  </OGBreadCrumbsItem>
+   
+  <div
+    className="Arrow"
+  >
+     &gt; 
+  </div>
+  <OGBreadCrumbsItem
+    active={false}
+    onClick={[MockFunction]}
+  >
+    C
+  </OGBreadCrumbsItem>
+   
+</div>
+`;
+
+exports[`BreadCrumbs should match snapshots 2`] = `
+<Box
+  pb="400"
+  pr="200"
+>
+  <HibanaBreadCrumbsItem
+    active={false}
+    onClick={[MockFunction]}
+  >
+    A
+  </HibanaBreadCrumbsItem>
+   
+  <Text
+    as="span"
+    display="inline-block"
+    fontSize="400"
+    fontWeight="semibold"
+    mx="200"
+  >
+    &gt;
+  </Text>
+  <HibanaBreadCrumbsItem
+    active={false}
+    onClick={[MockFunction]}
+  >
+    B
+  </HibanaBreadCrumbsItem>
+   
+  <Text
+    as="span"
+    display="inline-block"
+    fontSize="400"
+    fontWeight="semibold"
+    mx="200"
+  >
+    &gt;
+  </Text>
+  <HibanaBreadCrumbsItem
+    active={false}
+    onClick={[MockFunction]}
+  >
+    C
+  </HibanaBreadCrumbsItem>
+   
+</Box>
+`;

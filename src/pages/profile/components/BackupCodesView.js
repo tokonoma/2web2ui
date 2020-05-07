@@ -3,20 +3,22 @@ import BackupCodesList from './BackupCodesList';
 import DownloadCodes from './DownloadCodes';
 import CopyCodes from './CopyCodes'; //todo use CopyToClipboard component
 import PrintCodes from './PrintCodes';
-import { Button } from 'src/components/matchbox';
+import { Button, Stack } from 'src/components/matchbox';
 
 const BackupCodes = ({ codes }) => (
-  <div>
+  <Stack>
     <p>
       <strong>Your shiny new backup codes:</strong>
     </p>
+
+    <BackupCodesList codes={codes} />
+
     <Button.Group>
-      <BackupCodesList codes={codes} />
       <DownloadCodes codes={codes} />
       <CopyCodes codes={codes} />
       <PrintCodes codes={codes} />
     </Button.Group>
-  </div>
+  </Stack>
 );
 
 export default BackupCodes;

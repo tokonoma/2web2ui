@@ -54,93 +54,7 @@ exports[`Page: Alerts List should render happy path 1`] = `
   }
   title="Alerts"
 >
-  <p
-    className="Description"
-  >
-    Use alerts to be notified when important changes occur in your Health Score, bounce rates, and email usage.
-  </p>
-  <div
-    data-id="recent-incidents"
-  >
-    <h3>
-      Recent Incidents
-    </h3>
-    <Grid>
-      <Grid.Column
-        key="id-1"
-        lg={3}
-        md={6}
-        xs={12}
-      >
-        <Panel
-          accent={true}
-        >
-          <Panel.Section
-            className="LastTriggeredCard"
-          >
-            <PageLink
-              className="AlertName"
-              to="/alerts/details/id-1"
-            >
-              <strong
-                data-id="link-alert-name"
-              >
-                my alert 1
-              </strong>
-            </PageLink>
-            <Tag>
-              Health Score
-            </Tag>
-          </Panel.Section>
-          <Panel.Section
-            className="Footer"
-          >
-            <DisplayDate
-              formattedDate="Jun 15 2019, 10:48am"
-              timestamp={1560610080000}
-            />
-          </Panel.Section>
-        </Panel>
-      </Grid.Column>
-      <Grid.Column
-        key="id-3"
-        lg={3}
-        md={6}
-        xs={12}
-      >
-        <Panel
-          accent={true}
-        >
-          <Panel.Section
-            className="LastTriggeredCard"
-          >
-            <PageLink
-              className="AlertName"
-              to="/alerts/details/id-3"
-            >
-              <strong
-                data-id="link-alert-name"
-              >
-                my alert 3
-              </strong>
-            </PageLink>
-            <Tag>
-              Monthly Sending Limit
-            </Tag>
-          </Panel.Section>
-          <Panel.Section
-            className="Footer"
-          >
-            <DisplayDate
-              formattedDate="Jun 5 2019, 10:48am"
-              timestamp={1559746080000}
-            />
-          </Panel.Section>
-        </Panel>
-      </Grid.Column>
-    </Grid>
-  </div>
-  <AlertCollection
+  <AlertsPageComponent
     alerts={
       Array [
         Object {
@@ -164,6 +78,26 @@ exports[`Page: Alerts List should render happy path 1`] = `
       ]
     }
     handleDelete={[Function]}
+    recentlyTriggeredAlerts={
+      Array [
+        Object {
+          "id": "id-1",
+          "last_triggered": "2019-06-15T14:48:00.000Z",
+          "last_triggered_formatted": "Jun 15 2019, 10:48am",
+          "last_triggered_timestamp": 1560610080000,
+          "metric": "health_score",
+          "name": "my alert 1",
+        },
+        Object {
+          "id": "id-3",
+          "last_triggered": "2019-06-05T05:48:00.000Z",
+          "last_triggered_formatted": "Jun 5 2019, 10:48am",
+          "last_triggered_timestamp": 1559746080000,
+          "metric": "monthly_sending_limit",
+          "name": "my alert 3",
+        },
+      ]
+    }
   />
   <DeleteModal
     content={

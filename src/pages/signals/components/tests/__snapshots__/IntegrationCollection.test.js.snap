@@ -1,27 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`IntegrationCollection renders Error 1`] = `
-<Panel
-  accent="red"
-  actions={
-    Array [
-      Object {
-        "content": "Retry",
-        "onClick": undefined,
-      },
-    ]
-  }
-  className="ErrorPanel"
-  title="Something went wrong"
-/>
-`;
+exports[`IntegrationCollection renders Error 1`] = `<ApiErrorBanner />`;
 
 exports[`IntegrationCollection renders Loading 1`] = `
-<Panel
-  className="LoadingPanel"
->
-  <Loading />
-</Panel>
+<PanelLoading
+  accent={false}
+  minHeight="400px"
+/>
 `;
 
 exports[`IntegrationCollection renders Table 1`] = `
@@ -55,7 +40,8 @@ exports[`IntegrationCollection renders Table 1`] = `
 `;
 
 exports[`IntegrationCollection renders no data found 1`] = `
-<Panel
-  title="No Data Found!"
+<Empty
+  hasPanel={true}
+  message="No Data Found!"
 />
 `;

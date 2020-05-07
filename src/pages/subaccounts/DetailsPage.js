@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Route, Switch } from 'react-router-dom';
-import { Page, Tabs } from 'src/components/matchbox';
-
+import { Page, Panel, Tabs } from 'src/components/matchbox';
 import { clearSubaccount, getSubaccount } from 'src/actions/subaccounts';
-import { ApiKeySuccessBanner } from 'src/components';
+import { ApiKeySuccessBanner, TabsWrapper } from 'src/components';
 import { PageLink } from 'src/components/links';
 import { selectSubaccount } from 'src/selectors/subaccounts';
 import { listPools } from 'src/actions/ipPools';
@@ -12,7 +11,6 @@ import { listApiKeys, hideNewApiKey } from 'src/actions/api-keys';
 import { list as listDomains } from 'src/actions/sendingDomains';
 import RedirectAndAlert from 'src/components/globalAlert/RedirectAndAlert';
 import { Loading } from 'src/components/loading/Loading';
-
 import ApiKeysTab from './components/ApiKeysTab';
 import EditTab from './components/EditTab';
 import SendingDomainsTab from './components/SendingDomainsTab';
@@ -75,25 +73,31 @@ export class DetailsPage extends Component {
 
     return (
       <Page title={`${subaccount.name} (${subaccount.id})`} breadcrumbAction={breadcrumbAction}>
-        {newKey && <ApiKeySuccessBanner title="Don't Forget Your API Key" />}
-        <Tabs selected={selectedTab} tabs={tabs} />
-        <Switch>
-          <Route
-            exact
-            path="/account/subaccounts/:id"
-            render={() => <EditTab subaccount={subaccount} />}
-          />
-          <Route
-            exact
-            path="/account/subaccounts/:id/api-keys"
-            render={() => <ApiKeysTab id={subaccount.id} />}
-          />
-          <Route
-            exact
-            path="/account/subaccounts/:id/sending-domains"
-            render={() => <SendingDomainsTab id={subaccount.id} />}
-          />
-        </Switch>
+        {newKey && <ApiKeySuccessBanner title="Don't Forget Your API Key" mb="400" />}
+
+        <Panel>
+          <TabsWrapper>
+            <Tabs selected={selectedTab} tabs={tabs} />
+          </TabsWrapper>
+
+          <Switch>
+            <Route
+              exact
+              path="/account/subaccounts/:id"
+              render={() => <EditTab subaccount={subaccount} />}
+            />
+            <Route
+              exact
+              path="/account/subaccounts/:id/api-keys"
+              render={() => <ApiKeysTab id={subaccount.id} />}
+            />
+            <Route
+              exact
+              path="/account/subaccounts/:id/sending-domains"
+              render={() => <SendingDomainsTab id={subaccount.id} />}
+            />
+          </Switch>
+        </Panel>
       </Page>
     );
   }

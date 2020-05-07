@@ -10,11 +10,11 @@ import { selectSubaccountIdFromQuery } from 'src/selectors/subaccounts';
 // Components
 import { Loading, DeleteModal } from 'src/components';
 import { PageLink } from 'src/components/links';
-import { Page, Tabs } from 'src/components/matchbox';
+import { Page, Panel, Tabs } from 'src/components/matchbox';
+import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import TestTab from './components/TestTab';
 import EditTab from './components/EditTab';
 import BatchTab from './components/BatchTab';
-import { setSubaccountQuery } from 'src/helpers/subaccounts';
 
 export class WebhooksDetails extends Component {
   state = {
@@ -93,12 +93,14 @@ export class WebhooksDetails extends Component {
       <Page
         title={webhook.name}
         secondaryActions={secondaryActions}
-        breadcrumbAction={{ content: 'Webhooks', component: PageLink, to: '/webhooks/' }}
+        breadcrumbAction={{ content: 'View All Webhooks', component: PageLink, to: '/webhooks/' }}
       >
-        <Tabs selected={selectedTab} tabs={tabs} />
-        <Route exact path={editPath} render={() => <EditTab webhook={webhook} />} />
-        <Route path={testPath} render={() => <TestTab webhook={webhook} />} />
-        <Route path={batchPath} render={() => <BatchTab webhook={webhook} />} />
+        <Panel>
+          <Tabs selected={selectedTab} tabs={tabs} />
+          <Route exact path={editPath} render={() => <EditTab webhook={webhook} />} />
+          <Route path={testPath} render={() => <TestTab webhook={webhook} />} />
+          <Route path={batchPath} render={() => <BatchTab webhook={webhook} />} />
+        </Panel>
         <DeleteModal
           open={this.state.showDelete}
           title="Are you sure you want to delete this webhook?"

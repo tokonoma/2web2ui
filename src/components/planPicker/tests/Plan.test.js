@@ -1,10 +1,10 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-
 import Plan from '../Plan';
 
-describe('Plan:', () => {
+jest.mock('src/hooks/useHibanaOverride', () => styles => styles);
 
+describe('Plan:', () => {
   let wrapper;
   let props;
 
@@ -13,8 +13,8 @@ describe('Plan:', () => {
       plan: {
         monthly: 100,
         overage: 0.9,
-        volume: 200
-      }
+        volume: 200,
+      },
     };
 
     wrapper = shallow(<Plan {...props} />);
@@ -29,7 +29,7 @@ describe('Plan:', () => {
       isFree: true,
       overage: 0.8,
       includesIp: true,
-      volume: 300
+      volume: 300,
     };
     wrapper.setProps({ plan });
     expect(wrapper).toMatchSnapshot();
@@ -40,10 +40,9 @@ describe('Plan:', () => {
       hourly: 0.22,
       overage: 0.8,
       includesIp: true,
-      volume: 300
+      volume: 300,
     };
     wrapper.setProps({ plan });
     expect(wrapper).toMatchSnapshot();
   });
-
 });
