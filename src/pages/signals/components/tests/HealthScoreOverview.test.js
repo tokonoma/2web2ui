@@ -5,65 +5,64 @@ import { DEFAULT_VIEW } from '../../constants/summaryTables';
 import HealthScoreOverview from '../HealthScoreOverview';
 
 describe('HealthScoreOverview', () => {
-  const subject = (props = {}) => shallow(
-    <HealthScoreOverview
-      data={[
-        {
-          current_health_score: 98,
-          current_total_injection_count: 200000,
-          domain: 'example.com',
-          history: [
-            { date: '2018-01-13', health_score: 98 }
-          ],
-          average_health_score: 98,
-          WoW: 0.1,
-          sid: 123
-        }
-      ]}
-      facet={{
-        key: 'domain',
-        label: 'Domain'
-      }}
-      getHealthScore={() => {}}
-      loading={false}
-      resetSummaryTable={() => {}}
-      signalOptions={{
-        facet: 'domain',
-        facetSearchTerm: 'example.com',
-        from: '2015-01-01',
-        relativeRange: '14days',
-        subaccount: {
-          id: 123
-        },
-        to: '2015-01-05'
-      }}
-      subaccounts={{
-        123: { id: 123, name: 'Test Subaccount' }
-      }}
-      summaryTable={{
-        currentPage: 1,
-        order: { ascending: true, dataKey: 'domain' },
-        perPage: 10
-      }}
-      tableName="Test"
-      totalCount={1}
-      {...props}
-    />
-  );
+  const subject = (props = {}) =>
+    shallow(
+      <HealthScoreOverview
+        data={[
+          {
+            current_health_score: 98,
+            current_total_injection_count: 200000,
+            domain: 'example.com',
+            history: [{ date: '2018-01-13', health_score: 98 }],
+            average_health_score: 98,
+            WoW: 0.1,
+            sid: 123,
+          },
+        ]}
+        facet={{
+          key: 'domain',
+          label: 'Domain',
+        }}
+        getHealthScore={() => {}}
+        loading={false}
+        resetSummaryTable={() => {}}
+        signalOptions={{
+          facet: 'domain',
+          facetSearchTerm: 'example.com',
+          from: '2015-01-01',
+          relativeRange: '14days',
+          subaccount: {
+            id: 123,
+          },
+          to: '2015-01-05',
+        }}
+        subaccounts={{
+          123: { id: 123, name: 'Test Subaccount' },
+        }}
+        summaryTable={{
+          currentPage: 1,
+          order: { ascending: true, dataKey: 'domain' },
+          perPage: 10,
+        }}
+        tableName="Test"
+        totalCount={1}
+        {...props}
+      />,
+    );
 
   it('renders overview panel with controls and table', () => {
     expect(subject()).toMatchSnapshot();
   });
 
   it('renders empty summary table', () => {
-    const wrapper = subject({ data: []});
+    const wrapper = subject({ data: [] });
     expect(wrapper.find(SummaryTable).prop('empty')).toEqual(true);
   });
 
   it('renders error message', () => {
     const wrapper = subject({
       data: [],
-      error: new Error('Oh no!')
+      error: new Error('Oh no!'),
     });
 
     expect(wrapper.find(SummaryTable).prop('error')).toEqual('Oh no!');
@@ -72,7 +71,7 @@ describe('HealthScoreOverview', () => {
   it('renders loader', () => {
     const wrapper = subject({
       data: [],
-      loading: true
+      loading: true,
     });
 
     expect(wrapper.find(SummaryTable).prop('loading')).toEqual(true);
@@ -82,21 +81,25 @@ describe('HealthScoreOverview', () => {
     const wrapper = subject({
       signalOptions: {
         id: undefined,
-        name: 'Master & All Subaccounts'
-      }
+        name: 'Master & All Subaccounts',
+      },
     });
 
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders custom date range', () => {
-    const wrapper = subject({ signalOptions: { relativeRange: 'custom', to: new Date('2019/06/08') }});
+    const wrapper = subject({
+      signalOptions: { relativeRange: 'custom', to: new Date('2019/06/08') },
+    });
     expect(wrapper.find('Column[dataKey="current_health_score"]').prop('label')).toEqual('Score');
-    expect(wrapper.find('Column[dataKey="current_total_injection_count"]').prop('label')).toEqual('Injections');
+    expect(wrapper.find('Column[dataKey="current_total_injection_count"]').prop('label')).toEqual(
+      'Injections',
+    );
   });
 
   it('renders injections column if after V2 release date', () => {
-    const wrapper = subject({ signalOptions: { to: new Date('2019/06/08') }});
+    const wrapper = subject({ signalOptions: { to: new Date('2019/06/08') } });
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -113,7 +116,7 @@ describe('HealthScoreOverview', () => {
 
   it('requests reset on mount with default options', () => {
     const resetSummaryTable = jest.fn();
-    subject({ resetSummaryTable, defaults: { perPage: 25 }});
+    subject({ resetSummaryTable, defaults: { perPage: 25 } });
     expect(resetSummaryTable).toHaveBeenCalledWith('Test', { perPage: 25 });
   });
 
@@ -126,7 +129,7 @@ describe('HealthScoreOverview', () => {
   it('requests table reset on signal options update', () => {
     const resetSummaryTable = jest.fn();
     const wrapper = subject();
-    wrapper.setProps({ resetSummaryTable, signalOptions: {}});
+    wrapper.setProps({ resetSummaryTable, signalOptions: {} });
 
     expect(resetSummaryTable).toHaveBeenCalledWith('Test', {});
   });
@@ -135,7 +138,7 @@ describe('HealthScoreOverview', () => {
     const getHealthScore = jest.fn();
     const summaryTable = {
       currentPage: 2,
-      perPage: 10
+      perPage: 10,
     };
     const wrapper = subject();
 
@@ -151,9 +154,9 @@ describe('HealthScoreOverview', () => {
       orderBy: undefined,
       relativeRange: '14days',
       subaccount: {
-        id: 123
+        id: 123,
       },
-      to: '2015-01-05'
+      to: '2015-01-05',
     });
   });
 
@@ -162,16 +165,18 @@ describe('HealthScoreOverview', () => {
     const summaryTable = {
       currentPage: 1,
       order: { ascending: true, dataKey: 'domain' },
-      perPage: 10
+      perPage: 10,
     };
     const wrapper = subject();
 
     wrapper.setProps({ getHealthScore, summaryTable });
 
-    expect(getHealthScore).toHaveBeenCalledWith(expect.objectContaining({
-      order: 'asc',
-      orderBy: 'domain'
-    }));
+    expect(getHealthScore).toHaveBeenCalledWith(
+      expect.objectContaining({
+        order: 'asc',
+        orderBy: 'domain',
+      }),
+    );
   });
 
   it('requests data without subaccount data on summary table update', () => {
@@ -182,24 +187,26 @@ describe('HealthScoreOverview', () => {
       relativeRange: '14days',
       subaccount: {
         id: undefined,
-        name: 'Master & All Subaccounts'
-      }
+        name: 'Master & All Subaccounts',
+      },
     };
     const summaryTable = {
       currentPage: 2,
-      perPage: 10
+      perPage: 10,
     };
-    const wrapper = subject();
+    const wrapper = subject({ signalOptions });
 
-    wrapper.setProps({ getHealthScore, signalOptions, summaryTable });
+    wrapper.setProps({ getHealthScore, summaryTable });
 
-    expect(getHealthScore).toHaveBeenCalledWith(expect.objectContaining({
-      subaccount: undefined
-    }));
+    expect(getHealthScore).toHaveBeenCalledWith(
+      expect.objectContaining({
+        subaccount: undefined,
+      }),
+    );
   });
 
   describe('history component', () => {
-    const factory = (pageProps) => (props) => {
+    const factory = pageProps => props => {
       const wrapper = subject(pageProps);
       const Column = wrapper.find('Column[dataKey="history"]').prop('component');
 
@@ -208,25 +215,25 @@ describe('HealthScoreOverview', () => {
 
     it('redirects to details page when bar is clicked', () => {
       const historyPush = jest.fn();
-      const wrapper = factory({ history: { push: historyPush }})();
+      const wrapper = factory({ history: { push: historyPush } })();
       wrapper.simulate('click', { date: '2018-01-13' });
 
       expect(historyPush).toHaveBeenCalledWith({
         pathname: '/signals/health-score/domain/example.com',
         search: '?subaccount=123',
-        state: { date: '2018-01-13' }
+        state: { date: '2018-01-13' },
       });
     });
 
     it('redirects to details page when dot is clicked', () => {
       const historyPush = jest.fn();
-      const wrapper = factory({ history: { push: historyPush }})();
+      const wrapper = factory({ history: { push: historyPush } })();
       wrapper.simulate('click', { date: '2018-01-13' });
 
       expect(historyPush).toHaveBeenCalledWith({
         pathname: '/signals/health-score/domain/example.com',
         search: '?subaccount=123',
-        state: { date: '2018-01-13' }
+        state: { date: '2018-01-13' },
       });
     });
 
@@ -235,11 +242,11 @@ describe('HealthScoreOverview', () => {
       const wrapper = factory({
         facet: {
           key: 'sid',
-          label: 'Subaccount'
+          label: 'Subaccount',
         },
-        history: { push: historyPush }
+        history: { push: historyPush },
       })({
-        sid: -1
+        sid: -1,
       });
       wrapper.simulate('click', { date: '2018-01-13' });
 
@@ -259,8 +266,12 @@ describe('HealthScoreOverview', () => {
 
   describe('current injections column component', () => {
     it('renders current injection count', () => {
-      const wrapper = subject({ signalOptions: { relativeRange: 'custom', to: new Date('2019/06/08') }});
-      const Column = wrapper.find('Column[dataKey="current_total_injection_count"]').prop('component');
+      const wrapper = subject({
+        signalOptions: { relativeRange: 'custom', to: new Date('2019/06/08') },
+      });
+      const Column = wrapper
+        .find('Column[dataKey="current_total_injection_count"]')
+        .prop('component');
       const columnWrapper = shallow(<Column current_total_injection_count={235000} />);
 
       expect(columnWrapper).toMatchSnapshot();
@@ -272,27 +283,22 @@ describe('HealthScoreOverview', () => {
       {
         current_health_score: 98,
         domain: 'example.com',
-        history: [
-          { date: '2018-01-13', health_score: 98 }
-        ],
+        history: [{ date: '2018-01-13', health_score: 98 }],
         average_health_score: 98,
         WoW: 0.1,
-        sid: 123
+        sid: 123,
       },
       {
         current_health_score: 50,
         domain: 'master-and-all.com',
-        history: [
-          { date: '2018-01-13', health_score: 50 }
-        ],
+        history: [{ date: '2018-01-13', health_score: 50 }],
         average_health_score: 50,
         WoW: 0.5,
-        sid: -1
-      }
+        sid: -1,
+      },
     ];
     const wrapper = subject({ data });
     expect(wrapper.find(SummaryTable).prop('data')).toHaveLength(1);
     expect(wrapper.find(SummaryTable).prop('data')[0]).toEqual(data[0]);
   });
-
 });

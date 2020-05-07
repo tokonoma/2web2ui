@@ -5,7 +5,7 @@ import thresholds from 'src/pages/signals/constants/healthScoreThresholds';
 import { MAILBOX_PROVIDERS } from 'src/constants';
 import moment from 'moment';
 
-const translateSubaccount = (id) => {
+const translateSubaccount = id => {
   // Note: Subaccount -1 (aggregate of all subaccounts) does not have a details Page
 
   if (String(id) === '0') {
@@ -50,7 +50,7 @@ export const getDoD = (current, before) => {
     return null;
   }
 
-  return roundToPlaces(((current - before) / before * 100), 1);
+  return roundToPlaces(((current - before) / before) * 100, 1);
 };
 
 export const getCaretProps = (value, reverse) => {
@@ -70,16 +70,42 @@ export const getCaretProps = (value, reverse) => {
   return { direction, color };
 };
 
-
 export const getDates = ({ from, relativeRange, to, now = new Date() } = {}) => {
   let options = { from, to, relativeRange };
 
   if (relativeRange !== 'custom') {
     options = {
-      ...getRelativeDates(relativeRange, { now: moment(now).subtract(1, 'day').toDate() }),
-      relativeRange: relativeRange
+      ...getRelativeDates(relativeRange, {
+        now: moment(now)
+          .subtract(1, 'day')
+          .toDate(),
+      }),
+      relativeRange: relativeRange,
     };
   }
 
   return options;
 };
+
+export function getValidSignalsDateRange({ from, to }) {
+  const now = moment();
+
+  const validDates = _.every(
+    _.map([from, to, now], date => moment.isMoment(date) && date.isValid()),
+  );
+  const isGreaterThan7Days = Math.abs(to.diff(from, 'days')) >= 7;
+
+  if (validDates && isGreaterThan7Days && from.isBefore(to) && to.isBefore(now)) {
+    return { from, to };
+  }
+
+  if (!validDates) {
+    throw new Error('Invalid date format given');
+  }
+
+  if (!isGreaterThan7Days) {
+    throw new Error('Range must be at least 7 days');
+  }
+
+  throw new Error('Invalid date range given');
+}

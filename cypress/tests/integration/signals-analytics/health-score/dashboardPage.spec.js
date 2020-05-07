@@ -331,4 +331,22 @@ describe('The health score dashboard page', () => {
       });
     });
   });
+
+  describe('renders the page when given to and from params in the URL', () => {
+    it('with the correct date range', () => {
+      cy.visit(`${PAGE_URL}?from=2020-02-01&to=2020-02-10`);
+      cy.findByLabelText('Narrow Date Range').should('have.value', 'Feb 1st – Feb 10th');
+      cy.findByLabelText('Broad Date Range').should('have.value', 'custom');
+      cy.url().should('not.include', 'from');
+      cy.url().should('not.include', 'to');
+    });
+
+    it('with an error alert when date is in incorrect format', () => {
+      cy.visit(`${PAGE_URL}?from=foo&to=barr`);
+      cy.findByLabelText('Broad Date Range').should('have.value', '90days');
+      cy.findByText('Invalid date format given').should('be.visible');
+      cy.url().should('not.include', 'from');
+      cy.url().should('not.include', 'to');
+    });
+  });
 });

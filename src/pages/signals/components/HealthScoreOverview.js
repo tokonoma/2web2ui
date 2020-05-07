@@ -14,7 +14,6 @@ import moment from 'moment';
 import { V2Date } from '../constants/healthScoreV2';
 
 class HealthScoreOverview extends React.Component {
-
   componentDidMount() {
     this.resetTable();
   }
@@ -26,9 +25,7 @@ class HealthScoreOverview extends React.Component {
 
     if (prevProps.signalOptions !== signalOptions) {
       this.resetTable();
-    }
-
-    if (prevProps.summaryTable !== summaryTable) {
+    } else if (prevProps.summaryTable !== summaryTable) {
       this.getData();
     }
   }
@@ -42,7 +39,7 @@ class HealthScoreOverview extends React.Component {
     }
 
     resetSummaryTable(tableName, { ...options, ...defaults });
-  }
+  };
 
   getData = () => {
     const { getHealthScore, signalOptions, summaryTable } = this.props;
@@ -69,9 +66,9 @@ class HealthScoreOverview extends React.Component {
       orderBy,
       relativeRange: signalOptions.relativeRange,
       subaccount,
-      to: signalOptions.to
+      to: signalOptions.to,
     });
-  }
+  };
 
   handleClick = (facetId, subaccountId) => ({ date }) => {
     const { facet, history } = this.props;
@@ -89,14 +86,22 @@ class HealthScoreOverview extends React.Component {
       pathname: `/signals/health-score/${facet.key}/${facetId}`,
       search,
       state: {
-        date
-      }
+        date,
+      },
     });
-  }
+  };
 
   render() {
     const {
-      data, error, facet, loading, signalOptions, subaccounts, tableName, totalCount, header
+      data,
+      error,
+      facet,
+      loading,
+      signalOptions,
+      subaccounts,
+      tableName,
+      totalCount,
+      header,
     } = this.props;
     const { to } = signalOptions;
 
@@ -144,7 +149,7 @@ class HealthScoreOverview extends React.Component {
               label={facet.label}
               sortable
               width={noSubaccountFilter ? '15%' : '30%'}
-              component={(props) => (
+              component={props => (
                 <FacetDataCell
                   dimension="health-score"
                   facet={facet.key}
@@ -182,7 +187,7 @@ class HealthScoreOverview extends React.Component {
               <NumericDataCell value={current_health_score} />
             )}
           />
-          {afterNewModel &&
+          {afterNewModel && (
             <Column
               align="right"
               dataKey="current_total_injection_count"
@@ -192,15 +197,14 @@ class HealthScoreOverview extends React.Component {
               component={({ current_total_injection_count }) => (
                 <NumericDataCell value={current_total_injection_count} />
               )}
-            />}
+            />
+          )}
           <Column
             align="right"
             dataKey="WoW"
-            label={<WoWHeaderCell/>}
+            label={<WoWHeaderCell />}
             width={afterNewModel ? '12.5%' : '15%'}
-            component={({ WoW }) => (
-              <WoWDataCell value={WoW} />
-            )}
+            component={({ WoW }) => <WoWDataCell value={WoW} />}
           />
           <Column
             align="right"

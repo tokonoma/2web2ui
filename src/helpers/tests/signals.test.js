@@ -1,4 +1,10 @@
-import { getFriendlyTitle, getDoD, getCaretProps, getDates } from '../signals';
+import {
+  getFriendlyTitle,
+  getDoD,
+  getCaretProps,
+  getDates,
+  getValidSignalsDateRange,
+} from '../signals';
 import cases from 'jest-in-case';
 import thresholds from 'src/pages/signals/constants/healthScoreThresholds';
 import { roundBoundaries } from 'src/helpers/metrics';
@@ -131,5 +137,51 @@ describe('.getDates', () => {
       from: new Date('2015-01-04T05:00:00Z'),
       to: new Date('2015-01-09T05:00:00Z'),
     });
+  });
+});
+
+describe('getValidSignalsDateRange', () => {
+  const from = moment('2019-10-02T04:00:00Z');
+  const to = moment('2019-12-30T05:59:59.999Z');
+  const now = new Date('2019-12-31T04:00:00-04:00');
+  Date.now = jest.fn(() => now);
+
+  it('returns to and from if dates are valid', () => {
+    expect(
+      getValidSignalsDateRange({
+        from,
+        to,
+      }),
+    ).toEqual({
+      from,
+      to,
+    });
+  });
+
+  it('returns invalid date format error when to/from are in incorrect format', () => {
+    expect(() =>
+      getValidSignalsDateRange({
+        from: moment('foo'),
+        to,
+      }),
+    ).toThrow('Invalid date format given');
+  });
+
+  it('returns minimum date range error when range is < 7 days', () => {
+    expect(() =>
+      getValidSignalsDateRange({
+        from: moment('2019-12-29T04:00:00Z'),
+        to,
+      }),
+    ).toThrow('Range must be at least 7 days');
+  });
+
+  it('returns invalid date range error when to/from/now are not in order', () => {
+    expect(() =>
+      getValidSignalsDateRange({
+        from: moment('2020-12-29T04:00:00Z'),
+        to,
+      }),
+    ).toThrow('Invalid date range given');
   });
 });

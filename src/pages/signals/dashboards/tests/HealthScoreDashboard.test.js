@@ -12,6 +12,12 @@ jest.mock('../components/HealthScoreChart/HealthScoreChart');
 jest.mock('../../components/filters/FacetFilter');
 jest.mock('../../components/filters/DateFilter');
 jest.mock('../../components/filters/SubaccountFilter');
+jest.mock('src/hooks/useRouter', () =>
+  jest.fn().mockReturnValue({
+    requestParams: {},
+    updateRoute: jest.fn(),
+  }),
+);
 
 describe('Signals Health Score Dashboard', () => {
   const subject = (props = {}, render = shallow) => {
@@ -25,6 +31,7 @@ describe('Signals Health Score Dashboard', () => {
               from="2015-01-01"
               to="2015-01-05"
               subaccounts={['sub1', 'sub2']}
+              location={{ search: {} }}
               {...props}
             />
           </TestApp>,
@@ -37,6 +44,7 @@ describe('Signals Health Score Dashboard', () => {
             from="2015-01-01"
             to="2015-01-05"
             subaccounts={['sub1', 'sub2']}
+            location={{ search: {} }}
             {...props}
           />,
         );
