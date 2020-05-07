@@ -177,7 +177,6 @@ const routes = [
     // around with grants in the web UI keys
     supportDocSearch: 'started',
   },
-  ...signalsRoutes,
   {
     path: '/account/security',
     redirect: '/account/profile',
@@ -730,6 +729,7 @@ const routes = [
     component: LogoutPage,
     title: 'Logging out...',
   },
+  ...signalsRoutes,
   ...templateRoutes,
   ...inboxPlacementRoutes,
   ...blacklistRoutes,
