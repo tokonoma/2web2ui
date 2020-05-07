@@ -1,9 +1,5 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
-.Cancel {
-  margin-left: spacing();
-}
-
 // Force <Error /> to align nicely after a <Button />
 .ErrorWrapper {
   display: inline-block;
