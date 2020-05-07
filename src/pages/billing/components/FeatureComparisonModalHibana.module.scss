@@ -1,0 +1,48 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.GroupHeading {
+  background: color(gray, 200);
+  border-top: 1px solid color(gray, 500);
+  border-bottom: 1px solid color(gray, 500);
+}
+.FeatureCell {
+  width: 32%;
+  padding-left: 2em;
+  max-height: 40px;
+}
+.FeatureComparisonCell {
+  border-left: 1px solid color(gray, 400);
+  width: 23%;
+  text-align: center;
+  max-height: 40px;
+  word-break: break-word;
+  font-size: 120%;
+}
+.FeatureComparisonTable {
+  table {
+    margin-bottom: 0; // override
+  }
+}
+
+.SmallerFont {
+  font-size: font-size(100);
+}
+
+.PlanOne {
+  color: color(green, 700);
+}
+.PlanTwo {
+  color: color(brand, blue);
+}
+.PlanThree {
+  color: color(brand, orange);
+}
+.PlanName {
+  height: 80px;
+  padding: spacing(600);
+  font-size: font-size(500);
+  font-weight: font-weight(semibold);
+}
+.NotAvailable {
+  color: color(gray, 700);
+}
