@@ -2,10 +2,13 @@ import React from 'react';
 import { Panel, Table, Modal } from 'src/components/matchbox';
 import { FEATURE_COMPARISON, PLANS } from './../constants';
 import _ from 'lodash';
-import styles from './FeatureComparisonModal.module.scss';
+import OGStyles from './FeatureComparisonModal.module.scss';
+import HibanaStyles from './FeatureComparisonModalHibana.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import classNames from 'classnames';
 import { Check, Close } from '@sparkpost/matchbox-icons';
 export function Row({ featureName, ...featureValues }) {
+  const styles = useHibanaOverride(OGStyles, HibanaStyles);
   return (
     <Table.Row>
       <Table.Cell className={styles.FeatureCell}> {featureName} </Table.Cell>
@@ -20,13 +23,14 @@ export function Row({ featureName, ...featureValues }) {
           )}
         >
           {' '}
-          {renderCell(val)}{' '}
+          <RenderCell cellValue={val} />
         </Table.Cell>
       ))}
     </Table.Row>
   );
 }
 export function HeaderRow({ plans }) {
+  const styles = useHibanaOverride(OGStyles, HibanaStyles);
   return (
     <Table.Row>
       <Table.Cell className={styles.FeatureCell}> </Table.Cell>
@@ -49,6 +53,7 @@ export function HeaderRow({ plans }) {
   );
 }
 export function GroupHeading({ groupName, colSpan }) {
+  const styles = useHibanaOverride(OGStyles, HibanaStyles);
   return (
     <Table.Row>
       <Table.HeaderCell colSpan={colSpan} className={styles.GroupHeading}>
@@ -58,7 +63,8 @@ export function GroupHeading({ groupName, colSpan }) {
   );
 }
 
-export function renderCell(cellValue) {
+export function RenderCell({ cellValue }) {
+  const styles = useHibanaOverride(OGStyles, HibanaStyles);
   if (typeof cellValue === 'boolean') {
     return cellValue ? <Check /> : <Close className={styles.NotAvailable} />;
   }
@@ -73,9 +79,10 @@ export function renderCell(cellValue) {
       </div>
     );
   }
-  return cellValue;
+  return <>{cellValue}</>;
 }
 function ComparisonModal({ open, handleClose }) {
+  const styles = useHibanaOverride(OGStyles, HibanaStyles);
   return (
     <Modal open={open} showCloseButton={true} onClose={handleClose}>
       <Panel>

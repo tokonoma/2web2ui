@@ -4,9 +4,7 @@ exports[`Billing Address Form: should render 1`] = `
 <div>
   <Stack>
     <p>
-      <small>
-        Billing Address
-      </small>
+      Billing Address
     </p>
     <Grid
       className="spacer"
@@ -83,9 +81,7 @@ exports[`Billing Address Form: should show states 1`] = `
 <div>
   <Stack>
     <p>
-      <small>
-        Billing Address
-      </small>
+      Billing Address
     </p>
     <Grid
       className="spacer"

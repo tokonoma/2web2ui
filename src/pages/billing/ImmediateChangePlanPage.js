@@ -6,9 +6,10 @@ import * as conversions from 'src/helpers/conversionTracking';
 import { updateSubscription } from 'src/actions/billing';
 import { showAlert } from 'src/actions/globalAlert';
 import { ApiErrorBanner, Loading } from 'src/components';
+import { Heading } from 'src/components/text';
 import { PageLink } from 'src/components/links';
 import { stripImmediatePlanChange } from 'src/helpers/billing';
-
+import { Page } from 'src/components/matchbox';
 import styles from './ImmediateChangePlanPage.module.scss';
 
 const BILLING_ROUTE = '/account/billing';
@@ -58,9 +59,10 @@ export class ImmediateChangePlanPage extends Component {
 
   renderSuccess() {
     return (
-      <div className={styles.MessageInnards}>
-        <h1>Your subscription has been updated.</h1>
-        <PageLink to={BILLING_ROUTE}>Back to Billing</PageLink>
+      <div>
+        <Heading as="h2" looksLike="h5">
+          Your subscription has been updated.
+        </Heading>
       </div>
     );
   }
@@ -85,10 +87,17 @@ export class ImmediateChangePlanPage extends Component {
     }
 
     return (
-      <div className={styles.MessageBlock}>
-        {loading === LOAD_STATE.FAILURE && this.renderError()}
+      <Page
+        title="Billing"
+        breadcrumbAction={{
+          content: 'Back to billing',
+          to: BILLING_ROUTE,
+          component: PageLink,
+        }}
+      >
         {loading === LOAD_STATE.SUCCESS && this.renderSuccess()}
-      </div>
+        {loading === LOAD_STATE.FAILURE && this.renderError()}
+      </Page>
     );
   }
 }

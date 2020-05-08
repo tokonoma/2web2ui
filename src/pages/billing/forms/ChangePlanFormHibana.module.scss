@@ -1,0 +1,21 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.ChangePlanForm {
+  @media (min-width: media-query(lg)) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.CurrentPlanSection {
+  @media (min-width: media-query(lg)) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+}
+
+.MainContent {
+  @media (min-width: media-query(lg)) {
+    grid-column: 1;
+    grid-row: 1;
+  }
+}

@@ -2,8 +2,10 @@
 
 exports[`PlanSummary renders pending cancellation date 1`] = `
 <Fragment>
-  <h6
+  <Heading
+    as="h6"
     className="Headline"
+    looksLike="h5"
   >
     1,000
      emails for 
@@ -13,55 +15,63 @@ exports[`PlanSummary renders pending cancellation date 1`] = `
       Jun 20 2019
        when your account will be cancelled
     </small>
-  </h6>
+  </Heading>
 </Fragment>
 `;
 
 exports[`PlanSummary renders summary 1`] = `
 <Fragment>
-  <h6
+  <Heading
+    as="h6"
     className="Headline"
+    looksLike="h5"
   >
     1,000
      emails for 
     $100 per month
-  </h6>
+  </Heading>
 </Fragment>
 `;
 
 exports[`PlanSummary renders summary for free plan 1`] = `
 <Fragment>
-  <h6
+  <Heading
+    as="h6"
     className="Headline"
+    looksLike="h5"
   >
     1,000
      emails for 
     free
-  </h6>
+  </Heading>
 </Fragment>
 `;
 
 exports[`PlanSummary renders summary with custom plan 1`] = `
 <Fragment>
-  <h6
+  <Heading
+    as="h6"
     className="Headline"
+    looksLike="h5"
   >
     12,000
      emails for 
     $100 per year
-  </h6>
+  </Heading>
 </Fragment>
 `;
 
 exports[`PlanSummary renders summary with overages 1`] = `
 <Fragment>
-  <h6
+  <Heading
+    as="h6"
     className="Headline"
+    looksLike="h5"
   >
     1,000
      emails for 
     $100 per month
-  </h6>
+  </Heading>
   <p>
     $
     0.01

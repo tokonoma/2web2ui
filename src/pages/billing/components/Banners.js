@@ -1,14 +1,13 @@
 import React from 'react';
 import { format } from 'date-fns';
 import { PageLink } from 'src/components/links';
-import { Banner } from 'src/components/matchbox';
+import { Banner, Box, Stack } from 'src/components/matchbox';
 import { LINKS } from 'src/constants';
 import { pluralString } from 'src/helpers/string';
 import * as conversions from 'src/helpers/conversionTracking';
 import { Abbreviation } from 'src/components';
 import { ANALYTICS_PREMIUM_SUPPORT, ANALYTICS_ENTERPRISE_SUPPORT } from 'src/constants';
 import _ from 'lodash';
-
 const dateFormat = date => format(date, 'MMM DD, YYYY');
 
 /**
@@ -23,80 +22,92 @@ export const PendingPlanBanner = ({ account, subscription }) => {
 
   if (pendingDowngrades.length > 0) {
     return (
-      <Banner status="info" title="Pending Plan Change" my="300">
+      <Banner status="warning" title="Pending Plan Change" my="300">
         <p>
-          You're scheduled for a pending downgrade and can't update your plan until that switch
-          happens.
+          <Box maxWidth={600}>
+            You're scheduled for a pending downgrade and can't update your plan until that switch
+            happens.
+          </Box>
         </p>
       </Banner>
     );
   }
 
   return (
-    <Banner status="info" title="Pending Plan Change" my="300">
+    <Banner status="warning" title="Pending Plan Change" my="300">
       <p>
-        You're scheduled to switch to the {account.pending_subscription.name} plan on{' '}
-        {dateFormat(account.pending_subscription.effective_date)}, and can't update your plan until
-        that switch happens.
+        <Box maxWidth={600}>
+          You're scheduled to switch to the {account.pending_subscription.name} plan on{' '}
+          {dateFormat(account.pending_subscription.effective_date)}, and can't update your plan
+          until that switch happens.
+        </Box>
       </p>
     </Banner>
   );
 };
 
-export const PremiumBanner = () => (
-  <Banner
-    title="Premium Addon Plan"
-    action={{
-      content: 'Contact Us',
-      to: LINKS.PREMIUM_SUPPORT,
-      external: true,
-      onClick: () => conversions.trackAddonRequest(ANALYTICS_PREMIUM_SUPPORT),
-    }}
-    my="300"
-  >
-    <p>
-      Full-service account advocacy with a dedicated Customer Success Manager. Including proactive
-      reporting, planning, and reviews.
-    </p>
-    <ul>
-      <li>Includes all standard SparkPost features</li>
-      <li>Dedicated Customer Success Manager</li>
-      <li>
-        Global <Abbreviation title="Internet Service Provider">ISP</Abbreviation> support and
-        mediation
-      </li>
-      <li>Deliverability data analysis and guidance with powerful integrated tools</li>
-    </ul>
-  </Banner>
-);
+export const PremiumBanner = () => {
+  return (
+    <Banner
+      title="Premium Addon Plan"
+      action={{
+        content: 'Contact Us',
+        to: LINKS.PREMIUM_SUPPORT,
+        external: true,
+        onClick: () => conversions.trackAddonRequest(ANALYTICS_PREMIUM_SUPPORT),
+      }}
+      my="300"
+    >
+      <Stack>
+        <p>
+          Full-service account advocacy with a dedicated Customer Success Manager. Including
+          proactive reporting, planning, and reviews.
+        </p>
+        <ul>
+          <li>Includes all standard SparkPost features</li>
+          <li>Dedicated Customer Success Manager</li>
+          <li>
+            Global <Abbreviation title="Internet Service Provider">ISP</Abbreviation> support and
+            mediation
+          </li>
+          <li>Deliverability data analysis and guidance with powerful integrated tools</li>
+        </ul>
+      </Stack>
+    </Banner>
+  );
+};
 
 /**
  * Enterprise CTA
  */
-export const EnterpriseBanner = () => (
-  <Banner
-    title="Enterprise"
-    action={{
-      content: 'Contact Us',
-      to: LINKS.ENTERPRISE_SUPPORT,
-      external: true,
-      onClick: () => conversions.trackAddonRequest(ANALYTICS_ENTERPRISE_SUPPORT),
-    }}
-    my="300"
-  >
-    <p>
-      Enterprise-grade financial guarantees with 99.9% uptime{' '}
-      <Abbreviation title="Service Level Agreement">SLA</Abbreviation> and guaranteed burst rates,
-      and a dedicated Technical Account Manager.
-    </p>
-    <ul>
-      <li>Includes all standard SparkPost and Premium features</li>
-      <li>Comprehensive uptime SLAs with service credits</li>
-      <li>The industry's only burst-rate guarantee</li>
-      <li>Support of iOS Universal Links and Android App Links</li>
-    </ul>
-  </Banner>
-);
+export const EnterpriseBanner = () => {
+  return (
+    <Banner
+      title="Enterprise"
+      action={{
+        content: 'Contact Us',
+        to: LINKS.ENTERPRISE_SUPPORT,
+        external: true,
+        onClick: () => conversions.trackAddonRequest(ANALYTICS_ENTERPRISE_SUPPORT),
+      }}
+      my="300"
+    >
+      <Stack>
+        <p>
+          Enterprise-grade financial guarantees with 99.9% uptime{' '}
+          <Abbreviation title="Service Level Agreement">SLA</Abbreviation> and guaranteed burst
+          rates, and a dedicated Technical Account Manager.
+        </p>
+        <ul>
+          <li>Includes all standard SparkPost and Premium features</li>
+          <li>Comprehensive uptime SLAs with service credits</li>
+          <li>The industry's only burst-rate guarantee</li>
+          <li>Support of iOS Universal Links and Android App Links</li>
+        </ul>
+      </Stack>
+    </Banner>
+  );
+};
 
 export const FreePlanWarningBanner = ({
   account = {},

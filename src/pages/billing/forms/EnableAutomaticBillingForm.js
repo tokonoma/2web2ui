@@ -59,13 +59,13 @@ export class EnableAutomaticBillingForm extends React.Component {
               </Panel.Section>
             </Panel>
           </Grid.Column>
-          <Grid.Column xs={12} md={5}>
+          <Grid.Column xs={12} md={6}>
             <Panel title="Your Plan">
               <Panel.Section>
                 <PlanSummary plan={currentSubscription} />
               </Panel.Section>
               <Panel.Section>
-                <Button disabled={submitting} fullWidth primary type="submit">
+                <Button disabled={submitting} variant="primary" type="submit">
                   {submitting ? 'Loading...' : 'Enable Automatic Billing'}
                 </Button>
               </Panel.Section>
@@ -107,5 +107,9 @@ export default withRouter(
   connect(
     mapStateToProps,
     mapDispatchtoProps,
-  )(reduxForm({ form: FORMNAME, enableReinitialize: true })(EnableAutomaticBillingForm)),
+  )(
+    reduxForm({ form: FORMNAME, enableReinitialize: true, destroyOnUnmount: false })(
+      EnableAutomaticBillingForm,
+    ),
+  ),
 );

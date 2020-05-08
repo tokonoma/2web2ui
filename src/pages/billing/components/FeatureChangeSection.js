@@ -6,20 +6,26 @@ import { Loading } from 'src/components/loading/Loading';
 import { useFeatureChangeContext } from '../context/FeatureChangeContext';
 
 import cx from 'classnames';
-import styles from './FeatureChangeSection.module.scss';
+import OGStyles from './FeatureChangeSection.module.scss';
+import HibanaStyles from './FeatureChangeSectionHibana.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 
-const Feature = ({ key, value, label, description, action }) => (
-  <Panel.Section key={`confirm_${key}`}>
-    <div className={styles.Label}>{label}</div>
-    <div className={styles.Feature}>
-      <div className={styles.description}>{description}</div>
-      <div>{value ? <CheckCircle className={styles.FeatureCheckIcon} /> : action}</div>
-    </div>
-  </Panel.Section>
-);
+const Feature = ({ key, value, label, description, action }) => {
+  const styles = useHibanaOverride(OGStyles, HibanaStyles);
+  return (
+    <Panel.Section key={`confirm_${key}`}>
+      <div className={styles.Label}>{label}</div>
+      <div className={styles.Feature}>
+        <div className={styles.description}>{description}</div>
+        <div>{value ? <CheckCircle className={styles.FeatureCheckIcon} /> : action}</div>
+      </div>
+    </Panel.Section>
+  );
+};
 
 const FeatureChangeSection = () => {
   const { features = [], loading } = useFeatureChangeContext();
+  const styles = useHibanaOverride(OGStyles, HibanaStyles);
 
   if (!features.length) {
     return null;
@@ -48,7 +54,9 @@ const FeatureChangeSection = () => {
   return (
     <Panel accent="green" title="Changes to Features">
       {renderCTA()}
-      {features.map(Feature)}
+      {features.map(props => (
+        <Feature {...props} />
+      ))}
     </Panel>
   );
 };

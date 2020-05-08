@@ -15,21 +15,26 @@ exports[`CurrentPlanSection renders correctly 1`] = `
     <div
       className="Plan"
     >
-      <PlanPrice
-        plan={
-          Object {
-            "code": "big-code",
-            "monthly": 300,
-            "name": "Three",
-            "overage": 0.3,
-            "tier": "starter",
-            "volume": 3,
+      <Box
+        marginLeft="400"
+        marginTop="400"
+      >
+        <PlanPrice
+          plan={
+            Object {
+              "code": "big-code",
+              "monthly": 300,
+              "name": "Three",
+              "overage": 0.3,
+              "tier": "starter",
+              "volume": 3,
+            }
           }
-        }
-        showCsm={true}
-        showIp={true}
-        showOverage={true}
-      />
+          showCsm={true}
+          showIp={true}
+          showOverage={true}
+        />
+      </Box>
     </div>
   </Panel.Section>
 </Panel>

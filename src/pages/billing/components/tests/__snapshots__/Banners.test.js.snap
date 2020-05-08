@@ -13,30 +13,32 @@ exports[`Billing Banners:  Enterprise banner renders 1`] = `
   my="300"
   title="Enterprise"
 >
-  <p>
-    Enterprise-grade financial guarantees with 99.9% uptime
-     
-    <Abbreviation
-      title="Service Level Agreement"
-    >
-      SLA
-    </Abbreviation>
-     and guaranteed burst rates, and a dedicated Technical Account Manager.
-  </p>
-  <ul>
-    <li>
-      Includes all standard SparkPost and Premium features
-    </li>
-    <li>
-      Comprehensive uptime SLAs with service credits
-    </li>
-    <li>
-      The industry's only burst-rate guarantee
-    </li>
-    <li>
-      Support of iOS Universal Links and Android App Links
-    </li>
-  </ul>
+  <Stack>
+    <p>
+      Enterprise-grade financial guarantees with 99.9% uptime
+       
+      <Abbreviation
+        title="Service Level Agreement"
+      >
+        SLA
+      </Abbreviation>
+       and guaranteed burst rates, and a dedicated Technical Account Manager.
+    </p>
+    <ul>
+      <li>
+        Includes all standard SparkPost and Premium features
+      </li>
+      <li>
+        Comprehensive uptime SLAs with service credits
+      </li>
+      <li>
+        The industry's only burst-rate guarantee
+      </li>
+      <li>
+        Support of iOS Universal Links and Android App Links
+      </li>
+    </ul>
+  </Stack>
 </Banner>
 `;
 
@@ -97,15 +99,19 @@ exports[`Billing Banners:  Free Plan Downgrade warning banner should not render 
 exports[`Billing Banners:  PendingPlanBanner should render with pending_subscription 1`] = `
 <Banner
   my="300"
-  status="info"
+  status="warning"
   title="Pending Plan Change"
 >
   <p>
-    You're scheduled to switch to the 
-     plan on
-     
-    Oct 05, 2020
-    , and can't update your plan until that switch happens.
+    <Box
+      maxWidth={600}
+    >
+      You're scheduled to switch to the 
+       plan on
+       
+      Oct 05, 2020
+      , and can't update your plan until that switch happens.
+    </Box>
   </p>
 </Banner>
 `;
@@ -123,28 +129,30 @@ exports[`Billing Banners:  Premium banner renders 1`] = `
   my="300"
   title="Premium Addon Plan"
 >
-  <p>
-    Full-service account advocacy with a dedicated Customer Success Manager. Including proactive reporting, planning, and reviews.
-  </p>
-  <ul>
-    <li>
-      Includes all standard SparkPost features
-    </li>
-    <li>
-      Dedicated Customer Success Manager
-    </li>
-    <li>
-      Global 
-      <Abbreviation
-        title="Internet Service Provider"
-      >
-        ISP
-      </Abbreviation>
-       support and mediation
-    </li>
-    <li>
-      Deliverability data analysis and guidance with powerful integrated tools
-    </li>
-  </ul>
+  <Stack>
+    <p>
+      Full-service account advocacy with a dedicated Customer Success Manager. Including proactive reporting, planning, and reviews.
+    </p>
+    <ul>
+      <li>
+        Includes all standard SparkPost features
+      </li>
+      <li>
+        Dedicated Customer Success Manager
+      </li>
+      <li>
+        Global 
+        <Abbreviation
+          title="Internet Service Provider"
+        >
+          ISP
+        </Abbreviation>
+         support and mediation
+      </li>
+      <li>
+        Deliverability data analysis and guidance with powerful integrated tools
+      </li>
+    </ul>
+  </Stack>
 </Banner>
 `;

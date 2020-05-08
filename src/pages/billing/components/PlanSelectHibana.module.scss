@@ -1,7 +1,11 @@
 @import '~@sparkpost/design-tokens-hibana/tokens';
 
 .SelectedPlan {
-  color: color(green, 700);
+  color: color(blue, 700);
+}
+
+.tierLabel {
+  font-weight: font-weight(normal);
 }
 
 .tierLabel {

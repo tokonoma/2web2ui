@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Field, formValueSelector, change } from 'redux-form';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { Grid, Stack } from 'src/components/matchbox';
+import { Box, Grid, Stack } from 'src/components/matchbox';
 import { TextFieldWrapper, SelectWrapper } from 'src/components';
 import { required, email } from 'src/helpers/validation';
 import { getZipLabel } from 'src/helpers/billing';
@@ -72,24 +72,31 @@ export class BillingContactForm extends Component {
               />
             </Grid.Column>
           </Grid>
-          <Field
-            label="Email"
-            name="billingContact.email"
-            component={TextFieldWrapper}
-            validate={[required, email]}
-          />
-
-          <Field
-            label="Country"
-            name="billingContact.country"
-            placeholder="Select a country"
-            component={SelectWrapper}
-            options={countries}
-            validate={required}
-          />
+          <Box as={Grid}>
+            <Box as={Grid.Column} xs={6}>
+              <Field
+                label="Email"
+                name="billingContact.email"
+                component={TextFieldWrapper}
+                validate={[required, email]}
+              />
+            </Box>
+          </Box>
+          <Box as={Grid}>
+            <Box as={Grid.Column} xs={6}>
+              <Field
+                label="Country"
+                name="billingContact.country"
+                placeholder="Select a country"
+                component={SelectWrapper}
+                options={countries}
+                validate={required}
+              />
+            </Box>
+          </Box>
           <Grid>
             {stateOrProvince}
-            <Grid.Column xs={6}>
+            <Grid.Column xs={3}>
               <Field
                 label={getZipLabel(countryValue)}
                 name="billingContact.zip"

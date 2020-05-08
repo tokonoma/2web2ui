@@ -1,6 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import CurrentPlanSection from '../CurrentPlanSection';
+import styles from './CurrentPlanSection.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
+
+jest.mock('src/hooks/useHibanaOverride');
+useHibanaOverride.mockReturnValue(styles);
 
 describe('CurrentPlanSection', () => {
   const defaultProps = {
@@ -10,15 +15,10 @@ describe('CurrentPlanSection', () => {
       monthly: 300,
       name: 'Three',
       overage: 0.3,
-      volume: 3
-    }
+      volume: 3,
+    },
   };
-  const subject = (props) => shallow(
-    <CurrentPlanSection
-      {...defaultProps}
-      {...props}
-    />
-  );
+  const subject = props => shallow(<CurrentPlanSection {...defaultProps} {...props} />);
 
   it('renders correctly', () => {
     expect(subject()).toMatchSnapshot();
@@ -29,9 +29,9 @@ describe('CurrentPlanSection', () => {
     const wrapper = subject({
       currentPlan: {
         ...defaultProps.currentPlan,
-        status: 'deprecated'
+        status: 'deprecated',
       },
-      isPlanSelected: true
+      isPlanSelected: true,
     });
     expect(wrapper.find('Warning')).toExist();
   });

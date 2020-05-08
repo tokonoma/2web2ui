@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { LabelledValue } from 'src/components';
 import { PageLink } from 'src/components/links';
-import { Panel, UnstyledLink, Modal } from 'src/components/matchbox';
+import { Box, Panel, UnstyledLink, Modal } from 'src/components/matchbox';
+import { OGOnlyWrapper } from 'src/components/hibana';
 import {
   PremiumBanner,
   EnterpriseBanner,
@@ -20,6 +21,7 @@ import { formatFullNumber } from 'src/helpers/units';
 import totalRVCost from '../helpers/totalRecipientValidationCost';
 import _ from 'lodash';
 import { formatDateTime } from 'src/helpers/date';
+import { Text } from 'src/components/matchbox';
 const PAYMENT_MODAL = 'payment';
 const CONTACT_MODAL = 'contact';
 const IP_MODAL = 'ip';
@@ -91,8 +93,13 @@ export default class BillingSummary extends Component {
       <Panel.Section>
         <LabelledValue label="Recipient Validation">
           <h6>
-            {formatFullNumber(volumeUsed)} emails validated for {totalRVCost(volumeUsed)}
-            <small> as of {formatDateTime(recipientValidationDate)}</small>
+            <Text fontSize="300" as="span">
+              {formatFullNumber(volumeUsed)} emails validated for {totalRVCost(volumeUsed)}
+              <Text fontWeight="200" as="span">
+                {' '}
+                as of {formatDateTime(recipientValidationDate)}
+              </Text>
+            </Text>
           </h6>
           <UnstyledLink onClick={this.handleRvModal}>How was this calculated?</UnstyledLink>
         </LabelledValue>
@@ -155,10 +162,17 @@ export default class BillingSummary extends Component {
           {show === PAYMENT_MODAL && <UpdatePaymentForm onCancel={this.handleModal} />}
           {show === CONTACT_MODAL && <UpdateContactForm onCancel={this.handleModal} />}
           {show === IP_MODAL && <AddIps onClose={this.handleModal} />}
-          {show === RV_MODAL && (
-            <RecipientValidationModal volumeUsed={volumeUsed} onClose={this.handleModal} />
-          )}
         </Modal>
+        <OGOnlyWrapper as={Modal} open={show === RV_MODAL} onClose={this.handleModal}>
+          <Box
+            as={Modal}
+            open={show === RV_MODAL}
+            onClose={this.handleModal}
+            showCloseButton={true}
+          >
+            <RecipientValidationModal volumeUsed={volumeUsed} onClose={this.handleModal} />
+          </Box>
+        </OGOnlyWrapper>
       </div>
     );
   }

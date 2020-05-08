@@ -121,24 +121,27 @@ exports[`FeatureComparisonModal:  Row:  should render correctly 1`] = `
     key="testAccount"
   >
      
-    <Check />
-     
+    <RenderCell
+      cellValue={true}
+    />
   </Table.Cell>
   <Table.Cell
     className="FeatureComparisonCell"
     key="starterPlans"
   >
      
-    <Check />
-     
+    <RenderCell
+      cellValue={true}
+    />
   </Table.Cell>
   <Table.Cell
     className="FeatureComparisonCell"
     key="premierPlans"
   >
      
-    <Check />
-     
+    <RenderCell
+      cellValue={true}
+    />
   </Table.Cell>
 </Table.Row>
 `;

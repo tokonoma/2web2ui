@@ -84,13 +84,22 @@ exports[`Component: Billing Summary should render correctly for a paid plan 1`] 
         label="Recipient Validation"
       >
         <h6>
-          123,123
-           emails validated for 
-          $599.37
-          <small>
-             as of 
-            Jun 9 2019, 8:00pm
-          </small>
+          <Text
+            as="span"
+            fontSize="300"
+          >
+            123,123
+             emails validated for 
+            $599.37
+            <Text
+              as="span"
+              fontWeight="200"
+            >
+               
+              as of 
+              Jun 9 2019, 8:00pm
+            </Text>
+          </Text>
         </h6>
         <UnstyledLink
           onClick={[Function]}
@@ -146,6 +155,23 @@ exports[`Component: Billing Summary should render correctly for a paid plan 1`] 
     onClose={[Function]}
     open={false}
   />
+  <OGOnlyWrapper
+    as={[Function]}
+    onClose={[Function]}
+    open={false}
+  >
+    <Box
+      as={[Function]}
+      onClose={[Function]}
+      open={false}
+      showCloseButton={true}
+    >
+      <_default
+        onClose={[Function]}
+        volumeUsed={123123}
+      />
+    </Box>
+  </OGOnlyWrapper>
 </div>
 `;
 
@@ -223,13 +249,22 @@ exports[`Component: Billing Summary should render correctly for a standard free 
         label="Recipient Validation"
       >
         <h6>
-          123,123
-           emails validated for 
-          $599.37
-          <small>
-             as of 
-            Jun 9 2019, 8:00pm
-          </small>
+          <Text
+            as="span"
+            fontSize="300"
+          >
+            123,123
+             emails validated for 
+            $599.37
+            <Text
+              as="span"
+              fontWeight="200"
+            >
+               
+              as of 
+              Jun 9 2019, 8:00pm
+            </Text>
+          </Text>
         </h6>
         <UnstyledLink
           onClick={[Function]}
@@ -245,6 +280,23 @@ exports[`Component: Billing Summary should render correctly for a standard free 
     onClose={[Function]}
     open={false}
   />
+  <OGOnlyWrapper
+    as={[Function]}
+    onClose={[Function]}
+    open={false}
+  >
+    <Box
+      as={[Function]}
+      onClose={[Function]}
+      open={false}
+      showCloseButton={true}
+    >
+      <_default
+        onClose={[Function]}
+        volumeUsed={123123}
+      />
+    </Box>
+  </OGOnlyWrapper>
 </div>
 `;
 
@@ -322,13 +374,22 @@ exports[`Component: Billing Summary should render correctly if you can't buy IPs
         label="Recipient Validation"
       >
         <h6>
-          123,123
-           emails validated for 
-          $599.37
-          <small>
-             as of 
-            Jun 9 2019, 8:00pm
-          </small>
+          <Text
+            as="span"
+            fontSize="300"
+          >
+            123,123
+             emails validated for 
+            $599.37
+            <Text
+              as="span"
+              fontWeight="200"
+            >
+               
+              as of 
+              Jun 9 2019, 8:00pm
+            </Text>
+          </Text>
         </h6>
         <UnstyledLink
           onClick={[Function]}
@@ -384,6 +445,23 @@ exports[`Component: Billing Summary should render correctly if you can't buy IPs
     onClose={[Function]}
     open={false}
   />
+  <OGOnlyWrapper
+    as={[Function]}
+    onClose={[Function]}
+    open={false}
+  >
+    <Box
+      as={[Function]}
+      onClose={[Function]}
+      open={false}
+      showCloseButton={true}
+    >
+      <_default
+        onClose={[Function]}
+        volumeUsed={123123}
+      />
+    </Box>
+  </OGOnlyWrapper>
 </div>
 `;
 
@@ -462,13 +540,22 @@ exports[`Component: Billing Summary should render correctly if you can't change 
         label="Recipient Validation"
       >
         <h6>
-          123,123
-           emails validated for 
-          $599.37
-          <small>
-             as of 
-            Jun 9 2019, 8:00pm
-          </small>
+          <Text
+            as="span"
+            fontSize="300"
+          >
+            123,123
+             emails validated for 
+            $599.37
+            <Text
+              as="span"
+              fontWeight="200"
+            >
+               
+              as of 
+              Jun 9 2019, 8:00pm
+            </Text>
+          </Text>
         </h6>
         <UnstyledLink
           onClick={[Function]}
@@ -524,6 +611,23 @@ exports[`Component: Billing Summary should render correctly if you can't change 
     onClose={[Function]}
     open={false}
   />
+  <OGOnlyWrapper
+    as={[Function]}
+    onClose={[Function]}
+    open={false}
+  >
+    <Box
+      as={[Function]}
+      onClose={[Function]}
+      open={false}
+      showCloseButton={true}
+    >
+      <_default
+        onClose={[Function]}
+        volumeUsed={123123}
+      />
+    </Box>
+  </OGOnlyWrapper>
 </div>
 `;
 
@@ -611,13 +715,22 @@ exports[`Component: Billing Summary should render correctly if you can't update 
         label="Recipient Validation"
       >
         <h6>
-          123,123
-           emails validated for 
-          $599.37
-          <small>
-             as of 
-            Jun 9 2019, 8:00pm
-          </small>
+          <Text
+            as="span"
+            fontSize="300"
+          >
+            123,123
+             emails validated for 
+            $599.37
+            <Text
+              as="span"
+              fontWeight="200"
+            >
+               
+              as of 
+              Jun 9 2019, 8:00pm
+            </Text>
+          </Text>
         </h6>
         <UnstyledLink
           onClick={[Function]}
@@ -633,6 +746,23 @@ exports[`Component: Billing Summary should render correctly if you can't update 
     onClose={[Function]}
     open={false}
   />
+  <OGOnlyWrapper
+    as={[Function]}
+    onClose={[Function]}
+    open={false}
+  >
+    <Box
+      as={[Function]}
+      onClose={[Function]}
+      open={false}
+      showCloseButton={true}
+    >
+      <_default
+        onClose={[Function]}
+        volumeUsed={123123}
+      />
+    </Box>
+  </OGOnlyWrapper>
 </div>
 `;
 
@@ -720,13 +850,22 @@ exports[`Component: Billing Summary should render with IP modal open 1`] = `
         label="Recipient Validation"
       >
         <h6>
-          123,123
-           emails validated for 
-          $599.37
-          <small>
-             as of 
-            Jun 9 2019, 8:00pm
-          </small>
+          <Text
+            as="span"
+            fontSize="300"
+          >
+            123,123
+             emails validated for 
+            $599.37
+            <Text
+              as="span"
+              fontWeight="200"
+            >
+               
+              as of 
+              Jun 9 2019, 8:00pm
+            </Text>
+          </Text>
         </h6>
         <UnstyledLink
           onClick={[Function]}
@@ -786,6 +925,23 @@ exports[`Component: Billing Summary should render with IP modal open 1`] = `
       onClose={[Function]}
     />
   </Modal>
+  <OGOnlyWrapper
+    as={[Function]}
+    onClose={[Function]}
+    open={false}
+  >
+    <Box
+      as={[Function]}
+      onClose={[Function]}
+      open={false}
+      showCloseButton={true}
+    >
+      <_default
+        onClose={[Function]}
+        volumeUsed={123123}
+      />
+    </Box>
+  </OGOnlyWrapper>
 </div>
 `;
 
@@ -873,13 +1029,22 @@ exports[`Component: Billing Summary should render with the billing contact modal
         label="Recipient Validation"
       >
         <h6>
-          123,123
-           emails validated for 
-          $599.37
-          <small>
-             as of 
-            Jun 9 2019, 8:00pm
-          </small>
+          <Text
+            as="span"
+            fontSize="300"
+          >
+            123,123
+             emails validated for 
+            $599.37
+            <Text
+              as="span"
+              fontWeight="200"
+            >
+               
+              as of 
+              Jun 9 2019, 8:00pm
+            </Text>
+          </Text>
         </h6>
         <UnstyledLink
           onClick={[Function]}
@@ -939,6 +1104,23 @@ exports[`Component: Billing Summary should render with the billing contact modal
       onCancel={[Function]}
     />
   </Modal>
+  <OGOnlyWrapper
+    as={[Function]}
+    onClose={[Function]}
+    open={false}
+  >
+    <Box
+      as={[Function]}
+      onClose={[Function]}
+      open={false}
+      showCloseButton={true}
+    >
+      <_default
+        onClose={[Function]}
+        volumeUsed={123123}
+      />
+    </Box>
+  </OGOnlyWrapper>
 </div>
 `;
 
@@ -1026,13 +1208,22 @@ exports[`Component: Billing Summary should render with the payment info modal op
         label="Recipient Validation"
       >
         <h6>
-          123,123
-           emails validated for 
-          $599.37
-          <small>
-             as of 
-            Jun 9 2019, 8:00pm
-          </small>
+          <Text
+            as="span"
+            fontSize="300"
+          >
+            123,123
+             emails validated for 
+            $599.37
+            <Text
+              as="span"
+              fontWeight="200"
+            >
+               
+              as of 
+              Jun 9 2019, 8:00pm
+            </Text>
+          </Text>
         </h6>
         <UnstyledLink
           onClick={[Function]}
@@ -1092,6 +1283,23 @@ exports[`Component: Billing Summary should render with the payment info modal op
       onCancel={[Function]}
     />
   </Modal>
+  <OGOnlyWrapper
+    as={[Function]}
+    onClose={[Function]}
+    open={false}
+  >
+    <Box
+      as={[Function]}
+      onClose={[Function]}
+      open={false}
+      showCloseButton={true}
+    >
+      <_default
+        onClose={[Function]}
+        volumeUsed={123123}
+      />
+    </Box>
+  </OGOnlyWrapper>
 </div>
 `;
 
@@ -1179,13 +1387,22 @@ exports[`Component: Billing Summary should show the invoice history if there are
         label="Recipient Validation"
       >
         <h6>
-          123,123
-           emails validated for 
-          $599.37
-          <small>
-             as of 
-            Jun 9 2019, 8:00pm
-          </small>
+          <Text
+            as="span"
+            fontSize="300"
+          >
+            123,123
+             emails validated for 
+            $599.37
+            <Text
+              as="span"
+              fontWeight="200"
+            >
+               
+              as of 
+              Jun 9 2019, 8:00pm
+            </Text>
+          </Text>
         </h6>
         <UnstyledLink
           onClick={[Function]}
@@ -1249,5 +1466,22 @@ exports[`Component: Billing Summary should show the invoice history if there are
     onClose={[Function]}
     open={false}
   />
+  <OGOnlyWrapper
+    as={[Function]}
+    onClose={[Function]}
+    open={false}
+  >
+    <Box
+      as={[Function]}
+      onClose={[Function]}
+      open={false}
+      showCloseButton={true}
+    >
+      <_default
+        onClose={[Function]}
+        volumeUsed={123123}
+      />
+    </Box>
+  </OGOnlyWrapper>
 </div>
 `;

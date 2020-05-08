@@ -174,7 +174,7 @@ describe('Billing Page', () => {
 
     function assignToNewIpPool() {
       cy.findByLabelText(/Quantity */i).type('1'); // Helps avoid encountering the 'Required' error message
-      cy.findByLabelText('Name your new IP Pool *').type('My IP Pool');
+      cy.findByLabelText(/Name your new IP Pool */i).type('myPool');
       cy.findAllByText('Add Dedicated IPs')
         .last()
         .click();
@@ -183,7 +183,7 @@ describe('Billing Page', () => {
     function assignToExistingIpPool() {
       cy.findByLabelText(/Quantity */i).type('1'); // Helps avoid encountering the 'Required' error message
       cy.findByLabelText('Assign to an existing IP Pool').check({ force: true }); // `force` required to handle Matchbox design issue
-      cy.findByLabelText('Choose an IP Pool *').select('myPool');
+      cy.findByLabelText(/Choose an IP Pool */i).select('myPool');
       cy.findAllByText('Add Dedicated IPs')
         .last()
         .click();
@@ -298,7 +298,7 @@ describe('Billing Page', () => {
         });
 
         cy.visit(PAGE_URL);
-        cy.findByText('Update Payment Information').click();
+        cy.findByText(/Update Payment Information */i).click();
       });
 
       it('closes the modal when clicking "Cancel"', () => {
@@ -310,13 +310,11 @@ describe('Billing Page', () => {
       });
 
       it('renders "Required" validation errors when skipping the "Credit Card Number", "Cardholder Name", "Expiration Date", "Security Code", and "Zip Code" fields', () => {
-        cy.get('#modal-portal').within(() => {
-          cy.findAllByText('Update Payment Information')
-            .last()
-            .click();
+        cy.findAllByText(/Update Payment Information */i)
+          .last()
+          .click();
 
-          cy.findAllByText('Required').should('have.length', 5);
-        });
+        cy.findAllByText('Required').should('have.length', 5);
       });
 
       it('renders a success message when successfully updating payment information', () => {
@@ -352,11 +350,9 @@ describe('Billing Page', () => {
           fixture: 'billing/collect/200.post.json',
         });
 
-        cy.get('#modal-portal').within(() => {
-          cy.findAllByText('Update Payment Information')
-            .last()
-            .click();
-        });
+        cy.findAllByText(/Update Payment Information */i)
+          .last()
+          .click();
 
         cy.findByText('Payment Information Updated').should('be.visible');
         cy.queryByLabelText('Credit Card Number').should('not.be.visible'); // The modal should now be closed
@@ -372,11 +368,9 @@ describe('Billing Page', () => {
 
         fillOutForm();
 
-        cy.get('#modal-portal').within(() => {
-          cy.findAllByText('Update Payment Information')
-            .last()
-            .click();
-        });
+        cy.findAllByText(/Update Payment Information */i)
+          .last()
+          .click();
 
         cy.findByText('Something went wrong.').should('be.visible');
         cy.findByText('View Details').click();
@@ -398,9 +392,7 @@ describe('Billing Page', () => {
       it('closes the modal when clicking "Cancel"', () => {
         cy.findByLabelText('First Name').should('be.visible');
 
-        cy.get('#modal-portal').within(() => {
-          cy.findByText('Cancel').click();
-        });
+        cy.findByText('Cancel').click();
 
         cy.queryByLabelText('First Name').should('not.be.visible');
       });
@@ -418,13 +410,11 @@ describe('Billing Page', () => {
         cy.findByLabelText('Email').clear();
         cy.findByLabelText('Zip Code').clear();
 
-        cy.get('#modal-portal').within(() => {
-          cy.findAllByText('Update Billing Contact')
-            .last()
-            .click();
+        cy.findAllByText('Update Billing Contact')
+          .last()
+          .click();
 
-          cy.findAllByText('Required').should('have.length', 4);
-        });
+        cy.findAllByText('Required').should('have.length', 4);
       });
 
       it('renders a success message when successfully updating the billing contact', () => {
@@ -450,11 +440,9 @@ describe('Billing Page', () => {
           requestAlias: 'billingUpdate',
         });
 
-        cy.get('#modal-portal').within(() => {
-          cy.findAllByText('Update Billing Contact')
-            .last()
-            .click();
-        });
+        cy.findAllByText('Update Billing Contact')
+          .last()
+          .click();
 
         cy.wait('@billingUpdate').then(({ request }) => {
           cy.wrap(request.body).should('have.property', 'country_code', 'US');
@@ -476,11 +464,9 @@ describe('Billing Page', () => {
           fixture: '400.json',
         });
 
-        cy.get('#modal-portal').within(() => {
-          cy.findAllByText('Update Billing Contact')
-            .last()
-            .click();
-        });
+        cy.findAllByText('Update Billing Contact')
+          .last()
+          .click();
 
         cy.findByText('Something went wrong.').should('be.visible');
         cy.findByText('View Details').click();

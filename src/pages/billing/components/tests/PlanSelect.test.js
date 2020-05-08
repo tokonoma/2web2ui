@@ -9,7 +9,6 @@ import PlanSelect, { SelectedPlan, useModal } from '../PlanSelect';
 
 jest.mock('src/hooks/useHibanaOverride');
 useHibanaOverride.mockReturnValue(styles);
-
 describe('Plan Select:', () => {
   const defaultProps = {
     onSelect: jest.fn(),

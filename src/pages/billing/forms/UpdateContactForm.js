@@ -36,7 +36,9 @@ export class UpdateContactForm extends Component {
               disabled={submitting}
               countries={this.props.billing.countries}
             />
-            <ButtonWrapper>
+          </Panel.Section>
+          <Panel.Section>
+            <ButtonWrapper marginTop="0">
               <Button type="submit" variant="primary" disabled={submitting}>
                 Update Billing Contact
               </Button>

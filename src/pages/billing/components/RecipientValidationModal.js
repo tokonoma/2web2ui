@@ -1,5 +1,6 @@
 import React from 'react';
-import { Grid, Panel } from 'src/components/matchbox';
+import { Box, Grid, Panel, Stack, Text } from 'src/components/matchbox';
+import { OGOnlyWrapper } from 'src/components/hibana';
 import { Close } from '@sparkpost/matchbox-icons';
 import { formatCurrency, formatFullNumber } from 'src/helpers/units';
 import styles from './RecipientValidationModal.module.scss';
@@ -45,22 +46,31 @@ export default ({ onClose, volumeUsed }) => {
   });
 
   return (
-    <Panel
+    <OGOnlyWrapper
+      as={Panel}
       actions={[{ content: <Close />, onClick: onClose }]}
       className={styles.modalContainer}
       title="How was this calculated?"
     >
-      <Panel.Section>
-        {TierRows}
-        <Grid className={styles.TotalCost}>
-          <Grid.Column xs={3} xsOffset={6}>
-            Total:
-          </Grid.Column>
-          <Grid.Column style={{ textAlign: 'right' }} xs={3}>
-            {totalRecipientValidationCost(volumeUsed)}
-          </Grid.Column>
-        </Grid>
-      </Panel.Section>
-    </Panel>
+      <Box as={Panel} title="How was this calculated?">
+        <Panel.Section>
+          <Stack space="200">
+            <Stack space="200">{TierRows}</Stack>
+            <Box borderTop="1px solid" paddingTop="400" borderColor="gray.400">
+              <Grid className={styles.TotalCost}>
+                <Grid.Column xs={3} xsOffset={6}>
+                  Total:
+                </Grid.Column>
+                <Grid.Column style={{ textAlign: 'right' }} xs={3}>
+                  <Text color="gray.900" fontWeight="600">
+                    {totalRecipientValidationCost(volumeUsed)}
+                  </Text>
+                </Grid.Column>
+              </Grid>
+            </Box>
+          </Stack>
+        </Panel.Section>
+      </Box>
+    </OGOnlyWrapper>
   );
 };
