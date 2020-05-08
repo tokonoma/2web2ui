@@ -102,17 +102,17 @@ exports[`Billing Banners:  PendingPlanBanner should render with pending_subscrip
   status="warning"
   title="Pending Plan Change"
 >
-  <p>
-    <Box
-      maxWidth={600}
-    >
+  <Box
+    maxWidth="1200"
+  >
+    <p>
       You're scheduled to switch to the 
        plan on
        
       Oct 05, 2020
       , and can't update your plan until that switch happens.
-    </Box>
-  </p>
+    </p>
+  </Box>
 </Banner>
 `;
 
