@@ -11,6 +11,7 @@ import SubaccountOption from './SubaccountOption';
 import { onEscape } from 'src/helpers/keyEvents';
 import OGStyles from './SubaccountFilter.module.scss';
 import HibanaStyles from './SubaccountFilterHibana.module.scss';
+import { Label } from 'src/components/matchbox';
 
 const OPTIONS = [
   {
@@ -88,49 +89,52 @@ export function SubaccountFilter(props) {
   );
 
   return (
-    <div className={styles.SubaccountFilter}>
-      <WindowEvent handler={handleWindowClick} event="click" />
-      <WindowEvent handler={onEscape(close)} event="keydown" />
-      <Popover
-        id="popover-subaccount-filter"
-        className={styles.Popover}
-        left
-        open={isOpen}
-        trigger={trigger}
-      >
-        <div ref={node => (contentRef.current = node)}>
-          <div className={classnames(styles.PopoverContent, isSearchOpen && styles.showSearch)}>
-            <div className={styles.SubaccountSearchHeader}>
-              <UnstyledLink className={styles.BackButton} onClick={handleSearchToggle}>
-                <ChevronLeft size={20} />
-              </UnstyledLink>
-              <span>Subaccount</span>
+    <>
+      {props.label && <Label label={props.label} />}
+      <div className={styles.SubaccountFilter}>
+        <WindowEvent handler={handleWindowClick} event="click" />
+        <WindowEvent handler={onEscape(close)} event="keydown" />
+        <Popover
+          id="popover-subaccount-filter"
+          className={styles.Popover}
+          left
+          open={isOpen}
+          trigger={trigger}
+        >
+          <div ref={node => (contentRef.current = node)}>
+            <div className={classnames(styles.PopoverContent, isSearchOpen && styles.showSearch)}>
+              <div className={styles.SubaccountSearchHeader}>
+                <UnstyledLink className={styles.BackButton} onClick={handleSearchToggle}>
+                  <ChevronLeft size={20} />
+                </UnstyledLink>
+                <span>Subaccount</span>
+              </div>
+              <div className={styles.SubaccountSearch}>
+                <SubaccountTypeahead
+                  label=""
+                  onChange={handleChange}
+                  placeholder="Search here"
+                  unfiltered
+                />
+              </div>
             </div>
-            <div className={styles.SubaccountSearch}>
-              <SubaccountTypeahead
-                label=""
-                onChange={handleChange}
-                placeholder="Search here"
-                unfiltered
-              />
+            <div className={classnames(styles.PopoverContent, !isSearchOpen && styles.showOptions)}>
+              {OPTIONS.map(({ condition, id, name, nested }) => (
+                <SubaccountOption
+                  key={name}
+                  label={name}
+                  nested={nested}
+                  onChange={handleChange}
+                  onOpen={handleSearchToggle}
+                  selected={condition(subaccount)}
+                  value={{ id, name }}
+                />
+              ))}
             </div>
           </div>
-          <div className={classnames(styles.PopoverContent, !isSearchOpen && styles.showOptions)}>
-            {OPTIONS.map(({ condition, id, name, nested }) => (
-              <SubaccountOption
-                key={name}
-                label={name}
-                nested={nested}
-                onChange={handleChange}
-                onOpen={handleSearchToggle}
-                selected={condition(subaccount)}
-                value={{ id, name }}
-              />
-            ))}
-          </div>
-        </div>
-      </Popover>
-    </div>
+        </Popover>
+      </div>
+    </>
   );
 }
 

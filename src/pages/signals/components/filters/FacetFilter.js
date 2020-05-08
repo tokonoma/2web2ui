@@ -6,6 +6,7 @@ import { onEnter } from 'src/helpers/keyEvents';
 import withSignalOptions from '../../containers/withSignalOptions';
 import styles from './FacetFilter.module.scss';
 import facets from '../../constants/facets';
+import { Label } from 'src/components/matchbox';
 const initialFacets = facets;
 
 export class FacetFilter extends React.Component {
@@ -57,6 +58,7 @@ export class FacetFilter extends React.Component {
 
     return (
       <Grid.Column lg={facet ? 4 : 3} xl={facet ? 5 : 3}>
+        {this.props.label && <Label label={this.props.label} />}
         <div className={classnames(styles.FacetFilter, facet && styles.FacetSelected)}>
           <label className={styles.ScreenReaderOnly} htmlFor="facet-filter-select">
             Filter By
