@@ -24,17 +24,23 @@ export class SpamTrapDashboard extends Component {
       <Page title={<>Spam Trap Monitoring</>}>
         <PageDescription>{SPAM_TRAP_INFO}</PageDescription>
 
-        <Panel sectioned>
-          <Grid>
-            <Grid.Column xs={12} md={4}>
-              <DateFilter />
-            </Grid.Column>
-            <Grid.Column md={3} xs={12}>
-              <SubaccountFilter />
-            </Grid.Column>
-            {/* eslint-disable-next-line */}
-            <FacetFilter facets={_.reject(facets, facet => facet.key === 'mb_provider')} />
-          </Grid>
+        <Panel>
+          <Panel.Section>
+            <Grid>
+              <Grid.Column xs={12} md={4}>
+                <DateFilter label="Date Range" />
+              </Grid.Column>
+            </Grid>
+          </Panel.Section>
+          <Panel.Section>
+            <Grid>
+              <Grid.Column md={4} xs={12}>
+                <SubaccountFilter label="Subaccount" />
+              </Grid.Column>
+              {/* eslint-disable-next-line */}
+            <FacetFilter facets={_.reject(facets, facet => facet.key === 'mb_provider')} label="Breakdown" />
+            </Grid>
+          </Panel.Section>
         </Panel>
         <SpamTrapOverview defaults={{ perPage: 25 }} subaccounts={subaccounts} hideTitle />
       </Page>
