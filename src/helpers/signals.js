@@ -93,7 +93,7 @@ export function getValidSignalsDateRange({ from, to }) {
   const validDates = _.every(
     _.map([from, to, now], date => moment.isMoment(date) && date.isValid()),
   );
-  const isGreaterThan7Days = Math.abs(to.diff(from, 'days')) >= 7;
+  const isGreaterThan7Days = Math.abs(to.diff(from, 'days')) >= 6; //Needs to be 6 due to 1/1 12:00 am - 1/6 11:59pm date ranges
 
   if (validDates && isGreaterThan7Days && from.isBefore(to) && to.isBefore(now)) {
     return { from, to };
