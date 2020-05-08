@@ -104,7 +104,7 @@ exports[`Billing Banners:  PendingPlanBanner should render with pending_subscrip
 >
   <p>
     <Box
-      maxWidth={600}
+      maxWidth="45rem"
     >
       You're scheduled to switch to the 
        plan on

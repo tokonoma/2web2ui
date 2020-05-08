@@ -8,6 +8,7 @@ import * as conversions from 'src/helpers/conversionTracking';
 import { Abbreviation } from 'src/components';
 import { ANALYTICS_PREMIUM_SUPPORT, ANALYTICS_ENTERPRISE_SUPPORT } from 'src/constants';
 import _ from 'lodash';
+import { tokens } from '@sparkpost/design-tokens-hibana';
 const dateFormat = date => format(date, 'MMM DD, YYYY');
 
 /**
@@ -23,12 +24,12 @@ export const PendingPlanBanner = ({ account, subscription }) => {
   if (pendingDowngrades.length > 0) {
     return (
       <Banner status="warning" title="Pending Plan Change" my="300">
-        <p>
-          <Box maxWidth={600}>
+        <Box maxWidth={tokens.sizing_1200}>
+          <p>
             You're scheduled for a pending downgrade and can't update your plan until that switch
             happens.
-          </Box>
-        </p>
+          </p>
+        </Box>
       </Banner>
     );
   }
@@ -36,7 +37,7 @@ export const PendingPlanBanner = ({ account, subscription }) => {
   return (
     <Banner status="warning" title="Pending Plan Change" my="300">
       <p>
-        <Box maxWidth={600}>
+        <Box maxWidth={tokens.sizing_1200}>
           You're scheduled to switch to the {account.pending_subscription.name} plan on{' '}
           {dateFormat(account.pending_subscription.effective_date)}, and can't update your plan
           until that switch happens.
