@@ -36,13 +36,13 @@ export const PendingPlanBanner = ({ account, subscription }) => {
 
   return (
     <Banner status="warning" title="Pending Plan Change" my="300">
-      <p>
-        <Box maxWidth={tokens.sizing_1200}>
+      <Box maxWidth={tokens.sizing_1200}>
+        <p>
           You're scheduled to switch to the {account.pending_subscription.name} plan on{' '}
           {dateFormat(account.pending_subscription.effective_date)}, and can't update your plan
           until that switch happens.
-        </Box>
-      </p>
+        </p>
+      </Box>
     </Banner>
   );
 };
