@@ -1,9 +1,8 @@
-/* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
 import { getEngagementRateByCohort, getEngagementRecency } from 'src/actions/signals';
 import { selectEngagementRateByCohortDetails } from 'src/selectors/signals';
 import { PageLink } from 'src/components/links';
-import { Grid, Panel, Stack } from 'src/components/matchbox';
+import { Box, Grid, Panel, Stack } from 'src/components/matchbox';
 import LineChart from './components/charts/linechart/LineChart';
 import Legend from './components/charts/legend/Legend';
 import Callout from 'src/components/callout';
@@ -115,40 +114,44 @@ export class EngagementRateByCohortPage extends Component {
     return (
       <Grid>
         <Grid.Column sm={12} md={7}>
-          <Tabs facet={facet} facetId={facetId} subaccountId={subaccountId} />
-          <Panel sectioned data-id="engagement-rate-chart">
-            {chartPanel || (
-              <div className="LiftTooltip">
-                <LineChart
-                  height={300}
-                  onClick={handleDateSelect}
-                  selected={selectedDate}
-                  shouldHighlightSelected={shouldHighlightSelected}
-                  lines={data}
-                  tooltipWidth="250px"
-                  tooltipContent={this.getTooltipContent}
-                  yKeys={_.keys(cohorts).map(key => ({ key: `p_${key}_eng`, ...cohorts[key] }))}
-                  yAxisProps={this.getYAxisProps()}
-                  xAxisProps={this.getXAxisProps()}
-                />
-                <Legend
-                  items={_.values(cohorts)}
-                  tooltipContent={label => ENGAGEMENT_RECENCY_COHORTS[label]}
-                />
-              </div>
-            )}
+          <Panel data-id="engagement-rate-chart">
+            <Tabs facet={facet} facetId={facetId} subaccountId={subaccountId} />
+            <Panel.Section>
+              {chartPanel || (
+                <div className="LiftTooltip">
+                  <LineChart
+                    height={300}
+                    onClick={handleDateSelect}
+                    selected={selectedDate}
+                    shouldHighlightSelected={shouldHighlightSelected}
+                    lines={data}
+                    tooltipWidth="250px"
+                    tooltipContent={this.getTooltipContent}
+                    yKeys={_.keys(cohorts).map(key => ({ key: `p_${key}_eng`, ...cohorts[key] }))}
+                    yAxisProps={this.getYAxisProps()}
+                    xAxisProps={this.getXAxisProps()}
+                  />
+                  <Legend
+                    items={_.values(cohorts)}
+                    tooltipContent={label => ENGAGEMENT_RECENCY_COHORTS[label]}
+                  />
+                </div>
+              )}
+            </Panel.Section>
           </Panel>
         </Grid.Column>
         <Grid.Column sm={12} md={5} mdOffset={0}>
           <div className={styles.OffsetCol}>
             {!chartPanel && (
-              <EngagementRateByCohortActions
-                engagementByCohort={selectedEngagementRate}
-                recencyByCohort={selectedEngagementRecency}
-                date={selectedDate}
-                facet={facet}
-                facetId={facetId}
-              />
+              <Box as={Panel} sectioned>
+                <EngagementRateByCohortActions
+                  engagementByCohort={selectedEngagementRate}
+                  recencyByCohort={selectedEngagementRecency}
+                  date={selectedDate}
+                  facet={facet}
+                  facetId={facetId}
+                />
+              </Box>
             )}
           </div>
         </Grid.Column>
@@ -169,8 +172,16 @@ export class EngagementRateByCohortPage extends Component {
         facet={facet}
         facetId={facetId}
         subaccountId={subaccountId}
-        primaryArea={<DateFilter left />}
       >
+        <Panel>
+          <Panel.Section>
+            <Grid>
+              <Grid.Column xs={12} md={4}>
+                <DateFilter label="Date Range" />
+              </Grid.Column>
+            </Grid>
+          </Panel.Section>
+        </Panel>
         {this.renderContent()}
         <Divider />
         <Grid>

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { getEngagementRecency } from 'src/actions/signals';
 import { selectEngagementRecencyDetails } from 'src/selectors/signals';
 import { PageLink } from 'src/components/links';
-import { Grid, Panel, Stack } from 'src/components/matchbox';
+import { Box, Grid, Panel, Stack } from 'src/components/matchbox';
 import BarChart from './components/charts/barchart/BarChart';
 import Callout from 'src/components/callout';
 import DateFilter from './components/filters/DateFilter';
@@ -98,39 +98,43 @@ export class EngagementRecencyPage extends Component {
     return (
       <Grid>
         <Grid.Column sm={12} md={7}>
-          <Tabs facet={facet} facetId={facetId} subaccountId={subaccountId} />
-          <Panel sectioned data-id="engagement-recency-cohorts-chart">
-            {chartPanel || (
-              <div className="LiftTooltip">
-                <BarChart
-                  gap={gap}
-                  onMouseOver={handleDateHover}
-                  onMouseOut={resetDateHover}
-                  onClick={handleDateSelect}
-                  selected={selectedDate}
-                  hovered={hoveredDate}
-                  shouldHighlightSelected={shouldHighlightSelected}
-                  timeSeries={data}
-                  tooltipContent={this.getTooltipContent}
-                  tooltipWidth="250px"
-                  yKeys={_.keys(cohorts)
-                    .map(key => ({ key: `c_${key}`, ...cohorts[key] }))
-                    .reverse()}
-                  yAxisProps={this.getYAxisProps()}
-                  xAxisProps={this.getXAxisProps()}
-                />
-                <Legend
-                  items={_.values(cohorts)}
-                  tooltipContent={label => ENGAGEMENT_RECENCY_COHORTS[label]}
-                />
-              </div>
-            )}
+          <Panel data-id="engagement-recency-cohorts-chart">
+            <Tabs facet={facet} facetId={facetId} subaccountId={subaccountId} />
+            <Panel.Section>
+              {chartPanel || (
+                <div className="LiftTooltip">
+                  <BarChart
+                    gap={gap}
+                    onMouseOver={handleDateHover}
+                    onMouseOut={resetDateHover}
+                    onClick={handleDateSelect}
+                    selected={selectedDate}
+                    hovered={hoveredDate}
+                    shouldHighlightSelected={shouldHighlightSelected}
+                    timeSeries={data}
+                    tooltipContent={this.getTooltipContent}
+                    tooltipWidth="250px"
+                    yKeys={_.keys(cohorts)
+                      .map(key => ({ key: `c_${key}`, ...cohorts[key] }))
+                      .reverse()}
+                    yAxisProps={this.getYAxisProps()}
+                    xAxisProps={this.getXAxisProps()}
+                  />
+                  <Legend
+                    items={_.values(cohorts)}
+                    tooltipContent={label => ENGAGEMENT_RECENCY_COHORTS[label]}
+                  />
+                </div>
+              )}
+            </Panel.Section>
           </Panel>
         </Grid.Column>
         <Grid.Column sm={12} md={5} mdOffset={0}>
           <div className={styles.OffsetCol}>
             {!chartPanel && (
-              <EngagementRecencyActions cohorts={selectedCohorts} date={selectedDate} />
+              <Box as={Panel} sectioned>
+                <EngagementRecencyActions cohorts={selectedCohorts} date={selectedDate} />
+              </Box>
             )}
           </div>
         </Grid.Column>
@@ -157,8 +161,16 @@ export class EngagementRecencyPage extends Component {
         facet={facet}
         facetId={facetId}
         subaccountId={subaccountId}
-        primaryArea={<DateFilter left />}
       >
+        <Panel>
+          <Panel.Section>
+            <Grid>
+              <Grid.Column xs={12} md={4}>
+                <DateFilter label="Date Range" />
+              </Grid.Column>
+            </Grid>
+          </Panel.Section>
+        </Panel>
         {this.renderContent()}
         <Divider />
         <Grid>

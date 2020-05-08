@@ -1,9 +1,8 @@
-/* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
 import { getUnsubscribeRateByCohort, getEngagementRecency } from 'src/actions/signals';
 import { selectUnsubscribeRateByCohortDetails } from 'src/selectors/signals';
 import { PageLink } from 'src/components/links';
-import { Grid, Panel } from 'src/components/matchbox';
+import { Box, Grid, Panel } from 'src/components/matchbox';
 import LineChart from './components/charts/linechart/LineChart';
 import Legend from './components/charts/legend/Legend';
 import Callout from 'src/components/callout';
@@ -115,40 +114,44 @@ export class UnsubscribeRateByCohortPage extends Component {
     return (
       <Grid>
         <Grid.Column sm={12} md={7}>
-          <Tabs facet={facet} facetId={facetId} subaccountId={subaccountId} />
-          <Panel sectioned data-id="unsubscribe-rate-chart">
-            {chartPanel || (
-              <div className="LiftTooltip">
-                <LineChart
-                  height={300}
-                  onClick={handleDateSelect}
-                  selected={selectedDate}
-                  shouldHighlightSelected={shouldHighlightSelected}
-                  lines={data}
-                  tooltipWidth="250px"
-                  tooltipContent={this.getTooltipContent}
-                  yKeys={_.keys(cohorts)
-                    .map(key => ({ key: `p_${key}_unsub`, ...cohorts[key] }))
-                    .reverse()}
-                  yAxisProps={this.getYAxisProps()}
-                  xAxisProps={this.getXAxisProps()}
-                />
-                <Legend
-                  items={_.values(cohorts)}
-                  tooltipContent={label => ENGAGEMENT_RECENCY_COHORTS[label]}
-                />
-              </div>
-            )}
+          <Panel data-id="unsubscribe-rate-chart">
+            <Tabs facet={facet} facetId={facetId} subaccountId={subaccountId} />
+            <Panel.Section>
+              {chartPanel || (
+                <div className="LiftTooltip">
+                  <LineChart
+                    height={300}
+                    onClick={handleDateSelect}
+                    selected={selectedDate}
+                    shouldHighlightSelected={shouldHighlightSelected}
+                    lines={data}
+                    tooltipWidth="250px"
+                    tooltipContent={this.getTooltipContent}
+                    yKeys={_.keys(cohorts)
+                      .map(key => ({ key: `p_${key}_unsub`, ...cohorts[key] }))
+                      .reverse()}
+                    yAxisProps={this.getYAxisProps()}
+                    xAxisProps={this.getXAxisProps()}
+                  />
+                  <Legend
+                    items={_.values(cohorts)}
+                    tooltipContent={label => ENGAGEMENT_RECENCY_COHORTS[label]}
+                  />
+                </div>
+              )}
+            </Panel.Section>
           </Panel>
         </Grid.Column>
         <Grid.Column sm={12} md={5} mdOffset={0}>
           <div className={styles.OffsetCol}>
             {!chartPanel && (
-              <UnsubscribeRateByCohortActions
-                unsubscribeByCohort={selectedUnsubscribe}
-                recencyByCohort={selectedEngagementRecency}
-                date={selectedDate}
-              />
+              <Box as={Panel} sectioned>
+                <UnsubscribeRateByCohortActions
+                  unsubscribeByCohort={selectedUnsubscribe}
+                  recencyByCohort={selectedEngagementRecency}
+                  date={selectedDate}
+                />
+              </Box>
             )}
           </div>
         </Grid.Column>
@@ -170,8 +173,16 @@ export class UnsubscribeRateByCohortPage extends Component {
         facet={facet}
         facetId={facetId}
         subaccountId={subaccountId}
-        primaryArea={<DateFilter left />}
       >
+        <Panel>
+          <Panel.Section>
+            <Grid>
+              <Grid.Column xs={12} md={4}>
+                <DateFilter label="Date Range" />
+              </Grid.Column>
+            </Grid>
+          </Panel.Section>
+        </Panel>
         {this.renderContent()}
         <Divider />
         <Grid>

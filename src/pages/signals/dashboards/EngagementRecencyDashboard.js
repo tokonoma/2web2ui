@@ -21,16 +21,23 @@ export class EngagementRecencyDashboard extends Component {
     return (
       <Page title={<>Engagement Recency</>}>
         <PageDescription>{ENGAGEMENT_RECENCY_INFO}</PageDescription>
-        <Panel sectioned>
-          <Grid>
-            <Grid.Column xs={12} md={4}>
-              <DateFilter />
-            </Grid.Column>
-            <Grid.Column md={3} xs={12}>
-              <SubaccountFilter />
-            </Grid.Column>
-            <FacetFilter facets={facets} />
-          </Grid>
+        <Panel>
+          <Panel.Section>
+            <Grid>
+              <Grid.Column xs={12} md={4}>
+                <DateFilter label="Date Range" />
+              </Grid.Column>
+            </Grid>
+          </Panel.Section>
+          <Panel.Section>
+            <Grid>
+              <Grid.Column md={4} xs={12}>
+                <SubaccountFilter label="Subaccount" />
+              </Grid.Column>
+              {/* eslint-disable-next-line */}
+              <FacetFilter facets={facets} label="Breakdown" />
+            </Grid>
+          </Panel.Section>
         </Panel>
         <EngagementRecencyOverview defaults={{ perPage: 25 }} subaccounts={subaccounts} hideTitle />
       </Page>
