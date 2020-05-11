@@ -1,6 +1,8 @@
 /* eslint-disable lodash/prop-shorthand */
 import React, { useState, Fragment } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
+import _ from 'lodash';
 import { getCaretProps, getDoD } from 'src/helpers/signals';
 import { selectCurrentHealthScoreDashboard } from 'src/selectors/signals';
 import { Panel } from 'src/components/matchbox';
@@ -8,6 +10,7 @@ import BarChart from '../../../components/charts/barchart/BarChart';
 import TooltipMetric from 'src/components/charts/TooltipMetric';
 import { PanelLoading } from 'src/components';
 import Callout from 'src/components/callout';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import MetricDisplay from '../MetricDisplay/MetricDisplay';
 import { formatNumber, roundToPlaces } from 'src/helpers/units';
 import thresholds from '../../../constants/healthScoreThresholds';
@@ -16,11 +19,11 @@ import {
   newModelMarginsHealthScore,
 } from 'src/pages/signals/constants/healthScoreV2';
 import { formatDate, getDateTicks } from 'src/helpers/date';
-import moment from 'moment';
-import _ from 'lodash';
-import styles from './HealthScoreChart.module.scss';
+import OGStyles from './HealthScoreChart.module.scss';
+import hibanaStyles from './HealthScoreChartHibana.module.scss';
 
 export function HealthScoreChart(props) {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
   const [hoveredDate, setHovered] = useState(props.defaultHovered);
 
   function handleDateHover(props) {
