@@ -851,7 +851,7 @@ const routes = [
     component: onboarding.SendingDomainPage,
     condition: all(
       configFlag('featureFlags.has_signup'),
-      not(() => hasVWOflagSet('skipSendingDomainSet')),
+      not(() => hasVWOflagSet('skipSendingDomain')),
     ),
     title: 'Create a Sending Domain | Onboarding',
     supportDocSearch: 'sending domain',
