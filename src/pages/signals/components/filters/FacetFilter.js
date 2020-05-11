@@ -1,12 +1,11 @@
 import React from 'react';
 import classnames from 'classnames';
 import { Search } from '@sparkpost/matchbox-icons';
-import { Grid, Select, TextField } from 'src/components/matchbox';
+import { Grid, Label, Select, TextField } from 'src/components/matchbox';
 import { onEnter } from 'src/helpers/keyEvents';
 import withSignalOptions from '../../containers/withSignalOptions';
 import styles from './FacetFilter.module.scss';
 import facets from '../../constants/facets';
-import { Label } from 'src/components/matchbox';
 const initialFacets = facets;
 
 export class FacetFilter extends React.Component {
@@ -57,26 +56,26 @@ export class FacetFilter extends React.Component {
     ];
 
     return (
-      <Grid.Column lg={facet ? 4 : 3} xl={facet ? 5 : 3}>
+      <Grid.Column lg={facet ? 7 : 3} xl={facet ? 7 : 3}>
         {this.props.label && <Label label={this.props.label} />}
         <div className={classnames(styles.FacetFilter, facet && styles.FacetSelected)}>
-          <label className={styles.ScreenReaderOnly} htmlFor="facet-filter-select">
-            Filter By
-          </label>
-
           <Select
+            label="Breakdown"
             id="facet-filter-select"
             onChange={this.handleFacetChange}
             options={OPTIONS}
             value={facet}
           />
           {facet && (
-            <>
-              <label className={styles.ScreenReaderOnly} htmlFor="facet-filter-search">
-                Search By
-              </label>
+            <div>
+              <Label
+                className={styles.HiddenLabel}
+                id="facet-filter-search"
+                label="Search by Breakdown"
+              />
 
               <TextField
+                className={styles.FacetSearchField}
                 id="facet-filter-search"
                 onChange={this.handleSearchChange}
                 onKeyPress={onEnter(this.handleFacetSearch)}
@@ -85,7 +84,7 @@ export class FacetFilter extends React.Component {
                 suffix={<Search />}
                 value={searchTerm}
               />
-            </>
+            </div>
           )}
         </div>
       </Grid.Column>
