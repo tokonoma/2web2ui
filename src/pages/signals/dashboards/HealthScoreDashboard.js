@@ -87,7 +87,7 @@ export function HealthScoreDashboard(props) {
       <Panel title="Health Score Trends">
         <Panel.Section>
           <Grid>
-            <Grid.Column xs={12} md={4}>
+            <Grid.Column xs={12} md={5}>
               <DateFilter label="Date Range" />
             </Grid.Column>
           </Grid>
