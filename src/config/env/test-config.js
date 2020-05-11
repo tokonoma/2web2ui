@@ -3,8 +3,7 @@ const testConfig = {
   splashPage: '/dashboard',
   release: 'test-release',
   segment: {
-    enabled: true,
-    publicKey: 'LR3TCDRu7vPZfty8FPZsg4Oe1WTmpAtt',
+    enabled: false,
   },
   smtpAuth: {
     host: 'smtp.sparkmail.com',
