@@ -1,8 +1,11 @@
 import React from 'react';
-import styles from './DataCell.module.scss';
 import { ArrowDropUp, ArrowDropDown } from '@sparkpost/matchbox-icons';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
+import OGStyles from './DataCell.module.scss';
+import hibanaStyles from './DataCellHibana.module.scss';
 
 const WoWDataCell = ({ value, reverse }) => {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
   let caret = null;
   let content = '- - -';
 

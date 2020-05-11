@@ -1,0 +1,25 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.PaddedCell {
+  padding: 0; // Let the component from Matchbox do the work
+}
+
+.OverflowCell {
+  color: color(gray, 700);
+}
+
+.Red {
+  color: color(red, 700);
+}
+
+.Green {
+  color: color(green, 800);
+}
+
+.WoWValue {
+  min-width: 50px;
+}
+
+.InfoIcon {
+  color: color(gray, 700);
+}
