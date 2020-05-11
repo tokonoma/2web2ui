@@ -221,7 +221,7 @@ export function ReportOptions(props) {
     return (
       <Panel.Section>
         <Inline>
-          <Heading as="h2" looksLike="h5" style={{ display: 'inline' }}>
+          <Heading as="h2" looksLike="h5">
             Filters
           </Heading>
           <Stack>
