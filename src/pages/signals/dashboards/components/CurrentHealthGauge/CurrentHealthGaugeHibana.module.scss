@@ -1,0 +1,32 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.Header {
+  font-size: font-size(300);
+}
+
+.Red {
+  fill: color(red, 700);
+}
+
+.Yellow {
+  fill: color(yellow, 400);
+}
+
+.Green {
+  color: color(green, 800);
+}
+
+.Needle {
+  fill: color(gray, 700);
+}
+
+.Text {
+  fill: color(gray, 700);
+}
+
+.Tick {
+  stroke: color(gray, 400);
+}
+
+.Score {
+}

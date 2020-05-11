@@ -6,16 +6,17 @@ import { Panel } from 'src/components/matchbox';
 import { PanelLoading } from 'src/components';
 import Callout from 'src/components/callout';
 import { formatDate } from 'src/helpers/date';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import { FORMATS } from 'src/constants';
 import Gauge from './Gauge';
 import MetricDisplay from '../MetricDisplay/MetricDisplay';
 import thresholds from '../../../constants/healthScoreThresholds';
-
 import _ from 'lodash';
-
-import styles from './CurrentHealthGauge.module.scss';
+import OGStyles from './CurrentHealthGauge.module.scss';
+import hibanaStyles from './CurrentHealthGaugeHibana.module.scss';
 
 export function CurrentHealthGauge(props) {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
   const noData = _.isNil(props.current_health_score);
 
   if (props.loading) {
@@ -61,11 +62,8 @@ export function CurrentHealthGauge(props) {
   return (
     <Panel sectioned title={title}>
       <div className={styles.Content}>
-        {noData && (
-          <div>
-            <Callout height="auto">Current Health Score Not Available</Callout>
-          </div>
-        )}
+        {noData && <Callout height="100%">Current Health Score Not Available</Callout>}
+
         {!noData && (
           <>
             <Gauge score={props.current_health_score} threshold={threshold} />
