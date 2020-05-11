@@ -109,7 +109,7 @@ export function HealthScoreDashboard(props) {
         header={
           <Grid>
             <Grid.Column md={5} xs={12}>
-              <SubaccountFilter />
+              <SubaccountFilter label="Subaccount" />
             </Grid.Column>
             <FacetFilter facets={facets} />
           </Grid>
