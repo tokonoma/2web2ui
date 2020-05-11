@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { ExpandMore, ChevronLeft } from '@sparkpost/matchbox-icons';
-import { Button, Popover, UnstyledLink, WindowEvent } from 'src/components/matchbox';
+import { Button, Label, Popover, UnstyledLink, WindowEvent } from 'src/components/matchbox';
 import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import SubaccountTypeahead from 'src/components/typeahead/SubaccountTypeahead';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
@@ -11,7 +11,6 @@ import SubaccountOption from './SubaccountOption';
 import { onEscape } from 'src/helpers/keyEvents';
 import OGStyles from './SubaccountFilter.module.scss';
 import HibanaStyles from './SubaccountFilterHibana.module.scss';
-import { Label } from 'src/components/matchbox';
 
 const OPTIONS = [
   {

@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { PageLink } from 'src/components/links';
 import { Box, Grid, Panel } from 'src/components/matchbox';
 import { OGOnlyWrapper } from 'src/components/hibana';
@@ -21,14 +21,11 @@ import withDetails from './containers/withDetails';
 import withDateSelection from './containers/withDateSelection';
 import { Loading } from 'src/components';
 import Callout from 'src/components/callout';
-import Divider from './components/Divider';
 import ChartHeader from './components/ChartHeader';
 import { formatFullNumber, roundToPlaces, formatNumber } from 'src/helpers/units';
 import moment from 'moment';
 import _ from 'lodash';
 
-import SpamTrapsPreview from './components/previews/SpamTrapsPreview';
-import EngagementRecencyPreview from './components/previews/EngagementRecencyPreview';
 import styles from './DetailsPages.module.scss';
 import thresholds from './constants/healthScoreThresholds';
 import {
@@ -119,7 +116,7 @@ export class HealthScorePage extends Component {
             <Panel sectioned data-id="health-score-panel">
               <ChartHeader title="Health Score" tooltipContent={HEALTH_SCORE_INFO} />
               {panelContent || (
-                <Fragment>
+                <>
                   <BarChart
                     margin={newModelMarginsHealthScore}
                     gap={gap}
@@ -177,7 +174,7 @@ export class HealthScorePage extends Component {
                     xAxisProps={this.getXAxisProps()}
                   />
                   {selectedComponent && !selectedWeightsAreEmpty && (
-                    <Fragment>
+                    <>
                       <ChartHeader title={HEALTH_SCORE_COMPONENTS[selectedComponent].chartTitle} />
                       <BarChart
                         margin={newModelMarginsOther}
@@ -203,9 +200,9 @@ export class HealthScorePage extends Component {
                         yDomain={selectedDataIsZero ? [0, 1] : [0, 'auto']}
                         xAxisProps={this.getXAxisProps()}
                       />
-                    </Fragment>
+                    </>
                   )}
-                </Fragment>
+                </>
               )}
             </Panel>
           </Box>
@@ -273,28 +270,13 @@ export class HealthScorePage extends Component {
         <Panel title="Health Score Trends">
           <Panel.Section>
             <Grid>
-              <Grid.Column xs={12} md={4}>
+              <Grid.Column xs={12} md={5}>
                 <DateFilter label="Date Range" />
               </Grid.Column>
             </Grid>
           </Panel.Section>
         </Panel>
         {this.renderContent()}
-        <Divider />
-        <Grid>
-          {facet !== 'mb_provider' && (
-            <Grid.Column xs={12} sm={6}>
-              <div data-id="spam-traps-panel">
-                <SpamTrapsPreview />
-              </div>
-            </Grid.Column>
-          )}
-          <Grid.Column xs={12} sm={6}>
-            <div data-id="engagement-recency-panel">
-              <EngagementRecencyPreview />
-            </div>
-          </Grid.Column>
-        </Grid>
       </Page>
     );
   }

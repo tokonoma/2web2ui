@@ -1,0 +1,45 @@
+.Wrapper {
+  padding: spacing(400) 0 0 0;
+}
+
+.Action {
+  p {
+    font-size: font-size(300);
+  }
+}
+
+.Dash {
+  margin-bottom: spacing(400);
+  background: unset; // TODO: Remove when OG theme is removed - just an override
+}
+
+%Icon {
+  min-width: 45px;
+}
+
+.IconBad {
+  @extend %Icon;
+  color: color(red, 700);
+}
+
+.IconGood {
+  @extend %Icon;
+  color: color(green, 700);
+}
+
+.IconWarning {
+  @extend %Icon;
+  color: color(yellow, 400);
+}
+
+.Title {
+  border-bottom: 0;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.TitleText {
+  font-weight: font-weight(semibold);
+  font-size: font-size(500);
+  margin-bottom: spacing(400);
+}
