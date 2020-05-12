@@ -1,15 +1,15 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { SubaccountFilter } from '../SubaccountFilter';
-import useHibanaOverride from 'src/hooks/useHibanaOverride';
-import styles from './SubaccountFilter.module.scss';
+import { SubaccountFilterClassComponent as SubaccountFilter } from '../SubaccountFilter';
+import styles from '../SubaccountFilter.module.scss';
 
-jest.mock('src/hooks/useHibanaOverride');
-useHibanaOverride.mockReturnValue(styles);
+jest.mock('src/hooks/useHibanaOverride', () => styles => styles);
 
 describe('SubaccountFilter Component', () => {
   const subject = (props = {}) =>
-    shallow(<SubaccountFilter hasSubaccounts={true} signalOptions={{}} {...props} />);
+    shallow(
+      <SubaccountFilter hasSubaccounts={true} styles={styles} signalOptions={{}} {...props} />,
+    );
 
   const openPopover = wrapper => {
     shallow(wrapper.find('Popover').prop('trigger'))

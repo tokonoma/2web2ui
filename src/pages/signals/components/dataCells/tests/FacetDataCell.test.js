@@ -3,15 +3,11 @@ import { shallow } from 'enzyme';
 import FacetDataCell from '../FacetDataCell';
 import { MAILBOX_PROVIDERS } from 'src/constants';
 
+jest.mock('src/hooks/useHibanaOverride', () => styles => styles);
+
 describe('FacetDataCell', () => {
-  const subject = (props = {}) => shallow(
-    <FacetDataCell
-      dimension="example"
-      facet="domain"
-      id="example.com"
-      {...props}
-    />
-  );
+  const subject = (props = {}) =>
+    shallow(<FacetDataCell dimension="example" facet="domain" id="example.com" {...props} />);
 
   it('renders page link', () => {
     expect(subject()).toMatchSnapshot();
@@ -33,7 +29,7 @@ describe('FacetDataCell', () => {
     const props = {
       facet: 'sid',
       id: 123,
-      name: 'Test Subaccount'
+      name: 'Test Subaccount',
     };
     const wrapper = subject(props);
     expect(wrapper.find('PageLink').prop('children')).toEqual('Test Subaccount (123)');
@@ -43,7 +39,7 @@ describe('FacetDataCell', () => {
   it('formats mailbox provider label to friendly value', () => {
     const props = {
       facet: 'mb_provider',
-      id: 'other'
+      id: 'other',
     };
     const wrapper = subject(props);
     expect(wrapper.find('PageLink').prop('children')).toEqual(MAILBOX_PROVIDERS.other);
