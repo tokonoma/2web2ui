@@ -23,7 +23,6 @@ import _ from 'lodash';
 import SpamTrapsPreview from './components/previews/SpamTrapsPreview';
 import HealthScorePreview from './components/previews/HealthScorePreview';
 import cohorts from './constants/cohorts';
-import styles from './DetailsPages.module.scss';
 
 export class UnsubscribeRateByCohortPage extends Component {
   isEmpty = () => {
@@ -143,7 +142,7 @@ export class UnsubscribeRateByCohortPage extends Component {
           </Panel>
         </Grid.Column>
         <Grid.Column sm={12} md={5} mdOffset={0}>
-          <div className={styles.OffsetCol}>
+          <div>
             {!chartPanel && (
               <Box as={Panel} sectioned>
                 <UnsubscribeRateByCohortActions

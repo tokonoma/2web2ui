@@ -26,7 +26,6 @@ import { formatFullNumber, roundToPlaces, formatNumber } from 'src/helpers/units
 import moment from 'moment';
 import _ from 'lodash';
 
-import styles from './DetailsPages.module.scss';
 import thresholds from './constants/healthScoreThresholds';
 import {
   newModelLine,
@@ -209,7 +208,7 @@ export class HealthScorePage extends Component {
         </OGOnlyWrapper>
         <OGOnlyWrapper as={Grid.Column} sm={12} md={5} mdOffset={0}>
           {!loading && (
-            <div className={styles.OffsetCol} data-id="health-score-components">
+            <div data-id="health-score-components">
               <Box as={Grid}>
                 <Box as={Grid.Column} xs={12} md={7}>
                   <Box as={Panel} sectioned>

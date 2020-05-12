@@ -21,7 +21,6 @@ import { formatFullNumber, formatNumber, roundToPlaces } from 'src/helpers/units
 import moment from 'moment';
 import _ from 'lodash';
 import { spamTrapHitTypesCollection, spamTrapHitTypesByLabel } from './constants/spamTrapHitTypes';
-import styles from './DetailsPages.module.scss';
 
 export class SpamTrapPage extends Component {
   state = {
@@ -147,9 +146,8 @@ export class SpamTrapPage extends Component {
                   shouldHighlightSelected={shouldHighlightSelected}
                   tooltipContent={this.getTooltipContent}
                   yKeys={spamTrapHitTypesCollection
-                    .map(({ fill, key }) => ({
+                    .map(({ key }) => ({
                       key: calculation === 'relative' ? `relative_${key}` : key,
-                      fill,
                     }))
                     .reverse()}
                   yAxisProps={this.getYAxisProps()}
@@ -164,16 +162,18 @@ export class SpamTrapPage extends Component {
           </Panel>
         </Grid.Column>
         <Grid.Column sm={12} md={5} mdOffset={0}>
-          <Box as={Panel} sectioned height={1}>
-            <div className={styles.OffsetCol} style={{ height: 'fill-parent' }}>
-              {!chartPanel && (
-                <SpamTrapActions
-                  percent={selectedSpamTrapHits.relative_trap_hits}
-                  date={selectedDate}
-                />
-              )}
-            </div>
-          </Box>
+          {!loading && (
+            <Box as={Panel} sectioned>
+              <div style={{ height: 'fill-parent' }}>
+                {!chartPanel && (
+                  <SpamTrapActions
+                    percent={selectedSpamTrapHits.relative_trap_hits}
+                    date={selectedDate}
+                  />
+                )}
+              </div>
+            </Box>
+          )}
         </Grid.Column>
       </Grid>
     );
