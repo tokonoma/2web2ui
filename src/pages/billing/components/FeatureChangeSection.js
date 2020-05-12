@@ -1,6 +1,6 @@
 import React from 'react';
 import { Panel } from 'src/components/matchbox';
-import { CheckCircle } from '@sparkpost/matchbox-icons';
+import { CheckCircle, Warning } from '@sparkpost/matchbox-icons';
 
 import { Loading } from 'src/components/loading/Loading';
 import { useFeatureChangeContext } from '../context/FeatureChangeContext';
@@ -24,7 +24,7 @@ const Feature = ({ key, value, label, description, action }) => {
 };
 
 const FeatureChangeSection = () => {
-  const { features = [], loading } = useFeatureChangeContext();
+  const { features = [], loading, isReady } = useFeatureChangeContext();
   const styles = useHibanaOverride(OGStyles, HibanaStyles);
 
   if (!features.length) {
@@ -39,20 +39,31 @@ const FeatureChangeSection = () => {
     );
   }
 
-  const renderCTA = () => (
-    <Panel.Section name="feature-change-status">
-      <div className={styles.FeatureListStatus}>
-        <CheckCircle className={cx(styles.FeatureListIcon, styles.success)} />
-        <div name="status-description">
-          <strong>Your features have been updated</strong>
-          <span>, please continue with your plan change.</span>
+  const renderCTA = () =>
+    isReady ? (
+      <Panel.Section name="feature-change-status">
+        <div className={styles.FeatureListStatus}>
+          <CheckCircle className={cx(styles.FeatureListIcon, styles.success)} />
+          <div name="status-description">
+            <strong>Your features have been updated</strong>
+            <span>, please continue with your plan change.</span>
+          </div>
         </div>
-      </div>
-    </Panel.Section>
-  );
+      </Panel.Section>
+    ) : (
+      <>
+        <Warning className={cx(styles.FeatureListIcon, styles.danger)} />
+        <div name="status-description">
+          <span>
+            Your new plan has additional limits on features you currently use. See the list below to{' '}
+          </span>
+          <strong>make the necessary changes before you can change plans.</strong>
+        </div>
+      </>
+    );
 
   return (
-    <Panel accent="green" title="Changes to Features">
+    <Panel accent={isReady ? 'green' : 'red'} title="Changes to Features">
       {renderCTA()}
       {features.map(props => (
         <Feature {...props} />
