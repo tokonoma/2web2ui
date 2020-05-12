@@ -1,10 +1,10 @@
 import React, { createContext, useState, useContext, useEffect, useMemo } from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-
+import { Button } from 'src/components/matchbox';
 import { getSubscription } from 'src/actions/billing';
 import { selectPlansByKey } from 'src/selectors/accountBillingInfo';
-// import { pluralString } from 'src/helpers/string';
+import { pluralString } from 'src/helpers/string';
 
 const FeatureChangeContext = createContext({});
 
@@ -40,12 +40,9 @@ export const FeatureChangeProvider = ({
     if (!subscription) {
       return;
     }
-
     const { products: currentProducts } = subscription;
-
-    const diffObject = currentProducts.reduce((resObject, { product }) => {
+    const diffObject = currentProducts.reduce((resObject, { product, quantity }) => {
       const comparedPlan = selectedPlansByProduct[product];
-
       switch (product) {
         case 'dedicated_ip':
           if (actions.dedicated_ip || !comparedPlan) {
@@ -62,6 +59,43 @@ export const FeatureChangeProvider = ({
             };
           }
           return resObject;
+        case 'subaccounts': {
+          const limit = _.get(comparedPlan, 'limit', 0);
+          const qtyExceedsLimit = Boolean(quantity > limit);
+          if (actions.subaccounts || qtyExceedsLimit) {
+            resObject.subaccounts = {
+              label: 'Subaccounts',
+              description: (
+                <div>
+                  {limit === 0
+                    ? "Your new plan doesn't include subaccounts."
+                    : `Your new plan only allows for ${pluralString(
+                        limit,
+                        'active subaccount',
+                        'active subaccounts',
+                      )}.`}
+                  {qtyExceedsLimit && (
+                    <>
+                      <span> Please </span>
+                      <strong>
+                        change the status to terminated for{' '}
+                        {pluralString(quantity - limit, 'subaccount', 'subaccounts')}
+                      </strong>
+                      <span> to continue.</span>
+                    </>
+                  )}
+                </div>
+              ),
+              condition: !qtyExceedsLimit,
+              action: (
+                <Button variant="destructive" external to="/account/subaccounts">
+                  Update Status
+                </Button>
+              ),
+            };
+          }
+          return resObject;
+        }
         case 'sso':
         case 'tfa_required':
           if (actions.auth || !comparedPlan) {
