@@ -9,6 +9,7 @@
     }
   }
 }
+
 .BackButton {
   color: color(blue, 700);
   left: spacing(200);
@@ -20,8 +21,9 @@
 
 .ButtonIcon {
   right: spacing(200);
-  size: 36px;
-  transform: translate(0, -50%);
+  width: 24px;
+  height: 100%;
+  transform: translate(0, -50%) rotate(90deg);
   color: color(blue, 700); // to match other selects
 }
 

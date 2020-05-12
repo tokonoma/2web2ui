@@ -1,10 +1,11 @@
 import React from 'react';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
-import { ArrowDropDown, ChevronLeft } from '@sparkpost/matchbox-icons';
+import { ArrowDropDown, ChevronLeft, ChevronRight } from '@sparkpost/matchbox-icons';
 import { Button, Label, Popover, UnstyledLink, WindowEvent } from 'src/components/matchbox';
 import SubaccountTypeahead from 'src/components/typeahead/SubaccountTypeahead';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
+import { useHibana } from 'src/context/HibanaContext';
 import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import withSignalOptions from '../../containers/withSignalOptions';
 import SubaccountOption from './SubaccountOption';
@@ -84,7 +85,7 @@ export class SubaccountFilterClassComponent extends React.Component {
         >
           <span className={styles.ButtonLabel}>{subaccount.name}</span>
           {subaccount.id > 0 && <span>({subaccount.id})</span>}
-          <ArrowDropDown className={styles.ButtonIcon} />
+          <TriggerIcon className={styles.ButtonIcon} />
         </Button>
       </div>
     );
@@ -142,6 +143,18 @@ export class SubaccountFilterClassComponent extends React.Component {
       </>
     );
   }
+}
+
+// TODO: Remove when OG theme is removed - just use the `Chevron*` icon without using `ArrowDropDown`
+function TriggerIcon({ className }) {
+  const [state] = useHibana();
+  const { isHibanaEnabled } = state;
+
+  if (isHibanaEnabled) {
+    return <ChevronRight className={className} />;
+  }
+
+  return <ArrowDropDown className={className} />;
 }
 
 function SubaccountFilter(props) {

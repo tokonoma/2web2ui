@@ -20,7 +20,7 @@ exports[`SubaccountFilter Component renders open popover with options 1`] = `
         >
           Master & All Subaccounts
         </span>
-        <ArrowDropDown
+        <TriggerIcon
           className="ButtonIcon"
         />
       </Button>
@@ -150,7 +150,7 @@ exports[`SubaccountFilter Component renders with subaccount 1`] = `
               123
               )
             </span>
-            <ArrowDropDown
+            <TriggerIcon
               className="ButtonIcon"
             />
           </Button>
