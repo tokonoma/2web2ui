@@ -2,7 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { ArrowDropDown, ChevronLeft } from '@sparkpost/matchbox-icons';
-import { Button, Grid, Popover, UnstyledLink, WindowEvent } from 'src/components/matchbox';
+import { Button, Label, Popover, UnstyledLink, WindowEvent } from 'src/components/matchbox';
 import SubaccountTypeahead from 'src/components/typeahead/SubaccountTypeahead';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 import useHibanaOverride from 'src/hooks/useHibanaOverride';
@@ -76,6 +76,7 @@ export class SubaccountFilterClassComponent extends React.Component {
     const trigger = (
       <div ref={node => (this.triggerRef = node)}>
         <Button
+          aria-labelledby="subaccount-label"
           aria-controls="popover-subaccount-filter"
           fullWidth
           onClick={this.handleVisibilityToggle}
@@ -89,10 +90,13 @@ export class SubaccountFilterClassComponent extends React.Component {
     );
 
     return (
-      <Grid.Column md={5} lg={4} xl={3}>
+      <>
+        <Label id="subaccount-label" label="Subaccount" />
+
         <div className={styles.SubaccountFilter}>
           <WindowEvent handler={this.handleWindowClick} event="click" />
           <WindowEvent handler={onEscape(this.close)} event="keydown" />
+
           <Popover
             id="popover-subaccount-filter"
             className={styles.Popover}
@@ -110,7 +114,7 @@ export class SubaccountFilterClassComponent extends React.Component {
                 </div>
                 <div className={styles.SubaccountSearch}>
                   <SubaccountTypeahead
-                    label=""
+                    label="Subaccount Search"
                     onChange={this.handleChange}
                     placeholder="Search here"
                     unfiltered
@@ -135,7 +139,7 @@ export class SubaccountFilterClassComponent extends React.Component {
             </div>
           </Popover>
         </div>
-      </Grid.Column>
+      </>
     );
   }
 }

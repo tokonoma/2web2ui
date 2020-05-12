@@ -3,12 +3,10 @@ import { shallow } from 'enzyme';
 import { SubaccountFilterClassComponent as SubaccountFilter } from '../SubaccountFilter';
 import styles from '../SubaccountFilter.module.scss';
 
-jest.mock('src/hooks/useHibanaOverride', () => styles => styles);
-
 describe('SubaccountFilter Component', () => {
   const subject = (props = {}) =>
     shallow(
-      <SubaccountFilter hasSubaccounts={true} styles={styles} signalOptions={{}} {...props} />,
+      <SubaccountFilter styles={styles} hasSubaccounts={true} signalOptions={{}} {...props} />,
     );
 
   const openPopover = wrapper => {
@@ -23,6 +21,7 @@ describe('SubaccountFilter Component', () => {
 
   it('renders closed popover', () => {
     const wrapper = subject();
+
     expect(wrapper.find('Popover').prop('open')).toEqual(false);
   });
 
