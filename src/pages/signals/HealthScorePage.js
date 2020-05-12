@@ -208,45 +208,47 @@ export class HealthScorePage extends Component {
           </Box>
         </OGOnlyWrapper>
         <OGOnlyWrapper as={Grid.Column} sm={12} md={5} mdOffset={0}>
-          <div className={styles.OffsetCol} data-id="health-score-components">
-            <Box as={Grid} xs={12} md={6}>
-              <Box as={Grid.Column} xs={12} md={6}>
-                <Box as={Panel} sectioned>
-                  <ChartHeader
-                    title="Health Score Components"
-                    date={selectedDate}
-                    hideLine
-                    padding="1rem 0 1rem"
-                    tooltipContent={HEALTH_SCORE_COMPONENT_INFO}
-                  />
-                  {!loading && selectedWeightsAreEmpty && (
-                    <Callout>Insufficient data to populate this chart</Callout>
-                  )}
-                  {!panelContent && !selectedWeightsAreEmpty && (
-                    <DivergingBar
-                      barHeight={280 / (selectedWeights.length || 1)}
-                      data={selectedWeights}
-                      xKey="weight"
-                      yKey="weight_type"
-                      yLabel={({ value }) => _.get(HEALTH_SCORE_COMPONENTS[value], 'label')}
-                      tooltipContent={({ payload = {} }) =>
-                        _.get(HEALTH_SCORE_COMPONENTS[payload.weight_type], 'info')
-                      }
-                      onClick={this.handleComponentSelect}
-                      selected={selectedComponent}
+          {!loading && (
+            <div className={styles.OffsetCol} data-id="health-score-components">
+              <Box as={Grid}>
+                <Box as={Grid.Column} xs={12} md={7}>
+                  <Box as={Panel} sectioned>
+                    <ChartHeader
+                      title="Health Score Components"
+                      date={selectedDate}
+                      hideLine
+                      padding="1rem 0 1rem"
+                      tooltipContent={HEALTH_SCORE_COMPONENT_INFO}
                     />
-                  )}
+                    {!loading && selectedWeightsAreEmpty && (
+                      <Callout>Insufficient data to populate this chart</Callout>
+                    )}
+                    {!panelContent && !selectedWeightsAreEmpty && (
+                      <DivergingBar
+                        barHeight={280 / (selectedWeights.length || 1)}
+                        data={selectedWeights}
+                        xKey="weight"
+                        yKey="weight_type"
+                        yLabel={({ value }) => _.get(HEALTH_SCORE_COMPONENTS[value], 'label')}
+                        tooltipContent={({ payload = {} }) =>
+                          _.get(HEALTH_SCORE_COMPONENTS[payload.weight_type], 'info')
+                        }
+                        onClick={this.handleComponentSelect}
+                        selected={selectedComponent}
+                      />
+                    )}
+                  </Box>
+                </Box>
+                <Box as={Grid.Column} xs={12} md={5}>
+                  <Box as={Panel} sectioned>
+                    {!panelContent && (
+                      <HealthScoreActions weights={selectedWeights} date={selectedDate} />
+                    )}
+                  </Box>
                 </Box>
               </Box>
-              <Box as={Grid.Column} xs={12} md={6}>
-                <Box as={Panel} sectioned>
-                  {!panelContent && (
-                    <HealthScoreActions weights={selectedWeights} date={selectedDate} />
-                  )}
-                </Box>
-              </Box>
-            </Box>
-          </div>
+            </div>
+          )}
         </OGOnlyWrapper>
       </Grid>
     );
