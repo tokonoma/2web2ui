@@ -15,15 +15,12 @@ import withDateSelection from './containers/withDateSelection';
 import { Loading } from 'src/components';
 import Callout from 'src/components/callout';
 import Legend from './components/charts/legend/Legend';
-import Divider from './components/Divider';
 import Calculation from './components/viewControls/Calculation';
 import ChartHeader from './components/ChartHeader';
 import { formatFullNumber, formatNumber, roundToPlaces } from 'src/helpers/units';
 import moment from 'moment';
 import _ from 'lodash';
 import { spamTrapHitTypesCollection, spamTrapHitTypesByLabel } from './constants/spamTrapHitTypes';
-import EngagementRecencyPreview from './components/previews/EngagementRecencyPreview';
-import HealthScorePreview from './components/previews/HealthScorePreview';
 import styles from './DetailsPages.module.scss';
 
 export class SpamTrapPage extends Component {
@@ -207,15 +204,6 @@ export class SpamTrapPage extends Component {
           </Panel.Section>
         </Panel>
         {this.renderContent()}
-        <Divider />
-        <Grid>
-          <Grid.Column xs={12} sm={6}>
-            <EngagementRecencyPreview />
-          </Grid.Column>
-          <Grid.Column xs={12} sm={6}>
-            <HealthScorePreview />
-          </Grid.Column>
-        </Grid>
       </Page>
     );
   }
