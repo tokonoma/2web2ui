@@ -1,5 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
+import { tokens } from '@sparkpost/design-tokens-hibana';
 import styles from './TooltipMetric.module.scss';
 import { Box, Text } from 'src/components/matchbox';
 import useHibanaToggle from 'src/hooks/useHibanaToggle';
@@ -17,7 +18,7 @@ export const OGTooltipMetric = ({ color = '#6e6e73', description, label, value }
   </div>
 );
 export const HibanaTooltipMetric = ({
-  color = '#6e6e73',
+  color = tokens.color_gray_600,
   description = '',
   label = '',
   value = '',
