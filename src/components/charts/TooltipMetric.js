@@ -22,7 +22,7 @@ export const HibanaTooltipMetric = ({
   label = '',
   value = '',
 }) => (
-  <Box position="relative" display="inline-block" width={1} height="200">
+  <Box position="relative" display="inline-block" height="500">
     <Box display="flex" justifyContent="space-between">
       <Box
         backgroundColor={color}
