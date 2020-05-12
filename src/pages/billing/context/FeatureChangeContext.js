@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useEffect, useMemo } from 'react';
+import React, { createContext, useState, useCallback, useContext, useEffect, useMemo } from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Button } from 'src/components/matchbox';
@@ -20,6 +20,16 @@ export const FeatureChangeProvider = ({
   useEffect(() => {
     getSubscription();
   }, [getSubscription]);
+
+  const checkConditions = useCallback(() => {
+    getSubscription();
+  }, [getSubscription]);
+  useEffect(() => {
+    window.addEventListener('focus', checkConditions);
+    return () => {
+      window.removeEventListener('focus', checkConditions);
+    };
+  }, [checkConditions]);
 
   //Keys the selected plan by product to make for easier comparison
   const selectedPlansByProduct = useMemo(() => {
@@ -127,6 +137,17 @@ export const FeatureChangeProvider = ({
   );
 
   //Checks if all provided conditions are good
+  // const featuresWithActions = useMemo(
+  //   () =>
+  //     _.map(actions, ({ action, condition, ...rest }, key) => ({
+  //       ...rest,
+  //       key,
+  //       value: condition !== undefined ? condition : confirmations[key],
+  //       action:
+  //         condition !== undefined ? action : <Button onClick={() => onConfirm(key)}>Got it</Button>,
+  //     })),
+  //   [actions],
+  // );
   const value = {
     features: mappedFeatures,
     loading,
