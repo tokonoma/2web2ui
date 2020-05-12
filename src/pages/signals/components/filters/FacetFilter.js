@@ -57,7 +57,6 @@ export class FacetFilter extends React.Component {
 
     return (
       <Grid.Column lg={facet ? 7 : 3} xl={facet ? 7 : 3}>
-        {this.props.label && <Label label={this.props.label} />}
         <div className={classnames(styles.FacetFilter, facet && styles.FacetSelected)}>
           <Select
             label="Breakdown"

@@ -21,7 +21,7 @@ export class SpamTrapDashboard extends Component {
     const { subaccounts } = this.props;
 
     return (
-      <Page title={<>Spam Trap Monitoring</>}>
+      <Page title="Spam Trap Monitoring">
         <PageDescription>{SPAM_TRAP_INFO}</PageDescription>
 
         <Panel>
@@ -38,7 +38,7 @@ export class SpamTrapDashboard extends Component {
                 <SubaccountFilter label="Subaccount" />
               </Grid.Column>
               {/* eslint-disable-next-line */}
-            <FacetFilter facets={_.reject(facets, facet => facet.key === 'mb_provider')} label="Breakdown" />
+              <FacetFilter facets={_.reject(facets, facet => facet.key === 'mb_provider')} />
             </Grid>
           </Panel.Section>
         </Panel>

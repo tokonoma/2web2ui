@@ -2,14 +2,9 @@
 
 .Button {
   position: relative;
-  color: color(gray, 5) !important;
-}
+  opacity: 0.66;
 
-.Selected, .Selected:hover {
-  color: color(gray, 1) !important;
-  background: color(gray, 9);
-}
-
-.Group:not(:first-child) {
-  margin-left: spacing();
+  &.isSelected {
+    opacity: 1;
+  }
 }
