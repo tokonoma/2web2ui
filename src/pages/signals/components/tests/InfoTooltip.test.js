@@ -2,23 +2,20 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import InfoTooltip from '../InfoTooltip';
 
-describe('Signals InfoTooltip Component', () => {
-  let wrapper;
-  let props;
+jest.mock('src/hooks/useHibanaOverride', () => styles => styles);
 
-  beforeEach(() => {
-    props = {
-      content: 'Foo'
-    };
-    wrapper = shallow(<InfoTooltip {...props}/>);
-  });
+describe('Signals InfoTooltip Component', () => {
+  const subject = props => shallow(<InfoTooltip content="Foo" {...props} />);
 
   it('renders correctly', () => {
+    const wrapper = subject();
+
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders with size correctly', () => {
-    wrapper.setProps({ size: 15 });
+    const wrapper = subject({ size: 15 });
+
     expect(wrapper.find('InfoOutline').prop('size')).toEqual(15);
   });
 });
