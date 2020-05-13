@@ -72,7 +72,9 @@ export const FeatureChangeProvider = ({
           }
           return resObject;
         case 'subaccounts':
-          const limit = _.get(comparedPlan, 'limit', 0);
+          //there will always be a limit present for each plan,
+          //but till the api is released we need to default the higher limit to keep the current flow working
+          const limit = _.get(comparedPlan, 'limit', 5000);
           const qtyExceedsLimit = Boolean(quantity > limit);
           if (actions.subaccounts || qtyExceedsLimit || limit === 0) {
             resObject.subaccounts = {
