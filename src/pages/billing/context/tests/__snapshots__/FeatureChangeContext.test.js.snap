@@ -4,11 +4,13 @@ exports[`FeatureChangeContext should render acknowledgement for a change in auth
 Object {
   "features": Array [
     Object {
+      "condition": true,
       "description": "Your new plan no longer allows for single sign-on and account-wide requirement of two-factor authentication.",
       "key": "auth",
       "label": "Authentication and Security",
     },
   ],
+  "isReady": true,
   "loading": false,
 }
 `;
@@ -17,6 +19,7 @@ exports[`FeatureChangeContext should render acknowledgement for a change in dedi
 Object {
   "features": Array [
     Object {
+      "condition": true,
       "description": <div>
         <span>
           Your new plan doesn't include dedicated IPs. 
@@ -27,6 +30,44 @@ Object {
       "label": "Dedicated IPs",
     },
   ],
+  "isReady": true,
+  "loading": false,
+}
+`;
+
+exports[`FeatureChangeContext should render acknowledgement for a change in limit on subaccounts 1`] = `
+Object {
+  "features": Array [
+    Object {
+      "action": <Button
+        external={true}
+        to="/account/subaccounts"
+        variant="destructive"
+      >
+        Update Status
+      </Button>,
+      "condition": false,
+      "description": <div>
+        Your new plan doesn't include subaccounts.
+        <React.Fragment>
+          <span>
+             Please 
+          </span>
+          <strong>
+            change the status to terminated for
+             
+            10 subaccounts
+          </strong>
+          <span>
+             to continue.
+          </span>
+        </React.Fragment>
+      </div>,
+      "key": "subaccounts",
+      "label": "Subaccounts",
+    },
+  ],
+  "isReady": false,
   "loading": false,
 }
 `;

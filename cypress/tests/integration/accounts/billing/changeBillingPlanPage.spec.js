@@ -189,7 +189,7 @@ describe('Change Billing Plan Page', () => {
     cy.url().should('equal', `${Cypress.config().baseUrl}/account/billing`);
   });
 
-  it('Upgrades free account to starter 100K with previous active subaccounts', () => {
+  it('Upgrades free account to starter 100K with previous active subaccounts, current quantity of subaccounts exceeds new limit', () => {
     // user is on the test plan
     cy.stubRequest({
       url: '/api/v1/account',
@@ -218,32 +218,6 @@ describe('Change Billing Plan Page', () => {
     cy.findByText('Update Status')
       .should('have.prop', 'href')
       .and('include', 'account/subaccounts');
-    //calls to update the subscription with 0 active subaccounts
-    cy.stubRequest({
-      url: '/api/v1/billing/subscription',
-      fixture: 'billing/subscription/200.get.test-plan.json',
-    });
-    //confirms that active subaccounts now is less than limit
-    cy.findByText('Update Status').should('not.be.visible');
-
-    fillOutCreditCardForm();
-
-    mockCommonHttpCalls();
-
-    // Then server returns the new plan info that was saved...
-    cy.stubRequest({
-      url: '/api/v1/account',
-      fixture: 'account/200.get.100k-starter-plan.json',
-    });
-
-    cy.findByText('Change Plan').click();
-    cy.withinSnackbar(() => {
-      cy.findByText('Subscription Updated').should('be.visible');
-    });
-    cy.findByText('Plan Overview').should('be.visible');
-    cy.findByText('Your Plan').should('be.visible');
-    cy.findByText('100,000 emails for $30 per month').should('be.visible');
-    cy.url().should('equal', `${Cypress.config().baseUrl}/account/billing`);
   });
   it('Upgrades free account to starter 50K with query parameter', () => {
     cy.stubRequest({
@@ -462,7 +436,7 @@ describe('Change Billing Plan Page', () => {
     cy.url().should('equal', `${Cypress.config().baseUrl}/account/billing`);
   });
 
-  it('Upgrades free account to premier 1M with previous active subaccounts', () => {
+  it("Upgrades free account to premier 1M with previous active subaccounts, current quatity of subaccounts doesn't exceed new limit", () => {
     // user is on the test plan
     cy.stubRequest({
       url: '/api/v1/account',
@@ -483,21 +457,6 @@ describe('Change Billing Plan Page', () => {
     cy.get('[data-id=select-plan-1M-premier-0519]').click();
 
     cy.findByText('Your new plan only allows for 15 active subaccounts.').should('be.visible');
-    cy.findByText('Update Status').should('be.visible');
-    cy.findByText('Update Status')
-      .should('have.prop', 'href')
-      .and('include', 'account/subaccounts');
-    //calls to update the subscription with 0 active subaccounts
-    cy.stubRequest({
-      url: '/api/v1/billing/subscription',
-      fixture: 'billing/subscription/200.get.test-plan.json',
-    });
-    //confirms that active subaccounts now is less than limit
-    cy.findByText('Update Status').should('not.be.visible');
-
-    fillOutCreditCardForm();
-
-    mockCommonHttpCalls();
 
     fillOutCreditCardForm();
     mockCommonHttpCalls();

@@ -52,81 +52,85 @@ export const FeatureChangeProvider = ({
       return;
     }
     const { products: currentProducts } = subscription;
-    const diffObject = currentProducts.reduce((resObject, { product, quantity }) => {
-      const comparedPlan = selectedPlansByProduct[product];
-      switch (product) {
-        case 'dedicated_ip':
-          if (actions.dedicated_ip || !comparedPlan) {
-            resObject[product] = {
-              label: 'Dedicated IPs',
-              description: (
-                <div>
-                  <span>
-                    {`Your new plan doesn't include dedicated IPs. 
+    const diffObject = currentProducts.reduce(
+      (resObject, { product, quantity, limit: currentLimit }) => {
+        const comparedPlan = selectedPlansByProduct[product];
+        switch (product) {
+          case 'dedicated_ip':
+            if (actions.dedicated_ip || !comparedPlan) {
+              resObject[product] = {
+                label: 'Dedicated IPs',
+                description: (
+                  <div>
+                    <span>
+                      {`Your new plan doesn't include dedicated IPs. 
                     Your current IP(s) will be removed at the end of your current billing cycle.`}
-                  </span>
-                </div>
-              ),
-              condition: true,
-            };
-          }
-          return resObject;
-        case 'subaccounts':
-          //there will always be a limit present for each plan,
-          //but till the api is released we need to default the higher limit to keep the current flow working
-          const limit = _.get(comparedPlan, 'limit', 5000);
-          const qtyExceedsLimit = Boolean(quantity > limit);
-          if (actions.subaccounts || qtyExceedsLimit || limit === 0) {
-            resObject.subaccounts = {
-              label: 'Subaccounts',
-              description: (
-                <div>
-                  {limit === 0
-                    ? "Your new plan doesn't include subaccounts."
-                    : `Your new plan only allows for ${pluralString(
-                        limit,
-                        'active subaccount',
-                        'active subaccounts',
-                      )}.`}
-                  {qtyExceedsLimit && (
-                    <>
-                      <span> Please </span>
-                      <strong>
-                        change the status to terminated for{' '}
-                        {pluralString(quantity - limit, 'subaccount', 'subaccounts')}
-                      </strong>
-                      <span> to continue.</span>
-                    </>
-                  )}
-                </div>
-              ),
-              condition: !qtyExceedsLimit,
-              action: qtyExceedsLimit ? (
-                <Button variant="destructive" external to="/account/subaccounts">
-                  Update Status
-                </Button>
-              ) : (
-                undefined
-              ),
-            };
-          }
-          return resObject;
-        case 'sso':
-        case 'tfa_required':
-          if (actions.auth || !comparedPlan) {
-            resObject.auth = {
-              label: 'Authentication and Security',
-              description:
-                'Your new plan no longer allows for single sign-on and account-wide requirement of two-factor authentication.',
-              condition: true,
-            };
-          }
-          return resObject;
-        case 'messaging':
-        default:
-          return resObject;
-      }
-    }, {});
+                    </span>
+                  </div>
+                ),
+                condition: true,
+              };
+            }
+            return resObject;
+          case 'subaccounts':
+            //there will always be a limit present for each plan,
+            //but till the api is released we need to default the higher limit to keep the current flow working
+            const limit = _.get(comparedPlan, 'limit', 5000);
+            const qtyExceedsLimit = Boolean(quantity > limit);
+            const isLimitDecreasing = currentLimit > limit;
+            if (actions.subaccounts || qtyExceedsLimit || isLimitDecreasing) {
+              resObject.subaccounts = {
+                label: 'Subaccounts',
+                description: (
+                  <div>
+                    {limit === 0
+                      ? "Your new plan doesn't include subaccounts."
+                      : `Your new plan only allows for ${pluralString(
+                          limit,
+                          'active subaccount',
+                          'active subaccounts',
+                        )}.`}
+                    {qtyExceedsLimit && (
+                      <>
+                        <span> Please </span>
+                        <strong>
+                          change the status to terminated for{' '}
+                          {pluralString(quantity - limit, 'subaccount', 'subaccounts')}
+                        </strong>
+                        <span> to continue.</span>
+                      </>
+                    )}
+                  </div>
+                ),
+                condition: !qtyExceedsLimit,
+                action: qtyExceedsLimit ? (
+                  <Button variant="destructive" external to="/account/subaccounts">
+                    Update Status
+                  </Button>
+                ) : (
+                  undefined
+                ),
+              };
+            }
+            return resObject;
+          case 'sso':
+          case 'tfa_required':
+            if (actions.auth || !comparedPlan) {
+              resObject.auth = {
+                label: 'Authentication and Security',
+                description:
+                  'Your new plan no longer allows for single sign-on and account-wide requirement of two-factor authentication.',
+                condition: true,
+              };
+            }
+            return resObject;
+          case 'messaging':
+          default:
+            return resObject;
+        }
+      },
+      {},
+    );
     updateActions({ ...actions, ...diffObject });
   };
 
