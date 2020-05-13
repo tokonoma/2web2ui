@@ -44,6 +44,7 @@ function HibanaHead({ columns, onSort, order }) {
               onSort={onSort}
               order={order}
               sortable={sortable}
+              align={align}
             />
           </Table.HeaderCell>
         ))}
