@@ -10,7 +10,7 @@ exports[`Body renders a table body 1`] = `
       key="cell-id"
       style={
         Object {
-          "text-align": "left",
+          "textAlign": "left",
         }
       }
     >
@@ -21,7 +21,7 @@ exports[`Body renders a table body 1`] = `
       key="cell-value"
       style={
         Object {
-          "text-align": "left",
+          "textAlign": "left",
         }
       }
     >
@@ -41,7 +41,7 @@ exports[`Body renders custom component 1`] = `
       key="cell-id"
       style={
         Object {
-          "text-align": "left",
+          "textAlign": "left",
         }
       }
     >
@@ -52,7 +52,7 @@ exports[`Body renders custom component 1`] = `
       key="cell-value"
       style={
         Object {
-          "text-align": "left",
+          "textAlign": "left",
         }
       }
     >
@@ -105,7 +105,7 @@ exports[`Body renders max of perPage rows 1`] = `
       key="cell-id"
       style={
         Object {
-          "text-align": "left",
+          "textAlign": "left",
         }
       }
     >
@@ -116,7 +116,7 @@ exports[`Body renders max of perPage rows 1`] = `
       key="cell-value"
       style={
         Object {
-          "text-align": "left",
+          "textAlign": "left",
         }
       }
     >

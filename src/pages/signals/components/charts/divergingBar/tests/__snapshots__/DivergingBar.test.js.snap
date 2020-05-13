@@ -13,12 +13,12 @@ exports[`DivergingBar Component renders correctly 1`] = `
     data={
       Array [
         Object {
-          "fill": "#8CBE3C",
+          "fill": "#009f6a",
           "label": "Label foo",
           "value": "0.5",
         },
         Object {
-          "fill": "#DB2F2D",
+          "fill": "#d9363e",
           "label": "Label bar",
           "value": "-0.5",
         },
@@ -42,7 +42,7 @@ exports[`DivergingBar Component renders correctly 1`] = `
       horizontalFill={Array []}
       horizontalPoints={Array []}
       shapeRendering="crispEdges"
-      stroke="#d2d2d7"
+      stroke="#c5ced6"
       vertical={true}
       verticalFill={Array []}
       verticalPoints={Array []}
@@ -184,7 +184,7 @@ exports[`DivergingBar Component renders correctly 1`] = `
 exports[`DivergingBar Component should render custom unselected bar 1`] = `
 <g>
   <rect
-    fill="#5DCFF5"
+    fill="#abd2ff"
     opacity={0}
     width={100}
     x={0}
@@ -229,8 +229,8 @@ exports[`DivergingBar Component should render custom unselected y tick 1`] = `
 exports[`DivergingBar Component should render selected bar 1`] = `
 <g>
   <rect
-    fill="#5DCFF5"
-    opacity={0.3}
+    fill="#abd2ff"
+    opacity={0}
     width={100}
     x={0}
     x1={0}

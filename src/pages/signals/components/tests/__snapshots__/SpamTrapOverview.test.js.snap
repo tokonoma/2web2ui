@@ -12,17 +12,6 @@ exports[`SpamTrapOverview current_hits component renders current rate 1`] = `
 />
 `;
 
-exports[`SpamTrapOverview does not render title 1`] = `
-<div
-  className="Controls"
->
-  <Calculation
-    initialSelected="relative"
-    onChange={[Function]}
-  />
-</div>
-`;
-
 exports[`SpamTrapOverview history component renders absolute sparkline 1`] = `
 <SparklineDataCell
   dataKey="trap_hits"
@@ -43,9 +32,7 @@ exports[`SpamTrapOverview history component renders relative sparkline 1`] = `
 
 exports[`SpamTrapOverview renders overview panel with controls and table 1`] = `
 <Panel>
-  <div
-    className="Header"
-  >
+  <Panel.Section>
     <div
       className="Controls"
     >
@@ -54,7 +41,7 @@ exports[`SpamTrapOverview renders overview panel with controls and table 1`] = `
         onChange={[Function]}
       />
     </div>
-  </div>
+  </Panel.Section>
   <Connect(SummaryTable)
     data={
       Array [
