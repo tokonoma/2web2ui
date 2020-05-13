@@ -3,7 +3,8 @@
     {
       "plan": "subaccounts-unlimited",
       "product": "subaccounts",
-      "price": 0
+      "price": 0,
+      "limit": 5000
     },
     {
       "billing_id": "2c92c0f9488dbcd001488f4835d52bc4",
@@ -21,12 +22,14 @@
     {
       "plan": "subaccounts-premier",
       "product": "subaccounts",
-      "price": 0
+      "price": 0,
+      "limit": 15
     },
     {
-      "plan": "subaccounts-free",
+      "plan": "subaccounts-starter",
       "product": "subaccounts",
-      "price": 0
+      "price": 0, 
+      "limit": 0
     },
     {
       "plan": "sso",
