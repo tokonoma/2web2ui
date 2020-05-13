@@ -52,12 +52,15 @@ const FeatureChangeSection = () => {
       </Panel.Section>
     ) : (
       <Panel.Section name="feature-change-status">
-        <Warning className={cx(styles.FeatureListIcon, styles.danger)} />
-        <div name="status-description">
-          <span>
-            Your new plan has additional limits on features you currently use. See the list below to{' '}
-          </span>
-          <strong>make the necessary changes before you can change plans.</strong>
+        <div className={styles.FeatureListStatus}>
+          <Warning className={cx(styles.FeatureListIcon, styles.danger)} />
+          <div name="status-description">
+            <span>
+              Your new plan has additional limits on features you currently use. See the list below
+              to{' '}
+            </span>
+            <strong>make the necessary changes before you can change plans.</strong>
+          </div>
         </div>
       </Panel.Section>
     );
