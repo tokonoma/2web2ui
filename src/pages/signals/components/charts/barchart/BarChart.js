@@ -32,7 +32,7 @@ import healthScoreThresholds from '../../../constants/healthScoreThresholds';
  *   xAxisProps={{ interval: 88, tickFormatter: (tick) => moment(tick).format('M/D') }}
  * />
  */
-class BarChartClassComponent extends Component {
+export class BarChartClassComponent extends Component {
   getSelectedStyle = _.memoize(
     (key, isActiveDate, ranking, activeFill) => {
       const selectedFill =
