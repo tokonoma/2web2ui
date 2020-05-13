@@ -23,8 +23,8 @@ export const HibanaTooltipMetric = ({
   label = '',
   value = '',
 }) => (
-  <Box position="relative" display="inline-block" height="500">
-    <Box display="flex" justifyContent="space-between">
+  <Box position="relative" display="inline-block" height="500" maxWidth="900" width="100%">
+    <Box display="flex" justifyContent="space-between" width="100%">
       <Box
         backgroundColor={color}
         border="1px solid white" // todo, yuck
@@ -32,6 +32,9 @@ export const HibanaTooltipMetric = ({
         marginRight="100"
         size={16}
         marginTop="100"
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
       />
       <Box display="flex" height="100" flexDirection="column" flex="1 0 0">
         <Text as="span" fontSize="200" fontWeight="300">
