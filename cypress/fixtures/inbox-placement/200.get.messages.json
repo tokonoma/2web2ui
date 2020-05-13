@@ -1,0 +1,52 @@
+{
+  "results": [
+    {
+      "id": 1,
+      "email_address": "larry@provider.us",
+      "sending_ip": "unknown",
+      "folder": "inbox",
+      "tab": null,
+      "dkim": "pass",
+      "spf": null,
+      "dmarc": null,
+      "sent_at": "2020-03-12T01:01:13.000Z",
+      "received_at": "2020-03-12T02:01:13.000Z"
+    },
+    {
+      "id": 2,
+      "email_address": "moe@provider.us",
+      "sending_ip": "unknown",
+      "folder": "inbox",
+      "tab": "promotions",
+      "dkim": "pass",
+      "spf": null,
+      "dmarc": null,
+      "sent_at": "2020-03-12T01:01:13.000Z",
+      "received_at": "2020-03-12T02:01:13.000Z"
+    },
+    {
+      "id": 3,
+      "email_address": "curry@provider.us",
+      "sending_ip": "unknown",
+      "folder": "spam",
+      "tab": null,
+      "dkim": "pass",
+      "spf": null,
+      "dmarc": null,
+      "sent_at": "2020-03-12T01:01:13.000Z",
+      "received_at": "2020-03-12T02:01:13.000Z"
+    },
+    {
+      "id": 4,
+      "email_address": "anthony@provider.us",
+      "sending_ip": "unknown",
+      "folder": "missing",
+      "tab": null,
+      "dkim": null,
+      "spf": null,
+      "dmarc": null,
+      "sent_at": "2020-03-12T01:01:13.000Z",
+      "received_at": null
+    }
+  ]
+}

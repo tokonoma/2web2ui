@@ -1,8 +1,8 @@
 import React from 'react';
 import { CodeBlock, Grid, Panel, Tabs } from 'src/components/matchbox';
-import useTabs from 'src/hooks/useTabs';
+import { Bold } from 'src/components/text';
 import { formatBytes } from 'src/helpers/units';
-import InfoBlock from './InfoBlock';
+import useTabs from 'src/hooks/useTabs';
 
 const TABS = [
   { content: 'Raw Message', key: 'raw_message' },
@@ -15,20 +15,26 @@ const TABS = [
 const TestContent = ({ content, details }) => {
   const [selectedTabIndex, tabs] = useTabs(TABS);
   const selectedTabKey = tabs[selectedTabIndex].key;
-  const { from_address, message_size } = details;
 
   return (
     <>
-      <Panel sectioned>
-        <h2>{details.subject}</h2>
-        <Grid>
-          <InfoBlock value={from_address} label="From" columnProps={{ sm: 12, md: 4 }} />
-          <InfoBlock
-            value={formatBytes(message_size)}
-            label="Raw Message Size"
-            columnProps={{ sm: 12, md: 4 }}
-          />
-        </Grid>
+      <Panel>
+        <Panel.Section>
+          <Grid>
+            <Grid.Column xs={12} sm={6} md={6}>
+              <Bold>Subject Line</Bold>
+              <div>{details.subject}</div>
+            </Grid.Column>
+            <Grid.Column xs={12} sm={6} md={6}>
+              <Bold>From</Bold>
+              <div>{details.from_address}</div>
+            </Grid.Column>
+          </Grid>
+        </Panel.Section>
+        <Panel.Section>
+          <Bold>Raw Message Size</Bold>
+          <div>{formatBytes(details.message_size)}</div>
+        </Panel.Section>
       </Panel>
       <Panel>
         <Tabs selected={selectedTabIndex} tabs={tabs} color="blue" />

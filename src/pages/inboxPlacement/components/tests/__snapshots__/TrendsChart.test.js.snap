@@ -14,11 +14,11 @@ exports[`Inbox Placement Trends Chart renders happy path correctly 1`] = `
       items={
         Array [
           Object {
-            "fill": "#4194ED",
+            "fill": "#429bff",
             "label": "Inbox",
           },
           Object {
-            "fill": "#91C5FD",
+            "fill": "#abd2ff",
             "label": "Spam",
           },
           Object {
@@ -138,7 +138,7 @@ exports[`Inbox Placement Trends Chart renders happy path correctly 1`] = `
         cursor="pointer"
         data={Array []}
         dataKey="spam"
-        fill="#91C5FD"
+        fill="#abd2ff"
         hide={false}
         isAnimationActive={false}
         key="spam"
@@ -160,7 +160,7 @@ exports[`Inbox Placement Trends Chart renders happy path correctly 1`] = `
         cursor="pointer"
         data={Array []}
         dataKey="inbox"
-        fill="#4194ED"
+        fill="#429bff"
         hide={false}
         isAnimationActive={false}
         key="inbox"

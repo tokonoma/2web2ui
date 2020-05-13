@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Modal, Panel } from 'src/components/matchbox';
 import { ButtonWrapper } from 'src/components';
-import PanelLoading from 'src/components/panelLoading';
+import { PanelLoading } from 'src/components/loading';
 import { useHibana } from 'src/context/HibanaContext';
 
 export default function ConfirmationModal(props) {

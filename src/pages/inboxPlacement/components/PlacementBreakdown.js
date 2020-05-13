@@ -1,42 +1,10 @@
 import React from 'react';
-import { Table } from 'src/components/matchbox';
-import cx from 'classnames';
-import _ from 'lodash';
-import { TableCollection } from 'src/components/collection';
+import { PanelSectionTableCollection } from 'src/components/collection';
 import { PageLink } from 'src/components/links';
+import { slugToFriendly } from 'src/helpers/string';
 import { formatPercent } from 'src/helpers/units';
-import styles from './PlacementBreakdown.module.scss';
 import { PLACEMENT_FILTER_TYPES } from '../constants/types';
 import formatFilterName, { formatRegion } from '../helpers/formatFilterName.js';
-
-export const GroupPercentage = ({ value }) => (
-  <span className={styles.GroupValue}>{formatPercent(value * 100)}</span>
-);
-
-export const HeaderComponent = ({ type }) => (
-  <thead>
-    <Table.Row className={styles.HeaderRow}>
-      <Table.HeaderCell className={styles.PlacementNameCell}></Table.HeaderCell>
-      {type === PLACEMENT_FILTER_TYPES.MAILBOX_PROVIDER && (
-        <Table.HeaderCell className={styles.RegionCell}>Region</Table.HeaderCell>
-      )}
-      <Table.HeaderCell className={styles.Placement}>Inbox</Table.HeaderCell>
-      <Table.HeaderCell className={styles.Placement}>Spam</Table.HeaderCell>
-      <Table.HeaderCell className={styles.Placement}>Missing</Table.HeaderCell>
-      <Table.HeaderCell className={cx(styles.Authentication, styles.divider)}>SPF</Table.HeaderCell>
-      <Table.HeaderCell className={styles.Authentication}>DKIM</Table.HeaderCell>
-      <Table.HeaderCell className={styles.Authentication}>DMARC</Table.HeaderCell>
-    </Table.Row>
-  </thead>
-);
-
-const getHeaderWrapper = _.memoize(type => props => <HeaderComponent {...props} type={type} />);
-
-const WrapperComponent = ({ children }) => (
-  <div>
-    <Table>{children}</Table>
-  </div>
-);
 
 const getPlacementNameByType = (type, { mailbox_provider, region, sending_ip }) => {
   switch (type) {
@@ -51,61 +19,72 @@ const getPlacementNameByType = (type, { mailbox_provider, region, sending_ip }) 
   }
 };
 
-export const RowComponent = ({
-  id,
-  mailbox_provider,
-  placement,
-  authentication,
-  type,
-  region,
-  sending_ip,
-}) => {
-  const name = getPlacementNameByType(type, { mailbox_provider, region, sending_ip });
+const PlacementBreakdown = ({ data = [], type }) => {
+  const columns = [
+    {
+      component: props => {
+        const name = getPlacementNameByType(type, props);
+
+        return (
+          <PageLink to={`/inbox-placement/details/${props.id}/${type}/${name}`}>
+            {formatFilterName(type, name)}
+          </PageLink>
+        );
+      },
+      header: {
+        label: slugToFriendly(type),
+        sortKey: props => (getPlacementNameByType(type, props) || '').toLowerCase(),
+      },
+    },
+    {
+      component: ({ region }) => formatRegion(region),
+      header: {
+        label: 'Region',
+        sortKey: 'region',
+      },
+      visible: () => type === PLACEMENT_FILTER_TYPES.MAILBOX_PROVIDER,
+    },
+    {
+      component: ({ placement }) => formatPercent(placement.inbox_pct * 100),
+      header: {
+        label: 'Inbox',
+        sortKey: 'placement.inbox_pct',
+        minWidth: '72px',
+      },
+    },
+    {
+      component: ({ placement }) => formatPercent(placement.spam_pct * 100),
+      header: {
+        label: 'Spam',
+        sortKey: 'placement.spam_pct',
+        minWidth: '72px',
+      },
+    },
+    {
+      component: ({ placement }) => formatPercent(placement.missing_pct * 100),
+      header: {
+        label: 'Missing',
+        sortKey: 'placement.missing_pct',
+        minWidth: '72px',
+      },
+    },
+  ];
+  const visibleColumns = columns.filter(({ visible = () => true }) => visible());
+  const renderRow = columns => props =>
+    columns.map(({ component: Component }) => <Component {...props} />);
+
   return (
-    <Table.Row className={styles.DataRow}>
-      <Table.Cell className={styles.PlacementNameCell}>
-        <PageLink to={`/inbox-placement/details/${id}/${type}/${name}`}>
-          <strong>{formatFilterName(type, name)}</strong>
-        </PageLink>
-      </Table.Cell>
-      {type === PLACEMENT_FILTER_TYPES.MAILBOX_PROVIDER && (
-        <Table.Cell className={styles.RegionCell}>{formatRegion(region)}</Table.Cell>
-      )}
-      <Table.Cell className={styles.Placement}>
-        <GroupPercentage value={placement.inbox_pct} />
-      </Table.Cell>
-      <Table.Cell className={styles.Placement}>
-        <GroupPercentage value={placement.spam_pct} />
-      </Table.Cell>
-      <Table.Cell className={styles.Placement}>
-        <GroupPercentage value={placement.missing_pct} />
-      </Table.Cell>
-      <Table.Cell className={cx(styles.Authentication, styles.divider)}>
-        <GroupPercentage value={authentication.spf_pct} />
-      </Table.Cell>
-      <Table.Cell className={styles.Authentication}>
-        <GroupPercentage value={authentication.dkim_pct} />
-      </Table.Cell>
-      <Table.Cell className={styles.Authentication}>
-        <GroupPercentage value={authentication.dmarc_pct} />
-      </Table.Cell>
-    </Table.Row>
+    <PanelSectionTableCollection
+      columns={visibleColumns.map(({ header }) => header)}
+      rows={data}
+      getRowData={renderRow(visibleColumns)}
+      defaultSortColumn="placement.inbox_pct"
+      defaultSortDirection="desc"
+      filterBox={false}
+      pagination={true}
+      saveCsv={true}
+    />
   );
 };
-
-const getRowWrapper = _.memoize(type => props => <RowComponent {...props} type={type} />);
-
-const PlacementBreakdown = ({ data = [], type }) => (
-  <TableCollection
-    rows={data}
-    wrapperComponent={WrapperComponent}
-    headerComponent={getHeaderWrapper(type)}
-    rowComponent={getRowWrapper(type)}
-    pagination={true}
-    defaultSortColumn="placement.inbox_pct"
-    defaultSortDirection="desc"
-    saveCsv={false}
-  />
-);
 
 export default PlacementBreakdown;

@@ -61,6 +61,10 @@ input[type='number'] {
 code {
   font-size: 1rem;
 }
+
+pre code {
+  font-size: 0.75rem;
+}
 `;
 
 export default function HibanaStyleHandler() {

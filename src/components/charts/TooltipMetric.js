@@ -24,7 +24,14 @@ export const HibanaTooltipMetric = ({
 }) => (
   <Box position="relative" display="inline-block" width={1} height="200">
     <Box display="flex" justifyContent="space-between">
-      <Box bg={color} marginRight="100" borderRadius={8} size={16} marginTop="100" />
+      <Box
+        backgroundColor={color}
+        border="1px solid white" // todo, yuck
+        borderRadius={8}
+        marginRight="100"
+        size={16}
+        marginTop="100"
+      />
       <Box display="flex" height="100" flexDirection="column" flex="1 0 0">
         <Text as="span" fontSize="200" fontWeight="300">
           {label}

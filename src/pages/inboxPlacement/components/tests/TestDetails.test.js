@@ -5,6 +5,7 @@ import { PLACEMENT_FILTER_TYPES } from '../../constants/types';
 
 jest.mock('lodash/debounce', () => jest.fn(fn => fn));
 jest.mock('date-fns', () => ({ format: jest.fn().mockReturnValue('Jul 8th 2019 11:49am') }));
+jest.mock('src/hooks/useHibanaOverride', () => styles => styles);
 
 describe('Component: TestDetails', () => {
   const samplePlacement = {
@@ -40,7 +41,7 @@ describe('Component: TestDetails', () => {
       subject: 'Fooo',
     };
     const wrapper = subject({ details: detailsWithoutName });
-    expect(wrapper.find('InfoBlock').at(3)).toHaveProp('value', 'None');
+    expect(wrapper).toHaveTextContent('None');
   });
 
   it('renders providers breakdown correctly', () => {

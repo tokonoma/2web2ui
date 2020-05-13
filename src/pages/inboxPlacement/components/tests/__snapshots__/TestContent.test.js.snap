@@ -2,34 +2,43 @@
 
 exports[`Component: TestContent renders page correctly with defaults 1`] = `
 <Fragment>
-  <Panel
-    sectioned={true}
-  >
-    <h2>
-      foo
-    </h2>
-    <Grid>
-      <InfoBlock
-        columnProps={
-          Object {
-            "md": 4,
-            "sm": 12,
-          }
-        }
-        label="From"
-        value="foo@bar.com"
-      />
-      <InfoBlock
-        columnProps={
-          Object {
-            "md": 4,
-            "sm": 12,
-          }
-        }
-        label="Raw Message Size"
-        value="2.52KB"
-      />
-    </Grid>
+  <Panel>
+    <Panel.Section>
+      <Grid>
+        <Grid.Column
+          md={6}
+          sm={6}
+          xs={12}
+        >
+          <Bold>
+            Subject Line
+          </Bold>
+          <div>
+            foo
+          </div>
+        </Grid.Column>
+        <Grid.Column
+          md={6}
+          sm={6}
+          xs={12}
+        >
+          <Bold>
+            From
+          </Bold>
+          <div>
+            foo@bar.com
+          </div>
+        </Grid.Column>
+      </Grid>
+    </Panel.Section>
+    <Panel.Section>
+      <Bold>
+        Raw Message Size
+      </Bold>
+      <div>
+        2.52KB
+      </div>
+    </Panel.Section>
   </Panel>
   <Panel>
     <Tabs

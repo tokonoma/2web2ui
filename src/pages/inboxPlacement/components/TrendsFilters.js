@@ -1,18 +1,21 @@
 import React, { useCallback, useEffect, useMemo } from 'react';
 import moment from 'moment';
-import { Grid, Tag } from 'src/components/matchbox';
+import { Tag } from 'src/components/matchbox';
 import InboxPlacementTypeahead from 'src/components/typeahead/InboxPlacementTypeahead';
 import DatePicker from 'src/components/datePicker/DatePicker';
-import { getRelativeDates, formatApiTimestamp } from 'src/helpers/date';
-
-import styles from './TrendsFilters.module.scss';
+import { InlineItems } from 'src/components/structure';
 import {
   RELATIVE_DATE_OPTIONS,
   RELATIVE_DATE_RANGE_OPTIONS_MAP,
   TAG_LABELS,
 } from '../constants/filters';
+import { getRelativeDates, formatApiTimestamp } from 'src/helpers/date';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
+import OGStyles from './TrendsFilters.module.scss';
+import HibanaStyles from './TrendsFiltersHibana.module.scss';
 
 const TrendsFilters = ({ filters = {}, updateFilters, validateDate }) => {
+  const styles = useHibanaOverride(OGStyles, HibanaStyles);
   const { dateRange: { from, to } = {}, range, tags } = filters;
 
   // If the "to" is the current time, use the correct relative range option
@@ -75,63 +78,56 @@ const TrendsFilters = ({ filters = {}, updateFilters, validateDate }) => {
   };
 
   return (
-    <Grid>
-      <Grid.Column xs={12} lg={6}>
-        <div className={styles.DatePicker}>
-          <DatePicker
-            relativeDateOptions={RELATIVE_DATE_OPTIONS}
-            relativeRange={range}
-            from={new Date(from)}
-            to={new Date(to)}
-            disabled={false}
-            validate={validateDate}
-            onChange={({ from, to, relativeRange }) => {
-              if (from === undefined && to === undefined) {
-                const relativeDates = getRelativeDates(relativeRange);
+    <>
+      <div className={styles.Filters}>
+        <DatePicker
+          relativeDateOptions={RELATIVE_DATE_OPTIONS}
+          relativeRange={range}
+          from={new Date(from)}
+          to={new Date(to)}
+          disabled={false}
+          validate={validateDate}
+          onChange={({ from, to, relativeRange }) => {
+            if (from === undefined && to === undefined) {
+              const relativeDates = getRelativeDates(relativeRange);
 
-                updateFilters({
-                  dateRange: {
-                    from: formatApiTimestamp(relativeDates.from),
-                    to: formatApiTimestamp(relativeDates.to),
-                  },
-                  range: relativeRange,
-                });
-              } else {
-                updateFilters({
-                  dateRange: {
-                    from: formatApiTimestamp(from),
-                    to: formatApiTimestamp(to),
-                  },
-                  range: 'custom',
-                });
-              }
-            }}
-            roundToPrecision={true}
-          />
-        </div>
-      </Grid.Column>
-      <Grid.Column xs={12} lg={6}>
-        <div className={styles.SearchFilter}>
-          <InboxPlacementTypeahead filters={filters} onChange={handleFilterAdd} />
-        </div>
-      </Grid.Column>
-      {filterTags.length ? (
-        <Grid.Column xs={12} xl={12}>
-          <div className={styles.TagContainer}>
-            <strong>Filters:</strong>
+              updateFilters({
+                dateRange: {
+                  from: formatApiTimestamp(relativeDates.from),
+                  to: formatApiTimestamp(relativeDates.to),
+                },
+                range: relativeRange,
+              });
+            } else {
+              updateFilters({
+                dateRange: {
+                  from: formatApiTimestamp(from),
+                  to: formatApiTimestamp(to),
+                },
+                range: 'custom',
+              });
+            }
+          }}
+          roundToPrecision={true}
+        />
+        <InboxPlacementTypeahead filters={filters} onChange={handleFilterAdd} />
+      </div>
+      {Boolean(filterTags.length) && (
+        <div className={styles.SelectedFilters}>
+          <div className={styles.SelectedFiltersLabel}>Filters:</div>
+          <InlineItems>
             {filterTags.map(({ type, value }, index) => (
               <Tag
                 key={`${type}_${value}_${index}`}
                 onRemove={() => handleFilterRemove({ type, value })}
-                className={styles.TagWrapper}
               >
                 {TAG_LABELS[type]}: {value}
               </Tag>
             ))}
-          </div>
-        </Grid.Column>
-      ) : null}
-    </Grid>
+          </InlineItems>
+        </div>
+      )}
+    </>
   );
 };
 

@@ -17,7 +17,7 @@ export function OGPageDescription(props) {
 }
 
 export function HibanaPageDescription(props) {
-  const { children, className, maxWidth, mb = '500' } = props;
+  const { children, className, mb = '500' } = props;
 
   return (
     <Text
@@ -25,7 +25,6 @@ export function HibanaPageDescription(props) {
       fontSize="300"
       lineHeight="300"
       mb={mb}
-      maxWidth={maxWidth}
       className={classNames(hibanaStyles.PageDescription, className)}
       data-id={props['data-id']}
     >
@@ -41,7 +40,6 @@ export default function PageDescription(props) {
 PageDescription.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
-  maxWidth: PropTypes.string,
   mb: PropTypes.string,
   marginBottom: PropTypes.string,
   'data-id': PropTypes.string,

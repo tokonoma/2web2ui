@@ -191,3 +191,26 @@ Cypress.Commands.add('withinSnackbar', callback => {
 Cypress.Commands.add('withinMainContent', callback => {
   cy.get('main').within(callback);
 });
+
+Cypress.Commands.add('findByDataId', id => cy.get(`[data-id="${id}"]`));
+
+// todo, replace with findByLabelText when it works as documented
+Cypress.Commands.add('findByAriaLabelledByText', text =>
+  cy.findByText(text).then($label => {
+    const id = $label.prop('id');
+
+    if (!id) {
+      throw new Error(`Unable to find id for label with '${text}' text`);
+    }
+
+    return cy.get(`[aria-labelledby="${id}"]`);
+  }),
+);
+
+// todo, replace with findByAriaLabelledByText when Panel sets the correct aria attributes
+Cypress.Commands.add('findByPanelTitle', title =>
+  cy
+    .findByText(title)
+    .parent({ log: false })
+    .parent({ log: false }),
+);

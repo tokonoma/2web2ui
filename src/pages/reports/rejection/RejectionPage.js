@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import { refreshRejectionReport } from 'src/actions/rejectionReport';
 import { selectReportSearchOptions } from 'src/selectors/reportSearchOptions';
-import PanelLoading from 'src/components/panelLoading/PanelLoading';
+import { PanelLoading } from 'src/components/loading';
 import { Page } from 'src/components/matchbox';
 import ReportOptions from '../components/ReportOptions';
 import MetricsSummary from '../components/MetricsSummary';

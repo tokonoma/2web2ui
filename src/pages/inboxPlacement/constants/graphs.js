@@ -10,15 +10,3 @@ export const HIBANA_PERCENT_WHEEL = {
   color: tokens.color_blue_700,
   background: tokens.color_gray_300,
 };
-
-export const FOLDER_PLACEMENT_BAR_CHART = {
-  inbox: {
-    color: '#50D0D9',
-  },
-  spam: {
-    color: '#0CBAC7',
-  },
-  missing: {
-    color: '#00838C',
-  },
-};

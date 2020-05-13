@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Loading } from 'src/components/loading';
 import { Panel } from 'src/components/matchbox';
-import { Loading } from 'src/components/loading/Loading';
 import styles from './PanelLoading.module.scss';
 
 const PanelLoading = props => {

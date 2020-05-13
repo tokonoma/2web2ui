@@ -5,7 +5,7 @@ import { ApiErrorBanner, Loading } from 'src/components';
 import { Heading } from 'src/components/text';
 import { PageLink } from 'src/components/links';
 import { Page, Panel } from 'src/components/matchbox';
-import PanelLoading from 'src/components/panelLoading';
+import { PanelLoading } from 'src/components/loading';
 import IpForm from './components/IpForm';
 import DeliveryHistoryLineChart from './components/DeliveryHistoryLineChart';
 import { showAlert } from 'src/actions/globalAlert';

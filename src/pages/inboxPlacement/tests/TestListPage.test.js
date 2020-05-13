@@ -6,6 +6,7 @@ import useRouter from 'src/hooks/useRouter';
 
 import { TestListPage } from '../TestListPage';
 
+jest.mock('src/hooks/useHibanaOverride', () => styles => styles);
 jest.mock('src/hooks/useRouter');
 
 describe('Page: Test List', () => {
@@ -75,7 +76,7 @@ describe('Page: Test List', () => {
 
     it('render test name and divider if test name exists', () => {
       const wrapper = renderFirstColumn();
-      expect(wrapper.at(0)).toIncludeText(tests[0].test_name);
+      expect(wrapper).toHaveTextContent(tests[0].test_name);
     });
 
     it('doest not render test name and divider if test name does not exist', () => {

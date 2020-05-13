@@ -21,14 +21,12 @@ exports[`Page: Test List renders page correctly with defaults 1`] = `
   }
   title="Inbox Placement"
 >
-  <p
+  <PageDescription
     className="Description"
   >
     An Inbox Placement Test can tell you if you are actually landing in the recipients inbox. We can provide insight into what mailbox providers are doing with your email.
-  </p>
+  </PageDescription>
   <Panel
-    className="JoinBottom"
-    mb="0"
     title="Inbox Placement Trends"
   >
     <Panel.Section>
@@ -59,7 +57,6 @@ exports[`Page: Test List renders page correctly with defaults 1`] = `
         }
       }
     />
-    <Panel.Section />
   </Panel>
   <FilterSortCollection
     defaultSortColumn="start_time"
@@ -102,7 +99,7 @@ exports[`Page: Test List renders page correctly with defaults 1`] = `
         },
       ]
     }
-    title="Tests"
+    title="Inbox Placement Tests"
   />
 </Page>
 `;
@@ -128,14 +125,12 @@ exports[`Page: Test List renders page with tests 1`] = `
   }
   title="Inbox Placement"
 >
-  <p
+  <PageDescription
     className="Description"
   >
     An Inbox Placement Test can tell you if you are actually landing in the recipients inbox. We can provide insight into what mailbox providers are doing with your email.
-  </p>
+  </PageDescription>
   <Panel
-    className="JoinBottom"
-    mb="0"
     title="Inbox Placement Trends"
   >
     <Panel.Section>
@@ -166,7 +161,6 @@ exports[`Page: Test List renders page with tests 1`] = `
         }
       }
     />
-    <Panel.Section />
   </Panel>
   <FilterSortCollection
     defaultSortColumn="start_time"
@@ -272,7 +266,7 @@ exports[`Page: Test List renders page with tests 1`] = `
         },
       ]
     }
-    title="Tests"
+    title="Inbox Placement Tests"
   />
 </Page>
 `;

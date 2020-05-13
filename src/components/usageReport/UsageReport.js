@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { formatDateTime, formatDate } from 'src/helpers/date';
 import classnames from 'classnames';
 import { fetch as getAccount } from 'src/actions/account';
-import PanelLoading from 'src/components/panelLoading/PanelLoading';
+import { PanelLoading } from 'src/components/loading';
 import { ProgressBar, Panel, Text, Box, Inline } from 'src/components/matchbox';
 import useHibanaToggle from 'src/hooks/useHibanaToggle';
 import styles from './UsageReport.module.scss';

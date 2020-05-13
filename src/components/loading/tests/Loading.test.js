@@ -1,10 +1,8 @@
 import React from 'react';
-import { LoadingSVG, LoadingLogoSVG, Loading } from '../Loading';
+import { Loading, LoadingSVG, LoadingLogoSVG } from '../Loading';
 import { render, shallow } from 'enzyme';
-jest.mock('src/context/HibanaContext', () => ({
-  useHibana: jest.fn().mockReturnValue([{ isHibanaEnabled: false }]),
-}));
-jest.mock('src/hooks/useHibanaOverride', () => jest.fn(a => a));
+
+jest.mock('src/hooks/useHibanaOverride', () => styles => styles);
 
 describe('Loading Component', () => {
   it('should have data-id tag', () => {
@@ -32,7 +30,6 @@ describe('Loading Component', () => {
   describe('Logo', () => {
     it('should render - no props', () => {
       const wrapper = render(<LoadingLogoSVG />);
-
       expect(wrapper).toMatchSnapshot();
     });
   });

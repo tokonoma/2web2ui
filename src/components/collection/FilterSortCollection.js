@@ -157,12 +157,7 @@ const HibanaFilterSortCollection = ({
     >
       {({ collection, filterBox, pagination }) => (
         <>
-          <Panel>
-            {title && (
-              <Panel.Section>
-                <h3>{title}</h3>
-              </Panel.Section>
-            )}
+          <Panel title={title}>
             <Box justifyContent="center" alignItems="center" padding="500">
               <Grid>
                 <Grid.Column xs={12} md={9}>

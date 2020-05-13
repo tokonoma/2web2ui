@@ -2,7 +2,6 @@
 
 exports[`Component: FolderPlacementBarChart renders correct with data 1`] = `
 <ResponsiveContainer
-  className="FolderPlacementChart"
   debounce={0}
   height={200}
   width="99%"
@@ -13,17 +12,17 @@ exports[`Component: FolderPlacementBarChart renders correct with data 1`] = `
     data={
       Array [
         Object {
-          "color": "#50D0D9",
+          "color": "#28bd8b",
           "name": "Inbox",
           "value": 90.5,
         },
         Object {
-          "color": "#0CBAC7",
+          "color": "#d9363e",
           "name": "Spam",
           "value": 55.00000000000001,
         },
         Object {
-          "color": "#00838C",
+          "color": "#ffda00",
           "name": "Missing",
           "value": 40,
         },
@@ -33,27 +32,12 @@ exports[`Component: FolderPlacementBarChart renders correct with data 1`] = `
     margin={
       Object {
         "left": 20,
-        "right": 80,
+        "right": 50,
       }
     }
     reverseStackOrder={false}
     stackOffset="none"
   >
-    <CartesianGrid
-      fill="none"
-      horizontal={true}
-      horizontalFill={Array []}
-      horizontalPoints={
-        Array [
-          55,
-          110,
-        ]
-      }
-      stroke="#ccc"
-      vertical={false}
-      verticalFill={Array []}
-      verticalPoints={Array []}
-    />
     <XAxis
       allowDataOverflow={false}
       allowDecimals={true}
@@ -71,7 +55,8 @@ exports[`Component: FolderPlacementBarChart renders correct with data 1`] = `
       orientation="bottom"
       padding={
         Object {
-          "left": 20,
+          "left": 0,
+          "right": 0,
         }
       }
       reversed={false}
@@ -86,6 +71,7 @@ exports[`Component: FolderPlacementBarChart renders correct with data 1`] = `
       allowDataOverflow={false}
       allowDecimals={true}
       allowDuplicatedCategory={true}
+      axisLine={false}
       dataKey="name"
       domain={
         Array [
@@ -116,10 +102,14 @@ exports[`Component: FolderPlacementBarChart renders correct with data 1`] = `
       animationBegin={0}
       animationDuration={400}
       animationEasing="ease"
-      barSize={25}
+      background={
+        Object {
+          "fill": "#f5f8fa",
+        }
+      }
+      barSize={35}
       data={Array []}
       dataKey="value"
-      fill="#37aadc"
       hide={false}
       isAnimationActive={false}
       layout="vertical"
@@ -131,19 +121,19 @@ exports[`Component: FolderPlacementBarChart renders correct with data 1`] = `
       yAxisId={0}
     >
       <Cell
-        fill="#50D0D9"
+        fill="#28bd8b"
         key="0"
       />
       <Cell
-        fill="#0CBAC7"
+        fill="#d9363e"
         key="1"
       />
       <Cell
-        fill="#00838C"
+        fill="#ffda00"
         key="2"
       />
       <LabelList
-        fill="#55555a"
+        fill="#39444d"
         formatter={[Function]}
         position="right"
         valueAccessor={[Function]}

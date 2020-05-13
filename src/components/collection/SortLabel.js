@@ -38,7 +38,7 @@ export const HibanaSortLabel = ({ label, direction, ...rest }) => {
 
   return (
     <button className={classes} {...rest}>
-      <Text as="span" fontWeight="500" color="gray.800">
+      <Text as="span" fontWeight="600" color="gray.800">
         {label}
       </Text>
 

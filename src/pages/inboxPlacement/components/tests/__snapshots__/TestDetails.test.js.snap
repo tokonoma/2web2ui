@@ -4,97 +4,101 @@ exports[`Component: TestDetails renders correctly 1`] = `
 <Fragment>
   <Panel>
     <Panel.Section>
-      <h2>
-        Fooo
-      </h2>
       <Grid>
-        <InfoBlock
-          columnProps={
-            Object {
-              "md": 4,
-            }
-          }
-          label="From"
-        />
-        <InfoBlock
-          label="Started"
-          value="Jul 8th 2019 11:49am"
-        />
-        <InfoBlock
-          label="Finished"
-          value="--"
-        />
-        <InfoBlock
-          label="Inbox Placement Test Name"
-          value="Baz"
-        />
+        <Grid.Column
+          md={6}
+          sm={6}
+          xs={12}
+        >
+          <Bold>
+            Subject Line
+          </Bold>
+          <div>
+            Fooo
+          </div>
+        </Grid.Column>
+        <Grid.Column
+          md={6}
+          sm={6}
+          xs={12}
+        >
+          <Bold>
+            From
+          </Bold>
+          <div />
+        </Grid.Column>
       </Grid>
     </Panel.Section>
-    <Grid>
-      <Grid.Column
-        lg={8}
-        md={12}
-      >
-        <div
-          className="FolderPlacementBarChart"
+    <Panel.Section>
+      <Grid>
+        <Grid.Column
+          md={4}
+          sm={4}
+          xs={12}
         >
-          <Panel.Section>
-            <h3>
-              Folder Placement
-            </h3>
-            <FolderPlacementChart
-              placements={Object {}}
+          <Bold>
+            Started
+          </Bold>
+          <div>
+            Jul 8th 2019 11:49am
+          </div>
+        </Grid.Column>
+        <Grid.Column
+          md={4}
+          sm={4}
+          xs={12}
+        >
+          <Bold>
+            Finished
+          </Bold>
+          <div>
+            <Tag
+              className="StatusTag"
             />
-          </Panel.Section>
-        </div>
-      </Grid.Column>
-      <Grid.Column
-        lg={4}
-        md={12}
-      >
-        <Panel.Section>
-          <h3
-            className="AuthenticationHeader"
-          >
-            Authentication
-          </h3>
-          <AuthenticationResults />
-        </Panel.Section>
-      </Grid.Column>
-    </Grid>
+          </div>
+        </Grid.Column>
+      </Grid>
+    </Panel.Section>
+    <Panel.Section>
+      <Bold>
+        Test Name
+      </Bold>
+      <p>
+        Baz
+      </p>
+    </Panel.Section>
   </Panel>
-  <Panel
-    title={
-      <React.Fragment>
-        <h3
-          className="Inline"
-        >
-          Placement Breakdown
-        </h3>
-        <small
-          className="SeedsCount"
-        >
-           | undefined Seed
-        </small>
-      </React.Fragment>
-    }
+  <div
+    className="FolderAuthenticationPanels"
   >
-    <div
-      className="PlacementFilterContainer"
+    <Panel
+      className="FolderAuthenticationPanel"
+      sectioned={true}
+      title="Folder Placement"
     >
+      <FolderPlacementBarChart
+        placements={Object {}}
+      />
+    </Panel>
+    <Panel
+      className="FolderAuthenticationPanel"
+      sectioned={true}
+      title="Authentication"
+    >
+      <AuthenticationResults />
+    </Panel>
+  </div>
+  <Panel
+    title="Placement Breakdown"
+  >
+    <Panel.Section>
       <div
-        className="PlacementFilterSelect"
+        className="BreakdownFilters"
       >
-        <ScreenReaderOnly>
-          <Label
-            id="select-placement-type"
-          >
-            Placement Type
-          </Label>
-        </ScreenReaderOnly>
         <Select
           data-id="select-placement-type"
           id="select-placement-type"
+          label="Breakdown by"
           onChange={[Function]}
           options={
             Array [
@@ -113,45 +117,31 @@ exports[`Component: TestDetails renders correctly 1`] = `
             ]
           }
         />
-      </div>
-      <div
-        className="PlacementFilterTextField"
-      >
-        <ScreenReaderOnly>
-          <Label
-            id="textfield-placement-search"
-          >
-            Search by Mailbox Provider or Region
-          </Label>
-        </ScreenReaderOnly>
         <TextField
           data-id="text-field-placement-search"
           id="textfield-placement-search"
+          label="Filter"
           onChange={[Function]}
           placeholder="Mailbox Provider or Region"
           suffix={<Search />}
         />
       </div>
-    </div>
+    </Panel.Section>
     <PlacementBreakdown
       data={Array []}
       data-id="placement-breakdown-table"
       type="mailbox-provider"
     />
   </Panel>
-  <div
-    style={
-      Object {
-        "clear": "both",
-      }
-    }
+  <OGOnlyWrapper
+    as="div"
+    className="ClearSection"
   />
   <Panel
+    sectioned={true}
     title="Time to Receive Mail"
   >
-    <Panel.Section>
-      <TimeToReceiveSection />
-    </Panel.Section>
+    <TimeToReceiveSection />
   </Panel>
 </Fragment>
 `;

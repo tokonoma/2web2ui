@@ -1,8 +1,8 @@
 /* eslint-disable max-lines */
 import React, { useState } from 'react';
 import { Box, Button, Modal, Panel, Stack, TextField } from 'src/components/matchbox';
-import PanelLoading from 'src/components/panelLoading';
 import { ButtonWrapper } from 'src/components';
+import { PanelLoading } from 'src/components/loading';
 import MultiEmailField, { useMultiEmailField } from 'src/components/multiEmailField';
 import useEditorContext from '../hooks/useEditorContext';
 

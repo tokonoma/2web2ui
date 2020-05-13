@@ -11,9 +11,8 @@ import {
 } from 'src/actions/inboxPlacement';
 import { RedirectAndAlert } from 'src/components/globalAlert';
 import { PageLink } from 'src/components/links';
+import { Definition } from 'src/components/text';
 import AllMessagesCollection from './components/AllMessagesCollection';
-import InfoBlock from './components/InfoBlock';
-import styles from './AllMessagesPage.module.scss';
 import { formatPercent } from 'src/helpers/units';
 import { PLACEMENT_FILTER_TYPES } from './constants/types';
 import { selectSinglePlacementResult } from 'src/selectors/inboxPlacement';
@@ -85,78 +84,79 @@ export const AllMessagesPage = ({
     );
   }
 
-  const deliverabilityStyleProps = {
-    columnProps: { md: 3 },
-    valueClassName: styles.DeliverabilityValue,
-    labelClassName: styles.DeliverabilityHeader,
-  };
-
-  const authenticationStyleProps = {
-    columnProps: { md: 4 },
-    valueClassName: styles.AuthenticationValue,
-    labelClassName: styles.AuthenticationHeader,
-  };
-
   return (
     <Page
       breadcrumbAction={{
         component: PageLink,
-        content: 'Inbox Placement Results',
+        content: 'Test Results',
         to: `/inbox-placement/details/${id}`,
       }}
-      title="Inbox Placement"
+      title="Diagnostic Details"
       subtitle={formatFilterName(filterType, filterName)}
     >
-      <Panel title="Diagnostics">
-        <Grid>
-          <Grid.Column lg={7} md={12}>
-            <div className={styles.Divider}>
-              <h5 className={styles.Title}>Deliverability</h5>
-              <Grid className={styles.Panel}>
-                <InfoBlock value={sent} label="Sent" {...deliverabilityStyleProps} />
-                <InfoBlock
-                  value={(placement.inbox_pct || 0) * sent}
-                  label="Inbox"
-                  {...deliverabilityStyleProps}
-                />
-                <InfoBlock
-                  value={(placement.spam_pct || 0) * sent}
-                  label="Spam"
-                  {...deliverabilityStyleProps}
-                />
-                <InfoBlock
-                  value={(placement.missing_pct || 0) * sent}
-                  label="Missing"
-                  {...deliverabilityStyleProps}
-                />
-              </Grid>
-            </div>
-          </Grid.Column>
-          <Grid.Column lg={5} md={12}>
-            <h5 className={styles.Title}>Authentication</h5>
-            <Grid className={styles.Panel}>
-              <InfoBlock
-                value={formatPercent((authentication.spf_pct || 0) * 100)}
-                label="SPF"
-                {...authenticationStyleProps}
-              />
-              <InfoBlock
-                value={formatPercent((authentication.dkim_pct || 0) * 100)}
-                label="DKIM"
-                {...authenticationStyleProps}
-              />
-              <InfoBlock
-                value={formatPercent((authentication.dmarc_pct || 0) * 100)}
-                label="DMARC"
-                {...authenticationStyleProps}
-              />
+      <Grid>
+        <Grid.Column xs={12} sm={12} md={7}>
+          <Panel title="Deliverability" sectioned>
+            <Grid>
+              <Grid.Column>
+                <Definition>
+                  <Definition.Label>Sent</Definition.Label>
+                  <Definition.Value>{sent}</Definition.Value>
+                </Definition>
+              </Grid.Column>
+              <Grid.Column>
+                <Definition>
+                  <Definition.Label>Inbox</Definition.Label>
+                  <Definition.Value>{(placement.inbox_pct || 0) * sent}</Definition.Value>
+                </Definition>
+              </Grid.Column>
+              <Grid.Column>
+                <Definition>
+                  <Definition.Label>Spam</Definition.Label>
+                  <Definition.Value>{(placement.spam_pct || 0) * sent}</Definition.Value>
+                </Definition>
+              </Grid.Column>
+              <Grid.Column>
+                <Definition>
+                  <Definition.Label>Missing</Definition.Label>
+                  <Definition.Value>{(placement.missing_pct || 0) * sent}</Definition.Value>
+                </Definition>
+              </Grid.Column>
             </Grid>
-          </Grid.Column>
-        </Grid>
-      </Panel>
-      <Panel title="Seed Diagnostics">
-        <AllMessagesCollectionComponent data={messages} testId={id} />
-      </Panel>
+          </Panel>
+        </Grid.Column>
+        <Grid.Column xs={12} sm={12} md={5}>
+          <Panel title="Authentication" sectioned>
+            <Grid>
+              <Grid.Column>
+                <Definition>
+                  <Definition.Label>SPF</Definition.Label>
+                  <Definition.Value>
+                    {formatPercent((authentication.spf_pct || 0) * 100)}
+                  </Definition.Value>
+                </Definition>
+              </Grid.Column>
+              <Grid.Column>
+                <Definition>
+                  <Definition.Label>DKIM</Definition.Label>
+                  <Definition.Value>
+                    {formatPercent((authentication.dkim_pct || 0) * 100)}
+                  </Definition.Value>
+                </Definition>
+              </Grid.Column>
+              <Grid.Column>
+                <Definition>
+                  <Definition.Label>DMARC</Definition.Label>
+                  <Definition.Value>
+                    {formatPercent((authentication.dmarc_pct || 0) * 100)}
+                  </Definition.Value>
+                </Definition>
+              </Grid.Column>
+            </Grid>
+          </Panel>
+        </Grid.Column>
+      </Grid>
+      <AllMessagesCollectionComponent data={messages} testId={id} />
     </Page>
   );
 };

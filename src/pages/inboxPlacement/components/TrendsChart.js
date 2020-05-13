@@ -2,6 +2,7 @@ import React, { useEffect, useMemo } from 'react';
 import { connect } from 'react-redux';
 import { Bar, Rectangle } from 'recharts';
 import moment from 'moment';
+import { tokens } from '@sparkpost/design-tokens-hibana';
 
 import BarChart from 'src/components/charts/BarChart';
 import Legend from 'src/components/charts/Legend';
@@ -11,23 +12,22 @@ import useDateHover from 'src/pages/inboxPlacement/hooks/useDateHover';
 import { getInboxPlacementTrends } from 'src/actions/inboxPlacement';
 import { selectTrends } from 'src/selectors/inboxPlacement';
 import Callout from 'src/components/callout';
-import { PanelLoading } from 'src/components';
 import { formatApiDate } from 'src/helpers/date';
-import { Stack } from 'src/components/matchbox';
+import { PanelSectionLoading } from 'src/components/loading';
 
 const yKeys = [
   {
-    fill: '#203752',
+    fill: tokens.color_blue_1000,
     key: 'missing',
     label: 'Missing',
   },
   {
-    fill: '#91C5FD',
+    fill: tokens.color_blue_400,
     key: 'spam',
     label: 'Spam',
   },
   {
-    fill: '#4194ED',
+    fill: tokens.color_blue_600,
     key: 'inbox',
     label: 'Inbox',
   },
@@ -35,7 +35,7 @@ const yKeys = [
 
 const legend = [
   ...yKeys.map(({ fill, label }) => ({ label, fill })).reverse(),
-  { fill: '#ffffff', label: 'No Tests Sent', hasBorder: true },
+  { fill: tokens.color_white, label: 'No Tests Sent', hasBorder: true },
 ];
 
 const panelHeight = '280px';
@@ -47,21 +47,19 @@ const yAxisProps = {
 };
 
 const getTooltipContent = ({ payload = {} }) => (
-  <Stack>
+  <>
     <TooltipMetric label={'Total Messages'} value={payload.totalMessages} />
-    <Stack>
-      {yKeys
-        .map(({ fill, label, key }) => (
-          <TooltipMetric
-            key={key}
-            color={fill}
-            label={label}
-            value={`${(payload[key] * 100).toFixed(0)}%`}
-          />
-        ))
-        .reverse()}
-    </Stack>
-  </Stack>
+    {yKeys
+      .map(({ fill, label, key }) => (
+        <TooltipMetric
+          key={key}
+          color={fill}
+          label={label}
+          value={`${(payload[key] * 100).toFixed(0)}%`}
+        />
+      ))
+      .reverse()}
+  </>
 );
 
 export const TrendsChart = props => {
@@ -126,7 +124,7 @@ export const TrendsChart = props => {
   }
 
   if (loading) {
-    return <PanelLoading minHeight={panelHeight} />;
+    return <PanelSectionLoading minHeight={panelHeight} />;
   }
 
   return (

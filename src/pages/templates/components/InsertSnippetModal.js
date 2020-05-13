@@ -5,7 +5,7 @@ import copy from 'copy-to-clipboard';
 import { PageLink } from 'src/components/links';
 import { Typeahead, TypeaheadItem } from 'src/components/typeahead/Typeahead';
 import { ButtonWrapper } from 'src/components';
-import PanelLoading from 'src/components/panelLoading';
+import { PanelLoading } from 'src/components/loading';
 import CopyField from 'src/components/copyField';
 import { slugToFriendly } from 'src/helpers/string';
 import useEditorContext from '../hooks/useEditorContext';
