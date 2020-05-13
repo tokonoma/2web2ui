@@ -1,9 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { tokens } from '@sparkpost/design-tokens-hibana';
-import DivergingBar from '../DivergingBar';
-
-jest.mock('src/hooks/useHibanaOverride', () => styles => styles);
+import { DivergingBarClassComponent as DivergingBar } from '../DivergingBar';
+import styles from '../DivergingBar.module.scss';
 
 describe('DivergingBar Component', () => {
   let wrapper;
@@ -27,6 +25,7 @@ describe('DivergingBar Component', () => {
       width: '50%',
       onClick: jest.fn(),
       tooltipContent: jest.fn(),
+      styles,
     };
     wrapper = shallow(<DivergingBar {...props} />);
   });
@@ -64,14 +63,5 @@ describe('DivergingBar Component', () => {
       .props()
       .tick(getPayload(0));
     expect(Text).toMatchSnapshot();
-  });
-
-  it('should render selected y tick', () => {
-    wrapper.setProps({ selected: data[0].label });
-    const Text = wrapper
-      .find('YAxis')
-      .props()
-      .tick(getPayload(0));
-    expect(Text.props.fill).toBe(tokens.colors_gray_800);
   });
 });
