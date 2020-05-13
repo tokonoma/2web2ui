@@ -1,0 +1,27 @@
+{
+  "name": "eslint-plugin-2web2ui",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Custom rules for the 2web2ui project.",
+  "main": "index.js",
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "eslint-plugin"
+  ],
+  "scripts": {
+    "test": "node tests/no-matchbox-import.js"
+  },
+  "author": "sparkpost-fe",
+  "dependencies": {
+    "requireindex": "~1.1.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.6.0"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "license": "ISC"
+}

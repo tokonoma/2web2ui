@@ -7,6 +7,8 @@
   "rules": {
     // doesn't work with jest-in-case
     "jest/no-standalone-expect": "off",
+    
+    "2web2ui/no-matchbox-import": "error",
 
     "lodash/chaining": ["error", "never"],
 
@@ -59,5 +61,5 @@
     "plugin:prettier/recommended",
     "plugin:testing-library/recommended"
   ],
-  "plugins": ["testing-library", "jest", "lodash", "prettier"]
+  "plugins": ["testing-library", "jest", "lodash", "prettier", "2web2ui"]
 }
