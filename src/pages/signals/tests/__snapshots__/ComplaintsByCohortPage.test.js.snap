@@ -51,163 +51,173 @@ exports[`Signals Complaints Page renders correctly 1`] = `
   }
   facet="sending-domain"
   facetId="test.com"
-  primaryArea={
-    <Connect(DateFilter)
-      left={true}
-    />
-  }
   title="Complaints by Cohort"
 >
+  <Panel>
+    <Panel.Section>
+      <Grid>
+        <Grid.Column
+          md={4}
+          xs={12}
+        >
+          <Connect(DateFilter)
+            label="Date Range"
+          />
+        </Grid.Column>
+      </Grid>
+    </Panel.Section>
+  </Panel>
   <Grid>
     <Grid.Column
       md={7}
       sm={12}
     >
-      <withRouter(Tabs)
-        facet="sending-domain"
-        facetId="test.com"
-      />
       <Panel
         data-id="complaint-rate-chart"
-        sectioned={true}
       >
-        <div
-          className="LiftTooltip"
-        >
-          <LineChart
-            height={300}
-            lineType="linear"
-            lines={
-              Array [
-                Object {
-                  "date": "2017-01-01",
-                  "p_total_fbl": 1,
-                },
-                Object {
-                  "date": "2017-01-02",
-                  "p_total_fbl": 10,
-                },
-              ]
-            }
-            margin={
-              Object {
-                "bottom": 5,
-                "left": 18,
-                "right": 0,
-                "top": 12,
+        <withRouter(Tabs)
+          facet="sending-domain"
+          facetId="test.com"
+        />
+        <Panel.Section>
+          <div
+            className="LiftTooltip"
+          >
+            <LineChart
+              height={300}
+              lineType="linear"
+              lines={
+                Array [
+                  Object {
+                    "date": "2017-01-01",
+                    "p_total_fbl": 1,
+                  },
+                  Object {
+                    "date": "2017-01-02",
+                    "p_total_fbl": 10,
+                  },
+                ]
               }
-            }
-            onClick={[MockFunction]}
-            selected="2017-01-02"
-            shouldHighlightSelected={false}
-            stroke="#000"
-            tooltipContent={[Function]}
-            tooltipWidth="250px"
-            width="99%"
-            xAxisProps={
-              Object {
-                "tickFormatter": [Function],
-                "ticks": Array [
-                  1,
-                  2,
-                ],
+              margin={
+                Object {
+                  "bottom": 5,
+                  "left": 18,
+                  "right": 0,
+                  "top": 12,
+                }
               }
-            }
-            xKey="date"
-            yAxisProps={
-              Object {
-                "domain": Array [
+              onClick={[MockFunction]}
+              selected="2017-01-02"
+              shouldHighlightSelected={false}
+              stroke="#000"
+              tooltipContent={[Function]}
+              tooltipWidth="250px"
+              width="99%"
+              xAxisProps={
+                Object {
+                  "tickFormatter": [Function],
+                  "ticks": Array [
+                    1,
+                    2,
+                  ],
+                }
+              }
+              xKey="date"
+              yAxisProps={
+                Object {
+                  "domain": Array [
+                    "auto",
+                    "auto",
+                  ],
+                  "tickFormatter": [Function],
+                }
+              }
+              yKey="value"
+              yKeys={
+                Array [
+                  Object {
+                    "description": "Never engaged, first email in last 7 days",
+                    "fill": "#88E2E7",
+                    "key": "p_new_fbl",
+                    "label": "New",
+                    "stroke": "#88E2E7",
+                  },
+                  Object {
+                    "description": "365+ days since last engagement",
+                    "fill": "#50CFDA",
+                    "key": "p_uneng_fbl",
+                    "label": "Never Engaged",
+                    "stroke": "#50CFDA",
+                  },
+                  Object {
+                    "description": "90-365 days since last engagement",
+                    "fill": "#29B9C7",
+                    "key": "p_365d_fbl",
+                    "label": "Not Recently Engaged",
+                    "stroke": "#29B9C7",
+                  },
+                  Object {
+                    "description": "14-90 days since last engagement",
+                    "fill": "#219EA8",
+                    "key": "p_90d_fbl",
+                    "label": "Semi Recently Engaged",
+                    "stroke": "#219EA8",
+                  },
+                  Object {
+                    "description": "0-14 days since last engagement",
+                    "fill": "#1A838B",
+                    "key": "p_14d_fbl",
+                    "label": "Recently Engaged",
+                    "stroke": "#1A838B",
+                  },
+                ]
+              }
+              yRange={
+                Array [
                   "auto",
                   "auto",
-                ],
-                "tickFormatter": [Function],
+                ]
               }
-            }
-            yKey="value"
-            yKeys={
-              Array [
-                Object {
-                  "description": "Never engaged, first email in last 7 days",
-                  "fill": "#88E2E7",
-                  "key": "p_new_fbl",
-                  "label": "New",
-                  "stroke": "#88E2E7",
-                },
-                Object {
-                  "description": "365+ days since last engagement",
-                  "fill": "#50CFDA",
-                  "key": "p_uneng_fbl",
-                  "label": "Never Engaged",
-                  "stroke": "#50CFDA",
-                },
-                Object {
-                  "description": "90-365 days since last engagement",
-                  "fill": "#29B9C7",
-                  "key": "p_365d_fbl",
-                  "label": "Not Recently Engaged",
-                  "stroke": "#29B9C7",
-                },
-                Object {
-                  "description": "14-90 days since last engagement",
-                  "fill": "#219EA8",
-                  "key": "p_90d_fbl",
-                  "label": "Semi Recently Engaged",
-                  "stroke": "#219EA8",
-                },
-                Object {
-                  "description": "0-14 days since last engagement",
-                  "fill": "#1A838B",
-                  "key": "p_14d_fbl",
-                  "label": "Recently Engaged",
-                  "stroke": "#1A838B",
-                },
-              ]
-            }
-            yRange={
-              Array [
-                "auto",
-                "auto",
-              ]
-            }
-          />
-          <Legend
-            items={
-              Array [
-                Object {
-                  "description": "Never engaged, first email in last 7 days",
-                  "fill": "#88E2E7",
-                  "label": "New",
-                  "stroke": "#88E2E7",
-                },
-                Object {
-                  "description": "365+ days since last engagement",
-                  "fill": "#50CFDA",
-                  "label": "Never Engaged",
-                  "stroke": "#50CFDA",
-                },
-                Object {
-                  "description": "90-365 days since last engagement",
-                  "fill": "#29B9C7",
-                  "label": "Not Recently Engaged",
-                  "stroke": "#29B9C7",
-                },
-                Object {
-                  "description": "14-90 days since last engagement",
-                  "fill": "#219EA8",
-                  "label": "Semi Recently Engaged",
-                  "stroke": "#219EA8",
-                },
-                Object {
-                  "description": "0-14 days since last engagement",
-                  "fill": "#1A838B",
-                  "label": "Recently Engaged",
-                  "stroke": "#1A838B",
-                },
-              ]
-            }
-            tooltipContent={[Function]}
-          />
-        </div>
+            />
+            <Legend
+              items={
+                Array [
+                  Object {
+                    "description": "Never engaged, first email in last 7 days",
+                    "fill": "#88E2E7",
+                    "label": "New",
+                    "stroke": "#88E2E7",
+                  },
+                  Object {
+                    "description": "365+ days since last engagement",
+                    "fill": "#50CFDA",
+                    "label": "Never Engaged",
+                    "stroke": "#50CFDA",
+                  },
+                  Object {
+                    "description": "90-365 days since last engagement",
+                    "fill": "#29B9C7",
+                    "label": "Not Recently Engaged",
+                    "stroke": "#29B9C7",
+                  },
+                  Object {
+                    "description": "14-90 days since last engagement",
+                    "fill": "#219EA8",
+                    "label": "Semi Recently Engaged",
+                    "stroke": "#219EA8",
+                  },
+                  Object {
+                    "description": "0-14 days since last engagement",
+                    "fill": "#1A838B",
+                    "label": "Recently Engaged",
+                    "stroke": "#1A838B",
+                  },
+                ]
+              }
+              tooltipContent={[Function]}
+            />
+          </div>
+        </Panel.Section>
       </Panel>
     </Grid.Column>
     <Grid.Column
@@ -215,24 +225,27 @@ exports[`Signals Complaints Page renders correctly 1`] = `
       mdOffset={0}
       sm={12}
     >
-      <div
-        className="OffsetCol"
-      >
-        <ComplaintsByCohortActions
-          complaintsByCohort={
-            Object {
-              "date": "2017-01-02",
-              "p_total_fbl": 10,
+      <div>
+        <Box
+          as={[Function]}
+          sectioned={true}
+        >
+          <ComplaintsByCohortActions
+            complaintsByCohort={
+              Object {
+                "date": "2017-01-02",
+                "p_total_fbl": 10,
+              }
             }
-          }
-          date="2017-01-02"
-          recencyByCohort={
-            Object {
-              "c_uneng": 0.5,
-              "date": "2017-01-02",
+            date="2017-01-02"
+            recencyByCohort={
+              Object {
+                "c_uneng": 0.5,
+                "date": "2017-01-02",
+              }
             }
-          }
-        />
+          />
+        </Box>
       </div>
     </Grid.Column>
   </Grid>
@@ -255,32 +268,74 @@ exports[`Signals Complaints Page renders correctly 1`] = `
 `;
 
 exports[`Signals Complaints Page renders empty correctly 1`] = `
-<Panel
-  data-id="complaint-rate-chart"
-  sectioned={true}
->
-  <Callout
-    title="No Data Available"
+Array [
+  <Panel>
+    <Panel.Section>
+      <Grid>
+        <Grid.Column
+          md={4}
+          xs={12}
+        >
+          <Connect(DateFilter)
+            label="Date Range"
+          />
+        </Grid.Column>
+      </Grid>
+    </Panel.Section>
+  </Panel>,
+  <Panel
+    data-id="complaint-rate-chart"
   >
-    Insufficient data to populate this chart
-  </Callout>
-</Panel>
+    <withRouter(Tabs)
+      facet="sending-domain"
+      facetId="test.com"
+    />
+    <Panel.Section>
+      <Callout
+        title="No Data Available"
+      >
+        Insufficient data to populate this chart
+      </Callout>
+    </Panel.Section>
+  </Panel>,
+]
 `;
 
 exports[`Signals Complaints Page renders loading correctly 1`] = `
-<Panel
-  data-id="complaint-rate-chart"
-  sectioned={true}
->
-  <div
-    style={
-      Object {
-        "height": "220px",
-        "position": "relative",
-      }
-    }
+Array [
+  <Panel>
+    <Panel.Section>
+      <Grid>
+        <Grid.Column
+          md={4}
+          xs={12}
+        >
+          <Connect(DateFilter)
+            label="Date Range"
+          />
+        </Grid.Column>
+      </Grid>
+    </Panel.Section>
+  </Panel>,
+  <Panel
+    data-id="complaint-rate-chart"
   >
-    <Loading />
-  </div>
-</Panel>
+    <withRouter(Tabs)
+      facet="sending-domain"
+      facetId="test.com"
+    />
+    <Panel.Section>
+      <div
+        style={
+          Object {
+            "height": "220px",
+            "position": "relative",
+          }
+        }
+      >
+        <Loading />
+      </div>
+    </Panel.Section>
+  </Panel>,
+]
 `;
