@@ -51,7 +51,7 @@ const FeatureChangeSection = () => {
         </div>
       </Panel.Section>
     ) : (
-      <>
+      <Panel.Section name="feature-change-status">
         <Warning className={cx(styles.FeatureListIcon, styles.danger)} />
         <div name="status-description">
           <span>
@@ -59,7 +59,7 @@ const FeatureChangeSection = () => {
           </span>
           <strong>make the necessary changes before you can change plans.</strong>
         </div>
-      </>
+      </Panel.Section>
     );
 
   return (

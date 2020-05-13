@@ -43,6 +43,7 @@ export const FeatureChangeProvider = ({
     );
   }, [plans, selectedBundle]);
 
+  // console.log(selectedPlansByProduct);
   // Used for finding the features that need to have a proper function
   // Inserts into actions if it's got a conflicting issue
   // Updates if it was already in actions had conflicting issue
@@ -66,13 +67,14 @@ export const FeatureChangeProvider = ({
                   </span>
                 </div>
               ),
+              condition: true,
             };
           }
           return resObject;
-        case 'subaccounts': {
+        case 'subaccounts':
           const limit = _.get(comparedPlan, 'limit', 0);
           const qtyExceedsLimit = Boolean(quantity > limit);
-          if (actions.subaccounts || qtyExceedsLimit) {
+          if (actions.subaccounts || qtyExceedsLimit || limit === 0) {
             resObject.subaccounts = {
               label: 'Subaccounts',
               description: (
@@ -97,15 +99,16 @@ export const FeatureChangeProvider = ({
                 </div>
               ),
               condition: !qtyExceedsLimit,
-              action: (
+              action: qtyExceedsLimit ? (
                 <Button variant="destructive" external to="/account/subaccounts">
                   Update Status
                 </Button>
+              ) : (
+                undefined
               ),
             };
           }
           return resObject;
-        }
         case 'sso':
         case 'tfa_required':
           if (actions.auth || !comparedPlan) {
@@ -113,6 +116,7 @@ export const FeatureChangeProvider = ({
               label: 'Authentication and Security',
               description:
                 'Your new plan no longer allows for single sign-on and account-wide requirement of two-factor authentication.',
+              condition: true,
             };
           }
           return resObject;
@@ -125,8 +129,6 @@ export const FeatureChangeProvider = ({
   };
 
   useMemo(calculateDifferences, [subscription]);
-
-  //Evaluates condition and generates action if condition exists
   const mappedFeatures = useMemo(
     () =>
       _.map(actions, (action, key) => ({
@@ -136,19 +138,8 @@ export const FeatureChangeProvider = ({
     [actions],
   );
 
-  //Checks if all provided conditions are good
-  // const featuresWithActions = useMemo(
-  //   () =>
-  //     _.map(actions, ({ action, condition, ...rest }, key) => ({
-  //       ...rest,
-  //       key,
-  //       value: condition !== undefined ? condition : confirmations[key],
-  //       action:
-  //         condition !== undefined ? action : <Button onClick={() => onConfirm(key)}>Got it</Button>,
-  //     })),
-  //   [actions],
-  // );
   const value = {
+    isReady: _.every(mappedFeatures, 'condition'),
     features: mappedFeatures,
     loading,
   };
