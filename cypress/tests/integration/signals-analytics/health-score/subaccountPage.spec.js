@@ -53,7 +53,7 @@ describe('The health score by subaccount page', () => {
     });
   });
 
-  it('renders Recharts chart within the "Health Score", "Spam Trap Monitoring", and "Engagement Recency" panels', () => {
+  it('renders Recharts chart within the "Health Score" panel', () => {
     const rechartsSelector = '.recharts-wrapper';
 
     cy.clock(STABLE_UNIX_DATE);
@@ -65,14 +65,6 @@ describe('The health score by subaccount page', () => {
     // current missing from our current implementation. These tests can be improved!
     cy.get('[data-id="health-score-panel"]').within(() => {
       cy.get(rechartsSelector).should('have.length', 3);
-    });
-
-    cy.get('[data-id="spam-traps-panel"]').within(() => {
-      cy.get(rechartsSelector).should('be.visible');
-    });
-
-    cy.get('[data-id="engagement-recency-panel"]').within(() => {
-      cy.get(rechartsSelector).should('be.visible');
     });
   });
 
@@ -121,34 +113,6 @@ describe('The health score by subaccount page', () => {
       cy.visit(PAGE_URL);
 
       cy.get('[data-id="health-score-panel"]').within(() => {
-        cy.findByText('No Data Available').should('be.visible');
-        cy.findByText('Insufficient data to populate this chart').should('be.visible');
-      });
-    });
-
-    it('renders an empty state for "Spam Trap Monitoring" when the server returns no results', () => {
-      cy.stubRequest({
-        url: '/api/v1/signals/spam-hits/**/*',
-        fixture: 'signals/spam-hits/200.get.no-results.json',
-      });
-
-      cy.visit(PAGE_URL);
-
-      cy.get('[data-id="spam-traps-panel"]').within(() => {
-        cy.findByText('No Data Available').should('be.visible');
-        cy.findByText('Insufficient data to populate this chart').should('be.visible');
-      });
-    });
-
-    it('renders an empty state for "Engagement Recency" when the server returns no results', () => {
-      cy.stubRequest({
-        url: '/api/v1/signals/cohort-engagement/**/*',
-        fixture: 'signals/cohort-engagement/200.get.no-results.json',
-      });
-
-      cy.visit(PAGE_URL);
-
-      cy.get('[data-id="engagement-recency-panel"]').within(() => {
         cy.findByText('No Data Available').should('be.visible');
         cy.findByText('Insufficient data to populate this chart').should('be.visible');
       });
