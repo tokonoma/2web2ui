@@ -61,11 +61,6 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
   }
   facet="sending-domain"
   facetId="test.com"
-  primaryArea={
-    <Connect(DateFilter)
-      left={true}
-    />
-  }
   title={
     <React.Fragment>
       Engagement Recency
@@ -78,166 +73,179 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
     </React.Fragment>
   }
 >
+  <Panel>
+    <Panel.Section>
+      <Grid>
+        <Grid.Column
+          md={4}
+          xs={12}
+        >
+          <Connect(DateFilter)
+            label="Date Range"
+          />
+        </Grid.Column>
+      </Grid>
+    </Panel.Section>
+  </Panel>
   <Grid>
     <Grid.Column
       md={7}
       sm={12}
     >
-      <withRouter(Tabs)
-        facet="sending-domain"
-        facetId="test.com"
-      />
       <Panel
         data-id="engagement-recency-cohorts-chart"
-        sectioned={true}
       >
-        <div
-          className="LiftTooltip"
-        >
-          <BarChart
-            activeFill="#22838A"
-            fill="#B3ECEF"
-            gap={0.25}
-            height={250}
-            margin={
-              Object {
-                "bottom": 5,
-                "left": 18,
-                "right": 0,
-                "top": 12,
+        <withRouter(Tabs)
+          facet="sending-domain"
+          facetId="test.com"
+        />
+        <Panel.Section>
+          <div
+            className="LiftTooltip"
+          >
+            <BarChart
+              gap={0.25}
+              height={250}
+              margin={
+                Object {
+                  "bottom": 5,
+                  "left": 18,
+                  "right": 0,
+                  "top": 12,
+                }
               }
-            }
-            onClick={[MockFunction]}
-            selected="2017-01-02"
-            shouldHighlightSelected={true}
-            timeSeries={
-              Array [
-                Object {
-                  "c_total": 1,
-                  "date": "2017-01-01",
-                },
-                Object {
-                  "c_total": 10,
-                  "date": "2017-01-02",
-                },
-              ]
-            }
-            tooltipContent={[Function]}
-            tooltipWidth="250px"
-            width="99%"
-            xAxisProps={
-              Object {
-                "tickFormatter": [Function],
-                "ticks": Array [
-                  1,
-                  2,
-                ],
+              onClick={[MockFunction]}
+              selected="2017-01-02"
+              shouldHighlightSelected={true}
+              timeSeries={
+                Array [
+                  Object {
+                    "c_total": 1,
+                    "date": "2017-01-01",
+                  },
+                  Object {
+                    "c_total": 10,
+                    "date": "2017-01-02",
+                  },
+                ]
               }
-            }
-            xAxisRefLines={Array []}
-            xKey="date"
-            yAxisProps={
-              Object {
-                "domain": Array [
-                  0,
-                  1,
-                ],
-                "tickFormatter": [Function],
-                "ticks": Array [
-                  0,
-                  0.25,
-                  0.5,
-                  0.75,
-                  1,
-                ],
+              tooltipContent={[Function]}
+              tooltipWidth="250px"
+              width="99%"
+              xAxisProps={
+                Object {
+                  "tickFormatter": [Function],
+                  "ticks": Array [
+                    1,
+                    2,
+                  ],
+                }
               }
-            }
-            yAxisRefLines={Array []}
-            yKey="value"
-            yKeys={
-              Array [
+              xAxisRefLines={Array []}
+              xKey="date"
+              yAxisProps={
                 Object {
-                  "description": "0-14 days since last engagement",
-                  "fill": "#1A838B",
-                  "key": "c_14d",
-                  "label": "Recently Engaged",
-                  "stroke": "#1A838B",
-                },
-                Object {
-                  "description": "14-90 days since last engagement",
-                  "fill": "#219EA8",
-                  "key": "c_90d",
-                  "label": "Semi Recently Engaged",
-                  "stroke": "#219EA8",
-                },
-                Object {
-                  "description": "90-365 days since last engagement",
-                  "fill": "#29B9C7",
-                  "key": "c_365d",
-                  "label": "Not Recently Engaged",
-                  "stroke": "#29B9C7",
-                },
-                Object {
-                  "description": "365+ days since last engagement",
-                  "fill": "#50CFDA",
-                  "key": "c_uneng",
-                  "label": "Never Engaged",
-                  "stroke": "#50CFDA",
-                },
-                Object {
-                  "description": "Never engaged, first email in last 7 days",
-                  "fill": "#88E2E7",
-                  "key": "c_new",
-                  "label": "New",
-                  "stroke": "#88E2E7",
-                },
-              ]
-            }
-            yRange={
-              Array [
-                "auto",
-                "auto",
-              ]
-            }
-          />
-          <Legend
-            items={
-              Array [
-                Object {
-                  "description": "Never engaged, first email in last 7 days",
-                  "fill": "#88E2E7",
-                  "label": "New",
-                  "stroke": "#88E2E7",
-                },
-                Object {
-                  "description": "365+ days since last engagement",
-                  "fill": "#50CFDA",
-                  "label": "Never Engaged",
-                  "stroke": "#50CFDA",
-                },
-                Object {
-                  "description": "90-365 days since last engagement",
-                  "fill": "#29B9C7",
-                  "label": "Not Recently Engaged",
-                  "stroke": "#29B9C7",
-                },
-                Object {
-                  "description": "14-90 days since last engagement",
-                  "fill": "#219EA8",
-                  "label": "Semi Recently Engaged",
-                  "stroke": "#219EA8",
-                },
-                Object {
-                  "description": "0-14 days since last engagement",
-                  "fill": "#1A838B",
-                  "label": "Recently Engaged",
-                  "stroke": "#1A838B",
-                },
-              ]
-            }
-            tooltipContent={[Function]}
-          />
-        </div>
+                  "domain": Array [
+                    0,
+                    1,
+                  ],
+                  "tickFormatter": [Function],
+                  "ticks": Array [
+                    0,
+                    0.25,
+                    0.5,
+                    0.75,
+                    1,
+                  ],
+                }
+              }
+              yAxisRefLines={Array []}
+              yKey="value"
+              yKeys={
+                Array [
+                  Object {
+                    "description": "0-14 days since last engagement",
+                    "fill": "#1A838B",
+                    "key": "c_14d",
+                    "label": "Recently Engaged",
+                    "stroke": "#1A838B",
+                  },
+                  Object {
+                    "description": "14-90 days since last engagement",
+                    "fill": "#219EA8",
+                    "key": "c_90d",
+                    "label": "Semi Recently Engaged",
+                    "stroke": "#219EA8",
+                  },
+                  Object {
+                    "description": "90-365 days since last engagement",
+                    "fill": "#29B9C7",
+                    "key": "c_365d",
+                    "label": "Not Recently Engaged",
+                    "stroke": "#29B9C7",
+                  },
+                  Object {
+                    "description": "365+ days since last engagement",
+                    "fill": "#50CFDA",
+                    "key": "c_uneng",
+                    "label": "Never Engaged",
+                    "stroke": "#50CFDA",
+                  },
+                  Object {
+                    "description": "Never engaged, first email in last 7 days",
+                    "fill": "#88E2E7",
+                    "key": "c_new",
+                    "label": "New",
+                    "stroke": "#88E2E7",
+                  },
+                ]
+              }
+              yRange={
+                Array [
+                  "auto",
+                  "auto",
+                ]
+              }
+            />
+            <Legend
+              items={
+                Array [
+                  Object {
+                    "description": "Never engaged, first email in last 7 days",
+                    "fill": "#88E2E7",
+                    "label": "New",
+                    "stroke": "#88E2E7",
+                  },
+                  Object {
+                    "description": "365+ days since last engagement",
+                    "fill": "#50CFDA",
+                    "label": "Never Engaged",
+                    "stroke": "#50CFDA",
+                  },
+                  Object {
+                    "description": "90-365 days since last engagement",
+                    "fill": "#29B9C7",
+                    "label": "Not Recently Engaged",
+                    "stroke": "#29B9C7",
+                  },
+                  Object {
+                    "description": "14-90 days since last engagement",
+                    "fill": "#219EA8",
+                    "label": "Semi Recently Engaged",
+                    "stroke": "#219EA8",
+                  },
+                  Object {
+                    "description": "0-14 days since last engagement",
+                    "fill": "#1A838B",
+                    "label": "Recently Engaged",
+                    "stroke": "#1A838B",
+                  },
+                ]
+              }
+              tooltipContent={[Function]}
+            />
+          </div>
+        </Panel.Section>
       </Panel>
     </Grid.Column>
     <Grid.Column
@@ -245,18 +253,21 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
       mdOffset={0}
       sm={12}
     >
-      <div
-        className="OffsetCol"
-      >
-        <EngagementRecencyActions
-          cohorts={
-            Object {
-              "c_total": 10,
-              "date": "2017-01-02",
+      <div>
+        <Box
+          as={[Function]}
+          sectioned={true}
+        >
+          <EngagementRecencyActions
+            cohorts={
+              Object {
+                "c_total": 10,
+                "date": "2017-01-02",
+              }
             }
-          }
-          date="2017-01-02"
-        />
+            date="2017-01-02"
+          />
+        </Box>
       </div>
     </Grid.Column>
   </Grid>
@@ -279,16 +290,37 @@ exports[`Signals Engagement Recency Page renders correctly 1`] = `
 `;
 
 exports[`Signals Engagement Recency Page renders empty correctly 1`] = `
-<Panel
-  data-id="engagement-recency-cohorts-chart"
-  sectioned={true}
->
-  <Callout
-    title="No Data Available"
+Array [
+  <Panel>
+    <Panel.Section>
+      <Grid>
+        <Grid.Column
+          md={4}
+          xs={12}
+        >
+          <Connect(DateFilter)
+            label="Date Range"
+          />
+        </Grid.Column>
+      </Grid>
+    </Panel.Section>
+  </Panel>,
+  <Panel
+    data-id="engagement-recency-cohorts-chart"
   >
-    Insufficient data to populate this chart
-  </Callout>
-</Panel>
+    <withRouter(Tabs)
+      facet="sending-domain"
+      facetId="test.com"
+    />
+    <Panel.Section>
+      <Callout
+        title="No Data Available"
+      >
+        Insufficient data to populate this chart
+      </Callout>
+    </Panel.Section>
+  </Panel>,
+]
 `;
 
 exports[`Signals Engagement Recency Page renders error correctly 1`] = `
@@ -302,11 +334,6 @@ exports[`Signals Engagement Recency Page renders error correctly 1`] = `
   }
   facet="sending-domain"
   facetId="test.com"
-  primaryArea={
-    <Connect(DateFilter)
-      left={true}
-    />
-  }
   title={
     <React.Fragment>
       Engagement Recency
@@ -319,24 +346,39 @@ exports[`Signals Engagement Recency Page renders error correctly 1`] = `
     </React.Fragment>
   }
 >
+  <Panel>
+    <Panel.Section>
+      <Grid>
+        <Grid.Column
+          md={4}
+          xs={12}
+        >
+          <Connect(DateFilter)
+            label="Date Range"
+          />
+        </Grid.Column>
+      </Grid>
+    </Panel.Section>
+  </Panel>
   <Grid>
     <Grid.Column
       md={7}
       sm={12}
     >
-      <withRouter(Tabs)
-        facet="sending-domain"
-        facetId="test.com"
-      />
       <Panel
         data-id="engagement-recency-cohorts-chart"
-        sectioned={true}
       >
-        <Callout
-          title="Unable to Load Data"
-        >
-          error message
-        </Callout>
+        <withRouter(Tabs)
+          facet="sending-domain"
+          facetId="test.com"
+        />
+        <Panel.Section>
+          <Callout
+            title="Unable to Load Data"
+          >
+            error message
+          </Callout>
+        </Panel.Section>
       </Panel>
     </Grid.Column>
     <Grid.Column
@@ -344,9 +386,7 @@ exports[`Signals Engagement Recency Page renders error correctly 1`] = `
       mdOffset={0}
       sm={12}
     >
-      <div
-        className="OffsetCol"
-      />
+      <div />
     </Grid.Column>
   </Grid>
   <Divider />
@@ -368,19 +408,40 @@ exports[`Signals Engagement Recency Page renders error correctly 1`] = `
 `;
 
 exports[`Signals Engagement Recency Page renders loading correctly 1`] = `
-<Panel
-  data-id="engagement-recency-cohorts-chart"
-  sectioned={true}
->
-  <div
-    style={
-      Object {
-        "height": "220px",
-        "position": "relative",
-      }
-    }
+Array [
+  <Panel>
+    <Panel.Section>
+      <Grid>
+        <Grid.Column
+          md={4}
+          xs={12}
+        >
+          <Connect(DateFilter)
+            label="Date Range"
+          />
+        </Grid.Column>
+      </Grid>
+    </Panel.Section>
+  </Panel>,
+  <Panel
+    data-id="engagement-recency-cohorts-chart"
   >
-    <Loading />
-  </div>
-</Panel>
+    <withRouter(Tabs)
+      facet="sending-domain"
+      facetId="test.com"
+    />
+    <Panel.Section>
+      <div
+        style={
+          Object {
+            "height": "220px",
+            "position": "relative",
+          }
+        }
+      >
+        <Loading />
+      </div>
+    </Panel.Section>
+  </Panel>,
+]
 `;

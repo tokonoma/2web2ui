@@ -2,24 +2,31 @@
 
 exports[`Signals Health Score Dashboard renders page 1`] = `
 <SignalsPage
-  primaryArea={
-    <Connect(DateFilter)
-      left={true}
-    />
-  }
-  title={
-    <React.Fragment>
-      Health Score
-      <InfoTooltip
-        content="
+  title="Health Score"
+>
+  <PageDescription>
+    
   This is a predictive score that monitors your email health to identify problems before
   they negatively impact email delivery. This score is informed by message events,
   including bounces, spam trap hits, and engagement across our entire network.
-"
-      />
-    </React.Fragment>
-  }
->
+
+  </PageDescription>
+  <Panel
+    title="Health Score Trends"
+  >
+    <Panel.Section>
+      <Grid>
+        <Grid.Column
+          md={5}
+          xs={12}
+        >
+          <Connect(DateFilter)
+            label="Date Range"
+          />
+        </Grid.Column>
+      </Grid>
+    </Panel.Section>
+  </Panel>
   <Grid>
     <Grid.Column
       lg={5}
@@ -44,7 +51,14 @@ exports[`Signals Health Score Dashboard renders page 1`] = `
     }
     header={
       <Grid>
-        <Connect(Connect(SubaccountFilter)) />
+        <Grid.Column
+          md={5}
+          xs={12}
+        >
+          <Connect(Connect(SubaccountFilter))
+            label="Subaccount"
+          />
+        </Grid.Column>
         <Connect(FacetFilter)
           facets={
             Array [
