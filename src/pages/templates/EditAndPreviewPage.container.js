@@ -11,7 +11,7 @@ import {
   create as createTemplate,
   sendPreview,
   setTestData as setTestDataAction, // A method to update the editor content is also called `setTestData` - this method updates
-  getTestData
+  getTestData,
 } from 'src/actions/templates';
 import { getSnippets } from 'src/actions/snippets';
 import { list as listDomains } from 'src/actions/sendingDomains';
@@ -21,12 +21,13 @@ import {
   selectDraftTemplatePreview,
   selectPreviewLineErrors,
   selectPublishedTemplateById,
-  selectTemplateTestData
+  selectTemplateTestData,
 } from 'src/selectors/templates';
+import { hasGrants } from 'src/helpers/conditions';
 import { EditorContextProvider } from './context/EditorContext';
 import EditAndPreviewPage from './EditAndPreviewPage';
 
-const EditAndPreviewPageContainer = (props) => (
+const EditAndPreviewPageContainer = props => (
   <EditorContextProvider value={props}>
     <EditAndPreviewPage />
   </EditorContextProvider>
@@ -36,6 +37,8 @@ const mapStateToProps = (state, props) => {
   const id = props.match.params.id;
   const draft = selectDraftTemplateById(state, id);
   const published = selectPublishedTemplateById(state, id);
+  const canModify = hasGrants('templates/modify')(state);
+  const canSend = hasGrants('transmissions/modify')(state);
   const isPublishedMode = props.match.params.version === 'published';
   const template = draft || published;
   const hasDraft = template && template.has_draft;
@@ -60,7 +63,10 @@ const mapStateToProps = (state, props) => {
     isCreatePending: Boolean(state.templates.createPending),
     preview: selectDraftTemplatePreview(state, id, {}),
     previewLineErrors: selectPreviewLineErrors(state),
-    templateTestData: selectTemplateTestData(state)
+    templateTestData: selectTemplateTestData(state),
+    canModify,
+    canSend,
+    isReadOnly: !canModify || isPublishedMode,
   };
 };
 
@@ -78,7 +84,7 @@ const mapDispatchToProps = {
   showAlert,
   setTestDataAction,
   getTestData,
-  getSnippets
+  getSnippets,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditAndPreviewPageContainer);

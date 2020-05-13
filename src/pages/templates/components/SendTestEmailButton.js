@@ -17,6 +17,7 @@ const SendTestEmailButton = () => {
     parsedTestData,
     updateDraft,
     setHasSaved,
+    canModify,
   } = useEditorContext();
   const {
     handleMultiEmailChange,
@@ -33,6 +34,7 @@ const SendTestEmailButton = () => {
   const [isModalLoading, setModalLoading] = useState(false);
   const [fromEmail, setFromEmail] = useState('');
   const [subject, setSubject] = useState('');
+  const shouldTemplateBeSaved = !isPublishedMode && canModify;
 
   const resetForm = () => {
     setMultiEmailValue('');
@@ -44,7 +46,7 @@ const SendTestEmailButton = () => {
     setFromEmail(content.from.email);
     setSubject(content.subject);
 
-    if (!isPublishedMode) {
+    if (shouldTemplateBeSaved) {
       setModalLoading(true);
 
       // Save the template, then allow the user to send a preview

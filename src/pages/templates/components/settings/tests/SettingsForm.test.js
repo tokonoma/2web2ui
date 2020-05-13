@@ -26,6 +26,7 @@ describe('SettingsForm', () => {
       handleSubmit: jest.fn(func => func),
       showAlert: jest.fn(),
       setHasSaved: jest.fn(),
+      isReadOnly: false,
     };
 
     return shallow(<SettingsForm {...defaultProps} {...props} />);
@@ -69,7 +70,7 @@ describe('SettingsForm', () => {
       const wrapper = subject({
         hasSubaccounts: true,
         canViewSubaccount: true,
-        isPublishedMode: true,
+        isReadOnly: true,
       });
       const fieldProps = wrapper.find('Field').map(field => field.prop('disabled'));
       expect(fieldProps.length).toEqual(9);
@@ -91,16 +92,6 @@ describe('SettingsForm', () => {
     });
   });
 
-  describe('parseToggle', () => {
-    const instance = subject().instance();
-    it('converts value to boolean', () => {
-      expect(instance.parseToggle('1')).toBe(true);
-      expect(instance.parseToggle('')).toBe(false);
-      expect(instance.parseToggle(true)).toBe(true);
-      expect(instance.parseToggle(false)).toBe(false);
-    });
-  });
-
   cases(
     'disables submit button',
     ({ name, ...props }) => {
@@ -118,7 +109,7 @@ describe('SettingsForm', () => {
         valid: false,
       },
       'when in publish mode': {
-        isPublishedMode: true,
+        isReadOnly: true,
       },
     },
   );

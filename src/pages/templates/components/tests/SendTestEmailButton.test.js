@@ -25,6 +25,7 @@ describe('SendTestEmailButton', () => {
       isPublishedMode: false,
       updateDraft: jest.fn(() => Promise.resolve()),
       setHasSaved: jest.fn(),
+      canModify: true,
       ...editorState,
     });
 
@@ -63,6 +64,15 @@ describe('SendTestEmailButton', () => {
       expect(queryByLabelText('Subject')).toBeInTheDocument();
       expect(queryByText('Send Email')).toBeInTheDocument();
     });
+  });
+
+  it('does not save the draft when opening the modal if the template cannot be modified by the user', () => {
+    const mockUpdateDraft = jest.fn();
+    const { queryByText } = subject({ canModify: false, updateDraft: mockUpdateDraft });
+
+    userEvent.click(queryByText('Send a Test'));
+
+    expect(mockUpdateDraft).not.toHaveBeenCalled();
   });
 
   it('renders "Please enter a valid email address" when submitting the form with no values and then clears the error when the modal closes', () => {

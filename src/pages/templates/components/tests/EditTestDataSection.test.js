@@ -6,32 +6,35 @@ import EditTestDataSection from '../EditTestDataSection';
 jest.mock('../../hooks/useEditorContext');
 
 describe('EditTestDataSection', () => {
-  const subject = (editorState) => {
+  const subject = editorState => {
     useEditorContext.mockReturnValue({
       setTestData: jest.fn(),
+      template: {
+        id: 'my-template',
+      },
       testData: {
         options: {},
         metadata: {},
-        substitution_data: {}
+        substitution_data: {},
       },
       setContent: () => {},
-      ...editorState
+      ...editorState,
     });
 
-    return shallow(<EditTestDataSection/>);
+    return shallow(<EditTestDataSection />);
   };
 
   it('has an initial "value" that is derived from passed in "testData" editorContext', () => {
     const exampleTestData = {
       options: {
-        option: true
+        option: true,
       },
       metadata: {
-        meta: 'data'
+        meta: 'data',
       },
       substitution_data: {
-        substitution: 'data'
-      }
+        substitution: 'data',
+      },
     };
     const wrapper = subject({ testData: exampleTestData });
 

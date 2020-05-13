@@ -4,6 +4,7 @@ exports[`EditTextSection renders an editor 1`] = `
 <Editor
   name="text-content-editor"
   onChange={[Function]}
+  readOnly={false}
   value="Test Example"
 />
 `;

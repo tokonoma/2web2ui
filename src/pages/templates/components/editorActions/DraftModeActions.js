@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import classNames from 'classnames';
 import { Button, Popover, ScreenReaderOnly } from 'src/components/matchbox';
 import { ArrowDropDown } from '@sparkpost/matchbox-icons';
 import SaveAndPublish from './SaveAndPublish';
@@ -59,7 +60,10 @@ const DraftModeActions = () => {
 
   return (
     <Button.Group>
-      <SaveAndPublish onClick={handleSaveAndPublishClick} className={styles.Actions}>
+      <SaveAndPublish
+        onClick={handleSaveAndPublishClick}
+        className={classNames(styles.Actions, styles.ActionsPrimaryLink)}
+      >
         <strong>Save and Publish</strong>
       </SaveAndPublish>
 

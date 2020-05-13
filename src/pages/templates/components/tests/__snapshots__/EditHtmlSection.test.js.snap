@@ -5,6 +5,7 @@ exports[`EditHtmlSection renders an editor 1`] = `
   mode="html"
   name="html-content-editor"
   onChange={[Function]}
+  readOnly={false}
   value="<h1>Test</h1>"
 />
 `;

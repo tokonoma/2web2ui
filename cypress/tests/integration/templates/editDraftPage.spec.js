@@ -1,5 +1,6 @@
-const TEMPLATE_ID = 'stubbed-template-1';
-const EDITOR_SELECTOR = '.ace_text-input';
+import { EDITOR_SELECTOR, TEMPLATE_ID } from './constants';
+import { verifyTemplateSettingsIsDisabled, typeInEditor } from './helpers';
+
 const PAGE_URL = `/templates/edit/${TEMPLATE_ID}/draft/content`;
 const DEFAULT_PREVIEW_ERROR_HEADING = 'Oh no! An Error Occurred';
 const DEFAULT_PREVIEW_ERROR_DESCRIPTION =
@@ -18,6 +19,13 @@ function testPreviewContent({ selector, content }) {
     } else {
       cy.wrap($body).should('contain', content);
     }
+  });
+}
+
+function stubReportingUserGrants() {
+  cy.stubRequest({
+    url: '/api/v1/authenticate/grants**',
+    fixture: 'authenticate/grants/200.get.reporting.json',
   });
 }
 
@@ -135,6 +143,14 @@ describe('The templates edit draft page', () => {
         });
     });
 
+    it('renders all form elements as disabled if the user does not have the grant to modify templates', () => {
+      stubReportingUserGrants();
+
+      cy.visit(PAGE_URL);
+
+      verifyTemplateSettingsIsDisabled();
+    });
+
     it('renders a success message when the user changes a value in the form and then clicks the "Update Settings" button', () => {
       cy.stubRequest({
         method: 'PUT',
@@ -155,6 +171,14 @@ describe('The templates edit draft page', () => {
   });
 
   describe('template actions', () => {
+    it('does not render when the user does not have permission to modify templates', () => {
+      stubReportingUserGrants();
+
+      cy.visit(PAGE_URL);
+
+      cy.queryByText('Save and Publish').should('not.be.visible');
+    });
+
     it('renders with a "Save and Publish" button', () => {
       cy.visit(PAGE_URL);
 
@@ -390,6 +414,32 @@ describe('The templates edit draft page', () => {
   });
 
   describe('the code editor in draft mode', () => {
+    it('renders as "Read Only" on all tabs except "Test Data" when the user does not have permission to modify a template', () => {
+      stubReportingUserGrants();
+
+      cy.visit(PAGE_URL);
+
+      // HTML tab already active by default, so no need to click it
+      typeInEditor('Hello HTML tab.');
+      cy.queryByText('Hello HTML tab.').should('not.be.visible');
+      cy.findByText('Read Only').should('be.visible');
+
+      cy.findByText('AMP HTML').click();
+      typeInEditor('Hello AMP HTML tab.');
+      cy.queryByText('Hello AMP HTML tab.').should('not.be.visible');
+      cy.findByText('Read Only').should('be.visible');
+
+      cy.findByText('Text').click();
+      typeInEditor('Hello Text tab.');
+      cy.queryByText('Hello Text tab.').should('not.be.visible');
+      cy.findByText('Read Only').should('be.visible');
+
+      cy.findByText('Test Data').click();
+      typeInEditor('Hello Test Data tab.');
+      cy.findByText('Hello Test Data tab.').should('be.visible');
+      cy.queryByText('Read Only').should('not.be.visible');
+    });
+
     it('renders the values of the HTML, AMP HTML, and Text tabs from the stored template', () => {
       cy.visit(PAGE_URL);
 
@@ -405,14 +455,6 @@ describe('The templates edit draft page', () => {
     });
 
     it('allows text entry in the HTML, AMP HTML, Text, and Test Data tabs', () => {
-      const typeInEditor = content => {
-        cy.get(EDITOR_SELECTOR)
-          .focus()
-          .clear()
-          .type(content)
-          .blur();
-      };
-
       cy.visit(PAGE_URL);
 
       typeInEditor('<h1>Hello, HTML');
@@ -436,6 +478,31 @@ describe('The templates edit draft page', () => {
       typeInEditor('Hello, test data');
 
       cy.findByText('Hello, test data').should('be.visible');
+    });
+
+    it("saves the user's test data entry to local storage as the user edits test data", () => {
+      cy.visit(PAGE_URL);
+
+      cy.findByText('Test Data').click();
+
+      cy.clearLocalStorage();
+      typeInEditor('{"substitution_data": "THIS IS SOME TEST DATA"}');
+
+      // localStorage must be accessed asynchronously!
+      // See: https://github.com/cypress-io/cypress/issues/2722
+      cy.window().then(window =>
+        expect(window.localStorage.getItem('tpldata/mockuser/stubbed-template-1/d')).to.eq(
+          '{"substitution_data":"THIS IS SOME TEST DATA"}',
+        ),
+      );
+
+      typeInEditor('{"substitution_data": "THIS IS SOME DIFFERENT DATA"}');
+
+      cy.window().then(window =>
+        expect(window.localStorage.getItem('tpldata/mockuser/stubbed-template-1/d')).to.eq(
+          '{"substitution_data":"THIS IS SOME DIFFERENT DATA"}',
+        ),
+      );
     });
 
     describe('the editor actions popover', () => {

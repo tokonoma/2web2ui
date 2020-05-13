@@ -13,6 +13,7 @@ describe('PreviewControlBar', () => {
     useHibanaOverride.mockImplementationOnce(() => styles);
     useEditorContext.mockReturnValue({
       previewDevice: 'desktop',
+      canSend: true,
       ...editorState,
     });
     return shallow(<PreviewControlBar />);
@@ -20,6 +21,18 @@ describe('PreviewControlBar', () => {
 
   it('renders control bar', () => {
     expect(subject()).toMatchSnapshot();
+  });
+
+  it('does not render the "Send a Test" button if the user does not have the grant to send', () => {
+    const wrapper = subject({ editorState: { canSend: false } });
+
+    expect(wrapper.find('SendTestEmailButton')).not.toExist();
+  });
+
+  it('renders the "Send a Test" button if the user does have permmission to send', () => {
+    const wrapper = subject({ editorState: { canSend: true } });
+
+    expect(wrapper.find('SendTestEmailButton')).toExist();
   });
 
   it('calls setPreviewDevice when desktop button is clicked', () => {

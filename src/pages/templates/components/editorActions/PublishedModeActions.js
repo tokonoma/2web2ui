@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import classNames from 'classnames';
 import { Button, Popover, ScreenReaderOnly } from 'src/components/matchbox';
 import { ArrowDropDown, FileEdit } from '@sparkpost/matchbox-icons';
 import { PageLink } from 'src/components/links';
@@ -58,7 +59,7 @@ const PublishedModeActions = () => {
         to={editDraftTo}
         as={Button}
         variant="secondary"
-        className={styles.Actions}
+        className={classNames(styles.Actions, styles.ActionsPrimaryLink)}
         role="button"
         data-id="button-edit-draft"
       >
