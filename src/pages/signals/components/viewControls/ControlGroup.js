@@ -38,8 +38,9 @@ class ControlGroup extends Component {
     return _.keys(options).map(key => {
       return (
         <ControlButton
-          isSelected={selected === key}
           key={key}
+          selectedKey={key}
+          isSelected={selected === key}
           selectedKey={key}
           onClick={() => this.handleChange(key)}
         >
@@ -58,7 +59,7 @@ function ControlButton(props) {
   const [state] = useHibana();
   const styles = useHibanaOverride(OGStyles, hibanaStyles);
   const { isHibanaEnabled } = state;
-  const { children, key, isSelected, onClick } = props;
+  const { children, selectedKey, isSelected, onClick } = props;
 
   let defaultStyleProps = {};
   let selectedStyleProps = {};
@@ -78,7 +79,7 @@ function ControlButton(props) {
   return (
     <Button
       {...(isSelected ? selectedStyleProps : defaultStyleProps)}
-      selectedkey={key}
+      selectedkey={selectedKey}
       onClick={onClick}
       className={classNames(styles.Button, isSelected && styles.isSelected)}
       size="small"

@@ -1,8 +1,16 @@
 import React from 'react';
 import { Tooltip } from 'src/components/matchbox';
-import styles from './Legend.module.scss';
+import { useHibana } from 'src/context/HibanaContext';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
+import OGStyles from './Legend.module.scss';
+import hibanaStyles from './LegendHibana.module.scss';
 
-const Item = ({ label, fill = 'whitesmoke', tooltipContent }) => {
+const Item = ({ label, OGFill, hibanaFill, tooltipContent }) => {
+  const [state] = useHibana();
+  const { isHibanaEnabled } = state;
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+  const fill = isHibanaEnabled ? hibanaFill : OGFill;
+
   const content = (
     <div className={styles.Item}>
       <span className={styles.Fill} style={{ background: fill }} />

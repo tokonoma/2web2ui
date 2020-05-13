@@ -1,9 +1,10 @@
 /* eslint-disable max-lines */
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { getSpamHits } from 'src/actions/signals';
 import { selectSpamHitsDetails } from 'src/selectors/signals';
 import { PageLink } from 'src/components/links';
 import { Box, Grid, Panel, Stack } from 'src/components/matchbox';
+import { useHibana } from 'src/context/HibanaContext';
 import Page from './components/SignalsPage';
 import BarChart from './components/charts/barchart/BarChart';
 import SpamTrapActions from './components/actionContent/SpamTrapActions';
@@ -22,18 +23,17 @@ import moment from 'moment';
 import _ from 'lodash';
 import { spamTrapHitTypesCollection, spamTrapHitTypesByLabel } from './constants/spamTrapHitTypes';
 
-export class SpamTrapPage extends Component {
-  state = {
-    calculation: 'relative',
+export function SpamTrapPage(props) {
+  const [state] = useHibana();
+  const { isHibanaEnabled } = state;
+  const [calculation, setCalculation] = useState('relative');
+
+  const handleCalculationToggle = value => {
+    setCalculation(value);
   };
 
-  handleCalculationToggle = value => {
-    this.setState({ calculation: value });
-  };
-
-  getYAxisProps = () => {
-    const { data } = this.props;
-    const { calculation } = this.state;
+  const getYAxisProps = () => {
+    const { data } = props;
 
     return {
       tickFormatter:
@@ -47,17 +47,18 @@ export class SpamTrapPage extends Component {
     };
   };
 
-  getXAxisProps = () => {
-    const { xTicks } = this.props;
+  const getXAxisProps = () => {
+    const { xTicks } = props;
+
     return {
       ticks: xTicks,
       tickFormatter: tick => moment(tick).format('M/D'),
     };
   };
 
-  getTooltipContent = ({ payload = {} }) => (
+  const getTooltipContent = ({ payload = {} }) => (
     <Stack>
-      {this.state.calculation === 'absolute' ? (
+      {calculation === 'absolute' ? (
         <TooltipMetric label="Spam Trap Hits" value={formatFullNumber(payload.trap_hits)} />
       ) : (
         <TooltipMetric
@@ -65,25 +66,30 @@ export class SpamTrapPage extends Component {
           value={`${roundToPlaces(payload.relative_trap_hits * 100, 4)}%`}
         />
       )}
+
       <Stack>
-        {spamTrapHitTypesCollection.map(({ fill, key, label }) => (
-          <TooltipMetric
-            color={fill}
-            key={key}
-            label={label}
-            value={
-              this.state.calculation === 'absolute'
-                ? `${formatFullNumber(payload[key])}`
-                : `${roundToPlaces(payload[`relative_${key}`] * 100, 4)}%`
-            }
-          />
-        ))}
+        {spamTrapHitTypesCollection.map(({ OGFill, hibanaFill, key, label }) => {
+          const fill = isHibanaEnabled ? hibanaFill : OGFill;
+
+          return (
+            <TooltipMetric
+              color={fill}
+              key={key}
+              label={label}
+              value={
+                calculation === 'absolute'
+                  ? `${formatFullNumber(payload[key])}`
+                  : `${roundToPlaces(payload[`relative_${key}`] * 100, 4)}%`
+              }
+            />
+          );
+        })}
       </Stack>
       <TooltipMetric label="Injections" value={formatFullNumber(payload.injections)} />
     </Stack>
   );
 
-  renderContent = () => {
+  const renderContent = () => {
     const {
       data = [],
       handleDateSelect,
@@ -96,8 +102,7 @@ export class SpamTrapPage extends Component {
       resetDateHover,
       hoveredDate,
       shouldHighlightSelected,
-    } = this.props;
-    const { calculation } = this.state;
+    } = props;
     const selectedSpamTrapHits = _.find(data, ['date', selectedDate]) || {};
     let chartPanel;
 
@@ -126,10 +131,7 @@ export class SpamTrapPage extends Component {
             <ChartHeader
               title="Spam Trap Monitoring"
               primaryArea={
-                <Calculation
-                  initialSelected={calculation}
-                  onChange={this.handleCalculationToggle}
-                />
+                <Calculation initialSelected={calculation} onChange={handleCalculationToggle} />
               }
               tooltipContent={SPAM_TRAP_INFO}
             />
@@ -144,14 +146,19 @@ export class SpamTrapPage extends Component {
                   onMouseOut={resetDateHover}
                   hovered={hoveredDate}
                   shouldHighlightSelected={shouldHighlightSelected}
-                  tooltipContent={this.getTooltipContent}
+                  tooltipContent={getTooltipContent}
                   yKeys={spamTrapHitTypesCollection
-                    .map(({ key }) => ({
-                      key: calculation === 'relative' ? `relative_${key}` : key,
-                    }))
+                    .map(({ key, OGFill, hibanaFill }) => {
+                      const fill = isHibanaEnabled ? hibanaFill : OGFill;
+
+                      return {
+                        fill,
+                        key: calculation === 'relative' ? `relative_${key}` : key,
+                      };
+                    })
                     .reverse()}
-                  yAxisProps={this.getYAxisProps()}
-                  xAxisProps={this.getXAxisProps()}
+                  yAxisProps={getYAxisProps()}
+                  xAxisProps={getXAxisProps()}
                 />
                 <Legend
                   items={spamTrapHitTypesCollection}
@@ -179,34 +186,32 @@ export class SpamTrapPage extends Component {
     );
   };
 
-  render() {
-    const { facet, facetId, subaccountId } = this.props;
+  const { facet, facetId, subaccountId } = props;
 
-    return (
-      <Page
-        breadcrumbAction={{
-          content: 'Back to Spam Trap Overview',
-          to: '/signals/spam-traps',
-          component: PageLink,
-        }}
-        title="Spam Traps"
-        facet={facet}
-        facetId={facetId}
-        subaccountId={subaccountId}
-      >
-        <Panel title="Spam Trap Monitoring">
-          <Panel.Section>
-            <Grid>
-              <Grid.Column xs={12} md={4}>
-                <DateFilter label="Date Range" />
-              </Grid.Column>
-            </Grid>
-          </Panel.Section>
-        </Panel>
-        {this.renderContent()}
-      </Page>
-    );
-  }
+  return (
+    <Page
+      breadcrumbAction={{
+        content: 'Back to Spam Trap Overview',
+        to: '/signals/spam-traps',
+        component: PageLink,
+      }}
+      title="Spam Traps"
+      facet={facet}
+      facetId={facetId}
+      subaccountId={subaccountId}
+    >
+      <Panel title="Spam Trap Monitoring">
+        <Panel.Section>
+          <Grid>
+            <Grid.Column xs={12} md={4}>
+              <DateFilter label="Date Range" />
+            </Grid.Column>
+          </Grid>
+        </Panel.Section>
+      </Panel>
+      {renderContent()}
+    </Page>
+  );
 }
 
 export default withDetails(withDateSelection(SpamTrapPage), { getSpamHits }, selectSpamHitsDetails);

@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { getSpamHits } from 'src/actions/signals';
 import { selectSpamHitsDetails } from 'src/selectors/signals';
 import { PanelLoading } from 'src/components';
 import { PageLink } from 'src/components/links';
 import { Panel } from 'src/components/matchbox';
 import Callout from 'src/components/callout';
+import { useHibana } from 'src/context/HibanaContext';
 import { SPAM_TRAP_INFO } from '../../constants/info';
 import { spamTrapHitTypesCollection } from '../../constants/spamTrapHitTypes';
 import withDetails from '../../containers/withDetails';
@@ -13,9 +14,12 @@ import ChartHeader from '../ChartHeader';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { roundToPlaces } from 'src/helpers/units';
 
-export class SpamTrapsPreview extends Component {
-  renderContent = () => {
-    const { data, gap, empty, error } = this.props;
+export function SpamTrapsPreview(props) {
+  const [state] = useHibana();
+  const { isHibanaEnabled } = state;
+
+  const renderContent = () => {
+    const { data, gap, empty, error } = props;
 
     if (error) {
       return (
@@ -42,7 +46,14 @@ export class SpamTrapsPreview extends Component {
         gap={gap}
         timeSeries={data}
         yKeys={spamTrapHitTypesCollection
-          .map(({ fill, key }) => ({ fill, key: `relative_${key}` }))
+          .map(({ OGFill, hibanaFill, key }) => {
+            const fill = isHibanaEnabled ? hibanaFill : OGFill;
+
+            return {
+              fill,
+              key: `relative_${key}`,
+            };
+          })
           .reverse()}
         yAxisProps={{
           tickFormatter: tick => `${roundToPlaces(tick * 100, 2)}%`,
@@ -55,24 +66,22 @@ export class SpamTrapsPreview extends Component {
     );
   };
 
-  render() {
-    const { facet, facetId, loading, subaccountId } = this.props;
+  const { facet, facetId, loading, subaccountId } = props;
 
-    if (loading) {
-      return <PanelLoading minHeight="170px" />;
-    }
-
-    return (
-      <PageLink to={`/signals/spam-traps/${facet}/${facetId}${setSubaccountQuery(subaccountId)}`}>
-        <Panel>
-          <Panel.Section>
-            <ChartHeader title="Spam Trap Monitoring" hideLine tooltipContent={SPAM_TRAP_INFO} />
-          </Panel.Section>
-          <Panel.Section>{this.renderContent()}</Panel.Section>
-        </Panel>
-      </PageLink>
-    );
+  if (loading) {
+    return <PanelLoading minHeight="170px" />;
   }
+
+  return (
+    <PageLink to={`/signals/spam-traps/${facet}/${facetId}${setSubaccountQuery(subaccountId)}`}>
+      <Panel>
+        <Panel.Section>
+          <ChartHeader title="Spam Trap Monitoring" hideLine tooltipContent={SPAM_TRAP_INFO} />
+        </Panel.Section>
+        <Panel.Section>{renderContent()}</Panel.Section>
+      </Panel>
+    </PageLink>
+  );
 }
 
 export default withDetails(SpamTrapsPreview, { getSpamHits }, selectSpamHitsDetails);
