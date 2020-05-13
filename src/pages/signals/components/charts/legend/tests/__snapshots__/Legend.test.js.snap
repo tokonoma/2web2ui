@@ -15,43 +15,18 @@ exports[`Legend Component renders correctly 1`] = `
 `;
 
 exports[`Legend Component renders correctly 2`] = `
-<div
-  className="Item"
->
-  <span
-    className="Fill"
-    style={
-      Object {
-        "background": "blue",
-      }
-    }
-  />
-  <span
-    className="Label"
-  >
-    label 1
-  </span>
-</div>
+<Item
+  fill="blue"
+  key="0"
+  label="label 1"
+/>
 `;
 
 exports[`Legend Component renders correctly 3`] = `
-<div
-  className="Item"
->
-  <span
-    className="Fill"
-    style={
-      Object {
-        "background": "whitesmoke",
-      }
-    }
-  />
-  <span
-    className="Label"
-  >
-    label 2
-  </span>
-</div>
+<Item
+  key="1"
+  label="label 2"
+/>
 `;
 
 exports[`Legend Component renders correctly with tooltip content 1`] = `
@@ -71,51 +46,18 @@ exports[`Legend Component renders correctly with tooltip content 1`] = `
 `;
 
 exports[`Legend Component renders correctly with tooltip content 2`] = `
-<Tooltip
-  content="label 1"
-  dark={true}
->
-  <div
-    className="Item"
-  >
-    <span
-      className="Fill"
-      style={
-        Object {
-          "background": "blue",
-        }
-      }
-    />
-    <span
-      className="Label"
-    >
-      label 1
-    </span>
-  </div>
-</Tooltip>
+<Item
+  fill="blue"
+  key="0"
+  label="label 1"
+  tooltipContent={[Function]}
+/>
 `;
 
 exports[`Legend Component renders correctly with tooltip content 3`] = `
-<Tooltip
-  content="label 2"
-  dark={true}
->
-  <div
-    className="Item"
-  >
-    <span
-      className="Fill"
-      style={
-        Object {
-          "background": "whitesmoke",
-        }
-      }
-    />
-    <span
-      className="Label"
-    >
-      label 2
-    </span>
-  </div>
-</Tooltip>
+<Item
+  key="1"
+  label="label 2"
+  tooltipContent={[Function]}
+/>
 `;

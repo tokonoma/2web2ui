@@ -1,33 +1,38 @@
-import { shallow } from 'enzyme';
 import React from 'react';
+import { shallow } from 'enzyme';
+import { useHibana } from 'src/context/HibanaContext';
 import Legend from '../Legend';
 
-describe('Legend Component', () => {
-  let wrapper;
-  let props;
+jest.mock('src/context/HibanaContext');
+jest.mock('src/hooks/useHibanaOverride', () => styles => styles);
 
-  beforeEach(() => {
-    props = {
-      items: [
-        { fill: 'blue', label: 'label 1' },
-        { label: 'label 2' }
-      ]
-    };
-    wrapper = shallow(<Legend {...props}/>);
-  });
+describe('Legend Component', () => {
+  const defaultProps = {
+    items: [{ fill: 'blue', label: 'label 1' }, { label: 'label 2' }],
+    OGFill: 'whitesmoke',
+    hibanaFill: 'blue',
+  };
+
+  const subject = props => {
+    useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: false }]);
+
+    return shallow(<Legend {...defaultProps} {...props} />);
+  };
 
   it('renders correctly', () => {
+    const wrapper = subject();
+
     expect(wrapper).toMatchSnapshot();
-    wrapper.find('Item').forEach((item) => {
-      expect(item.dive()).toMatchSnapshot();
+    wrapper.find('Item').forEach(item => {
+      expect(item).toMatchSnapshot();
     });
   });
 
   it('renders correctly with tooltip content', () => {
-    wrapper.setProps({ tooltipContent: (label) => label });
+    const wrapper = subject({ tooltipContent: label => label });
     expect(wrapper).toMatchSnapshot();
-    wrapper.find('Item').forEach((item) => {
-      expect(item.dive()).toMatchSnapshot();
+    wrapper.find('Item').forEach(item => {
+      expect(item).toMatchSnapshot();
     });
   });
 });
