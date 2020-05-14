@@ -96,7 +96,6 @@
     "localforage": "^1.5.3",
     "lodash": "^4.17.11",
     "moment": "^2.20.1",
-    "eslint-plugin-2web2ui": "file:eslint-plugins/2web2ui",
     "papaparse": "^4.3.6",
     "payment": "^2.3.0",
     "print-js": "^1.0.31",
