@@ -17,6 +17,7 @@ import {
   currentPlanSelector,
   canUpdateBillingInfoSelector,
   getPromoCodeObject,
+  selectAvailablePlans,
 } from 'src/selectors/accountBillingInfo';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
 import CardSection from '../components/CardSection';
@@ -46,6 +47,7 @@ export const ChangePlanForm = ({
   billingUpdate,
   billingCreate,
   showAlert,
+  plans,
 }) => {
   const styles = useHibanaOverride(OGStyles, HibanaStyles);
   const { billingCountries, account, bundles, loading, error } = useChangePlanContext();
@@ -181,7 +183,8 @@ export const ChangePlanForm = ({
                   loading={submitting}
                   selectedBundle={selectedBundle}
                   account={account}
-                  brightbackCondition={isDowngradeToFree}
+                  isDowngradeToFree={isDowngradeToFree}
+                  freePlan={_.find(plans, { isFree: true })}
                 />
               </FeatureChangeContextProvider>
             </>
@@ -202,6 +205,8 @@ const mapStateToProps = (state, props) => {
     canUpdateBillingInfo: canUpdateBillingInfoSelector(state),
     currentPlan: currentPlanSelector(state),
     promoCodeObj: getPromoCodeObject(state),
+    loading: state.billing.plansLoading,
+    plans: selectAvailablePlans(state),
   };
 };
 
