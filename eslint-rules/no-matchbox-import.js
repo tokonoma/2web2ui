@@ -26,3 +26,4 @@ const noMatchboxImport = {
 };
 
 module.exports = noMatchboxImport;
+// export default noMatchboxImport;

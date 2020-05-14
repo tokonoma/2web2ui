@@ -1,12 +1,16 @@
 const rule = require("../rules/no-matchbox-import"),
     RuleTester = require("eslint").RuleTester;
 
-const ruleTester = new RuleTester({
-    parserOptions: {
-        ecmaVersion: 7,
-        sourceType: "module"
-    }
-});
+// fix rule tester options?
+// const ruleTester = new RuleTester({
+//     parserOptions: {
+//         ecmaVersion: 7,
+//         sourceType: "module"
+//     }
+// });
+
+// Override describe and it?
+// https://eslint.org/docs/developer-guide/nodejs-api#customizing-ruletester
 
 ruleTester.run("no-matchbox-import", rule, {
     valid: [
