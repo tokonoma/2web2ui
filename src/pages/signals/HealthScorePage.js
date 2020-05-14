@@ -25,7 +25,6 @@ import ChartHeader from './components/ChartHeader';
 import { formatFullNumber, roundToPlaces, formatNumber } from 'src/helpers/units';
 import moment from 'moment';
 import _ from 'lodash';
-
 import thresholds from './constants/healthScoreThresholds';
 import {
   newModelLine,
@@ -109,102 +108,100 @@ export class HealthScorePage extends Component {
     }
 
     return (
-      <Grid>
+      <OGOnlyWrapper as={Grid}>
         <OGOnlyWrapper as={Grid.Column} sm={12} md={7}>
-          <Box as={Grid.Column} md={12}>
-            <Panel sectioned data-id="health-score-panel">
-              <ChartHeader title="Health Score" tooltipContent={HEALTH_SCORE_INFO} />
-              {panelContent || (
-                <>
-                  <BarChart
-                    margin={newModelMarginsHealthScore}
-                    gap={gap}
-                    onClick={handleDateSelect}
-                    onMouseOver={handleDateHover}
-                    onMouseOut={resetDateHover}
-                    disableHover={false}
-                    shouldHighlightSelected={shouldHighlightSelected}
-                    selected={selectedDate}
-                    hovered={hoveredDate}
-                    timeSeries={data}
-                    tooltipContent={({ payload = {} }) =>
-                      payload.ranking && (
-                        <TooltipMetric
-                          label="Health Score"
-                          color={thresholds[payload.ranking].color}
-                          value={`${roundToPlaces(payload.health_score * 100, 1)}`}
-                        />
-                      )
-                    }
-                    yAxisRefLines={[
-                      { y: 0.8, stroke: thresholds.good.color, strokeWidth: 1 },
-                      { y: 0.55, stroke: thresholds.danger.color, strokeWidth: 1 },
-                    ]}
-                    xAxisRefLines={newModelLine}
-                    yKey="health_score"
-                    yAxisProps={{
-                      ticks: [0, 0.55, 0.8, 1],
-                      tickFormatter: tick => parseInt(tick * 100),
-                    }}
-                    xAxisProps={this.getXAxisProps()}
-                  />
-                  <ChartHeader title="Injections" tooltipContent={INJECTIONS_INFO} />
-                  <BarChart
-                    margin={newModelMarginsOther}
-                    gap={gap}
-                    height={190}
-                    onClick={handleDateSelect}
-                    onMouseOver={handleDateHover}
-                    selected={selectedDate}
-                    hovered={hoveredDate}
-                    shouldHighlightSelected={shouldHighlightSelected}
-                    onMouseOut={resetDateHover}
-                    timeSeries={data}
-                    tooltipContent={({ payload = {} }) => (
+          <Panel sectioned data-id="health-score-panel">
+            <ChartHeader title="Health Score" tooltipContent={HEALTH_SCORE_INFO} />
+            {panelContent || (
+              <>
+                <BarChart
+                  margin={newModelMarginsHealthScore}
+                  gap={gap}
+                  onClick={handleDateSelect}
+                  onMouseOver={handleDateHover}
+                  onMouseOut={resetDateHover}
+                  disableHover={false}
+                  shouldHighlightSelected={shouldHighlightSelected}
+                  selected={selectedDate}
+                  hovered={hoveredDate}
+                  timeSeries={data}
+                  tooltipContent={({ payload = {} }) =>
+                    payload.ranking && (
                       <TooltipMetric
-                        label="Injections"
-                        value={formatFullNumber(payload.injections)}
+                        label="Health Score"
+                        color={thresholds[payload.ranking].color}
+                        value={`${roundToPlaces(payload.health_score * 100, 1)}`}
                       />
-                    )}
-                    yKey="injections"
-                    yAxisProps={{
-                      tickFormatter: tick => formatNumber(tick),
-                    }}
-                    xAxisProps={this.getXAxisProps()}
-                  />
-                  {selectedComponent && !selectedWeightsAreEmpty && (
-                    <>
-                      <ChartHeader title={HEALTH_SCORE_COMPONENTS[selectedComponent].chartTitle} />
-                      <BarChart
-                        margin={newModelMarginsOther}
-                        gap={gap}
-                        height={190}
-                        onClick={handleDateSelect}
-                        onMouseOver={handleDateHover}
-                        onMouseOut={resetDateHover}
-                        hovered={hoveredDate}
-                        selected={selectedDate}
-                        shouldHighlightSelected={shouldHighlightSelected}
-                        timeSeries={dataForSelectedWeight}
-                        tooltipContent={({ payload = {} }) => (
-                          <TooltipMetric
-                            label={HEALTH_SCORE_COMPONENTS[selectedComponent].label}
-                            value={`${roundToPlaces(payload.weight_value * 100, 4)}%`}
-                          />
-                        )}
-                        yKey="weight_value"
-                        yAxisProps={{
-                          tickFormatter: tick => `${roundToPlaces(tick * 100, 3)}%`,
-                        }}
-                        yDomain={selectedDataIsZero ? [0, 1] : [0, 'auto']}
-                        xAxisProps={this.getXAxisProps()}
-                      />
-                    </>
+                    )
+                  }
+                  yAxisRefLines={[
+                    { y: 0.8, stroke: thresholds.good.color, strokeWidth: 1 },
+                    { y: 0.55, stroke: thresholds.danger.color, strokeWidth: 1 },
+                  ]}
+                  xAxisRefLines={newModelLine}
+                  yKey="health_score"
+                  yAxisProps={{
+                    ticks: [0, 0.55, 0.8, 1],
+                    tickFormatter: tick => parseInt(tick * 100),
+                  }}
+                  xAxisProps={this.getXAxisProps()}
+                />
+                <ChartHeader title="Injections" tooltipContent={INJECTIONS_INFO} />
+                <BarChart
+                  margin={newModelMarginsOther}
+                  gap={gap}
+                  height={190}
+                  onClick={handleDateSelect}
+                  onMouseOver={handleDateHover}
+                  selected={selectedDate}
+                  hovered={hoveredDate}
+                  shouldHighlightSelected={shouldHighlightSelected}
+                  onMouseOut={resetDateHover}
+                  timeSeries={data}
+                  tooltipContent={({ payload = {} }) => (
+                    <TooltipMetric
+                      label="Injections"
+                      value={formatFullNumber(payload.injections)}
+                    />
                   )}
-                </>
-              )}
-            </Panel>
-          </Box>
+                  yKey="injections"
+                  yAxisProps={{
+                    tickFormatter: tick => formatNumber(tick),
+                  }}
+                  xAxisProps={this.getXAxisProps()}
+                />
+                {selectedComponent && !selectedWeightsAreEmpty && (
+                  <>
+                    <ChartHeader title={HEALTH_SCORE_COMPONENTS[selectedComponent].chartTitle} />
+                    <BarChart
+                      margin={newModelMarginsOther}
+                      gap={gap}
+                      height={190}
+                      onClick={handleDateSelect}
+                      onMouseOver={handleDateHover}
+                      onMouseOut={resetDateHover}
+                      hovered={hoveredDate}
+                      selected={selectedDate}
+                      shouldHighlightSelected={shouldHighlightSelected}
+                      timeSeries={dataForSelectedWeight}
+                      tooltipContent={({ payload = {} }) => (
+                        <TooltipMetric
+                          label={HEALTH_SCORE_COMPONENTS[selectedComponent].label}
+                          value={`${roundToPlaces(payload.weight_value * 100, 4)}%`}
+                        />
+                      )}
+                      yKey="weight_value"
+                      yAxisProps={{
+                        tickFormatter: tick => `${roundToPlaces(tick * 100, 3)}%`,
+                      }}
+                      yDomain={selectedDataIsZero ? [0, 1] : [0, 'auto']}
+                      xAxisProps={this.getXAxisProps()}
+                    />
+                  </>
+                )}
+              </>
+            )}
+          </Panel>
         </OGOnlyWrapper>
         <OGOnlyWrapper as={Grid.Column} sm={12} md={5} mdOffset={0}>
           {!loading && (
@@ -216,7 +213,6 @@ export class HealthScorePage extends Component {
                       title="Health Score Components"
                       date={selectedDate}
                       hideLine
-                      padding="1rem 0 1rem"
                       tooltipContent={HEALTH_SCORE_COMPONENT_INFO}
                     />
                     {!loading && selectedWeightsAreEmpty && (
@@ -249,7 +245,7 @@ export class HealthScorePage extends Component {
             </div>
           )}
         </OGOnlyWrapper>
-      </Grid>
+      </OGOnlyWrapper>
     );
   };
 
