@@ -29,6 +29,12 @@
   }
 }
 
+.ActionButtonWrapper {
+  > button {
+    margin-right: spacing(300);
+  }
+}
+
 .conditional {
   font-style: italic;
 }
