@@ -8,10 +8,6 @@
   },
   "engineStrict": true,
   "scripts": {
-    "lint:js": "eslint . --rulesdir eslint-rules/ -ext .js,.jsx",
-    "lint:js:fix": "lint:js -- --fix",
-    "stylelint": "stylelint ’src/**/*.{css,scss}’",
-    "stylelint:fix": "npm run stylelint -- --fix",
     "start": "FORCE_COLOR=true nf start --port 3100",
     "start-app": "REACT_APP_VERSION=local-$USER-$(git rev-parse HEAD) node scripts/start.js",
     "start-app-hibana": "REACT_APP_DEFAULT_TO_HIBANA=true npm run start-app",
@@ -191,6 +187,7 @@
     "jest-in-case": "^1.0.2",
     "jest-junit": "^6.2.1",
     "jest-junit-reporter": "^1.1.0",
+    "jest-without-globals": "0.0.3",
     "lint-staged": "^8.0.4",
     "mdx-loader": "^1.1.0",
     "mdxc": "^1.1.1",
