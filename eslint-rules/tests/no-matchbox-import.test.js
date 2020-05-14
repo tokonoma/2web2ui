@@ -1,7 +1,7 @@
 import runner from '../utils/eslint-test-runner';
 import rule from '../no-matchbox-import';
 
-const caseList = {
+runner('no-matchbox-import', rule, {
   valid: {
     'allows matchbox-icons import from outside the matchbox component folder': {
       code: "import { OpenInNew } from '@sparkpost/matchbox-icons'",
@@ -32,6 +32,4 @@ const caseList = {
       errors: [{ message: 'Do not allow direct matchbox imports.' }],
     },
   },
-};
-
-runner('no-matchbox-import', rule, caseList);
+});
