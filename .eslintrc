@@ -9,10 +9,7 @@
     "no-matchbox-import": "error",
     // doesn't work with jest-in-case
     "jest/no-standalone-expect": "off",
-    "lodash/chaining": [
-      "error",
-      "never"
-    ],
+    "lodash/chaining": ["error", "never"],
     // could result in unwanted result (e.g. _.get(obj, [a,b]) is not same as _.get(obj, `${a}${b}`))
     "lodash/path-style": "off",
     "no-console": "error",
@@ -58,10 +55,5 @@
     "plugin:prettier/recommended",
     "plugin:testing-library/recommended"
   ],
-  "plugins": [
-    "testing-library",
-    "jest",
-    "lodash",
-    "prettier"
-  ]
+  "plugins": ["testing-library", "jest", "lodash", "prettier"]
 }
