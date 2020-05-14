@@ -8,7 +8,7 @@ import { showAlert } from 'src/actions/globalAlert';
 import { GUIDE_IDS } from 'src/constants';
 import { formatDate } from 'src/helpers/date';
 import { withRouter } from 'react-router-dom';
-
+import { reportGuideLoadingError } from 'src/helpers/errorTracker';
 const ACCOUNT_CANCEL_LINK = '/account/cancel';
 
 export class CancellationPanel extends React.Component {
@@ -21,7 +21,10 @@ export class CancellationPanel extends React.Component {
   };
 
   handleCancelAccount = () => {
-    if (!window.pendo.showGuideById(GUIDE_IDS.CANCEL_ACCOUNT)) {
+    try {
+      window.pendo.showGuideyId(GUIDE_IDS.CANCEL_ACCOUNT);
+    } catch (error) {
+      reportGuideLoadingError(error);
       this.props.history.push(ACCOUNT_CANCEL_LINK);
     }
   };

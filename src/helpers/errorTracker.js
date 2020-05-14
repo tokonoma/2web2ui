@@ -22,6 +22,10 @@ const BLACKLIST = new Set([
   '@@redux-form/SET_SUBMIT_FAILED',
 ]);
 
+/*report that guide couldn't be loaded */
+export function reportGuideLoadingError(err) {
+  Raven.captureException(err);
+}
 /**
  * Filter out blacklisted breadcrumbs
  *
