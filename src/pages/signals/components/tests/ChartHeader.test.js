@@ -2,6 +2,8 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import ChartHeader from '../ChartHeader';
 
+jest.mock('src/hooks/useHibanaOverride', () => styles => styles);
+
 describe('Signals ChartHeader Component', () => {
   let wrapper;
   let props;
@@ -9,9 +11,9 @@ describe('Signals ChartHeader Component', () => {
   beforeEach(() => {
     props = {
       title: 'Foo',
-      date: '2018-02-15'
+      date: '2018-02-15',
     };
-    wrapper = shallow(<ChartHeader {...props}/>);
+    wrapper = shallow(<ChartHeader {...props} />);
   });
 
   it('renders correctly', () => {

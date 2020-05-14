@@ -9,8 +9,8 @@ import DateFilter from '../components/filters/DateFilter';
 import SubaccountFilter from '../components/filters/SubaccountFilter';
 import facets from '../constants/facets';
 import _ from 'lodash';
-import InfoTooltip from '../components/InfoTooltip';
 import { SPAM_TRAP_INFO } from '../constants/info';
+import { PageDescription } from 'src/components/text';
 
 export class SpamTrapDashboard extends Component {
   componentDidMount() {
@@ -21,23 +21,26 @@ export class SpamTrapDashboard extends Component {
     const { subaccounts } = this.props;
 
     return (
-      <Page
-        title={
-          <>
-            Spam Trap Monitoring
-            <InfoTooltip content={SPAM_TRAP_INFO} />
-          </>
-        }
-      >
-        <Panel sectioned>
-          <Grid>
-            <Grid.Column xs={4}>
-              <DateFilter />
-            </Grid.Column>
-            <SubaccountFilter />
-            {/* eslint-disable-next-line */}
-            <FacetFilter facets={_.reject(facets, facet => facet.key === 'mb_provider')} />
-          </Grid>
+      <Page title="Spam Trap Monitoring">
+        <PageDescription>{SPAM_TRAP_INFO}</PageDescription>
+
+        <Panel>
+          <Panel.Section>
+            <Grid>
+              <Grid.Column xs={12} md={4}>
+                <DateFilter label="Date Range" />
+              </Grid.Column>
+            </Grid>
+          </Panel.Section>
+          <Panel.Section>
+            <Grid>
+              <Grid.Column md={4} xs={12}>
+                <SubaccountFilter label="Subaccount" />
+              </Grid.Column>
+              {/* eslint-disable-next-line */}
+              <FacetFilter facets={_.reject(facets, facet => facet.key === 'mb_provider')} />
+            </Grid>
+          </Panel.Section>
         </Panel>
         <SpamTrapOverview defaults={{ perPage: 25 }} subaccounts={subaccounts} hideTitle />
       </Page>

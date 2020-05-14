@@ -300,17 +300,20 @@ describe('The health score dashboard page', () => {
       });
 
       it('re-requests data when filtering by breakdown and renders a search field', () => {
-        cy.findByLabelText('Search By').should('not.be.visible');
+        cy.findByLabelText('Search by Breakdown').should('not.be.visible');
 
-        cy.findByLabelText('Filter By').select('By Campaign');
+        cy.findByLabelText('Breakdown').select('By Campaign');
         cy.wait('@nextRequest');
 
         cy.findByText('No Data Available').should('be.visible');
-        cy.findByLabelText('Search By').should('be.visible');
+        cy.findByLabelText('Search by Breakdown').should('be.visible');
       });
 
       it('re-requests data when clicking on "Subaccount"', () => {
-        cy.findByText('Subaccount').click();
+        cy.get('table').within(() => {
+          cy.findByText('Subaccount').click();
+        });
+
         cy.wait('@nextRequest');
 
         cy.findByText('No Data Available').should('be.visible');

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import { list as getSubaccounts } from 'src/actions/subaccounts';
 import { getCurrentHealthScore } from 'src/actions/signals';
-import { Grid } from 'src/components/matchbox';
+import { Grid, Panel } from 'src/components/matchbox';
 import Page from '../components/SignalsPage';
 import HealthScoreOverview from '../containers/HealthScoreOverviewContainer';
 import FacetFilter from '../components/filters/FacetFilter';
@@ -16,8 +16,8 @@ import { getValidSignalsDateRange } from 'src/helpers/signals';
 import { showAlert } from 'src/actions/globalAlert';
 import useRouter from 'src/hooks/useRouter';
 import facets from '../constants/facets';
-import InfoTooltip from '../components/InfoTooltip';
 import { HEALTH_SCORE_INFO } from '../constants/info';
+import { PageDescription } from 'src/components/text';
 
 export function HealthScoreDashboard(props) {
   const {
@@ -82,15 +82,18 @@ export function HealthScoreDashboard(props) {
   }, [getCurrentHealthScore, relativeRange, from, to, hasDeeplinkDateRange]);
 
   return (
-    <Page
-      title={
-        <>
-          Health Score
-          <InfoTooltip content={HEALTH_SCORE_INFO} />
-        </>
-      }
-      primaryArea={<DateFilter left />}
-    >
+    <Page title="Health Score">
+      <PageDescription>{HEALTH_SCORE_INFO}</PageDescription>
+      <Panel title="Health Score Trends">
+        <Panel.Section>
+          <Grid>
+            <Grid.Column xs={12} md={5}>
+              <DateFilter label="Date Range" />
+            </Grid.Column>
+          </Grid>
+        </Panel.Section>
+      </Panel>
+
       <Grid>
         <Grid.Column xs={12} lg={5} xl={4}>
           <CurrentHealthGauge />
@@ -105,7 +108,9 @@ export function HealthScoreDashboard(props) {
         hideTitle
         header={
           <Grid>
-            <SubaccountFilter />
+            <Grid.Column md={5} xs={12}>
+              <SubaccountFilter label="Subaccount" />
+            </Grid.Column>
             <FacetFilter facets={facets} />
           </Grid>
         }

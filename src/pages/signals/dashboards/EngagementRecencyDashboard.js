@@ -8,9 +8,8 @@ import FacetFilter from '../components/filters/FacetFilter';
 import DateFilter from '../components/filters/DateFilter';
 import SubaccountFilter from '../components/filters/SubaccountFilter';
 import facets from '../constants/facets';
-import InfoTooltip from '../components/InfoTooltip';
 import { ENGAGEMENT_RECENCY_INFO } from '../constants/info';
-
+import { PageDescription } from 'src/components/text';
 export class EngagementRecencyDashboard extends Component {
   componentDidMount() {
     this.props.getSubaccounts();
@@ -20,22 +19,25 @@ export class EngagementRecencyDashboard extends Component {
     const { subaccounts } = this.props;
 
     return (
-      <Page
-        title={
-          <>
-            Engagement Recency
-            <InfoTooltip content={ENGAGEMENT_RECENCY_INFO} />
-          </>
-        }
-      >
-        <Panel sectioned>
-          <Grid>
-            <Grid.Column lg={4}>
-              <DateFilter />
-            </Grid.Column>
-            <SubaccountFilter />
-            <FacetFilter facets={facets} />
-          </Grid>
+      <Page title={<>Engagement Recency</>}>
+        <PageDescription>{ENGAGEMENT_RECENCY_INFO}</PageDescription>
+        <Panel>
+          <Panel.Section>
+            <Grid>
+              <Grid.Column xs={12} md={4}>
+                <DateFilter label="Date Range" />
+              </Grid.Column>
+            </Grid>
+          </Panel.Section>
+          <Panel.Section>
+            <Grid>
+              <Grid.Column md={4} xs={12}>
+                <SubaccountFilter label="Subaccount" />
+              </Grid.Column>
+              {/* eslint-disable-next-line */}
+              <FacetFilter facets={facets} label="Breakdown" />
+            </Grid>
+          </Panel.Section>
         </Panel>
         <EngagementRecencyOverview defaults={{ perPage: 25 }} subaccounts={subaccounts} hideTitle />
       </Page>

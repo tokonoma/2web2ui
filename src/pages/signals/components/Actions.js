@@ -2,11 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Warning, CheckCircleOutline } from '@sparkpost/matchbox-icons';
 import { formatDate } from 'src/helpers/date';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
+import { Heading } from 'src/components/text';
 import { ExternalLink, PageLink } from 'src/components/links';
 import Callout from 'src/components/callout';
-import styles from './Actions.module.scss';
+import OGStyles from './Actions.module.scss';
+import hibanaStyles from './ActionsHibana.module.scss';
 
 const Action = ({ content, link, type = 'bad', internal = false, linkText = 'Learn More' }) => {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+
   let iconMarkup;
 
   const linkMarkup =
@@ -58,18 +63,22 @@ const Action = ({ content, link, type = 'bad', internal = false, linkText = 'Lea
   );
 };
 
-const Actions = ({ actions, date, empty }) => (
-  <div className={styles.Wrapper}>
-    <div className={styles.Title}>
-      <h6 className={styles.TitleText}>
-        Recommendations
-        {date && ` – ${formatDate(date)}`}
-      </h6>
+const Actions = ({ actions, date, empty }) => {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+
+  return (
+    <div className={styles.Wrapper}>
+      <div className={styles.Title}>
+        <Heading as="h6" className={styles.TitleText}>
+          Recommendations
+          {date && ` – ${formatDate(date)}`}
+        </Heading>
+      </div>
+      {!empty && actions.map((props, i) => <Action key={i} {...props} />)}
+      {empty && <Callout height="100px">No actions to display at this time.</Callout>}
     </div>
-    {!empty && actions.map((props, i) => <Action key={i} {...props} />)}
-    {empty && <Callout height="100px">No actions to display at this time.</Callout>}
-  </div>
-);
+  );
+};
 
 Actions.propTypes = {
   actions: PropTypes.arrayOf(

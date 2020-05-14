@@ -1,10 +1,11 @@
 import React from 'react';
+import { tokens } from '@sparkpost/design-tokens-hibana';
 import { CheckCircleOutline, ErrorOutline } from '@sparkpost/matchbox-icons';
 
 const thresholds = {
   danger: {
-    color: '#FF594D',
-    barColor: '#FF594D',
+    color: tokens.color_red_700,
+    barColor: tokens.color_red_700,
     icon: ErrorOutline,
     condition: n => n < 55,
     description: (
@@ -14,8 +15,8 @@ const thresholds = {
     ),
   },
   warning: {
-    color: '#E6B400',
-    barColor: '#FFDA00',
+    color: tokens.color_yellow_400,
+    barColor: tokens.color_yellow_400,
     icon: ErrorOutline,
     condition: n => n < 80 && n >= 55,
     description: (
@@ -25,8 +26,8 @@ const thresholds = {
     ),
   },
   good: {
-    color: '#2CC995',
-    barColor: '#2CC995',
+    color: tokens.color_green_800,
+    barColor: tokens.color_green_800,
     icon: CheckCircleOutline,
     condition: n => n >= 80,
     description: (

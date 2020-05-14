@@ -3,17 +3,16 @@ import React from 'react';
 import Gauge from '../Gauge';
 
 describe('Signals Health Score Gauge SVG', () => {
-
-  const subject = (props = {}) => mount(
-    <Gauge {...props} />
-  );
+  const subject = (props = {}) => mount(<Gauge {...props} />);
 
   it('renders correct color', () => {
-    expect(subject({
-      threshold: {
-        color: '#color'
-      }
-    })).toMatchSnapshot();
+    expect(
+      subject({
+        threshold: {
+          color: '#color',
+        },
+      }),
+    ).toMatchSnapshot();
   });
 
   it('renders score', () => {

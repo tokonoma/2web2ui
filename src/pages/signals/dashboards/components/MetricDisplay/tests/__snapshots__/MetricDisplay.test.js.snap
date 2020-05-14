@@ -28,15 +28,17 @@ exports[`Signals Metrics Display renders label and value with no caret 1`] = `
 <div
   className="MetricDisplay"
 >
-  <h4
+  <Heading
+    as="h4"
     className="Label"
   >
     Metric Name
-  </h4>
-  <h5
+  </Heading>
+  <Heading
+    as="h5"
     className="Value"
   >
     10%
-  </h5>
+  </Heading>
 </div>
 `;

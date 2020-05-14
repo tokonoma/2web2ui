@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Signals Health Score Gauge Container renders bad threshold color 1`] = `"#FF594D"`;
+exports[`Signals Health Score Gauge Container renders bad threshold color 1`] = `"#d9363e"`;
 
 exports[`Signals Health Score Gauge Container renders error correctly 1`] = `
 <Callout
@@ -14,21 +14,17 @@ exports[`Signals Health Score Gauge Container renders error correctly 1`] = `
 exports[`Signals Health Score Gauge Container renders happy path correctly 1`] = `
 <Panel
   sectioned={true}
+  title="Current Health Score"
 >
   <div
     className="Content"
   >
-    <h2
-      className="Header"
-    >
-      Current Health Score
-    </h2>
     <Gauge
       score={88}
       threshold={
         Object {
-          "barColor": "#2CC995",
-          "color": "#2CC995",
+          "barColor": "#067852",
+          "color": "#067852",
           "condition": [Function],
           "description": <span
             data-id="health-score-above-80-description"
@@ -51,7 +47,7 @@ exports[`Signals Health Score Gauge Container renders happy path correctly 1`] =
         size={25}
         style={
           Object {
-            "fill": "#2CC995",
+            "fill": "#067852",
           }
         }
       />
@@ -73,14 +69,14 @@ exports[`Signals Health Score Gauge Container renders happy path correctly 1`] =
       className="Metrics"
     >
       <MetricDisplay
-        color="#FF594D"
+        color="#d9363e"
         data-id="health-score-wow-change"
         direction="down"
         label="WoW Change"
         value="-5%"
       />
       <MetricDisplay
-        color="#2CC995"
+        color="#067852"
         data-id="health-score-dod-change"
         direction="up"
         label="DoD Change"
@@ -93,12 +89,12 @@ exports[`Signals Health Score Gauge Container renders happy path correctly 1`] =
 
 exports[`Signals Health Score Gauge Container renders no current score correctly 1`] = `
 <Callout
-  height="auto"
+  height="100%"
 >
   Current Health Score Not Available
 </Callout>
 `;
 
-exports[`Signals Health Score Gauge Container renders title with a custom date 1`] = `"Health Score for Jan 1st"`;
+exports[`Signals Health Score Gauge Container renders title with a custom date 1`] = `null`;
 
-exports[`Signals Health Score Gauge Container renders warning threshold color 1`] = `"#E6B400"`;
+exports[`Signals Health Score Gauge Container renders warning threshold color 1`] = `"#ffda00"`;

@@ -42,9 +42,7 @@ exports[`Signals Health Score Page V3 renders correctly when receiving data 1`] 
         </Grid.Column>
       </Grid>
       <BarChart
-        activeFill="#22838A"
         disableHover={false}
-        fill="#B3ECEF"
         gap={1}
         height={250}
         margin={
@@ -81,12 +79,12 @@ exports[`Signals Health Score Page V3 renders correctly when receiving data 1`] 
         yAxisRefLines={
           Array [
             Object {
-              "stroke": "#2CC995",
+              "stroke": "#067852",
               "strokeWidth": 1,
               "y": 0.8,
             },
             Object {
-              "stroke": "#FF594D",
+              "stroke": "#d9363e",
               "strokeWidth": 1,
               "y": 0.55,
             },

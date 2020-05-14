@@ -34,6 +34,10 @@
   }
 }
 
-.ScreenReaderOnly {
-  @include visually-hidden();
+.HiddenLabel {
+  opacity: 0; // Not using `<ScreenReaderOnly/>` to help with alignment issues
+}
+
+.FacetSearchField {
+  margin-left: -1px;
 }

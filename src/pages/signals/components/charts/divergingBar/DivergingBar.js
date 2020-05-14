@@ -1,20 +1,35 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { ResponsiveContainer, BarChart, Bar, Tooltip, XAxis, YAxis, CartesianGrid, Rectangle, Text } from 'recharts';
-import TooltipWrapper from 'src/components/charts/Tooltip';
 import _ from 'lodash';
-import styles from './DivergingBar.module.scss';
+import PropTypes from 'prop-types';
+import { tokens } from '@sparkpost/design-tokens-hibana';
+import {
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+  Tooltip,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Rectangle,
+  Text,
+} from 'recharts';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
+import TooltipWrapper from 'src/components/charts/Tooltip';
+import OGStyles from './DivergingBar.module.scss';
+import hibanaStyles from './DivergingBarHibana.module.scss';
 
-class DivergingBar extends Component {
+export class DivergingBarClassComponent extends Component {
   getData = () => {
     const { data, xKey, positiveFill, negativeFill } = this.props;
-    return data && data.map((item) => ({ ...item, fill: item[xKey] > 0 ? positiveFill : negativeFill }));
-  }
+    return (
+      data && data.map(item => ({ ...item, fill: item[xKey] > 0 ? positiveFill : negativeFill }))
+    );
+  };
 
   getHeight = () => {
     const { data, barHeight } = this.props;
     return data && data.length * barHeight;
-  }
+  };
 
   renderBar = ({ key, background, payload, ...props }) => {
     const { selected, yKey } = this.props;
@@ -28,13 +43,13 @@ class DivergingBar extends Component {
           x1={0}
           x2={width}
           width={width}
-          fill='#5DCFF5'
+          fill={tokens.color_blue_400}
           opacity={selected && selected === payload[yKey] ? 0.3 : 0}
         />
         <Rectangle key={key} {...props} />
       </g>
     );
-  }
+  };
 
   renderYTick = ({ payload, ...props }) => {
     const { data, selected, yKey, yLabel } = this.props;
@@ -42,24 +57,29 @@ class DivergingBar extends Component {
     const label = yLabel ? yLabel(payload) : payload.value;
 
     if (payload.value === match[yKey]) {
-      return <Text {...props} fill='#0B83D6'>{label}</Text>;
+      return (
+        <Text {...props} fill={tokens.colors_gray_800}>
+          {label}
+        </Text>
+      );
     }
 
     return <Text {...props}>{label}</Text>;
-  }
+  };
 
   render() {
-    const { tooltipContent, onClick, width, xDomain, xKey, yKey } = this.props;
+    const { tooltipContent, onClick, width, xDomain, xKey, yKey, styles } = this.props;
+
     return (
       <ResponsiveContainer height={this.getHeight()} width={width} className={styles.DivergingBar}>
-        <BarChart data={this.getData()} layout='vertical' barCategoryGap={2}>
+        <BarChart data={this.getData()} layout="vertical" barCategoryGap={2}>
           <CartesianGrid
             horizontal={false}
-            shapeRendering='crispEdges'
-            stroke='#d2d2d7'
+            shapeRendering="crispEdges"
+            stroke={tokens.color_gray_400}
           />
           <Bar
-            cursor='pointer'
+            cursor="pointer"
             dataKey={xKey}
             onClick={onClick}
             isAnimationActive={false}
@@ -67,7 +87,7 @@ class DivergingBar extends Component {
             minPointSize={1}
           />
           <YAxis
-            type='category'
+            type="category"
             tickLine={false}
             axisLine={false}
             interval={0}
@@ -78,11 +98,11 @@ class DivergingBar extends Component {
           />
           <XAxis
             hide
-            type='number'
+            type="number"
             tickLine={false}
             domain={xDomain}
             dataKey={xKey}
-            shapeRendering='crispEdges'
+            shapeRendering="crispEdges"
             ticks={[0]}
           />
           <Tooltip
@@ -97,6 +117,13 @@ class DivergingBar extends Component {
   }
 }
 
+// TODO: Remove when OG theme is removed
+function DivergingBar(props) {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+
+  return <DivergingBarClassComponent {...props} styles={styles} />;
+}
+
 DivergingBar.propTypes = {
   negativeFill: PropTypes.string,
   onClick: PropTypes.func,
@@ -106,7 +133,7 @@ DivergingBar.propTypes = {
   xKey: PropTypes.string,
   yKey: PropTypes.string,
   yLabel: PropTypes.func,
-  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
 DivergingBar.defaultProps = {
@@ -115,8 +142,8 @@ DivergingBar.defaultProps = {
   xKey: 'value',
   yKey: 'label',
   width: '99%',
-  negativeFill: '#DB2F2D',
-  positiveFill: '#8CBE3C'
+  negativeFill: tokens.color_red_700,
+  positiveFill: tokens.color_green_700,
 };
 
 export default DivergingBar;

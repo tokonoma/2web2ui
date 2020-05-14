@@ -26,9 +26,15 @@
   position: relative;
 }
 
-.Red { fill: #FF594D; }
-.Yellow { fill: #FFDA00; }
-.Green { fill: #2CC995; }
+.Red {
+  fill: #ff594d;
+}
+.Yellow {
+  fill: #ffda00;
+}
+.Green {
+  fill: #2cc995;
+}
 
 .NeedleContainer {
   position: absolute;
@@ -44,13 +50,13 @@
 .Needle {
   fill: color(gray, 2);
   transform-origin: 50px 64px;
-  transition: 0.8s cubic-bezier(0.1,0,.2,1.15);
+  transition: 0.8s cubic-bezier(0.1, 0, 0.2, 1.15);
 }
 
 .Text {
   font-size: 5px;
   font-weight: 400;
-  fill: color(gray, 4)
+  fill: color(gray, 4);
 }
 
 .Tick {
@@ -60,6 +66,7 @@
 }
 
 .Score {
+  color: currentColor;
   margin-top: rem(-65);
   font-size: rem(45);
   font-weight: 400;

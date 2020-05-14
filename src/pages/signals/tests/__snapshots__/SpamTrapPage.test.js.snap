@@ -15,19 +15,19 @@ exports[`Signals Spam Trap Page bar chart props renders tooltip content 1`] = `
   />
   <Stack>
     <TooltipMetric
-      color="#50CFDA"
+      color="#1a497d"
       key="trap_hits_parked"
       label="Parked"
       value="2.5%"
     />
     <TooltipMetric
-      color="#29B9C7"
+      color="#1273e6"
       key="trap_hits_recycled"
       label="Recycled"
       value="2.5%"
     />
     <TooltipMetric
-      color="#1A838B"
+      color="#78b6ff"
       key="trap_hits_typo"
       label="Typo"
       value="5%"
@@ -51,13 +51,24 @@ exports[`Signals Spam Trap Page renders correctly 1`] = `
   }
   facet="sending-domain"
   facetId="test.com"
-  primaryArea={
-    <Connect(DateFilter)
-      left={true}
-    />
-  }
   title="Spam Traps"
 >
+  <Panel
+    title="Spam Trap Monitoring"
+  >
+    <Panel.Section>
+      <Grid>
+        <Grid.Column
+          md={4}
+          xs={12}
+        >
+          <Connect(DateFilter)
+            label="Date Range"
+          />
+        </Grid.Column>
+      </Grid>
+    </Panel.Section>
+  </Panel>
   <Grid>
     <Grid.Column
       md={7}
@@ -83,8 +94,6 @@ exports[`Signals Spam Trap Page renders correctly 1`] = `
           className="LiftTooltip"
         >
           <BarChart
-            activeFill="#22838A"
-            fill="#B3ECEF"
             gap={0.25}
             height={250}
             margin={
@@ -150,15 +159,15 @@ exports[`Signals Spam Trap Page renders correctly 1`] = `
             yKeys={
               Array [
                 Object {
-                  "fill": "#1A838B",
+                  "fill": "#78b6ff",
                   "key": "relative_trap_hits_typo",
                 },
                 Object {
-                  "fill": "#29B9C7",
+                  "fill": "#1273e6",
                   "key": "relative_trap_hits_recycled",
                 },
                 Object {
-                  "fill": "#50CFDA",
+                  "fill": "#1a497d",
                   "key": "relative_trap_hits_parked",
                 },
               ]
@@ -174,29 +183,32 @@ exports[`Signals Spam Trap Page renders correctly 1`] = `
             items={
               Array [
                 Object {
+                  "OGFill": "#50CFDA",
                   "description": "
       This is an email address from a domain hosted by a parked domain provider. These addresses
       can point to list quality issues but do not affect your reputation.
     ",
-                  "fill": "#50CFDA",
+                  "hibanaFill": "#1a497d",
                   "key": "trap_hits_parked",
                   "label": "Parked",
                 },
                 Object {
+                  "OGFill": "#29B9C7",
                   "description": "
       An email address that once was a real address, but now is a spam trap. These addresses signal
       that you should clean out old unengaged recipients.
     ",
-                  "fill": "#29B9C7",
+                  "hibanaFill": "#1273e6",
                   "key": "trap_hits_recycled",
                   "label": "Recycled",
                 },
                 Object {
+                  "OGFill": "#1A838B",
                   "description": "
       This is an email address from a domain that looks like a real mailbox provider, like
       gmal.com. These addresses signal that you should improve your list acquisition practices.
     ",
-                  "fill": "#1A838B",
+                  "hibanaFill": "#78b6ff",
                   "key": "trap_hits_typo",
                   "label": "Typo",
                 },
@@ -212,57 +224,63 @@ exports[`Signals Spam Trap Page renders correctly 1`] = `
       mdOffset={0}
       sm={12}
     >
-      <div
-        className="OffsetCol"
+      <Box
+        as={[Function]}
+        sectioned={true}
       >
-        <SpamTrapActions
-          date="2017-01-01"
-          percent={0.1}
-        />
-      </div>
-    </Grid.Column>
-  </Grid>
-  <Divider />
-  <Grid>
-    <Grid.Column
-      sm={6}
-      xs={12}
-    >
-      <withRouter(Connect(WithDetails(EngagementRecencyPreview))) />
-    </Grid.Column>
-    <Grid.Column
-      sm={6}
-      xs={12}
-    >
-      <withRouter(Connect(WithDetails(HealthScorePreview))) />
+        <div>
+          <SpamTrapActions
+            date="2017-01-01"
+            percent={0.1}
+          />
+        </div>
+      </Box>
     </Grid.Column>
   </Grid>
 </SignalsPage>
 `;
 
 exports[`Signals Spam Trap Page renders empty correctly 1`] = `
-<Panel
-  sectioned={true}
->
-  <ChartHeader
-    primaryArea={
-      <Calculation
-        initialSelected="relative"
-        onChange={[Function]}
-      />
-    }
+Array [
+  <Panel
     title="Spam Trap Monitoring"
-    tooltipContent="
+  >
+    <Panel.Section>
+      <Grid>
+        <Grid.Column
+          md={4}
+          xs={12}
+        >
+          <Connect(DateFilter)
+            label="Date Range"
+          />
+        </Grid.Column>
+      </Grid>
+    </Panel.Section>
+  </Panel>,
+  <Panel
+    sectioned={true}
+  >
+    <ChartHeader
+      primaryArea={
+        <Calculation
+          initialSelected="relative"
+          onChange={[Function]}
+        />
+      }
+      title="Spam Trap Monitoring"
+      tooltipContent="
   The share over time of your total email that has been sent to known spam traps. An
   excessive rate of spam trap hits is an indicator of poor list procurement and hygiene practices.
 "
-  />
-  <Callout
-    title="No Data Available"
-  >
-    Insufficient data to populate this chart
-  </Callout>
-</Panel>
+    />
+    <Callout
+      title="No Data Available"
+    >
+      Insufficient data to populate this chart
+    </Callout>
+  </Panel>,
+]
 `;
 
 exports[`Signals Spam Trap Page renders error correctly 1`] = `
@@ -276,13 +294,24 @@ exports[`Signals Spam Trap Page renders error correctly 1`] = `
   }
   facet="sending-domain"
   facetId="test.com"
-  primaryArea={
-    <Connect(DateFilter)
-      left={true}
-    />
-  }
   title="Spam Traps"
 >
+  <Panel
+    title="Spam Trap Monitoring"
+  >
+    <Panel.Section>
+      <Grid>
+        <Grid.Column
+          md={4}
+          xs={12}
+        >
+          <Connect(DateFilter)
+            label="Date Range"
+          />
+        </Grid.Column>
+      </Grid>
+    </Panel.Section>
+  </Panel>
   <Grid>
     <Grid.Column
       md={7}
@@ -316,55 +345,61 @@ exports[`Signals Spam Trap Page renders error correctly 1`] = `
       mdOffset={0}
       sm={12}
     >
-      <div
-        className="OffsetCol"
-      />
-    </Grid.Column>
-  </Grid>
-  <Divider />
-  <Grid>
-    <Grid.Column
-      sm={6}
-      xs={12}
-    >
-      <withRouter(Connect(WithDetails(EngagementRecencyPreview))) />
-    </Grid.Column>
-    <Grid.Column
-      sm={6}
-      xs={12}
-    >
-      <withRouter(Connect(WithDetails(HealthScorePreview))) />
+      <Box
+        as={[Function]}
+        sectioned={true}
+      >
+        <div />
+      </Box>
     </Grid.Column>
   </Grid>
 </SignalsPage>
 `;
 
 exports[`Signals Spam Trap Page renders loading correctly 1`] = `
-<Panel
-  sectioned={true}
->
-  <ChartHeader
-    primaryArea={
-      <Calculation
-        initialSelected="relative"
-        onChange={[Function]}
-      />
-    }
+Array [
+  <Panel
     title="Spam Trap Monitoring"
-    tooltipContent="
+  >
+    <Panel.Section>
+      <Grid>
+        <Grid.Column
+          md={4}
+          xs={12}
+        >
+          <Connect(DateFilter)
+            label="Date Range"
+          />
+        </Grid.Column>
+      </Grid>
+    </Panel.Section>
+  </Panel>,
+  <Panel
+    sectioned={true}
+  >
+    <ChartHeader
+      primaryArea={
+        <Calculation
+          initialSelected="relative"
+          onChange={[Function]}
+        />
+      }
+      title="Spam Trap Monitoring"
+      tooltipContent="
   The share over time of your total email that has been sent to known spam traps. An
   excessive rate of spam trap hits is an indicator of poor list procurement and hygiene practices.
 "
-  />
-  <div
-    style={
-      Object {
-        "height": "220px",
-        "position": "relative",
+    />
+    <div
+      style={
+        Object {
+          "height": "220px",
+          "position": "relative",
+        }
       }
-    }
-  >
-    <Loading />
-  </div>
-</Panel>
+    >
+      <Loading />
+    </div>
+  </Panel>,
+]
 `;

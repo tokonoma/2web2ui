@@ -1,5 +1,13 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
+.SubaccountFilter {
+  > span {
+    display: block !important;
+    > span {
+      display: block !important;
+    }
+  }
+}
 .BackButton {
   color: color(gray, 4);
   left: spacing();

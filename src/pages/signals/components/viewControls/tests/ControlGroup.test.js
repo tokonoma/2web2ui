@@ -2,6 +2,8 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import ControlGroup from '../ControlGroup';
 
+jest.mock('src/hooks/useHibanaOverride', () => styles => styles);
+
 describe('Signals View ControlGroup Component', () => {
   let wrapper;
   let props;
@@ -10,12 +12,12 @@ describe('Signals View ControlGroup Component', () => {
     props = {
       options: {
         foo: 'fOo',
-        bar: <test>BaR</test>
+        bar: <test>BaR</test>,
       },
       initialSelected: 'bar',
-      onChange: jest.fn()
+      onChange: jest.fn(),
     };
-    wrapper = shallow(<ControlGroup {...props}/>);
+    wrapper = shallow(<ControlGroup {...props} />);
   });
 
   it('renders correctly', () => {
@@ -23,14 +25,20 @@ describe('Signals View ControlGroup Component', () => {
   });
 
   it('handles a select correctly', () => {
-    wrapper.find('Button').first().simulate('click');
-    expect(wrapper.find('Button').first()).toMatchSnapshot();
+    wrapper
+      .find('ControlButton')
+      .first()
+      .simulate('click');
+    expect(wrapper.find('ControlButton').first()).toMatchSnapshot();
     expect(props.onChange).toHaveBeenCalledWith('foo');
   });
 
   it('does not call onChange if not provided a callback', () => {
     wrapper.setProps({ onChange: null });
-    wrapper.find('Button').first().simulate('click');
+    wrapper
+      .find('ControlButton')
+      .first()
+      .simulate('click');
     expect(props.onChange).not.toHaveBeenCalled();
   });
 

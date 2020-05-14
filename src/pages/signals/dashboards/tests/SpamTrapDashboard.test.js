@@ -3,9 +3,8 @@ import React from 'react';
 import { SpamTrapDashboard } from '../SpamTrapDashboard';
 
 describe('Signals Spam Trap Dashboard Dashboard', () => {
-  const subject = (props = {}) => shallow(
-    <SpamTrapDashboard getSubaccounts={() => {}} {...props} />
-  );
+  const subject = (props = {}) =>
+    shallow(<SpamTrapDashboard getSubaccounts={() => {}} {...props} />);
 
   it('renders page', () => {
     expect(subject()).toMatchSnapshot();

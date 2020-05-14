@@ -22,7 +22,7 @@ class HeaderLabel extends React.Component {
   }
 
   render() {
-    const { dataKey, label, order, sortable } = this.props;
+    const { align, dataKey, label, order, sortable } = this.props;
     let direction;
 
     if (!sortable) {
@@ -33,7 +33,9 @@ class HeaderLabel extends React.Component {
       direction = order.ascending ? 'asc' : 'desc';
     }
 
-    return <SortLabel direction={direction} label={label} onClick={this.handleSort} />;
+    return (
+      <SortLabel align={align} direction={direction} label={label} onClick={this.handleSort} />
+    );
   }
 }
 

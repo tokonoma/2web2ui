@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
+import classNames from 'classnames';
 import { Button } from 'src/components/matchbox';
+import { useHibana } from 'src/context/HibanaContext';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import _ from 'lodash';
-import styles from './ControlGroup.module.scss';
+import OGStyles from './ControlGroup.module.scss';
+import hibanaStyles from './ControlGroupHibana.module.scss';
 
 class ControlGroup extends Component {
   state = {
@@ -33,18 +36,57 @@ class ControlGroup extends Component {
     const { selected } = this.state;
 
     return _.keys(options).map(key => {
-      const classes = classnames(styles.Button, selected === key && styles.Selected);
       return (
-        <Button key={key} onClick={() => this.handleChange(key)} className={classes} size="small">
+        <ControlButton
+          key={key}
+          selectedKey={key}
+          isSelected={selected === key}
+          selectedKey={key}
+          onClick={() => this.handleChange(key)}
+        >
           {options[key]}
-        </Button>
+        </ControlButton>
       );
     });
   };
 
   render() {
-    return <Button.Group className={styles.Group}>{this.renderButtons()}</Button.Group>;
+    return <Button.Group>{this.renderButtons()}</Button.Group>;
   }
+}
+
+function ControlButton(props) {
+  const [state] = useHibana();
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+  const { isHibanaEnabled } = state;
+  const { children, selectedKey, isSelected, onClick } = props;
+
+  let defaultStyleProps = {};
+  let selectedStyleProps = {};
+
+  if (isHibanaEnabled) {
+    defaultStyleProps = {
+      color: 'gray',
+      outlineBorder: true,
+    };
+
+    selectedStyleProps = {
+      color: 'gray',
+      flat: false,
+    };
+  }
+
+  return (
+    <Button
+      {...(isSelected ? selectedStyleProps : defaultStyleProps)}
+      selectedkey={selectedKey}
+      onClick={onClick}
+      className={classNames(styles.Button, isSelected && styles.isSelected)}
+      size="small"
+    >
+      {children}
+    </Button>
+  );
 }
 
 ControlGroup.propTypes = {

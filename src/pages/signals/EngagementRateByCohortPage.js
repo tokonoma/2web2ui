@@ -1,15 +1,14 @@
-/* eslint max-lines: ["error", 200] */
-import React, { Component } from 'react';
+import React from 'react';
 import { getEngagementRateByCohort, getEngagementRecency } from 'src/actions/signals';
 import { selectEngagementRateByCohortDetails } from 'src/selectors/signals';
 import { PageLink } from 'src/components/links';
-import { Grid, Panel, Stack } from 'src/components/matchbox';
+import { Box, Grid, Panel, Stack } from 'src/components/matchbox';
+import { useHibana } from 'src/context/HibanaContext';
 import LineChart from './components/charts/linechart/LineChart';
 import Legend from './components/charts/legend/Legend';
 import Callout from 'src/components/callout';
 import DateFilter from './components/filters/DateFilter';
 import EngagementRateByCohortActions from './components/actionContent/EngagementRateByCohortActions';
-import Divider from './components/Divider';
 import Page from './components/SignalsPage';
 import Tabs from './components/engagement/Tabs';
 import TooltipMetric from 'src/components/charts/TooltipMetric';
@@ -20,39 +19,40 @@ import { Loading } from 'src/components';
 import { roundToPlaces } from 'src/helpers/units';
 import moment from 'moment';
 import _ from 'lodash';
-
-import SpamTrapsPreview from './components/previews/SpamTrapsPreview';
-import HealthScorePreview from './components/previews/HealthScorePreview';
 import cohorts from './constants/cohorts';
-import styles from './DetailsPages.module.scss';
 
-export class EngagementRateByCohortPage extends Component {
-  isEmpty = () => {
-    const { data } = this.props;
+export function EngagementRateByCohortPage(props) {
+  const [state] = useHibana();
+  const { isHibanaEnabled } = state;
+
+  const isEmpty = () => {
+    const { data } = props;
 
     // Returns true with 0 total engagement
     return data.every(({ p_total_eng }) => !p_total_eng);
   };
 
-  getYAxisProps = () => ({
-    domain: this.isEmpty() ? [0, 1] : ['auto', 'auto'],
+  const getYAxisProps = () => ({
+    domain: isEmpty() ? [0, 1] : ['auto', 'auto'],
     tickFormatter: tick => `${roundToPlaces(tick * 100, 1)}%`,
   });
 
-  getXAxisProps = () => {
-    const { xTicks } = this.props;
+  const getXAxisProps = () => {
+    const { xTicks } = props;
     return {
       ticks: xTicks,
       tickFormatter: tick => moment(tick).format('M/D'),
     };
   };
 
-  getTooltipContent = ({ payload = {} }) => {
+  const getTooltipContent = ({ payload = {} }) => {
     const metrics = _.keys(cohorts).reduce(
       (acc, key) => [
         ...acc,
         {
           ...cohorts[key],
+          fill: isHibanaEnabled ? cohorts[key].hibanaFill : cohorts[key].OGFill,
+          stroke: isHibanaEnabled ? cohorts[key].hibanaStroke : cohorts[key].OGStroke,
           key,
           value: payload[`p_${key}_eng`],
         },
@@ -62,20 +62,22 @@ export class EngagementRateByCohortPage extends Component {
 
     return (
       <Stack>
-        {_.orderBy(metrics, 'value', 'desc').map(metric => (
-          <TooltipMetric
-            key={metric.key}
-            color={metric.fill}
-            label={metric.label}
-            description={metric.description}
-            value={`${roundToPlaces(metric.value * 100, 1)}%`}
-          />
-        ))}
+        {_.orderBy(metrics, 'value', 'desc').map(metric => {
+          return (
+            <TooltipMetric
+              key={metric.key}
+              color={metric.fill}
+              label={metric.label}
+              description={metric.description}
+              value={`${roundToPlaces(metric.value * 100, 1)}%`}
+            />
+          );
+        })}
       </Stack>
     );
   };
 
-  renderContent = () => {
+  const renderContent = () => {
     const {
       data = [],
       dataEngRecency = [],
@@ -88,7 +90,7 @@ export class EngagementRateByCohortPage extends Component {
       selectedDate,
       shouldHighlightSelected,
       subaccountId,
-    } = this.props;
+    } = props;
     const selectedEngagementRate = _.find(data, ['date', selectedDate]) || {};
     const selectedEngagementRecency = _.find(dataEngRecency, ['date', selectedDate]) || {};
 
@@ -115,40 +117,51 @@ export class EngagementRateByCohortPage extends Component {
     return (
       <Grid>
         <Grid.Column sm={12} md={7}>
-          <Tabs facet={facet} facetId={facetId} subaccountId={subaccountId} />
-          <Panel sectioned data-id="engagement-rate-chart">
-            {chartPanel || (
-              <div className="LiftTooltip">
-                <LineChart
-                  height={300}
-                  onClick={handleDateSelect}
-                  selected={selectedDate}
-                  shouldHighlightSelected={shouldHighlightSelected}
-                  lines={data}
-                  tooltipWidth="250px"
-                  tooltipContent={this.getTooltipContent}
-                  yKeys={_.keys(cohorts).map(key => ({ key: `p_${key}_eng`, ...cohorts[key] }))}
-                  yAxisProps={this.getYAxisProps()}
-                  xAxisProps={this.getXAxisProps()}
-                />
-                <Legend
-                  items={_.values(cohorts)}
-                  tooltipContent={label => ENGAGEMENT_RECENCY_COHORTS[label]}
-                />
-              </div>
-            )}
+          <Panel data-id="engagement-rate-chart">
+            <Tabs facet={facet} facetId={facetId} subaccountId={subaccountId} />
+            <Panel.Section>
+              {chartPanel || (
+                <div className="LiftTooltip">
+                  <LineChart
+                    height={300}
+                    onClick={handleDateSelect}
+                    selected={selectedDate}
+                    shouldHighlightSelected={shouldHighlightSelected}
+                    lines={data}
+                    tooltipWidth="250px"
+                    tooltipContent={getTooltipContent}
+                    yKeys={_.keys(cohorts).map(key => {
+                      return {
+                        key: `p_${key}_eng`,
+                        ...cohorts[key],
+                        fill: isHibanaEnabled ? cohorts[key].hibanaFill : cohorts[key].OGFill,
+                        stroke: isHibanaEnabled ? cohorts[key].hibanaStroke : cohorts[key].OGStroke,
+                      };
+                    })}
+                    yAxisProps={getYAxisProps()}
+                    xAxisProps={getXAxisProps()}
+                  />
+                  <Legend
+                    items={_.values(cohorts)}
+                    tooltipContent={label => ENGAGEMENT_RECENCY_COHORTS[label]}
+                  />
+                </div>
+              )}
+            </Panel.Section>
           </Panel>
         </Grid.Column>
         <Grid.Column sm={12} md={5} mdOffset={0}>
-          <div className={styles.OffsetCol}>
+          <div>
             {!chartPanel && (
-              <EngagementRateByCohortActions
-                engagementByCohort={selectedEngagementRate}
-                recencyByCohort={selectedEngagementRecency}
-                date={selectedDate}
-                facet={facet}
-                facetId={facetId}
-              />
+              <Box as={Panel} sectioned>
+                <EngagementRateByCohortActions
+                  engagementByCohort={selectedEngagementRate}
+                  recencyByCohort={selectedEngagementRecency}
+                  date={selectedDate}
+                  facet={facet}
+                  facetId={facetId}
+                />
+              </Box>
             )}
           </div>
         </Grid.Column>
@@ -156,36 +169,32 @@ export class EngagementRateByCohortPage extends Component {
     );
   };
 
-  render() {
-    const { facet, facetId, subaccountId } = this.props;
-    return (
-      <Page
-        breadcrumbAction={{
-          content: 'Back to Engagement Recency Overview',
-          to: '/signals/engagement',
-          component: PageLink,
-        }}
-        title="Engagement Rate by Cohort"
-        facet={facet}
-        facetId={facetId}
-        subaccountId={subaccountId}
-        primaryArea={<DateFilter left />}
-      >
-        {this.renderContent()}
-        <Divider />
-        <Grid>
-          {facet !== 'mb_provider' && (
-            <Grid.Column xs={12} sm={6}>
-              <SpamTrapsPreview />
+  const { facet, facetId, subaccountId } = props;
+
+  return (
+    <Page
+      breadcrumbAction={{
+        content: 'Back to Engagement Recency Overview',
+        to: '/signals/engagement',
+        component: PageLink,
+      }}
+      title="Engagement Rate by Cohort"
+      facet={facet}
+      facetId={facetId}
+      subaccountId={subaccountId}
+    >
+      <Panel>
+        <Panel.Section>
+          <Grid>
+            <Grid.Column xs={12} md={4}>
+              <DateFilter label="Date Range" />
             </Grid.Column>
-          )}
-          <Grid.Column xs={12} sm={6}>
-            <HealthScorePreview />
-          </Grid.Column>
-        </Grid>
-      </Page>
-    );
-  }
+          </Grid>
+        </Panel.Section>
+      </Panel>
+      {renderContent()}
+    </Page>
+  );
 }
 
 export default withDetails(

@@ -1,14 +1,18 @@
 import React from 'react';
+import classNames from 'classnames';
 import { PageLink } from 'src/components/links';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import { MAILBOX_PROVIDERS } from 'src/constants';
-import styles from './DataCell.module.scss';
-import classnames from 'classnames';
+import OGStyles from './DataCell.module.scss';
+import hibanaStyles from './DataCellHibana.module.scss';
 
 const FacetDataCell = ({ dimension, facet, id, name, subaccountId, truncate }) => {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+
   if (facet === 'sid' && id === -1) {
     return (
-      <div className={classnames(styles.PaddedCell, truncate && styles.OverflowCell)}>
+      <div className={classNames(styles.PaddedCell, truncate && styles.OverflowCell)}>
         Master & All Subaccounts
       </div>
     );
@@ -29,7 +33,7 @@ const FacetDataCell = ({ dimension, facet, id, name, subaccountId, truncate }) =
   const search = subaccountId >= 0 ? setSubaccountQuery(subaccountId) : undefined;
 
   return (
-    <div className={classnames(styles.PaddedCell, truncate && styles.OverflowCell)}>
+    <div className={classNames(styles.PaddedCell, truncate && styles.OverflowCell)}>
       <PageLink
         children={label}
         to={{

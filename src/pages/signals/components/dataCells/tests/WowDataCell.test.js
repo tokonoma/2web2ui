@@ -2,10 +2,10 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import WoWDataCell from '../WoWDataCell';
 
+jest.mock('src/hooks/useHibanaOverride', () => styles => styles);
+
 describe('WoWDataCell', () => {
-  const subject = (props = {}) => shallow(
-    <WoWDataCell {...props} />
-  );
+  const subject = (props = {}) => shallow(<WoWDataCell {...props} />);
 
   it('renders a positive change', () => {
     expect(subject({ value: 0.1 })).toMatchSnapshot();

@@ -5,7 +5,7 @@ import thresholds from '../../../constants/healthScoreThresholds';
 
 import styles from './CurrentHealthGauge.module.scss';
 
-function Gauge({ score = 0, threshold = {} }) {
+function Gauge({ score = 0 }) {
   // Mounts this component initially with 0
   // then animates to its provided score
   const [rotation, setRotation] = useState(`rotate(${lerp(-205, 27, 0)}deg)`);
@@ -61,7 +61,7 @@ function Gauge({ score = 0, threshold = {} }) {
           d="M78.4 63S51.5 61.2 50 61.2s-2.8 1.3-2.8 2.8c0 1.5 1.3 2.8 2.8 2.8S78.4 63 78.4 63z"
         />
       </svg>
-      <h4 className={styles.Score} style={{ color: threshold.color }} data-id="health-score">
+      <h4 className={styles.Score} data-id="health-score">
         {roundToPlaces(score, 1).toFixed(1)}
       </h4>
     </div>

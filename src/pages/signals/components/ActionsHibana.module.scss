@@ -1,0 +1,49 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.Wrapper {
+  padding: 0; // TODO: Remove when OG theme is removed
+}
+
+.Action {
+  p {
+    font-size: font-size(300);
+    color: color(gray, 900);
+    line-height: line-height(300);
+  }
+}
+
+.Dash {
+  margin-bottom: spacing(400);
+  background: unset; // TODO: Remove when OG theme is removed - just an override
+}
+
+%Icon {
+  min-width: 45px;
+}
+
+.IconBad {
+  @extend %Icon;
+  color: color(red, 700);
+}
+
+.IconGood {
+  @extend %Icon;
+  color: color(green, 700);
+}
+
+.IconWarning {
+  @extend %Icon;
+  color: color(yellow, 400);
+}
+
+.Title {
+  border-bottom: 0;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.TitleText {
+  font-weight: font-weight(semibold);
+  font-size: font-size(400);
+  margin-bottom: spacing(500);
+}

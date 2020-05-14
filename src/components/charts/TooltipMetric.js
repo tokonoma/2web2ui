@@ -1,5 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
+import { tokens } from '@sparkpost/design-tokens-hibana';
 import styles from './TooltipMetric.module.scss';
 import { Box, Text } from 'src/components/matchbox';
 import useHibanaToggle from 'src/hooks/useHibanaToggle';
@@ -16,33 +17,50 @@ export const OGTooltipMetric = ({ color = '#6e6e73', description, label, value }
     </div>
   </div>
 );
+
 export const HibanaTooltipMetric = ({
-  color = '#6e6e73',
+  color = tokens.color_gray_600,
   description = '',
   label = '',
   value = '',
 }) => (
-  <Box position="relative" display="inline-block" width={1} height="200">
-    <Box display="flex" justifyContent="space-between">
-      <Box
-        backgroundColor={color}
-        border="1px solid white" // todo, yuck
-        borderRadius={8}
-        marginRight="100"
-        size={16}
-        marginTop="100"
-      />
-      <Box display="flex" height="100" flexDirection="column" flex="1 0 0">
-        <Text as="span" fontSize="200" fontWeight="300">
+  <Box display="flex" alignItems="flex-start" justifyContent="flex-start" width="100%">
+    <Box
+      backgroundColor={color}
+      border="1px solid white" // todo, yuck
+      borderRadius="circle"
+      display="inline-flex"
+      flexShrink="0" // Prevents the circle from getting kinda squishy
+      size={16}
+      role="presentation"
+    />
+
+    <Box
+      marginLeft="200"
+      display="inline-flex"
+      alignItems="flex-start"
+      justifyContent="space-between"
+      width="100%"
+    >
+      <div>
+        <Text
+          as="div"
+          fontSize="200"
+          fontWeight="300"
+          lineHeight="200"
+          style={{ transform: 'translateY(-2px)' }} // Fixes slight vertical centering problem
+        >
           {label}
         </Text>
+
         {description && (
-          <Text as="span" fontSize="100" fontWeight="300">
+          <Text as="div" fontSize="100" fontWeight="300" margin-top="200">
             {description}
           </Text>
         )}
-      </Box>
-      <Text as="span" fontSize="200" fontWeight="600">
+      </div>
+
+      <Text as="span" fontSize="200" fontWeight="600" style={{ transform: 'translateY(-4px)' }}>
         {value}
       </Text>
     </Box>

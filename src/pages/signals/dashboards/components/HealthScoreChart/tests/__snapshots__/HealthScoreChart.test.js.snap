@@ -12,20 +12,12 @@ exports[`Signals Health Score Chart renders error correctly 1`] = `
 exports[`Signals Health Score Chart renders happy path correctly 1`] = `
 <Panel
   sectioned={true}
+  title="Dec 1 2014 – Feb 1 2015"
 >
   <div
     className="Content"
   >
-    <h2
-      className="Header"
-    >
-      Dec 1 2014
-       – 
-      Feb 1 2015
-    </h2>
     <BarChart
-      activeFill="#22838A"
-      fill="#B3ECEF"
       gap={1}
       height={250}
       margin={
@@ -116,12 +108,12 @@ exports[`Signals Health Score Chart renders happy path correctly 1`] = `
       yAxisRefLines={
         Array [
           Object {
-            "stroke": "#2CC995",
+            "stroke": "#067852",
             "strokeWidth": 1,
             "y": 80,
           },
           Object {
-            "stroke": "#FF594D",
+            "stroke": "#d9363e",
             "strokeWidth": 1,
             "y": 55,
           },
@@ -176,7 +168,7 @@ exports[`Signals Health Score Chart renders metric displays 2`] = `
 
 exports[`Signals Health Score Chart renders no account level data callout correctly 1`] = `
 <Callout
-  height="auto"
+  height="100%"
 >
   Health Scores Not Available
 </Callout>

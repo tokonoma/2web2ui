@@ -1,10 +1,12 @@
 import React from 'react';
-import styles from './Divider.module.scss';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
+import OGStyles from './Divider.module.scss';
+import hibanaStyles from './DividerHibana.module.scss';
 
 function Divider() {
-  return (
-    <hr className={styles.Divider} />
-  );
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+
+  return <hr className={styles.Divider} />;
 }
 
 export default Divider;
