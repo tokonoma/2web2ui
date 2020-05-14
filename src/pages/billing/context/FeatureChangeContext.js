@@ -53,7 +53,7 @@ export const FeatureChangeProvider = ({
     }
     const { products: currentProducts } = subscription;
     const diffObject = currentProducts.reduce(
-      (resObject, { product, quantity, limit: currentLimit }) => {
+      (resObject, { product, quantity, limit: currentLimit, limit_override }) => {
         const comparedPlan = selectedPlansByProduct[product];
         switch (product) {
           case 'dedicated_ip':
@@ -78,7 +78,14 @@ export const FeatureChangeProvider = ({
             const limit = _.get(comparedPlan, 'limit', 5000);
             const qtyExceedsLimit = Boolean(quantity > limit);
             const isLimitDecreasing = currentLimit > limit;
-            if (actions.subaccounts || qtyExceedsLimit || isLimitDecreasing) {
+            //we let the user upgrade/downgrade without showing subaccount section if current limit_override
+            //is higher than current Limit and that of compared plan
+            const overrideCondition =
+              limit_override && limit_override > currentLimit && limit_override > limit;
+            if (
+              (actions.subaccounts || qtyExceedsLimit || isLimitDecreasing) &&
+              !overrideCondition
+            ) {
               resObject.subaccounts = {
                 label: 'Subaccounts',
                 description: (

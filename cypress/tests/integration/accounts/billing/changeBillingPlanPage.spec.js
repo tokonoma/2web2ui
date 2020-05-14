@@ -581,6 +581,51 @@ describe('Change Billing Plan Page', () => {
     cy.queryAllByText('Premier Plans').should('not.be.visible');
     cy.queryAllByText('Close').should('not.be.visible');
   });
+  it('Upgrades from a starter plan to premier plan, with subaccounts limit_override higher than premier subaccount limit', () => {
+    // user is on the test plan
+    cy.stubRequest({
+      url: '/api/v1/account',
+      fixture: 'account/200.get.100k-starter-plan.json',
+    });
+    cy.stubRequest({
+      url: '/api/v1/billing',
+      fixture: 'billing/200.get.json',
+      fixtureAlias: 'billingGet',
+    });
+    cy.stubRequest({
+      url: '/api/v1/billing/subscription',
+      fixture: 'billing/subscription/200.get.starter-plan-higher-subaccounts-limitoverride.json',
+    });
+
+    cy.visit('/account/billing/plan');
+
+    cy.get('[data-id=select-plan-1M-premier-0519]').click();
+
+    cy.findByText('Your new plan only allows for 15 active subaccounts.').should('not.be.visible');
+
+    cy.stubRequest({
+      url: '/api/v1/billing/subscription/bundle',
+      fixture: 'billing/subscription/bundle/200.put.json',
+      method: 'PUT',
+    });
+
+    mockCommonHttpCalls();
+
+    // Then server returns the new plan info that was saved...
+    cy.stubRequest({
+      url: '/api/v1/account',
+      fixture: 'account/200.get.1m-premier-plan.json',
+    });
+
+    cy.findByText('Change Plan').click();
+    cy.withinSnackbar(() => {
+      cy.findByText('Subscription Updated').should('be.visible');
+    });
+    cy.findByText('Plan Overview').should('be.visible');
+    cy.findByText('Your Plan').should('be.visible');
+    cy.findByText('1,000,000 emails for $525 per month').should('be.visible');
+    cy.url().should('equal', `${Cypress.config().baseUrl}/account/billing`);
+  });
 
   it('Upgrades from free to paid using a promo code', () => {
     cy.stubRequest({
