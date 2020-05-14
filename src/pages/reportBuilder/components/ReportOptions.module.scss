@@ -1,22 +1,24 @@
-@import '~@sparkpost/matchbox/src/styles/config.scss';
+@import '~@sparkpost/design-tokens-hibana/tokens';
 
 .FieldWrapper {
-  margin-bottom: spacing();
-  @media screen and (min-width: breakpoint(small)) {
+  margin-bottom: spacing(400);
+
+  @media (min-width: media-query(md)) {
     margin-bottom: 0;
   }
 }
 
 .FieldWrapperMetricsRollup {
-  margin-top: 20px; // Matches the label height of other fields
-  @media screen and (max-width: breakpoint(small)) {
-    margin-bottom: spacing();
+  margin-top: spacing(300);
+
+  @media (min-width: media-query(md)) {
+    margin-bottom: spacing(400);
     margin-top: 0;
   }
 }
 
 .TagWrapper {
-  margin: 0 spacing(small);
+  margin: 0 spacing(200);
 }
 
 // The Tooltip component sets the display to inline block,
@@ -25,4 +27,8 @@
   > span {
     display: inherit;
   }
+}
+
+.conditional {
+  font-style: italic;
 }

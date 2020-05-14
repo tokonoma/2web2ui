@@ -13,7 +13,6 @@ import PrecisionSelector from 'src/pages/reports/components/PrecisionSelector'; 
 import { Heading } from 'src/components/text';
 import { parseSearch } from 'src/helpers/reports';
 import { isForcedUTCRollupPrecision } from 'src/helpers/metrics';
-import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import Typeahead from 'src/pages/reports/components/Typeahead'; //TODO: Remove
 import { Grid, Inline, Panel, Select, Stack, Tag, Tooltip } from 'src/components/matchbox';
 import DatePicker from 'src/components/datePicker/DatePicker';
@@ -22,8 +21,7 @@ import { TimezoneTypeahead } from 'src/components/typeahead/TimezoneTypeahead';
 import { selectFeatureFlaggedMetrics } from 'src/selectors/metrics';
 import _ from 'lodash';
 import config from 'src/config';
-import OGStyles from './ReportOptions.module.scss';
-import hibanaStyles from './ReportOptionsHibana.module.scss';
+import styles from './ReportOptions.module.scss';
 
 const { metricsRollupPrecisionMap } = config;
 const RELATIVE_DATE_OPTIONS = ['hour', 'day', '7days', '30days', '90days', 'custom'];
@@ -39,8 +37,6 @@ const PanelContent = ({
   typeaheadCache,
   searchOptions,
 }) => {
-  const styles = useHibanaOverride(OGStyles, hibanaStyles);
-
   return (
     <Panel.Section>
       <Grid>
@@ -81,7 +77,6 @@ const MetricsRollupPanelContent = (
   searchOptions,
 ) => {
   const [shownPrecision, setShownPrecision] = useState('');
-  const styles = useHibanaOverride(OGStyles, hibanaStyles);
 
   const updateShownPrecision = shownPrecision => {
     setShownPrecision(shownPrecision);
@@ -189,14 +184,13 @@ export function ReportOptions(props) {
     initTypeaheadCache,
   } = props;
 
-  const styles = useHibanaOverride(OGStyles, hibanaStyles);
-
   useEffect(() => {
     const { options, filters = [] } = parseSearch(location.search);
     addFilters(filters);
     refreshReportOptions(options);
     initTypeaheadCache();
-  }, [addFilters, initTypeaheadCache, location.search, refreshReportOptions]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleFilterRemove = index => {
     removeFilter(index);
