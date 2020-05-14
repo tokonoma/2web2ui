@@ -5,7 +5,7 @@ import { refreshSummaryReport } from 'src/actions/summaryChart';
 import { refreshReportOptions } from 'src/actions/reportOptions';
 import { Page, Panel } from 'src/components/matchbox';
 import { Loading } from 'src/components';
-import ReportOptions from '../reports/components/ReportOptions'; //TODO: Remove usage of these components
+import ReportOptions from './components/ReportOptions';
 import { Table, MetricsModal, ChartGroup, ChartHeader } from '../reports/summary/components'; //TODO: Remove usage of these components
 import { selectSummaryChartSearchOptions } from 'src/selectors/reportSearchOptions';
 import styles from './ReportBuilder.module.scss';
