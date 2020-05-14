@@ -203,6 +203,12 @@ export const PLAN_TIERS = {
   starter: 'Starter',
   premier: 'Premier',
 };
+export const GUIDE_IDS = {
+  SEND_TEST_EMAIL: '6RgwDLtUU5Ynp20auFvU9Qjbpqg',
+  EXPLORE_ANALYTICS: 'LHGQClYKBmD_OI1t9oj-DE8mcOY',
+  CHECKOUT_EVENTS: 'wMsJgAtVLFeDKNOoiIxStA2jP-U',
+  CANCEL_ACCOUNT: 'PxtX15UGbdzmScWQrz1_XPx6t4Q',
+};
 
 export const RECIPIENT_VALIDATION_TIERS = [
   { volumeMin: 0, volumeMax: 5000, cost: 0.01, displayedCost: '$0.010' },

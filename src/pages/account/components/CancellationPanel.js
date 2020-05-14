@@ -1,14 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetch as fetchAccount, renewAccount } from 'src/actions/account';
-import { PageLink } from 'src/components/links';
 import { Heading } from 'src/components/text';
 import { ButtonWrapper } from 'src/components';
 import { Button, Panel, Stack } from 'src/components/matchbox';
 import { showAlert } from 'src/actions/globalAlert';
-import config from 'src/config';
-import Brightback from 'src/components/brightback/Brightback';
+import { GUIDE_IDS } from 'src/constants';
 import { formatDate } from 'src/helpers/date';
+import { withRouter } from 'react-router-dom';
 
 const ACCOUNT_CANCEL_LINK = '/account/cancel';
 
@@ -19,6 +18,12 @@ export class CancellationPanel extends React.Component {
       showAlert({ type: 'success', message: 'Your account will not be cancelled.' });
       return fetchAccount();
     });
+  };
+
+  handleCancelAccount = () => {
+    if (!window.pendo.showGuideById(GUIDE_IDS.CANCEL_ACCOUNT)) {
+      this.props.history.push(ACCOUNT_CANCEL_LINK);
+    }
   };
 
   render() {
@@ -80,19 +85,9 @@ export class CancellationPanel extends React.Component {
           </Stack>
         </Panel.Section>
         <Panel.Section>
-          <Brightback
-            config={config.brightback.cancelConfig}
-            condition={true}
-            render={({ to, enabled }) => (
-              <Button
-                variant="destructive"
-                to={enabled ? to : ACCOUNT_CANCEL_LINK}
-                component={enabled ? null : PageLink}
-              >
-                Cancel Account
-              </Button>
-            )}
-          />
+          <Button variant="destructive" onClick={this.handleCancelAccount}>
+            Cancel Account
+          </Button>
         </Panel.Section>
       </Panel>
     );
@@ -103,6 +98,6 @@ const mapStateToProps = ({ account }) => ({
   account,
 });
 
-export default connect(mapStateToProps, { fetchAccount, renewAccount, showAlert })(
-  CancellationPanel,
+export default withRouter(
+  connect(mapStateToProps, { fetchAccount, renewAccount, showAlert })(CancellationPanel),
 );
