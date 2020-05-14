@@ -16,8 +16,7 @@ const noMatchboxImport = {
 
         if (
           !withinSrcMatchboxComponents &&
-          (/@sparkpost\/matchbox$/.test(node.source.value) ||
-            /@sparkpost\/matchbox-hibana$/.test(node.source.value))
+          /@sparkpost\/matchbox(-hibana)?$/.test(node.source.value)
         ) {
           report({
             node: node,
