@@ -39,8 +39,8 @@
     }
   },
   "lint-staged": {
-    "{cypress,src}/**/*.js": [
-      "eslint --fix",
+    "{cypress,src,eslint-rules}/**/*.js": [
+      "eslint --rulesdir eslint-rules/ --fix",
       "git add"
     ],
     "src/**/*.{css,scss}": [
