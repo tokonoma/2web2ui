@@ -1,5 +1,8 @@
 import { Linter } from 'eslint';
 
+// note, experimented with RuleTester, too much magic and no easy way to set each test description
+//   because only "code" is provided to "it"
+// see, https://eslint.org/docs/developer-guide/nodejs-api#ruletester
 const runner = (title, rule, { valid = {}, invalid = {} } = {}) => {
   describe(title, () => {
     const linter = new Linter();
