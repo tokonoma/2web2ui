@@ -44,17 +44,12 @@ exports[`CancellationPanel renders 1`] = `
     </Stack>
   </Panel.Section>
   <Panel.Section>
-    <withRouter(Connect(Brightback))
-      condition={true}
-      config={
-        Object {
-          "app_id": "bAJDEmD5EK",
-          "cancel_confirmation_url": "/account/cancel",
-          "save_return_url": "/account/settings",
-        }
-      }
-      render={[Function]}
-    />
+    <Button
+      onClick={[Function]}
+      variant="destructive"
+    >
+      Cancel Account
+    </Button>
   </Panel.Section>
 </Panel>
 `;
