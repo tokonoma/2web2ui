@@ -26,7 +26,10 @@ module.exports = {
   testResultsProcessor: './node_modules/jest-junit-reporter',
   setupFiles: ['<rootDir>/config/polyfills.js'],
   setupFilesAfterEnv: ['<rootDir>/config/jest/setup.js'],
-  testMatch: ['<rootDir>/src/**/__tests__/**/*.js?(x)', '<rootDir>/(src|scripts)/**/*.test.js?(x)'],
+  testMatch: [
+    '<rootDir>/src/**/__tests__/**/*.js?(x)',
+    '<rootDir>/(eslint-rules|src|scripts)/**/*.test.js?(x)',
+  ],
   testEnvironment: 'node',
   testURL: 'http://phoenix.test',
   transform: {

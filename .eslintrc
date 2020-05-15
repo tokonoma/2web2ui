@@ -5,19 +5,19 @@
     "jest": true
   },
   "rules": {
+    // Custom 2web2ui rules
+    "no-matchbox-import": "error",
     // doesn't work with jest-in-case
     "jest/no-standalone-expect": "off",
-
-    "lodash/chaining": ["error", "never"],
-
+    "lodash/chaining": [
+      "error",
+      "never"
+    ],
     // could result in unwanted result (e.g. _.get(obj, [a,b]) is not same as _.get(obj, `${a}${b}`))
     "lodash/path-style": "off",
-
     "no-console": "error",
-
     // allow `import debounce from 'lodash/debounce';` for easy mocking
     "lodash/import-scope": "off",
-
     // All of the following "lodash/*" rules are lodash's "Preference over Native"
     // We prefer native functions over lodash in most cases to reduce proneness to
     // masking errors (_.map will still work if the array is null, etc.)
@@ -34,7 +34,6 @@
     "lodash/prefer-some": "off",
     "lodash/prefer-startswith": "off",
     "lodash/prefer-times": "off",
-
     // Custom rule for i18n
     "no-restricted-syntax": [
       "warn",
@@ -59,5 +58,10 @@
     "plugin:prettier/recommended",
     "plugin:testing-library/recommended"
   ],
-  "plugins": ["testing-library", "jest", "lodash", "prettier"]
+  "plugins": [
+    "testing-library",
+    "jest",
+    "lodash",
+    "prettier"
+  ]
 }
