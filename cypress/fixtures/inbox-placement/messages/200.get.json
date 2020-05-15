@@ -1,0 +1,15 @@
+{
+  "results": {
+    "id": 1,
+    "email_address": "larry@provider.us",
+    "sending_ip": "unknown",
+    "folder": "inbox",
+    "tab": null,
+    "dkim": "pass",
+    "spf": null,
+    "dmarc": null,
+    "sent_at": "2020-03-12T01:01:13.000Z",
+    "received_at": "2020-03-12T02:01:13.000Z",
+    "headers": "Return-Path: <test@sparkpost.com>\r\nDelivered-To: larry@provider.us\r\n..."
+  }
+}

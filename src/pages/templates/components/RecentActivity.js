@@ -12,7 +12,7 @@ import OGStyles from './RecentActivity.module.scss';
 import hibanaStyles from './RecentActivityHibana.module.scss';
 
 const RecentActivity = props => {
-  const { templates, onToggleDeleteModal, onToggleDuplicateModal } = props;
+  const { hasActionButtons, templates, onToggleDeleteModal, onToggleDuplicateModal } = props;
   const descendingSortedTemplates = _.orderBy(templates, 'last_update_time', 'desc');
   const styles = useHibanaOverride(OGStyles, hibanaStyles);
 
@@ -82,19 +82,21 @@ const RecentActivity = props => {
                           </div>
                         </div>
 
-                        <div className={styles.RecentActivityActions}>
-                          <DuplicateAction
-                            className={styles.RecentActivityAction}
-                            onClick={() => onToggleDuplicateModal(template)}
-                            data-id="recent-activity-button-duplicate"
-                          />
+                        {hasActionButtons && (
+                          <div className={styles.RecentActivityActions}>
+                            <DuplicateAction
+                              className={styles.RecentActivityAction}
+                              onClick={() => onToggleDuplicateModal(template)}
+                              data-id="recent-activity-button-duplicate"
+                            />
 
-                          <DeleteAction
-                            className={styles.RecentActivityAction}
-                            onClick={() => onToggleDeleteModal(template)}
-                            data-id="recent-activity-button-delete"
-                          />
-                        </div>
+                            <DeleteAction
+                              className={styles.RecentActivityAction}
+                              onClick={() => onToggleDeleteModal(template)}
+                              data-id="recent-activity-button-delete"
+                            />
+                          </div>
+                        )}
                       </div>
                     </div>
                   </Panel>

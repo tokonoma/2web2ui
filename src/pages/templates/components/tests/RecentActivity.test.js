@@ -25,9 +25,13 @@ describe('RecentActivity', () => {
   };
 
   const subject = props => {
+    const defaultProps = {
+      hasActionButtons: true,
+    };
+
     return render(
       <TestApp>
-        <RecentActivity {...props} />
+        <RecentActivity {...defaultProps} {...props} />
       </TestApp>,
     );
   };
@@ -97,5 +101,15 @@ describe('RecentActivity', () => {
 
     expect(mockToggleDeleteModal).toHaveBeenCalled();
     expect(mockToggleDuplicateModal).toHaveBeenCalled();
+  });
+
+  it('does not render action buttons when `hasActionButtons` is `false`', () => {
+    const { queryAllByText } = subject({
+      templates: [publishedWithDraftTemplate, publishedTemplate, draftTemplate],
+      hasActionButtons: false,
+    });
+
+    expect(queryAllByText('Delete Template')).toHaveLength(0);
+    expect(queryAllByText('Duplicate Template')).toHaveLength(0);
   });
 });

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import PanelLoading from 'src/components/panelLoading/PanelLoading';
+import { PanelLoading } from 'src/components/loading';
 
 import { getSubaccount, editSubaccount } from 'src/actions/subaccounts';
 import { selectSubaccount } from 'src/selectors/subaccounts';

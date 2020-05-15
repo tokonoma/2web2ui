@@ -9,8 +9,9 @@ describe('EditHtmlSection', () => {
   const subject = ({ editorState } = {}) => {
     useEditorContext.mockReturnValue({
       content: { html: '<h1>Test</h1>' },
+      isReadOnly: false,
       setContent: () => {},
-      ...editorState
+      ...editorState,
     });
 
     return shallow(<EditHtmlSection />);
@@ -21,12 +22,12 @@ describe('EditHtmlSection', () => {
   });
 
   it('renders correctly in readOnly mode', () => {
-    expect(subject({ editorState: { isPublishedMode: true }}).prop('readOnly')).toBe(true);
+    expect(subject({ editorState: { isReadOnly: true } }).prop('readOnly')).toBe(true);
   });
 
   it('sets content on change', () => {
     const setContent = jest.fn();
-    const wrapper = subject({ editorState: { setContent }});
+    const wrapper = subject({ editorState: { setContent } });
 
     wrapper.simulate('change', '<h1>New Value</h1>');
 

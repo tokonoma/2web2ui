@@ -16,29 +16,33 @@ exports[`Page: Single Inbox Placement Test renders page correctly with defaults 
 <Page
   breadcrumbAction={
     Object {
-      "content": "All Inbox Placement Tests",
-      "onClick": [Function],
+      "component": [Function],
+      "content": "All Tests",
+      "to": "/inbox-placement",
     }
   }
-  subtitle="Results"
-  title="Inbox Placement"
+  title="Inbox Placement Test Results"
 >
-  <Tabs
-    connectBelow={true}
-    selected={0}
-    tabs={
-      Array [
-        Object {
-          "content": "Details",
-          "key": "details",
-        },
-        Object {
-          "content": "Content",
-          "key": "content",
-        },
-      ]
-    }
-  />
+  <Box
+    marginBottom="400"
+  >
+    <Tabs
+      connectBelow={true}
+      selected={0}
+      tabs={
+        Array [
+          Object {
+            "content": "Test Details",
+            "key": "details",
+          },
+          Object {
+            "content": "Test Content",
+            "key": "content",
+          },
+        ]
+      }
+    />
+  </Box>
   <TestDetails />
 </Page>
 `;

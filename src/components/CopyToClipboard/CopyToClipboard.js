@@ -4,7 +4,6 @@ import copy from 'copy-to-clipboard';
 
 import { Tooltip } from 'src/components/matchbox';
 import { Button } from 'src/components/matchbox';
-import { ContentCopy } from '@sparkpost/matchbox-icons';
 
 /**
  * Reusable Copy to Clipboard button
@@ -31,15 +30,15 @@ class CopyToClipboard extends Component {
   }
 
   render() {
-    const { label = 'Copy', primary } = this.props;
+    const { children = 'Copy', ...props } = this.props;
     const { copied } = this.state;
 
     const content = copied ? 'Copied to Clipboard' : 'Copy to Clipboard';
 
     return (
       <Tooltip dark content={content}>
-        <Button primary={primary} name="copy-field-button" onClick={this.handleCopy}>
-          <ContentCopy size={14} /> {label}
+        <Button {...props} name="copy-field-button" onClick={this.handleCopy}>
+          {children}
         </Button>
       </Tooltip>
     );
@@ -48,7 +47,6 @@ class CopyToClipboard extends Component {
 
 CopyToClipboard.propTypes = {
   value: PropTypes.string,
-  label: PropTypes.string,
 };
 
 export default CopyToClipboard;

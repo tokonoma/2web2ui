@@ -10,8 +10,8 @@ import CopyField from 'src/components/copyField/CopyField';
 import { required } from 'src/helpers/validation';
 import styles from './SettingsForm.module.scss';
 
-export default class SettingsForm extends React.Component {
-  updateSettings = values => {
+export default function SettingsForm(props) {
+  const updateSettings = values => {
     const {
       draft,
       updateDraft,
@@ -19,7 +19,7 @@ export default class SettingsForm extends React.Component {
       showAlert,
       content: { amp_html, html, text },
       setHasSaved,
-    } = this.props;
+    } = props;
 
     return updateDraft(
       {
@@ -40,10 +40,10 @@ export default class SettingsForm extends React.Component {
     });
   };
 
-  parseToggle = value => !!value;
+  const parseToggle = value => !!value;
 
-  renderPublishedIntro = () => {
-    const { hasDraft } = this.props;
+  const renderPublishedIntro = () => {
+    const { hasDraft } = props;
     return (
       <Panel.Section>
         <p
@@ -54,151 +54,148 @@ export default class SettingsForm extends React.Component {
       </Panel.Section>
     );
   };
-  render() {
-    const {
-      handleSubmit,
-      domainsLoading,
-      domains,
-      subaccountId,
-      submitting,
-      pristine,
-      valid,
-      hasSubaccounts,
-      canViewSubaccount,
-      isPublishedMode,
-      draft,
-    } = this.props;
 
-    const canViewSubaccountSection = hasSubaccounts && canViewSubaccount;
-    const fromEmailHelpText =
-      !domainsLoading && !domains.length
-        ? subaccountId
-          ? 'The selected subaccount does not have any verified sending domains.'
-          : 'You do not have any verified sending domains to use.'
-        : null;
+  const {
+    handleSubmit,
+    domainsLoading,
+    domains,
+    subaccountId,
+    submitting,
+    pristine,
+    valid,
+    hasSubaccounts,
+    canViewSubaccount,
+    isPublishedMode,
+    draft,
+    isReadOnly,
+  } = props;
+  const isEditingDisabled = submitting || isReadOnly;
+  const isSubmissionDisabled = submitting || !valid || pristine || isReadOnly;
+  const canViewSubaccountSection = hasSubaccounts && canViewSubaccount;
+  const fromEmailHelpText =
+    !domainsLoading && !domains.length
+      ? subaccountId
+        ? 'The selected subaccount does not have any verified sending domains.'
+        : 'You do not have any verified sending domains to use.'
+      : null;
 
-    return (
-      <>
-        {isPublishedMode && this.renderPublishedIntro()}
-        <form onSubmit={handleSubmit(this.updateSettings)}>
+  return (
+    <>
+      {isPublishedMode && renderPublishedIntro()}
+      <form onSubmit={handleSubmit(updateSettings)}>
+        <Panel.Section>
+          <Stack>
+            <Field
+              name="name"
+              component={TextFieldWrapper}
+              label="Template Name"
+              disabled={isEditingDisabled}
+              validate={required}
+            />
+
+            <CopyField
+              name="id"
+              id="template-id-field"
+              label="Template ID"
+              value={draft.id}
+              helpText={"A Unique ID for your template, we'll fill this in for you."}
+              disabled={true}
+            />
+          </Stack>
+        </Panel.Section>
+
+        {canViewSubaccountSection && (
           <Panel.Section>
-            <Stack>
-              <Field
-                name="name"
-                component={TextFieldWrapper}
-                label="Template Name"
-                disabled={submitting || isPublishedMode}
-                validate={required}
-              />
-
-              <CopyField
-                name="id"
-                id="template-id-field"
-                label="Template ID"
-                value={draft.id}
-                helpText={"A Unique ID for your template, we'll fill this in for you."}
-                disabled={true}
-              />
-            </Stack>
+            <SubaccountSection newTemplate={false} disabled={isEditingDisabled} />
           </Panel.Section>
+        )}
 
-          {canViewSubaccountSection && (
-            <Panel.Section>
-              <SubaccountSection newTemplate={false} disabled={submitting || isPublishedMode} />
-            </Panel.Section>
-          )}
+        <Panel.Section>
+          <Stack>
+            <Field
+              name="content.subject"
+              component={TextFieldWrapper}
+              label="Subject"
+              validate={required}
+              disabled={isEditingDisabled}
+            />
 
-          <Panel.Section>
-            <Stack>
-              <Field
-                name="content.subject"
-                component={TextFieldWrapper}
-                label="Subject"
-                validate={required}
-                disabled={submitting || isPublishedMode}
-              />
+            <Field
+              name="content.from.email"
+              component={FromEmailWrapper}
+              placeholder="example@email.com"
+              label="From Email"
+              // Do not try to validate email, let our API make that decision
+              validate={[required]}
+              domains={domains}
+              helpText={fromEmailHelpText}
+              disabled={isEditingDisabled}
+            />
 
-              <Field
-                name="content.from.email"
-                component={FromEmailWrapper}
-                placeholder="example@email.com"
-                label="From Email"
-                // Do not try to validate email, let our API make that decision
-                validate={[required]}
-                domains={domains}
-                helpText={fromEmailHelpText}
-                disabled={submitting || isPublishedMode}
-              />
+            <Field
+              name="content.from.name"
+              component={TextFieldWrapper}
+              label="From Name"
+              helpText="A friendly from for your recipients."
+              disabled={isEditingDisabled}
+            />
 
-              <Field
-                name="content.from.name"
-                component={TextFieldWrapper}
-                label="From Name"
-                helpText="A friendly from for your recipients."
-                disabled={submitting || isPublishedMode}
-              />
+            <Field
+              // Do not try to validate email, let our API make that decision
+              name="content.reply_to"
+              component={TextFieldWrapper}
+              label="Reply To"
+              helpText="An email address recipients can reply to."
+              disabled={isEditingDisabled}
+            />
 
-              <Field
-                // Do not try to validate email, let our API make that decision
-                name="content.reply_to"
-                component={TextFieldWrapper}
-                label="Reply To"
-                helpText="An email address recipients can reply to."
-                disabled={submitting || isPublishedMode}
-              />
+            <Field
+              name="description"
+              component={TextFieldWrapper}
+              label="Description"
+              helpText="Not visible to recipients."
+              disabled={isEditingDisabled}
+            />
+          </Stack>
+        </Panel.Section>
+        <Panel.Section>
+          <Stack>
+            <Field
+              name="options.open_tracking"
+              component={ToggleBlock}
+              label="Track Opens"
+              type="checkbox"
+              parse={parseToggle}
+              disabled={isEditingDisabled}
+            />
 
-              <Field
-                name="description"
-                component={TextFieldWrapper}
-                label="Description"
-                helpText="Not visible to recipients."
-                disabled={submitting || isPublishedMode}
-              />
-            </Stack>
-          </Panel.Section>
-          <Panel.Section>
-            <Stack>
-              <Field
-                name="options.open_tracking"
-                component={ToggleBlock}
-                label="Track Opens"
-                type="checkbox"
-                parse={this.parseToggle}
-                disabled={submitting || isPublishedMode}
-              />
+            <Field
+              name="options.click_tracking"
+              component={ToggleBlock}
+              label="Track Clicks"
+              type="checkbox"
+              parse={parseToggle}
+              disabled={isEditingDisabled}
+            />
 
-              <Field
-                name="options.click_tracking"
-                component={ToggleBlock}
-                label="Track Clicks"
-                type="checkbox"
-                parse={this.parseToggle}
-                disabled={submitting || isPublishedMode}
-              />
+            <Field
+              name="options.transactional"
+              component={ToggleBlock}
+              label="Transactional"
+              type="checkbox"
+              parse={parseToggle}
+              helpText="Transactional messages are triggered by a user’s actions on the website, like requesting a password reset, signing up, or making a purchase."
+              disabled={isEditingDisabled}
+            />
+          </Stack>
+        </Panel.Section>
 
-              <Field
-                name="options.transactional"
-                component={ToggleBlock}
-                label="Transactional"
-                type="checkbox"
-                parse={this.parseToggle}
-                helpText="Transactional messages are triggered by a user’s actions on the website, like requesting a password reset, signing up, or making a purchase."
-                disabled={submitting || isPublishedMode}
-              />
-            </Stack>
-          </Panel.Section>
-
-          <Panel.Section>
-            <Button
-              variant="primary"
-              type="submit"
-              disabled={submitting || !valid || pristine || isPublishedMode}
-            >
-              Update Settings
-            </Button>
-          </Panel.Section>
-        </form>
-      </>
-    );
-  }
+        <Panel.Section>
+          <Button variant="primary" type="submit" disabled={isSubmissionDisabled}>
+            Update Settings
+          </Button>
+        </Panel.Section>
+      </form>
+    </>
+  );
 }

@@ -1,44 +1,35 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
-.Inline {
-  display: inline;
+.BreakdownFilters {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-gap: spacing();
 }
 
-.SeedsCount {
-  font-weight: normal;
+// this is unfortunate, but can be removed with OG
+.ClearSection {
+  clear: both;
+  margin-bottom: spacing();
 }
 
-.FolderPlacementBarChart {
-  border-bottom: 1px solid color(gray, 8);
-  @media screen and (min-width: breakpoint(medium)) {
-    border-right: 1px solid color(gray, 8);
-    border-bottom: none;
+.FolderAuthenticationPanels {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-column-gap: spacing();
+
+  @media (min-width: breakpoint(small)) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (min-width: breakpoint(medium)) {
+    grid-template-columns: 10fr 9fr;
+  }
+
+  @media (min-width: breakpoint(large)) {
+    grid-template-columns: 10fr 7fr;
   }
 }
 
-.AuthenticationHeader {
-  @media screen and (min-width: breakpoint(medium)) {
-    text-align: center;
-  }
-}
-
-.PlacementFilterContainer {
-  padding: spacing(base);
-  @media screen and (min-width: breakpoint(smaller)) {
-    display: flex;
-  }
-}
-
-.PlacementFilterSelect {
-  @media screen and (min-width: breakpoint(smaller)) {
-    max-width: 200px;
-  }
-}
-
-.PlacementFilterTextField {
-  flex: 1;
-  margin-top: spacing(base);
-  @media screen and (min-width: breakpoint(smaller)) {
-    margin: 0 0 0 spacing(base);
-  }
+.StatusTag {
+  text-transform: capitalize;
 }

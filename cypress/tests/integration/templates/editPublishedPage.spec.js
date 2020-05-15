@@ -1,5 +1,6 @@
-const TEMPLATE_ID = 'stubbed-template-1';
-const EDITOR_SELECTOR = '.ace_text-input';
+import { EDITOR_SELECTOR, TEMPLATE_ID } from './constants';
+import { verifyTemplateSettingsIsDisabled, typeInEditor } from './helpers';
+
 const PAGE_URL = `/templates/edit/${TEMPLATE_ID}/published/content`;
 
 function openTemplateSettings() {
@@ -115,6 +116,31 @@ describe('The templates published template page', () => {
       cy.scrollTo('top');
 
       cy.findByText('Hello, world').should('be.visible');
+    });
+
+    it("saves the user's test data entry to local storage as the user edits test data", () => {
+      cy.visit(PAGE_URL);
+
+      cy.findByText('Test Data').click();
+
+      cy.clearLocalStorage();
+      typeInEditor('{"substitution_data": "THIS IS SOME TEST DATA"}');
+
+      // localStorage must be accessed asynchronously!
+      // See: https://github.com/cypress-io/cypress/issues/2722
+      cy.window().then(window =>
+        expect(window.localStorage.getItem('tpldata/mockuser/stubbed-template-1/p')).to.eq(
+          '{"substitution_data":"THIS IS SOME TEST DATA"}',
+        ),
+      );
+
+      typeInEditor('{"substitution_data": "THIS IS SOME DIFFERENT DATA"}');
+
+      cy.window().then(window =>
+        expect(window.localStorage.getItem('tpldata/mockuser/stubbed-template-1/p')).to.eq(
+          '{"substitution_data":"THIS IS SOME DIFFERENT DATA"}',
+        ),
+      );
     });
   });
 
@@ -257,38 +283,7 @@ describe('The templates published template page', () => {
     it('renders all fields as disabled in published mode', () => {
       cy.visit(PAGE_URL);
 
-      cy.findByText('Template Settings').click();
-
-      cy.findByLabelText('Template Name').should('be.disabled');
-      cy.findByLabelText('Template ID').should('be.disabled');
-      cy.findByLabelText('Subject').should('be.disabled');
-      cy.findByLabelText('From Email').should('be.disabled');
-      cy.findByLabelText('From Name').should('be.disabled');
-      cy.findByLabelText('Reply To').should('be.disabled');
-      cy.findByLabelText('Description').should('be.disabled');
-
-      // NOTE: Using `.findByLabelText` for grabbing the switch isn't working as labels aren't correctly associated with inputs from an HTML POV
-      // Additionally, the switch content visibility isn't working as the content isn't actually hidden from the standpoing of Cypress, just ocluded by a decorative
-      // element. Ideally when this component is refactored, these tests could be cleaner and less brittle.
-      cy.findAllByText('Track Opens') // Each `<ToggleBlock/>` has a visually hidden and screen reader hidden label - kinda confusing!
-        .closest('[data-id="toggle-block"]')
-        .within(() => {
-          cy.get('input').should('be.disabled');
-        });
-
-      cy.findAllByText('Track Clicks')
-        .closest('[data-id="toggle-block"]')
-        .within(() => {
-          cy.get('input').should('be.disabled');
-        });
-
-      cy.findAllByText('Transactional')
-        .closest('[data-id="toggle-block"]')
-        .within(() => {
-          cy.get('input').should('be.disabled');
-        });
-
-      cy.findAllByText('Update Settings').should('be.disabled');
+      verifyTemplateSettingsIsDisabled();
     });
   });
 });

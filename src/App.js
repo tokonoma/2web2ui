@@ -2,6 +2,7 @@ import React from 'react';
 import { AuthenticationGate, SuspensionAlerts } from 'src/components/auth';
 import { CookieConsent, GlobalAlertWrapper, BoomerangBanner, SiftScience } from 'src/components';
 import VisualWebsiteOptimizer from './components/vwo/VisualWebsiteOptimizer';
+import Segment from './components/segment/Segment';
 import Support from 'src/components/support/Support';
 import GoogleTagManager from 'src/components/googleTagManager/GoogleTagManager';
 import Pendo from 'src/components/pendo/Pendo';
@@ -22,6 +23,7 @@ const App = ({ RouterComponent = BrowserRouter }) => (
       {config.gtmId && <GoogleTagManager id={config.gtmId} />}
       <Pendo />
       <VisualWebsiteOptimizer />
+      <Segment />
       <AuthenticationGate />
       <SuspensionAlerts />
       <CookieConsent />

@@ -7,9 +7,11 @@ import { Box, Text } from 'src/components/matchbox';
 const HibanaCallout = ({ children, height = '220px', title = '' }) => (
   <Box height={height} display="flex" justifyContent="center" alignItems="center">
     <Box>
-      <Text as="h3" mb="200" color="gray.800">
-        {title}
-      </Text>
+      {title && (
+        <Text as="h3" mb="200" color="gray.800">
+          {title}
+        </Text>
+      )}
       {children && (
         <Text as="p" color="gray.800">
           {children}
@@ -22,7 +24,7 @@ const HibanaCallout = ({ children, height = '220px', title = '' }) => (
 const OGCallout = ({ children, height = '220px', title }) => (
   <div className={styles.Callout} style={{ height }}>
     <div>
-      <h3 className={styles.Title}>{title}</h3>
+      {title && <h3 className={styles.Title}>{title}</h3>}
       {children && <p className={styles.Content}>{children}</p>}
     </div>
   </div>

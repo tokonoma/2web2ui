@@ -5,7 +5,7 @@ import { safeRate } from 'src/helpers/math';
 import { refreshBounceReport } from 'src/actions/bounceReport';
 import { TableCollection, Empty, LongTextContainer } from 'src/components';
 import { Percent } from 'src/components/formatters';
-import PanelLoading from 'src/components/panelLoading/PanelLoading';
+import { PanelLoading } from 'src/components/loading';
 import { Page, Tabs } from 'src/components/matchbox';
 import ReportOptions from '../components/ReportOptions';
 import BounceChart from './components/BounceChart';

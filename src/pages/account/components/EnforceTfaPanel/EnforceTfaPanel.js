@@ -1,6 +1,6 @@
 import React from 'react';
 import { Panel } from 'src/components/matchbox';
-import PanelLoading from 'src/components/panelLoading/PanelLoading';
+import { PanelLoading } from 'src/components/loading';
 import { ConfirmationModal } from 'src/components/modals';
 import { Stack } from 'src/components/matchbox';
 import TogglePanelSection from './TogglePanelSection';

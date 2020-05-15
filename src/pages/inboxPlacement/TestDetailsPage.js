@@ -1,8 +1,5 @@
 import React, { useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
-import { Page, Tabs } from 'src/components/matchbox';
-
-import { Loading } from 'src/components';
 import {
   getInboxPlacementTest,
   getInboxPlacementByProvider,
@@ -10,14 +7,17 @@ import {
   getInboxPlacementBySendingIp,
   getInboxPlacementTestContent,
 } from 'src/actions/inboxPlacement';
+import { Loading } from 'src/components';
+import { RedirectAndAlert } from 'src/components/globalAlert';
+import { PageLink } from 'src/components/links';
+import { Box, Page, Tabs } from 'src/components/matchbox';
+import useTabs from 'src/hooks/useTabs';
 import {
   selectTestDetailsPageError,
   selectTestDetailsPageLoading,
 } from 'src/selectors/inboxPlacement';
 import TestDetails from './components/TestDetails';
 import TestContent from './components/TestContent';
-import useTabs from 'src/hooks/useTabs';
-import { RedirectAndAlert } from 'src/components/globalAlert';
 
 export const TestDetailsPage = props => {
   const {
@@ -93,21 +93,23 @@ export const TestDetailsPage = props => {
   return (
     <Page
       breadcrumbAction={{
-        content: 'All Inbox Placement Tests',
-        onClick: () => history.push('/inbox-placement'),
+        component: PageLink,
+        content: 'All Tests',
+        to: '/inbox-placement',
       }}
-      title="Inbox Placement"
-      subtitle="Results"
+      title="Inbox Placement Test Results"
     >
-      <Tabs selected={selectedTabIndex} connectBelow={true} tabs={tabs} />
+      <Box marginBottom="400">
+        <Tabs selected={selectedTabIndex} connectBelow tabs={tabs} />
+      </Box>
       {renderTabContent(selectedTabIndex)}
     </Page>
   );
 };
 
 const TABS = [
-  { content: 'Details', key: 'details' },
-  { content: 'Content', key: 'content' },
+  { content: 'Test Details', key: 'details' },
+  { content: 'Test Content', key: 'content' },
 ];
 
 function mapStateToProps(state, props) {

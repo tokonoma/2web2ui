@@ -194,6 +194,7 @@ export default class ListPage extends Component {
         ) : (
           <>
             <RecentActivity
+              hasActionButtons={canModify}
               templates={templates}
               onToggleDeleteModal={this.toggleDeleteModal}
               onToggleDuplicateModal={this.toggleDuplicateModal}

@@ -1,67 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component: PlacementBreakdown HeaderComponent renders correctly 1`] = `
-<thead>
-  <Table.Row
-    className="HeaderRow"
-  >
-    <Table.HeaderCell
-      className="PlacementNameCell"
-    />
-    <Table.HeaderCell
-      className="RegionCell"
-    >
-      Region
-    </Table.HeaderCell>
-    <Table.HeaderCell
-      className="Placement"
-    >
-      Inbox
-    </Table.HeaderCell>
-    <Table.HeaderCell
-      className="Placement"
-    >
-      Spam
-    </Table.HeaderCell>
-    <Table.HeaderCell
-      className="Placement"
-    >
-      Missing
-    </Table.HeaderCell>
-    <Table.HeaderCell
-      className="Authentication divider"
-    >
-      SPF
-    </Table.HeaderCell>
-    <Table.HeaderCell
-      className="Authentication"
-    >
-      DKIM
-    </Table.HeaderCell>
-    <Table.HeaderCell
-      className="Authentication"
-    >
-      DMARC
-    </Table.HeaderCell>
-  </Table.Row>
-</thead>
-`;
-
-exports[`Component: PlacementBreakdown SubComponent: GroupPercentage renders percentage correctly 1`] = `
-<span
-  className="GroupValue"
->
-  20%
-</span>
-`;
-
 exports[`Component: PlacementBreakdown matches snapshot with provider data 1`] = `
-<TableCollection
+<PanelSectionTableCollection
+  columns={
+    Array [
+      Object {
+        "label": "",
+        "sortKey": [Function],
+      },
+      Object {
+        "label": "Inbox",
+        "minWidth": "72px",
+        "sortKey": "placement.inbox_pct",
+      },
+      Object {
+        "label": "Spam",
+        "minWidth": "72px",
+        "sortKey": "placement.spam_pct",
+      },
+      Object {
+        "label": "Missing",
+        "minWidth": "72px",
+        "sortKey": "placement.missing_pct",
+      },
+    ]
+  }
   defaultSortColumn="placement.inbox_pct"
   defaultSortDirection="desc"
-  headerComponent={[Function]}
+  filterBox={false}
+  getRowData={[Function]}
   pagination={true}
-  rowComponent={[Function]}
   rows={
     Array [
       Object {
@@ -96,20 +64,41 @@ exports[`Component: PlacementBreakdown matches snapshot with provider data 1`] =
       },
     ]
   }
-  saveCsv={false}
-  wrapperComponent={[Function]}
+  saveCsv={true}
 />
 `;
 
 exports[`Component: PlacementBreakdown renders correctly with no data 1`] = `
-<TableCollection
+<PanelSectionTableCollection
+  columns={
+    Array [
+      Object {
+        "label": "",
+        "sortKey": [Function],
+      },
+      Object {
+        "label": "Inbox",
+        "minWidth": "72px",
+        "sortKey": "placement.inbox_pct",
+      },
+      Object {
+        "label": "Spam",
+        "minWidth": "72px",
+        "sortKey": "placement.spam_pct",
+      },
+      Object {
+        "label": "Missing",
+        "minWidth": "72px",
+        "sortKey": "placement.missing_pct",
+      },
+    ]
+  }
   defaultSortColumn="placement.inbox_pct"
   defaultSortDirection="desc"
-  headerComponent={[Function]}
+  filterBox={false}
+  getRowData={[Function]}
   pagination={true}
-  rowComponent={[Function]}
   rows={Array []}
-  saveCsv={false}
-  wrapperComponent={[Function]}
+  saveCsv={true}
 />
 `;

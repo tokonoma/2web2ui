@@ -2,14 +2,11 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import SubaccountOption from '../SubaccountOption';
 
+jest.mock('src/hooks/useHibanaOverride', () => styles => styles);
+
 describe('SubaccountOption', () => {
-  const subject = (props = {}) => shallow(
-    <SubaccountOption
-      label="Test Option"
-      value="Gotcha"
-      {...props}
-    />
-  );
+  const subject = (props = {}) =>
+    shallow(<SubaccountOption label="Test Option" value="Gotcha" {...props} />);
 
   it('renders option', () => {
     expect(subject()).toMatchSnapshot();

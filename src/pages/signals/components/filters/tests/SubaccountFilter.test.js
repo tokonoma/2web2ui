@@ -1,26 +1,27 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { SubaccountFilter } from '../SubaccountFilter';
+import { SubaccountFilterClassComponent as SubaccountFilter } from '../SubaccountFilter';
+import styles from '../SubaccountFilter.module.scss';
 
 describe('SubaccountFilter Component', () => {
-  const subject = (props = {}) => shallow(
-    <SubaccountFilter
-      hasSubaccounts={true}
-      signalOptions={{}}
-      {...props}
-    />
-  );
+  const subject = (props = {}) =>
+    shallow(
+      <SubaccountFilter styles={styles} hasSubaccounts={true} signalOptions={{}} {...props} />,
+    );
 
-  const openPopover = (wrapper) => {
-    shallow(wrapper.find('Popover').prop('trigger')).find('Button').simulate('click');
+  const openPopover = wrapper => {
+    shallow(wrapper.find('Popover').prop('trigger'))
+      .find('Button')
+      .simulate('click');
   };
 
-  const openSearch = (wrapper) => {
+  const openSearch = wrapper => {
     wrapper.find('SubaccountOption[nested=true]').simulate('open');
   };
 
   it('renders closed popover', () => {
     const wrapper = subject();
+
     expect(wrapper.find('Popover').prop('open')).toEqual(false);
   });
 
@@ -32,8 +33,8 @@ describe('SubaccountFilter Component', () => {
   it('renders with subaccount', () => {
     const props = {
       signalOptions: {
-        subaccount: { id: 123, name: 'Test Subaccount' }
-      }
+        subaccount: { id: 123, name: 'Test Subaccount' },
+      },
     };
     const wrapper = subject(props);
     expect(wrapper).toMatchSnapshot();
@@ -51,7 +52,12 @@ describe('SubaccountFilter Component', () => {
     openPopover(wrapper);
     openSearch(wrapper);
 
-    expect(wrapper.find('.PopoverContent').at(0).prop('className')).toMatchSnapshot();
+    expect(
+      wrapper
+        .find('.PopoverContent')
+        .at(0)
+        .prop('className'),
+    ).toMatchSnapshot();
   });
 
   it('renders open popover with options after back button is clicked', () => {
@@ -62,7 +68,12 @@ describe('SubaccountFilter Component', () => {
 
     wrapper.find('UnstyledLink').simulate('click');
 
-    expect(wrapper.find('.PopoverContent').at(1).prop('className')).toMatchSnapshot();
+    expect(
+      wrapper
+        .find('.PopoverContent')
+        .at(1)
+        .prop('className'),
+    ).toMatchSnapshot();
   });
 
   it('calls changeSignalOptions when option is clicked', () => {
@@ -84,7 +95,7 @@ describe('SubaccountFilter Component', () => {
     const wrapper = subject({ changeSignalOptions });
     const value = {
       id: 123,
-      name: 'Test Example'
+      name: 'Test Example',
     };
 
     wrapper.setState({ isOpen: true, isSearchOpen: true });
@@ -98,8 +109,8 @@ describe('SubaccountFilter Component', () => {
     let wrapper;
     let windowEvent;
 
-    const ref = (node) => ({
-      contains: (str) => Boolean(str.includes(node))
+    const ref = node => ({
+      contains: str => Boolean(str.includes(node)),
     });
 
     beforeEach(() => {

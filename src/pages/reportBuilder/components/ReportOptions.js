@@ -251,7 +251,7 @@ export function ReportOptions(props) {
               <Inline key={`filter_group_${key}`}>
                 <div>{key}</div>
                 <div>
-                  <strong style={{ fontStyle: 'italic' }}>equals</strong>
+                  <strong className={styles.Conditional}>equals</strong>
                   {groupedFilters[key].map(({ value, index }) => (
                     <Tag
                       className={styles.TagWrapper}

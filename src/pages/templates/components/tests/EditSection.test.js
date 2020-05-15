@@ -20,7 +20,7 @@ describe('EditSection', () => {
 
   const subject = editorState => {
     beforeSteps();
-    useEditorContext.mockReturnValue(editorState);
+    useEditorContext.mockReturnValue({ isReadOnly: false, canModify: true, ...editorState });
 
     return shallow(<EditSection />);
   };
@@ -40,9 +40,33 @@ describe('EditSection', () => {
   });
 
   it('renders a "Read Only" tag in published mode for the "HTML", "AMP HTML", and "Text" tabs', () => {
-    const wrapper = subject({ currentTabIndex: 0, isPublishedMode: true });
-
+    // HTML tab visible
+    let wrapper = subject({
+      currentTabIndex: 0,
+      isReadOnly: true,
+    });
     expect(wrapper).toHaveTextContent('Read Only');
+
+    // AMP HTML tab visible
+    wrapper = subject({
+      currentTabIndex: 1,
+      isReadOnly: true,
+    });
+    expect(wrapper).toHaveTextContent('Read Only');
+
+    // Text tab visible
+    wrapper = subject({
+      currentTabIndex: 2,
+      isReadOnly: true,
+    });
+    expect(wrapper).toHaveTextContent('Read Only');
+
+    // Test data tab visible
+    wrapper = subject({
+      currentTabIndex: 3,
+      isReadOnly: true,
+    });
+    expect(wrapper).not.toHaveTextContent('Read Only');
   });
 
   it('does not render a "Read Only" tag in published mode for the "Test Data" tab', () => {
@@ -97,6 +121,16 @@ describe('EditSection', () => {
       const wrapper = subject({
         currentTabIndex: 0,
         isPublishedMode: true,
+      });
+
+      expect(wrapper.find('Popover')).not.toExist();
+    });
+
+    it('does not render when the user cannot modify templates', () => {
+      const wrapper = subject({
+        currentTabIndex: 0,
+        isPublishedMode: false,
+        canModify: false,
       });
 
       expect(wrapper.find('Popover')).not.toExist();

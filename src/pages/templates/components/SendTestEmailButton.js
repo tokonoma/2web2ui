@@ -1,8 +1,8 @@
 /* eslint-disable max-lines */
 import React, { useState } from 'react';
 import { Box, Button, Modal, Panel, Stack, TextField } from 'src/components/matchbox';
-import PanelLoading from 'src/components/panelLoading';
 import { ButtonWrapper } from 'src/components';
+import { PanelLoading } from 'src/components/loading';
 import MultiEmailField, { useMultiEmailField } from 'src/components/multiEmailField';
 import useEditorContext from '../hooks/useEditorContext';
 
@@ -17,6 +17,7 @@ const SendTestEmailButton = () => {
     parsedTestData,
     updateDraft,
     setHasSaved,
+    canModify,
   } = useEditorContext();
   const {
     handleMultiEmailChange,
@@ -33,6 +34,7 @@ const SendTestEmailButton = () => {
   const [isModalLoading, setModalLoading] = useState(false);
   const [fromEmail, setFromEmail] = useState('');
   const [subject, setSubject] = useState('');
+  const shouldTemplateBeSaved = !isPublishedMode && canModify;
 
   const resetForm = () => {
     setMultiEmailValue('');
@@ -44,7 +46,7 @@ const SendTestEmailButton = () => {
     setFromEmail(content.from.email);
     setSubject(content.subject);
 
-    if (!isPublishedMode) {
+    if (shouldTemplateBeSaved) {
       setModalLoading(true);
 
       // Save the template, then allow the user to send a preview

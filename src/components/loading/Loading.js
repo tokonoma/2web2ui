@@ -10,9 +10,10 @@ import hibanaStyles from './LoadingHibana.module.scss';
 /**
  * A centered loading animation
  */
-export const Loading = function Loading(props) {
+export const Loading = props => {
   const { className, minHeight = '70vh' } = props;
   const styles = useHibanaOverride(OGStyles, hibanaStyles);
+
   return (
     <div data-id="loading">
       <Box paddingTop={minHeight}>

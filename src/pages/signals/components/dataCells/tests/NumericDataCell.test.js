@@ -2,10 +2,10 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import NumericDataCell from '../NumericDataCell';
 
+jest.mock('src/hooks/useHibanaOverride', () => styles => styles);
+
 describe('NumericDataCell', () => {
-  const subject = (props = {}) => shallow(
-    <NumericDataCell value={123} {...props} />
-  );
+  const subject = (props = {}) => shallow(<NumericDataCell value={123} {...props} />);
 
   it('renders a number', () => {
     expect(subject()).toMatchSnapshot();

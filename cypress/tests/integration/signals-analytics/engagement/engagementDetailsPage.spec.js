@@ -87,8 +87,8 @@ describe('The engagement details page', () => {
     cy.visit(PAGE_URL);
 
     cy.queryByText('Recommendations').should('not.be.visible');
-    cy.findAllByText('No Data Available').should('have.length', 3);
-    cy.findAllByText('Insufficient data to populate this chart').should('have.length', 3);
+    cy.findByText('No Data Available').should('be.visible');
+    cy.findByText('Insufficient data to populate this chart').should('be.visible');
   });
 
   it('renders with the current Subaccount ID', () => {
@@ -104,8 +104,8 @@ describe('The engagement details page', () => {
 
     cy.findByLabelText('Broad Date Range').select('Last 7 Days');
 
-    cy.findAllByText('No Data Available').should('have.length', 3);
-    cy.findAllByText('Insufficient data to populate this chart').should('have.length', 3);
+    cy.findByText('No Data Available').should('be.visible');
+    cy.findByText('Insufficient data to populate this chart').should('be.visible');
   });
 
   describe('engagement data breakdown within tabs', () => {
@@ -415,28 +415,6 @@ describe('The engagement details page', () => {
           cy.findByText('This is an error').should('be.visible');
         });
       });
-    });
-  });
-
-  it('renders with the "Spam Trap Monitoring" chart that links to the spam traps page', () => {
-    cy.visit(PAGE_URL);
-
-    cy.get('main').within(() => {
-      cy.findByText('Spam Trap Monitoring')
-        .should('be.visible')
-        .closest('a')
-        .should('have.attr', 'href', '/signals/spam-traps/sid/102');
-    });
-  });
-
-  it('renders with the "Health Score" chart that links to the health score page', () => {
-    cy.visit(PAGE_URL);
-
-    cy.get('main').within(() => {
-      cy.findByText('Health Score')
-        .should('be.visible')
-        .closest('a')
-        .should('have.attr', 'href', '/signals/health-score/sid/102');
     });
   });
 });

@@ -74,12 +74,10 @@ const content = {
   label: 'Content',
   to: '/templates',
   icon: Code,
-  tag: 'new',
   children: [
     {
       label: 'Templates',
       to: '/templates',
-      tag: 'new',
     },
     {
       label: 'A/B Testing',

@@ -22,6 +22,7 @@ exports[`ListPage renders correctly 1`] = `
   title="Templates"
 >
   <RecentActivity
+    hasActionButtons={true}
     onToggleDeleteModal={[Function]}
     onToggleDuplicateModal={[Function]}
     templates={

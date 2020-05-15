@@ -5,7 +5,9 @@ exports[`DraftModeActions renders draft actions 1`] = `
   <div
     class="AB_AG"
   >
-    <div>
+    <div
+      class=""
+    >
       <button
         class="AB_AE"
         data-id="action-save-and-publish"

@@ -8,9 +8,12 @@
   user-select: none;
 }
 
-.TooltipDate, .TooltipContent {
+.TooltipDate,
+.TooltipContent {
   padding: rem(9) rem(13);
   color: color(gray, 10);
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 .TooltipContent {

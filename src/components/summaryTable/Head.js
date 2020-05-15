@@ -37,13 +37,14 @@ function HibanaHead({ columns, onSort, order }) {
     <thead>
       <Table.Row header>
         {columns.map(({ align = 'left', dataKey, label, sortable, width }) => (
-          <Table.HeaderCell style={{ 'text-align': align }} key={`header-${dataKey}`} width={width}>
+          <Table.HeaderCell style={{ textAlign: align }} key={`header-${dataKey}`} width={width}>
             <HeaderLabel
               dataKey={dataKey}
               label={label}
               onSort={onSort}
               order={order}
               sortable={sortable}
+              align={align}
             />
           </Table.HeaderCell>
         ))}

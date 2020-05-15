@@ -9,7 +9,7 @@ describe('Page: SeedList tests', () => {
       loading: false,
       seeds: [],
       getSeedList: jest.fn(),
-      referenceSeed: 'ref1@seed.sparkpost.com'
+      referenceSeed: 'ref1@seed.sparkpost.com',
     };
     return shallow(<SeedListPage {...defaults} {...props} />);
   };
@@ -23,12 +23,16 @@ describe('Page: SeedList tests', () => {
   });
 
   it('renders page with seeds', () => {
-    const wrapper = subject({ seeds: ['seed1@gmail.com', 'seed2@yahoo.com', 'ref1@seed.sparkpost.com']});
-    expect(wrapper.find('TextField')).toMatchSnapshot();
+    const wrapper = subject({
+      seeds: ['seed1@gmail.com', 'seed2@yahoo.com', 'ref1@seed.sparkpost.com'],
+    });
+    expect(wrapper.find('CodeBlock')).toMatchSnapshot();
   });
 
   it('render include download csv button with correct format', () => {
-    const wrapper = subject({ seeds: ['seed1@gmail.com', 'seed2@yahoo.com', 'ref1@seed.sparkpost.com']});
+    const wrapper = subject({
+      seeds: ['seed1@gmail.com', 'seed2@yahoo.com', 'ref1@seed.sparkpost.com'],
+    });
     expect(wrapper.find('SaveCSVButton')).toMatchSnapshot();
   });
 

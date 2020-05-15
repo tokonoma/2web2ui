@@ -6,7 +6,7 @@ import {
   updateAccountSingleSignOn,
 } from 'src/actions/accountSingleSignOn';
 import { ExternalLink } from 'src/components/links';
-import PanelLoading from 'src/components/panelLoading/PanelLoading';
+import { PanelLoading } from 'src/components/loading';
 import { LINKS } from 'src/constants';
 import ProviderSection from './ProviderSection';
 import StatusSection from './StatusSection';

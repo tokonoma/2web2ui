@@ -39,10 +39,9 @@ export function OnboardingPlanPage({
   handleSubmit,
   hasError,
   bundles,
+  vwoSkipSendingDomainSet,
 }) {
-  const next_step = Boolean(window.skipSendingDomain)
-    ? DASHBOARD_ROUTE
-    : ONBOARDING_SENDINGDOMAIN_ROUTE;
+  const next_step = vwoSkipSendingDomainSet ? DASHBOARD_ROUTE : ONBOARDING_SENDINGDOMAIN_ROUTE;
   useEffect(() => {
     getPlans();
   }, [getPlans]);

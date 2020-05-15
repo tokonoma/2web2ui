@@ -7,7 +7,7 @@ import ErrorTracker from 'src/helpers/errorTracker';
 import { CenteredLogo } from 'src/components';
 import { PageLink } from 'src/components/links';
 import { Panel, Stack } from 'src/components/matchbox';
-import PanelLoading from 'src/components/panelLoading/PanelLoading';
+import { PanelLoading } from 'src/components/loading';
 import RegisterUserForm from './RegisterUserForm';
 
 import { registerUser, checkInviteToken } from 'src/actions/users';

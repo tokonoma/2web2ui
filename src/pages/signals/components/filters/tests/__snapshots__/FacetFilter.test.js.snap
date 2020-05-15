@@ -2,20 +2,15 @@
 
 exports[`FacetFilter renders facet select and search input 1`] = `
 <Grid.Column
-  lg={4}
-  xl={5}
+  lg={7}
+  xl={7}
 >
   <div
     className="FacetFilter FacetSelected"
   >
-    <label
-      className="ScreenReaderOnly"
-      htmlFor="facet-filter-select"
-    >
-      Filter By
-    </label>
     <Select
       id="facet-filter-select"
+      label="Breakdown"
       onChange={[Function]}
       options={
         Array [
@@ -43,21 +38,23 @@ exports[`FacetFilter renders facet select and search input 1`] = `
       }
       value="campaign"
     />
-    <label
-      className="ScreenReaderOnly"
-      htmlFor="facet-filter-search"
-    >
-      Search By
-    </label>
-    <TextField
-      id="facet-filter-search"
-      onBlur={[Function]}
-      onChange={[Function]}
-      onKeyPress={[Function]}
-      placeholder="Search"
-      suffix={<Search />}
-      value=""
-    />
+    <div>
+      <Label
+        className="HiddenLabel"
+        id="facet-filter-search"
+        label="Search by Breakdown"
+      />
+      <TextField
+        className="FacetSearchField"
+        id="facet-filter-search"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onKeyPress={[Function]}
+        placeholder="Search"
+        suffix={<Search />}
+        value=""
+      />
+    </div>
   </div>
 </Grid.Column>
 `;
@@ -70,14 +67,9 @@ exports[`FacetFilter renders only facet select 1`] = `
   <div
     className="FacetFilter"
   >
-    <label
-      className="ScreenReaderOnly"
-      htmlFor="facet-filter-select"
-    >
-      Filter By
-    </label>
     <Select
       id="facet-filter-select"
+      label="Breakdown"
       onChange={[Function]}
       options={
         Array [

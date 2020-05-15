@@ -12,8 +12,9 @@ import {
   LINKS,
   ANALYTICS_ONBOARDING,
   ANALYTICS_ONBOARDING_CREATE_DOMAIN,
+  CAMPAIGN_IDS,
 } from 'src/constants';
-
+import { trackCustomConversionGoal } from 'src/helpers/vwo';
 export function SendingDomainPage(props) {
   const { submitSucceeded, history, handleSubmit, submitting } = props;
 
@@ -34,6 +35,7 @@ export function SendingDomainPage(props) {
         data: { action: ANALYTICS_ONBOARDING_CREATE_DOMAIN },
       });
       history.push('/dashboard');
+      trackCustomConversionGoal(CAMPAIGN_IDS.ONBOARDING_SENDINGDOMAIN);
     }
   }, [history, submitSucceeded]);
 

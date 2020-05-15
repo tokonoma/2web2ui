@@ -16,7 +16,7 @@ exports[`Signals Health Score Page bar chart props renders tooltip content for c
 
 exports[`Signals Health Score Page bar chart props renders tooltip content for health score 1`] = `
 <TooltipMetric
-  color="#FF594D"
+  color="#d9363e"
   label="Health Score"
   value="12"
 />
@@ -51,15 +51,29 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
   }
   facet="sending-domain"
   facetId="test.com"
-  primaryArea={
-    <Connect(DateFilter)
-      left={true}
-    />
-  }
   title="Health Score"
 >
-  <Grid>
-    <Grid.Column
+  <Panel
+    title="Health Score Trends"
+  >
+    <Panel.Section>
+      <Grid>
+        <Grid.Column
+          md={5}
+          xs={12}
+        >
+          <Connect(DateFilter)
+            label="Date Range"
+          />
+        </Grid.Column>
+      </Grid>
+    </Panel.Section>
+  </Panel>
+  <OGOnlyWrapper
+    as={[Function]}
+  >
+    <OGOnlyWrapper
+      as={[Function]}
       md={7}
       sm={12}
     >
@@ -76,9 +90,7 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
 "
         />
         <BarChart
-          activeFill="#22838A"
           disableHover={false}
-          fill="#B3ECEF"
           gap={0.25}
           height={250}
           hovered="2017-01-05"
@@ -175,12 +187,12 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
           yAxisRefLines={
             Array [
               Object {
-                "stroke": "#2CC995",
+                "stroke": "#067852",
                 "strokeWidth": 1,
                 "y": 0.8,
               },
               Object {
-                "stroke": "#FF594D",
+                "stroke": "#d9363e",
                 "strokeWidth": 1,
                 "y": 0.55,
               },
@@ -201,8 +213,6 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
 "
         />
         <BarChart
-          activeFill="#22838A"
-          fill="#B3ECEF"
           gap={0.25}
           height={190}
           hovered="2017-01-05"
@@ -280,8 +290,6 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
           title="Hard Bounces Percent"
         />
         <BarChart
-          activeFill="#22838A"
-          fill="#B3ECEF"
           gap={0.25}
           height={190}
           hovered="2017-01-05"
@@ -341,123 +349,143 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
           }
         />
       </Panel>
-    </Grid.Column>
-    <Grid.Column
+    </OGOnlyWrapper>
+    <OGOnlyWrapper
+      as={[Function]}
       md={5}
       mdOffset={0}
       sm={12}
     >
       <div
-        className="OffsetCol"
         data-id="health-score-components"
       >
-        <ChartHeader
-          date="2017-01-01"
-          hideLine={true}
-          padding="1rem 0 1rem"
-          title="Health Score Components"
-          tooltipContent="
+        <Box
+          as={[Function]}
+        >
+          <Box
+            as={[Function]}
+            md={7}
+            xs={12}
+          >
+            <Box
+              as={[Function]}
+              sectioned={true}
+            >
+              <ChartHeader
+                date="2017-01-01"
+                hideLine={true}
+                title="Health Score Components"
+                tooltipContent="
   Your email Health Score is comprised of several signals, including bounces, spam trap hits, user
   engagement, and others.
 "
-        />
-        <DivergingBar
-          barHeight={140}
-          data={
-            Array [
-              Object {
-                "weight": 0.5,
-                "weight_type": "Hard Bounces",
-                "weight_value": 0.25,
-              },
-              Object {
-                "weight": -0.5,
-                "weight_type": "eng cohorts: new, 14-day",
-                "weight_value": 0.25,
-              },
-            ]
-          }
-          negativeFill="#DB2F2D"
-          onClick={[Function]}
-          positiveFill="#8CBE3C"
-          selected="Hard Bounces"
-          tooltipContent={[Function]}
-          width="99%"
-          xDomain={
-            Array [
-              "dataMin",
-              "dataMax",
-            ]
-          }
-          xKey="weight"
-          yKey="weight_type"
-          yLabel={[Function]}
-        />
-        <HealthScoreActions
-          date="2017-01-01"
-          weights={
-            Array [
-              Object {
-                "weight": 0.5,
-                "weight_type": "Hard Bounces",
-                "weight_value": 0.25,
-              },
-              Object {
-                "weight": -0.5,
-                "weight_type": "eng cohorts: new, 14-day",
-                "weight_value": 0.25,
-              },
-            ]
-          }
-        />
+              />
+              <DivergingBar
+                barHeight={140}
+                data={
+                  Array [
+                    Object {
+                      "weight": 0.5,
+                      "weight_type": "Hard Bounces",
+                      "weight_value": 0.25,
+                    },
+                    Object {
+                      "weight": -0.5,
+                      "weight_type": "eng cohorts: new, 14-day",
+                      "weight_value": 0.25,
+                    },
+                  ]
+                }
+                negativeFill="#d9363e"
+                onClick={[Function]}
+                positiveFill="#009f6a"
+                selected="Hard Bounces"
+                tooltipContent={[Function]}
+                width="99%"
+                xDomain={
+                  Array [
+                    "dataMin",
+                    "dataMax",
+                  ]
+                }
+                xKey="weight"
+                yKey="weight_type"
+                yLabel={[Function]}
+              />
+            </Box>
+          </Box>
+          <Box
+            as={[Function]}
+            md={5}
+            xs={12}
+          >
+            <Box
+              as={[Function]}
+              sectioned={true}
+            >
+              <HealthScoreActions
+                date="2017-01-01"
+                weights={
+                  Array [
+                    Object {
+                      "weight": 0.5,
+                      "weight_type": "Hard Bounces",
+                      "weight_value": 0.25,
+                    },
+                    Object {
+                      "weight": -0.5,
+                      "weight_type": "eng cohorts: new, 14-day",
+                      "weight_value": 0.25,
+                    },
+                  ]
+                }
+              />
+            </Box>
+          </Box>
+        </Box>
       </div>
-    </Grid.Column>
-  </Grid>
-  <Divider />
-  <Grid>
-    <Grid.Column
-      sm={6}
-      xs={12}
-    >
-      <div
-        data-id="spam-traps-panel"
-      >
-        <withRouter(Connect(WithDetails(SpamTrapsPreview))) />
-      </div>
-    </Grid.Column>
-    <Grid.Column
-      sm={6}
-      xs={12}
-    >
-      <div
-        data-id="engagement-recency-panel"
-      >
-        <withRouter(Connect(WithDetails(EngagementRecencyPreview))) />
-      </div>
-    </Grid.Column>
-  </Grid>
+    </OGOnlyWrapper>
+  </OGOnlyWrapper>
 </SignalsPage>
 `;
 
 exports[`Signals Health Score Page renders empty correctly 1`] = `
-<Panel
-  data-id="health-score-panel"
-  sectioned={true}
->
-  <ChartHeader
-    title="Health Score"
-    tooltipContent="
+Array [
+  <Panel
+    title="Health Score Trends"
+  >
+    <Panel.Section>
+      <Grid>
+        <Grid.Column
+          md={5}
+          xs={12}
+        >
+          <Connect(DateFilter)
+            label="Date Range"
+          />
+        </Grid.Column>
+      </Grid>
+    </Panel.Section>
+  </Panel>,
+  <Panel
+    data-id="health-score-panel"
+    sectioned={true}
+  >
+    <ChartHeader
+      title="Health Score"
+      tooltipContent="
   This is a predictive score that monitors your email health to identify problems before
   they negatively impact email delivery. This score is informed by message events,
   including bounces, spam trap hits, and engagement across our entire network.
 "
-  />
-  <Callout
-    title="No Data Available"
-  >
-    Insufficient data to populate this chart
-  </Callout>
-</Panel>
+    />
+    <Callout
+      title="No Data Available"
+    >
+      Insufficient data to populate this chart
+    </Callout>
+  </Panel>,
+]
 `;
 
 exports[`Signals Health Score Page renders empty weights 1`] = `
@@ -471,15 +499,29 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
   }
   facet="sending-domain"
   facetId="test.com"
-  primaryArea={
-    <Connect(DateFilter)
-      left={true}
-    />
-  }
   title="Health Score"
 >
-  <Grid>
-    <Grid.Column
+  <Panel
+    title="Health Score Trends"
+  >
+    <Panel.Section>
+      <Grid>
+        <Grid.Column
+          md={5}
+          xs={12}
+        >
+          <Connect(DateFilter)
+            label="Date Range"
+          />
+        </Grid.Column>
+      </Grid>
+    </Panel.Section>
+  </Panel>
+  <OGOnlyWrapper
+    as={[Function]}
+  >
+    <OGOnlyWrapper
+      as={[Function]}
       md={7}
       sm={12}
     >
@@ -496,9 +538,7 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
 "
         />
         <BarChart
-          activeFill="#22838A"
           disableHover={false}
-          fill="#B3ECEF"
           gap={0.25}
           height={250}
           hovered="2017-01-05"
@@ -568,12 +608,12 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
           yAxisRefLines={
             Array [
               Object {
-                "stroke": "#2CC995",
+                "stroke": "#067852",
                 "strokeWidth": 1,
                 "y": 0.8,
               },
               Object {
-                "stroke": "#FF594D",
+                "stroke": "#d9363e",
                 "strokeWidth": 1,
                 "y": 0.55,
               },
@@ -594,8 +634,6 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
 "
         />
         <BarChart
-          activeFill="#22838A"
-          fill="#B3ECEF"
           gap={0.25}
           height={190}
           hovered="2017-01-05"
@@ -643,59 +681,61 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
           }
         />
       </Panel>
-    </Grid.Column>
-    <Grid.Column
+    </OGOnlyWrapper>
+    <OGOnlyWrapper
+      as={[Function]}
       md={5}
       mdOffset={0}
       sm={12}
     >
       <div
-        className="OffsetCol"
         data-id="health-score-components"
       >
-        <ChartHeader
-          date="2017-01-01"
-          hideLine={true}
-          padding="1rem 0 1rem"
-          title="Health Score Components"
-          tooltipContent="
+        <Box
+          as={[Function]}
+        >
+          <Box
+            as={[Function]}
+            md={7}
+            xs={12}
+          >
+            <Box
+              as={[Function]}
+              sectioned={true}
+            >
+              <ChartHeader
+                date="2017-01-01"
+                hideLine={true}
+                title="Health Score Components"
+                tooltipContent="
   Your email Health Score is comprised of several signals, including bounces, spam trap hits, user
   engagement, and others.
 "
-        />
-        <Callout>
-          Insufficient data to populate this chart
-        </Callout>
-        <HealthScoreActions
-          date="2017-01-01"
-          weights={Array []}
-        />
+              />
+              <Callout>
+                Insufficient data to populate this chart
+              </Callout>
+            </Box>
+          </Box>
+          <Box
+            as={[Function]}
+            md={5}
+            xs={12}
+          >
+            <Box
+              as={[Function]}
+              sectioned={true}
+            >
+              <HealthScoreActions
+                date="2017-01-01"
+                weights={Array []}
+              />
+            </Box>
+          </Box>
+        </Box>
       </div>
-    </Grid.Column>
-  </Grid>
-  <Divider />
-  <Grid>
-    <Grid.Column
-      sm={6}
-      xs={12}
-    >
-      <div
-        data-id="spam-traps-panel"
-      >
-        <withRouter(Connect(WithDetails(SpamTrapsPreview))) />
-      </div>
-    </Grid.Column>
-    <Grid.Column
-      sm={6}
-      xs={12}
-    >
-      <div
-        data-id="engagement-recency-panel"
-      >
-        <withRouter(Connect(WithDetails(EngagementRecencyPreview))) />
-      </div>
-    </Grid.Column>
-  </Grid>
+    </OGOnlyWrapper>
+  </OGOnlyWrapper>
 </SignalsPage>
 `;
 
@@ -710,15 +750,29 @@ exports[`Signals Health Score Page renders error correctly 1`] = `
   }
   facet="sending-domain"
   facetId="test.com"
-  primaryArea={
-    <Connect(DateFilter)
-      left={true}
-    />
-  }
   title="Health Score"
 >
-  <Grid>
-    <Grid.Column
+  <Panel
+    title="Health Score Trends"
+  >
+    <Panel.Section>
+      <Grid>
+        <Grid.Column
+          md={5}
+          xs={12}
+        >
+          <Connect(DateFilter)
+            label="Date Range"
+          />
+        </Grid.Column>
+      </Grid>
+    </Panel.Section>
+  </Panel>
+  <OGOnlyWrapper
+    as={[Function]}
+  >
+    <OGOnlyWrapper
+      as={[Function]}
       md={7}
       sm={12}
     >
@@ -740,77 +794,96 @@ exports[`Signals Health Score Page renders error correctly 1`] = `
           error message
         </Callout>
       </Panel>
-    </Grid.Column>
-    <Grid.Column
+    </OGOnlyWrapper>
+    <OGOnlyWrapper
+      as={[Function]}
       md={5}
       mdOffset={0}
       sm={12}
     >
       <div
-        className="OffsetCol"
         data-id="health-score-components"
       >
-        <ChartHeader
-          date="2017-01-01"
-          hideLine={true}
-          padding="1rem 0 1rem"
-          title="Health Score Components"
-          tooltipContent="
+        <Box
+          as={[Function]}
+        >
+          <Box
+            as={[Function]}
+            md={7}
+            xs={12}
+          >
+            <Box
+              as={[Function]}
+              sectioned={true}
+            >
+              <ChartHeader
+                date="2017-01-01"
+                hideLine={true}
+                title="Health Score Components"
+                tooltipContent="
   Your email Health Score is comprised of several signals, including bounces, spam trap hits, user
   engagement, and others.
 "
-        />
+              />
+            </Box>
+          </Box>
+          <Box
+            as={[Function]}
+            md={5}
+            xs={12}
+          >
+            <Box
+              as={[Function]}
+              sectioned={true}
+            />
+          </Box>
+        </Box>
       </div>
-    </Grid.Column>
-  </Grid>
-  <Divider />
-  <Grid>
-    <Grid.Column
-      sm={6}
-      xs={12}
-    >
-      <div
-        data-id="spam-traps-panel"
-      >
-        <withRouter(Connect(WithDetails(SpamTrapsPreview))) />
-      </div>
-    </Grid.Column>
-    <Grid.Column
-      sm={6}
-      xs={12}
-    >
-      <div
-        data-id="engagement-recency-panel"
-      >
-        <withRouter(Connect(WithDetails(EngagementRecencyPreview))) />
-      </div>
-    </Grid.Column>
-  </Grid>
+    </OGOnlyWrapper>
+  </OGOnlyWrapper>
 </SignalsPage>
 `;
 
 exports[`Signals Health Score Page renders loading correctly 1`] = `
-<Panel
-  data-id="health-score-panel"
-  sectioned={true}
->
-  <ChartHeader
-    title="Health Score"
-    tooltipContent="
+Array [
+  <Panel
+    title="Health Score Trends"
+  >
+    <Panel.Section>
+      <Grid>
+        <Grid.Column
+          md={5}
+          xs={12}
+        >
+          <Connect(DateFilter)
+            label="Date Range"
+          />
+        </Grid.Column>
+      </Grid>
+    </Panel.Section>
+  </Panel>,
+  <Panel
+    data-id="health-score-panel"
+    sectioned={true}
+  >
+    <ChartHeader
+      title="Health Score"
+      tooltipContent="
   This is a predictive score that monitors your email health to identify problems before
   they negatively impact email delivery. This score is informed by message events,
   including bounces, spam trap hits, and engagement across our entire network.
 "
-  />
-  <div
-    style={
-      Object {
-        "height": "220px",
-        "position": "relative",
+    />
+    <div
+      style={
+        Object {
+          "height": "220px",
+          "position": "relative",
+        }
       }
-    }
-  >
-    <Loading />
-  </div>
-</Panel>
+    >
+      <Loading />
+    </div>
+  </Panel>,
+]
 `;

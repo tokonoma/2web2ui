@@ -28,6 +28,8 @@ const EditSection = () => {
     setContent,
     content,
     isPublishedMode,
+    canModify,
+    isReadOnly,
   } = useEditorContext();
   const styles = useHibanaOverride(OGStyles, hibanaStyles);
   const [isPopoverOpen, setPopoverOpen] = useState(false);
@@ -36,10 +38,8 @@ const EditSection = () => {
 
   const currentTab = tabs[currentTabIndex];
   const TabComponent = currentTab.render;
-  const hasReadOnlyTag =
-    isPublishedMode &&
-    (currentTab.key === 'html' || currentTab.key === 'amp_html' || currentTab.key === 'text');
-  const hasPopover = !isPublishedMode;
+  const hasReadOnlyTag = isReadOnly && currentTab.key !== 'test_data';
+  const hasPopover = !isPublishedMode && canModify;
   const AMPBoilerplate = `
 <!DOCTYPE html>
 <html ⚡4email>

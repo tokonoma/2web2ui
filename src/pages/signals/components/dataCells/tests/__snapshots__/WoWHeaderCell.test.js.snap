@@ -4,6 +4,7 @@ exports[`WoWHeaderCell renders 1`] = `
 <Tooltip
   content="Week Over Week Change"
   dark={true}
+  id="wow-header-cell-1"
 >
   WoW 
   <InfoOutline

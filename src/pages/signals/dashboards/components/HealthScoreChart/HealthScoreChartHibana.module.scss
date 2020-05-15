@@ -1,0 +1,18 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.Injections,
+.DodDChange {
+  width: 140px;
+}
+
+.Divider {
+  margin-top: spacing(300);
+  margin-right: spacing(500);
+  background: color(gray, 300);
+}
+
+.xDividerLabel {
+  fill: color(gray, 700);
+  font-size: font-size(100);
+  line-height: line-height(500);
+}

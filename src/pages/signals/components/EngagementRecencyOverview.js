@@ -16,8 +16,8 @@ import styles from './SpamTrapOverview.module.scss';
 
 class EngagementRecencyOverview extends React.Component {
   state = {
-    calculation: 'relative'
-  }
+    calculation: 'relative',
+  };
 
   componentDidMount() {
     this.resetTable();
@@ -46,7 +46,7 @@ class EngagementRecencyOverview extends React.Component {
     }
 
     resetSummaryTable(tableName, { ...options, ...defaults });
-  }
+  };
 
   getData = () => {
     const { getEngagementRecency, signalOptions, summaryTable } = this.props;
@@ -73,15 +73,15 @@ class EngagementRecencyOverview extends React.Component {
       orderBy,
       relativeRange: signalOptions.relativeRange,
       subaccount,
-      to: signalOptions.to
+      to: signalOptions.to,
     });
-  }
+  };
 
-  handleCalculationChange = (calculation) => {
+  handleCalculationChange = calculation => {
     this.setState({ calculation });
-  }
+  };
 
-  handleClick = (facetId) => ({ date }) => {
+  handleClick = facetId => ({ date }) => {
     const { facet, history, signalOptions } = this.props;
     let search;
 
@@ -93,25 +93,32 @@ class EngagementRecencyOverview extends React.Component {
       pathname: `/signals/engagement/cohorts/${facet.key}/${facetId}`,
       search,
       state: {
-        date
-      }
+        date,
+      },
     });
-  }
+  };
 
   render() {
     const {
-      data, error, facet, loading, signalOptions, subaccounts, tableName, totalCount
+      data,
+      error,
+      facet,
+      loading,
+      signalOptions,
+      subaccounts,
+      tableName,
+      totalCount,
     } = this.props;
     const { calculation } = this.state;
     const isCustomRange = signalOptions.relativeRange === 'custom';
 
     return (
       <Panel>
-        <div className={styles.Header}>
+        <Panel.Section>
           <div className={styles.Controls}>
             <Calculation initialSelected={calculation} onChange={this.handleCalculationChange} />
           </div>
-        </div>
+        </Panel.Section>
         <SummaryTable
           data={data}
           empty={data.length === 0}
@@ -125,7 +132,7 @@ class EngagementRecencyOverview extends React.Component {
             label={facet.label}
             sortable
             width="30%"
-            component={(props) => {
+            component={props => {
               const id = props[facet.key];
 
               return (
@@ -150,7 +157,11 @@ class EngagementRecencyOverview extends React.Component {
               return (
                 <SparklineDataCell
                   data={history}
-                  dataKey={calculation === 'relative' ? 'relative_engaged_recipients' : 'engaged_recipients'}
+                  dataKey={
+                    calculation === 'relative'
+                      ? 'relative_engaged_recipients'
+                      : 'engaged_recipients'
+                  }
                   label="Recently Engaged"
                   onClick={this.handleClick(id)}
                   relative={calculation === 'relative'}
@@ -184,11 +195,9 @@ class EngagementRecencyOverview extends React.Component {
           <Column
             align="right"
             dataKey="WoW"
-            label={<WoWHeaderCell/>}
+            label={<WoWHeaderCell />}
             width="12.5%"
-            component={({ WoW }) => (
-              <WoWDataCell value={WoW} />
-            )}
+            component={({ WoW }) => <WoWDataCell value={WoW} />}
           />
           <Column
             align="right"

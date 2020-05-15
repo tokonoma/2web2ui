@@ -9,7 +9,8 @@ import OGStyles from './PreviewControlBar.module.scss';
 import hibanaStyles from './PreviewControlBarHibana.module.scss';
 
 const PreviewControlBar = () => {
-  const { previewDevice, setPreviewDevice } = useEditorContext();
+  const { previewDevice, setPreviewDevice, canSend } = useEditorContext();
+  const hasSendTestEmailButton = canSend;
   const styles = useHibanaOverride(OGStyles, hibanaStyles);
 
   return (
@@ -48,9 +49,7 @@ const PreviewControlBar = () => {
         </UnstyledLink>
       </div>
 
-      <div>
-        <SendTestEmailButton />
-      </div>
+      <div>{hasSendTestEmailButton && <SendTestEmailButton />}</div>
     </div>
   );
 };

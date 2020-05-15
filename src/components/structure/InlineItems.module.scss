@@ -1,0 +1,20 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.Container {
+  margin-left: -(spacing(smaller));
+  margin-top: -(spacing(smaller));
+
+  &.compact {
+    margin-top: 0;
+  }
+}
+
+.Item {
+  display: inline-block;
+  margin-left: spacing(smaller);
+  margin-top: spacing(smaller);
+
+  &.compact {
+    margin-top: 0;
+  }
+}

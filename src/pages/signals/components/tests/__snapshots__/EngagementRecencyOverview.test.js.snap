@@ -12,17 +12,6 @@ exports[`EngagementRecencyOverview current column component renders current rate
 />
 `;
 
-exports[`EngagementRecencyOverview does not render title 1`] = `
-<div
-  className="Controls"
->
-  <Calculation
-    initialSelected="relative"
-    onChange={[Function]}
-  />
-</div>
-`;
-
 exports[`EngagementRecencyOverview handles calculation change 1`] = `
 <Column
   align="right"
@@ -54,9 +43,7 @@ exports[`EngagementRecencyOverview history component renders relative sparkline 
 
 exports[`EngagementRecencyOverview renders overview panel with controls and table 1`] = `
 <Panel>
-  <div
-    className="Header"
-  >
+  <Panel.Section>
     <div
       className="Controls"
     >
@@ -65,7 +52,7 @@ exports[`EngagementRecencyOverview renders overview panel with controls and tabl
         onChange={[Function]}
       />
     </div>
-  </div>
+  </Panel.Section>
   <Connect(SummaryTable)
     data={
       Array [

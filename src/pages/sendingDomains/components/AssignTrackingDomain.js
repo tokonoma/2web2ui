@@ -10,7 +10,7 @@ import { SendingDomainSection } from './SendingDomainSection';
 import { update as updateSendingDomain } from 'src/actions/sendingDomains';
 import { listTrackingDomains } from 'src/actions/trackingDomains';
 import { selectTrackingDomainsOptions } from 'src/selectors/trackingDomains';
-import PanelLoading from 'src/components/panelLoading/PanelLoading';
+import { PanelLoading } from 'src/components/loading';
 import { SelectWrapper } from 'src/components/reduxFormWrappers';
 
 export class AssignTrackingDomain extends Component {

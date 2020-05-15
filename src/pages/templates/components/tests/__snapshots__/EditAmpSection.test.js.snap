@@ -13,6 +13,7 @@ exports[`EditAmpSection renders an editor 1`] = `
   mode="html"
   name="amp-html-content-editor"
   onChange={[Function]}
+  readOnly={false}
   value="<html ⚡4email>"
 />
 `;

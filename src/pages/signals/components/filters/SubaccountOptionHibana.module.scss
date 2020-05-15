@@ -1,0 +1,17 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.Check {
+  color: color(blue, 700);
+}
+
+.Option,
+a.Option {
+  text-decoration: none;
+  color: color(gray, 800);
+
+  &:hover,
+  &:focus {
+    background-color: color(blue, 200);
+    color: color(blue, 700);
+  }
+}

@@ -3,6 +3,8 @@ import moment from 'moment';
 import React from 'react';
 import TrendsFilters from '../TrendsFilters';
 
+jest.mock('src/hooks/useHibanaOverride', () => styles => styles);
+
 const now = moment.utc(new Date('2019-08-10T12:30:00-04:00'));
 const from = moment(now).subtract(30, 'd');
 const to = now;

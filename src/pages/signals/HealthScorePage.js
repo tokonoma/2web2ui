@@ -1,7 +1,8 @@
 /* eslint-disable max-lines */
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { PageLink } from 'src/components/links';
-import { Grid, Panel } from 'src/components/matchbox';
+import { Box, Grid, Panel } from 'src/components/matchbox';
+import { OGOnlyWrapper } from 'src/components/hibana';
 import { selectHealthScoreDetails } from 'src/selectors/signals';
 import { getHealthScore, getSpamHits } from 'src/actions/signals';
 import Page from './components/SignalsPage';
@@ -20,15 +21,10 @@ import withDetails from './containers/withDetails';
 import withDateSelection from './containers/withDateSelection';
 import { Loading } from 'src/components';
 import Callout from 'src/components/callout';
-import Divider from './components/Divider';
 import ChartHeader from './components/ChartHeader';
 import { formatFullNumber, roundToPlaces, formatNumber } from 'src/helpers/units';
 import moment from 'moment';
 import _ from 'lodash';
-
-import SpamTrapsPreview from './components/previews/SpamTrapsPreview';
-import EngagementRecencyPreview from './components/previews/EngagementRecencyPreview';
-import styles from './DetailsPages.module.scss';
 import thresholds from './constants/healthScoreThresholds';
 import {
   newModelLine,
@@ -112,12 +108,12 @@ export class HealthScorePage extends Component {
     }
 
     return (
-      <Grid>
-        <Grid.Column sm={12} md={7}>
+      <OGOnlyWrapper as={Grid}>
+        <OGOnlyWrapper as={Grid.Column} sm={12} md={7}>
           <Panel sectioned data-id="health-score-panel">
             <ChartHeader title="Health Score" tooltipContent={HEALTH_SCORE_INFO} />
             {panelContent || (
-              <Fragment>
+              <>
                 <BarChart
                   margin={newModelMarginsHealthScore}
                   gap={gap}
@@ -175,7 +171,7 @@ export class HealthScorePage extends Component {
                   xAxisProps={this.getXAxisProps()}
                 />
                 {selectedComponent && !selectedWeightsAreEmpty && (
-                  <Fragment>
+                  <>
                     <ChartHeader title={HEALTH_SCORE_COMPONENTS[selectedComponent].chartTitle} />
                     <BarChart
                       margin={newModelMarginsOther}
@@ -201,42 +197,55 @@ export class HealthScorePage extends Component {
                       yDomain={selectedDataIsZero ? [0, 1] : [0, 'auto']}
                       xAxisProps={this.getXAxisProps()}
                     />
-                  </Fragment>
+                  </>
                 )}
-              </Fragment>
+              </>
             )}
           </Panel>
-        </Grid.Column>
-        <Grid.Column sm={12} md={5} mdOffset={0}>
-          <div className={styles.OffsetCol} data-id="health-score-components">
-            <ChartHeader
-              title="Health Score Components"
-              date={selectedDate}
-              hideLine
-              padding="1rem 0 1rem"
-              tooltipContent={HEALTH_SCORE_COMPONENT_INFO}
-            />
-            {!loading && selectedWeightsAreEmpty && (
-              <Callout>Insufficient data to populate this chart</Callout>
-            )}
-            {!panelContent && !selectedWeightsAreEmpty && (
-              <DivergingBar
-                barHeight={280 / (selectedWeights.length || 1)}
-                data={selectedWeights}
-                xKey="weight"
-                yKey="weight_type"
-                yLabel={({ value }) => _.get(HEALTH_SCORE_COMPONENTS[value], 'label')}
-                tooltipContent={({ payload = {} }) =>
-                  _.get(HEALTH_SCORE_COMPONENTS[payload.weight_type], 'info')
-                }
-                onClick={this.handleComponentSelect}
-                selected={selectedComponent}
-              />
-            )}
-            {!panelContent && <HealthScoreActions weights={selectedWeights} date={selectedDate} />}
-          </div>
-        </Grid.Column>
-      </Grid>
+        </OGOnlyWrapper>
+        <OGOnlyWrapper as={Grid.Column} sm={12} md={5} mdOffset={0}>
+          {!loading && (
+            <div data-id="health-score-components">
+              <Box as={Grid}>
+                <Box as={Grid.Column} xs={12} md={7}>
+                  <Box as={Panel} sectioned>
+                    <ChartHeader
+                      title="Health Score Components"
+                      date={selectedDate}
+                      hideLine
+                      tooltipContent={HEALTH_SCORE_COMPONENT_INFO}
+                    />
+                    {!loading && selectedWeightsAreEmpty && (
+                      <Callout>Insufficient data to populate this chart</Callout>
+                    )}
+                    {!panelContent && !selectedWeightsAreEmpty && (
+                      <DivergingBar
+                        barHeight={280 / (selectedWeights.length || 1)}
+                        data={selectedWeights}
+                        xKey="weight"
+                        yKey="weight_type"
+                        yLabel={({ value }) => _.get(HEALTH_SCORE_COMPONENTS[value], 'label')}
+                        tooltipContent={({ payload = {} }) =>
+                          _.get(HEALTH_SCORE_COMPONENTS[payload.weight_type], 'info')
+                        }
+                        onClick={this.handleComponentSelect}
+                        selected={selectedComponent}
+                      />
+                    )}
+                  </Box>
+                </Box>
+                <Box as={Grid.Column} xs={12} md={5}>
+                  <Box as={Panel} sectioned>
+                    {!panelContent && (
+                      <HealthScoreActions weights={selectedWeights} date={selectedDate} />
+                    )}
+                  </Box>
+                </Box>
+              </Box>
+            </div>
+          )}
+        </OGOnlyWrapper>
+      </OGOnlyWrapper>
     );
   };
 
@@ -254,24 +263,17 @@ export class HealthScorePage extends Component {
         facet={facet}
         facetId={facetId}
         subaccountId={subaccountId}
-        primaryArea={<DateFilter left />}
       >
+        <Panel title="Health Score Trends">
+          <Panel.Section>
+            <Grid>
+              <Grid.Column xs={12} md={5}>
+                <DateFilter label="Date Range" />
+              </Grid.Column>
+            </Grid>
+          </Panel.Section>
+        </Panel>
         {this.renderContent()}
-        <Divider />
-        <Grid>
-          {facet !== 'mb_provider' && (
-            <Grid.Column xs={12} sm={6}>
-              <div data-id="spam-traps-panel">
-                <SpamTrapsPreview />
-              </div>
-            </Grid.Column>
-          )}
-          <Grid.Column xs={12} sm={6}>
-            <div data-id="engagement-recency-panel">
-              <EngagementRecencyPreview />
-            </div>
-          </Grid.Column>
-        </Grid>
       </Page>
     );
   }

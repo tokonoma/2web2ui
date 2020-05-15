@@ -5,14 +5,15 @@ import { useHibana } from 'src/context/HibanaContext';
 
 function SubduedText(props) {
   const [state] = useHibana();
+  const { as: Component } = props;
   const { isHibanaEnabled } = state;
 
   return isHibanaEnabled ? (
-    <Text {...props} />
+    <Text {...props} as={Component} />
   ) : (
-    <p className={props.className} data-id={props['data-id']}>
+    <Component className={props.className} data-id={props['data-id']}>
       {props.children}
-    </p>
+    </Component>
   );
 }
 

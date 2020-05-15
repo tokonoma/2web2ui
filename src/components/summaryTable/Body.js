@@ -45,11 +45,7 @@ const Body = ({ columns, data, empty, error, loading, perPage }) => {
               !isHibanaEnabled && classNames(styles.Cell, { [styles.DataCell]: !Component }),
             );
             return (
-              <Table.Cell
-                className={classes}
-                style={{ 'text-align': align }}
-                key={`cell-${dataKey}`}
-              >
+              <Table.Cell className={classes} style={{ textAlign: align }} key={`cell-${dataKey}`}>
                 {Component ? <Component {...rowOfData} /> : rowOfData[dataKey]}
               </Table.Cell>
             );

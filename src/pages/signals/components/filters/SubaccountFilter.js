@@ -1,14 +1,17 @@
 import React from 'react';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
-import { ArrowDropDown, ChevronLeft } from '@sparkpost/matchbox-icons';
-import { Button, Grid, Popover, UnstyledLink, WindowEvent } from 'src/components/matchbox';
+import { ArrowDropDown, ChevronLeft, ChevronRight } from '@sparkpost/matchbox-icons';
+import { Button, Label, Popover, UnstyledLink, WindowEvent } from 'src/components/matchbox';
 import SubaccountTypeahead from 'src/components/typeahead/SubaccountTypeahead';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
+import { useHibana } from 'src/context/HibanaContext';
+import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import withSignalOptions from '../../containers/withSignalOptions';
 import SubaccountOption from './SubaccountOption';
 import { onEscape } from 'src/helpers/keyEvents';
-import styles from './SubaccountFilter.module.scss';
+import OGStyles from './SubaccountFilter.module.scss';
+import hibanaStyles from './SubaccountFilterHibana.module.scss';
 
 const OPTIONS = [
   {
@@ -28,7 +31,7 @@ const OPTIONS = [
   },
 ];
 
-export class SubaccountFilter extends React.Component {
+export class SubaccountFilterClassComponent extends React.Component {
   state = {
     isOpen: false,
     isSearchOpen: false,
@@ -63,6 +66,7 @@ export class SubaccountFilter extends React.Component {
     const {
       hasSubaccounts,
       signalOptions: { subaccount = OPTIONS[0] },
+      styles,
     } = this.props;
     const { isOpen, isSearchOpen } = this.state;
 
@@ -73,6 +77,7 @@ export class SubaccountFilter extends React.Component {
     const trigger = (
       <div ref={node => (this.triggerRef = node)}>
         <Button
+          aria-labelledby="subaccount-label"
           aria-controls="popover-subaccount-filter"
           fullWidth
           onClick={this.handleVisibilityToggle}
@@ -80,16 +85,19 @@ export class SubaccountFilter extends React.Component {
         >
           <span className={styles.ButtonLabel}>{subaccount.name}</span>
           {subaccount.id > 0 && <span>({subaccount.id})</span>}
-          <ArrowDropDown className={styles.ButtonIcon} />
+          <TriggerIcon className={styles.ButtonIcon} />
         </Button>
       </div>
     );
 
     return (
-      <Grid.Column md={5} lg={4} xl={3}>
+      <>
+        <Label id="subaccount-label" label="Subaccount" />
+
         <div className={styles.SubaccountFilter}>
           <WindowEvent handler={this.handleWindowClick} event="click" />
           <WindowEvent handler={onEscape(this.close)} event="keydown" />
+
           <Popover
             id="popover-subaccount-filter"
             className={styles.Popover}
@@ -107,7 +115,7 @@ export class SubaccountFilter extends React.Component {
                 </div>
                 <div className={styles.SubaccountSearch}>
                   <SubaccountTypeahead
-                    label=""
+                    label="Subaccount Search"
                     onChange={this.handleChange}
                     placeholder="Search here"
                     unfiltered
@@ -132,9 +140,27 @@ export class SubaccountFilter extends React.Component {
             </div>
           </Popover>
         </div>
-      </Grid.Column>
+      </>
     );
   }
+}
+
+// TODO: Remove when OG theme is removed - just use the `Chevron*` icon without using `ArrowDropDown`
+function TriggerIcon({ className }) {
+  const [state] = useHibana();
+  const { isHibanaEnabled } = state;
+
+  if (isHibanaEnabled) {
+    return <ChevronRight className={className} />;
+  }
+
+  return <ArrowDropDown className={className} />;
+}
+
+function SubaccountFilter(props) {
+  const styles = useHibanaOverride(OGStyles, hibanaStyles);
+
+  return <SubaccountFilterClassComponent styles={styles} {...props} />;
 }
 
 const mapStateToProps = state => ({

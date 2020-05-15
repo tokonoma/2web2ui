@@ -16,8 +16,8 @@ import styles from './SpamTrapOverview.module.scss';
 
 class SpamTrapOverview extends React.Component {
   state = {
-    calculation: 'relative'
-  }
+    calculation: 'relative',
+  };
 
   componentDidMount() {
     this.resetTable();
@@ -46,7 +46,7 @@ class SpamTrapOverview extends React.Component {
     }
 
     resetSummaryTable(tableName, { ...options, ...defaults });
-  }
+  };
 
   getData = () => {
     const { getSpamHits, signalOptions, summaryTable } = this.props;
@@ -77,15 +77,15 @@ class SpamTrapOverview extends React.Component {
       orderBy,
       relativeRange: signalOptions.relativeRange,
       subaccount,
-      to: signalOptions.to
+      to: signalOptions.to,
     });
-  }
+  };
 
-  handleCalculationChange = (calculation) => {
+  handleCalculationChange = calculation => {
     this.setState({ calculation });
-  }
+  };
 
-  handleClick = (facetId) => ({ date }) => {
+  handleClick = facetId => ({ date }) => {
     const { facet, history, signalOptions } = this.props;
     let search;
 
@@ -97,14 +97,21 @@ class SpamTrapOverview extends React.Component {
       pathname: `/signals/spam-traps/${facet.key}/${facetId}`,
       search,
       state: {
-        date
-      }
+        date,
+      },
     });
-  }
+  };
 
   render() {
     const {
-      data, error, facet, loading, signalOptions, subaccounts, tableName, totalCount
+      data,
+      error,
+      facet,
+      loading,
+      signalOptions,
+      subaccounts,
+      tableName,
+      totalCount,
     } = this.props;
     const { calculation } = this.state;
 
@@ -112,11 +119,11 @@ class SpamTrapOverview extends React.Component {
 
     return (
       <Panel>
-        <div className={styles.Header}>
+        <Panel.Section>
           <div className={styles.Controls}>
             <Calculation initialSelected={calculation} onChange={this.handleCalculationChange} />
           </div>
-        </div>
+        </Panel.Section>
         <SummaryTable
           data={data}
           empty={data.length === 0}
@@ -130,7 +137,7 @@ class SpamTrapOverview extends React.Component {
             label={facet.label}
             sortable
             width="30%"
-            component={(props) => {
+            component={props => {
               const id = props[facet.key];
 
               return (
@@ -181,9 +188,7 @@ class SpamTrapOverview extends React.Component {
               label={isCustomRange ? 'Count' : 'Current Count'}
               sortable
               width="12.5%"
-              component={({ current_trap_hits }) => (
-                <NumericDataCell value={current_trap_hits} />
-              )}
+              component={({ current_trap_hits }) => <NumericDataCell value={current_trap_hits} />}
             />
           )}
           <Column
@@ -191,9 +196,7 @@ class SpamTrapOverview extends React.Component {
             dataKey="WoW"
             label={<WoWHeaderCell />}
             width="12.5%"
-            component={({ WoW }) => (
-              <WoWDataCell value={WoW} reverse />
-            )}
+            component={({ WoW }) => <WoWDataCell value={WoW} reverse />}
           />
           <Column
             align="right"

@@ -7,13 +7,13 @@ import Sparkline from '../charts/sparkline/Sparkline';
 import TooltipMetric from 'src/components/charts/TooltipMetric';
 import EmptyDataCell from './EmptyDataCell';
 
-const StyledDot = (props) => (
+const StyledDot = props => (
   <Dot {...props} fill={colorMapByRank[props.payload.ranking]} stroke="#FFFFFF" />
 );
 
 const SparklineDataCell = ({ data, dataKey, label, onClick = () => {}, relative }) => {
   const currentDate = _.last(data).date;
-  const isEmpty = data.every((values) => values[dataKey] === null);
+  const isEmpty = data.every(values => values[dataKey] === null);
 
   if (isEmpty) {
     return <EmptyDataCell />;
@@ -22,15 +22,17 @@ const SparklineDataCell = ({ data, dataKey, label, onClick = () => {}, relative 
   return (
     <Sparkline
       activeDot={StyledDot}
-      dot={(props) => {
-        if (props.payload.date === currentDate) { // only show for current date
+      dot={props => {
+        if (props.payload.date === currentDate) {
+          // only show for current date
           return <StyledDot {...props} />;
         }
 
         return null;
       }}
-      onClick={(data) => {
-        if (data) { // if a user doesn't click a dot, data === null
+      onClick={data => {
+        if (data) {
+          // if a user doesn't click a dot, data === null
           onClick(data.activePayload[0].payload);
         }
       }}
