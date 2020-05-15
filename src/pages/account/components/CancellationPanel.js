@@ -22,7 +22,9 @@ export class CancellationPanel extends React.Component {
 
   handleCancelAccount = () => {
     try {
-      window.pendo.showGuideyId(GUIDE_IDS.CANCEL_ACCOUNT);
+      if (!window.pendo.showGuideById(GUIDE_IDS.CANCEL_ACCOUNT)) {
+        this.props.history.push(ACCOUNT_CANCEL_LINK);
+      }
     } catch (error) {
       reportGuideLoadingError(error);
       this.props.history.push(ACCOUNT_CANCEL_LINK);
