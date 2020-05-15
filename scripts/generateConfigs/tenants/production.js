@@ -24,11 +24,6 @@ const productionTenants = {
       cnameValue: 'eu.sparkpostmail.com',
       mxValue: 'smtp.eu.sparkpostmail.com'
     },
-    brightback: {
-      downgradeToFreeConfig: {
-        cancel_confirmation_url: '/account/billing/plan/change?immediatePlanChange=free500-SPCEU-0419' // Return URL from Brightback for end-users who cancel
-      }
-    },
     crossLinkTenant: 'spc',
     featureFlags: {
       allow_anyone_at_verification: true,

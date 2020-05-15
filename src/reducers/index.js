@@ -13,7 +13,6 @@ import auth from './auth';
 import billing from './billing';
 import bounceReport from './bounceReport';
 import blacklist from './blacklist';
-import brightback from './brightback';
 import cookieConsent from './cookieConsent';
 import delayReport from './delayReport';
 import dataPrivacy from './dataPrivacy';
@@ -63,7 +62,6 @@ const appReducer = combineReducers({
   billing,
   blacklist,
   bounceReport,
-  brightback,
   cookieConsent,
   currentUser,
   dataPrivacy,
