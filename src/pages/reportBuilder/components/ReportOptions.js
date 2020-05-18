@@ -306,7 +306,7 @@ export function ReportOptions(props) {
           )}
         </Panel.Section>
         <Panel.Section>
-          <div className={styles.ActionButtonWrapper}>
+          <Inline space={'300'}>
             <Button
               {...getActivatorProps()}
               onClick={() => handleDrawerOpen(0)}
@@ -321,7 +321,7 @@ export function ReportOptions(props) {
             >
               <span>Add Filters</span> <Add />
             </Button>
-          </div>
+          </Inline>
           <Drawer {...getDrawerProps()}>
             <Drawer.Header showCloseButton />
             <Drawer.Content p="0">
