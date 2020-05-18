@@ -1,55 +1,70 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CancellationPanel renders 1`] = `
-<Panel
-  title="Request Account Cancellation"
->
-  <Panel.Section>
-    <Stack>
+<Fragment>
+  <Panel
+    title="Request Account Cancellation"
+  >
+    <Panel.Section>
+      <Stack>
+        <p>
+          If you choose to cancel your account, it will be cancelled at the end of your billing cycle. You can change your mind at any time until 8am UTC on the date of cancellation.
+        </p>
+        <div>
+          <span>
+            Before your cancellation date:
+          </span>
+          <ul>
+            <li>
+              You can continue to send up to your monthly limit.
+            </li>
+            <li>
+              You may not go into overage.
+            </li>
+            <li>
+              You may not use our recipient validation feature.
+            </li>
+          </ul>
+        </div>
+        <div>
+          <span>
+            After your cancellation date:
+          </span>
+          <ul>
+            <li>
+              You will no longer be able to log in using your account credentials.
+            </li>
+            <li>
+              You will no longer be able to send email or make API calls using your API keys.
+            </li>
+            <li>
+              Any dedicated IPs on your account will be unrecoverable and may be assigned to other SparkPost accounts.
+            </li>
+          </ul>
+        </div>
+      </Stack>
+    </Panel.Section>
+    <Panel.Section>
+      <Button
+        onClick={[Function]}
+        variant="destructive"
+      >
+        Cancel Account
+      </Button>
+    </Panel.Section>
+  </Panel>
+  <ConfirmationModal
+    cancelVerb="Keep My Account"
+    confirmVerb="Cancel My Account"
+    content={
       <p>
-        If you choose to cancel your account, it will be cancelled at the end of your billing cycle. You can change your mind at any time until 8am UTC on the date of cancellation.
+        If you cancel, you can send emails up to your monthly limit before your cancel date, but you cannot overage past that. You will not be able to validate email addresses using recipient validation. Any dedicated IPs assigned to your account will be unrecoverable after your cancel date and might be assigned to other SparkPost accounts.
       </p>
-      <div>
-        <span>
-          Before your cancellation date:
-        </span>
-        <ul>
-          <li>
-            You can continue to send up to your monthly limit.
-          </li>
-          <li>
-            You may not go into overage.
-          </li>
-          <li>
-            You may not use our recipient validation feature.
-          </li>
-        </ul>
-      </div>
-      <div>
-        <span>
-          After your cancellation date:
-        </span>
-        <ul>
-          <li>
-            You will no longer be able to log in using your account credentials.
-          </li>
-          <li>
-            You will no longer be able to send email or make API calls using your API keys.
-          </li>
-          <li>
-            Any dedicated IPs on your account will be unrecoverable and may be assigned to other SparkPost accounts.
-          </li>
-        </ul>
-      </div>
-    </Stack>
-  </Panel.Section>
-  <Panel.Section>
-    <Button
-      onClick={[Function]}
-      variant="destructive"
-    >
-      Cancel Account
-    </Button>
-  </Panel.Section>
-</Panel>
+    }
+    onCancel={[Function]}
+    onConfirm={[Function]}
+    open={false}
+    title="Are you sure you want to cancel your account?"
+  />
+</Fragment>
 `;

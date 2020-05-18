@@ -21,6 +21,12 @@ describe('CancellationPanel', () => {
     expect(subject()).toMatchSnapshot();
   });
 
+  it("renders a Confirmation Modal if the pendo guide doesn't load", () => {
+    const wrapper = subject();
+    wrapper.find('Button').simulate('click');
+    expect(wrapper.find('ConfirmationModal').prop('open')).toBe(true);
+  });
+
   it('renders renew button when pending cancellation ', () => {
     expect(
       subject({ account: accountPendingCancellation })
