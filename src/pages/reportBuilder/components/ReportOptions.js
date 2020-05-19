@@ -14,20 +14,20 @@ import { Heading } from 'src/components/text';
 import { parseSearch } from 'src/helpers/reports';
 import { isForcedUTCRollupPrecision } from 'src/helpers/metrics';
 import Typeahead from 'src/pages/reports/components/Typeahead'; //TODO: Remove
-import { Add } from '@sparkpost/matchbox-icons';
+// import { Add } from '@sparkpost/matchbox-icons';
 import {
-  Button,
-  Drawer,
+  // Button,
+  // Drawer,
   Grid,
   Inline,
   Panel,
   Select,
   Stack,
-  Tabs,
+  // Tabs,
   Tag,
   Tooltip,
 } from 'src/components/matchbox';
-import { useDrawer } from '@sparkpost/matchbox-hibana';
+// import { useDrawer } from '@sparkpost/matchbox-hibana';
 import DatePicker from 'src/components/datePicker/DatePicker';
 import typeaheadCacheSelector from 'src/selectors/reportFilterTypeaheadCache';
 import { TimezoneTypeahead } from 'src/components/typeahead/TimezoneTypeahead';
@@ -205,20 +205,20 @@ export function ReportOptions(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const {
-    getActivatorProps,
-    getDrawerProps,
-    openDrawer,
-    // closeDrawer,
-    // toggleDrawer,
-    // isOpen,
-  } = useDrawer({ id: 'report-drawer' });
-  const [drawerTab, setDrawerTab] = useState(0);
+  // const {
+  //   getActivatorProps,
+  //   getDrawerProps,
+  //   openDrawer,
+  //   // closeDrawer,
+  //   // toggleDrawer,
+  //   // isOpen,
+  // } = useDrawer({ id: 'report-drawer' });
+  // const [drawerTab, setDrawerTab] = useState(0);
 
-  const handleDrawerOpen = index => {
-    setDrawerTab(index);
-    openDrawer();
-  };
+  // const handleDrawerOpen = index => {
+  //   setDrawerTab(index);
+  //   openDrawer();
+  // };
 
   const handleFilterRemove = index => {
     removeFilter(index);
@@ -270,16 +270,16 @@ export function ReportOptions(props) {
     );
   };
 
-  const tabs = [
-    {
-      content: 'Metrics',
-      onClick: () => setDrawerTab(0),
-    },
-    {
-      content: 'Filters',
-      onClick: () => setDrawerTab(1),
-    },
-  ];
+  // const tabs = [
+  //   {
+  //     content: 'Metrics',
+  //     onClick: () => setDrawerTab(0),
+  //   },
+  //   {
+  //     content: 'Filters',
+  //     onClick: () => setDrawerTab(1),
+  //   },
+  // ];
 
   return (
     <div data-id="report-options">
@@ -305,7 +305,8 @@ export function ReportOptions(props) {
             />
           )}
         </Panel.Section>
-        <Panel.Section>
+        {/* TODO: Uncomment section when implementing */}
+        {/* <Panel.Section>
           <Inline space={'300'}>
             <Button
               {...getActivatorProps()}
@@ -328,7 +329,7 @@ export function ReportOptions(props) {
               <Tabs selected={drawerTab} fitted tabs={tabs} />
             </Drawer.Content>
           </Drawer>
-        </Panel.Section>
+        </Panel.Section> */}
         <ActiveFilters />
       </Panel>
     </div>
