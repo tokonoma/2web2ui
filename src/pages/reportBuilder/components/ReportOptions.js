@@ -19,6 +19,8 @@ import DatePicker from 'src/components/datePicker/DatePicker';
 import typeaheadCacheSelector from 'src/selectors/reportFilterTypeaheadCache';
 import { TimezoneTypeahead } from 'src/components/typeahead/TimezoneTypeahead';
 import { selectFeatureFlaggedMetrics } from 'src/selectors/metrics';
+import { selectSummaryMetricsProcessed } from 'src/selectors/reportSearchOptions';
+import { Legend } from './index';
 import _ from 'lodash';
 import config from 'src/config';
 import styles from './ReportOptions.module.scss';
@@ -36,6 +38,7 @@ const PanelContent = ({
   handleTypeaheadSelect,
   typeaheadCache,
   searchOptions,
+  refreshReportOptions,
 }) => {
   return (
     <Panel.Section>
@@ -75,6 +78,7 @@ const MetricsRollupPanelContent = (
   typeaheadCache,
   handleTimezoneSelect,
   searchOptions,
+  refreshReportOptions,
 ) => {
   const [shownPrecision, setShownPrecision] = useState('');
 
@@ -174,6 +178,7 @@ export function ReportOptions(props) {
   const {
     removeFilter,
     addFilters,
+    processedMetrics,
     refreshReportOptions,
     reportOptions,
     typeaheadCache,
@@ -202,6 +207,11 @@ export function ReportOptions(props) {
 
   const handleTimezoneSelect = timezone => {
     refreshReportOptions({ timezone: timezone.value });
+  };
+
+  const handleRemoveMetric = selectedMetric => {
+    const updatedMetrics = reportOptions.metrics.filter(key => key !== selectedMetric);
+    refreshReportOptions({ metrics: updatedMetrics });
   };
 
   const ActiveFilters = () => {
@@ -255,6 +265,7 @@ export function ReportOptions(props) {
               searchOptions={searchOptions}
               handleTimezoneSelect={handleTimezoneSelect}
               reportLoading={reportLoading}
+              refreshReportOptions={refreshReportOptions}
             />
           ) : (
             <PanelContent
@@ -263,8 +274,12 @@ export function ReportOptions(props) {
               typeaheadCache={typeaheadCache}
               searchOptions={searchOptions}
               reportLoading={reportLoading}
+              refreshReportOptions={refreshReportOptions}
             />
           )}
+        </Panel.Section>
+        <Panel.Section>
+          <Legend metrics={processedMetrics} removeMetric={handleRemoveMetric} />
         </Panel.Section>
         <ActiveFilters />
       </Panel>
@@ -273,6 +288,7 @@ export function ReportOptions(props) {
 }
 
 const mapStateToProps = state => ({
+  processedMetrics: selectSummaryMetricsProcessed(state),
   reportOptions: state.reportOptions,
   typeaheadCache: typeaheadCacheSelector(state),
   featureFlaggedMetrics: selectFeatureFlaggedMetrics(state),

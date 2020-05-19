@@ -1,4 +1,6 @@
 /* eslint-disable max-lines */
+import { tokens } from '@sparkpost/design-tokens-hibana';
+
 export const DEFAULT_REDIRECT_ROUTE = '/landing';
 export const AFTER_JOIN_REDIRECT_ROUTE = '/onboarding/plan';
 export const SIGN_UP_ROUTE = '/join';
@@ -213,6 +215,23 @@ export const RECIPIENT_VALIDATION_TIERS = [
   { volumeMin: 250000, volumeMax: 750000, cost: 0.0015, displayedCost: '$0.0015' },
   { volumeMin: 750000, volumeMax: 1000000, cost: 0.001, displayedCost: '$0.0010' },
   { volumeMin: 1000000, volumeMax: Infinity, cost: 0.00075, displayedCost: '$0.00075' },
+];
+
+export const HIBANA_METRICS_COLORS = [
+  tokens.color_red_700,
+  tokens.color_purple_800,
+  tokens.color_yellow_500,
+  tokens.color_blue_700,
+  tokens.color_teal_600,
+  tokens.color_magenta_800,
+  tokens.color_blue_900,
+  tokens.color_green_800,
+  tokens.color_red_600,
+  tokens.color_purple_600,
+  tokens.color_yellow_700,
+  tokens.color_teal_700,
+  tokens.color_magenta_700,
+  tokens.color_green_900,
 ];
 
 export { ROLES, SUBACCOUNT_ROLES, ROLE_LABELS } from './users';

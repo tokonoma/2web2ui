@@ -4,11 +4,11 @@ import config from 'src/config';
 const initialState = {
   chartLoading: false,
   tableLoading: false,
-  metrics: getMetricsFromKeys(config.summaryChart.defaultMetrics),
+  metrics: getMetricsFromKeys(config.summaryChart.defaultMetrics), //TODO RB CLEANUP: can probably remove metrics from redux store here since it's already in reportOptions
   precision: '',
   chartData: [],
   tableData: [],
-  groupBy: 'aggregate'
+  groupBy: 'aggregate',
 };
 
 export default (state = initialState, { type, payload, meta }) => {
@@ -21,7 +21,9 @@ export default (state = initialState, { type, payload, meta }) => {
       return { ...state, chartLoading: false };
 
     case 'FETCH_TABLE_DATA_PENDING': {
-      const { context: { groupBy }} = meta;
+      const {
+        context: { groupBy },
+      } = meta;
       return { ...state, tableLoading: true, tableData: [], groupBy };
     }
 
