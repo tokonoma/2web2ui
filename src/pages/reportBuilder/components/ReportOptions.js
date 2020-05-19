@@ -14,7 +14,20 @@ import { Heading } from 'src/components/text';
 import { parseSearch } from 'src/helpers/reports';
 import { isForcedUTCRollupPrecision } from 'src/helpers/metrics';
 import Typeahead from 'src/pages/reports/components/Typeahead'; //TODO: Remove
-import { Grid, Inline, Panel, Select, Stack, Tag, Tooltip } from 'src/components/matchbox';
+// import { Add } from '@sparkpost/matchbox-icons';
+import {
+  // Button,
+  // Drawer,
+  Grid,
+  Inline,
+  Panel,
+  Select,
+  Stack,
+  // Tabs,
+  Tag,
+  Tooltip,
+} from 'src/components/matchbox';
+// import { useDrawer } from '@sparkpost/matchbox-hibana';
 import DatePicker from 'src/components/datePicker/DatePicker';
 import typeaheadCacheSelector from 'src/selectors/reportFilterTypeaheadCache';
 import { TimezoneTypeahead } from 'src/components/typeahead/TimezoneTypeahead';
@@ -197,6 +210,21 @@ export function ReportOptions(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // const {
+  //   getActivatorProps,
+  //   getDrawerProps,
+  //   openDrawer,
+  //   // closeDrawer,
+  //   // toggleDrawer,
+  //   // isOpen,
+  // } = useDrawer({ id: 'report-drawer' });
+  // const [drawerTab, setDrawerTab] = useState(0);
+
+  // const handleDrawerOpen = index => {
+  //   setDrawerTab(index);
+  //   openDrawer();
+  // };
+
   const handleFilterRemove = index => {
     removeFilter(index);
   };
@@ -252,6 +280,17 @@ export function ReportOptions(props) {
     );
   };
 
+  // const tabs = [
+  //   {
+  //     content: 'Metrics',
+  //     onClick: () => setDrawerTab(0),
+  //   },
+  //   {
+  //     content: 'Filters',
+  //     onClick: () => setDrawerTab(1),
+  //   },
+  // ];
+
   return (
     <div data-id="report-options">
       <Panel>
@@ -278,6 +317,31 @@ export function ReportOptions(props) {
             />
           )}
         </Panel.Section>
+        {/* TODO: Uncomment section when implementing */}
+        {/* <Panel.Section>
+          <Inline space={'300'}>
+            <Button
+              {...getActivatorProps()}
+              onClick={() => handleDrawerOpen(0)}
+              variant="secondary"
+            >
+              <span>Add Metrics</span> <Add />
+            </Button>
+            <Button
+              {...getActivatorProps()}
+              onClick={() => handleDrawerOpen(1)}
+              variant="secondary"
+            >
+              <span>Add Filters</span> <Add />
+            </Button>
+          </Inline>
+          <Drawer {...getDrawerProps()}>
+            <Drawer.Header showCloseButton />
+            <Drawer.Content p="0">
+              <Tabs selected={drawerTab} fitted tabs={tabs} />
+            </Drawer.Content>
+          </Drawer>
+        </Panel.Section> */}
         <Panel.Section>
           <Legend metrics={processedMetrics} removeMetric={handleRemoveMetric} />
         </Panel.Section>
