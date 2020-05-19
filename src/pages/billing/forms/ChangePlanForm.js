@@ -17,7 +17,6 @@ import {
   currentPlanSelector,
   canUpdateBillingInfoSelector,
   getPromoCodeObject,
-  selectAvailablePlans,
 } from 'src/selectors/accountBillingInfo';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
 import CardSection from '../components/CardSection';
@@ -29,6 +28,7 @@ import { useChangePlanContext } from '../context/ChangePlanContext';
 import { FeatureChangeContextProvider } from '../context/FeatureChangeContext';
 import OGStyles from './ChangePlanForm.module.scss';
 import HibanaStyles from './ChangePlanFormHibana.module.scss';
+import * as conversions from 'src/helpers/conversionTracking';
 
 export const ChangePlanForm = ({
   location,
@@ -47,7 +47,6 @@ export const ChangePlanForm = ({
   billingUpdate,
   billingCreate,
   showAlert,
-  plans,
 }) => {
   const styles = useHibanaOverride(OGStyles, HibanaStyles);
   const { billingCountries, account, bundles, loading, error } = useChangePlanContext();
@@ -106,6 +105,14 @@ export const ChangePlanForm = ({
       billingId,
     };
     let action = Promise.resolve({});
+
+    if (isDowngradeToFree) {
+      return updateSubscription({ bundle: selectedBundleCode }).then(() => {
+        conversions.trackDowngradeToFree(selectedBundleCode);
+        history.push('/account/billing');
+        showAlert({ type: 'success', message: 'Subscription Updated' });
+      });
+    }
 
     if (!_.isEmpty(selectedPromo) && !isDowngradeToFree) {
       newValues.promoCode = selectedPromo.promoCode;
@@ -184,7 +191,6 @@ export const ChangePlanForm = ({
                   selectedBundle={selectedBundle}
                   account={account}
                   isDowngradeToFree={isDowngradeToFree}
-                  freePlan={_.find(plans, { isFree: true })}
                 />
               </FeatureChangeContextProvider>
             </>
@@ -205,8 +211,6 @@ const mapStateToProps = (state, props) => {
     canUpdateBillingInfo: canUpdateBillingInfoSelector(state),
     currentPlan: currentPlanSelector(state),
     promoCodeObj: getPromoCodeObject(state),
-    loading: state.billing.plansLoading,
-    plans: selectAvailablePlans(state),
   };
 };
 
