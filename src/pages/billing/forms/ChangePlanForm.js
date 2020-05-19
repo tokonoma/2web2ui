@@ -186,12 +186,7 @@ export const ChangePlanForm = ({
                   />
                 )}
 
-                <SubmitSection
-                  loading={submitting}
-                  selectedBundle={selectedBundle}
-                  account={account}
-                  isDowngradeToFree={isDowngradeToFree}
-                />
+                <SubmitSection loading={submitting} />
               </FeatureChangeContextProvider>
             </>
           ) : (
