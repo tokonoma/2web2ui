@@ -28,7 +28,6 @@ import { useChangePlanContext } from '../context/ChangePlanContext';
 import { FeatureChangeContextProvider } from '../context/FeatureChangeContext';
 import OGStyles from './ChangePlanForm.module.scss';
 import HibanaStyles from './ChangePlanFormHibana.module.scss';
-import * as conversions from 'src/helpers/conversionTracking';
 
 export const ChangePlanForm = ({
   location,
@@ -108,7 +107,6 @@ export const ChangePlanForm = ({
 
     if (isDowngradeToFree) {
       return updateSubscription({ bundle: selectedBundleCode }).then(() => {
-        conversions.trackDowngradeToFree(selectedBundleCode);
         history.push('/account/billing');
         showAlert({ type: 'success', message: 'Subscription Updated' });
       });
