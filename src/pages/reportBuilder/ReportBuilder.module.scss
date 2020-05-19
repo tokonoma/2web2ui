@@ -1,9 +1,9 @@
-@import '~@sparkpost/matchbox/src/styles/config.scss';
+@import '~@sparkpost/design-tokens-hibana/tokens';
 
 .ChartSection {
   position: relative;
-  padding: spacing();
-  min-height: rem(300);
+  padding: spacing(300);
+  min-height: 350px;
 
   opacity: 1;
   pointer-events: auto;
@@ -20,4 +20,20 @@
   top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.SelectMetrics {
+  margin-top: spacing(100);
+  margin-left: spacing(300);
+  text-align: left;
+
+  & * {
+    text-align: left;
+  }
+
+  @media screen and (min-width: media-query(sm)) {
+    margin-top: 0;
+    margin-left: 0;
+    text-align: right;
+  }
 }

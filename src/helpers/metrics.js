@@ -2,6 +2,7 @@ import moment from 'moment';
 import _ from 'lodash';
 import { list as METRICS_LIST } from 'src/config/metrics';
 import config from 'src/config';
+import { HIBANA_METRICS_COLORS } from 'src/constants/index';
 import { getRelativeDates } from 'src/helpers/date';
 import { safeDivide, safeRate } from './math';
 
@@ -258,7 +259,8 @@ export function getValidDateRange({
   throw new Error('Invalid date range selected');
 }
 
-export function _getMetricsFromKeys(keys = []) {
+export function _getMetricsFromKeys(keys = [], isHibanaEnabled) {
+  const metricsColors = isHibanaEnabled ? HIBANA_METRICS_COLORS : chartColors;
   return keys.map((metric, i) => {
     const found = METRICS_LIST.find(M => M.key === metric || M.key === metric.key);
 
@@ -266,11 +268,14 @@ export function _getMetricsFromKeys(keys = []) {
       throw new Error(`Cannot find metric: ${JSON.stringify(metric)}`);
     }
 
-    return { ...found, name: found.key, stroke: chartColors[i] };
+    return { ...found, name: found.key, stroke: metricsColors[i % metricsColors.length] };
   });
 }
 
-export const getMetricsFromKeys = _.memoize(_getMetricsFromKeys, (keys = []) => keys.join(''));
+export const getMetricsFromKeys = _.memoize(
+  _getMetricsFromKeys,
+  (keys = [], isHibanaEnabled) => `${keys.join('')}${isHibanaEnabled ? 'hibana' : 'og'}`,
+);
 
 export function getKeysFromMetrics(metrics = []) {
   const flattened = _.flatMap(metrics, ({ key, computeKeys }) => (computeKeys ? computeKeys : key));

@@ -1,11 +1,10 @@
 import { dedupeFilters } from 'src/helpers/reports';
-import { getMetricsFromKeys } from 'src/helpers/metrics';
 import config from 'src/config';
 
 const initialState = {
   relativeRange: 'day',
   filters: [],
-  metrics: getMetricsFromKeys(config.summaryChart.defaultMetrics),
+  metrics: config.summaryChart.defaultMetrics,
 };
 
 export default (state = initialState, action) => {

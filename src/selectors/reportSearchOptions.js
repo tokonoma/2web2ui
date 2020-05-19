@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 import moment from 'moment';
 import { stringifyTypeaheadfilter } from 'src/helpers/string';
+import { getMetricsFromKeys } from 'src/helpers/metrics';
 import _ from 'lodash';
 
 const selectDateOptions = state => ({
@@ -23,7 +24,11 @@ const selectSummaryMetrics = state => ({
   metrics: _.get(state, 'reportOptions.metrics', []).map(metric =>
     typeof metric === 'string' ? metric : metric.key,
   ),
+  //TODO RB CLEANUP: can probably remove the check if it's an object
 });
+
+export const selectSummaryMetricsProcessed = state =>
+  getMetricsFromKeys(_.get(state, 'reportOptions.metrics', []), true);
 
 /**
  * Converts reportOptions for url sharing

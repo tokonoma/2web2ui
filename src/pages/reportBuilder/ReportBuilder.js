@@ -3,15 +3,20 @@ import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { refreshSummaryReport } from 'src/actions/summaryChart';
 import { refreshReportOptions } from 'src/actions/reportOptions';
-import { Page, Panel } from 'src/components/matchbox';
+import { Button, Grid, Page, Panel } from 'src/components/matchbox';
 import { Loading } from 'src/components';
+import { list as metricsList } from 'src/config/metrics';
+import { Table, MetricsModal, ChartGroup } from '../reports/summary/components'; //TODO: Remove usage of these components
 import ReportOptions from './components/ReportOptions';
-import { Table, MetricsModal, ChartGroup, ChartHeader } from '../reports/summary/components'; //TODO: Remove usage of these components
-import { selectSummaryChartSearchOptions } from 'src/selectors/reportSearchOptions';
+import {
+  selectSummaryChartSearchOptions,
+  selectSummaryMetricsProcessed,
+} from 'src/selectors/reportSearchOptions';
 import styles from './ReportBuilder.module.scss';
 
 export function ReportBuilder({
   chart,
+  processedMetrics,
   reportOptions,
   summarySearchOptions = {},
   refreshSummaryReport,
@@ -20,10 +25,7 @@ export function ReportBuilder({
   useEffect(() => {
     refreshSummaryReport(reportOptions);
   }, [refreshSummaryReport, reportOptions]);
-
   const [metricsModal, setMetricsModal] = useState(false);
-  const [eventTime, setEventTime] = useState('real');
-  const [scale, setScale] = useState('linear');
 
   const renderLoading = () => {
     if (chart.chartLoading) {
@@ -44,14 +46,6 @@ export function ReportBuilder({
     setMetricsModal(!metricsModal);
   };
 
-  const handleTimeClick = time => {
-    setEventTime(time);
-  };
-
-  const handleScaleClick = scale => {
-    setScale(scale);
-  };
-
   const { to } = summarySearchOptions;
   //TODO: Make sure to replace these components with new ones
   return (
@@ -59,18 +53,19 @@ export function ReportBuilder({
       <ReportOptions reportLoading={chart.chartLoading} searchOptions={summarySearchOptions} />
       <div data-id="summary-chart">
         <Panel>
+          <Panel.Section>
+            <Grid>
+              <div className={styles.SelectMetrics}>
+                <Button size="small" onClick={handleMetricsModal}>
+                  Select Metrics
+                </Button>
+              </div>
+            </Grid>
+          </Panel.Section>
           <Panel.Section
             className={classnames(styles.ChartSection, chart.chartLoading && styles.pending)}
           >
-            <ChartHeader
-              selectedMetrics={chart.metrics}
-              selectedTime={eventTime}
-              selectedScale={scale}
-              onScaleClick={handleScaleClick}
-              onTimeClick={handleTimeClick}
-              onMetricsToggle={handleMetricsModal}
-            />
-            <ChartGroup {...chart} to={to} yScale={scale} />
+            <ChartGroup {...chart} metrics={processedMetrics} to={to} yScale={'linear'} />
           </Panel.Section>
 
           {renderLoading()}
@@ -81,7 +76,8 @@ export function ReportBuilder({
       </div>
 
       <MetricsModal
-        selectedMetrics={chart.metrics}
+        maxMetrics={metricsList.length + 1}
+        selectedMetrics={processedMetrics}
         open={metricsModal}
         onCancel={handleMetricsModal}
         onSubmit={handleMetricsApply}
@@ -94,6 +90,7 @@ export function ReportBuilder({
 const mapStateToProps = state => ({
   chart: state.summaryChart,
   reportOptions: state.reportOptions,
+  processedMetrics: selectSummaryMetricsProcessed(state),
   summarySearchOptions: selectSummaryChartSearchOptions(state),
 });
 
