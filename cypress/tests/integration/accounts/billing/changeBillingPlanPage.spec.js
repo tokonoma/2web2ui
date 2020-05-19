@@ -218,6 +218,7 @@ describe('Change Billing Plan Page', () => {
     cy.findByText('Update Status')
       .should('have.prop', 'href')
       .and('include', 'account/subaccounts');
+    cy.findByText('Change Plan').should('be.disabled');
   });
   it('Upgrades free account to starter 50K with query parameter', () => {
     cy.stubRequest({
@@ -436,7 +437,7 @@ describe('Change Billing Plan Page', () => {
     cy.url().should('equal', `${Cypress.config().baseUrl}/account/billing`);
   });
 
-  it("Upgrades free account to premier 1M with previous active subaccounts, current quatity of subaccounts doesn't exceed new limit", () => {
+  it("Upgrades free account to premier 1M with previous active subaccounts, current quantity of subaccounts doesn't exceed new limit", () => {
     // user is on the test plan
     cy.stubRequest({
       url: '/api/v1/account',

@@ -43,7 +43,6 @@ export const FeatureChangeProvider = ({
     );
   }, [plans, selectedBundle]);
 
-  // console.log(selectedPlansByProduct);
   // Used for finding the features that need to have a proper function
   // Inserts into actions if it's got a conflicting issue
   // Updates if it was already in actions had conflicting issue
