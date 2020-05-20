@@ -105,6 +105,13 @@ export const ChangePlanForm = ({
     };
     let action = Promise.resolve({});
 
+    if (isDowngradeToFree) {
+      return updateSubscription({ bundle: selectedBundleCode }).then(() => {
+        history.push('/account/billing');
+        showAlert({ type: 'success', message: 'Subscription Updated' });
+      });
+    }
+
     if (!_.isEmpty(selectedPromo) && !isDowngradeToFree) {
       newValues.promoCode = selectedPromo.promoCode;
       action = verifyPromoCode({
@@ -177,12 +184,7 @@ export const ChangePlanForm = ({
                   />
                 )}
 
-                <SubmitSection
-                  loading={submitting}
-                  selectedBundle={selectedBundle}
-                  account={account}
-                  brightbackCondition={isDowngradeToFree}
-                />
+                <SubmitSection loading={submitting} />
               </FeatureChangeContextProvider>
             </>
           ) : (

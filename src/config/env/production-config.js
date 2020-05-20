@@ -1,12 +1,4 @@
 const productionConfig = {
-  brightback: {
-    downgradeToFreeConfig: {
-      app_id: '9N0rWBvKGR', //Downgrade to prod
-    },
-    cancelConfig: {
-      app_id: 'RYeoK4Dp3a', //Cancel Prod id
-    },
-  },
   segment: {
     enabled: true,
     publicKey: '6NftxrUb0QfhkIaOqcpbfxjZDhvNEExm',

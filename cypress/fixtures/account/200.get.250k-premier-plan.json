@@ -62,8 +62,7 @@
 		  "signals": true,
 		  "onboarding_active_step": "Show Me SparkPost",
 		  "feature_alerts": true,
-		  "ip_auto_warmup": true,
-		  "brightback": true
+		  "ip_auto_warmup": true
 		},
 		"initial_open_pixel_tracking": true,
 		"smtp_tracking_default": true,

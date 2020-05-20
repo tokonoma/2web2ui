@@ -1,54 +1,73 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { fetch as fetchAccount, renewAccount } from 'src/actions/account';
-import { PageLink } from 'src/components/links';
 import { Heading } from 'src/components/text';
-import { ButtonWrapper } from 'src/components';
+import { ButtonWrapper, ConfirmationModal } from 'src/components';
 import { Button, Panel, Stack } from 'src/components/matchbox';
 import { showAlert } from 'src/actions/globalAlert';
-import config from 'src/config';
-import Brightback from 'src/components/brightback/Brightback';
+import { GUIDE_IDS } from 'src/constants';
 import { formatDate } from 'src/helpers/date';
-
+import { withRouter } from 'react-router-dom';
+import ErrorTracker from 'src/helpers/errorTracker';
 const ACCOUNT_CANCEL_LINK = '/account/cancel';
 
-export class CancellationPanel extends React.Component {
-  onRenewAccount = () => {
-    const { renewAccount, fetchAccount, showAlert } = this.props;
+export function CancellationPanel(props) {
+  const [showCancelAccountModal, setShowCancelAccountModal] = useState(false);
+  const onRenewAccount = () => {
+    const { renewAccount, fetchAccount, showAlert } = props;
     return renewAccount().then(() => {
       showAlert({ type: 'success', message: 'Your account will not be cancelled.' });
       return fetchAccount();
     });
   };
 
-  render() {
-    const { account } = this.props;
-    const { pending_cancellation, cancelLoading } = account;
-
-    if (pending_cancellation) {
-      return (
-        <Panel sectioned title="Pending Account Cancellation">
-          <Stack>
-            <Heading as="h3" looksLike="h6">
-              Account is set to cancel {formatDate(pending_cancellation.effective_date)}
-            </Heading>
-
-            <p>
-              You can undo your cancellation at anytime <strong>before</strong> 8:00 UTC on your
-              cancel date. We hope you decide to stay!
-            </p>
-          </Stack>
-
-          <ButtonWrapper>
-            <Button variant="primary" disabled={cancelLoading} onClick={this.onRenewAccount}>
-              Don't cancel my account!
-            </Button>
-          </ButtonWrapper>
-        </Panel>
-      );
+  const handleCancelAccount = () => {
+    try {
+      if (!window.pendo.showGuideById(GUIDE_IDS.CANCEL_ACCOUNT)) {
+        setShowCancelAccountModal(true);
+      }
+    } catch (error) {
+      ErrorTracker.report('account-cancellation-pendo-guide-error', error);
+      setShowCancelAccountModal(true);
     }
+  };
 
+  const handleCancel = () => {
+    props.history.push(ACCOUNT_CANCEL_LINK);
+  };
+
+  const toggleCancel = () => {
+    setShowCancelAccountModal(false);
+  };
+
+  const { account } = props;
+  const { pending_cancellation, cancelLoading } = account;
+
+  if (pending_cancellation) {
     return (
+      <Panel sectioned title="Pending Account Cancellation">
+        <Stack>
+          <Heading as="h3" looksLike="h6">
+            Account is set to cancel {formatDate(pending_cancellation.effective_date)}
+          </Heading>
+
+          <p>
+            You can undo your cancellation at anytime <strong>before</strong> 8:00 UTC on your
+            cancel date. We hope you decide to stay!
+          </p>
+        </Stack>
+
+        <ButtonWrapper>
+          <Button variant="primary" disabled={cancelLoading} onClick={onRenewAccount}>
+            Don't cancel my account!
+          </Button>
+        </ButtonWrapper>
+      </Panel>
+    );
+  }
+
+  return (
+    <>
       <Panel title="Request Account Cancellation">
         <Panel.Section>
           <Stack>
@@ -80,29 +99,35 @@ export class CancellationPanel extends React.Component {
           </Stack>
         </Panel.Section>
         <Panel.Section>
-          <Brightback
-            config={config.brightback.cancelConfig}
-            condition={true}
-            render={({ to, enabled }) => (
-              <Button
-                variant="destructive"
-                to={enabled ? to : ACCOUNT_CANCEL_LINK}
-                component={enabled ? null : PageLink}
-              >
-                Cancel Account
-              </Button>
-            )}
-          />
+          <Button variant="destructive" onClick={handleCancelAccount}>
+            Cancel Account
+          </Button>
         </Panel.Section>
       </Panel>
-    );
-  }
+      <ConfirmationModal
+        open={showCancelAccountModal}
+        title="Are you sure you want to cancel your account?"
+        content={
+          <p>
+            If you cancel, you can send emails up to your monthly limit before your cancel date, but
+            you cannot overage past that. You will not be able to validate email addresses using
+            recipient validation. Any dedicated IPs assigned to your account will be unrecoverable
+            after your cancel date and might be assigned to other SparkPost accounts.
+          </p>
+        }
+        onConfirm={handleCancel}
+        onCancel={toggleCancel}
+        confirmVerb="Cancel My Account"
+        cancelVerb="Keep My Account"
+      />
+    </>
+  );
 }
 
 const mapStateToProps = ({ account }) => ({
   account,
 });
 
-export default connect(mapStateToProps, { fetchAccount, renewAccount, showAlert })(
-  CancellationPanel,
+export default withRouter(
+  connect(mapStateToProps, { fetchAccount, renewAccount, showAlert })(CancellationPanel),
 );

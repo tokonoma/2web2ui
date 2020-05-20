@@ -2,7 +2,6 @@
 import _ from 'lodash';
 import config from 'src/config';
 import Payment from 'payment';
-import qs from 'query-string';
 
 export function formatDataForCors(values) {
   const { email, card, billingAddress, discountId, billingId } = values;
@@ -182,11 +181,6 @@ export function prepareCardInfo({ expCombined, ...cardInfo }) {
     expMonth: expiryInfo.month,
     expYear: expiryInfo.year,
   };
-}
-
-export function stripImmediatePlanChange(search) {
-  const { immediatePlanChange: _immediatePlanChange, ...options } = qs.parse(search);
-  return qs.stringify(options);
 }
 
 export const isProductOnSubscription = (productName = 'recipient_validation') => state => {

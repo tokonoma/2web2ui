@@ -31,13 +31,6 @@ describe('Change Billing Plan Page', () => {
       fixture: 'metrics/deliverability/200.get.json',
       fixtureAlias: 'deliverabilityGet',
     });
-
-    cy.stubRequest({
-      method: 'POST',
-      url: 'https://app.brightback.com/precancel',
-      fixture: 'metrics/precancel/200.post.json',
-      fixtureAlias: 'precancelPost',
-    });
   });
 
   const mockCommonHttpCalls = () => {

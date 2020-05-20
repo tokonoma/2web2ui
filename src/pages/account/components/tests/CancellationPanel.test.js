@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { CancellationPanel } from '../CancellationPanel';
-import Brightback from 'src/components/brightback/Brightback';
 
 describe('CancellationPanel', () => {
   const accountPendingCancellation = {
@@ -18,11 +17,14 @@ describe('CancellationPanel', () => {
       />,
     );
 
-  const getButton = ({ wrapper = subject(), enabled = false, to = '' } = {}) =>
-    wrapper.find(Brightback).renderProp('render')({ enabled, to });
-
   it('renders', () => {
     expect(subject()).toMatchSnapshot();
+  });
+
+  it("renders a Confirmation Modal if the pendo guide doesn't load", () => {
+    const wrapper = subject();
+    wrapper.find('Button').simulate('click');
+    expect(wrapper.find('ConfirmationModal').prop('open')).toBe(true);
   });
 
   it('renders renew button when pending cancellation ', () => {
@@ -33,17 +35,12 @@ describe('CancellationPanel', () => {
     ).toEqual(expect.stringMatching(/Don't cancel my account/));
   });
 
-  it('cancellation button goes to cancellation link when not enabled', () => {
-    expect(getButton({ enabled: false }).prop('to')).toEqual('/account/cancel');
-  });
-
-  it('cancellation button goes to brightback when enabled', () => {
-    const bbUrl = 'https://brightback.url';
-    expect(getButton({ enabled: true, to: bbUrl }).prop('to')).toEqual(bbUrl);
-  });
-
   it('cancellation button is the destructive variant', () => {
-    expect(getButton().prop('variant')).toBe('destructive');
+    expect(
+      subject()
+        .find('Button')
+        .prop('variant'),
+    ).toBe('destructive');
   });
 
   it('refresh button renews account and retrieves new account state', async () => {
