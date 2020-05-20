@@ -7,7 +7,7 @@
       "products": [
         {
           "product": "subaccounts",
-          "plan": "subaccounts-free"
+          "plan": "subaccounts-unlimited"
         },
         {
           "product": "sso",
@@ -37,6 +37,10 @@
           "plan": "online-support"
         },
         {
+          "product": "subaccounts",
+          "plan": "subaccounts-starter"
+        },
+        {
           "product": "messaging",
           "plan": "50K-starter-0519"
         }
@@ -54,6 +58,10 @@
         {
           "product": "messaging",
           "plan": "100K-starter-0519"
+        },
+        {
+          "product": "subaccounts",
+          "plan": "subaccounts-starter"
         }
       ]
     },

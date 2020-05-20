@@ -11,6 +11,7 @@ useHibanaOverride.mockReturnValue(styles);
 const defaultContextState = {
   loading: false,
   features: [],
+  isReady: true,
 };
 
 const subject = (contextState = {}) => {

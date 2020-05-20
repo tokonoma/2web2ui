@@ -17,6 +17,11 @@ const defaultProps = {
       plan: 'subaccounts-0519',
       limit: 15,
     },
+    'subaccounts-starter': {
+      product: 'subaccounts',
+      plan: 'subaccounts-starter',
+      limit: 0,
+    },
     'tfa-required-0519': {
       product: 'tfa_required',
       plan: 'tfa-required-0519',
@@ -38,7 +43,7 @@ const defaultProps = {
         product: 'subaccounts',
         plan: 'subaccounts-0519',
         quantity: 10,
-        limit_override: 20,
+        limit: 15,
       },
       {
         product: 'sso',
@@ -101,6 +106,21 @@ describe('FeatureChangeContext', () => {
           { product: 'messaging', plan: '100K-premier-0519' },
           { product: 'subaccounts', plan: 'subaccounts-0519' },
           { product: 'dedicated_ip', plan: 'ip-0519' },
+        ],
+      },
+    });
+    expect(wrapper.prop('value')).toMatchSnapshot();
+  });
+
+  it('should render acknowledgement for a change in limit on subaccounts', () => {
+    const wrapper = subject({
+      selectedBundle: {
+        products: [
+          { product: 'messaging', plan: '100K-premier-0519' },
+          { product: 'subaccounts', plan: 'subaccounts-starter' },
+          { product: 'dedicated_ip', plan: 'ip-0519' },
+          { product: 'sso', plan: 'sso-0519' },
+          { product: 'tfa_required', plan: 'tfa-required-0519' },
         ],
       },
     });
