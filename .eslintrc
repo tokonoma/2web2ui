@@ -6,7 +6,7 @@
   },
   "rules": {
     // Custom 2web2ui rules
-    "no-matchbox-import": "error",
+    "local/no-matchbox-import": "error",
     // doesn't work with jest-in-case
     "jest/no-standalone-expect": "off",
     "lodash/chaining": [
@@ -59,6 +59,7 @@
     "plugin:testing-library/recommended"
   ],
   "plugins": [
+    "local",
     "testing-library",
     "jest",
     "lodash",

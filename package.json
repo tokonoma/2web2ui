@@ -36,7 +36,7 @@
   },
   "lint-staged": {
     "{cypress,src,eslint-rules}/**/*.js": [
-      "eslint --rulesdir eslint-rules/ --fix",
+      "eslint --fix",
       "git add"
     ],
     "src/**/*.{css,scss}": [
@@ -51,11 +51,6 @@
     "plugins": [
       "lodash",
       "recharts"
-    ]
-  },
-  "greenkeeper": {
-    "ignore": [
-      "webpack"
     ]
   },
   "description": "SparkPost web app built in React",
@@ -169,6 +164,7 @@
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jest": "^23.0.4",
     "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-local": "^1.0.0",
     "eslint-plugin-lodash": "^6.0.0",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.16.0",

@@ -1,7 +1,5 @@
-const meta = {};
-
 const noMatchboxImport = {
-  meta,
+  meta: {},
   create(context) {
     const { report } = context;
     const filePath = context.getFilename();
