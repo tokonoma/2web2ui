@@ -141,21 +141,18 @@ describe('.getDates', () => {
 });
 
 describe('getValidSignalsDateRange', () => {
-  const from = moment('2019-10-02T04:00:00Z');
-  const to = moment('2019-12-30T05:59:59.999Z');
+  const from = moment('2019-10-02T00:00:00Z');
+  const to = moment('2019-12-30T23:59:59.99Z');
   const now = new Date('2019-12-31T04:00:00-04:00');
   Date.now = jest.fn(() => now);
 
-  it('returns to and from if dates are valid', () => {
-    expect(
-      getValidSignalsDateRange({
-        from,
-        to,
-      }),
-    ).toEqual({
+  it('returns formatted to and from if dates are valid', () => {
+    const { from: adjustedFrom, to: adjustedTo } = getValidSignalsDateRange({
       from,
       to,
     });
+    expect(adjustedFrom.format('YYYY-MM-DD')).toEqual('2019-10-02');
+    expect(adjustedTo.format('YYYY-MM-DD')).toEqual('2019-12-30');
   });
 
   it('returns invalid date format error when to/from are in incorrect format', () => {

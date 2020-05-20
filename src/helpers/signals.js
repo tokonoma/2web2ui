@@ -96,7 +96,12 @@ export function getValidSignalsDateRange({ from, to }) {
   const isGreaterThan7Days = Math.abs(to.diff(from, 'days')) >= 6; //Needs to be 6 due to 1/1 12:00 am - 1/6 11:59pm date ranges
 
   if (validDates && isGreaterThan7Days && from.isBefore(to) && to.isBefore(now)) {
-    return { from, to };
+    const utcOffset = moment().utcOffset();
+    //Matches the day given in UTC to your local time.
+    //So 1/2 0000 UTC = 1/1 2000 EST(-4). Then subtract -4 hours (-240 minutes) to get 1/2 0000 EST(-4)
+    const adjustedFrom = from.subtract(utcOffset, 'minutes').startOf('day');
+    const adjustedTo = to.subtract(utcOffset, 'minutes').endOf('day');
+    return { from: adjustedFrom, to: adjustedTo };
   }
 
   if (!validDates) {
