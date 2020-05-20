@@ -15,15 +15,15 @@ commands:
             #   "Caches are immutable so it is useful to start all your cache keys with a version prefix,
             #    for example v1-.... This enables you to regenerate all of your caches by incrementing
             #    the version in this prefix."
-            - v1-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}
-            - v1-deps-{{ .Branch }}-
-            - v1-deps-
+            - v2-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - v2-deps-{{ .Branch }}-
+            - v2-deps-
 
   save_npm_cache:
     description: 'Saves Node modules for later re-use'
     steps:
       - save_cache:
-          key: v1-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          key: v2-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
             - ~/.npm
             - ~/.cache/Cypress

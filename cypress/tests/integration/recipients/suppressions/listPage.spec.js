@@ -31,7 +31,7 @@ describe('The recipients suppressions list page', () => {
 
     cy.wait('@stubbedSuppressionListRequest');
 
-    cy.assertLink({
+    cy.verifyLink({
       content: 'Add Suppressions',
       href: '/lists/suppressions/create',
     });
@@ -171,6 +171,7 @@ describe('The recipients suppressions list page', () => {
 
       cy.get('table').within(() => cy.findAllByText('Delete').should('be.disabled'));
 
+      // eslint-disable-next-line
       cy.wait(deleteDelay);
 
       cy.get('table').within(() => cy.findAllByText('Delete').should('not.be.disabled'));
@@ -188,7 +189,7 @@ describe('The recipients suppressions list page', () => {
         cy.findByText('Non-transactional').should('be.visible');
         cy.findByText('Manually Added').should('be.visible');
         cy.findByText('this is a test description').should('be.visible');
-        cy.findByText('Close').click();
+        cy.findByText('Close').click({ force: true });
       });
 
       cy.findByText('Suppression Details').should('not.be.visible');

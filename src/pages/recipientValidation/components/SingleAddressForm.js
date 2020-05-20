@@ -28,7 +28,7 @@ export class SingleAddressFormClass extends Component {
         </p>
         <div className={classNames(styles.Field)}>
           <ScreenReaderOnly>
-            <Label id="email-address-field">Email Address</Label>
+            <Label id="email-address-field" label="Email Address" />
           </ScreenReaderOnly>
 
           <Field

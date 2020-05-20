@@ -222,7 +222,7 @@ describe('The health score dashboard page', () => {
     });
 
     it('renders each subaccount along with the current health score for that subaccount', () => {
-      function assertTableRow({
+      function verifyTableRow({
         rowIndex,
         subaccount,
         currentScore,
@@ -232,6 +232,7 @@ describe('The health score dashboard page', () => {
       }) {
         cy.get('tbody tr')
           .eq(rowIndex)
+          .scrollIntoView()
           .within(() => {
             cy.get('td')
               .eq(0)
@@ -253,16 +254,16 @@ describe('The health score dashboard page', () => {
       // Grabbing the data in each of the cells in the table row. The chart isn't interpretable
       // by Cypress, which indicates an a11y problem.
 
-      assertTableRow({
+      verifyTableRow({
         rowIndex: 0,
-        subaccount: 'Master Account',
+        subaccount: /Master Account/g,
         currentScore: 10,
         currentInjections: 12,
         WoW: '10%',
         averageScore: 15,
       });
 
-      assertTableRow({
+      verifyTableRow({
         rowIndex: 1,
         subaccount: 'Fake Subaccount 1 (101)',
         currentScore: 20,
@@ -271,7 +272,7 @@ describe('The health score dashboard page', () => {
         averageScore: 25,
       });
 
-      assertTableRow({
+      verifyTableRow({
         rowIndex: 2,
         subaccount: 'Fake Subaccount 2 (102)',
         currentScore: 30,
@@ -280,7 +281,7 @@ describe('The health score dashboard page', () => {
         averageScore: 35,
       });
 
-      assertTableRow({
+      verifyTableRow({
         rowIndex: 3,
         subaccount: 'Fake Subaccount 3 (103)',
         currentScore: 40,

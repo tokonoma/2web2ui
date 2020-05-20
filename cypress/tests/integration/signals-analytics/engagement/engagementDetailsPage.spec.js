@@ -53,17 +53,16 @@ describe('The engagement details page', () => {
     cy.visit(PAGE_URL);
 
     cy.title().should('include', 'Engagement Details | Engagement Recency | Signals Analytics');
-    cy.get('main').within(() => cy.findByText('Engagement Recency').should('be.visible'));
+    cy.withinMainContent(() => cy.findByText('Engagement Recency').should('be.visible'));
   });
 
   it('renders with a link back to the dashboard page', () => {
     cy.visit(PAGE_URL);
 
-    cy.findByText('Back to Engagement Recency Overview').should(
-      'have.attr',
-      'href',
-      '/signals/engagement',
-    );
+    cy.verifyLink({
+      content: 'Back to Engagement Recency Overview',
+      href: '/signals/engagement',
+    });
   });
 
   it('renders tooltip content when hovering over the icon within the page heading', () => {
@@ -76,7 +75,7 @@ describe('The engagement details page', () => {
         .trigger('mouseover');
     });
 
-    cy.findByText(
+    cy.findAllByText(
       'The share over time of your email that has been sent to recipients who most recently opened messages or clicked links during several defined time periods.',
     ).should('be.visible');
   });

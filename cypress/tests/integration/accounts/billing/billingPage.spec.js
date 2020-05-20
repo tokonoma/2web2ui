@@ -99,14 +99,14 @@ describe('Billing Page', () => {
   it('renders with a link to the change plan page', () => {
     cy.visit(PAGE_URL);
 
-    cy.assertLink({ content: 'Change Plan', href: '/account/billing/plan' });
+    cy.verifyLink({ content: 'Change Plan', href: '/account/billing/plan' });
   });
 
   it('renders with the dedicated IPs section if the user is able to purchase IPs', () => {
     cy.visit(PAGE_URL);
 
     cy.findByText('Dedicated IPs').should('be.visible');
-    cy.assertLink({ content: 'Manage Your IPs', href: '/account/ip-pools' });
+    cy.verifyLink({ content: 'Manage Your IPs', href: '/account/ip-pools' });
   });
 
   it('does not render the dedicated IPs section if the user is unable to purchase IPs', () => {
@@ -134,7 +134,7 @@ describe('Billing Page', () => {
     cy.findByText('Enable automatic billing to self-manage your plan and add-ons.').should(
       'be.visible',
     );
-    cy.assertLink({
+    cy.verifyLink({
       content: 'Enable Automatic Billing',
       href: '/account/billing/enable-automatic',
     });
@@ -156,7 +156,7 @@ describe('Billing Page', () => {
     cy.findByText('Your account is currently suspended due to a billing problem.').should(
       'be.visible',
     );
-    cy.assertLink({ content: 'visit the billing page', href: '/account/billing' });
+    cy.verifyLink({ content: 'visit the billing page', href: '/account/billing' });
     cy.findAllByText('Update Payment Information').should('be.visible');
     cy.findByText('Plan Overview').should('not.be.visible');
     cy.findByLabelText('Credit Card Number').should('be.visible');

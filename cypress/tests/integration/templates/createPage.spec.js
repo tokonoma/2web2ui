@@ -29,7 +29,7 @@ describe('The create template page', () => {
   it('has a link back to the templates list page', () => {
     cy.visit(PAGE_URL);
 
-    cy.assertLink({
+    cy.verifyLink({
       content: 'View All Templates',
       href: '/templates',
     });
@@ -98,7 +98,7 @@ describe('The create template page', () => {
   it('has a "Cancel" button that links back to the templates list page', () => {
     cy.visit(PAGE_URL);
 
-    cy.assertLink({
+    cy.verifyLink({
       content: 'Cancel',
       href: '/templates',
     });

@@ -504,7 +504,7 @@ describe('Change Billing Plan Page', () => {
       .scrollIntoView()
       .should('be.visible');
 
-    cy.findAllByText('Close').click();
+    cy.findAllByText('Close').click({ force: true });
 
     cy.queryAllByText('Starter Plans').should('not.be.visible');
     cy.queryAllByText('Premier Plans').should('not.be.visible');

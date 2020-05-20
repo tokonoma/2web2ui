@@ -74,7 +74,8 @@ describe('Summary Report page', () => {
           .closest('a')
           .click({ force: true });
       });
-      cy.findByText('Campaign: sparkpost-test').should('be.visible');
+      cy.findByText('Campaign').should('be.visible');
+      cy.findByText('sparkpost-test').should('be.visible');
     });
   });
 

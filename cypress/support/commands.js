@@ -155,7 +155,7 @@ Cypress.Commands.add(
  * @param {string} href - The expected value of the `href` attribute present on the link
  *
  */
-Cypress.Commands.add('assertLink', ({ content, href }) => {
+Cypress.Commands.add('verifyLink', ({ content, href }) => {
   cy.findByText(content)
     .should('be.visible')
     .closest('a')

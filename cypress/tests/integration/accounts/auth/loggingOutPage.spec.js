@@ -15,7 +15,7 @@ describe('logging out', () => {
       status: 200,
     });
 
-    if (Cypress.env('CYPRESS_DEFAULT_TO_HIBANA')) {
+    if (Cypress.env('DEFAULT_TO_HIBANA') === true) {
       cy.findByText('UT').click();
       cy.get('[data-id="desktop-navigation-account-popover"]').within(() => {
         cy.findByText('Log Out').click();

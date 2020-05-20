@@ -37,20 +37,27 @@ describe('The health score by subaccount page', () => {
     cy.clock(STABLE_UNIX_DATE);
     cy.visit(PAGE_URL);
 
-    cy.get('[data-id="health-score-components"]').within(() => {
-      cy.findByText('Suppression Hits');
-      cy.findByText('Subscriber Quality').should('be.visible');
-      cy.findByText('Complaints').should('be.visible');
-      cy.findByText('Engaged Recipients').should('be.visible');
-      cy.findByText('Spam Trap Hits').should('be.visible');
-      cy.findByText('Block Bounces').should('be.visible');
-      cy.findByText('Unsubscribes').should('be.visible');
-      cy.findByText('Unengaged Recipients').should('be.visible');
-      cy.findByText('Hard Bounces').should('be.visible');
-      cy.findByText('Other Bounces').should('be.visible');
-      cy.findByText('Transient Failures').should('be.visible');
-      cy.findByText('Historical Engagement').should('be.visible');
-    });
+    cy.get('[data-id="health-score-components"]')
+      .scrollIntoView()
+      .within(() => {
+        cy.findByText('Suppression Hits').should('be.visible');
+        cy.findByText('Subscriber Quality').should('be.visible');
+        cy.findByText('Complaints').should('be.visible');
+        cy.findByText('Engaged Recipients').should('be.visible');
+        cy.findByText('Spam Trap Hits').should('be.visible');
+        cy.findByText('Block Bounces').should('be.visible');
+        cy.findByText('Unsubscribes').should('be.visible');
+        cy.findByText('Unengaged Recipients').should('be.visible');
+        cy.findByText('Hard Bounces').should('be.visible');
+        cy.findByText('Other Bounces').should('be.visible');
+        cy.findByText('Transient Failures').should('be.visible');
+
+        // The following is searching for 'Historical Engagement' - because of font differences
+        // in CI and locally, this is causing the word to wrap on to two distinct lines.
+        // Since this is SVG content, it isn't properly queried by Cypress as a result.
+        cy.findByText(/Historical/g).should('be.visible');
+        cy.findByText(/Engagement/g).should('be.visible');
+      });
   });
 
   it('renders Recharts chart within the "Health Score" panel', () => {

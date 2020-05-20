@@ -48,7 +48,7 @@ describe('Hibana theme toggling UI', () => {
 
     cy.visit(PAGE_URL);
 
-    if (Cypress.env('DEFAULT_TO_HIBANA') === 'true') {
+    if (Cypress.env('DEFAULT_TO_HIBANA') === true) {
       cy.findByText(enabledDescription).should('be.visible');
       cy.findByText(enabledButtonContent).click();
       cy.findByText(disabledDescription).should('be.visible');
@@ -61,7 +61,7 @@ describe('Hibana theme toggling UI', () => {
     }
 
     // TODO: Remove when OG theme is removed
-    if (Cypress.env('DEFAULT_TO_HIBANA') === 'false') {
+    if (Cypress.env('DEFAULT_TO_HIBANA') !== true) {
       cy.findByText(disabledDescription).should('be.visible');
       cy.findByText(disabledButtonContent).click();
       cy.findByText(enabledDescription).should('be.visible');

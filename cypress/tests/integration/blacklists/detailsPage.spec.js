@@ -100,9 +100,10 @@ describe('Blacklist Incident Details Page', () => {
       cy.findByText('View Engagement').click();
 
       cy.url().should('include', '/reports/summary?filters=Sending%20Domain%3Asparkpost.io');
-      //Within summary report, find the filter tag
+      // Within summary report, find the filter tag
       cy.get('[data-id="report-options"]').within(() => {
-        cy.findByText('Sending Domain: sparkpost.io').should('be.visible');
+        cy.findByText(/Sending Domain/g).should('be.visible');
+        cy.findByText(/sparkpost.io/g).should('be.visible');
       });
     });
   });

@@ -34,7 +34,7 @@ function assertAccountMenuIsNotVisible() {
   cy.get(accountDropdownListSelector).should('not.be.visible');
 }
 
-if (Cypress.env('DEFAULT_TO_HIBANA') === 'false') {
+if (Cypress.env('DEFAULT_TO_HIBANA') !== true) {
   describe('The navigation behavior', () => {
     beforeEach(() => {
       cy.viewport(500, 1000);

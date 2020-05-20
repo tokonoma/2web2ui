@@ -16,39 +16,39 @@ function assertAllSignalsAnalyticsLinks() {
   // Signals Analytics section and subitems
   cy.queryByText('Signals Analytics').click();
 
-  cy.assertLink({
+  cy.verifyLink({
     content: 'Summary',
     href: '/reports/summary',
   });
-  cy.assertLink({
+  cy.verifyLink({
     content: 'Bounce',
     href: '/reports/bounce',
   });
-  cy.assertLink({
+  cy.verifyLink({
     content: 'Rejections',
     href: '/reports/rejections',
   });
-  cy.assertLink({
+  cy.verifyLink({
     content: 'Accepted',
     href: '/reports/accepted',
   });
-  cy.assertLink({
+  cy.verifyLink({
     content: 'Delayed',
     href: '/reports/delayed',
   });
-  cy.assertLink({
+  cy.verifyLink({
     content: 'Health Score',
     href: '/signals/health-score',
   });
-  cy.assertLink({
+  cy.verifyLink({
     content: 'Spam Traps',
     href: '/signals/spam-traps',
   });
-  cy.assertLink({
+  cy.verifyLink({
     content: 'Engagement Recency',
     href: '/signals/engagement',
   });
-  cy.assertLink({
+  cy.verifyLink({
     content: 'Engagement',
     href: '/reports/engagement',
   });
@@ -68,7 +68,7 @@ function stubGrantsRequest({ role }) {
   cy.wait('@stubbedAccountRequest'); // ...the request is made twice! So wait again for the second
 }
 
-if (Cypress.env('DEFAULT_TO_HIBANA') === 'false') {
+if (Cypress.env('DEFAULT_TO_HIBANA') !== true) {
   describe('The navigation content as an admin', () => {
     beforeEach(() => {
       beforeSteps();
@@ -78,27 +78,27 @@ if (Cypress.env('DEFAULT_TO_HIBANA') === 'false') {
 
     it('renders with relevant links', () => {
       cy.get(navigationListSelector).within(() => {
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Dashboard',
           href: '/dashboard',
         });
         assertAllSignalsAnalyticsLinks();
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Events',
           href: '/reports/message-events',
         });
 
         cy.queryByText('Content').click();
 
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Templates',
           href: '/templates',
         });
-        cy.assertLink({
+        cy.verifyLink({
           content: 'A/B Testing',
           href: '/ab-testing',
         });
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Snippets',
           href: '/snippets',
         });
@@ -107,19 +107,19 @@ if (Cypress.env('DEFAULT_TO_HIBANA') === 'false') {
 
         cy.queryByText('Recipients').click();
 
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Recipient Validation',
           href: '/recipient-validation/list',
         });
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Recipient Lists',
           href: '/lists/recipient-lists',
         });
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Suppressions',
           href: '/lists/suppressions',
         });
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Alerts',
           href: '/alerts',
         });
@@ -130,31 +130,31 @@ if (Cypress.env('DEFAULT_TO_HIBANA') === 'false') {
           .scrollIntoView()
           .click();
 
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Webhooks',
           href: '/webhooks',
         });
-        cy.assertLink({
+        cy.verifyLink({
           content: 'IP Pools',
           href: '/account/ip-pools',
         });
-        cy.assertLink({
+        cy.verifyLink({
           content: 'API Keys',
           href: '/account/api-keys',
         });
-        cy.assertLink({
+        cy.verifyLink({
           content: 'SMTP Settings',
           href: '/account/smtp',
         });
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Sending Domains',
           href: '/account/sending-domains',
         });
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Tracking Domains',
           href: '/account/tracking-domains',
         });
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Subaccounts',
           href: '/account/subaccounts',
         });
@@ -165,35 +165,35 @@ if (Cypress.env('DEFAULT_TO_HIBANA') === 'false') {
       openAccountMenu();
 
       cy.get(accountDropdownListSelector).within(() => {
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Account Settings',
           href: '/account/settings',
         });
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Profile',
           href: '/account/profile',
         });
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Billing',
           href: '/account/billing',
         });
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Billing',
           href: '/account/billing',
         });
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Manage Users',
           href: '/account/users',
         });
 
         cy.queryByText('Get Help').should('be.visible');
 
-        cy.assertLink({
+        cy.verifyLink({
           content: 'API Docs',
           href: 'https://developers.sparkpost.com/api',
         });
 
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Log Out',
           href: '/logout',
         });
@@ -210,27 +210,27 @@ if (Cypress.env('DEFAULT_TO_HIBANA') === 'false') {
 
     it('renders with relevant links', () => {
       cy.get(navigationListSelector).within(() => {
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Dashboard',
           href: '/dashboard',
         });
         assertAllSignalsAnalyticsLinks();
       });
-      cy.assertLink({
+      cy.verifyLink({
         content: 'Events',
         href: '/reports/message-events',
       });
       cy.queryByText('Content').click();
 
-      cy.assertLink({
+      cy.verifyLink({
         content: 'Templates',
         href: '/templates',
       });
-      cy.assertLink({
+      cy.verifyLink({
         content: 'A/B Testing',
         href: '/ab-testing',
       });
-      cy.assertLink({
+      cy.verifyLink({
         content: 'Snippets',
         href: '/snippets',
       });
@@ -239,15 +239,15 @@ if (Cypress.env('DEFAULT_TO_HIBANA') === 'false') {
 
       cy.queryByText('Recipients').click();
 
-      cy.assertLink({
+      cy.verifyLink({
         content: 'Recipient Lists',
         href: '/lists/recipient-lists',
       });
-      cy.assertLink({
+      cy.verifyLink({
         content: 'Suppressions',
         href: '/lists/suppressions',
       });
-      cy.assertLink({
+      cy.verifyLink({
         content: 'Alerts',
         href: '/alerts',
       });
@@ -261,16 +261,16 @@ if (Cypress.env('DEFAULT_TO_HIBANA') === 'false') {
       cy.get(accountDropdownListSelector).within(() => {
         cy.queryByText('Account Settings').should('not.be.visible');
 
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Profile',
           href: '/account/profile',
         });
         cy.queryByText('Get Help').should('be.visible');
-        cy.assertLink({
+        cy.verifyLink({
           content: 'API Docs',
           href: 'https://developers.sparkpost.com/api',
         });
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Log Out',
           href: '/logout',
         });
@@ -287,28 +287,28 @@ if (Cypress.env('DEFAULT_TO_HIBANA') === 'false') {
 
     it('renders with relevant links', () => {
       cy.get(navigationListSelector).within(() => {
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Dashboard',
           href: '/dashboard',
         });
         assertAllSignalsAnalyticsLinks();
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Events',
           href: '/reports/message-events',
         });
         cy.queryByText('Content').click();
 
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Templates',
           href: '/templates',
         });
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Snippets',
           href: '/snippets',
         });
         cy.queryByText('Content').click();
         cy.queryByText('Recipients').should('not.be.visible');
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Alerts',
           href: '/alerts',
         });
@@ -319,15 +319,15 @@ if (Cypress.env('DEFAULT_TO_HIBANA') === 'false') {
       openAccountMenu();
 
       cy.get(accountDropdownListSelector).within(() => {
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Profile',
           href: '/account/profile',
         });
-        cy.assertLink({
+        cy.verifyLink({
           content: 'API Docs',
           href: 'https://developers.sparkpost.com/api',
         });
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Log Out',
           href: '/logout',
         });
@@ -348,49 +348,49 @@ if (Cypress.env('DEFAULT_TO_HIBANA') === 'false') {
 
     it('renders with relevant links', () => {
       cy.get(navigationListSelector).within(() => {
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Dashboard',
           href: '/dashboard',
         });
         cy.queryByText('Signals Analytics').click();
 
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Summary',
           href: '/reports/summary',
         });
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Bounce',
           href: '/reports/bounce',
         });
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Rejections',
           href: '/reports/rejections',
         });
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Accepted',
           href: '/reports/accepted',
         });
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Delayed',
           href: '/reports/delayed',
         });
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Health Score',
           href: '/signals/health-score',
         });
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Spam Traps',
           href: '/signals/spam-traps',
         });
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Engagement Recency',
           href: '/signals/engagement',
         });
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Engagement',
           href: '/reports/engagement',
         });
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Events',
           href: '/reports/message-events',
         });
@@ -399,11 +399,11 @@ if (Cypress.env('DEFAULT_TO_HIBANA') === 'false') {
 
         cy.queryByText('Content').click();
 
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Templates',
           href: '/templates',
         });
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Snippets',
           href: '/snippets',
         });
@@ -411,7 +411,7 @@ if (Cypress.env('DEFAULT_TO_HIBANA') === 'false') {
         cy.queryByText('Content').click();
 
         cy.queryByText('Recipients').should('not.be.visible');
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Alerts',
           href: '/alerts',
         });
@@ -422,15 +422,15 @@ if (Cypress.env('DEFAULT_TO_HIBANA') === 'false') {
       openAccountMenu();
 
       cy.get(accountDropdownListSelector).within(() => {
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Profile',
           href: '/account/profile',
         });
-        cy.assertLink({
+        cy.verifyLink({
           content: 'API Docs',
           href: 'https://developers.sparkpost.com/api',
         });
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Log Out',
           href: '/logout',
         });
@@ -451,22 +451,22 @@ if (Cypress.env('DEFAULT_TO_HIBANA') === 'false') {
 
     it('renders with relevant links', () => {
       cy.get(navigationListSelector).within(() => {
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Dashboard',
           href: '/dashboard',
         });
         assertAllSignalsAnalyticsLinks();
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Events',
           href: '/reports/message-events',
         });
         cy.queryByText('Content').click();
 
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Templates',
           href: '/templates',
         });
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Snippets',
           href: '/snippets',
         });
@@ -482,10 +482,10 @@ if (Cypress.env('DEFAULT_TO_HIBANA') === 'false') {
       openAccountMenu();
 
       cy.get(accountDropdownListSelector).within(() => {
-        cy.assertLink({ content: 'Profile', href: '/account/profile' });
+        cy.verifyLink({ content: 'Profile', href: '/account/profile' });
         cy.queryByText('Get Help').should('be.visible');
-        cy.assertLink({ content: 'API Docs', href: 'https://developers.sparkpost.com/api' });
-        cy.assertLink({ content: 'Log Out', href: '/logout' });
+        cy.verifyLink({ content: 'API Docs', href: 'https://developers.sparkpost.com/api' });
+        cy.verifyLink({ content: 'Log Out', href: '/logout' });
       });
     });
   });
@@ -550,7 +550,7 @@ if (Cypress.env('DEFAULT_TO_HIBANA') === 'false') {
       cy.visit(PAGE_URL);
 
       cy.get('[data-id="top-nav"]').within(() => {
-        cy.assertLink({
+        cy.verifyLink({
           content: 'Upgrade Plan',
           href: '/account/billing/plan',
         });

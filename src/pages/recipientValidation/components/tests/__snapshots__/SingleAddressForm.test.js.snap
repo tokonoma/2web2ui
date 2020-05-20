@@ -18,9 +18,8 @@ exports[`SingleAddressForm renders correctly 1`] = `
     <ScreenReaderOnly>
       <Label
         id="email-address-field"
-      >
-        Email Address
-      </Label>
+        label="Email Address"
+      />
     </ScreenReaderOnly>
     <Field
       component={[Function]}
