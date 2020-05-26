@@ -162,7 +162,7 @@
     "eslint-plugin-cypress": "^2.10.3",
     "eslint-plugin-flowtype": "^3.13.0",
     "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-jest": "^23.0.4",
+    "eslint-plugin-jest": "^23.13.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-local": "^1.0.0",
     "eslint-plugin-lodash": "^6.0.0",
