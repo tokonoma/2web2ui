@@ -1,0 +1,13 @@
+{
+  "success": false,
+  "reasons":  [
+  {
+    "code": 53100320,
+    "message": "'termType' value should be one of: TERMED, EVERGREEN"
+  },
+  {
+    "code": 53100321,
+    "message": "some other zuora error"
+  }
+]
+}
