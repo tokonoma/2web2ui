@@ -9,27 +9,31 @@ export default requestHelperFactory({
   request: zuoraAxios,
   onSuccess: ({ types, response, dispatch, meta }) => {
     if (!response.data.success) {
-      const message = _.get(
-        response,
-        'data.reasons[0].message',
-        'An error occurred while contacting the billing service',
-      );
-      const sanitizedMessage = stripTags(message); // some messages include html tags
-      const error = new Error(sanitizedMessage);
-      error.name = 'ZuoraApiError';
-      error.response = response;
+      try {
+        const message = _.get(
+          response,
+          'data.reasons[0].message',
+          'An error occurred while contacting the billing service',
+        );
+        const sanitizedMessage = stripTags(message); // some messages include html tags
+        const error = new Error(sanitizedMessage);
+        error.name = 'ZuoraApiError';
+        error.response = response;
 
-      dispatch({
-        type: types.FAIL,
-        payload: { error, message: sanitizedMessage, response },
-        meta,
-      });
+        dispatch({
+          type: types.FAIL,
+          payload: { error, message: sanitizedMessage, response },
+          meta,
+        });
 
-      // auto alert all errors
-      dispatch(showAlert({ type: 'error', message: sanitizedMessage }));
+        // auto alert all errors
+        dispatch(showAlert({ type: 'error', message: sanitizedMessage }));
 
-      // TODO: 'return' err once we unchain all actions
-      ErrorTracker.addRequestContextAndThrow(types.FAIL, response, error);
+        // TODO: 'return' err once we unchain all actions
+        ErrorTracker.addRequestContextAndThrow(types.FAIL, response, error);
+      } catch (err) {
+        ErrorTracker.report('zuora-request-error', err);
+      }
     }
 
     dispatch({
@@ -39,5 +43,10 @@ export default requestHelperFactory({
     });
 
     return meta.onSuccess ? dispatch(meta.onSuccess({ results: response })) : response;
+  },
+  onFail: ({ types, err, dispatch }) => {
+    dispatch(showAlert({ type: 'error', message: 'An error occurred while contacting zuora' }));
+    //report 4xx and 5xx errors to sentry
+    ErrorTracker.addRequestContextAndThrow(types.FAIL, err.response, err);
   },
 });
