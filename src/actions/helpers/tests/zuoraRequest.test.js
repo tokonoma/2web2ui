@@ -18,11 +18,11 @@ describe('Helper: Zuora API Request', () => {
   beforeEach(() => {
     mockStore = createMockStore({});
     action = { type: 'ZUORA_REQUEST', meta: {} };
-    expectedResponse = { data: { success: true } };
-    axiosMocks.zuora.mockImplementation(() => Promise.resolve(expectedResponse));
   });
 
   it('should make a successful call', async () => {
+    expectedResponse = { data: { success: true } };
+    axiosMocks.zuora.mockImplementation(() => Promise.resolve(expectedResponse));
     const results = await mockStore.dispatch(zuoraRequest(action));
     expect(results).toBe(expectedResponse);
     expect(mockStore.getActions()).toMatchSnapshot();
@@ -38,7 +38,7 @@ describe('Helper: Zuora API Request', () => {
       }),
     );
 
-    await expect(mockStore.dispatch(zuoraRequest(action))).rejects.toThrow();
+    await mockStore.dispatch(zuoraRequest(action));
     expect(mockStore.getActions()).toMatchSnapshot();
   });
 });

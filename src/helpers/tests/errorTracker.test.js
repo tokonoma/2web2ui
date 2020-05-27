@@ -395,6 +395,7 @@ describe('.addRequestContextAndThrow', () => {
         tags: {
           reduxActionType: 'MOCK_REDUX_ACTION',
           httpResponseStatus: 404,
+          zuoraErrorCode: '',
         },
       },
       expect.any(Function),
@@ -410,6 +411,7 @@ describe('.addRequestContextAndThrow', () => {
         tags: {
           reduxActionType: 'MOCK_REDUX_ACTION',
           httpResponseStatus: 0,
+          zuoraErrorCode: '',
         },
       },
       expect.any(Function),
