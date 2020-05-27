@@ -20,27 +20,27 @@ export default requestHelperFactory({
         error.name = 'ZuoraApiError';
         error.response = response;
 
+        dispatch({
+          type: types.FAIL,
+          payload: { error, message: sanitizedMessage, response },
+          meta,
+        });
+
         // auto alert all errors
         dispatch(showAlert({ type: 'error', message: sanitizedMessage }));
 
         // TODO: 'return' err once we unchain all actions
         ErrorTracker.addRequestContextAndThrow(types.FAIL, response, error);
-
-        return dispatch({
-          type: types.FAIL,
-          payload: { error, message: sanitizedMessage, response },
-          meta,
-        });
       } catch (err) {
         ErrorTracker.report('zuora-request-error', err);
       }
+    } else {
+      dispatch({
+        type: types.SUCCESS,
+        payload: response,
+        meta,
+      });
     }
-
-    dispatch({
-      type: types.SUCCESS,
-      payload: response,
-      meta,
-    });
 
     return meta.onSuccess ? dispatch(meta.onSuccess({ results: response })) : response;
   },
