@@ -31,6 +31,20 @@ Array [
     },
     "type": "SHOW_GLOBAL_ALERT",
   },
+  Object {
+    "meta": Object {},
+    "payload": Object {
+      "data": Object {
+        "reasons": Array [
+          Object {
+            "message": "The credit card is bad and wrong",
+          },
+        ],
+        "success": false,
+      },
+    },
+    "type": "ZUORA_REQUEST_SUCCESS",
+  },
 ]
 `;
 
