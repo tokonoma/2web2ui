@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
 import { relativeDateOptions } from 'src/helpers/date';
-import { Button, Checkbox, Panel, WindowEvent, Modal, Stack, Box } from 'src/components/matchbox';
+import { Button, Checkbox, Panel, WindowEvent, Modal, Stack } from 'src/components/matchbox';
 import { CopyField } from 'src/components';
 import { onEnter } from 'src/helpers/keyEvents';
 import _ from 'lodash';
@@ -79,14 +79,8 @@ export class ShareModal extends Component {
         label="Pin dates for this link"
         checked={pinned}
         onChange={this.handlePin}
-        helpText={
-          <span>
-            <Box marginTop="100" marginLeft="500">
-              Pins this report's relative time range to its calculated dates (this is usually what
-              you want when sharing a report).
-            </Box>
-          </span>
-        }
+        helpText="Pins this report's relative time range to its calculated dates (this is usually what
+          you want when sharing a report)."
       />
     );
   }
