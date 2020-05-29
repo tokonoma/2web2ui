@@ -302,19 +302,21 @@ describe('Billing Page', () => {
       });
 
       it('closes the modal when clicking "Cancel"', () => {
-        cy.findByLabelText('Credit Card Number').should('be.visible');
-
-        cy.findByText('Cancel').click();
-
-        cy.queryByLabelText('Credit Card Number').should('not.be.visible');
+        cy.withinModal(() => {
+          cy.findAllByText('Update Payment Information').should('be.visible');
+          cy.findByText('Cancel').click({ force: true });
+          cy.queryAllByText('Update Payment Information').should('not.be.visible');
+        });
       });
 
       it('renders "Required" validation errors when skipping the "Credit Card Number", "Cardholder Name", "Expiration Date", "Security Code", and "Zip Code" fields', () => {
-        cy.findAllByText(/Update Payment Information */i)
-          .last()
-          .click();
+        cy.withinModal(() => {
+          cy.findAllByText('Update Payment Information')
+            .last()
+            .click({ force: true });
 
-        cy.findAllByText('Required').should('have.length', 5);
+          cy.findAllByText('Required').should('have.length', 5);
+        });
       });
 
       it('renders a success message when successfully updating payment information', () => {
