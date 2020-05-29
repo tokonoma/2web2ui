@@ -101,17 +101,16 @@ const EditSection = () => {
   return (
     <Panel className={styles.EditSection} mb="0">
       <div className={styles.TabsWrapper}>
-        {/* eslint-disable no-unused-vars */}
         <Tabs
+          disableResponsiveBehavior={true}
           fitted={tabsFitted}
           color="blue"
           selected={currentTabIndex}
           onSelect={nextTabIndex => {
             setTab(nextTabIndex);
           }}
-          tabs={tabs.map(({ render, ...tab }) => tab)}
+          tabs={tabs.map(({ _render, ...tab }) => tab)}
         />
-        {/* eslint-enable no-unused-vars */}
 
         {hasReadOnlyTag && (
           <div className={styles.TagWrapper}>
