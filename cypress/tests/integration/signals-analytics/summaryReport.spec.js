@@ -1,3 +1,5 @@
+const PAGE_URL = '/reports/summary';
+
 describe('Summary Report page', () => {
   beforeEach(() => {
     cy.stubAuth();
@@ -30,22 +32,28 @@ describe('Summary Report page', () => {
       fixture: 'metrics/deliverability/campaign/200.get.json',
       requestAlias: 'getDataCampaign',
     });
+
+    cy.stubRequest({
+      url: '/api/v1/subaccounts',
+      fixture: 'subaccounts/200.get.json',
+      requestAlias: 'getSubaccounts',
+    });
   });
 
-  it('Handles changing the date range correctly', () => {
+  it('handles changing the date range correctly', () => {
     const timestamp = 1580392800000; //01/30/2020 @ 2:00pm (UTC)
     const momentDateTime = Cypress.moment(timestamp);
     const now = momentDateTime.local().format('MMM Do YYYY h:mma');
     const getDatePickerText = startDateTime => `${startDateTime} – ${now}`; //Use this dash: '–' ¯\_(ツ)_/¯
     cy.clock(timestamp);
-    cy.visit('/reports/summary');
+    cy.visit(PAGE_URL);
 
     const dayAgo = momentDateTime
       .subtract(1, 'day')
       .local()
       .format('MMM Do YYYY h:mma');
     cy.url().should('not.include', 'range=7days');
-    cy.get('[data-id="report-options"]').within(() => {
+    cy.findByDataId('report-options').within(() => {
       cy.findByLabelText('Narrow Date Range').should('have.value', getDatePickerText(dayAgo));
       cy.get('select').select('7days');
     });
@@ -56,19 +64,19 @@ describe('Summary Report page', () => {
       .startOf('day')
       .format('MMM Do YYYY h:mma');
     cy.url().should('include', 'range=7days');
-    cy.get('[data-id="report-options"]').within(() => {
+    cy.findByDataId('report-options').within(() => {
       cy.findByLabelText('Narrow Date Range').should('have.value', getDatePickerText(sevenDaysAgo));
     });
   });
 
-  it('Handles applying filters correctly', () => {
-    cy.visit('/reports/summary');
-    cy.get('[data-id="report-options"]').within(() => {
+  it('handles applying filters correctly', () => {
+    cy.visit(PAGE_URL);
+    cy.findByDataId('report-options').within(() => {
       cy.findAllByLabelText('Reports Filter Typeahead')
         .first()
         .type('sparkpost');
       cy.wait('@getMetricsFilterOptions');
-      cy.get('[data-id="report-filters-dropdown"]').within(() => {
+      cy.findByDataId('report-filters-dropdown').within(() => {
         cy.findByText('sparkpost-test')
           .should('be.visible')
           .closest('a')
@@ -79,28 +87,44 @@ describe('Summary Report page', () => {
     });
   });
 
-  it('Handles changing metrics correctly', () => {
-    cy.visit('/reports/summary');
-    cy.get('[data-id="summary-chart"]').within(() => {
-      cy.findByText('Accepted').should('be.visible');
-      cy.findByText('Select Metrics').click();
+  it('handles changing metrics correctly', () => {
+    cy.visit(PAGE_URL);
+
+    // Selected filters render in different spots based on Hibana vs. OG
+    if (Cypress.env('DEFAULT_TO_HIBANA') === true) {
+      cy.findByDataId('report-options').within(() => {
+        cy.findByText('Accepted').should('be.visible');
+      });
+    } else {
+      cy.findByDataId('summary-chart').within(() => {
+        cy.findByText('Accepted').should('be.visible');
+      });
+    }
+
+    cy.findByText('Select Metrics').click();
+
+    cy.withinModal(() => {
+      cy.findByText('Select up to 5 metrics').should('be.visible');
+      cy.findByLabelText('Accepted').uncheck({ force: true });
+      cy.findByLabelText('Injected').check({ force: true });
+      cy.findByText('Apply Metrics').click();
     });
 
-    cy.findByText('Select up to 5 metrics').should('be.visible');
-    cy.findByLabelText('Accepted').uncheck({ force: true });
-    //Not sure why, but this duplicate command is necessary to uncheck properly
-    cy.findByLabelText('Accepted').uncheck({ force: true });
-    cy.findByLabelText('Injected').check({ force: true });
-    cy.findByText('Apply Metrics').click();
-
-    cy.get('[data-id="summary-chart"]').within(() => {
-      cy.findByText('Accepted').should('not.be.visible');
-      cy.findByText('Injected').should('be.visible');
-    });
+    if (Cypress.env('DEFAULT_TO_HIBANA') === true) {
+      cy.findByDataId('report-options').within(() => {
+        cy.queryByText('Accepted').should('not.be.visible');
+        cy.findByText('Injected').should('be.visible');
+      });
+    } else {
+      cy.findByDataId('summary-chart').within(() => {
+        cy.queryByText('Accepted').should('not.be.visible');
+        cy.findByText('Injected').should('be.visible');
+      });
+    }
   });
 
   it('Opens share modal correctly', () => {
-    cy.visit('/reports/summary');
+    cy.visit(PAGE_URL);
     cy.findByText('Share').click();
     cy.findByText('Share this report').should('be.visible');
     cy.url().then(url => {
@@ -110,12 +134,4 @@ describe('Summary Report page', () => {
       cy.get('[name="copy-field"]').should('have.value', editedUrl);
     });
   });
-
-  //Breaks in Travis CI
-  /*  it('Handles changing group by metric in the table', () => {
-      cy.visit('/reports/summary');
-      cy.get('[data-id="summary-table"]').within(() => cy.get('select').select('campaign'));
-      cy.wait('@getDataCampaign');
-      cy.findByText('Free Beer').should('be.visible');
-    });*/
 });

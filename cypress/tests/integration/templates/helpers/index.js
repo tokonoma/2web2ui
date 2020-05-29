@@ -36,7 +36,8 @@ export function verifyTemplateSettingsIsDisabled() {
 }
 
 export function typeInEditor(content) {
-  cy.get(EDITOR_SELECTOR)
+  return cy
+    .get(EDITOR_SELECTOR)
     .focus()
     .clear()
     .type(content, { parseSpecialCharSequences: false })

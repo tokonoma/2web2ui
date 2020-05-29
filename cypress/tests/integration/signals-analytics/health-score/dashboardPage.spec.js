@@ -222,6 +222,13 @@ describe('The health score dashboard page', () => {
     });
 
     it('renders each subaccount along with the current health score for that subaccount', () => {
+      function getTableRow(rowIndex) {
+        return cy
+          .get('tbody tr')
+          .eq(rowIndex)
+          .scrollIntoView();
+      }
+
       function verifyTableRow({
         rowIndex,
         subaccount,
@@ -230,26 +237,30 @@ describe('The health score dashboard page', () => {
         WoW,
         averageScore,
       }) {
-        cy.get('tbody tr')
-          .eq(rowIndex)
-          .scrollIntoView()
-          .within(() => {
-            cy.get('td')
-              .eq(0)
-              .within(() => cy.findByText(subaccount).should('be.visible'));
-            cy.get('td')
-              .eq(2)
-              .within(() => cy.findByText(currentScore.toString()).should('be.visible'));
-            cy.get('td')
-              .eq(3)
-              .within(() => cy.findByText(currentInjections.toString()).should('be.visible'));
-            cy.get('td')
-              .eq(4)
-              .within(() => cy.findByText(WoW).should('be.visible'));
-            cy.get('td')
-              .eq(5)
-              .within(() => cy.findByText(averageScore.toString()).should('be.visible'));
-          });
+        getTableRow(rowIndex)
+          .find('td')
+          .eq(0)
+          .within(() => cy.findByText(subaccount).should('be.visible'));
+
+        getTableRow(rowIndex)
+          .find('td')
+          .eq(2)
+          .within(() => cy.findByText(currentScore.toString()).should('be.visible'));
+
+        getTableRow(rowIndex)
+          .find('td')
+          .eq(3)
+          .within(() => cy.findByText(currentInjections.toString()).should('be.visible'));
+
+        getTableRow(rowIndex)
+          .find('td')
+          .eq(4)
+          .within(() => cy.findByText(WoW).should('be.visible'));
+
+        getTableRow(rowIndex)
+          .find('td')
+          .eq(5)
+          .within(() => cy.findByText(averageScore.toString()).should('be.visible'));
       }
       // Grabbing the data in each of the cells in the table row. The chart isn't interpretable
       // by Cypress, which indicates an a11y problem.

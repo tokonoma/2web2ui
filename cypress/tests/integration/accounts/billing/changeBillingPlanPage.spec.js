@@ -1,3 +1,5 @@
+const PAGE_URL = '/account/billing/plan';
+
 describe('Change Billing Plan Page', () => {
   beforeEach(() => {
     cy.stubAuth();
@@ -6,12 +8,6 @@ describe('Change Billing Plan Page', () => {
     cy.stubRequest({
       url: '/api/v1/account/countries?filter=billing',
       fixture: 'account/countries/200.get.billing-filter.json',
-    });
-
-    cy.stubRequest({
-      url: '/api/v1/billing',
-      fixture: 'billing/200.get.json',
-      fixtureAlias: 'billingGet',
     });
 
     cy.stubRequest({
@@ -24,12 +20,6 @@ describe('Change Billing Plan Page', () => {
       url: '/api/v1/billing/plans',
       fixture: 'billing/plans/200.get.json',
       fixtureAlias: 'billingPlansGet',
-    });
-
-    cy.stubRequest({
-      url: '/api/v1/metrics/deliverability**/**',
-      fixture: 'metrics/deliverability/200.get.json',
-      fixtureAlias: 'deliverabilityGet',
     });
   });
 
@@ -84,12 +74,11 @@ describe('Change Billing Plan Page', () => {
       fixture: 'billing/subscription/200.get.json',
       fixtureAlias: 'subscriptionGet',
     });
-    cy.visit('/account/billing/plan');
+    cy.visit(PAGE_URL);
     cy.get('[data-id=select-plan-free500-0419]').click();
   };
 
   it('Upgrades free account to starter 50K', () => {
-    // user is on the test plan
     cy.stubRequest({
       url: '/api/v1/account',
       fixture: 'account/200.get.test-plan.json',
@@ -102,29 +91,20 @@ describe('Change Billing Plan Page', () => {
     cy.stubRequest({
       url: '/api/v1/billing/subscription',
       fixture: 'billing/subscription/200.get.test-plan.json',
+      requestAlias: 'subscriptionGet',
     });
 
     // they visit the billing page and change to the starter 50k plan
-    cy.visit('/account/billing/plan');
+    cy.visit(PAGE_URL);
     cy.get('[data-id=select-plan-50K-starter-0519]').click();
 
-    cy.findByText('Your features have been updated').should('be.visible');
+    cy.findByText(/Your features have been updated/g)
+      .scrollIntoView()
+      .should('be.visible');
 
     cy.findByText('Change Plan').click();
     cy.findAllByText('Required').should('have.length', 5);
-
-    // dont' use the fill out function because we are testing form validation in between interactions
-    cy.findByLabelText('Credit Card Number').type('4000 0000 0000 0000');
-    cy.findAllByText('Required').should('have.length', 4);
-    cy.findByLabelText('Cardholder Name').type('Test Account');
-    cy.findAllByText('Required').should('have.length', 3);
-    cy.findByLabelText('Expiration Date').type('03/33');
-    cy.findAllByText('Required').should('have.length', 2);
-    cy.findByLabelText('Security Code').type('123');
-    cy.findAllByText('Required').should('have.length', 1);
-    cy.findByLabelText('Country').select('United States');
-    cy.findByLabelText('State').select('Maryland');
-    cy.findByLabelText('Zip Code').type('12345');
+    fillOutCreditCardForm();
     cy.queryAllByText('Required').should('not.be.visible');
 
     mockCommonHttpCalls();
@@ -146,11 +126,6 @@ describe('Change Billing Plan Page', () => {
   });
 
   it('Upgrades free account to starter 100K', () => {
-    // user is on the test plan
-    cy.stubRequest({
-      url: '/api/v1/account',
-      fixture: 'account/200.get.test-plan.json',
-    });
     cy.stubRequest({
       url: '/api/v1/billing',
       fixture: 'billing/200.get.has-no-credit-card.json',
@@ -161,7 +136,7 @@ describe('Change Billing Plan Page', () => {
       fixture: 'billing/subscription/200.get.test-plan.json',
     });
 
-    cy.visit('/account/billing/plan');
+    cy.visit(PAGE_URL);
 
     cy.findAllByText('100,000').should('be.visible');
     cy.findAllByText('emails/month').should('be.visible');
@@ -222,11 +197,6 @@ describe('Change Billing Plan Page', () => {
   });
   it('Upgrades free account to starter 50K with query parameter', () => {
     cy.stubRequest({
-      url: '/api/v1/account',
-      fixture: 'account/200.get.test-plan.json',
-    });
-
-    cy.stubRequest({
       url: '/api/v1/billing',
       fixture: 'billing/200.get.has-no-credit-card.json',
       fixtureAlias: 'billingGet',
@@ -235,7 +205,7 @@ describe('Change Billing Plan Page', () => {
       url: '/api/v1/billing/subscription',
       fixture: 'billing/subscription/200.get.test-plan.json',
     });
-    cy.visit('/account/billing/plan?code=50K-starter-0519');
+    cy.visit(`${PAGE_URL}?code=50K-starter-0519`);
 
     // auto select new plan
     cy.findByText('Your New Plan').should('be.visible');
@@ -268,7 +238,6 @@ describe('Change Billing Plan Page', () => {
       url: '/api/v1/account',
       fixture: 'account/200.get.test-plan.json',
     });
-
     cy.stubRequest({
       url: '/api/v1/billing',
       fixture: 'billing/200.get.has-no-credit-card.json',
@@ -278,7 +247,8 @@ describe('Change Billing Plan Page', () => {
       url: '/api/v1/billing/subscription',
       fixture: 'billing/subscription/200.get.test-plan.json',
     });
-    cy.visit('/account/billing/plan?code=100K-starter-0519');
+
+    cy.visit(`${PAGE_URL}?code=100K-starter-0519`);
 
     cy.findByText('Your New Plan').should('be.visible');
     cy.findByText('100,000').should('be.visible');
@@ -287,7 +257,9 @@ describe('Change Billing Plan Page', () => {
       url: '/api/v1/account',
       fixture: 'account/200.get.100k-premier-plan.json',
     });
+
     mockCommonHttpCalls();
+
     // Then server returns the new plan info that was saved...
     cy.stubRequest({
       url: '/api/v1/account',
@@ -324,7 +296,7 @@ describe('Change Billing Plan Page', () => {
       fixture: 'billing/subscription/200.get.test-plan.json',
     });
 
-    cy.visit('/account/billing/plan');
+    cy.visit(PAGE_URL);
 
     cy.findAllByText('100,000').should('be.visible');
     cy.findAllByText('emails/month').should('be.visible');
@@ -352,11 +324,6 @@ describe('Change Billing Plan Page', () => {
   });
 
   it('Upgrades free account to premier 250K', () => {
-    // user is on the test plan
-    cy.stubRequest({
-      url: '/api/v1/account',
-      fixture: 'account/200.get.test-plan.json',
-    });
     cy.stubRequest({
       url: '/api/v1/billing',
       fixture: 'billing/200.get.has-no-credit-card.json',
@@ -367,7 +334,7 @@ describe('Change Billing Plan Page', () => {
       fixture: 'billing/subscription/200.get.test-plan.json',
     });
 
-    cy.visit('/account/billing/plan');
+    cy.visit(PAGE_URL);
 
     cy.findAllByText('250,000').should('be.visible');
     cy.findAllByText('emails/month').should('be.visible');
@@ -395,11 +362,6 @@ describe('Change Billing Plan Page', () => {
   });
 
   it('Upgrades free account to premier 500K', () => {
-    // user is on the test plan
-    cy.stubRequest({
-      url: '/api/v1/account',
-      fixture: 'account/200.get.test-plan.json',
-    });
     cy.stubRequest({
       url: '/api/v1/billing',
       fixture: 'billing/200.get.has-no-credit-card.json',
@@ -410,7 +372,7 @@ describe('Change Billing Plan Page', () => {
       fixture: 'billing/subscription/200.get.test-plan.json',
     });
 
-    cy.visit('/account/billing/plan');
+    cy.visit(PAGE_URL);
 
     cy.findAllByText('500,000').should('be.visible');
     cy.findAllByText('emails/month').should('be.visible');
@@ -479,11 +441,6 @@ describe('Change Billing Plan Page', () => {
   });
 
   it('Upgrades free account to premier 1M', () => {
-    // user is on the test plan
-    cy.stubRequest({
-      url: '/api/v1/account',
-      fixture: 'account/200.get.test-plan.json',
-    });
     cy.stubRequest({
       url: '/api/v1/billing',
       fixture: 'billing/200.get.has-no-credit-card.json',
@@ -494,7 +451,7 @@ describe('Change Billing Plan Page', () => {
       fixture: 'billing/subscription/200.get.test-plan.json',
     });
 
-    cy.visit('/account/billing/plan');
+    cy.visit(PAGE_URL);
 
     cy.get('[data-id=select-plan-1M-premier-0519]').click();
 
@@ -525,10 +482,6 @@ describe('Change Billing Plan Page', () => {
 
   it('shows the compare features modal', () => {
     cy.stubRequest({
-      url: '/api/v1/account',
-      fixture: 'account/200.get.test-plan.json',
-    });
-    cy.stubRequest({
       url: '/api/v1/billing',
       fixture: 'billing/200.get.has-no-credit-card.json',
       fixtureAlias: 'billingGet',
@@ -537,7 +490,7 @@ describe('Change Billing Plan Page', () => {
       url: '/api/v1/billing/subscription',
       fixture: 'billing/subscription/200.get.test-plan.json',
     });
-    cy.visit('/account/billing/plan');
+    cy.visit(PAGE_URL);
 
     cy.stubRequest({
       method: 'POST',
@@ -576,11 +529,12 @@ describe('Change Billing Plan Page', () => {
       .scrollIntoView()
       .should('be.visible');
 
-    cy.findAllByText('Close').click({ force: true });
+    cy.withinModal(() => {
+      cy.findByText('Close').click({ force: true });
+    });
 
     cy.queryAllByText('Starter Plans').should('not.be.visible');
     cy.queryAllByText('Premier Plans').should('not.be.visible');
-    cy.queryAllByText('Close').should('not.be.visible');
   });
   it('Upgrades from a starter plan to premier plan, with subaccounts limit_override higher than premier subaccount limit', () => {
     // user is on the test plan
@@ -633,7 +587,6 @@ describe('Change Billing Plan Page', () => {
       url: '/api/v1/account',
       fixture: 'account/200.get.test-plan.json',
     });
-
     cy.stubRequest({
       url: '/api/v1/billing',
       fixture: 'billing/200.get.has-no-credit-card.json',
@@ -654,7 +607,8 @@ describe('Change Billing Plan Page', () => {
       fixture: 'blank.json',
       fixtureAlias: 'promoGet',
     });
-    cy.visit('/account/billing/plan');
+
+    cy.visit(PAGE_URL);
 
     cy.get('[data-id=select-plan-100K-premier-0519]').click();
 
@@ -678,11 +632,6 @@ describe('Change Billing Plan Page', () => {
   });
 
   it('Retains credit card information between plan changes', () => {
-    // user is on the test plan
-    cy.stubRequest({
-      url: '/api/v1/account',
-      fixture: 'account/200.get.test-plan.json',
-    });
     cy.stubRequest({
       url: '/api/v1/billing',
       fixture: 'billing/200.get.has-no-credit-card.json',
@@ -694,7 +643,7 @@ describe('Change Billing Plan Page', () => {
     });
 
     // they visit the billing page and change to the starter 50k plan
-    cy.visit('/account/billing/plan');
+    cy.visit(PAGE_URL);
     cy.get('[data-id=select-plan-50K-starter-0519]').click();
 
     cy.findByText('Your features have been updated').should('be.visible');
