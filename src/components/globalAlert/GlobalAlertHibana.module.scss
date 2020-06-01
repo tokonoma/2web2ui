@@ -1,12 +1,15 @@
 @import '~@sparkpost/design-tokens-hibana/tokens';
 
 .Wrapper {
-  top: spacing(500) * 3;
-  right: spacing(500);
+  bottom: spacing(400) * 5; // TODO: When OG theme is removed, remove multiplier - this is only to clear the theme banner
+  left: spacing(400);
+  top: unset;
+  right: unset;
   z-index: 9999; // Overlay all other overlays!
+  text-align: left;
 
   :global(.heroku-boomerang-loaded) & {
-    top: spacing(800) + spacing(500);
+    top: unset;
   }
 }
 

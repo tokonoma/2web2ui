@@ -1,0 +1,14 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.Animator {
+  transform: translate(-#{spacing(600)}, 0);
+}
+
+.entered {
+  transform: translate(0, 0);
+}
+
+.exiting,
+.exited {
+  transform: translate(-#{spacing(600)}, 0);
+}
