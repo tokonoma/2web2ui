@@ -56,7 +56,7 @@ export default class DisableTfaModal extends Component {
               </Grid>
             </Panel.Section>
             <Panel.Section>
-              <ButtonWrapper marginTop="0">
+              <ButtonWrapper>
                 <Button
                   type="submit"
                   variant="primary"

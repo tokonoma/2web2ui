@@ -11,7 +11,15 @@ import {
   isSameDate,
 } from 'src/helpers/date';
 import { roundBoundaries, getRollupPrecision, getPrecision } from 'src/helpers/metrics';
-import { Button, Error, Popover, Select, TextField, WindowEvent } from 'src/components/matchbox';
+import {
+  Box,
+  Button,
+  Error,
+  Popover,
+  Select,
+  TextField,
+  WindowEvent,
+} from 'src/components/matchbox';
 import ButtonWrapper from 'src/components/buttonWrapper';
 import DateSelector from 'src/components/dateSelector/DateSelector';
 import useHibanaOverride from 'src/hooks/useHibanaOverride';
@@ -309,20 +317,21 @@ export class DatePickerClassComponent extends Component {
           />
         )}
 
-        <ButtonWrapper>
-          <Button
-            variant="primary"
-            onClick={this.handleSubmit}
-            className={styles.Apply}
-            data-id="date-picker-custom-apply"
-          >
-            Apply
-          </Button>
+        <Box marginTop="500">
+          <ButtonWrapper>
+            <Button
+              variant="primary"
+              onClick={this.handleSubmit}
+              data-id="date-picker-custom-apply"
+            >
+              Apply
+            </Button>
 
-          <Button variant="secondary" onClick={this.cancelDatePicker}>
-            Cancel
-          </Button>
-        </ButtonWrapper>
+            <Button variant="secondary" onClick={this.cancelDatePicker}>
+              Cancel
+            </Button>
+          </ButtonWrapper>
+        </Box>
 
         {validationError && (
           <span className={styles.Error}>

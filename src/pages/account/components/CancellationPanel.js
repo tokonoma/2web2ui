@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { fetch as fetchAccount, renewAccount } from 'src/actions/account';
 import { Heading } from 'src/components/text';
-import { ButtonWrapper, ConfirmationModal } from 'src/components';
+import { ConfirmationModal } from 'src/components';
 import { Button, Panel, Stack } from 'src/components/matchbox';
 import { showAlert } from 'src/actions/globalAlert';
 import { GUIDE_IDS } from 'src/constants';
@@ -45,23 +45,25 @@ export function CancellationPanel(props) {
 
   if (pending_cancellation) {
     return (
-      <Panel sectioned title="Pending Account Cancellation">
-        <Stack>
-          <Heading as="h3" looksLike="h6">
-            Account is set to cancel {formatDate(pending_cancellation.effective_date)}
-          </Heading>
+      <Panel title="Pending Account Cancellation">
+        <Panel.Section>
+          <Stack>
+            <Heading as="h3" looksLike="h6">
+              Account is set to cancel {formatDate(pending_cancellation.effective_date)}
+            </Heading>
 
-          <p>
-            You can undo your cancellation at anytime <strong>before</strong> 8:00 UTC on your
-            cancel date. We hope you decide to stay!
-          </p>
-        </Stack>
+            <p>
+              You can undo your cancellation at anytime <strong>before</strong> 8:00 UTC on your
+              cancel date. We hope you decide to stay!
+            </p>
+          </Stack>
+        </Panel.Section>
 
-        <ButtonWrapper>
+        <Panel.Section>
           <Button variant="primary" disabled={cancelLoading} onClick={onRenewAccount}>
             Don't cancel my account!
           </Button>
-        </ButtonWrapper>
+        </Panel.Section>
       </Panel>
     );
   }

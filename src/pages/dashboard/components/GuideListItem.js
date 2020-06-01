@@ -29,7 +29,7 @@ export const HibanaGuideListItem = ({
     <Box ml="200">
       <Button
         onClick={onClick}
-        variant={itemCompleted ? 'monochrome' : 'secondary'}
+        variant={itemCompleted ? 'monochrome-secondary' : 'secondary'}
         data-id={key}
         to={to}
         external={external}

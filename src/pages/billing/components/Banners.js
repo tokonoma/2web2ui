@@ -1,7 +1,7 @@
 import React from 'react';
 import { format } from 'date-fns';
-import { PageLink } from 'src/components/links';
-import { Banner, Box, Stack } from 'src/components/matchbox';
+import { PageLink, ExternalLink } from 'src/components/links';
+import { Banner, Button, Box, Stack } from 'src/components/matchbox';
 import { LINKS } from 'src/constants';
 import { pluralString } from 'src/helpers/string';
 import * as conversions from 'src/helpers/conversionTracking';
@@ -22,7 +22,7 @@ export const PendingPlanBanner = ({ account, subscription }) => {
 
   if (pendingDowngrades.length > 0) {
     return (
-      <Banner status="warning" title="Pending Plan Change" my="300">
+      <Banner status="warning" title="Pending Plan Change" marginBottom="500">
         <Box maxWidth="1200">
           <p>
             You're scheduled for a pending downgrade and can't update your plan until that switch
@@ -34,7 +34,7 @@ export const PendingPlanBanner = ({ account, subscription }) => {
   }
 
   return (
-    <Banner status="warning" title="Pending Plan Change" my="300">
+    <Banner status="warning" title="Pending Plan Change" marginBottom="500">
       <Box maxWidth="1200">
         <p>
           You're scheduled to switch to the {account.pending_subscription.name} plan on{' '}
@@ -48,16 +48,7 @@ export const PendingPlanBanner = ({ account, subscription }) => {
 
 export const PremiumBanner = () => {
   return (
-    <Banner
-      title="Premium Addon Plan"
-      action={{
-        content: 'Contact Us',
-        to: LINKS.PREMIUM_SUPPORT,
-        external: true,
-        onClick: () => conversions.trackAddonRequest(ANALYTICS_PREMIUM_SUPPORT),
-      }}
-      my="300"
-    >
+    <Banner title="Premium Addon Plan" marginBottom="500">
       <Stack>
         <p>
           Full-service account advocacy with a dedicated Customer Success Manager. Including
@@ -73,6 +64,16 @@ export const PremiumBanner = () => {
           <li>Deliverability data analysis and guidance with powerful integrated tools</li>
         </ul>
       </Stack>
+
+      <Banner.Actions>
+        <ExternalLink
+          as={Button}
+          to={LINKS.PREMIUM_SUPPORT}
+          onClick={() => conversions.trackAddonRequest(ANALYTICS_PREMIUM_SUPPORT)}
+        >
+          Contact Us
+        </ExternalLink>
+      </Banner.Actions>
     </Banner>
   );
 };
@@ -82,16 +83,7 @@ export const PremiumBanner = () => {
  */
 export const EnterpriseBanner = () => {
   return (
-    <Banner
-      title="Enterprise"
-      action={{
-        content: 'Contact Us',
-        to: LINKS.ENTERPRISE_SUPPORT,
-        external: true,
-        onClick: () => conversions.trackAddonRequest(ANALYTICS_ENTERPRISE_SUPPORT),
-      }}
-      my="300"
-    >
+    <Banner title="Enterprise" marginBottom="500">
       <Stack>
         <p>
           Enterprise-grade financial guarantees with 99.9% uptime{' '}
@@ -105,6 +97,16 @@ export const EnterpriseBanner = () => {
           <li>Support of iOS Universal Links and Android App Links</li>
         </ul>
       </Stack>
+
+      <Banner.Actions>
+        <ExternalLink
+          as={Button}
+          to={LINKS.ENTERPRISE_SUPPORT}
+          onClick={() => conversions.trackAddonRequest(ANALYTICS_ENTERPRISE_SUPPORT)}
+        >
+          Contact Us
+        </ExternalLink>
+      </Banner.Actions>
     </Banner>
   );
 };
@@ -131,7 +133,7 @@ export const FreePlanWarningBanner = ({
   const daysLeft = Math.floor(ageRangeEnd - accountAgeInDays) + 1;
 
   return (
-    <Banner status="warning" title="Free Plan Downgrade" my="300">
+    <Banner status="warning" title="Free Plan Downgrade" marginBottom="500">
       <p>
         Your plan will automatically downgrade to 500 emails/month in{' '}
         {pluralString(daysLeft, 'day')}.{' '}

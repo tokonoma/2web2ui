@@ -1,40 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Component: Tracking Domains Create Form should render correctly when submitting is false 1`] = `
-<Panel
-  sectioned={true}
->
+<Panel>
   <form
     onSubmit={[MockFunction]}
   >
-    <Stack>
-      <Box
-        maxWidth="860px"
-      >
-        <Field
-          component={[Function]}
-          disabled={false}
-          label="Domain Name"
-          name="domain"
-          validate={
-            Array [
-              [Function],
-            ]
-          }
-        />
-      </Box>
-      <Box
-        maxWidth="860px"
-      >
-        <Field
-          component={[Function]}
-          disabled={false}
-          helpText="Leaving this field blank will permanently assign the tracking domain to the master account."
-          name="subaccount"
-        />
-      </Box>
-    </Stack>
-    <ButtonWrapper>
+    <Panel.Section>
+      <Stack>
+        <Box
+          maxWidth="860px"
+        >
+          <Field
+            component={[Function]}
+            disabled={false}
+            label="Domain Name"
+            name="domain"
+            validate={
+              Array [
+                [Function],
+              ]
+            }
+          />
+        </Box>
+        <Box
+          maxWidth="860px"
+        >
+          <Field
+            component={[Function]}
+            disabled={false}
+            helpText="Leaving this field blank will permanently assign the tracking domain to the master account."
+            name="subaccount"
+          />
+        </Box>
+      </Stack>
+    </Panel.Section>
+    <Panel.Section>
       <Button
         disabled={false}
         submit={true}
@@ -42,46 +42,46 @@ exports[`Component: Tracking Domains Create Form should render correctly when su
       >
         Add Tracking Domain
       </Button>
-    </ButtonWrapper>
+    </Panel.Section>
   </form>
 </Panel>
 `;
 
 exports[`Component: Tracking Domains Create Form should render correctly when submitting is true 1`] = `
-<Panel
-  sectioned={true}
->
+<Panel>
   <form
     onSubmit={[MockFunction]}
   >
-    <Stack>
-      <Box
-        maxWidth="860px"
-      >
-        <Field
-          component={[Function]}
-          disabled={true}
-          label="Domain Name"
-          name="domain"
-          validate={
-            Array [
-              [Function],
-            ]
-          }
-        />
-      </Box>
-      <Box
-        maxWidth="860px"
-      >
-        <Field
-          component={[Function]}
-          disabled={true}
-          helpText="Leaving this field blank will permanently assign the tracking domain to the master account."
-          name="subaccount"
-        />
-      </Box>
-    </Stack>
-    <ButtonWrapper>
+    <Panel.Section>
+      <Stack>
+        <Box
+          maxWidth="860px"
+        >
+          <Field
+            component={[Function]}
+            disabled={true}
+            label="Domain Name"
+            name="domain"
+            validate={
+              Array [
+                [Function],
+              ]
+            }
+          />
+        </Box>
+        <Box
+          maxWidth="860px"
+        >
+          <Field
+            component={[Function]}
+            disabled={true}
+            helpText="Leaving this field blank will permanently assign the tracking domain to the master account."
+            name="subaccount"
+          />
+        </Box>
+      </Stack>
+    </Panel.Section>
+    <Panel.Section>
       <Button
         disabled={true}
         submit={true}
@@ -89,7 +89,7 @@ exports[`Component: Tracking Domains Create Form should render correctly when su
       >
         Submitting...
       </Button>
-    </ButtonWrapper>
+    </Panel.Section>
   </form>
 </Panel>
 `;

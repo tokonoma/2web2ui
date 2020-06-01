@@ -1,5 +1,5 @@
 import React from 'react';
-import { Banner } from 'src/components/matchbox';
+import { Banner, Box, Button } from 'src/components/matchbox';
 import { PageLink, SupportTicketLink } from 'src/components/links';
 
 /**
@@ -40,23 +40,25 @@ const ManuallyBilledOrAwsBanner = ({
     );
   }
 
-  const action = onZuoraPlan
-    ? {
-        Component: PageLink,
-        content: 'Enable Automatic Billing',
-        to: '/account/billing/enable-automatic',
-      }
-    : null;
   return (
-    <>
-      <Banner status="info" title={title} action={action}>
-        <p>
-          To make changes to your plan or billing information, please{' '}
-          {<SupportTicketLink issueId="general_issue">submit a support ticket</SupportTicketLink>}.
-        </p>
-        {onZuoraPlan && <p>Enable automatic billing to self-manage your plan and add-ons.</p>}
-      </Banner>
-    </>
+    <Banner status="info" title={title}>
+      <p>
+        To make changes to your plan or billing information, please{' '}
+        {<SupportTicketLink issueId="general_issue">submit a support ticket</SupportTicketLink>}.
+      </p>
+
+      {onZuoraPlan && (
+        <Box marginTop="400">
+          <p>Enable automatic billing to self-manage your plan and add-ons.</p>
+
+          <Banner.Actions>
+            <PageLink as={Button} to="/account/billing/enable-automatic">
+              Enable Automatic Billing
+            </PageLink>
+          </Banner.Actions>
+        </Box>
+      )}
+    </Banner>
   );
 };
 

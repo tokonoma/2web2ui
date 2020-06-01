@@ -59,70 +59,6 @@ exports[`Support Form Component Form should render successfully created ticket m
 </div>
 `;
 
-exports[`Support Form Component Form should render support form 1`] = `
-<form>
-  <Panel.Section>
-    <Stack>
-      <Field
-        component={[Function]}
-        errorInLabel={true}
-        label="I need help with..."
-        name="issueId"
-        options={
-          Array [
-            Object {
-              "disabled": true,
-              "label": "Select an option",
-              "value": "",
-            },
-            Object {
-              "label": "I need help!",
-              "value": "technical_issues",
-            },
-          ]
-        }
-        validate={[Function]}
-      />
-      <Field
-        component={[Function]}
-        errorInLabel={true}
-        label="Tell us more about your issue"
-        multiline={true}
-        name="message"
-        resize="none"
-        rows={10}
-        validate={[Function]}
-      />
-      <Field
-        component={[Function]}
-        label="Attach a file"
-        name="attachment"
-        type="file"
-        validate={[Function]}
-      />
-    </Stack>
-  </Panel.Section>
-  <Panel.Section>
-    <ButtonWrapper
-      marginTop="0"
-    >
-      <Button
-        submit={true}
-        variant="primary"
-      >
-        Submit Ticket
-      </Button>
-      <Button
-        onClick={[Function]}
-        variant="secondary"
-      >
-        Cancel
-      </Button>
-    </ButtonWrapper>
-  </Panel.Section>
-</form>
-`;
-
 exports[`Support Form Component Form should render unauthorized message 1`] = `<NoIssues />`;
 
 exports[`Support Form Component Form should render with selected issue message label 1`] = `
@@ -169,9 +105,7 @@ exports[`Support Form Component Form should render with selected issue message l
     </Stack>
   </Panel.Section>
   <Panel.Section>
-    <ButtonWrapper
-      marginTop="0"
-    >
+    <ButtonWrapper>
       <Button
         submit={true}
         variant="primary"

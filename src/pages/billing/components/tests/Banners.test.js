@@ -36,7 +36,8 @@ describe('Billing Banners: ', () => {
     });
 
     it('tracks addon request', () => {
-      wrapper.prop('action').onClick();
+      wrapper.find('ExternalLink').simulate('click');
+
       expect(conversions.trackAddonRequest).toHaveBeenCalledWith(
         constants.ANALYTICS_PREMIUM_SUPPORT,
       );
@@ -55,7 +56,8 @@ describe('Billing Banners: ', () => {
     });
 
     it('tracks addon request', () => {
-      wrapper.prop('action').onClick();
+      wrapper.find('ExternalLink').simulate('click');
+
       expect(conversions.trackAddonRequest).toHaveBeenCalledWith(
         constants.ANALYTICS_ENTERPRISE_SUPPORT,
       );

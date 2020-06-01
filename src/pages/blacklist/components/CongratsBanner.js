@@ -8,7 +8,7 @@ const CongratsBanner = ({
 }) => {
   return (
     <div data-id="congrats-banner">
-      <Banner title={title} status="success" onDismiss={onDismiss} mb="400">
+      <Banner title={title} status="success" onDismiss={onDismiss} marginBottom="500">
         {content}
       </Banner>
     </div>

@@ -2,15 +2,7 @@
 
 exports[`Billing Banners:  Enterprise banner renders 1`] = `
 <Banner
-  action={
-    Object {
-      "content": "Contact Us",
-      "external": true,
-      "onClick": [Function],
-      "to": "https://www.sparkpost.com/contact-enterprise",
-    }
-  }
-  my="300"
+  marginBottom="500"
   title="Enterprise"
 >
   <Stack>
@@ -39,12 +31,21 @@ exports[`Billing Banners:  Enterprise banner renders 1`] = `
       </li>
     </ul>
   </Stack>
+  <Banner.Actions>
+    <ExternalLink
+      as={[Function]}
+      onClick={[Function]}
+      to="https://www.sparkpost.com/contact-enterprise"
+    >
+      Contact Us
+    </ExternalLink>
+  </Banner.Actions>
 </Banner>
 `;
 
 exports[`Billing Banners:  Free Plan Downgrade warning banner renders 1`] = `
 <Banner
-  my="300"
+  marginBottom="500"
   status="warning"
   title="Free Plan Downgrade"
 >
@@ -66,7 +67,7 @@ exports[`Billing Banners:  Free Plan Downgrade warning banner renders 1`] = `
 
 exports[`Billing Banners:  Free Plan Downgrade warning banner renders correct text on last day of plan 1`] = `
 <Banner
-  my="300"
+  marginBottom="500"
   status="warning"
   title="Free Plan Downgrade"
 >
@@ -98,7 +99,7 @@ exports[`Billing Banners:  Free Plan Downgrade warning banner should not render 
 
 exports[`Billing Banners:  PendingPlanBanner should render with pending_subscription 1`] = `
 <Banner
-  my="300"
+  marginBottom="500"
   status="warning"
   title="Pending Plan Change"
 >
@@ -118,15 +119,7 @@ exports[`Billing Banners:  PendingPlanBanner should render with pending_subscrip
 
 exports[`Billing Banners:  Premium banner renders 1`] = `
 <Banner
-  action={
-    Object {
-      "content": "Contact Us",
-      "external": true,
-      "onClick": [Function],
-      "to": "https://www.sparkpost.com/contact-premium",
-    }
-  }
-  my="300"
+  marginBottom="500"
   title="Premium Addon Plan"
 >
   <Stack>
@@ -154,5 +147,14 @@ exports[`Billing Banners:  Premium banner renders 1`] = `
       </li>
     </ul>
   </Stack>
+  <Banner.Actions>
+    <ExternalLink
+      as={[Function]}
+      onClick={[Function]}
+      to="https://www.sparkpost.com/contact-premium"
+    >
+      Contact Us
+    </ExternalLink>
+  </Banner.Actions>
 </Banner>
 `;

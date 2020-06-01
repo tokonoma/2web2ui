@@ -1,7 +1,6 @@
 /* eslint-disable max-lines */
 import React, { useState } from 'react';
-import { Box, Button, Modal, Panel, Stack, TextField } from 'src/components/matchbox';
-import { ButtonWrapper } from 'src/components';
+import { Button, Modal, Panel, Stack, TextField } from 'src/components/matchbox';
 import { PanelLoading } from 'src/components/loading';
 import MultiEmailField, { useMultiEmailField } from 'src/components/multiEmailField';
 import useEditorContext from '../hooks/useEditorContext';
@@ -136,51 +135,51 @@ const SendTestEmailButton = () => {
         {isModalLoading && <PanelLoading />}
 
         {!isModalLoading && (
-          <Panel title="Send a Test" sectioned>
-            <Box mb="300">
-              <p>Verify your email renders as expected in the inbox by sending a quick test.</p>
-            </Box>
-
+          <Panel title="Send a Test">
             <form onSubmit={handleSubmit}>
-              <Stack>
-                <MultiEmailField
-                  id="multi-email-email-to"
-                  label="To"
-                  name="emailTo"
-                  onChange={e => handleMultiEmailChange(e)}
-                  onKeyDownAndBlur={e => handleMultiEmailKeyDownAndBlur(e)}
-                  onRemoveEmail={handleMultiEmailRemove}
-                  error={multiEmailError}
-                  value={multiEmailValue}
-                  emailList={multiEmailList}
-                />
+              <Panel.Section>
+                <Stack>
+                  <p>Verify your email renders as expected in the inbox by sending a quick test.</p>
 
-                <TextField
-                  id="text-field-test-email-from"
-                  label="From"
-                  name="emailFrom"
-                  type="email"
-                  disabled
-                  value={fromEmail}
-                  data-id="textfield-from-email"
-                />
+                  <MultiEmailField
+                    id="multi-email-email-to"
+                    label="To"
+                    name="emailTo"
+                    onChange={e => handleMultiEmailChange(e)}
+                    onKeyDownAndBlur={e => handleMultiEmailKeyDownAndBlur(e)}
+                    onRemoveEmail={handleMultiEmailRemove}
+                    error={multiEmailError}
+                    value={multiEmailValue}
+                    emailList={multiEmailList}
+                  />
 
-                <TextField
-                  id="text-field-test-email-subject"
-                  label="Subject"
-                  name="emailSubject"
-                  type="email"
-                  disabled
-                  value={subject}
-                  data-id="textfield-from-email"
-                />
-              </Stack>
+                  <TextField
+                    id="text-field-test-email-from"
+                    label="From"
+                    name="emailFrom"
+                    type="email"
+                    disabled
+                    value={fromEmail}
+                    data-id="textfield-from-email"
+                  />
 
-              <ButtonWrapper>
+                  <TextField
+                    id="text-field-test-email-subject"
+                    label="Subject"
+                    name="emailSubject"
+                    type="email"
+                    disabled
+                    value={subject}
+                    data-id="textfield-from-email"
+                  />
+                </Stack>
+              </Panel.Section>
+
+              <Panel.Section>
                 <Button variant="primary" type="submit" data-id="button-send-email">
                   Send Email
                 </Button>
-              </ButtonWrapper>
+              </Panel.Section>
             </form>
           </Panel>
         )}

@@ -127,7 +127,7 @@ export class AddIps extends Component {
             </Stack>
           </Panel.Section>
           <Panel.Section>
-            <ButtonWrapper marginTop="0">
+            <ButtonWrapper>
               <Button type="submit" variant="primary" disabled={isDisabled}>
                 Add Dedicated IPs
               </Button>

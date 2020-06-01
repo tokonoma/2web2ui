@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import copy from 'copy-to-clipboard';
-import { Banner } from 'src/components/matchbox';
+import { Banner, Button } from 'src/components/matchbox';
 import { hideNewApiKey } from 'src/actions/api-keys';
 
 export class ApiKeySuccessBanner extends Component {
@@ -15,15 +15,16 @@ export class ApiKeySuccessBanner extends Component {
   render() {
     const { title, status = 'success', hideNewApiKey, newKey } = this.props;
 
-    const action = {
-      content: this.state.copied ? 'Copied to clipboard' : 'Copy',
-      onClick: this.onClickBanner,
-    };
-
     return (
-      <Banner action={action} title={title} status={status} onDismiss={hideNewApiKey} my="300">
+      <Banner title={title} status={status} onDismiss={hideNewApiKey} my="300">
         <p>Make sure to copy your API key now. You won't be able to see it again!</p>
         <strong>{newKey}</strong>
+
+        <Banner.Actions>
+          <Button onClick={this.onClickBanner}>
+            {this.state.copied ? 'Copied to clipboard' : 'Copy'}
+          </Button>
+        </Banner.Actions>
       </Banner>
     );
   }

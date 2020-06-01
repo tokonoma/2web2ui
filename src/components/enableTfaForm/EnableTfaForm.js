@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { VpnKey } from '@sparkpost/matchbox-icons';
 import { QRCode } from 'react-qr-svg';
 import ButtonWrapper from 'src/components/buttonWrapper';
-import { Button, Grid, Stack, TextField } from 'src/components/matchbox';
+import { Button, Grid, Panel, Stack, TextField } from 'src/components/matchbox';
 import { Loading } from 'src/components/loading/Loading';
 import { getTfaSecret, toggleTfa } from 'src/actions/tfa';
 import { showAlert } from 'src/actions/globalAlert';
@@ -78,67 +78,73 @@ export const RenderedForm = props => {
 
   return (
     <form onSubmit={e => e.preventDefault()}>
-      <Stack space="600">
-        <Grid>
-          <Grid.Column xs={12} md={7}>
-            <Stack>
-              <h6>Step 1: Configure your 2FA app</h6>
-              <p>
-                To enable 2FA, you'll need to have a 2FA auth app installed on your phone or tablet
-                (examples include Google Authenticator, Duo Mobile, and Authy).
-              </p>
-              <p>
-                Most apps will let you get set up by scanning our QR code from within the app. If
-                you prefer, you can type in the key manually.
-              </p>
-              <p>
-                <strong>
-                  <VpnKey /> <code>{secret}</code>
-                </strong>
-              </p>
-            </Stack>
-          </Grid.Column>
-          <Grid.Column xs={12} md={5} style={{ textAlign: 'center' }}>
-            <QRCode
-              bgColor="#FFFFFF"
-              fgColor="#000000"
-              level="Q"
-              style={{ width: 230 }}
-              value={qrData}
-            />
-          </Grid.Column>
-        </Grid>
-        <Grid>
-          <Grid.Column xs={12} md={7}>
-            <Stack>
-              <h6>Step 2: Enter a 2FA code</h6>
-              <p>
-                Generate a code from your newly-activated 2FA app to confirm that you're all set up.
-              </p>
-              <TextField
-                id="tfa-setup-passcode"
-                required={true}
-                data-lpignore={true}
-                label="Passcode"
-                error={toggleError ? 'Problem verifying your code, please try again' : ''}
-                placeholder="Enter a generated 2FA passcode"
-                onChange={handleInputChange}
-                value={code}
+      <Panel.Section>
+        <Stack space="600">
+          <Grid>
+            <Grid.Column xs={12} md={7}>
+              <Stack>
+                <h6>Step 1: Configure your 2FA app</h6>
+                <p>
+                  To enable 2FA, you'll need to have a 2FA auth app installed on your phone or
+                  tablet (examples include Google Authenticator, Duo Mobile, and Authy).
+                </p>
+                <p>
+                  Most apps will let you get set up by scanning our QR code from within the app. If
+                  you prefer, you can type in the key manually.
+                </p>
+                <p>
+                  <strong>
+                    <VpnKey /> <code>{secret}</code>
+                  </strong>
+                </p>
+              </Stack>
+            </Grid.Column>
+            <Grid.Column xs={12} md={5} style={{ textAlign: 'center' }}>
+              <QRCode
+                bgColor="#FFFFFF"
+                fgColor="#000000"
+                level="Q"
+                style={{ width: 230 }}
+                value={qrData}
               />
-            </Stack>
-          </Grid.Column>
-        </Grid>
-      </Stack>
-      <ButtonWrapper>
-        <Button type="submit" variant="primary" disabled={togglePending} onClick={onEnable}>
-          {togglePending ? 'Verifying Code...' : 'Enable 2FA'}
-        </Button>
-        {onClose && (
-          <Button variant="secondary" disabled={togglePending} onClick={onClose}>
-            Cancel
+            </Grid.Column>
+          </Grid>
+          <Grid>
+            <Grid.Column xs={12} md={7}>
+              <Stack>
+                <h6>Step 2: Enter a 2FA code</h6>
+                <p>
+                  Generate a code from your newly-activated 2FA app to confirm that you're all set
+                  up.
+                </p>
+                <TextField
+                  id="tfa-setup-passcode"
+                  required={true}
+                  data-lpignore={true}
+                  label="Passcode"
+                  error={toggleError ? 'Problem verifying your code, please try again' : ''}
+                  placeholder="Enter a generated 2FA passcode"
+                  onChange={handleInputChange}
+                  value={code}
+                />
+              </Stack>
+            </Grid.Column>
+          </Grid>
+        </Stack>
+      </Panel.Section>
+
+      <Panel.Section>
+        <ButtonWrapper>
+          <Button type="submit" variant="primary" disabled={togglePending} onClick={onEnable}>
+            {togglePending ? 'Verifying Code...' : 'Enable 2FA'}
           </Button>
-        )}
-      </ButtonWrapper>
+          {onClose && (
+            <Button variant="secondary" disabled={togglePending} onClick={onClose}>
+              Cancel
+            </Button>
+          )}
+        </ButtonWrapper>
+      </Panel.Section>
     </form>
   );
 };

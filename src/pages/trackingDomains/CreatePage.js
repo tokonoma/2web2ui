@@ -27,15 +27,18 @@ export class CreatePage extends Component {
             Component: PageLink,
           }}
         />
-        <Banner status="info" title="Verification required" my="300">
+        <Banner status="info" title="Verification required" marginBottom="500">
           <p>
             Tracking domains need to be verified via DNS. You'll need to{' '}
             <strong>add a CNAME record</strong> with the value of <strong>{cname}</strong> to this
-            domain's DNS settings before it can be used or set as the default.{' '}
+            domain's DNS settings before it can be used or set as the default.
+          </p>
+
+          <Banner.Actions>
             <ExternalLink to={LINKS.DOMAIN_VERIFICATION}>
               Learn more about editing your DNS settings.
             </ExternalLink>
-          </p>
+          </Banner.Actions>
         </Banner>
         <CreateForm onSubmit={this.onSubmit} />
       </div>

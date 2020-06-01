@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Panel, Modal } from 'src/components/matchbox';
 import { connect } from 'react-redux';
 import { domainRegex } from 'src/helpers/regex';
-import { ButtonWrapper, PanelLoading } from 'src/components';
+import { PanelLoading } from 'src/components';
 import { deleteMonitor } from 'src/actions/blacklist';
 import { showAlert } from 'src/actions/globalAlert';
 
@@ -28,18 +28,20 @@ export const StopMonitoringModal = ({
     }
     return (
       <>
-        <p>
-          {`Removing this ${
-            monitorToDelete.match(domainRegex) ? 'domain' : 'IP'
-          } from your watchlist means you won't get notified of changes, but don't
+        <Panel.Section>
+          <p>
+            {`Removing this ${
+              monitorToDelete.match(domainRegex) ? 'domain' : 'IP'
+            } from your watchlist means you won't get notified of changes, but don't
           worry you can always add it again later.`}
-        </p>
+          </p>
+        </Panel.Section>
 
-        <ButtonWrapper>
+        <Panel.Section>
           <Button variant="primary" disabled={isPending} onClick={confirmAction}>
             Stop Monitoring
           </Button>
-        </ButtonWrapper>
+        </Panel.Section>
       </>
     );
   };
@@ -51,9 +53,7 @@ export const StopMonitoringModal = ({
       {isPending ? (
         <PanelLoading minHeight="175px" />
       ) : (
-        <Panel title={title} sectioned>
-          {renderContent()}
-        </Panel>
+        <Panel title={title}>{renderContent()}</Panel>
       )}
     </Modal>
   );

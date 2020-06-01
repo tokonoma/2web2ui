@@ -90,7 +90,7 @@ export class ProviderForm extends React.Component {
             </Stack>
           </Panel.Section>
           <Panel.Section>
-            <ButtonWrapper marginTop="0">
+            <ButtonWrapper>
               <Button variant="primary" disabled={submitting} type="submit">
                 Provision SSO
               </Button>

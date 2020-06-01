@@ -1,23 +1,14 @@
 import React from 'react';
-
-import styles from './ButtonWrapper.module.scss';
 import useHibanaToggle from 'src/hooks/useHibanaToggle';
-import { Box, Inline } from 'src/components/matchbox';
+import { Inline } from 'src/components/matchbox';
+import styles from './ButtonWrapper.module.scss';
 
-function OGButtonWrapper({ children, marginTop }) {
-  return (
-    <div className={styles.ButtonWrapper} style={{ marginTop }}>
-      {children}
-    </div>
-  );
+function OGButtonWrapper({ children }) {
+  return <div className={styles.ButtonWrapper}>{children}</div>;
 }
 
-function HibanaButtonWrapper({ children, marginTop }) {
-  return (
-    <Box marginTop={marginTop ? marginTop : '500'}>
-      <Inline>{children}</Inline>
-    </Box>
-  );
+function HibanaButtonWrapper({ children }) {
+  return <Inline>{children}</Inline>;
 }
 
 export default function ButtonWrapper(props) {

@@ -35,9 +35,7 @@ exports[`SendingDomainPage should render correctly 1`] = `
         </Stack>
       </Panel.Section>
       <Panel.Section>
-        <ButtonWrapper
-          marginTop="0"
-        >
+        <ButtonWrapper>
           <Button
             disabled={false}
             submit={true}
@@ -94,9 +92,7 @@ exports[`SendingDomainPage should render submitting state correctly 1`] = `
         </Stack>
       </Panel.Section>
       <Panel.Section>
-        <ButtonWrapper
-          marginTop="0"
-        >
+        <ButtonWrapper>
           <Button
             disabled={true}
             submit={true}

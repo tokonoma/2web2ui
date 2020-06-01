@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { listPools } from 'src/actions/ipPools';
-import { ButtonWrapper, Loading, TableCollection, ApiErrorBanner } from 'src/components';
+import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
 import { ExternalLink, PageLink } from 'src/components/links';
 import { Banner, Box, Button, Page } from 'src/components/matchbox';
 import { LINKS } from 'src/constants';
@@ -87,17 +87,22 @@ export class IpPoolsList extends Component {
 }
 
 export const IPWarmupReminderBanner = () => (
-  <Banner status="warning" title={'New dedicated IP addresses need to be warmed up'} my="300">
-    <Box mt="200" maxWidth="1200">
+  <Banner
+    status="warning"
+    title="New dedicated IP addresses need to be warmed up"
+    marginBottom="500"
+  >
+    <Box maxWidth="1200">
       <p>
         In order to establish a positive sending reputation, warm up new dedicated IP addresses by
         gradually sending more emails.
       </p>
-      <ButtonWrapper>
-        <ExternalLink as={Button} outline={true} to={LINKS.IP_WARM_UP}>
-          {'Read our IP Warm-up Overview'}
+
+      <Banner.Actions>
+        <ExternalLink as={Button} to={LINKS.IP_WARM_UP}>
+          Read our IP Warm-up Overview
         </ExternalLink>
-      </ButtonWrapper>
+      </Banner.Actions>
     </Box>
   </Banner>
 );

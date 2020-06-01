@@ -1,9 +1,8 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { Box, Button, Stack } from 'src/components/matchbox';
-import ButtonWrapper from 'src/components/buttonWrapper';
+import { Box, Button, Panel, Stack } from 'src/components/matchbox';
 import { showAlert } from 'src/actions/globalAlert';
 import { uploadSuppressions } from 'src/actions/suppressions';
 import { DownloadLink } from 'src/components/links';
@@ -28,46 +27,51 @@ export class UploadForm extends Component {
   render() {
     const { handleSubmit: reduxFormSubmit, submitting, pristine } = this.props;
     return (
-      <Fragment>
+      <>
         <form onSubmit={reduxFormSubmit(this.handleSubmit)}>
-          <Stack>
-            <Field
-              component={FileFieldWrapper}
-              disabled={submitting}
-              name="suppressionsFile"
-              label="CSV File of Suppressions"
-              fileType="csv"
-              helpText={
-                <span>
-                  You can download an{' '}
-                  <DownloadLink href={exampleSuppressionsListPath}>example file here</DownloadLink>{' '}
-                  to use when formatting your list of suppressions for upload.
-                </span>
-              }
-              required
-              validate={[
-                required,
-                fileExtension('csv'),
-                maxFileSize(config.maxUploadSizeBytes),
-                nonEmptyFile,
-              ]}
-            />
-            <Box maxWidth="1200">
+          <Panel.Section>
+            <Stack>
               <Field
-                component={SubaccountTypeaheadWrapper}
+                component={FileFieldWrapper}
                 disabled={submitting}
-                helpText="Leaving this field blank will add the suppressions to the master account."
-                name="subaccount"
+                name="suppressionsFile"
+                label="CSV File of Suppressions"
+                fileType="csv"
+                helpText={
+                  <span>
+                    You can download an{' '}
+                    <DownloadLink href={exampleSuppressionsListPath}>
+                      example file here
+                    </DownloadLink>{' '}
+                    to use when formatting your list of suppressions for upload.
+                  </span>
+                }
+                required
+                validate={[
+                  required,
+                  fileExtension('csv'),
+                  maxFileSize(config.maxUploadSizeBytes),
+                  nonEmptyFile,
+                ]}
               />
-            </Box>
-          </Stack>
-          <ButtonWrapper>
+              <Box maxWidth="1200">
+                <Field
+                  component={SubaccountTypeaheadWrapper}
+                  disabled={submitting}
+                  helpText="Leaving this field blank will add the suppressions to the master account."
+                  name="subaccount"
+                />
+              </Box>
+            </Stack>
+          </Panel.Section>
+
+          <Panel.Section>
             <Button variant="primary" disabled={pristine || submitting} type="submit">
               Upload
             </Button>
-          </ButtonWrapper>
+          </Panel.Section>
         </form>
-      </Fragment>
+      </>
     );
   }
 }

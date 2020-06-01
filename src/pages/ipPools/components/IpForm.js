@@ -6,7 +6,7 @@ import { Field, formValueSelector, getFormValues, reduxForm, submit, isDirty } f
 import { withRouter } from 'react-router-dom';
 import { Button, Label, Panel } from 'src/components/matchbox';
 import { SelectWrapper, RadioGroup } from 'src/components/reduxFormWrappers';
-import { ButtonWrapper, ConfirmationModal, Abbreviation } from 'src/components';
+import { ConfirmationModal, Abbreviation } from 'src/components';
 import { Card, CardTitle, CardContent } from 'src/components/card';
 import { ExternalLink } from 'src/components/links';
 import {
@@ -165,15 +165,13 @@ export const IpForm = props => {
         </Panel.Section>
 
         <Panel.Section>
-          <ButtonWrapper marginTop="0">
-            <Button
-              variant="primary"
-              disabled={submitting || pristine}
-              onClick={handleUpdateSendingIPClick}
-            >
-              {submitting ? 'Saving' : 'Update Sending IP'}
-            </Button>
-          </ButtonWrapper>
+          <Button
+            variant="primary"
+            disabled={submitting || pristine}
+            onClick={handleUpdateSendingIPClick}
+          >
+            {submitting ? 'Saving' : 'Update Sending IP'}
+          </Button>
         </Panel.Section>
       </form>
 

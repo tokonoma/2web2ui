@@ -29,9 +29,7 @@ exports[`base case 1`] = `
     </Stack>
   </Panel.Section>
   <Panel.Section>
-    <ButtonWrapper
-      marginTop="0"
-    >
+    <ButtonWrapper>
       <Button
         disabled={true}
         submit={true}
@@ -73,9 +71,7 @@ exports[`cancel button 1`] = `
     </Stack>
   </Panel.Section>
   <Panel.Section>
-    <ButtonWrapper
-      marginTop="0"
-    >
+    <ButtonWrapper>
       <Button
         disabled={false}
         submit={true}
@@ -118,9 +114,7 @@ exports[`no ip pools 1`] = `
     </Stack>
   </Panel.Section>
   <Panel.Section>
-    <ButtonWrapper
-      marginTop="0"
-    >
+    <ButtonWrapper>
       <Button
         disabled={true}
         submit={true}
@@ -162,9 +156,7 @@ exports[`should disable all fields when compliance is true 1`] = `
     </Stack>
   </Panel.Section>
   <Panel.Section>
-    <ButtonWrapper
-      marginTop="0"
-    >
+    <ButtonWrapper>
       <Button
         disabled={true}
         submit={true}
@@ -213,9 +205,7 @@ exports[`submits correctly 1`] = `
     </Stack>
   </Panel.Section>
   <Panel.Section>
-    <ButtonWrapper
-      marginTop="0"
-    >
+    <ButtonWrapper>
       <Button
         disabled={true}
         submit={true}
@@ -265,9 +255,7 @@ exports[`with an assigned ip pool 1`] = `
     </Stack>
   </Panel.Section>
   <Panel.Section>
-    <ButtonWrapper
-      marginTop="0"
-    >
+    <ButtonWrapper>
       <Button
         disabled={true}
         submit={true}

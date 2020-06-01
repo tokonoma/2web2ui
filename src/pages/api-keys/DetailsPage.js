@@ -32,7 +32,7 @@ export class ApiKeysDetailsPage extends Component {
     const { apiKey } = this.props;
 
     return (
-      <Banner status="info" title="This API Key is read-only" my="300">
+      <Banner status="info" title="This API Key is read-only" marginBottom="500">
         <p>This API Key is only editable by the owner: {apiKey.username}.</p>
       </Banner>
     );
@@ -40,7 +40,7 @@ export class ApiKeysDetailsPage extends Component {
 
   renderNotFound() {
     return (
-      <Banner status="warning" title="Not found" my="300">
+      <Banner status="warning" title="Not found" marginBottom="500">
         <p>API Key was not found.</p>
       </Banner>
     );
@@ -58,13 +58,14 @@ export class ApiKeysDetailsPage extends Component {
     return (
       <Page title={apiKey.label} breadcrumbAction={breadcrumbAction}>
         {!isEmpty && this.renderReadOnlyAlert()}
-        <Panel>
-          {isEmpty ? (
-            this.renderNotFound()
-          ) : (
+
+        {isEmpty ? (
+          this.renderNotFound()
+        ) : (
+          <Panel>
             <ApiKeyForm onSubmit={_.noop} apiKey={apiKey} isReadOnly={true} />
-          )}
-        </Panel>
+          </Panel>
+        )}
       </Page>
     );
   }

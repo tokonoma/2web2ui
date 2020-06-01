@@ -42,10 +42,15 @@ export class EditBounce extends Component {
     }
 
     return (
-      <Banner status="warning" my="300">
-        We strongly recommend using a subdomain such as <strong>bounces.{id}</strong> for bounce
-        domains.{' '}
-        <PageLink to={'/account/sending-domains/create'}>Create a new domain now.</PageLink>
+      <Banner status="warning" marginBottom="500">
+        <p>
+          We strongly recommend using a subdomain such as <strong>bounces.{id}</strong> for bounce
+          domains.
+        </p>
+
+        <Banner.Actions>
+          <PageLink to="/account/sending-domains/create">Create a new domain now.</PageLink>
+        </Banner.Actions>
       </Banner>
     );
   }

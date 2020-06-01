@@ -2,8 +2,7 @@ import React from 'react';
 import cx from 'classnames';
 import moment from 'moment';
 import { PageLink } from 'src/components/links';
-import { ButtonWrapper } from 'src/components';
-import { Grid, Tag, Button } from 'src/components/matchbox';
+import { Box, Button, Grid, Tag } from 'src/components/matchbox';
 import { formatDate } from 'src/helpers/date';
 import { domainRegex } from 'src/helpers/regex';
 import useHibanaOverride from 'src/hooks/useHibanaOverride';
@@ -81,7 +80,7 @@ export default ({
           </div>
         </Grid.Column>
       </Grid>
-      <ButtonWrapper>
+      <Box marginTop="500">
         <PageLink
           as={Button}
           size="small"
@@ -91,7 +90,7 @@ export default ({
         >
           View Engagement
         </PageLink>
-      </ButtonWrapper>
+      </Box>
     </>
   );
 };

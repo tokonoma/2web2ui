@@ -1,11 +1,10 @@
 import _ from 'lodash';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Field, reset, reduxForm } from 'redux-form';
-import { Box, Button, Checkbox, Stack } from 'src/components/matchbox';
+import { Box, Button, Checkbox, Panel, Stack } from 'src/components/matchbox';
 import { TextFieldWrapper, CheckboxWrapper } from 'src/components';
-import ButtonWrapper from 'src/components/buttonWrapper';
 import { showAlert } from 'src/actions/globalAlert';
 import { createOrUpdateSuppressions } from 'src/actions/suppressions';
 import SubaccountTypeaheadWrapper from 'src/components/reduxFormWrappers/SubaccountTypeaheadWrapper';
@@ -41,50 +40,53 @@ export class AddForm extends Component {
     const { handleSubmit, pristine, submitting } = this.props;
 
     return (
-      <Fragment>
+      <>
         <form onSubmit={handleSubmit(this.onSubmit)}>
-          <Stack>
-            <Box maxWidth="1200">
-              <Field
-                name="recipient"
-                component={TextFieldWrapper}
-                validate={[required, email]}
-                required
-                label="Email Address"
-              />
-            </Box>
-            <Box maxWidth="1200">
-              <Field
-                component={SubaccountTypeaheadWrapper}
-                disabled={submitting}
-                helpText="Leaving this field blank will add the suppressions to the master account."
-                name="subaccount"
-              />
-            </Box>
-            <Checkbox.Group label="Type" required>
-              <Field
-                component={CheckboxWrapper}
-                name="types.transactional"
-                label="Transactional"
-                type="checkbox"
-              />
-              <Field
-                component={CheckboxWrapper}
-                name="types.non_transactional"
-                label="Non-Transactional"
-                type="checkbox"
-                validate={this.atLeastOne}
-              />
-            </Checkbox.Group>
-            <Field name="description" component={TextFieldWrapper} label="Description" />
-          </Stack>
-          <ButtonWrapper>
+          <Panel.Section>
+            <Stack>
+              <Box maxWidth="1200">
+                <Field
+                  name="recipient"
+                  component={TextFieldWrapper}
+                  validate={[required, email]}
+                  required
+                  label="Email Address"
+                />
+              </Box>
+              <Box maxWidth="1200">
+                <Field
+                  component={SubaccountTypeaheadWrapper}
+                  disabled={submitting}
+                  helpText="Leaving this field blank will add the suppressions to the master account."
+                  name="subaccount"
+                />
+              </Box>
+              <Checkbox.Group label="Type" required>
+                <Field
+                  component={CheckboxWrapper}
+                  name="types.transactional"
+                  label="Transactional"
+                  type="checkbox"
+                />
+                <Field
+                  component={CheckboxWrapper}
+                  name="types.non_transactional"
+                  label="Non-Transactional"
+                  type="checkbox"
+                  validate={this.atLeastOne}
+                />
+              </Checkbox.Group>
+              <Field name="description" component={TextFieldWrapper} label="Description" />
+            </Stack>
+          </Panel.Section>
+
+          <Panel.Section>
             <Button variant="primary" disabled={pristine || submitting} type="submit">
               Add / Update
             </Button>
-          </ButtonWrapper>
+          </Panel.Section>
         </form>
-      </Fragment>
+      </>
     );
   }
 }

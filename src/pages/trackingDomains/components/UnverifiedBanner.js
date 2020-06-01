@@ -1,7 +1,7 @@
 import React from 'react';
-import { Banner, Button, Stack } from 'src/components/matchbox';
-import { ButtonWrapper } from 'src/components';
+import { Banner, Stack } from 'src/components/matchbox';
 import { LINKS } from 'src/constants';
+import { ExternalLink } from 'src/components/links';
 
 const UnverifiedBanner = ({ unverifiedDomains, cname }) => {
   const count = unverifiedDomains.length;
@@ -16,17 +16,16 @@ const UnverifiedBanner = ({ unverifiedDomains, cname }) => {
       : 'You have an unverified tracking domain';
 
   return (
-    <Banner status="warning" title={title} my="300">
+    <Banner status="warning" title={title} marginBottom="500">
       <Stack>
         <p>
           To verify a tracking domain, edit its DNS settings to <strong>add a CNAME record</strong>{' '}
           with the value of <strong>{cname}</strong>.
         </p>
-        <ButtonWrapper>
-          <Button outline external to={LINKS.DOMAIN_VERIFICATION}>
-            Learn more
-          </Button>
-        </ButtonWrapper>
+
+        <Banner.Actions>
+          <ExternalLink to={LINKS.DOMAIN_VERIFICATION}>Learn more</ExternalLink>
+        </Banner.Actions>
       </Stack>
     </Banner>
   );

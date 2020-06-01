@@ -11,7 +11,7 @@ exports[`renders ready only mode correctly 1`] = `
   }
 >
   <Banner
-    my="300"
+    marginBottom="500"
     status="info"
     title="This API Key is read-only"
   >
@@ -48,16 +48,14 @@ exports[`should render not found pane when api key can not be found 1`] = `
     }
   }
 >
-  <Panel>
-    <Banner
-      my="300"
-      status="warning"
-      title="Not found"
-    >
-      <p>
-        API Key was not found.
-      </p>
-    </Banner>
-  </Panel>
+  <Banner
+    marginBottom="500"
+    status="warning"
+    title="Not found"
+  >
+    <p>
+      API Key was not found.
+    </p>
+  </Banner>
 </Page>
 `;

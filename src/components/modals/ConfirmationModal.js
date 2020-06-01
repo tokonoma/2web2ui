@@ -27,7 +27,7 @@ export default function ConfirmationModal(props) {
       <>
         <Panel.Section>{content}</Panel.Section>
         <Panel.Section>
-          <ButtonWrapper marginTop="0">
+          <ButtonWrapper>
             <Button
               variant={confirmVariant}
               disabled={confirming}

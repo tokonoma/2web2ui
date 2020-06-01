@@ -2,7 +2,7 @@
 
 exports[`Component: UnverifiedBanner should render correctly with 1 unverified domain 1`] = `
 <Banner
-  my="300"
+  marginBottom="500"
   status="warning"
   title="You have an unverified tracking domain"
 >
@@ -19,22 +19,20 @@ exports[`Component: UnverifiedBanner should render correctly with 1 unverified d
       </strong>
       .
     </p>
-    <ButtonWrapper>
-      <Button
-        external={true}
-        outline={true}
+    <Banner.Actions>
+      <ExternalLink
         to="https://www.sparkpost.com/docs/tech-resources/enabling-multiple-custom-tracking-domains"
       >
         Learn more
-      </Button>
-    </ButtonWrapper>
+      </ExternalLink>
+    </Banner.Actions>
   </Stack>
 </Banner>
 `;
 
 exports[`Component: UnverifiedBanner should render correctly with more than 1 unverified domain 1`] = `
 <Banner
-  my="300"
+  marginBottom="500"
   status="warning"
   title="You have 2 unverified tracking domains"
 >
@@ -51,15 +49,13 @@ exports[`Component: UnverifiedBanner should render correctly with more than 1 un
       </strong>
       .
     </p>
-    <ButtonWrapper>
-      <Button
-        external={true}
-        outline={true}
+    <Banner.Actions>
+      <ExternalLink
         to="https://www.sparkpost.com/docs/tech-resources/enabling-multiple-custom-tracking-domains"
       >
         Learn more
-      </Button>
-    </ButtonWrapper>
+      </ExternalLink>
+    </Banner.Actions>
   </Stack>
 </Banner>
 `;

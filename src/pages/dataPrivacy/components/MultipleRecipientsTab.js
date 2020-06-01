@@ -6,7 +6,7 @@ import { Field } from 'redux-form';
 import { reduxForm, SubmissionError } from 'redux-form';
 import { RadioGroup, ButtonWrapper } from 'src/components';
 import { DownloadLink } from 'src/components/links';
-import { Button, Panel, Modal } from 'src/components/matchbox';
+import { Button, Panel, Modal, Stack } from 'src/components/matchbox';
 import { FileFieldWrapper } from 'src/components/reduxFormWrappers';
 import SubaccountSection from 'src/components/subaccountSection';
 import { required } from 'src/helpers/validation';
@@ -15,7 +15,6 @@ import { showAlert } from 'src/actions/globalAlert';
 import { download } from 'src/helpers/downloading';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
 import { REQUEST_TYPES, SUBACCOUNT_ITEMS, SUBACCOUNT_OPTIONS } from '../constants';
-import styles from './DataPrivacy.module.scss';
 import exampleRecipientListPath from './example-recipients.csv';
 
 export function MultipleRecipientsTab({
@@ -96,59 +95,72 @@ export function MultipleRecipientsTab({
   };
 
   return (
-    <Panel.Section>
-      <div className={styles.FormContainer}>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Field
-            component={RadioGroup}
-            name="requestType"
-            label="Select Compliance Type"
-            options={REQUEST_TYPES}
-            disabled={submitting}
-            validate={[required]}
-          />
-          <Field
-            type="file"
-            label="Upload List"
-            fileType="csv"
-            helpText={
-              <DownloadLink href={exampleRecipientListPath}>Download a CSV Template</DownloadLink>
-            }
-            component={FileFieldWrapper}
-            disabled={submitting}
-            name="file"
-            validate={[required]}
-          />
-          <Modal open={Boolean(dataPrivacyRequestError)} showCloseButton onClose={resetDataPrivacy}>
-            <Panel sectioned title="Upload Error">
-              <p>
-                We couldn’t process some of the addresses in your list. Download a list of the
-                errors, update your list, and please upload again.
-              </p>
-              <Button onClick={downloadErrorCSV} color="orange">
-                Download List
-              </Button>
-            </Panel>
-          </Modal>
-          {hasSubaccounts && (
-            <SubaccountSection
-              newTemplate={true}
+    <>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Panel.Section>
+          <Stack>
+            <Field
+              component={RadioGroup}
+              name="requestType"
+              label="Select Compliance Type"
+              options={REQUEST_TYPES}
               disabled={submitting}
               validate={[required]}
-              createOptions={SUBACCOUNT_OPTIONS}
             />
-          )}
+            <Field
+              type="file"
+              label="Upload List"
+              fileType="csv"
+              helpText={
+                <DownloadLink href={exampleRecipientListPath}>Download a CSV Template</DownloadLink>
+              }
+              component={FileFieldWrapper}
+              disabled={submitting}
+              name="file"
+              validate={[required]}
+            />
+
+            {hasSubaccounts && (
+              <SubaccountSection
+                newTemplate={true}
+                disabled={submitting}
+                validate={[required]}
+                createOptions={SUBACCOUNT_OPTIONS}
+              />
+            )}
+          </Stack>
+        </Panel.Section>
+
+        <Panel.Section>
           <ButtonWrapper>
-            <Button color="orange" type="submit">
+            <Button variant="primary" type="submit">
               Submit Request
             </Button>
-            <Button onClick={reset} disabled={pristine || submitting}>
+
+            <Button variant="secondary" onClick={reset} disabled={pristine || submitting}>
               Clear
             </Button>
           </ButtonWrapper>
-        </form>
-      </div>
-    </Panel.Section>
+        </Panel.Section>
+      </form>
+
+      <Modal open={Boolean(dataPrivacyRequestError)} showCloseButton onClose={resetDataPrivacy}>
+        <Panel title="Upload Error">
+          <Panel.Section>
+            <p>
+              We couldn’t process some of the addresses in your list. Download a list of the errors,
+              update your list, and please upload again.
+            </p>
+          </Panel.Section>
+
+          <Panel.Section>
+            <Button onClick={downloadErrorCSV} variant="primary">
+              Download List
+            </Button>
+          </Panel.Section>
+        </Panel>
+      </Modal>
+    </>
   );
 }
 

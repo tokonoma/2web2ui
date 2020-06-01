@@ -55,7 +55,7 @@ export function HibanaSendMoreCTA({ hasSendingLimits }) {
             <Case
               condition={defaultCase}
               children={
-                <PageLink as={Button} variant="monochrome" to="/account/billing">
+                <PageLink as={Button} variant="monochrome-secondary" to="/account/billing">
                   Upgrade your account.
                 </PageLink>
               }

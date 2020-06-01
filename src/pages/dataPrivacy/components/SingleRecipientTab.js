@@ -5,11 +5,10 @@ import { ButtonWrapper, RadioGroup, TextFieldWrapper } from 'src/components';
 import { Field } from 'redux-form';
 import SubaccountSection from 'src/components/subaccountSection';
 import { required, email, maxLength } from 'src/helpers/validation';
-import { Button, Panel } from 'src/components/matchbox';
+import { Button, Panel, Stack } from 'src/components/matchbox';
 import { submitRTBFRequest, submitOptOutRequest } from 'src/actions/dataPrivacy';
 import { showAlert } from 'src/actions/globalAlert';
 import { hasSubaccounts } from 'src/selectors/subaccounts';
-import styles from './DataPrivacy.module.scss';
 import { REQUEST_TYPES, SUBACCOUNT_ITEMS, SUBACCOUNT_OPTIONS } from '../constants';
 
 export function SingleRecipientTab(props) {
@@ -34,9 +33,9 @@ export function SingleRecipientTab(props) {
   };
 
   return (
-    <Panel.Section>
-      <div className={styles.FormContainer}>
-        <form onSubmit={props.handleSubmit(onSubmit)}>
+    <form onSubmit={props.handleSubmit(onSubmit)}>
+      <Panel.Section>
+        <Stack>
           <Field
             component={RadioGroup}
             name="requestType"
@@ -63,17 +62,24 @@ export function SingleRecipientTab(props) {
               createOptions={SUBACCOUNT_OPTIONS}
             />
           )}
-          <ButtonWrapper>
-            <Button color="orange" type="submit" disabled={props.dataPrivacyRequestPending}>
-              Submit Request
-            </Button>
-            <Button onClick={props.reset} disabled={props.pristine || props.submitting}>
-              Clear
-            </Button>
-          </ButtonWrapper>
-        </form>
-      </div>
-    </Panel.Section>
+        </Stack>
+      </Panel.Section>
+
+      <Panel.Section>
+        <ButtonWrapper>
+          <Button variant="primary" type="submit" disabled={props.dataPrivacyRequestPending}>
+            Submit Request
+          </Button>
+          <Button
+            variant="secondary"
+            onClick={props.reset}
+            disabled={props.pristine || props.submitting}
+          >
+            Clear
+          </Button>
+        </ButtonWrapper>
+      </Panel.Section>
+    </form>
   );
 }
 

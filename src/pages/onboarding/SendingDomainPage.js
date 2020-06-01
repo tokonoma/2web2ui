@@ -64,7 +64,7 @@ export function SendingDomainPage(props) {
             </Stack>
           </Panel.Section>
           <Panel.Section>
-            <ButtonWrapper marginTop="0">
+            <ButtonWrapper>
               <Button submit disabled={submitting} variant="primary">
                 {submitting ? 'Adding Domain...' : 'Add Domain'}
               </Button>

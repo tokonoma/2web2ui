@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Field, SubmissionError, reduxForm } from 'redux-form';
 import _ from 'lodash';
 import { Banner, Box, Button, Error, Panel, Stack } from 'src/components/matchbox';
-import { ButtonWrapper, TextFieldWrapper } from 'src/components';
+import { TextFieldWrapper } from 'src/components';
 import { DownloadLink } from 'src/components/links';
 import { required, maxLength } from 'src/helpers/validation';
 import FileFieldWrapper from 'src/components/reduxFormWrappers/FileFieldWrapper';
@@ -44,7 +44,7 @@ export class RecipientListForm extends Component {
   renderCsvErrors() {
     const { error } = this.props;
     return (
-      <Banner status="danger" title="CSV Format Errors" my="400">
+      <Banner status="danger" title="CSV Format Errors" marginBottom="500">
         {error.map((err, idx) => (
           <Error key={idx} error={err} />
         ))}
@@ -124,12 +124,12 @@ export class RecipientListForm extends Component {
                   validate={uploadValidators}
                 />
               </Stack>
+            </Panel.Section>
 
-              <ButtonWrapper>
-                <Button variant="primary" submit disabled={submitDisabled}>
-                  {actionText} Recipient List
-                </Button>
-              </ButtonWrapper>
+            <Panel.Section>
+              <Button variant="primary" submit disabled={submitDisabled}>
+                {actionText} Recipient List
+              </Button>
             </Panel.Section>
           </Panel>
         </form>

@@ -61,9 +61,7 @@ exports[`ProviderForm disables fields and buttons when submitting 1`] = `
       </Stack>
     </Panel.Section>
     <Panel.Section>
-      <ButtonWrapper
-        marginTop="0"
-      >
+      <ButtonWrapper>
         <Button
           disabled={true}
           type="submit"
@@ -143,9 +141,7 @@ exports[`ProviderForm renders form 1`] = `
       </Stack>
     </Panel.Section>
     <Panel.Section>
-      <ButtonWrapper
-        marginTop="0"
-      >
+      <ButtonWrapper>
         <Button
           type="submit"
           variant="primary"

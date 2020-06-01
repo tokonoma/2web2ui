@@ -2,36 +2,40 @@
 
 exports[`Component: Verify Email Banner should show default email banner 1`] = `
 <Banner
-  action={
-    Object {
-      "content": "Resend Email",
-      "onClick": [Function],
-    }
-  }
-  mb="400"
+  mb="500"
   status="info"
   title="Verify your email address"
 >
   <p>
     Please click the link in the email we sent you to verify your email address.
   </p>
+  <Banner.Actions>
+    <Button
+      disabled={false}
+      onClick={[Function]}
+    >
+      Resend Email
+    </Button>
+  </Banner.Actions>
 </Banner>
 `;
 
 exports[`Component: Verify Email Banner should show sending sending content 1`] = `
 <Banner
-  action={
-    Object {
-      "content": "Sending..",
-      "disabled": true,
-    }
-  }
-  mb="400"
+  mb="500"
   status="info"
   title="Verify your email address"
 >
   <p>
     Please click the link in the email we sent you to verify your email address.
   </p>
+  <Banner.Actions>
+    <Button
+      disabled={true}
+      onClick={[Function]}
+    >
+      Sending...
+    </Button>
+  </Banner.Actions>
 </Banner>
 `;

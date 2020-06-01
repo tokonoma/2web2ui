@@ -3,26 +3,28 @@
 exports[`Component: SuspendedForBilling should render correctly 1`] = `
 <Fragment>
   <Banner
-    my="300"
+    marginBottom="500"
     status="danger"
     title="Your account has been suspended due to a billing problem"
   >
-    <p>
-      We sent an email notification to your current billing contact email address 
-       (account.billing.email@example.com)
-      . To reactivate your account and pay your outstanding balance due, please update your payment information below.
-    </p>
-    <p>
-      If this is incorrect, please
-       
-      <Connect(SupportTicketLink)
-        issueId="general_billing"
-      >
-        submit a support ticket
-      </Connect(SupportTicketLink)>
-       
-      and let us know why.
-    </p>
+    <Stack>
+      <p>
+        We sent an email notification to your current billing contact email address 
+         (account.billing.email@example.com)
+        . To reactivate your account and pay your outstanding balance due, please update your payment information below.
+      </p>
+      <p>
+        If this is incorrect, please
+         
+        <Connect(SupportTicketLink)
+          issueId="general_billing"
+        >
+          submit a support ticket
+        </Connect(SupportTicketLink)>
+         
+        and let us know why.
+      </p>
+    </Stack>
   </Banner>
   <UpdatePaymentForm />
 </Fragment>

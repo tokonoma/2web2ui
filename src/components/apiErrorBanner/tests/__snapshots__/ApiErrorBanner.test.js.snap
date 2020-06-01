@@ -44,9 +44,7 @@ exports[`ApiErrorBanner Component should render when error prop is passed 1`] = 
         <p>
           Sorry, there was an issue loading your your resource.
         </p>
-        <div
-          class="ButtonWrapper"
-        >
+        <div>
           <button
             class="AB_AE AB_AY"
             type="button"

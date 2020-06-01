@@ -109,7 +109,7 @@ export class ShareModal extends Component {
             disabled={this.props.disabled}
             fullWidth
             onClick={this.toggleModal}
-            variant="monochrome"
+            variant="monochrome-secondary"
           >
             Share
           </Button>

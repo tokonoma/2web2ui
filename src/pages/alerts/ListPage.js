@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ApiErrorBanner, DeleteModal, Loading, DisplayDate } from 'src/components';
 import { PageLink } from 'src/components/links';
+import { PageDescription } from 'src/components/text';
 import { Box, Grid, Page, Panel, Tag, Stack } from 'src/components/matchbox';
 import { Templates } from 'src/components/images';
 import AlertCollection from './components/AlertCollection';
@@ -154,13 +155,13 @@ export const AlertsPageComponent = props => {
 
   return (
     <>
-      <Box mb={'400'} maxWidth={'57%'}>
-        <p className={styles.Description}>
-          Use alerts to be notified when important changes occur in your Health Score, bounce rates,
-          and email usage.
-        </p>
-      </Box>
-      <Box mb={'400'}>{renderRecentlyTriggered()}</Box>
+      <PageDescription>
+        Use alerts to be notified when important changes occur in your Health Score, bounce rates,
+        and email usage.
+      </PageDescription>
+
+      <Box mb="500">{renderRecentlyTriggered()}</Box>
+
       <AlertCollection alerts={alerts} handleDelete={handleDelete} />
     </>
   );

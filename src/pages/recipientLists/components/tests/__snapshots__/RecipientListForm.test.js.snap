@@ -76,16 +76,16 @@ exports[`RecipientListForm defaults to create mode 1`] = `
             }
           />
         </Stack>
-        <ButtonWrapper>
-          <Button
-            disabled={true}
-            submit={true}
-            variant="primary"
-          >
-            Create
-             Recipient List
-          </Button>
-        </ButtonWrapper>
+      </Panel.Section>
+      <Panel.Section>
+        <Button
+          disabled={true}
+          submit={true}
+          variant="primary"
+        >
+          Create
+           Recipient List
+        </Button>
       </Panel.Section>
     </Panel>
   </form>
@@ -95,7 +95,7 @@ exports[`RecipientListForm defaults to create mode 1`] = `
 exports[`RecipientListForm renders CSV errors 1`] = `
 <div>
   <Banner
-    my="400"
+    marginBottom="500"
     status="danger"
     title="CSV Format Errors"
   >
@@ -182,16 +182,16 @@ exports[`RecipientListForm renders CSV errors 1`] = `
             }
           />
         </Stack>
-        <ButtonWrapper>
-          <Button
-            disabled={true}
-            submit={true}
-            variant="primary"
-          >
-            Create
-             Recipient List
-          </Button>
-        </ButtonWrapper>
+      </Panel.Section>
+      <Panel.Section>
+        <Button
+          disabled={true}
+          submit={true}
+          variant="primary"
+        >
+          Create
+           Recipient List
+        </Button>
       </Panel.Section>
     </Panel>
   </form>
@@ -274,16 +274,16 @@ exports[`RecipientListForm renders correctly in create mode 1`] = `
             }
           />
         </Stack>
-        <ButtonWrapper>
-          <Button
-            disabled={true}
-            submit={true}
-            variant="primary"
-          >
-            Create
-             Recipient List
-          </Button>
-        </ButtonWrapper>
+      </Panel.Section>
+      <Panel.Section>
+        <Button
+          disabled={true}
+          submit={true}
+          variant="primary"
+        >
+          Create
+           Recipient List
+        </Button>
       </Panel.Section>
     </Panel>
   </form>
@@ -346,16 +346,16 @@ exports[`RecipientListForm renders correctly in edit mode 1`] = `
             validate={Array []}
           />
         </Stack>
-        <ButtonWrapper>
-          <Button
-            disabled={true}
-            submit={true}
-            variant="primary"
-          >
-            Update
-             Recipient List
-          </Button>
-        </ButtonWrapper>
+      </Panel.Section>
+      <Panel.Section>
+        <Button
+          disabled={true}
+          submit={true}
+          variant="primary"
+        >
+          Update
+           Recipient List
+        </Button>
       </Panel.Section>
     </Panel>
   </form>
@@ -442,16 +442,16 @@ exports[`RecipientListForm should disable form elements on submit 1`] = `
             }
           />
         </Stack>
-        <ButtonWrapper>
-          <Button
-            disabled={true}
-            submit={true}
-            variant="primary"
-          >
-            Create
-             Recipient List
-          </Button>
-        </ButtonWrapper>
+      </Panel.Section>
+      <Panel.Section>
+        <Button
+          disabled={true}
+          submit={true}
+          variant="primary"
+        >
+          Create
+           Recipient List
+        </Button>
       </Panel.Section>
     </Panel>
   </form>

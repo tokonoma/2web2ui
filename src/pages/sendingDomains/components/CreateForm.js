@@ -41,7 +41,7 @@ export class CreateForm extends Component {
         </Panel.Section>
 
         <Panel.Section>
-          <ButtonWrapper marginTop="0">
+          <ButtonWrapper>
             <Button variant="primary" submit disabled={submitting}>
               {submitting ? 'Submitting...' : 'Add a Domain'}
             </Button>

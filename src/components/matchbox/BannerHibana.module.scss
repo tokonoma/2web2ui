@@ -1,0 +1,9 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.BannerActions {
+  margin-top: spacing(500);
+
+  > * + * {
+    margin-left: unset;
+  }
+}

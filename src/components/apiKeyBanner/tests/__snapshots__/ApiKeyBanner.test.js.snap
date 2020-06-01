@@ -2,12 +2,6 @@
 
 exports[`ApiKeyBanner Component should change content when key is copied 1`] = `
 <Banner
-  action={
-    Object {
-      "content": "Copied to clipboard",
-      "onClick": [Function],
-    }
-  }
   my="300"
   onDismiss={[MockFunction]}
   status="success"
@@ -19,17 +13,18 @@ exports[`ApiKeyBanner Component should change content when key is copied 1`] = `
   <strong>
     nuevo-llave
   </strong>
+  <Banner.Actions>
+    <Button
+      onClick={[Function]}
+    >
+      Copied to clipboard
+    </Button>
+  </Banner.Actions>
 </Banner>
 `;
 
 exports[`ApiKeyBanner Component should render default success message 1`] = `
 <Banner
-  action={
-    Object {
-      "content": "Copy",
-      "onClick": [Function],
-    }
-  }
   my="300"
   onDismiss={[MockFunction]}
   status="success"
@@ -41,5 +36,12 @@ exports[`ApiKeyBanner Component should render default success message 1`] = `
   <strong>
     nuevo-llave
   </strong>
+  <Banner.Actions>
+    <Button
+      onClick={[Function]}
+    >
+      Copy
+    </Button>
+  </Banner.Actions>
 </Banner>
 `;

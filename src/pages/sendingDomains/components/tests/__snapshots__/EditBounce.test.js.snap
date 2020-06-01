@@ -116,21 +116,24 @@ exports[`Component: EditBounce renders not ready correctly 1`] = `
   </Left>
   <Right>
     <Banner
-      my="300"
+      marginBottom="500"
       status="warning"
     >
-      We strongly recommend using a subdomain such as 
-      <strong>
-        bounces.
-        xyz.com
-      </strong>
-       for bounce domains.
-       
-      <PageLink
-        to="/account/sending-domains/create"
-      >
-        Create a new domain now.
-      </PageLink>
+      <p>
+        We strongly recommend using a subdomain such as 
+        <strong>
+          bounces.
+          xyz.com
+        </strong>
+         for bounce domains.
+      </p>
+      <Banner.Actions>
+        <PageLink
+          to="/account/sending-domains/create"
+        >
+          Create a new domain now.
+        </PageLink>
+      </Banner.Actions>
     </Banner>
     <Connect(BounceSetupInstructionPanel)
       domain={
@@ -157,21 +160,24 @@ exports[`Component: EditBounce renders ready correctly 1`] = `
   <Left />
   <Right>
     <Banner
-      my="300"
+      marginBottom="500"
       status="warning"
     >
-      We strongly recommend using a subdomain such as 
-      <strong>
-        bounces.
-        xyz.com
-      </strong>
-       for bounce domains.
-       
-      <PageLink
-        to="/account/sending-domains/create"
-      >
-        Create a new domain now.
-      </PageLink>
+      <p>
+        We strongly recommend using a subdomain such as 
+        <strong>
+          bounces.
+          xyz.com
+        </strong>
+         for bounce domains.
+      </p>
+      <Banner.Actions>
+        <PageLink
+          to="/account/sending-domains/create"
+        >
+          Create a new domain now.
+        </PageLink>
+      </Banner.Actions>
     </Banner>
     <Connect(BounceSetupInstructionPanel)
       domain={

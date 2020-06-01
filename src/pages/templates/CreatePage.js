@@ -57,7 +57,9 @@ export default class CreatePage extends Component {
           <Panel>
             <Panel.Section>
               <CreateForm formName={formName} />
+            </Panel.Section>
 
+            <Panel.Section>
               <ButtonWrapper>
                 <Button type="submit" variant="primary" disabled={submitting || pristine || !valid}>
                   Create and View

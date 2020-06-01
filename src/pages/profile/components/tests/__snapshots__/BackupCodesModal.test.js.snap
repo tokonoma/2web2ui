@@ -13,7 +13,7 @@ exports[`Component: BackupCodesModal should change button text to Generating... 
       <Panel.Section>
         <Stack>
           <Banner
-            my="300"
+            marginBottom="500"
             status="warning"
           >
             Clicking Generate will overwrite your existing 
@@ -50,9 +50,7 @@ exports[`Component: BackupCodesModal should change button text to Generating... 
         </Stack>
       </Panel.Section>
       <Panel.Section>
-        <ButtonWrapper
-          marginTop="0"
-        >
+        <ButtonWrapper>
           <Button
             disabled={true}
             onClick={[MockFunction]}
@@ -87,7 +85,7 @@ exports[`Component: BackupCodesModal should render correctly 1`] = `
       <Panel.Section>
         <Stack>
           <Banner
-            my="300"
+            marginBottom="500"
             status="warning"
           >
             Clicking Generate will overwrite your existing 
@@ -124,9 +122,7 @@ exports[`Component: BackupCodesModal should render correctly 1`] = `
         </Stack>
       </Panel.Section>
       <Panel.Section>
-        <ButtonWrapper
-          marginTop="0"
-        >
+        <ButtonWrapper>
           <Button
             disabled={false}
             onClick={[Function]}
@@ -191,16 +187,12 @@ exports[`Component: BackupCodesModal should show new codes when they exist 1`] =
         </Stack>
       </Panel.Section>
       <Panel.Section>
-        <ButtonWrapper
-          marginTop="0"
+        <Button
+          onClick={[MockFunction]}
+          variant="primary"
         >
-          <Button
-            onClick={[MockFunction]}
-            variant="primary"
-          >
-            Close
-          </Button>
-        </ButtonWrapper>
+          Close
+        </Button>
       </Panel.Section>
     </form>
   </Panel>
@@ -220,7 +212,7 @@ exports[`Component: BackupCodesModal should show password error when exists 1`] 
       <Panel.Section>
         <Stack>
           <Banner
-            my="300"
+            marginBottom="500"
             status="warning"
           >
             Clicking Generate will overwrite your existing 
@@ -257,9 +249,7 @@ exports[`Component: BackupCodesModal should show password error when exists 1`] 
         </Stack>
       </Panel.Section>
       <Panel.Section>
-        <ButtonWrapper
-          marginTop="0"
-        >
+        <ButtonWrapper>
           <Button
             disabled={false}
             onClick={[MockFunction]}

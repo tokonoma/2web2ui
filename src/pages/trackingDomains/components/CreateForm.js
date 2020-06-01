@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { Box, Button, Panel, Stack } from 'src/components/matchbox';
-import { ButtonWrapper, TextFieldWrapper } from 'src/components';
+import { TextFieldWrapper } from 'src/components';
 import { required } from 'src/helpers/validation';
 import { SubaccountTypeaheadWrapper } from 'src/components/reduxFormWrappers';
 
@@ -11,33 +11,36 @@ export class CreateForm extends Component {
     const { submitting, handleSubmit } = this.props;
 
     return (
-      <Panel sectioned>
+      <Panel>
         <form onSubmit={handleSubmit}>
-          <Stack>
-            <Box maxWidth={maxWidth}>
-              <Field
-                component={TextFieldWrapper}
-                label="Domain Name"
-                name="domain"
-                // Do not try to validate tracking domains, let our API make that decision
-                validate={[required]}
-                disabled={submitting}
-              />
-            </Box>
-            <Box maxWidth={maxWidth}>
-              <Field
-                component={SubaccountTypeaheadWrapper}
-                name="subaccount"
-                helpText="Leaving this field blank will permanently assign the tracking domain to the master account."
-                disabled={submitting}
-              />
-            </Box>
-          </Stack>
-          <ButtonWrapper>
+          <Panel.Section>
+            <Stack>
+              <Box maxWidth={maxWidth}>
+                <Field
+                  component={TextFieldWrapper}
+                  label="Domain Name"
+                  name="domain"
+                  // Do not try to validate tracking domains, let our API make that decision
+                  validate={[required]}
+                  disabled={submitting}
+                />
+              </Box>
+              <Box maxWidth={maxWidth}>
+                <Field
+                  component={SubaccountTypeaheadWrapper}
+                  name="subaccount"
+                  helpText="Leaving this field blank will permanently assign the tracking domain to the master account."
+                  disabled={submitting}
+                />
+              </Box>
+            </Stack>
+          </Panel.Section>
+
+          <Panel.Section>
             <Button submit variant="primary" disabled={submitting}>
               {submitting ? 'Submitting...' : 'Add Tracking Domain'}
             </Button>
-          </ButtonWrapper>
+          </Panel.Section>
         </form>
       </Panel>
     );

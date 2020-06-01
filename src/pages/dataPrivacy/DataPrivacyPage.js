@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Page, Panel, Tabs } from 'src/components/matchbox';
 import { connect } from 'react-redux';
+import { Page, Panel, Tabs } from 'src/components/matchbox';
+import { TabsWrapper } from 'src/components';
+import { PageDescription } from 'src/components/text';
 import { resetDataPrivacy } from 'src/actions/dataPrivacy';
-import styles from './DataPrivacyPage.module.scss';
 import ApiDetailsTab from './components/ApiDetailsTab';
 import SingleRecipientTab from './components/SingleRecipientTab';
 import MultipleRecipientsTab from './components/MultipleRecipientsTab';
+
 const tabs = [
   { content: 'Single Recipient', key: 'single-recipient' },
   { content: 'Multiple Recipients', key: 'multiple-recipients' },
@@ -41,20 +43,24 @@ export const DataPrivacyPage = props => {
 
   return (
     <Page title="Data and Privacy">
-      <p className={styles.LeadText}>
+      <PageDescription>
         Fill in this form to request deletion of recipient data or opt-out of third party data usage
         of recipient's personal information. Your request will be completed within 30 days.
-      </p>
-      <Tabs
-        selected={tabIndex}
-        connectBelow={true}
-        tabs={tabs.map(({ content }, idx) => ({
-          content,
-          onClick: () => handleTabs(idx),
-        }))}
-      />
+      </PageDescription>
 
-      <Panel>{renderTabs(tabIndex)}</Panel>
+      <Panel>
+        <TabsWrapper>
+          <Tabs
+            selected={tabIndex}
+            connectBelow={true}
+            tabs={tabs.map(({ content }, idx) => ({
+              content,
+              onClick: () => handleTabs(idx),
+            }))}
+          />
+          {renderTabs(tabIndex)}
+        </TabsWrapper>
+      </Panel>
     </Page>
   );
 };

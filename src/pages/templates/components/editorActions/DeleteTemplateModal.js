@@ -47,13 +47,15 @@ const DeleteTemplateModal = props => {
                 <strong className={styles.WarningText}>published version and any drafts</strong>
                 <span> will all be deleted.</span>
               </p>
+            </Panel.Section>
 
+            <Panel.Section>
               <ButtonWrapper>
                 <Button variant="destructive" onClick={handleDelete}>
                   Delete All Versions
                 </Button>
 
-                <Button variant="secondary" onClick={onClose}>
+                <Button variant="destructive-secondary" onClick={onClose}>
                   Cancel
                 </Button>
               </ButtonWrapper>

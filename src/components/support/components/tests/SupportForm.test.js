@@ -13,24 +13,19 @@ describe('Support Form Component', () => {
     label: 'I need help!',
     messageLabel: 'Tell use more about your technical issue',
     type: 'Support',
-    isHeroku: false
+    isHeroku: false,
   };
 
   describe('Form', () => {
     let props;
 
     beforeEach(() => {
-
       props = {
         handleSubmit: jest.fn(),
         issues: [technicalIssue],
-        toggleSupportPanel: jest.fn()
+        toggleSupportPanel: jest.fn(),
       };
       wrapper = shallow(<SupportForm {...props} />);
-    });
-
-    it('should render support form', () => {
-      expect(wrapper).toMatchSnapshot();
     });
 
     it('should render successfully created ticket message', () => {
@@ -70,7 +65,7 @@ describe('Support Form Component', () => {
         handleSubmit: jest.fn(),
         reset: jest.fn(),
         onClose: jest.fn(),
-        openSupportPanel: jest.fn()
+        openSupportPanel: jest.fn(),
       };
       wrapper = shallow(<SupportForm {...props} />);
     });
@@ -96,7 +91,7 @@ describe('Support Form Component', () => {
     it('should submit a ticket', async () => {
       const values = {
         issueId: 'technical_issues',
-        message: 'I was not able to send an email!'
+        message: 'I was not able to send an email!',
       };
 
       await wrapper.instance().onSubmit(values);
@@ -104,7 +99,7 @@ describe('Support Form Component', () => {
       expect(props.createTicket).toHaveBeenCalledWith({
         issueType: technicalIssue.type,
         subject: technicalIssue.label,
-        message: values.message
+        message: values.message,
       });
     });
 
@@ -113,8 +108,8 @@ describe('Support Form Component', () => {
         issueId: 'technical_issues',
         message: 'I was not able to send an email!',
         attachment: {
-          name: 'example.png'
-        }
+          name: 'example.png',
+        },
       };
       const encoded = btoa('attachment://body');
 
@@ -129,8 +124,8 @@ describe('Support Form Component', () => {
         message: values.message,
         attachment: {
           filename: values.attachment.name,
-          content: encoded
-        }
+          content: encoded,
+        },
       });
     });
   });

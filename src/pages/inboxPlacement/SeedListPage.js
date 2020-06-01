@@ -64,7 +64,7 @@ export class SeedListPage extends React.Component {
           </Stack>
         </Panel.Section>
         <Panel.Section>
-          <ButtonWrapper marginTop="0">
+          <ButtonWrapper>
             <CopyToClipboard variant="primary" value={seeds.join(',')}>
               Copy List
             </CopyToClipboard>

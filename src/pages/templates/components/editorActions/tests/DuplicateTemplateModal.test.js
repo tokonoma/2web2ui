@@ -4,23 +4,15 @@ import DuplicateTemplateModal from '../DuplicateTemplateModal';
 
 describe('DuplicateTemplateModal', () => {
   const mockFn = jest.fn();
-  const subject = (props) => shallow(
-    <DuplicateTemplateModal
-      isLoading={false}
-      onClose={mockFn}
-      open={false}
-      {...props}
-    />);
-
-  it('renders with default props and some data from the current draft', () => {
-    const wrapper = subject();
-
-    expect(wrapper).toMatchSnapshot();
-  });
+  const subject = props =>
+    shallow(<DuplicateTemplateModal isLoading={false} onClose={mockFn} open={false} {...props} />);
 
   it('has a close button', () => {
     const wrapper = subject();
-    const { showCloseButton } = wrapper.find('ModalWrapper').dive().props();
+    const { showCloseButton } = wrapper
+      .find('ModalWrapper')
+      .dive()
+      .props();
 
     expect(showCloseButton).toBe(true);
   });
@@ -65,7 +57,7 @@ describe('DuplicateTemplateModal', () => {
   it('renders the default value of the "templateName" `TextField` with the word `(COPY)` appended', () => {
     const exampleTemplate = {
       name: 'My Draft',
-      id: 'my-draft'
+      id: 'my-draft',
     };
     const wrapper = subject({ template: exampleTemplate });
 
@@ -75,7 +67,7 @@ describe('DuplicateTemplateModal', () => {
   it('renders the default value of the "templateId" `TextField` with the word "-copy"', () => {
     const exampleTemplate = {
       name: 'My Draft',
-      id: 'my-draft'
+      id: 'my-draft',
     };
     const wrapper = subject({ template: exampleTemplate });
 
@@ -83,15 +75,19 @@ describe('DuplicateTemplateModal', () => {
   });
 
   it('renders with an error message if the user does not type in a value for the draft name or for draft ID', () => {
-    const wrapper = subject({ draft: { name: null }});
+    const wrapper = subject({ draft: { name: null } });
     wrapper.find('form').simulate('submit', {
       preventDefault: jest.fn(),
       templateName: '',
-      templateId: ''
+      templateId: '',
     });
 
-    expect(wrapper.find('[name="templateName"]').props().error).toEqual('Please enter a template name.');
-    expect(wrapper.find('[name="templateId"]').props().error).toEqual('Please enter a unique template ID.');
+    expect(wrapper.find('[name="templateName"]').props().error).toEqual(
+      'Please enter a template name.',
+    );
+    expect(wrapper.find('[name="templateId"]').props().error).toEqual(
+      'Please enter a unique template ID.',
+    );
   });
 
   it('invokes the `createTemplate` prop on submit, shows an alert, and then invokes the `onClose` prop', () => {
@@ -100,19 +96,19 @@ describe('DuplicateTemplateModal', () => {
     const mockOnClose = jest.fn();
     const mockShowAlert = jest.fn();
     const mockContent = {
-      html: '<p>Some HTML.</p>'
+      html: '<p>Some HTML.</p>',
     };
     const mockTestData = {
-      some: 'data'
+      some: 'data',
     };
     const mockTemplate = {
       name: 'My template',
       id: 'my-template',
       options: {
-        myOption: true
+        myOption: true,
       },
       shared_with_subaccounts: false,
-      subaccount_id: 123
+      subaccount_id: 123,
     };
 
     const wrapper = subject({
@@ -121,7 +117,7 @@ describe('DuplicateTemplateModal', () => {
       createTemplate: mockCreateTemplate,
       template: mockTemplate,
       testDataToDuplicate: mockTestData,
-      contentToDuplicate: mockContent
+      contentToDuplicate: mockContent,
     });
 
     wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
@@ -133,14 +129,14 @@ describe('DuplicateTemplateModal', () => {
       options: mockTemplate.options,
       parsedTestData: mockTestData,
       sharedWithSubaccounts: mockTemplate.shared_with_subaccounts,
-      subaccount: mockTemplate.subaccount_id
+      subaccount: mockTemplate.subaccount_id,
     });
 
     return promise.then(() => {
       expect(mockOnClose).toHaveBeenCalled();
       expect(mockShowAlert).toHaveBeenCalledWith({
         type: 'success',
-        message: 'Template duplicated.'
+        message: 'Template duplicated.',
       });
     });
   });

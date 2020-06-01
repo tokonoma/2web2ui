@@ -82,7 +82,7 @@ export const WatchlistAddPage = ({
             />
           </Panel.Section>
           <Panel.Section>
-            <ButtonWrapper marginTop="0">
+            <ButtonWrapper>
               <Button variant="primary" type="submit" disabled={submitPending || !resource}>
                 Save
               </Button>

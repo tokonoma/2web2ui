@@ -38,7 +38,7 @@ describe('GuideListItem', () => {
       hibanaSubject({ itemCompleted: true })
         .find('Button')
         .prop('variant'),
-    ).toBe('monochrome');
+    ).toBe('monochrome-secondary');
   });
 
   it('should render a Button with outline prop only when the item is complete', () => {

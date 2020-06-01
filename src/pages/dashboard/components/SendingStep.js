@@ -1,7 +1,7 @@
 import React from 'react';
 import GuideBreadCrumbs from './GuideBreadCrumbs';
 import { useGuideContext } from './GettingStartedGuide';
-import { ButtonWrapper, Card, CardContent, CardActions } from 'src/components';
+import { Card, CardContent, CardActions } from 'src/components';
 import { Box, Button, Grid, Panel, Text } from 'src/components/matchbox';
 import useHibanaToggle from 'src/hooks/useHibanaToggle';
 import { SENDING_STEP_LIST } from '../constants';
@@ -54,7 +54,7 @@ export const OGSendingStepListItem = ({ setAndStoreStepName, name, label = name,
         <p className={styles.FeaturesCardContent}>{content}</p>
       </CardContent>
       <CardActions>
-        <ButtonWrapper>
+        <div style={{ marginTop: '1rem' }}>
           <Button
             color="orange"
             onClick={() => setAndStoreStepName(name)}
@@ -62,7 +62,7 @@ export const OGSendingStepListItem = ({ setAndStoreStepName, name, label = name,
           >
             {label}
           </Button>
-        </ButtonWrapper>
+        </div>
       </CardActions>
     </Card>
   </Grid.Column>
@@ -82,9 +82,11 @@ export const HibanaSendingStepListItem = ({
           <Text>{content}</Text>
         </CardContent>
         <CardActions>
-          <Button mt="400" variant="secondary" onClick={() => setAndStoreStepName(name)}>
-            {label}
-          </Button>
+          <Box marginTop="500">
+            <Button variant="secondary" onClick={() => setAndStoreStepName(name)}>
+              {label}
+            </Button>
+          </Box>
         </CardActions>
       </Card>
     </Box>

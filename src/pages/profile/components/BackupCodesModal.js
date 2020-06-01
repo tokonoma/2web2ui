@@ -38,15 +38,13 @@ export default class BackupCodesModal extends Component {
     const generatedCodes = this.props.codes.length > 0;
     if (generatedCodes) {
       return (
-        <ButtonWrapper marginTop="0">
-          <Button variant="primary" onClick={onClose}>
-            Close
-          </Button>
-        </ButtonWrapper>
+        <Button variant="primary" onClick={onClose}>
+          Close
+        </Button>
       );
     } else {
       return (
-        <ButtonWrapper marginTop="0">
+        <ButtonWrapper>
           <Button variant="primary" type="submit" disabled={pending} onClick={this.generateCodes}>
             {pending ? 'Generating...' : 'Generate'}
           </Button>
@@ -70,7 +68,7 @@ export default class BackupCodesModal extends Component {
             <Panel.Section>
               <Stack>
                 {!generatedCodes && hasCodes && (
-                  <Banner status="warning" my="300">
+                  <Banner status="warning" marginBottom="500">
                     Clicking Generate will overwrite your existing {activeCount} active backup
                     codes.
                   </Banner>

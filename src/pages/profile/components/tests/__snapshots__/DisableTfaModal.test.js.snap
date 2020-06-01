@@ -36,9 +36,7 @@ exports[`DisableTfaModal tests should render correctly 1`] = `
         </Grid>
       </Panel.Section>
       <Panel.Section>
-        <ButtonWrapper
-          marginTop="0"
-        >
+        <ButtonWrapper>
           <Button
             disabled={false}
             onClick={[Function]}
@@ -97,9 +95,7 @@ exports[`DisableTfaModal tests should show disabling as button text when toggleP
         </Grid>
       </Panel.Section>
       <Panel.Section>
-        <ButtonWrapper
-          marginTop="0"
-        >
+        <ButtonWrapper>
           <Button
             disabled={true}
             onClick={[Function]}
@@ -158,9 +154,7 @@ exports[`DisableTfaModal tests should show error on TextField when toggleError a
         </Grid>
       </Panel.Section>
       <Panel.Section>
-        <ButtonWrapper
-          marginTop="0"
-        >
+        <ButtonWrapper>
           <Button
             disabled={false}
             onClick={[Function]}

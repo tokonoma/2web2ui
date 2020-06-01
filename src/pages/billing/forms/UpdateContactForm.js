@@ -38,7 +38,7 @@ export class UpdateContactForm extends Component {
             />
           </Panel.Section>
           <Panel.Section>
-            <ButtonWrapper marginTop="0">
+            <ButtonWrapper>
               <Button type="submit" variant="primary" disabled={submitting}>
                 Update Billing Contact
               </Button>

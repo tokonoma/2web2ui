@@ -7,7 +7,7 @@ describe('Component: Verify Email Banner', () => {
   const props = {
     verifying: false,
     showAlert: jest.fn(),
-    verifyEmail: jest.fn(() => Promise.resolve())
+    verifyEmail: jest.fn(() => Promise.resolve()),
   };
 
   let wrapper;
@@ -26,11 +26,9 @@ describe('Component: Verify Email Banner', () => {
   });
 
   it('should show success alert on successful email verification', async () => {
-    await wrapper.instance().handleClick();
+    await wrapper.find('Button').simulate('click');
 
     expect(props.verifyEmail).toHaveBeenCalledTimes(1);
-    expect(props.showAlert).toHaveBeenCalledWith(
-      expect.objectContaining({ type: 'success' })
-    );
+    expect(props.showAlert).toHaveBeenCalledWith(expect.objectContaining({ type: 'success' }));
   });
 });

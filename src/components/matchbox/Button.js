@@ -56,6 +56,10 @@ function getVariantProps({ variant, isHibanaEnabled }) {
       case 'monochrome':
         return {
           color: 'gray',
+        };
+      case 'monochrome-secondary':
+        return {
+          color: 'gray',
           outlineBorder: true,
         };
       case 'destructive':
@@ -92,6 +96,7 @@ function getVariantProps({ variant, isHibanaEnabled }) {
       };
     case 'secondary':
     case 'tertiary':
+    case 'monochrome-primary':
     case 'monochrome':
     case 'connected':
     default:

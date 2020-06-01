@@ -7,9 +7,7 @@ exports[`Component: ConfirmationModal should render correctly with basic props 1
   <Panel>
     <Panel.Section />
     <Panel.Section>
-      <ButtonWrapper
-        marginTop="0"
-      >
+      <ButtonWrapper>
         <Button
           name="confirmation-modal-confirm-button"
           onClick={[MockFunction]}

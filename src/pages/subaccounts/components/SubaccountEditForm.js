@@ -45,7 +45,7 @@ export class SubaccountEditForm extends Component {
           </Stack>
         </Panel.Section>
         <Panel.Section>
-          <ButtonWrapper marginTop="0">
+          <ButtonWrapper>
             <Button variant="primary" submit disabled={pristine || submitting || compliance}>
               {submitting ? 'Updating...' : 'Update Subaccount'}
             </Button>

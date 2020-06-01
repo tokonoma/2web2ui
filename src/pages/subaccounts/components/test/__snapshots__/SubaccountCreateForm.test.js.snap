@@ -26,9 +26,7 @@ exports[`api key form 1`] = `
     </Stack>
   </Panel.Section>
   <Panel.Section>
-    <ButtonWrapper
-      marginTop="0"
-    >
+    <ButtonWrapper>
       <Button
         submit={true}
         variant="primary"
@@ -73,9 +71,7 @@ exports[`base case 1`] = `
     </Stack>
   </Panel.Section>
   <Panel.Section>
-    <ButtonWrapper
-      marginTop="0"
-    >
+    <ButtonWrapper>
       <Button
         submit={true}
         variant="primary"
@@ -123,9 +119,7 @@ exports[`has ip pools 1`] = `
     </Stack>
   </Panel.Section>
   <Panel.Section>
-    <ButtonWrapper
-      marginTop="0"
-    >
+    <ButtonWrapper>
       <Button
         submit={true}
         variant="primary"
@@ -180,9 +174,7 @@ exports[`has ip pools and checked checkbox 1`] = `
     </Stack>
   </Panel.Section>
   <Panel.Section>
-    <ButtonWrapper
-      marginTop="0"
-    >
+    <ButtonWrapper>
       <Button
         submit={true}
         variant="primary"
@@ -238,9 +230,7 @@ exports[`submits correctly 1`] = `
     </Stack>
   </Panel.Section>
   <Panel.Section>
-    <ButtonWrapper
-      marginTop="0"
-    >
+    <ButtonWrapper>
       <Button
         disabled={true}
         submit={true}

@@ -210,26 +210,24 @@ Array [
 
 exports[`IP Pools List Page should render the IP warm-up banner correctly 1`] = `
 <Banner
-  my="300"
+  marginBottom="500"
   status="warning"
   title="New dedicated IP addresses need to be warmed up"
 >
   <Box
     maxWidth="1200"
-    mt="200"
   >
     <p>
       In order to establish a positive sending reputation, warm up new dedicated IP addresses by gradually sending more emails.
     </p>
-    <ButtonWrapper>
+    <Banner.Actions>
       <ExternalLink
         as={[Function]}
-        outline={true}
         to="https://support.sparkpost.com/customer/portal/articles/1972209-ip-warm-up-overview"
       >
         Read our IP Warm-up Overview
       </ExternalLink>
-    </ButtonWrapper>
+    </Banner.Actions>
   </Box>
 </Banner>
 `;

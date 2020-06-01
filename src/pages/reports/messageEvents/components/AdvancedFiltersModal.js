@@ -40,7 +40,7 @@ export class AdvancedFiltersModal extends Component {
     const { modalOpen } = this.state;
     return (
       <Fragment>
-        <Button onClick={this.toggleModal} variant="monochrome">
+        <Button onClick={this.toggleModal} variant="monochrome-secondary">
           Add Filters
         </Button>
         <Modal open={modalOpen} onClose={this.toggleModal}>

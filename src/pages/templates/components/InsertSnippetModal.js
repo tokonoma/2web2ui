@@ -4,7 +4,6 @@ import { Button, Label, Modal, Panel, Stack } from 'src/components/matchbox';
 import copy from 'copy-to-clipboard';
 import { PageLink } from 'src/components/links';
 import { Typeahead, TypeaheadItem } from 'src/components/typeahead/Typeahead';
-import { ButtonWrapper } from 'src/components';
 import { PanelLoading } from 'src/components/loading';
 import CopyField from 'src/components/copyField';
 import { slugToFriendly } from 'src/helpers/string';
@@ -66,53 +65,55 @@ const InsertSnippetModal = props => {
 
   return (
     <ModalWrapper {...modalProps}>
-      <Panel title="Add a snippet" sectioned>
+      <Panel title="Add a snippet">
         <form onSubmit={handleSubmit}>
-          <Stack space="500">
-            <p>
-              Snippets are a great way to manage sections like headers or footers that are used
-              across multiple templates. Simply edit your snippet, and that change will populate
-              across all your templates.
-            </p>
+          <Panel.Section>
+            <Stack space="500">
+              <p>
+                Snippets are a great way to manage sections like headers or footers that are used
+                across multiple templates. Simply edit your snippet, and that change will populate
+                across all your templates.
+              </p>
 
-            <Typeahead
-              label="Find a Snippet"
-              disabled={snippets.length === 0}
-              helpText={
-                snippets.length === 0 ? (
-                  <span>
-                    You have not created a snippet.
-                    <PageLink to="/snippets/create">Create your first snippet</PageLink>
-                  </span>
-                ) : (
-                  ''
-                )
-              }
-              itemToString={snippet =>
-                snippet ? `${snippet.name || slugToFriendly(snippet.id)} (${snippet.id})` : ''
-              }
-              name="snippetTypeahead"
-              onChange={handleTypeaheadChange}
-              placeholder={snippets.length === 0 ? '' : 'Type to search...'}
-              renderItem={({ id, name }) => (
-                <TypeaheadItem id={id} label={name || slugToFriendly(id)} />
-              )}
-              results={snippets}
-              data-id="snippet-typeahead"
-            />
+              <Typeahead
+                label="Find a Snippet"
+                disabled={snippets.length === 0}
+                helpText={
+                  snippets.length === 0 ? (
+                    <span>
+                      You have not created a snippet.
+                      <PageLink to="/snippets/create">Create your first snippet</PageLink>
+                    </span>
+                  ) : (
+                    ''
+                  )
+                }
+                itemToString={snippet =>
+                  snippet ? `${snippet.name || slugToFriendly(snippet.id)} (${snippet.id})` : ''
+                }
+                name="snippetTypeahead"
+                onChange={handleTypeaheadChange}
+                placeholder={snippets.length === 0 ? '' : 'Type to search...'}
+                renderItem={({ id, name }) => (
+                  <TypeaheadItem id={id} label={name || slugToFriendly(id)} />
+                )}
+                results={snippets}
+                data-id="snippet-typeahead"
+              />
 
-            <div>
-              <Label id="snippet-copy-field" label="Snippet Code" />
+              <div>
+                <Label id="snippet-copy-field" label="Snippet Code" />
 
-              <CopyField id="snippet-copy-field" value={copyFieldValue} />
-            </div>
-          </Stack>
+                <CopyField id="snippet-copy-field" value={copyFieldValue} />
+              </div>
+            </Stack>
+          </Panel.Section>
 
-          <ButtonWrapper>
+          <Panel.Section>
             <Button variant="primary" onClick={handleSubmit}>
               Copy Code
             </Button>
-          </ButtonWrapper>
+          </Panel.Section>
         </form>
       </Panel>
     </ModalWrapper>

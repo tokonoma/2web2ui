@@ -3,58 +3,60 @@
 exports[`AddForm tests should disable fields when submitting 1`] = `
 <Fragment>
   <form>
-    <Stack>
-      <Box
-        maxWidth="1200"
-      >
-        <Field
-          component={[Function]}
-          label="Email Address"
-          name="recipient"
+    <Panel.Section>
+      <Stack>
+        <Box
+          maxWidth="1200"
+        >
+          <Field
+            component={[Function]}
+            label="Email Address"
+            name="recipient"
+            required={true}
+            validate={
+              Array [
+                [Function],
+                [Function],
+              ]
+            }
+          />
+        </Box>
+        <Box
+          maxWidth="1200"
+        >
+          <Field
+            component={[Function]}
+            disabled={true}
+            helpText="Leaving this field blank will add the suppressions to the master account."
+            name="subaccount"
+          />
+        </Box>
+        <Checkbox.Group
+          label="Type"
           required={true}
-          validate={
-            Array [
-              [Function],
-              [Function],
-            ]
-          }
-        />
-      </Box>
-      <Box
-        maxWidth="1200"
-      >
+        >
+          <Field
+            component={[Function]}
+            label="Transactional"
+            name="types.transactional"
+            type="checkbox"
+          />
+          <Field
+            component={[Function]}
+            label="Non-Transactional"
+            name="types.non_transactional"
+            type="checkbox"
+            validate={[Function]}
+          />
+        </Checkbox.Group>
         <Field
           component={[Function]}
-          disabled={true}
-          helpText="Leaving this field blank will add the suppressions to the master account."
-          name="subaccount"
+          label="Description"
+          name="description"
         />
-      </Box>
-      <Checkbox.Group
-        label="Type"
-        required={true}
-      >
-        <Field
-          component={[Function]}
-          label="Transactional"
-          name="types.transactional"
-          type="checkbox"
-        />
-        <Field
-          component={[Function]}
-          label="Non-Transactional"
-          name="types.non_transactional"
-          type="checkbox"
-          validate={[Function]}
-        />
-      </Checkbox.Group>
-      <Field
-        component={[Function]}
-        label="Description"
-        name="description"
-      />
-    </Stack>
-    <ButtonWrapper>
+      </Stack>
+    </Panel.Section>
+    <Panel.Section>
       <Button
         disabled={true}
         type="submit"
@@ -62,7 +64,7 @@ exports[`AddForm tests should disable fields when submitting 1`] = `
       >
         Add / Update
       </Button>
-    </ButtonWrapper>
+    </Panel.Section>
   </form>
 </Fragment>
 `;
@@ -70,58 +72,60 @@ exports[`AddForm tests should disable fields when submitting 1`] = `
 exports[`AddForm tests should make form submitable when dirty and not submitting 1`] = `
 <Fragment>
   <form>
-    <Stack>
-      <Box
-        maxWidth="1200"
-      >
-        <Field
-          component={[Function]}
-          label="Email Address"
-          name="recipient"
+    <Panel.Section>
+      <Stack>
+        <Box
+          maxWidth="1200"
+        >
+          <Field
+            component={[Function]}
+            label="Email Address"
+            name="recipient"
+            required={true}
+            validate={
+              Array [
+                [Function],
+                [Function],
+              ]
+            }
+          />
+        </Box>
+        <Box
+          maxWidth="1200"
+        >
+          <Field
+            component={[Function]}
+            disabled={false}
+            helpText="Leaving this field blank will add the suppressions to the master account."
+            name="subaccount"
+          />
+        </Box>
+        <Checkbox.Group
+          label="Type"
           required={true}
-          validate={
-            Array [
-              [Function],
-              [Function],
-            ]
-          }
-        />
-      </Box>
-      <Box
-        maxWidth="1200"
-      >
+        >
+          <Field
+            component={[Function]}
+            label="Transactional"
+            name="types.transactional"
+            type="checkbox"
+          />
+          <Field
+            component={[Function]}
+            label="Non-Transactional"
+            name="types.non_transactional"
+            type="checkbox"
+            validate={[Function]}
+          />
+        </Checkbox.Group>
         <Field
           component={[Function]}
-          disabled={false}
-          helpText="Leaving this field blank will add the suppressions to the master account."
-          name="subaccount"
+          label="Description"
+          name="description"
         />
-      </Box>
-      <Checkbox.Group
-        label="Type"
-        required={true}
-      >
-        <Field
-          component={[Function]}
-          label="Transactional"
-          name="types.transactional"
-          type="checkbox"
-        />
-        <Field
-          component={[Function]}
-          label="Non-Transactional"
-          name="types.non_transactional"
-          type="checkbox"
-          validate={[Function]}
-        />
-      </Checkbox.Group>
-      <Field
-        component={[Function]}
-        label="Description"
-        name="description"
-      />
-    </Stack>
-    <ButtonWrapper>
+      </Stack>
+    </Panel.Section>
+    <Panel.Section>
       <Button
         disabled={false}
         type="submit"
@@ -129,7 +133,7 @@ exports[`AddForm tests should make form submitable when dirty and not submitting
       >
         Add / Update
       </Button>
-    </ButtonWrapper>
+    </Panel.Section>
   </form>
 </Fragment>
 `;
@@ -137,58 +141,60 @@ exports[`AddForm tests should make form submitable when dirty and not submitting
 exports[`AddForm tests should render add form 1`] = `
 <Fragment>
   <form>
-    <Stack>
-      <Box
-        maxWidth="1200"
-      >
-        <Field
-          component={[Function]}
-          label="Email Address"
-          name="recipient"
+    <Panel.Section>
+      <Stack>
+        <Box
+          maxWidth="1200"
+        >
+          <Field
+            component={[Function]}
+            label="Email Address"
+            name="recipient"
+            required={true}
+            validate={
+              Array [
+                [Function],
+                [Function],
+              ]
+            }
+          />
+        </Box>
+        <Box
+          maxWidth="1200"
+        >
+          <Field
+            component={[Function]}
+            disabled={false}
+            helpText="Leaving this field blank will add the suppressions to the master account."
+            name="subaccount"
+          />
+        </Box>
+        <Checkbox.Group
+          label="Type"
           required={true}
-          validate={
-            Array [
-              [Function],
-              [Function],
-            ]
-          }
-        />
-      </Box>
-      <Box
-        maxWidth="1200"
-      >
+        >
+          <Field
+            component={[Function]}
+            label="Transactional"
+            name="types.transactional"
+            type="checkbox"
+          />
+          <Field
+            component={[Function]}
+            label="Non-Transactional"
+            name="types.non_transactional"
+            type="checkbox"
+            validate={[Function]}
+          />
+        </Checkbox.Group>
         <Field
           component={[Function]}
-          disabled={false}
-          helpText="Leaving this field blank will add the suppressions to the master account."
-          name="subaccount"
+          label="Description"
+          name="description"
         />
-      </Box>
-      <Checkbox.Group
-        label="Type"
-        required={true}
-      >
-        <Field
-          component={[Function]}
-          label="Transactional"
-          name="types.transactional"
-          type="checkbox"
-        />
-        <Field
-          component={[Function]}
-          label="Non-Transactional"
-          name="types.non_transactional"
-          type="checkbox"
-          validate={[Function]}
-        />
-      </Checkbox.Group>
-      <Field
-        component={[Function]}
-        label="Description"
-        name="description"
-      />
-    </Stack>
-    <ButtonWrapper>
+      </Stack>
+    </Panel.Section>
+    <Panel.Section>
       <Button
         disabled={true}
         type="submit"
@@ -196,7 +202,7 @@ exports[`AddForm tests should render add form 1`] = `
       >
         Add / Update
       </Button>
-    </ButtonWrapper>
+    </Panel.Section>
   </form>
 </Fragment>
 `;

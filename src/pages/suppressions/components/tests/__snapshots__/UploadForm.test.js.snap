@@ -3,48 +3,50 @@
 exports[`UploadForm tests should disable fields when submitting 1`] = `
 <Fragment>
   <form>
-    <Stack>
-      <Field
-        component={[Function]}
-        disabled={true}
-        fileType="csv"
-        helpText={
-          <span>
-            You can download an
-             
-            <DownloadLink
-              href="example-suppressions-list.csv"
-            >
-              example file here
-            </DownloadLink>
-             
-            to use when formatting your list of suppressions for upload.
-          </span>
-        }
-        label="CSV File of Suppressions"
-        name="suppressionsFile"
-        required={true}
-        validate={
-          Array [
-            [Function],
-            [Function],
-            [Function],
-            [Function],
-          ]
-        }
-      />
-      <Box
-        maxWidth="1200"
-      >
+    <Panel.Section>
+      <Stack>
         <Field
           component={[Function]}
           disabled={true}
-          helpText="Leaving this field blank will add the suppressions to the master account."
-          name="subaccount"
+          fileType="csv"
+          helpText={
+            <span>
+              You can download an
+               
+              <DownloadLink
+                href="example-suppressions-list.csv"
+              >
+                example file here
+              </DownloadLink>
+               
+              to use when formatting your list of suppressions for upload.
+            </span>
+          }
+          label="CSV File of Suppressions"
+          name="suppressionsFile"
+          required={true}
+          validate={
+            Array [
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+            ]
+          }
         />
-      </Box>
-    </Stack>
-    <ButtonWrapper>
+        <Box
+          maxWidth="1200"
+        >
+          <Field
+            component={[Function]}
+            disabled={true}
+            helpText="Leaving this field blank will add the suppressions to the master account."
+            name="subaccount"
+          />
+        </Box>
+      </Stack>
+    </Panel.Section>
+    <Panel.Section>
       <Button
         disabled={true}
         type="submit"
@@ -52,7 +54,7 @@ exports[`UploadForm tests should disable fields when submitting 1`] = `
       >
         Upload
       </Button>
-    </ButtonWrapper>
+    </Panel.Section>
   </form>
 </Fragment>
 `;
@@ -60,48 +62,50 @@ exports[`UploadForm tests should disable fields when submitting 1`] = `
 exports[`UploadForm tests should render upload form 1`] = `
 <Fragment>
   <form>
-    <Stack>
-      <Field
-        component={[Function]}
-        disabled={false}
-        fileType="csv"
-        helpText={
-          <span>
-            You can download an
-             
-            <DownloadLink
-              href="example-suppressions-list.csv"
-            >
-              example file here
-            </DownloadLink>
-             
-            to use when formatting your list of suppressions for upload.
-          </span>
-        }
-        label="CSV File of Suppressions"
-        name="suppressionsFile"
-        required={true}
-        validate={
-          Array [
-            [Function],
-            [Function],
-            [Function],
-            [Function],
-          ]
-        }
-      />
-      <Box
-        maxWidth="1200"
-      >
+    <Panel.Section>
+      <Stack>
         <Field
           component={[Function]}
           disabled={false}
-          helpText="Leaving this field blank will add the suppressions to the master account."
-          name="subaccount"
+          fileType="csv"
+          helpText={
+            <span>
+              You can download an
+               
+              <DownloadLink
+                href="example-suppressions-list.csv"
+              >
+                example file here
+              </DownloadLink>
+               
+              to use when formatting your list of suppressions for upload.
+            </span>
+          }
+          label="CSV File of Suppressions"
+          name="suppressionsFile"
+          required={true}
+          validate={
+            Array [
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+            ]
+          }
         />
-      </Box>
-    </Stack>
-    <ButtonWrapper>
+        <Box
+          maxWidth="1200"
+        >
+          <Field
+            component={[Function]}
+            disabled={false}
+            helpText="Leaving this field blank will add the suppressions to the master account."
+            name="subaccount"
+          />
+        </Box>
+      </Stack>
+    </Panel.Section>
+    <Panel.Section>
       <Button
         disabled={false}
         type="submit"
@@ -109,7 +113,7 @@ exports[`UploadForm tests should render upload form 1`] = `
       >
         Upload
       </Button>
-    </ButtonWrapper>
+    </Panel.Section>
   </form>
 </Fragment>
 `;

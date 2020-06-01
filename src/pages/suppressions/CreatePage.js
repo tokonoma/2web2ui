@@ -55,7 +55,7 @@ export class CreatePage extends Component {
               }))}
             />
           </TabsWrapper>
-          <Panel.Section>{selectedTab === 1 ? <UploadForm /> : <AddForm />}</Panel.Section>
+          {selectedTab === 1 ? <UploadForm /> : <AddForm />}
         </Panel>
       </Page>
     );

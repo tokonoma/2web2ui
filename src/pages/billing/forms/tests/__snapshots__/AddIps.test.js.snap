@@ -54,9 +54,7 @@ exports[`AddIps renders correctly when user reaches max ip limit 1`] = `
       </Stack>
     </Panel.Section>
     <Panel.Section>
-      <ButtonWrapper
-        marginTop="0"
-      >
+      <ButtonWrapper>
         <Button
           disabled={true}
           type="submit"
@@ -137,9 +135,7 @@ exports[`AddIps renders correctly with default props 1`] = `
       </Stack>
     </Panel.Section>
     <Panel.Section>
-      <ButtonWrapper
-        marginTop="0"
-      >
+      <ButtonWrapper>
         <Button
           disabled={false}
           type="submit"
@@ -229,9 +225,7 @@ exports[`AddIps renders free ip elements when included in plan 1`] = `
       </Stack>
     </Panel.Section>
     <Panel.Section>
-      <ButtonWrapper
-        marginTop="0"
-      >
+      <ButtonWrapper>
         <Button
           disabled={false}
           type="submit"

@@ -150,7 +150,7 @@ export class MessageEventsPageComponent extends Component {
       return <PanelLoading />;
     }
     const perPageProps = isHibanaEnabled ? {} : { className: styles.RightAlignedButtons };
-    const saveCSVProps = isHibanaEnabled ? { variant: 'monochrome' } : {};
+    const saveCSVProps = isHibanaEnabled ? { variant: 'monochrome-secondary' } : {};
     const content = empty ? (
       <Empty message={emptyMessage} />
     ) : (

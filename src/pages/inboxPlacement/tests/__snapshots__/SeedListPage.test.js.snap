@@ -91,9 +91,7 @@ exports[`Page: SeedList tests renders page correctly with defaults 1`] = `
       </Stack>
     </Panel.Section>
     <Panel.Section>
-      <ButtonWrapper
-        marginTop="0"
-      >
+      <ButtonWrapper>
         <CopyToClipboard
           value=""
           variant="primary"
