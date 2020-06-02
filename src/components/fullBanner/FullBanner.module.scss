@@ -1,0 +1,52 @@
+@import '~@sparkpost/matchbox/src/styles/config.scss';
+
+.FullBanner {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: white;
+  background-color: color(orange, base);
+  height: rem(50);
+  padding: 0 spacing();
+}
+
+.FullBannerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.CloseButton {
+  position: absolute;
+  padding: spacing(smaller);
+  right: 0;
+  top: 50%;
+  transform: translate(-50%, -50%); // Vertical centering hack
+  color: white;
+
+  &:hover,
+  &:focus {
+    position: absolute; // Overrides some styles stemming from Matchbox
+    background: transparent;
+    color: white;
+    outline-color: white;
+  }
+}
+
+.Icon {
+  display: inline-block;
+  margin-right: spacing(small);
+}
+
+.Link.Link {
+  text-decoration: underline;
+  font-size: 0.875rem;
+  margin: 0 spacing(small);
+  color: white;
+
+  &:hover,
+  &:focus {
+    color: white;
+  }
+}

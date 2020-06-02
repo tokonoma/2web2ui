@@ -4,4 +4,4 @@ export { default as HibanaToggle } from './HibanaToggle';
 export { default as OGOnlyWrapper } from './OGOnlyWrapper';
 export { default as HibanaDescription } from './HibanaDescription';
 export { default as HibanaStyleHandler } from './HibanaStyleHandler';
-export { default as Navigation } from './Navigation';
+export { default as Header } from './Header';

@@ -1,6 +1,8 @@
 @import '~@sparkpost/design-tokens-hibana/tokens';
 @import 'src/styles/resets';
 
+$logo-width: 150px;
+
 .DesktopNavigation {
   background-color: color(white);
   display: none;
@@ -11,7 +13,7 @@
 }
 
 .Wrapper {
-  padding: spacing(200) spacing(400);
+  padding: spacing(400);
 }
 
 .SubWrapper {
@@ -22,10 +24,8 @@
 
 .PrimaryNavLayout {
   display: grid;
-  grid-template-columns: 175px auto auto;
+  grid-template-columns: $logo-width auto auto;
   grid-gap: spacing(600);
-  padding-top: spacing(400);
-  padding-bottom: spacing(400);
 }
 
 // Some specificity issues with links
@@ -56,7 +56,7 @@
 }
 
 .Logo {
-  width: 175px;
+  width: $logo-width;
   max-height: 50px;
   transform: translateY(-#{spacing(100)}); // Bumps up logo so top of flame moves in to padding
 }
@@ -105,7 +105,5 @@
 }
 
 .SecondaryNav {
-  padding-top: spacing(200);
-  padding-bottom: spacing(200);
   background-color: color(gray, 900);
 }

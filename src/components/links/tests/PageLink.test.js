@@ -29,4 +29,11 @@ describe('PageLink', () => {
     const wrapper = subject({ as: Button });
     expect(wrapper).toHaveDisplayName('Button');
   });
+
+  it('warns the developer if a click handler is supplied', () => {
+    const consoleWarningSpy = jest.spyOn(console, 'warn');
+    subject({ onClick: jest.fn() });
+
+    expect(consoleWarningSpy).toHaveBeenCalled();
+  });
 });

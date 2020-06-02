@@ -134,7 +134,7 @@ $header-height: spacing(800);
 
 .MenuMeta {
   background-color: color(white);
-  color: color(purple, 700);
+  color: scale-color(color(brand, orange), $lightness: -25%);
   padding: spacing(400);
 }
 

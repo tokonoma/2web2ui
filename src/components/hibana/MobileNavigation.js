@@ -57,14 +57,12 @@ function MobileNavigation(props) {
         <Menu.Wrapper onOverlayClick={handleToggle} isOpen={isOpen}>
           {currentUser && (
             <div className={styles.MenuMeta}>
-              {(currentUser.email || currentUser.customer) && (
-                <div className={styles.MenuUserInfo}>
-                  {currentUser.email ? currentUser.email : currentUser.customer}
-                </div>
-              )}
+              {currentUser.email && <div className={styles.MenuUserInfo}>{currentUser.email}</div>}
 
-              {currentUser.access_level && (
-                <div className={styles.MenuUserSupplemental}>{currentUser.access_level}</div>
+              {(currentUser.customer || currentUser.access_level) && (
+                <div className={styles.MenuUserSupplemental}>
+                  {currentUser.customer ? currentUser.customer : currentUser.access_level}
+                </div>
               )}
             </div>
           )}

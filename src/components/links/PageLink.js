@@ -4,11 +4,20 @@ import PropTypes from 'prop-types';
 import { Button, UnstyledLink } from 'src/components/matchbox';
 
 // Link to a page in our application
-const PageLink = ({ as: Component = UnstyledLink, children, ...props }) => (
-  <Component {...props} component={Link}>
-    {children}
-  </Component>
-);
+const PageLink = ({ as: Component = UnstyledLink, children, ...props }) => {
+  if (props.onClick) {
+    /* eslint-disable-next-line */
+    console.warn(
+      'Invalid prop `onClick` - avoid attaching click handlers to links. Use the `ButtonLink` component instead.',
+    );
+  }
+
+  return (
+    <Component {...props} component={Link}>
+      {children}
+    </Component>
+  );
+};
 
 PageLink.propTypes = {
   as: PropTypes.oneOf([Button, UnstyledLink]),

@@ -1,0 +1,26 @@
+{
+  "results": {
+    "anniversary_date": "2020-05-07T08:00:00.000Z",
+    "company_name": null,
+    "country_code": "",
+    "created": "2020-05-07T17:51:54.006Z",
+    "customer_id": 123,
+    "service_level": "standard",
+    "status": "active",
+    "status_reason_category": "",
+    "status_updated": "2020-05-07T17:51:54.006Z",
+    "tfa_required": false,
+    "updated": "2020-05-18T18:13:34.384Z",
+    "subscription": {
+      "code": "free500-0419",
+      "name": "Free",
+      "plan_volume": 500,
+      "period": "month",
+      "recurring_charge": 0,
+      "self_serve": true,
+      "type": "default"
+    },
+    "options": { "ui": { "hibana": { "hasThemeControls": true } } },
+    "support": { "phone": false, "online": true }
+  }
+}

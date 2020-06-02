@@ -11,6 +11,7 @@ const UnstyledLink = props => {
   if (!isHibanaEnabled) {
     return <OGUnstyledLink {...omitSystemProps(props)} />;
   }
+
   return <HibanaUnstyledLink {...props} />;
 };
 

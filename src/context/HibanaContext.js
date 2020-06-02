@@ -10,10 +10,6 @@ const initialState = {
   isHibanaEnabled: process.env.REACT_APP_DEFAULT_TO_HIBANA === 'true' ? true : false,
 };
 
-function useHibana() {
-  return [useHibanaState(), useHibanaDispatch()];
-}
-
 function hibanaReducer(state, action) {
   switch (action.type) {
     case 'ENABLE': {
@@ -57,6 +53,10 @@ function useHibanaDispatch() {
     throw new Error('useHibanaDispatch must be used within a HibanaProvider');
 
   return context;
+}
+
+function useHibana() {
+  return [useHibanaState(), useHibanaDispatch()];
 }
 
 export { HibanaProvider, HibanaConsumer, useHibana };

@@ -6,7 +6,12 @@ import UnstyledLink from '../UnstyledLink';
 jest.mock('src/context/HibanaContext');
 
 describe('UnstyledLink Matchbox component wrapper', () => {
-  const subject = () => shallow(<UnstyledLink to="/test">Children...</UnstyledLink>);
+  const subject = props =>
+    shallow(
+      <UnstyledLink to="/test" {...props}>
+        Children...
+      </UnstyledLink>,
+    );
 
   it('renders the Hibana version of the UnstyledLink component correctly when hibana is enabled', () => {
     useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: true }]);

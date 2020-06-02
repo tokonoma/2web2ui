@@ -1,4 +1,15 @@
-import { OpenInNew, ExitToApp } from '@sparkpost/matchbox-icons';
+import {
+  OpenInNew,
+  ExitToApp,
+  Person,
+  Settings,
+  CreditCard,
+  People,
+  Dashboard,
+  Lock,
+  AddAlert,
+  HelpOutline,
+} from '@sparkpost/matchbox-icons';
 import { LINKS } from 'src/constants';
 import { openSupportPanel } from 'src/actions/support';
 import { isHeroku } from 'src/helpers/conditions/user';
@@ -37,21 +48,20 @@ const profile = {
   section: 1,
 };
 
-const billingLinks = [
-  {
-    label: 'Billing',
-    to: '/account/billing',
-    section: 1,
-    condition: any(onPlan('free500-0419'), onPlan('free500-SPCEU-0419')), //on free plan
-    secondaryLabel: 'Upgrade',
-  },
-  {
-    label: 'Billing',
-    to: '/account/billing',
-    section: 1,
-    condition: not(any(onPlan('free500-0419'), onPlan('free500-SPCEU-0419'))), //not on free plan
-  },
-];
+const billingFreePlan = {
+  label: 'Billing',
+  to: '/account/billing',
+  section: 1,
+  condition: any(onPlan('free500-0419'), onPlan('free500-SPCEU-0419')), // on free plan
+  secondaryLabel: 'Upgrade',
+};
+
+const billingPaidPlan = {
+  label: 'Billing',
+  to: '/account/billing',
+  section: 1,
+  condition: not(any(onPlan('free500-0419'), onPlan('free500-SPCEU-0419'))), // not on free plan
+};
 
 const manageUsers = {
   label: 'Manage Users',
@@ -116,7 +126,8 @@ const logOut = {
 export const accountNavItems = [
   accountSettings,
   profile,
-  ...billingLinks,
+  billingFreePlan,
+  billingPaidPlan,
   manageUsers,
   dataAndPrivacy,
   getHelp,
@@ -125,16 +136,44 @@ export const accountNavItems = [
 ];
 
 export const hibanaAccountNavItems = [
-  profile,
-  accountSettings,
+  {
+    ...profile,
+    icon: Person,
+  },
+  {
+    ...accountSettings,
+    icon: Settings,
+  },
   // myPlan, // In the mock, but doesn't exist yet?
   // usage,  // In the mock, but doesn't exist yet?
-  ...billingLinks,
-  users,
-  dataAndPrivacy,
-  subaccounts,
-  alerts,
-  help,
+  {
+    ...billingFreePlan,
+    icon: CreditCard,
+  },
+  {
+    ...billingPaidPlan,
+    icon: CreditCard,
+  },
+  {
+    ...users,
+    icon: People,
+  },
+  {
+    ...dataAndPrivacy,
+    icon: Lock,
+  },
+  {
+    ...subaccounts,
+    icon: Dashboard, // TODO: This will be replaced by a different icon
+  },
+  {
+    ...alerts,
+    icon: AddAlert, // TODO: This will be replaced by a different icon
+  },
+  {
+    ...help,
+    icon: HelpOutline,
+  },
   APIDocs,
   logOut,
 ];

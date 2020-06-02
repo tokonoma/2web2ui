@@ -33,7 +33,7 @@
 .AccountPopoverHeader {
   padding: spacing(200) spacing(400);
   background-color: color(white);
-  color: color(purple, 800);
+  color: scale-color(color(brand, orange), $lightness: -25%);
   overflow: hidden;
   border-bottom: 1px solid color(gray, 300);
   border-radius: border-radius(200) border-radius(200) 0 0;
@@ -56,4 +56,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.PopoverItemSecondaryLabel {
+  color: color(blue, 800);
 }

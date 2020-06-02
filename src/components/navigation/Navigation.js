@@ -15,7 +15,7 @@ import PendingCancelGlobalBanner from 'src/pages/billing/components/PendingCance
 
 export class Navigation extends Component {
   state = {
-    open: false
+    open: false,
   };
 
   renderItems({ mobile }) {
@@ -34,21 +34,23 @@ export class Navigation extends Component {
   renderNav = ({ mobile }) => {
     const asideClasses = classnames(styles.Aside, mobile && styles.mobile);
     const listClasses = classnames(styles.List, mobile && styles.mobile);
-    const navClasses = classnames(styles.Navigation, mobile && styles.mobile, this.state.open && styles.show);
+    const navClasses = classnames(
+      styles.Navigation,
+      mobile && styles.mobile,
+      this.state.open && styles.show,
+    );
     const overlayClasses = classnames(styles.Overlay, this.state.open && styles.show);
     const wrapperClasses = classnames(styles.Wrapper, this.props.bannerOpen && styles.bannerOpen);
 
     return (
       <Fragment>
-        {mobile && <div className={overlayClasses} onClick={this.toggleMobileNav}/>}
+        {mobile && <div className={overlayClasses} onClick={this.toggleMobileNav} />}
         <Top toggleMobileNav={this.toggleMobileNav} open={this.state.open} />
         <div className={asideClasses}>
-          {this.props.bannerOpen && (
-            <PendingCancelGlobalBanner />
-          )}
+          {this.props.bannerOpen && <PendingCancelGlobalBanner />}
           <nav className={navClasses}>
             <div className={wrapperClasses}>
-              <ul className={listClasses} data-id='navigation-list'>
+              <ul className={listClasses} data-id="navigation-list">
                 {this.renderItems({ mobile })}
               </ul>
             </div>
@@ -63,6 +65,8 @@ export class Navigation extends Component {
   }
 }
 
-export default withRouter(connect((state) => ({
-  navItems: selectNavItems(state)
-}))(withContext(BannerContext, Navigation)));
+export default withRouter(
+  connect(state => ({
+    navItems: selectNavItems(state),
+  }))(withContext(BannerContext, Navigation)),
+);

@@ -2,8 +2,8 @@ import React from 'react';
 import ErrorBoundary from 'src/components/errorBoundaries/ErrorBoundary';
 import { Provider } from 'react-redux';
 import Poll from 'src/context/Poll';
-import { HibanaProvider } from 'src/context/HibanaContext';
 import { ThemeProvider } from 'src/components/matchbox';
+import { HibanaProvider } from 'src/context/HibanaContext';
 
 const reloadApp = () => {
   window.location.reload(true);

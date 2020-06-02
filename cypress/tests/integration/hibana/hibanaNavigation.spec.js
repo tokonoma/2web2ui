@@ -4,6 +4,7 @@ if (Cypress.env('DEFAULT_TO_HIBANA') === true) {
     const secondaryNavSelector = '[data-id="secondary-navigation"]';
     const mobileNavSelector = '[data-id="mobile-navigation"]';
     const accountActionlistSelector = '[data-id="desktop-navigation-account-actionlist"]';
+    const accountPopoverSelector = '[data-id="desktop-navigation-account-popover"]';
     const accountPopoverTriggerSelector = '[data-id="desktop-navigation-account-popover-trigger"]';
 
     function commonBeforeSteps() {
@@ -190,8 +191,28 @@ if (Cypress.env('DEFAULT_TO_HIBANA') === true) {
           fixture: 'account/cancellation-request/200.delete.json',
         });
 
-        cy.findByText("Don't Cancel").click();
+        cy.findByText('Don’t Cancel').click();
         cy.findByText('Your account will not be cancelled.').should('be.visible');
+      });
+    });
+
+    it("renders the upgrade banner when the user's account is on a free plan", () => {
+      cy.stubAuth();
+
+      cy.stubRequest({
+        url: '/api/v1/account*',
+        fixture: 'account/200.get.free-plan.json',
+      });
+
+      cy.login({ isStubbed: true });
+      cy.visit('/');
+
+      cy.findByText(
+        'Gain access to all of the features we have to offer and increase your sending limits!',
+      ).should('be.visible');
+      cy.verifyLink({
+        href: '/account/billing/plan',
+        content: 'Upgrade Now',
       });
     });
 
@@ -224,6 +245,8 @@ if (Cypress.env('DEFAULT_TO_HIBANA') === true) {
         toggleMobileMenu();
 
         cy.get(mobileNavSelector).within(() => {
+          cy.findByText('mockuser@example.com');
+          cy.findByText('107'); // The user's Customer ID
           cy.findByText('Signals Analytics').click();
           cy.verifyLink({ content: 'Summary', href: '/reports/summary' });
           cy.verifyLink({ content: 'Bounce', href: '/reports/bounce' });
@@ -393,6 +416,11 @@ if (Cypress.env('DEFAULT_TO_HIBANA') === true) {
         commonBeforeSteps();
         toggleAccountMenu();
 
+        cy.get(accountPopoverSelector).within(() => {
+          cy.findByText('mockuser@example.com').should('be.visible');
+          cy.findByText('107').should('be.visible'); // The user's Customer ID
+        });
+
         cy.get(accountActionlistSelector).within(() => {
           cy.verifyLink({ content: 'Profile', href: '/account/profile' });
           cy.verifyLink({ content: 'Alerts', href: '/alerts' });
@@ -406,6 +434,11 @@ if (Cypress.env('DEFAULT_TO_HIBANA') === true) {
         stubGrantsRequest({ role: 'reporting' });
         commonBeforeSteps();
         toggleAccountMenu();
+
+        cy.get(accountPopoverSelector).within(() => {
+          cy.findByText('mockuser@example.com').should('be.visible');
+          cy.findByText('107').should('be.visible'); // The user's Customer ID
+        });
 
         cy.get(accountActionlistSelector).within(() => {
           cy.verifyLink({ content: 'Profile', href: '/account/profile' });
@@ -421,6 +454,11 @@ if (Cypress.env('DEFAULT_TO_HIBANA') === true) {
         commonBeforeSteps();
         toggleAccountMenu();
 
+        cy.get(accountPopoverSelector).within(() => {
+          cy.findByText('mockuser@example.com').should('be.visible');
+          cy.findByText('107').should('be.visible'); // The user's Customer ID
+        });
+
         cy.get(accountActionlistSelector).within(() => {
           cy.verifyLink({ content: 'Profile', href: '/account/profile' });
           cy.verifyLink({ content: 'Subaccounts', href: '/account/subaccounts' });
@@ -428,6 +466,20 @@ if (Cypress.env('DEFAULT_TO_HIBANA') === true) {
           cy.findByText('Help').should('be.visible');
           cy.verifyLink({ content: 'API Docs', href: 'https://developers.sparkpost.com/api' });
           cy.findByText('Log Out').should('be.visible');
+        });
+      });
+
+      it('renders with the "Upgrade" text when the user is on a free plan', () => {
+        stubGrantsRequest({ role: 'admin' });
+        cy.stubRequest({
+          url: '/api/v1/account*',
+          fixture: 'account/200.get.free-plan.json',
+        });
+        cy.visit('/');
+        toggleAccountMenu();
+
+        cy.get(accountActionlistSelector).within(() => {
+          cy.findByText('Upgrade').should('be.visible');
         });
       });
     });

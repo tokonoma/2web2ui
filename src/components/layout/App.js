@@ -2,12 +2,12 @@ import React from 'react';
 import ScrollToTop from './ScrollToTop';
 import cx from 'classnames';
 import Navigation from 'src/components/navigation/Navigation';
-import { Navigation as HibanaNavigation } from 'src/components/hibana';
+import { Header as HibanaHeader } from 'src/components/hibana';
 import WindowSize from 'src/context/WindowSize';
 import OGStyles from './Layout.module.scss';
 import hibanaStyles from './LayoutHibana.module.scss';
-import withContext from 'src/context/withContext';
 import { BannerContext } from 'src/context/GlobalBanner';
+import withContext from 'src/context/withContext';
 import { useHibana } from 'src/context/HibanaContext';
 import useHibanaOverride from 'src/hooks/useHibanaOverride';
 
@@ -19,7 +19,7 @@ export const App = ({ children, bannerOpen }) => {
   return (
     <WindowSize>
       <div className={cx(styles.wrapper, styles.app)}>
-        {isHibanaEnabled ? <HibanaNavigation className={styles.header} /> : <Navigation />}
+        {isHibanaEnabled ? <HibanaHeader className={styles.header} /> : <Navigation />}
 
         <main
           role="main"

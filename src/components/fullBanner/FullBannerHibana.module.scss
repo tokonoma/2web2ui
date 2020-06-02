@@ -1,0 +1,33 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.FullBanner {
+  color: color(white);
+  background-color: color(blue, 700);
+  height: spacing(700);
+  padding: 0 spacing(400);
+}
+
+.CloseButton {
+  color: color(white);
+  padding: spacing(100);
+
+  &:hover,
+  &:focus {
+    color: color(white);
+    outline-color: color(white);
+  }
+}
+
+.Icon {
+  margin-right: spacing(200);
+}
+
+.Link.Link {
+  font-size: font-size(300);
+  margin: 0 spacing(200);
+
+  &:hover,
+  &:focus {
+    color: color(white);
+  }
+}

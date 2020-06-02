@@ -27,14 +27,17 @@ function AccountPopover(props) {
       >
         {currentUser && (
           <div className={styles.AccountPopoverHeader}>
-            {(currentUser.email || currentUser.customer) && (
+            {currentUser.email && (
               <div className={styles.AccountPopoverUserInfo}>
-                {currentUser.email ? shrinkToFit(currentUser.email, 25) : currentUser.customer}
+                {shrinkToFit(currentUser.email, 25)}
               </div>
             )}
 
-            {currentUser.access_level && (
-              <div className={styles.AccountPopoverSupplemental}>{currentUser.access_level}</div>
+            {/* Render the customer ID where available, otherwise their role */}
+            {(currentUser.customer || currentUser.access_level) && (
+              <div className={styles.AccountPopoverSupplemental}>
+                {currentUser.customer ? currentUser.customer : currentUser.access_level}
+              </div>
             )}
           </div>
         )}
@@ -102,11 +105,20 @@ function PopoverItem({ item }) {
 
   return (
     <div className={styles.PopoverItem}>
-      {label}
+      {/* Extra `div` needed to appropriately handle flexbox properties */}
+      <div>
+        {label}
 
-      {Icon && <Icon className={styles.PopoverItemIcon} size={15} />}
+        {secondaryLabel && (
+          <span>
+            <span role="presentation"> / </span>
 
-      {secondaryLabel && <div>{secondaryLabel}</div>}
+            <span className={styles.PopoverItemSecondaryLabel}>{secondaryLabel}</span>
+          </span>
+        )}
+      </div>
+
+      {Icon && <Icon size={18} />}
     </div>
   );
 }
