@@ -57,6 +57,7 @@ Array [
 exports[`metrics helpers should get metrics from keys 1`] = `
 Array [
   Object {
+    "category": "Delivery",
     "description": "Total number of delays due to any temporary failure.",
     "inSummary": true,
     "key": "count_delayed",
@@ -67,6 +68,7 @@ Array [
     "unit": "number",
   },
   Object {
+    "category": "Injection",
     "description": "Messages either injected to or received by SparkPost.",
     "inSummary": true,
     "key": "count_injected",

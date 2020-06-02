@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { refreshSummaryReport } from 'src/actions/summaryChart';
-import { refreshReportOptions } from 'src/actions/reportOptions';
-import { Button, Grid, Page, Panel } from 'src/components/matchbox';
+import { Page, Panel } from 'src/components/matchbox';
 import { Loading } from 'src/components';
-import { list as metricsList } from 'src/config/metrics';
-import { Table, MetricsModal, ChartGroup } from '../reports/summary/components'; //TODO: Remove usage of these components
-import ReportOptions from './components/ReportOptions';
+import { Table, ChartGroup } from '../reports/summary/components'; //TODO: Remove usage of these components
+import { ReportOptions } from './components';
 import {
   selectSummaryChartSearchOptions,
   selectSummaryMetricsProcessed,
@@ -20,12 +18,10 @@ export function ReportBuilder({
   reportOptions,
   summarySearchOptions = {},
   refreshSummaryReport,
-  refreshReportOptions,
 }) {
   useEffect(() => {
     refreshSummaryReport(reportOptions);
   }, [refreshSummaryReport, reportOptions]);
-  const [metricsModal, setMetricsModal] = useState(false);
 
   const renderLoading = () => {
     if (chart.chartLoading) {
@@ -37,15 +33,6 @@ export function ReportBuilder({
     }
   };
 
-  const handleMetricsApply = selectedMetrics => {
-    setMetricsModal(false);
-    refreshReportOptions({ metrics: selectedMetrics });
-  };
-
-  const handleMetricsModal = () => {
-    setMetricsModal(!metricsModal);
-  };
-
   const { to } = summarySearchOptions;
   //TODO: Make sure to replace these components with new ones
   return (
@@ -53,15 +40,6 @@ export function ReportBuilder({
       <ReportOptions reportLoading={chart.chartLoading} searchOptions={summarySearchOptions} />
       <div data-id="summary-chart">
         <Panel>
-          <Panel.Section>
-            <Grid>
-              <div className={styles.SelectMetrics}>
-                <Button size="small" onClick={handleMetricsModal}>
-                  Select Metrics
-                </Button>
-              </div>
-            </Grid>
-          </Panel.Section>
           <Panel.Section
             className={classnames(styles.ChartSection, chart.chartLoading && styles.pending)}
           >
@@ -74,14 +52,6 @@ export function ReportBuilder({
       <div data-id="summary-table">
         <Table />
       </div>
-
-      <MetricsModal
-        maxMetrics={metricsList.length + 1}
-        selectedMetrics={processedMetrics}
-        open={metricsModal}
-        onCancel={handleMetricsModal}
-        onSubmit={handleMetricsApply}
-      />
     </Page>
   );
 }
@@ -95,7 +65,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  refreshReportOptions,
   refreshSummaryReport,
 };
 
