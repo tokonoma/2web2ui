@@ -51,6 +51,14 @@ describe('ZuoraApiError', () => {
     expect(error).toHaveProperty('message', "'termType' value should be one of: TERMED, EVERGREEN");
   });
 
+  it('returns a network error if no axios response', () => {
+    const error = createTestError();
+    expect(error).toHaveProperty(
+      'message',
+      'You may be having network issues or an adblocker may be blocking part of the app.',
+    );
+  });
+
   it('returns extra properties', () => {
     const error = createTestError({
       extra: 'shh',
