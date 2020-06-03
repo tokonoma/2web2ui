@@ -413,7 +413,9 @@ describe('Billing Page', () => {
           cy.findAllByText(/Update Payment Information */i)
             .last()
             .click();
-          cy.findByText('Something went wrong.').should('be.visible');
+          cy.findByText("'termType' value should be one of: TERMED, EVERGREEN").should(
+            'be.visible',
+          );
         });
 
         it('reports error to sentry when zuora errors with 4xx or 5xx', () => {
@@ -453,7 +455,9 @@ describe('Billing Page', () => {
           cy.findAllByText(/Update Payment Information */i)
             .last()
             .click();
-          cy.findByText('An error occurred while contacting zuora').should('be.visible');
+          cy.findByText('An error occurred while contacting the billing service').should(
+            'be.visible',
+          );
         });
       });
     });
