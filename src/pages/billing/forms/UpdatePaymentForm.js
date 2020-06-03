@@ -10,7 +10,6 @@ import { Button, Panel } from 'src/components/matchbox';
 import { ButtonWrapper } from 'src/components';
 import PaymentForm from 'src/components/billing/PaymentForm';
 import BillingAddressForm from 'src/components/billing/BillingAddressForm';
-import ErrorTracker from 'src/helpers/errorTracker';
 
 const FORMNAME = 'updatePayment';
 
@@ -28,9 +27,7 @@ export class UpdatePaymentForm extends Component {
       .then(() => {
         showAlert({ type: 'success', message: 'Payment Information Updated' });
       })
-      .catch(error => {
-        ErrorTracker.report('update-payment-information-error', error);
-      });
+      .catch(() => {});
   };
 
   render() {
