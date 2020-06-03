@@ -1,19 +1,24 @@
 import React from 'react';
 import { Button, Modal, Panel, Stack, Text } from 'src/components/matchbox';
-import { CopyField, LabelledValue } from 'src/components';
+import { ButtonWrapper, CopyField, LabelledValue, ShortKeyCode } from 'src/components';
 import useModal from 'src/hooks/useModal';
 export default function SCIMTokenSection(props) {
-  const { apiKey } = props;
-  const getActions = apiKey
+  const {
+    apiKey: { short_key = '' },
+    generateScimToken,
+  } = props;
+  const getActions = short_key
     ? [
         {
-          content: 'Generate SCIM Token',
+          content: 'Delete Token',
           onClick: () => {},
           color: 'orange',
         },
         {
-          content: 'Delete Token',
-          onClick: () => {},
+          content: 'Generate SCIM Token',
+          onClick: () => {
+            openModal({ name: 'Override Token' });
+          },
           color: 'orange',
         },
       ]
@@ -21,21 +26,57 @@ export default function SCIMTokenSection(props) {
         {
           content: 'Generate SCIM Token',
           onClick: () => {
-            openModal({ name: 'First Time Token' });
+            handleGenerateToken();
           },
           color: 'orange',
         },
       ];
   const { closeModal, isModalOpen, openModal, meta: { name } = {} } = useModal();
-  return (
-    <>
-      <Panel.Section title="SCIM Token" actions={getActions}>
-        <LabelledValue label="Identity Provider">
-          <h6>{apiKey ? apiKey : 'No token generated'}</h6>
-        </LabelledValue>
-      </Panel.Section>
-      <Modal open={isModalOpen} onClose={() => closeModal()} showCloseButton>
-        {isModalOpen && name === 'First Time Token' && (
+  const handleGenerateToken = () => {
+    generateScimToken().then(() => openModal({ name: 'Generate SCIM Token' }));
+  };
+  const renderModalByName = name => {
+    switch (name) {
+      case 'Override Token':
+        return (
+          <Panel title="Generate SCIM Token">
+            <Panel.Section>
+              <Stack>
+                <Text as="p" fontWeight="medium">
+                  <p>Override Your Current Token?</p>
+                </Text>
+                <Text as="p">
+                  <p>
+                    Creating a new token will
+                    <Text as="span" fontWeight="medium">
+                      <strong> override the existing token.</strong>
+                    </Text>
+                  </p>
+                </Text>
+              </Stack>
+            </Panel.Section>
+            <Panel.Section>
+              <ButtonWrapper>
+                <Button
+                  variant="primary"
+                  onClick={() => {
+                    closeModal();
+                    handleGenerateToken();
+                  }}
+                >
+                  Generate New Token
+                </Button>
+                <Button variant="secondary" onClick={() => closeModal()}>
+                  Cancel
+                </Button>
+              </ButtonWrapper>
+            </Panel.Section>
+          </Panel>
+        );
+
+      default:
+      case 'Generate SCIM Token':
+        return (
           <Panel title="Generate SCIM Token">
             <Panel.Section>
               <Stack>
@@ -50,7 +91,7 @@ export default function SCIMTokenSection(props) {
                     </Text>
                   </p>
                 </Text>
-                <CopyField value={apiKey} />
+                <CopyField value={short_key} />
               </Stack>
             </Panel.Section>
             <Panel.Section>
@@ -59,7 +100,18 @@ export default function SCIMTokenSection(props) {
               </Button>
             </Panel.Section>
           </Panel>
-        )}
+        );
+    }
+  };
+  return (
+    <>
+      <Panel.Section title="SCIM Token" actions={getActions}>
+        <LabelledValue label="Identity Provider">
+          <h6>{short_key ? <ShortKeyCode shortKey={short_key} /> : 'No token generated'}</h6>
+        </LabelledValue>
+      </Panel.Section>
+      <Modal open={isModalOpen} onClose={() => closeModal()} showCloseButton>
+        {isModalOpen && renderModalByName(name)}
       </Modal>
     </>
   );

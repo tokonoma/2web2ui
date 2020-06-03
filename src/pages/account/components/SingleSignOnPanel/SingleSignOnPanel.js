@@ -12,10 +12,31 @@ import ProviderSection from './ProviderSection';
 import StatusSection from './StatusSection';
 import SCIMTokenSection from './SCIMTokenSection';
 import { PANEL_LOADING_HEIGHT } from 'src/pages/account/constants';
+import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
+import { listApiKeys } from 'src/actions/api-keys';
+import generateScimToken, { resetScimTokenStatus } from 'src/actions/generateScimToken';
 
 export function SingleSignOnPanel(props) {
-  const { getAccountSingleSignOnDetails, provider, tfaRequired } = props;
-  useEffect(() => getAccountSingleSignOnDetails(), [getAccountSingleSignOnDetails]);
+  const {
+    getAccountSingleSignOnDetails,
+    provider,
+    tfaRequired,
+    isSsoScimUiEnabled,
+    loading,
+    listApiKeys,
+    apiKeys,
+    generateScimToken,
+    scimTokenStatus,
+  } = props;
+  useEffect(() => {
+    getAccountSingleSignOnDetails();
+  }, [getAccountSingleSignOnDetails]);
+  //TODO: grant here may need needs to be updated
+  useEffect(() => {
+    if (isSsoScimUiEnabled) {
+      listApiKeys(null, { grant: 'scim/manage' });
+    }
+  }, [isSsoScimUiEnabled, listApiKeys]);
 
   const renderContent = () => {
     return (
@@ -28,12 +49,19 @@ export function SingleSignOnPanel(props) {
         )}
         <ProviderSection readOnly={tfaRequired} provider={provider} />
         <StatusSection readOnly={tfaRequired} {...props} />
-        <SCIMTokenSection {...props} />
+        {/*TODO: prop passed as apiKey may need to be updated once the backend is ready :shrug: */}
+        {isSsoScimUiEnabled && (
+          <SCIMTokenSection
+            apiKey={apiKeys.keys[0] || {}}
+            generateScimToken={generateScimToken}
+            resetScimTokenStatus={resetScimTokenStatus}
+            listApiKeys={listApiKeys}
+            scimTokenStatus={scimTokenStatus}
+          />
+        )}
       </React.Fragment>
     );
   };
-
-  const { loading } = props;
 
   if (loading) {
     return <PanelLoading minHeight={PANEL_LOADING_HEIGHT} />;
@@ -59,11 +87,16 @@ export function SingleSignOnPanel(props) {
 const mapDispatchToProps = {
   getAccountSingleSignOnDetails,
   updateAccountSingleSignOn,
+  listApiKeys,
+  generateScimToken,
 };
 
-const mapStateToProps = ({ account, accountSingleSignOn }) => ({
-  ...accountSingleSignOn,
-  tfaRequired: account.tfa_required,
+const mapStateToProps = state => ({
+  ...state.accountSingleSignOn,
+  tfaRequired: state.account.tfa_required,
+  isSsoScimUiEnabled: isAccountUiOptionSet('sso_scim_section')(state),
+  apiKeys: state.apiKeys,
+  scimTokenStatus: state.generateScimToken,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleSignOnPanel);

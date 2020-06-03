@@ -1,7 +1,7 @@
 import sparkpostApiRequest from './helpers/sparkpostApiRequest';
 import setSubaccountHeader from './helpers/setSubaccountHeader';
 
-export function createApiKey({ grants, label, subaccount, validIps: valid_ips = []}) {
+export function createApiKey({ grants, label, subaccount, validIps: valid_ips = [] }) {
   return sparkpostApiRequest({
     type: 'CREATE_API_KEY',
     meta: {
@@ -11,9 +11,9 @@ export function createApiKey({ grants, label, subaccount, validIps: valid_ips = 
       data: {
         grants,
         label,
-        valid_ips
-      }
-    }
+        valid_ips,
+      },
+    },
   });
 }
 
@@ -25,10 +25,9 @@ export function getApiKey({ id, subaccount = null }) {
     meta: {
       method: 'GET',
       url: `/v1/api-keys/${id}`,
-      headers
-    }
+      headers,
+    },
   });
-
 }
 
 export function deleteApiKey({ id, subaccount = null }) {
@@ -39,12 +38,12 @@ export function deleteApiKey({ id, subaccount = null }) {
     meta: {
       method: 'DELETE',
       url: `/v1/api-keys/${id}`,
-      headers
-    }
+      headers,
+    },
   });
 }
 
-export function updateApiKey({ grants, id, label, subaccount, validIps: valid_ips = []}) {
+export function updateApiKey({ grants, id, label, subaccount, validIps: valid_ips = [] }) {
   return sparkpostApiRequest({
     type: 'UPDATE_API_KEY',
     meta: {
@@ -54,15 +53,15 @@ export function updateApiKey({ grants, id, label, subaccount, validIps: valid_ip
       data: {
         grants,
         label,
-        valid_ips
-      }
-    }
+        valid_ips,
+      },
+    },
   });
 }
 
 export function hideNewApiKey() {
   return {
-    type: 'HIDE_NEW_API_KEY'
+    type: 'HIDE_NEW_API_KEY',
   };
 }
 
@@ -75,8 +74,8 @@ export function listApiKeys(subaccount) {
       method: 'GET',
       url: '/v1/api-keys',
       headers,
-      showErrorAlert: false
-    }
+      showErrorAlert: false,
+    },
   });
 }
 
@@ -85,8 +84,8 @@ export function listGrants() {
     type: 'LIST_GRANTS',
     meta: {
       method: 'GET',
-      url: '/v1/authenticate/grants'
-    }
+      url: '/v1/authenticate/grants',
+    },
   });
 }
 
@@ -97,9 +96,8 @@ export function listSubaccountGrants() {
       method: 'GET',
       url: '/v1/authenticate/grants',
       params: {
-        role: 'subaccount'
-      }
-    }
+        role: 'subaccount',
+      },
+    },
   });
 }
-
