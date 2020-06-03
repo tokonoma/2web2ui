@@ -24,8 +24,8 @@ const onFail = ({ types, err, dispatch, meta }) => {
 
 const onSuccess = ({ types, response, dispatch, meta }) => {
   if (!response.data.success) {
-    // mocking axios err that would normally
-    const err = new Error('Oh no!');
+    // mocking axios err that would normally be thrown when an error occurs
+    const err = new Error('Something went wrong!');
     err.response = response;
     onFail({ dispatch, err, meta, types });
   }
