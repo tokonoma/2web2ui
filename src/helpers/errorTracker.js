@@ -222,7 +222,7 @@ class ErrorTracker {
     if (!Raven.isSetup()) {
       throw error;
     }
-    let zuoraErrorCode = _.get(response, 'data.reasons', [])
+    let zuoraErrorCodes = _.get(response, 'data.reasons', [])
       .map(reason => reason.code)
       .join();
 
@@ -231,7 +231,7 @@ class ErrorTracker {
         tags: {
           reduxActionType,
           httpResponseStatus: response.status || 0,
-          zuoraErrorCode: zuoraErrorCode,
+          zuoraErrorCodes: zuoraErrorCodes,
         },
       },
       () => {
