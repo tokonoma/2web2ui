@@ -29,16 +29,9 @@ describe('Helper: Zuora API Request', () => {
   });
 
   it('should handle a zuora failure', async () => {
-    axiosMocks.zuora.mockImplementation(() =>
-      Promise.resolve({
-        data: {
-          success: false,
-          reasons: [{ message: 'The credit card is bad and wrong' }],
-        },
-      }),
-    );
-
-    await mockStore.dispatch(zuoraRequest(action));
+    expectedResponse = { data: { success: false } };
+    axiosMocks.zuora.mockImplementation(() => Promise.resolve(expectedResponse));
+    await expect(mockStore.dispatch(zuoraRequest(action))).rejects.toThrow();
     expect(mockStore.getActions()).toMatchSnapshot();
   });
 });

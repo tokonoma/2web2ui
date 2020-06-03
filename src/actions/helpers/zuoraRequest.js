@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { zuora as zuoraAxios } from 'src/helpers/axiosInstances';
 import ErrorTracker from 'src/helpers/errorTracker';
 import { showAlert } from 'src/actions/globalAlert';
-import { stripTags } from 'src/helpers/string';
+import ZuoraApiError from './zuoraApiError';
 
 const onFail = ({ types, err, dispatch, meta }) => {
   const apiError = new ZuoraApiError(err);
@@ -11,7 +11,7 @@ const onFail = ({ types, err, dispatch, meta }) => {
 
   dispatch({
     type: types.FAIL,
-    payload: { error, message, response },
+    payload: { error: apiError, message, response },
     meta,
   });
 

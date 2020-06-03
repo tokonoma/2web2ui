@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { stripTags } from 'src/helpers/string';
 
 // TODO: Return an Error object as if we were to create it with class and extends Error
 function ZuoraApiError(error) {
