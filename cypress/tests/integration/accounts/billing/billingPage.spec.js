@@ -376,6 +376,90 @@ describe('Billing Page', () => {
         cy.findByText('View Details').click();
         cy.findByText('This is an error').should('be.visible');
       });
+      describe('reports error to sentry', () => {
+        it('sends zuora error codes to sentry when zuora errors with 200', () => {
+          cy.stubRequest({
+            method: 'POST',
+            url: `${BILLING_API_BASE_URL}/cors-data*`,
+            fixture: 'billing/cors-data/200.post.json',
+          });
+
+          cy.stubRequest({
+            method: 'POST',
+            url: '/v1/payment-methods/credit-cards',
+            fixture: 'zuora/payment-method/credit-cards/200.post.with-error.json',
+          });
+
+          cy.stubRequest({
+            method: 'POST',
+            url: `${ACCOUNT_API_BASE_URL}/subscription/check`,
+            fixture: 'account/subscription/check/200.post.json',
+          });
+
+          cy.stubRequest({
+            method: 'POST',
+            url: `${BILLING_API_BASE_URL}/subscription/check`,
+            fixture: 'billing/subscription/check/200.post.json',
+          });
+
+          cy.stubRequest({
+            method: 'POST',
+            statusCode: 400,
+            url: `${BILLING_API_BASE_URL}/collect`,
+            fixture: 'billing/collect/400.post.json',
+          });
+
+          fillOutForm();
+          cy.findAllByText(/Update Payment Information */i)
+            .last()
+            .click();
+          cy.findByText("'termType' value should be one of: TERMED, EVERGREEN").should(
+            'be.visible',
+          );
+        });
+
+        it('reports error to sentry when zuora errors with 4xx or 5xx', () => {
+          cy.stubRequest({
+            method: 'POST',
+            url: `${BILLING_API_BASE_URL}/cors-data*`,
+            fixture: 'billing/cors-data/200.post.json',
+          });
+
+          cy.stubRequest({
+            method: 'POST',
+            statusCode: 400,
+            url: '/v1/payment-methods/credit-cards',
+            fixture: 'zuora/payment-method/credit-cards/400.post.json',
+          });
+
+          cy.stubRequest({
+            method: 'POST',
+            url: `${ACCOUNT_API_BASE_URL}/subscription/check`,
+            fixture: 'account/subscription/check/200.post.json',
+          });
+
+          cy.stubRequest({
+            method: 'POST',
+            url: `${BILLING_API_BASE_URL}/subscription/check`,
+            fixture: 'billing/subscription/check/200.post.json',
+          });
+
+          cy.stubRequest({
+            method: 'POST',
+            statusCode: 400,
+            url: `${BILLING_API_BASE_URL}/collect`,
+            fixture: 'billing/collect/400.post.json',
+          });
+
+          fillOutForm();
+          cy.findAllByText(/Update Payment Information */i)
+            .last()
+            .click();
+          cy.findByText('An error occurred while contacting the billing service').should(
+            'be.visible',
+          );
+        });
+      });
     });
 
     describe('the update billing contact form', () => {

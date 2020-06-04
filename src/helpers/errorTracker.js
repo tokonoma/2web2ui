@@ -222,9 +222,22 @@ class ErrorTracker {
     if (!Raven.isSetup()) {
       throw error;
     }
-    Raven.context({ tags: { reduxActionType, httpResponseStatus: response.status || 0 } }, () => {
-      throw error;
-    });
+    const zuoraErrorCodes = _.get(response, 'data.reasons', [])
+      .map(reason => reason.code)
+      .join();
+
+    Raven.context(
+      {
+        tags: {
+          reduxActionType,
+          httpResponseStatus: response.status || 0,
+          zuoraErrorCodes: zuoraErrorCodes,
+        },
+      },
+      () => {
+        throw error;
+      },
+    );
   }
 }
 
