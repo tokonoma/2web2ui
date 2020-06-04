@@ -23,11 +23,9 @@ export class UpdatePaymentForm extends Component {
 
     const newValues = values.card ? { ...values, card: prepareCardInfo(values.card) } : values;
 
-    return billingUpdate(newValues)
-      .then(() => {
-        showAlert({ type: 'success', message: 'Payment Information Updated' });
-      })
-      .catch(() => {});
+    return billingUpdate(newValues).then(() => {
+      showAlert({ type: 'success', message: 'Payment Information Updated' });
+    });
   };
 
   render() {
