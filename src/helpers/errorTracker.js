@@ -222,7 +222,7 @@ class ErrorTracker {
     if (!Raven.isSetup()) {
       throw error;
     }
-    let zuoraErrorCodes = _.get(response, 'data.reasons', [])
+    const zuoraErrorCodes = _.get(response, 'data.reasons', [])
       .map(reason => reason.code)
       .join();
 
