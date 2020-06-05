@@ -25,16 +25,8 @@ const selectPreparedSubaccounts = createSelector([selectSubaccounts], subaccount
   })),
 );
 
-const selectPreparedSubaccountsReportBuilder = createSelector([selectSubaccounts], subaccounts =>
-  subaccounts.map(({ name, id }) => `${name} (ID ${id})`),
-);
-
 const selectPreparedSendingDomains = createSelector([selectSendingDomains], domains =>
   domains.map(d => ({ type: 'Sending Domain', value: d.domain })),
-);
-
-const selectPreparedSendingDomainsReportBuilder = createSelector([selectSendingDomains], domains =>
-  domains.map(d => d.domain),
 );
 
 const selectPreparedRecipientDomains = createSelector([selectRecipientDomains], domains =>
@@ -66,13 +58,13 @@ const selectCache = createSelector(
 
 export const selectCacheReportBuilder = createSelector(
   [
-    selectTemplates,
-    selectPreparedSubaccountsReportBuilder,
-    selectPreparedSendingDomainsReportBuilder,
-    selectRecipientDomains,
-    selectCampaigns,
-    selectSendingIps,
-    selectIpPools,
+    selectPreparedTemplates,
+    selectPreparedSubaccounts,
+    selectPreparedSendingDomains,
+    selectPreparedRecipientDomains,
+    selectPreparedCampaigns,
+    selectPreparedSendingIps,
+    selectPreparedIpPools,
   ],
   (templates, subaccounts, sendingDomains, recipientDomains, campaigns, sendingIps, IpPools) => ({
     'Recipient Domain': recipientDomains,

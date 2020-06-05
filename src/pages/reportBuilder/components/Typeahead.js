@@ -43,13 +43,14 @@ function Typeahead(props) {
   );
 
   const filteredResults = useMemo(() => {
-    return sortMatch(results, inputValue, a => a);
+    return sortMatch(results, inputValue, a => a.value);
   }, [inputValue, results]);
 
   return (
     <ComboBoxTypeahead
       onChange={onFilterChange}
       onInputChange={updateLookahead}
+      itemToString={item => (item ? item.value : '')}
       value={value}
       results={omitResults ? [] : filteredResults}
       loading={loading}
