@@ -4,6 +4,7 @@ exports[`Subaccount Field renders combo box field 1`] = `
 <Field
   component={[Function]}
   disabled={false}
+  id="combobox_subaccounts"
   isExclusiveItem={[Function]}
   itemToString={[Function]}
   label="Subaccounts"

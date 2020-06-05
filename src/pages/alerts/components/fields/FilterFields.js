@@ -147,6 +147,7 @@ export class FilterFields extends Component {
           <Field
             key={value}
             name={value}
+            id={`combobox_${label}`}
             component={ComboBoxTypeaheadWrapper}
             results={filterTypeaheadResults[value]}
             label={label}

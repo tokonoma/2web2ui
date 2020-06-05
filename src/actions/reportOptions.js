@@ -109,6 +109,13 @@ export function removeFilter(payload) {
   };
 }
 
+export function setFilters(payload) {
+  return {
+    type: 'SET_FILTERS',
+    payload,
+  };
+}
+
 export function clearFilters() {
   return {
     type: 'CLEAR_FILTERS',

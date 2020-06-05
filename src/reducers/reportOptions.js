@@ -38,6 +38,12 @@ export default (state = initialState, action) => {
         ],
       };
 
+    case 'SET_FILTERS':
+      return {
+        ...state,
+        filters: action.payload,
+      };
+
     case 'CLEAR_FILTERS':
       return { ...state, filters: [] };
 

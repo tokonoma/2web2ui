@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 import _ from 'lodash';
 
 function reshape(list, type) {
-  return list.map((value) => ({ type, value }));
+  return list.map(value => ({ type, value }));
 }
 
 const selectSubaccounts = ({ subaccounts }) => subaccounts.list;
@@ -13,44 +13,43 @@ const selectSendingIps = ({ metrics }) => metrics.sendingIps;
 const selectIpPools = ({ metrics }) => metrics.ipPools;
 const selectTemplates = ({ metrics }) => metrics.templates;
 
-const selectPreparedTemplates = createSelector(
-  [selectTemplates],
-  (templates) => reshape(templates, 'Template')
+const selectPreparedTemplates = createSelector([selectTemplates], templates =>
+  reshape(templates, 'Template'),
 );
 
-const selectPreparedSubaccounts = createSelector(
-  [selectSubaccounts],
-  (subaccounts) => subaccounts.map(({ name, id }) => ({
+const selectPreparedSubaccounts = createSelector([selectSubaccounts], subaccounts =>
+  subaccounts.map(({ name, id }) => ({
     type: 'Subaccount',
     value: `${name} (ID ${id})`,
-    id
-  }))
+    id,
+  })),
 );
 
-const selectPreparedSendingDomains = createSelector(
-  [selectSendingDomains],
-  (domains) => domains.map((d) => ({ type: 'Sending Domain', value: d.domain }))
+const selectPreparedSubaccountsReportBuilder = createSelector([selectSubaccounts], subaccounts =>
+  subaccounts.map(({ name, id }) => `${name} (ID ${id})`),
 );
 
-const selectPreparedRecipientDomains = createSelector(
-  [selectRecipientDomains],
-  (domains) => reshape(domains, 'Recipient Domain')
+const selectPreparedSendingDomains = createSelector([selectSendingDomains], domains =>
+  domains.map(d => ({ type: 'Sending Domain', value: d.domain })),
 );
 
-const selectPreparedCampaigns = createSelector(
-  [selectCampaigns],
-  (campaigns) => reshape(campaigns, 'Campaign')
+const selectPreparedSendingDomainsReportBuilder = createSelector([selectSendingDomains], domains =>
+  domains.map(d => d.domain),
 );
 
-const selectPreparedSendingIps = createSelector(
-  [selectSendingIps],
-  (ips) => reshape(ips, 'Sending IP')
+const selectPreparedRecipientDomains = createSelector([selectRecipientDomains], domains =>
+  reshape(domains, 'Recipient Domain'),
 );
 
-const selectPreparedIpPools = createSelector(
-  [selectIpPools],
-  (pools) => reshape(pools, 'IP Pool')
+const selectPreparedCampaigns = createSelector([selectCampaigns], campaigns =>
+  reshape(campaigns, 'Campaign'),
 );
+
+const selectPreparedSendingIps = createSelector([selectSendingIps], ips =>
+  reshape(ips, 'Sending IP'),
+);
+
+const selectPreparedIpPools = createSelector([selectIpPools], pools => reshape(pools, 'IP Pool'));
 
 const selectCache = createSelector(
   [
@@ -60,9 +59,30 @@ const selectCache = createSelector(
     selectPreparedRecipientDomains,
     selectPreparedCampaigns,
     selectPreparedSendingIps,
-    selectPreparedIpPools
+    selectPreparedIpPools,
   ],
-  (...caches) => _.flatten(caches)
+  (...caches) => _.flatten(caches),
+);
+
+export const selectCacheReportBuilder = createSelector(
+  [
+    selectTemplates,
+    selectPreparedSubaccountsReportBuilder,
+    selectPreparedSendingDomainsReportBuilder,
+    selectRecipientDomains,
+    selectCampaigns,
+    selectSendingIps,
+    selectIpPools,
+  ],
+  (templates, subaccounts, sendingDomains, recipientDomains, campaigns, sendingIps, IpPools) => ({
+    'Recipient Domain': recipientDomains,
+    Subaccount: subaccounts,
+    Campaign: campaigns,
+    Template: templates,
+    'Sending Domain': sendingDomains,
+    'IP Pool': IpPools,
+    'Sending IP': sendingIps,
+  }),
 );
 
 export default selectCache;

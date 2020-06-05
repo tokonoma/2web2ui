@@ -39,6 +39,7 @@ export const SubaccountsField = props => {
       disabled={disabled}
       isExclusiveItem={isExclusiveItem}
       itemToString={subaccountToString}
+      id="combobox_subaccounts"
       label="Subaccounts"
       name="subaccounts"
       placeholder="Type To Search"

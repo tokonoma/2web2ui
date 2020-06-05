@@ -3,7 +3,9 @@ import { ComboBox, ComboBoxTextField, ComboBoxMenu } from 'src/components/matchb
 import Downshift from 'downshift';
 import PropTypes from 'prop-types';
 import { useDebouncedCallback } from 'use-debounce';
-import sortMatch from 'src/helpers/sortMatch';
+import { LoadingSVG } from 'src/components';
+
+const Loading = () => <LoadingSVG size="XSmall" />;
 
 export const ComboBoxTypeahead = ({
   disabled,
@@ -12,7 +14,6 @@ export const ComboBoxTypeahead = ({
   isExclusiveItem,
   itemToString,
   label,
-  maxNumberOfResults,
   name,
   onChange,
   placeholder,
@@ -20,15 +21,12 @@ export const ComboBoxTypeahead = ({
   results,
   value,
   id,
+  onInputChange,
+  loading,
 }) => {
   const [inputValue, setInputValue] = useState('');
-  const [menuItems, setMenuItems] = useState([]);
+  const [debouncedValue, setDebouncedValue] = useState('');
   const [selectedItems, setSelectedItems] = useState(value);
-  const [updateMenuItems] = useDebouncedCallback(input => {
-    const items = input ? sortMatch(results, input, itemToString) : results;
-    const nextMenuItems = items.slice(0, maxNumberOfResults);
-    setMenuItems(nextMenuItems);
-  }, 300);
 
   // Updated list of selected menu items when combo box is being controlled
   // note, state must be initialized with defaultSelected to avoid a runaway effect
@@ -41,10 +39,14 @@ export const ComboBoxTypeahead = ({
     onChange(selectedItems);
   }, [onChange, selectedItems]);
 
-  // Update list of menu items when available list of items (results), input value or select items changes
   useEffect(() => {
-    updateMenuItems(inputValue);
-  }, [updateMenuItems, inputValue, results, selectedItems]);
+    onInputChange(debouncedValue);
+  }, [onInputChange, debouncedValue]);
+  const [debounceInputChange] = useDebouncedCallback(setDebouncedValue, 300);
+
+  useEffect(() => {
+    debounceInputChange(inputValue);
+  }, [debounceInputChange, inputValue]);
 
   const isSelectedItem = item => selectedItems.some(selectedItem => selectedItem === item);
 
@@ -56,7 +58,7 @@ export const ComboBoxTypeahead = ({
       case Downshift.stateChangeTypes.keyDownEnter: {
         setSelectedItems([...selectedItems, changes.selectedItem]);
         setInputValue(''); // unset below won't trigger a changeInput action
-
+        setDebouncedValue('');
         return {
           ...changes,
           inputValue: '', // unset input value, now that it has been saved in selected items
@@ -66,9 +68,10 @@ export const ComboBoxTypeahead = ({
       }
       case Downshift.stateChangeTypes.changeInput:
         setInputValue(changes.inputValue);
+        return changes;
+      default:
+        return changes;
     }
-
-    return changes;
   };
 
   const typeaheadfn = ({
@@ -83,7 +86,9 @@ export const ComboBoxTypeahead = ({
   }) => {
     const hasSelectedItems = Boolean(selectedItems.length);
     const isSelectedItemExclusive = isExclusiveItem(selectedItems[0]);
-    const items = menuItems
+
+    const isMenuOpen = isOpen && Boolean(debouncedValue);
+    const items = results
       .filter(
         item =>
           !isSelectedItemExclusive &&
@@ -98,11 +103,10 @@ export const ComboBoxTypeahead = ({
           item,
         }),
       );
-    const isMenuOpen = isOpen && Boolean(items.length);
 
     const inputProps = getInputProps({
       disabled,
-      error: error && !isMenuOpen ? error : undefined,
+      error: error && !isOpen ? error : undefined,
       helpText,
       id: name,
       itemToString,
@@ -126,13 +130,21 @@ export const ComboBoxTypeahead = ({
     return (
       <ComboBox {...getRootProps({ refKey: 'rootRef' })}>
         <ComboBoxTextField {...inputProps} id={id} />
-        <ComboBoxMenu {...getMenuProps({ items, isOpen: isMenuOpen, refKey: 'menuRef' })} />
+        <ComboBoxMenu
+          {...getMenuProps({ items, isOpen: isMenuOpen, refKey: 'menuRef' })}
+          emptyMessage={loading ? <Loading /> : undefined}
+        />
       </ComboBox>
     );
   };
 
   return (
-    <Downshift defaultHighlightedIndex={0} itemToString={itemToString} stateReducer={stateReducer}>
+    <Downshift
+      defaultHighlightedIndex={0}
+      itemToString={itemToString}
+      stateReducer={stateReducer}
+      onInputValueChange={debounceInputChange}
+    >
       {typeaheadfn}
     </Downshift>
   );
@@ -144,7 +156,6 @@ ComboBoxTypeahead.propTypes = {
   isExclusiveItem: PropTypes.func,
   itemToString: PropTypes.func,
   label: PropTypes.string,
-  maxNumberOfResults: PropTypes.number,
   name: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,

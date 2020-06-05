@@ -1,7 +1,6 @@
 import React from 'react';
 import { useHibana } from 'src/context/HibanaContext';
-import { Drawer as HibanaDrawer } from '@sparkpost/matchbox-hibana';
-import { useDrawer as matchboxUseDrawer } from '@sparkpost/matchbox-hibana';
+import { Drawer as HibanaDrawer, useDrawer } from '@sparkpost/matchbox-hibana';
 
 function Drawer(props) {
   const [{ isHibanaEnabled }] = useHibana();
@@ -50,6 +49,6 @@ Header.displayName = 'Drawer.Header';
 Drawer.Footer = Footer;
 Drawer.Content = Content;
 Drawer.Header = Header;
+Drawer.useDrawer = useDrawer;
 
-export const useDrawer = matchboxUseDrawer;
 export default Drawer;
