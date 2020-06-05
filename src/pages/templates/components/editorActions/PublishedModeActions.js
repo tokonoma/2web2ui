@@ -76,7 +76,6 @@ const PublishedModeActions = () => {
           trigger={
             <Button
               variant="secondary"
-              className={styles.ActionsPopoverTrigger}
               onClick={() => setPopoverOpen(!isPopoverOpen)}
               aria-controls="popover-action-list"
               aria-expanded={isPopoverOpen ? 'true' : 'false'}
