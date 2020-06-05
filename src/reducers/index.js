@@ -17,7 +17,6 @@ import cookieConsent from './cookieConsent';
 import delayReport from './delayReport';
 import dataPrivacy from './dataPrivacy';
 import engagementReport from './engagementReport';
-import generateScimToken from './generateScimToken';
 import rejectionReport from './rejectionReport';
 import currentUser from './currentUser';
 import globalAlert from './globalAlert';
@@ -29,6 +28,7 @@ import passwordReset from './passwordReset';
 import recipientLists from './recipientLists';
 import recipientValidation from './recipientValidation';
 import reportOptions from './reportOptions';
+import scimToken from './scimToken';
 import sendingDomains from './sendingDomains';
 import sendingIps from './sendingIps';
 import signalOptions from './signalOptions';
@@ -68,7 +68,7 @@ const appReducer = combineReducers({
   dataPrivacy,
   delayReport,
   engagementReport,
-  generateScimToken,
+  scimToken,
   globalAlert,
   form,
   inboxPlacement,

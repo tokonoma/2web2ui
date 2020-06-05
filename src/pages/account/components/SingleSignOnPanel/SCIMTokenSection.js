@@ -3,37 +3,38 @@ import { Button, Modal, Panel, Stack, Text } from 'src/components/matchbox';
 import { ButtonWrapper, CopyField, LabelledValue, ShortKeyCode } from 'src/components';
 import useModal from 'src/hooks/useModal';
 export default function SCIMTokenSection(props) {
-  const {
-    apiKey: { short_key = '' },
-    generateScimToken,
-  } = props;
-  const getActions = short_key
-    ? [
-        {
-          content: 'Delete Token',
-          onClick: () => {},
-          color: 'orange',
-        },
-        {
-          content: 'Generate SCIM Token',
-          onClick: () => {
-            openModal({ name: 'Override Token' });
+  const { scimTokenList, newScimToken, generateScimToken, listScimToken } = props;
+  const getActions =
+    scimTokenList.length > 0
+      ? [
+          {
+            content: 'Delete Token',
+            onClick: () => {},
+            color: 'orange',
           },
-          color: 'orange',
-        },
-      ]
-    : [
-        {
-          content: 'Generate SCIM Token',
-          onClick: () => {
-            handleGenerateToken();
+          {
+            content: 'Generate SCIM Token',
+            onClick: () => {
+              openModal({ name: 'Override Token' });
+            },
+            color: 'orange',
           },
-          color: 'orange',
-        },
-      ];
+        ]
+      : [
+          {
+            content: 'Generate SCIM Token',
+            onClick: () => {
+              handleGenerateToken();
+            },
+            color: 'orange',
+          },
+        ];
   const { closeModal, isModalOpen, openModal, meta: { name } = {} } = useModal();
   const handleGenerateToken = () => {
-    generateScimToken().then(() => openModal({ name: 'Generate SCIM Token' }));
+    generateScimToken().then(() => {
+      openModal({ name: 'Generate SCIM Token' });
+      listScimToken();
+    });
   };
   const renderModalByName = name => {
     switch (name) {
@@ -91,7 +92,7 @@ export default function SCIMTokenSection(props) {
                     </Text>
                   </p>
                 </Text>
-                <CopyField value={short_key} />
+                <CopyField value={newScimToken} />
               </Stack>
             </Panel.Section>
             <Panel.Section>
@@ -107,7 +108,13 @@ export default function SCIMTokenSection(props) {
     <>
       <Panel.Section title="SCIM Token" actions={getActions}>
         <LabelledValue label="Identity Provider">
-          <h6>{short_key ? <ShortKeyCode shortKey={short_key} /> : 'No token generated'}</h6>
+          <h6>
+            {scimTokenList.length > 0 ? (
+              <ShortKeyCode shortKey={scimTokenList[0].short_key} />
+            ) : (
+              'No token generated'
+            )}
+          </h6>
         </LabelledValue>
       </Panel.Section>
       <Modal open={isModalOpen} onClose={() => closeModal()} showCloseButton>
