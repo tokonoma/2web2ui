@@ -133,6 +133,7 @@ function AddFiltersSection({
       if (!key) {
         return acc;
       }
+
       return [...acc, ...value.map(filter => ({ type: key, value: filter }))];
     }, []);
     setFilters(filters);
