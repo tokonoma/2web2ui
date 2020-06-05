@@ -89,9 +89,9 @@ function AddFiltersSection({
           _.reduce(
             //Groups and cleans up value array
             initialFilters,
-            (acc, { type: key, value }) => {
-              acc[key] = acc[key] || [];
-              acc[key].push(value);
+            (acc, value) => {
+              acc[value.type] = acc[value.type] || [];
+              acc[value.type].push(value);
               return acc;
             },
             {},
@@ -133,7 +133,8 @@ function AddFiltersSection({
       if (!key) {
         return acc;
       }
-      return [...acc, ...value.map(filter => ({ type: key, value: filter }))];
+
+      return [...acc, ...value];
     }, []);
     setFilters(filters);
     closeDrawer();

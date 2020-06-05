@@ -7,6 +7,7 @@ import { Tabs } from 'src/components';
 
 import { selectFeatureFlaggedMetrics } from 'src/selectors/metrics';
 import { selectSummaryMetricsProcessed } from 'src/selectors/reportSearchOptions';
+import { parseSearch } from 'src/helpers/reports';
 import styles from './ReportOptions.module.scss';
 import MetricsDrawer from './MetricsDrawer';
 import { Legend } from './index';
@@ -26,7 +27,7 @@ export function ReportOptions(props) {
     searchOptions,
   } = props;
 
-  const { requestParams, updateRoute } = useRouter();
+  const { location, updateRoute } = useRouter();
 
   // Updates the query params with incoming search option changes
   useEffect(() => {
@@ -35,7 +36,8 @@ export function ReportOptions(props) {
 
   //Initializes the report options with the search
   useEffect(() => {
-    const { options, filters = [] } = requestParams;
+    const { options, filters = [] } = parseSearch(location.search);
+
     addFilters(filters);
     refreshReportOptions(options);
     // eslint-disable-next-line react-hooks/exhaustive-deps
