@@ -107,7 +107,7 @@ export default function SCIMTokenSection(props) {
   return (
     <>
       <Panel.Section title="SCIM Token" actions={getActions}>
-        <LabelledValue label="Identity Provider">
+        <LabelledValue label="SCIM Token">
           <h6>
             {scimTokenList.length > 0 ? (
               <ShortKeyCode shortKey={scimTokenList[0].short_key} />
