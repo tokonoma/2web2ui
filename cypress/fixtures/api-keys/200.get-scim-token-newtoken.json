@@ -1,9 +1,9 @@
 {
   "results": [
     {
-      "id": "oldid",
+      "id": "02fa2d41-8bc0-4418-88b3-6a3fd4d25855",
       "label": "SCIM Token",
-      "short_key": "old1",
+      "short_key": "123f",
       "grants": [
         "scim/manage"
       ],
