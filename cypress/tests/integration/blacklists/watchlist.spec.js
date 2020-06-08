@@ -108,15 +108,15 @@ describe('The blacklist watchlist page', () => {
     cy.visit(PAGE_BASE_URL);
 
     cy.get('tbody tr').then(val => {
-      cy.findByText('Stop Monitoring', { container: val[0] }).click();
-
-      cy.findByText('Stop Monitoring 12.12.12.').should('be.visible');
-      cy.findByText(
-        "Removing this IP from your watchlist means you won't get notified of changes, but don't worry you can always add it again later.",
-      ).should('be.visible');
+      cy.findByText('Remove from Watchlist', { container: val[0] }).click();
 
       cy.withinModal(() => {
-        cy.findByText('Stop Monitoring').click();
+        cy.findByText(
+          "Removing IP 12.12.12. from your watchlist means you won't get notified of changes, but don't worry you can always add it again later.",
+        ).should('be.visible');
+        cy.findAllByText('Remove from Watchlist')
+          .last()
+          .click();
       });
     });
 

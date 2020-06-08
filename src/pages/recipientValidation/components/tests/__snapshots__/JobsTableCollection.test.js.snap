@@ -13,11 +13,19 @@ Array [
     count={999}
     status="success"
   />,
-  <JobActionLink
-    fileHref="https://example.com/rejects.csv"
-    jobId="A1C1_D1_C1"
-    status="success"
-  />,
+  <div
+    style={
+      Object {
+        "textAlign": "right",
+      }
+    }
+  >
+    <JobActionLink
+      fileHref="https://example.com/rejects.csv"
+      jobId="A1C1_D1_C1"
+      status="success"
+    />
+  </div>,
 ]
 `;
 
@@ -42,7 +50,9 @@ exports[`JobsTableCollection renders a table of jobs 1`] = `
         "sortKey": "addressCount",
       },
       Object {
-        "label": "Actions",
+        "label": <ScreenReaderOnly>
+          Actions
+        </ScreenReaderOnly>,
       },
     ]
   }

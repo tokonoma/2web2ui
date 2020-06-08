@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { TableCollection } from 'src/components/collection';
+import { ScreenReaderOnly } from 'src/components/matchbox';
 import ActionsTableData from './ActionsTableData';
 import DeleteSnippetModal from './DeleteSnippetModal.container';
 import NameTableData from './NameTableData';
@@ -9,7 +10,7 @@ import UpdatedAtTableData from './UpdatedAtTableData';
 const filterBoxConfig = {
   show: true,
   exampleModifiers: ['id', 'name'],
-  itemToStringKeys: ['name', 'id', 'subaccount_id']
+  itemToStringKeys: ['name', 'id', 'subaccount_id'],
 };
 
 export default class SnippetCollection extends Component {
@@ -18,36 +19,36 @@ export default class SnippetCollection extends Component {
       component: NameTableData,
       header: {
         label: 'Name',
-        sortKey: ({ id, name }) => (name || id).toLowerCase() // name may not be present
-      }
+        sortKey: ({ id, name }) => (name || id).toLowerCase(), // name may not be present
+      },
     },
     {
       component: SubaccountTableData,
       header: {
         label: 'Subaccount',
-        sortKey: ({ subaccount_id, shared_with_subaccounts }) => (
-          subaccount_id || shared_with_subaccounts
-        )
+        sortKey: ({ subaccount_id, shared_with_subaccounts }) =>
+          subaccount_id || shared_with_subaccounts,
       },
-      visible: () => this.props.hasSubaccounts && this.props.canViewSubaccounts
+      visible: () => this.props.hasSubaccounts && this.props.canViewSubaccounts,
     },
     {
       component: UpdatedAtTableData,
       header: {
         label: 'Last Updated',
-        sortKey: ({ created_at, updated_at }) => updated_at || created_at
-      }
+        sortKey: ({ created_at, updated_at }) => updated_at || created_at,
+      },
     },
     {
       component: ActionsTableData,
-      header: null,
-      visible: () => this.props.canCreate
-    }
-  ]
+      header: {
+        label: <ScreenReaderOnly>Actions</ScreenReaderOnly>,
+      },
+      visible: () => this.props.canCreate,
+    },
+  ];
 
-  renderRow = (columns, parentProps) => (props) => (
-    columns.map(({ component: Component }) => <Component {...parentProps} {...props} />)
-  )
+  renderRow = (columns, parentProps) => props =>
+    columns.map(({ component: Component }) => <Component {...parentProps} {...props} />);
 
   render() {
     const { snippets } = this.props;

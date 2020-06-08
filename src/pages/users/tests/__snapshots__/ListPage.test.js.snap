@@ -68,7 +68,12 @@ exports[`Page: Users List should render correctly by default 1`] = `
             "label": "Last Login",
             "sortKey": "last_login",
           },
-          null,
+          Object {
+            "key": "actions",
+            "label": <ScreenReaderOnly>
+              Actions
+            </ScreenReaderOnly>,
+          },
         ]
       }
       defaultSortColumn="name"
@@ -234,7 +239,12 @@ exports[`Page: Users List should show a delete modal 1`] = `
             "label": "Last Login",
             "sortKey": "last_login",
           },
-          null,
+          Object {
+            "key": "actions",
+            "label": <ScreenReaderOnly>
+              Actions
+            </ScreenReaderOnly>,
+          },
         ]
       }
       defaultSortColumn="name"

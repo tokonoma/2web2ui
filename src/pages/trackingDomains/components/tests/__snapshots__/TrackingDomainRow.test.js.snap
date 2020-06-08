@@ -10,49 +10,55 @@ exports[`Component: TrackingDomainRow Tag component should render the IsDefaultT
 `;
 
 exports[`Component: TrackingDomainRow rendering when assigned to master account should render a "currently verifying" domain 1`] = `
-<Panel.Section>
-  <Grid>
-    <Grid.Column
-      md={8}
-      xs={12}
-    >
-      <span
-        className="DomainHeading"
+<Fragment>
+  <Panel.Section>
+    <Grid>
+      <Grid.Column
+        md={8}
+        xs={12}
       >
-        somedomain.com
-      </span>
-      <div
-        className="TagRow"
+        <span
+          className="DomainHeading"
+        >
+          somedomain.com
+        </span>
+        <div
+          className="TagRow"
+        >
+          <DomainStatusTag
+            className="Tag"
+            status="unverified"
+          />
+        </div>
+      </Grid.Column>
+      <Grid.Column
+        md={4}
+        xs={12}
       >
-        <DomainStatusTag
-          className="Tag"
-          status="unverified"
+        <ActionPopover
+          actions={
+            Array [
+              Object {
+                "content": "Set as Default",
+                "onClick": [Function],
+                "visible": undefined,
+              },
+              Object {
+                "content": "Verifying...",
+                "onClick": [Function],
+                "visible": true,
+              },
+              Object {
+                "content": "Delete",
+                "onClick": [Function],
+                "visible": true,
+              },
+            ]
+          }
         />
-      </div>
-    </Grid.Column>
-    <Grid.Column
-      md={4}
-      xs={12}
-    >
-      <Button.Group
-        className="ButtonColumn"
-      >
-        <Button
-          onClick={[Function]}
-          size="small"
-        >
-          Verifying...
-        </Button>
-        <Button
-          destructive={true}
-          onClick={[Function]}
-          size="small"
-        >
-          Delete
-        </Button>
-      </Button.Group>
-    </Grid.Column>
-  </Grid>
+      </Grid.Column>
+    </Grid>
+  </Panel.Section>
   <div>
     <DeleteModal
       content={
@@ -80,46 +86,59 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       title="Set default tracking domain (somedomain.com)"
     />
   </div>
-</Panel.Section>
+</Fragment>
 `;
 
 exports[`Component: TrackingDomainRow rendering when assigned to master account should render a blocked domain 1`] = `
-<Panel.Section>
-  <Grid>
-    <Grid.Column
-      md={8}
-      xs={12}
-    >
-      <span
-        className="DomainHeading"
+<Fragment>
+  <Panel.Section>
+    <Grid>
+      <Grid.Column
+        md={8}
+        xs={12}
       >
-        somedomain.com
-      </span>
-      <div
-        className="TagRow"
-      >
-        <DomainStatusTag
-          className="Tag"
-          status="blocked"
-        />
-      </div>
-    </Grid.Column>
-    <Grid.Column
-      md={4}
-      xs={12}
-    >
-      <Button.Group
-        className="ButtonColumn"
-      >
-        <Button
-          onClick={[Function]}
-          size="small"
+        <span
+          className="DomainHeading"
         >
-          Retry Verification
-        </Button>
-      </Button.Group>
-    </Grid.Column>
-  </Grid>
+          somedomain.com
+        </span>
+        <div
+          className="TagRow"
+        >
+          <DomainStatusTag
+            className="Tag"
+            status="blocked"
+          />
+        </div>
+      </Grid.Column>
+      <Grid.Column
+        md={4}
+        xs={12}
+      >
+        <ActionPopover
+          actions={
+            Array [
+              Object {
+                "content": "Set as Default",
+                "onClick": [Function],
+                "visible": undefined,
+              },
+              Object {
+                "content": "Retry Verification",
+                "onClick": [Function],
+                "visible": true,
+              },
+              Object {
+                "content": "Delete",
+                "onClick": [Function],
+                "visible": false,
+              },
+            ]
+          }
+        />
+      </Grid.Column>
+    </Grid>
+  </Panel.Section>
   <div>
     <DeleteModal
       content={
@@ -147,54 +166,60 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       title="Set default tracking domain (somedomain.com)"
     />
   </div>
-</Panel.Section>
+</Fragment>
 `;
 
 exports[`Component: TrackingDomainRow rendering when assigned to master account should render a default unverified domain 1`] = `
-<Panel.Section>
-  <Grid>
-    <Grid.Column
-      md={8}
-      xs={12}
-    >
-      <span
-        className="DomainHeading"
+<Fragment>
+  <Panel.Section>
+    <Grid>
+      <Grid.Column
+        md={8}
+        xs={12}
       >
-        somedomain.com
-      </span>
-      <div
-        className="TagRow"
+        <span
+          className="DomainHeading"
+        >
+          somedomain.com
+        </span>
+        <div
+          className="TagRow"
+        >
+          <DomainStatusTag
+            className="Tag"
+            status="unverified"
+          />
+          <IsDefaultTag />
+        </div>
+      </Grid.Column>
+      <Grid.Column
+        md={4}
+        xs={12}
       >
-        <DomainStatusTag
-          className="Tag"
-          status="unverified"
+        <ActionPopover
+          actions={
+            Array [
+              Object {
+                "content": "Remove Default",
+                "onClick": [Function],
+                "visible": undefined,
+              },
+              Object {
+                "content": "Retry Verification",
+                "onClick": [Function],
+                "visible": true,
+              },
+              Object {
+                "content": "Delete",
+                "onClick": [Function],
+                "visible": true,
+              },
+            ]
+          }
         />
-        <IsDefaultTag />
-      </div>
-    </Grid.Column>
-    <Grid.Column
-      md={4}
-      xs={12}
-    >
-      <Button.Group
-        className="ButtonColumn"
-      >
-        <Button
-          onClick={[Function]}
-          size="small"
-        >
-          Retry Verification
-        </Button>
-        <Button
-          destructive={true}
-          onClick={[Function]}
-          size="small"
-        >
-          Delete
-        </Button>
-      </Button.Group>
-    </Grid.Column>
-  </Grid>
+      </Grid.Column>
+    </Grid>
+  </Panel.Section>
   <div>
     <DeleteModal
       content={
@@ -228,51 +253,56 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       title="Remove default tracking domain (somedomain.com)"
     />
   </div>
-</Panel.Section>
+</Fragment>
 `;
 
 exports[`Component: TrackingDomainRow rendering when assigned to master account should render a default verified domain 1`] = `
-<Panel.Section>
-  <Grid>
-    <Grid.Column
-      md={8}
-      xs={12}
-    >
-      <span
-        className="DomainHeading"
+<Fragment>
+  <Panel.Section>
+    <Grid>
+      <Grid.Column
+        md={8}
+        xs={12}
       >
-        somedomain.com
-      </span>
-      <div
-        className="TagRow"
-      >
-        <IsDefaultTag />
-      </div>
-    </Grid.Column>
-    <Grid.Column
-      md={4}
-      xs={12}
-    >
-      <Button.Group
-        className="ButtonColumn"
-      >
-        <Button
-          destructive={true}
-          onClick={[Function]}
-          size="small"
+        <span
+          className="DomainHeading"
         >
-          Remove Default
-        </Button>
-        <Button
-          destructive={true}
-          onClick={[Function]}
-          size="small"
+          somedomain.com
+        </span>
+        <div
+          className="TagRow"
         >
-          Delete
-        </Button>
-      </Button.Group>
-    </Grid.Column>
-  </Grid>
+          <IsDefaultTag />
+        </div>
+      </Grid.Column>
+      <Grid.Column
+        md={4}
+        xs={12}
+      >
+        <ActionPopover
+          actions={
+            Array [
+              Object {
+                "content": "Remove Default",
+                "onClick": [Function],
+                "visible": true,
+              },
+              Object {
+                "content": "Retry Verification",
+                "onClick": [Function],
+                "visible": false,
+              },
+              Object {
+                "content": "Delete",
+                "onClick": [Function],
+                "visible": true,
+              },
+            ]
+          }
+        />
+      </Grid.Column>
+    </Grid>
+  </Panel.Section>
   <div>
     <DeleteModal
       content={
@@ -306,53 +336,54 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       title="Remove default tracking domain (somedomain.com)"
     />
   </div>
-</Panel.Section>
+</Fragment>
 `;
 
 exports[`Component: TrackingDomainRow rendering when assigned to master account should render a non-default unverified domain 1`] = `
-<Panel.Section>
-  <Grid>
-    <Grid.Column
-      md={8}
-      xs={12}
-    >
-      <span
-        className="DomainHeading"
+<Fragment>
+  <Panel.Section>
+    <Grid>
+      <Grid.Column
+        md={8}
+        xs={12}
       >
-        somedomain.com
-      </span>
-      <div
-        className="TagRow"
+        <span
+          className="DomainHeading"
+        >
+          somedomain.com
+        </span>
+        <div
+          className="TagRow"
+        >
+          <DomainStatusTag
+            className="Tag"
+            status="unverified"
+          />
+        </div>
+      </Grid.Column>
+      <Grid.Column
+        md={4}
+        xs={12}
       >
-        <DomainStatusTag
-          className="Tag"
-          status="unverified"
+        <ActionPopover
+          actions={
+            Array [
+              Object {
+                "content": "Set as Default",
+                "onClick": [Function],
+                "visible": undefined,
+              },
+              Object {
+                "content": "Retry Verification",
+                "onClick": [Function],
+                "visible": true,
+              },
+            ]
+          }
         />
-      </div>
-    </Grid.Column>
-    <Grid.Column
-      md={4}
-      xs={12}
-    >
-      <Button.Group
-        className="ButtonColumn"
-      >
-        <Button
-          onClick={[Function]}
-          size="small"
-        >
-          Retry Verification
-        </Button>
-        <Button
-          destructive={true}
-          onClick={[Function]}
-          size="small"
-        >
-          Delete
-        </Button>
-      </Button.Group>
-    </Grid.Column>
-  </Grid>
+      </Grid.Column>
+    </Grid>
+  </Panel.Section>
   <div>
     <DeleteModal
       content={
@@ -380,49 +411,54 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       title="Set default tracking domain (somedomain.com)"
     />
   </div>
-</Panel.Section>
+</Fragment>
 `;
 
 exports[`Component: TrackingDomainRow rendering when assigned to master account should render a non-default verified domain 1`] = `
-<Panel.Section>
-  <Grid>
-    <Grid.Column
-      md={8}
-      xs={12}
-    >
-      <span
-        className="DomainHeading"
+<Fragment>
+  <Panel.Section>
+    <Grid>
+      <Grid.Column
+        md={8}
+        xs={12}
       >
-        somedomain.com
-      </span>
-      <div
-        className="TagRow"
-      />
-    </Grid.Column>
-    <Grid.Column
-      md={4}
-      xs={12}
-    >
-      <Button.Group
-        className="ButtonColumn"
+        <span
+          className="DomainHeading"
+        >
+          somedomain.com
+        </span>
+        <div
+          className="TagRow"
+        />
+      </Grid.Column>
+      <Grid.Column
+        md={4}
+        xs={12}
       >
-        <Button
-          destructive={false}
-          onClick={[Function]}
-          size="small"
-        >
-          Set as Default
-        </Button>
-        <Button
-          destructive={true}
-          onClick={[Function]}
-          size="small"
-        >
-          Delete
-        </Button>
-      </Button.Group>
-    </Grid.Column>
-  </Grid>
+        <ActionPopover
+          actions={
+            Array [
+              Object {
+                "content": "Set as Default",
+                "onClick": [Function],
+                "visible": true,
+              },
+              Object {
+                "content": "Retry Verification",
+                "onClick": [Function],
+                "visible": false,
+              },
+              Object {
+                "content": "Delete",
+                "onClick": [Function],
+                "visible": true,
+              },
+            ]
+          }
+        />
+      </Grid.Column>
+    </Grid>
+  </Panel.Section>
   <div>
     <DeleteModal
       content={
@@ -450,46 +486,59 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       title="Set default tracking domain (somedomain.com)"
     />
   </div>
-</Panel.Section>
+</Fragment>
 `;
 
 exports[`Component: TrackingDomainRow rendering when assigned to master account should render a pending domain 1`] = `
-<Panel.Section>
-  <Grid>
-    <Grid.Column
-      md={8}
-      xs={12}
-    >
-      <span
-        className="DomainHeading"
+<Fragment>
+  <Panel.Section>
+    <Grid>
+      <Grid.Column
+        md={8}
+        xs={12}
       >
-        somedomain.com
-      </span>
-      <div
-        className="TagRow"
-      >
-        <DomainStatusTag
-          className="Tag"
-          status="pending"
-        />
-      </div>
-    </Grid.Column>
-    <Grid.Column
-      md={4}
-      xs={12}
-    >
-      <Button.Group
-        className="ButtonColumn"
-      >
-        <Button
-          onClick={[Function]}
-          size="small"
+        <span
+          className="DomainHeading"
         >
-          Retry Verification
-        </Button>
-      </Button.Group>
-    </Grid.Column>
-  </Grid>
+          somedomain.com
+        </span>
+        <div
+          className="TagRow"
+        >
+          <DomainStatusTag
+            className="Tag"
+            status="pending"
+          />
+        </div>
+      </Grid.Column>
+      <Grid.Column
+        md={4}
+        xs={12}
+      >
+        <ActionPopover
+          actions={
+            Array [
+              Object {
+                "content": "Set as Default",
+                "onClick": [Function],
+                "visible": undefined,
+              },
+              Object {
+                "content": "Retry Verification",
+                "onClick": [Function],
+                "visible": true,
+              },
+              Object {
+                "content": "Delete",
+                "onClick": [Function],
+                "visible": false,
+              },
+            ]
+          }
+        />
+      </Grid.Column>
+    </Grid>
+  </Panel.Section>
   <div>
     <DeleteModal
       content={
@@ -517,61 +566,67 @@ exports[`Component: TrackingDomainRow rendering when assigned to master account 
       title="Set default tracking domain (somedomain.com)"
     />
   </div>
-</Panel.Section>
+</Fragment>
 `;
 
 exports[`Component: TrackingDomainRow rendering when assigned to subaccount should render a "currently verifying" domain 1`] = `
-<Panel.Section>
-  <Grid>
-    <Grid.Column
-      md={8}
-      xs={12}
-    >
-      <span
-        className="DomainHeading"
+<Fragment>
+  <Panel.Section>
+    <Grid>
+      <Grid.Column
+        md={8}
+        xs={12}
       >
-        somedomain.com
-      </span>
-      <div
-        className="TagRow"
-      >
-        <DomainStatusTag
-          className="Tag"
-          status="unverified"
-        />
-        <Subaccount
-          all={false}
-          className="Tag"
-          id={100}
-          isDefault={false}
-          master={false}
-          receiveAll={false}
-        />
-      </div>
-    </Grid.Column>
-    <Grid.Column
-      md={4}
-      xs={12}
-    >
-      <Button.Group
-        className="ButtonColumn"
-      >
-        <Button
-          onClick={[Function]}
-          size="small"
+        <span
+          className="DomainHeading"
         >
-          Verifying...
-        </Button>
-        <Button
-          destructive={true}
-          onClick={[Function]}
-          size="small"
+          somedomain.com
+        </span>
+        <div
+          className="TagRow"
         >
-          Delete
-        </Button>
-      </Button.Group>
-    </Grid.Column>
-  </Grid>
+          <DomainStatusTag
+            className="Tag"
+            status="unverified"
+          />
+          <Subaccount
+            all={false}
+            className="Tag"
+            id={100}
+            isDefault={false}
+            master={false}
+            receiveAll={false}
+          />
+        </div>
+      </Grid.Column>
+      <Grid.Column
+        md={4}
+        xs={12}
+      >
+        <ActionPopover
+          actions={
+            Array [
+              Object {
+                "content": "Set as Default",
+                "onClick": [Function],
+                "visible": undefined,
+              },
+              Object {
+                "content": "Verifying...",
+                "onClick": [Function],
+                "visible": true,
+              },
+              Object {
+                "content": "Delete",
+                "onClick": [Function],
+                "visible": true,
+              },
+            ]
+          }
+        />
+      </Grid.Column>
+    </Grid>
+  </Panel.Section>
   <div>
     <DeleteModal
       content={
@@ -599,54 +654,67 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       title="Set default tracking domain (somedomain.com)"
     />
   </div>
-</Panel.Section>
+</Fragment>
 `;
 
 exports[`Component: TrackingDomainRow rendering when assigned to subaccount should render a blocked domain 1`] = `
-<Panel.Section>
-  <Grid>
-    <Grid.Column
-      md={8}
-      xs={12}
-    >
-      <span
-        className="DomainHeading"
+<Fragment>
+  <Panel.Section>
+    <Grid>
+      <Grid.Column
+        md={8}
+        xs={12}
       >
-        somedomain.com
-      </span>
-      <div
-        className="TagRow"
-      >
-        <DomainStatusTag
-          className="Tag"
-          status="blocked"
-        />
-        <Subaccount
-          all={false}
-          className="Tag"
-          id={100}
-          isDefault={false}
-          master={false}
-          receiveAll={false}
-        />
-      </div>
-    </Grid.Column>
-    <Grid.Column
-      md={4}
-      xs={12}
-    >
-      <Button.Group
-        className="ButtonColumn"
-      >
-        <Button
-          onClick={[Function]}
-          size="small"
+        <span
+          className="DomainHeading"
         >
-          Retry Verification
-        </Button>
-      </Button.Group>
-    </Grid.Column>
-  </Grid>
+          somedomain.com
+        </span>
+        <div
+          className="TagRow"
+        >
+          <DomainStatusTag
+            className="Tag"
+            status="blocked"
+          />
+          <Subaccount
+            all={false}
+            className="Tag"
+            id={100}
+            isDefault={false}
+            master={false}
+            receiveAll={false}
+          />
+        </div>
+      </Grid.Column>
+      <Grid.Column
+        md={4}
+        xs={12}
+      >
+        <ActionPopover
+          actions={
+            Array [
+              Object {
+                "content": "Set as Default",
+                "onClick": [Function],
+                "visible": undefined,
+              },
+              Object {
+                "content": "Retry Verification",
+                "onClick": [Function],
+                "visible": true,
+              },
+              Object {
+                "content": "Delete",
+                "onClick": [Function],
+                "visible": false,
+              },
+            ]
+          }
+        />
+      </Grid.Column>
+    </Grid>
+  </Panel.Section>
   <div>
     <DeleteModal
       content={
@@ -674,61 +742,67 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       title="Set default tracking domain (somedomain.com)"
     />
   </div>
-</Panel.Section>
+</Fragment>
 `;
 
 exports[`Component: TrackingDomainRow rendering when assigned to subaccount should render a default unverified domain 1`] = `
-<Panel.Section>
-  <Grid>
-    <Grid.Column
-      md={8}
-      xs={12}
-    >
-      <span
-        className="DomainHeading"
+<Fragment>
+  <Panel.Section>
+    <Grid>
+      <Grid.Column
+        md={8}
+        xs={12}
       >
-        somedomain.com
-      </span>
-      <div
-        className="TagRow"
-      >
-        <DomainStatusTag
-          className="Tag"
-          status="unverified"
-        />
-        <Subaccount
-          all={false}
-          className="Tag"
-          id={100}
-          isDefault={true}
-          master={false}
-          receiveAll={false}
-        />
-      </div>
-    </Grid.Column>
-    <Grid.Column
-      md={4}
-      xs={12}
-    >
-      <Button.Group
-        className="ButtonColumn"
-      >
-        <Button
-          onClick={[Function]}
-          size="small"
+        <span
+          className="DomainHeading"
         >
-          Retry Verification
-        </Button>
-        <Button
-          destructive={true}
-          onClick={[Function]}
-          size="small"
+          somedomain.com
+        </span>
+        <div
+          className="TagRow"
         >
-          Delete
-        </Button>
-      </Button.Group>
-    </Grid.Column>
-  </Grid>
+          <DomainStatusTag
+            className="Tag"
+            status="unverified"
+          />
+          <Subaccount
+            all={false}
+            className="Tag"
+            id={100}
+            isDefault={true}
+            master={false}
+            receiveAll={false}
+          />
+        </div>
+      </Grid.Column>
+      <Grid.Column
+        md={4}
+        xs={12}
+      >
+        <ActionPopover
+          actions={
+            Array [
+              Object {
+                "content": "Remove Default",
+                "onClick": [Function],
+                "visible": undefined,
+              },
+              Object {
+                "content": "Retry Verification",
+                "onClick": [Function],
+                "visible": true,
+              },
+              Object {
+                "content": "Delete",
+                "onClick": [Function],
+                "visible": true,
+              },
+            ]
+          }
+        />
+      </Grid.Column>
+    </Grid>
+  </Panel.Section>
   <div>
     <DeleteModal
       content={
@@ -762,58 +836,63 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       title="Remove default tracking domain (somedomain.com)"
     />
   </div>
-</Panel.Section>
+</Fragment>
 `;
 
 exports[`Component: TrackingDomainRow rendering when assigned to subaccount should render a default verified domain 1`] = `
-<Panel.Section>
-  <Grid>
-    <Grid.Column
-      md={8}
-      xs={12}
-    >
-      <span
-        className="DomainHeading"
+<Fragment>
+  <Panel.Section>
+    <Grid>
+      <Grid.Column
+        md={8}
+        xs={12}
       >
-        somedomain.com
-      </span>
-      <div
-        className="TagRow"
+        <span
+          className="DomainHeading"
+        >
+          somedomain.com
+        </span>
+        <div
+          className="TagRow"
+        >
+          <Subaccount
+            all={false}
+            className="Tag"
+            id={100}
+            isDefault={true}
+            master={false}
+            receiveAll={false}
+          />
+        </div>
+      </Grid.Column>
+      <Grid.Column
+        md={4}
+        xs={12}
       >
-        <Subaccount
-          all={false}
-          className="Tag"
-          id={100}
-          isDefault={true}
-          master={false}
-          receiveAll={false}
+        <ActionPopover
+          actions={
+            Array [
+              Object {
+                "content": "Remove Default",
+                "onClick": [Function],
+                "visible": true,
+              },
+              Object {
+                "content": "Retry Verification",
+                "onClick": [Function],
+                "visible": false,
+              },
+              Object {
+                "content": "Delete",
+                "onClick": [Function],
+                "visible": true,
+              },
+            ]
+          }
         />
-      </div>
-    </Grid.Column>
-    <Grid.Column
-      md={4}
-      xs={12}
-    >
-      <Button.Group
-        className="ButtonColumn"
-      >
-        <Button
-          destructive={true}
-          onClick={[Function]}
-          size="small"
-        >
-          Remove Default
-        </Button>
-        <Button
-          destructive={true}
-          onClick={[Function]}
-          size="small"
-        >
-          Delete
-        </Button>
-      </Button.Group>
-    </Grid.Column>
-  </Grid>
+      </Grid.Column>
+    </Grid>
+  </Panel.Section>
   <div>
     <DeleteModal
       content={
@@ -847,61 +926,67 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       title="Remove default tracking domain (somedomain.com)"
     />
   </div>
-</Panel.Section>
+</Fragment>
 `;
 
 exports[`Component: TrackingDomainRow rendering when assigned to subaccount should render a non-default unverified domain 1`] = `
-<Panel.Section>
-  <Grid>
-    <Grid.Column
-      md={8}
-      xs={12}
-    >
-      <span
-        className="DomainHeading"
+<Fragment>
+  <Panel.Section>
+    <Grid>
+      <Grid.Column
+        md={8}
+        xs={12}
       >
-        somedomain.com
-      </span>
-      <div
-        className="TagRow"
-      >
-        <DomainStatusTag
-          className="Tag"
-          status="unverified"
-        />
-        <Subaccount
-          all={false}
-          className="Tag"
-          id={100}
-          isDefault={false}
-          master={false}
-          receiveAll={false}
-        />
-      </div>
-    </Grid.Column>
-    <Grid.Column
-      md={4}
-      xs={12}
-    >
-      <Button.Group
-        className="ButtonColumn"
-      >
-        <Button
-          onClick={[Function]}
-          size="small"
+        <span
+          className="DomainHeading"
         >
-          Retry Verification
-        </Button>
-        <Button
-          destructive={true}
-          onClick={[Function]}
-          size="small"
+          somedomain.com
+        </span>
+        <div
+          className="TagRow"
         >
-          Delete
-        </Button>
-      </Button.Group>
-    </Grid.Column>
-  </Grid>
+          <DomainStatusTag
+            className="Tag"
+            status="unverified"
+          />
+          <Subaccount
+            all={false}
+            className="Tag"
+            id={100}
+            isDefault={false}
+            master={false}
+            receiveAll={false}
+          />
+        </div>
+      </Grid.Column>
+      <Grid.Column
+        md={4}
+        xs={12}
+      >
+        <ActionPopover
+          actions={
+            Array [
+              Object {
+                "content": "Set as Default",
+                "onClick": [Function],
+                "visible": undefined,
+              },
+              Object {
+                "content": "Retry Verification",
+                "onClick": [Function],
+                "visible": true,
+              },
+              Object {
+                "content": "Delete",
+                "onClick": [Function],
+                "visible": true,
+              },
+            ]
+          }
+        />
+      </Grid.Column>
+    </Grid>
+  </Panel.Section>
   <div>
     <DeleteModal
       content={
@@ -929,58 +1014,63 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       title="Set default tracking domain (somedomain.com)"
     />
   </div>
-</Panel.Section>
+</Fragment>
 `;
 
 exports[`Component: TrackingDomainRow rendering when assigned to subaccount should render a non-default verified domain 1`] = `
-<Panel.Section>
-  <Grid>
-    <Grid.Column
-      md={8}
-      xs={12}
-    >
-      <span
-        className="DomainHeading"
+<Fragment>
+  <Panel.Section>
+    <Grid>
+      <Grid.Column
+        md={8}
+        xs={12}
       >
-        somedomain.com
-      </span>
-      <div
-        className="TagRow"
+        <span
+          className="DomainHeading"
+        >
+          somedomain.com
+        </span>
+        <div
+          className="TagRow"
+        >
+          <Subaccount
+            all={false}
+            className="Tag"
+            id={100}
+            isDefault={false}
+            master={false}
+            receiveAll={false}
+          />
+        </div>
+      </Grid.Column>
+      <Grid.Column
+        md={4}
+        xs={12}
       >
-        <Subaccount
-          all={false}
-          className="Tag"
-          id={100}
-          isDefault={false}
-          master={false}
-          receiveAll={false}
+        <ActionPopover
+          actions={
+            Array [
+              Object {
+                "content": "Set as Default",
+                "onClick": [Function],
+                "visible": true,
+              },
+              Object {
+                "content": "Retry Verification",
+                "onClick": [Function],
+                "visible": false,
+              },
+              Object {
+                "content": "Delete",
+                "onClick": [Function],
+                "visible": true,
+              },
+            ]
+          }
         />
-      </div>
-    </Grid.Column>
-    <Grid.Column
-      md={4}
-      xs={12}
-    >
-      <Button.Group
-        className="ButtonColumn"
-      >
-        <Button
-          destructive={false}
-          onClick={[Function]}
-          size="small"
-        >
-          Set as Default
-        </Button>
-        <Button
-          destructive={true}
-          onClick={[Function]}
-          size="small"
-        >
-          Delete
-        </Button>
-      </Button.Group>
-    </Grid.Column>
-  </Grid>
+      </Grid.Column>
+    </Grid>
+  </Panel.Section>
   <div>
     <DeleteModal
       content={
@@ -1008,54 +1098,67 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       title="Set default tracking domain (somedomain.com)"
     />
   </div>
-</Panel.Section>
+</Fragment>
 `;
 
 exports[`Component: TrackingDomainRow rendering when assigned to subaccount should render a pending domain 1`] = `
-<Panel.Section>
-  <Grid>
-    <Grid.Column
-      md={8}
-      xs={12}
-    >
-      <span
-        className="DomainHeading"
+<Fragment>
+  <Panel.Section>
+    <Grid>
+      <Grid.Column
+        md={8}
+        xs={12}
       >
-        somedomain.com
-      </span>
-      <div
-        className="TagRow"
-      >
-        <DomainStatusTag
-          className="Tag"
-          status="pending"
-        />
-        <Subaccount
-          all={false}
-          className="Tag"
-          id={100}
-          isDefault={false}
-          master={false}
-          receiveAll={false}
-        />
-      </div>
-    </Grid.Column>
-    <Grid.Column
-      md={4}
-      xs={12}
-    >
-      <Button.Group
-        className="ButtonColumn"
-      >
-        <Button
-          onClick={[Function]}
-          size="small"
+        <span
+          className="DomainHeading"
         >
-          Retry Verification
-        </Button>
-      </Button.Group>
-    </Grid.Column>
-  </Grid>
+          somedomain.com
+        </span>
+        <div
+          className="TagRow"
+        >
+          <DomainStatusTag
+            className="Tag"
+            status="pending"
+          />
+          <Subaccount
+            all={false}
+            className="Tag"
+            id={100}
+            isDefault={false}
+            master={false}
+            receiveAll={false}
+          />
+        </div>
+      </Grid.Column>
+      <Grid.Column
+        md={4}
+        xs={12}
+      >
+        <ActionPopover
+          actions={
+            Array [
+              Object {
+                "content": "Set as Default",
+                "onClick": [Function],
+                "visible": undefined,
+              },
+              Object {
+                "content": "Retry Verification",
+                "onClick": [Function],
+                "visible": true,
+              },
+              Object {
+                "content": "Delete",
+                "onClick": [Function],
+                "visible": false,
+              },
+            ]
+          }
+        />
+      </Grid.Column>
+    </Grid>
+  </Panel.Section>
   <div>
     <DeleteModal
       content={
@@ -1083,5 +1186,5 @@ exports[`Component: TrackingDomainRow rendering when assigned to subaccount shou
       title="Set default tracking domain (somedomain.com)"
     />
   </div>
-</Panel.Section>
+</Fragment>
 `;

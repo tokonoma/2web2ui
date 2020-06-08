@@ -13,8 +13,7 @@ const JobActionLink = ({ jobId, fileHref, status }) => {
       <PageLink
         as={Button}
         to={`/recipient-validation/list/${jobId}`}
-        flat
-        color="orange"
+        variant="minimal"
         size="small"
       >
         <span>Review</span>&nbsp;
@@ -25,7 +24,7 @@ const JobActionLink = ({ jobId, fileHref, status }) => {
 
   if (status === 'success') {
     return (
-      <DownloadLink as={Button} href={fileHref} color="orange" flat size="small">
+      <DownloadLink as={Button} href={fileHref} variant="minimal" size="small">
         <span>Download</span>&nbsp;
         <FileDownload />
       </DownloadLink>
@@ -33,13 +32,7 @@ const JobActionLink = ({ jobId, fileHref, status }) => {
   }
 
   return (
-    <PageLink
-      as={Button}
-      to={`/recipient-validation/list/${jobId}`}
-      flat
-      color="orange"
-      size="small"
-    >
+    <PageLink as={Button} to={`/recipient-validation/list/${jobId}`} variant="minimal" size="small">
       <span>See Progress</span>&nbsp;
       <Cached />
     </PageLink>

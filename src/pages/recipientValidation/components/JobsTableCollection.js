@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from 'src/components/matchbox';
+import { ScreenReaderOnly, Table } from 'src/components/matchbox';
 import { TableCollection, NewCollectionBody } from 'src/components/collection';
 import { formatDateTime } from 'src/helpers/date';
 import withJobs from '../containers/withJobs';
@@ -42,10 +42,12 @@ export const JobsTableCollection = ({ jobs }) => {
     },
     {
       dataCellComponent: ({ rejectedUrl, status, jobId }) => (
-        <JobActionLink fileHref={rejectedUrl} status={status} jobId={jobId} />
+        <div style={{ textAlign: 'right' }}>
+          <JobActionLink fileHref={rejectedUrl} status={status} jobId={jobId} />
+        </div>
       ),
       header: {
-        label: 'Actions',
+        label: <ScreenReaderOnly>Actions</ScreenReaderOnly>,
       },
     },
   ];

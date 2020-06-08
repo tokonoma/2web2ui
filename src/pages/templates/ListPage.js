@@ -3,20 +3,15 @@ import React, { Component } from 'react';
 import { Page, ScreenReaderOnly } from 'src/components/matchbox';
 import { ApiErrorBanner, Loading, TableCollection } from 'src/components';
 import { Templates } from 'src/components/images';
+import { Heading } from 'src/components/text';
 import { PageLink } from 'src/components/links';
+import ActionPopover from 'src/components/actionPopover';
 import { resolveTemplateStatus } from 'src/helpers/templates';
 import RecentActivity from './components/RecentActivity';
-import {
-  DeleteAction,
-  DuplicateAction,
-  LastUpdated,
-  Name,
-  Status,
-} from './components/ListComponents';
+import { LastUpdated, Name, Status } from './components/ListComponents';
 import DuplicateTemplateModal from './components/editorActions/DuplicateTemplateModal';
 import DeleteTemplateModal from './components/editorActions/DeleteTemplateModal';
 import { routeNamespace } from './constants/routes';
-import styles from './ListPage.module.scss';
 
 export default class ListPage extends Component {
   state = {
@@ -125,17 +120,18 @@ export default class ListPage extends Component {
       },
       {
         component: template => (
-          <span className={styles.Actions}>
-            <DuplicateAction
-              onClick={() => this.toggleDuplicateModal(template)}
-              data-id="table-button-duplicate"
-            />
-
-            <DeleteAction
-              onClick={() => this.toggleDeleteModal(template)}
-              data-id="table-button-delete"
-            />
-          </span>
+          <ActionPopover
+            actions={[
+              {
+                content: 'Duplicate Template',
+                onClick: () => this.toggleDuplicateModal(template),
+              },
+              {
+                content: 'Delete Template',
+                onClick: () => this.toggleDeleteModal(template),
+              },
+            ]}
+          />
         ),
         header: {
           width: 20,
@@ -193,32 +189,6 @@ export default class ListPage extends Component {
           />
         ) : (
           <>
-            <RecentActivity
-              hasActionButtons={canModify}
-              templates={templates}
-              onToggleDeleteModal={this.toggleDeleteModal}
-              onToggleDuplicateModal={this.toggleDuplicateModal}
-            />
-
-            <ScreenReaderOnly>
-              <h2>All Templates</h2>
-            </ScreenReaderOnly>
-
-            <TableCollection
-              columns={columns.map(({ header, key }) => ({ ...header, key }))}
-              rows={templates}
-              getRowData={this.renderRow(columns)}
-              pagination
-              filterBox={{
-                show: true,
-                exampleModifiers: ['id', 'name'],
-                itemToStringKeys: ['name', 'id', 'subaccount_id'],
-              }}
-              defaultSortColumn="last_update_time"
-              defaultSortDirection="desc"
-              saveCsv={false}
-            />
-
             <DeleteTemplateModal
               open={this.state.showDeleteModal}
               onClose={this.toggleDeleteModal}
@@ -243,6 +213,32 @@ export default class ListPage extends Component {
                 this.state.templateToDuplicate && this.state.templateToDuplicate.published
               }
               isLoading={isDraftPending || isPublishedPending || isCreatePending}
+            />
+
+            <RecentActivity
+              hasActionButtons={canModify}
+              templates={templates}
+              onToggleDeleteModal={this.toggleDeleteModal}
+              onToggleDuplicateModal={this.toggleDuplicateModal}
+            />
+
+            <ScreenReaderOnly>
+              <Heading as="h2">All Templates</Heading>
+            </ScreenReaderOnly>
+
+            <TableCollection
+              columns={columns.map(({ header, key }) => ({ ...header, key }))}
+              rows={templates}
+              getRowData={this.renderRow(columns)}
+              pagination
+              filterBox={{
+                show: true,
+                exampleModifiers: ['id', 'name'],
+                itemToStringKeys: ['name', 'id', 'subaccount_id'],
+              }}
+              defaultSortColumn="last_update_time"
+              defaultSortDirection="desc"
+              saveCsv={false}
             />
           </>
         )}

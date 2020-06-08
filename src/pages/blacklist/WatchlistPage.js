@@ -7,7 +7,7 @@ import { PageDescription } from 'src/components/text';
 import { selectBlacklistedCount } from 'src/selectors/blacklist';
 import { listMonitors } from 'src/actions/blacklist';
 import MonitorsCollection from './components/MonitorsCollection';
-import StopMonitoringModal from './components/StopMonitoringModal';
+import RemoveFromWatchlistModal from './components/RemoveFromWatchlistModal';
 import CongratsBanner from './components/CongratsBanner';
 
 export const WatchlistPage = props => {
@@ -74,7 +74,7 @@ export const WatchlistPage = props => {
         updates.
       </PageDescription>
       {renderContent()}
-      <StopMonitoringModal monitorToDelete={monitorToDelete} closeModal={closeModal} />
+      <RemoveFromWatchlistModal monitorToDelete={monitorToDelete} closeModal={closeModal} />
     </Page>
   );
 };

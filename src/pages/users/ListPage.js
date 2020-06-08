@@ -5,7 +5,7 @@ import fp from 'lodash/fp';
 import TimeAgo from 'react-timeago';
 import { Users } from 'src/components/images';
 import { PageLink } from 'src/components/links';
-import { Page, Tag } from 'src/components/matchbox';
+import { Page, ScreenReaderOnly, Tag } from 'src/components/matchbox';
 import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
 import { list as listSubaccounts } from 'src/actions/subaccounts';
 import * as usersActions from 'src/actions/users';
@@ -29,7 +29,7 @@ const COLUMNS = [
   { label: 'Role', sortKey: 'roleLabel' },
   { label: tfaColumnLabel, sortKey: 'tfa_enabled' },
   { label: 'Last Login', sortKey: 'last_login' },
-  null,
+  { label: <ScreenReaderOnly>Actions</ScreenReaderOnly>, key: 'actions' },
 ];
 
 const SUB_COLUMN = [
@@ -38,7 +38,7 @@ const SUB_COLUMN = [
   { label: 'Subaccount', sortKey: 'subaccount_id', width: '15%' },
   { label: tfaColumnLabel, sortKey: 'tfa_enabled', width: '10%' },
   { label: 'Last Login', sortKey: 'last_login', width: '14%' },
-  null,
+  { label: <ScreenReaderOnly>Actions</ScreenReaderOnly>, key: 'actions' },
 ];
 
 export const Actions = ({ username, deletable, onDelete }) => {

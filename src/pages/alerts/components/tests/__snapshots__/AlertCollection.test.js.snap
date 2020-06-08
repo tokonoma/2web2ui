@@ -21,7 +21,11 @@ exports[`TestCollection Component should render 1`] = `
         "label": "Mute",
         "sortKey": "muted",
       },
-      null,
+      Object {
+        "label": <ScreenReaderOnly>
+          Actions
+        </ScreenReaderOnly>,
+      },
     ]
   }
   defaultSortColumn="last_triggered_timestamp"
@@ -86,25 +90,17 @@ Array [
     id="id-1"
     muted={true}
   />,
-  <Tooltip
-    content="Delete"
-    dark={true}
-    horizontalOffset="-8px"
-    id="delete-alert-id-1"
-    width="auto"
+  <Button
+    onClick={[Function]}
+    variant="minimal"
   >
-    <Button
-      flat={true}
-      onClick={[Function]}
-    >
-      <Delete
-        className="Icon"
-      />
-      <ScreenReaderOnly>
-        Delete Alert
-      </ScreenReaderOnly>
-    </Button>
-  </Tooltip>,
+    <span>
+      Delete
+    </span>
+    <Delete
+      className="Icon"
+    />
+  </Button>,
 ]
 `;
 
@@ -127,25 +123,17 @@ Array [
     id="id-2"
     muted={false}
   />,
-  <Tooltip
-    content="Delete"
-    dark={true}
-    horizontalOffset="-8px"
-    id="delete-alert-id-2"
-    width="auto"
+  <Button
+    onClick={[Function]}
+    variant="minimal"
   >
-    <Button
-      flat={true}
-      onClick={[Function]}
-    >
-      <Delete
-        className="Icon"
-      />
-      <ScreenReaderOnly>
-        Delete Alert
-      </ScreenReaderOnly>
-    </Button>
-  </Tooltip>,
+    <span>
+      Delete
+    </span>
+    <Delete
+      className="Icon"
+    />
+  </Button>,
 ]
 `;
 
@@ -168,24 +156,16 @@ Array [
     id="id-3"
     muted={true}
   />,
-  <Tooltip
-    content="Delete"
-    dark={true}
-    horizontalOffset="-8px"
-    id="delete-alert-id-3"
-    width="auto"
+  <Button
+    onClick={[Function]}
+    variant="minimal"
   >
-    <Button
-      flat={true}
-      onClick={[Function]}
-    >
-      <Delete
-        className="Icon"
-      />
-      <ScreenReaderOnly>
-        Delete Alert
-      </ScreenReaderOnly>
-    </Button>
-  </Tooltip>,
+    <span>
+      Delete
+    </span>
+    <Delete
+      className="Icon"
+    />
+  </Button>,
 ]
 `;

@@ -83,24 +83,23 @@ describe('RecentActivity', () => {
     expect(queryAllByRole('listitem')).not.toHaveLength(5);
   });
 
-  it('invokes the `onToggleDuplicateModal` propr when `DuplicateAction` is clicked', () => {
+  it('invokes the `onToggleDuplicateModal` propr when `DuplicateAction` is clicked', async () => {
     const mockToggleDeleteModal = jest.fn();
     const mockToggleDuplicateModal = jest.fn();
 
-    const { queryAllByText } = subject({
+    const { getAllByText, getByText } = subject({
       templates: [publishedWithDraftTemplate, publishedTemplate, draftTemplate, draftTemplate],
       onToggleDeleteModal: mockToggleDeleteModal,
       onToggleDuplicateModal: mockToggleDuplicateModal,
     });
 
-    const firstDeleteButton = queryAllByText('Delete Template')[0];
-    const firstDuplicateButton = queryAllByText('Duplicate Template')[0];
+    userEvent.click(getAllByText('Open Menu')[0]);
 
-    userEvent.click(firstDeleteButton);
-    userEvent.click(firstDuplicateButton);
-
-    expect(mockToggleDeleteModal).toHaveBeenCalled();
+    userEvent.click(getByText('Duplicate Template'));
     expect(mockToggleDuplicateModal).toHaveBeenCalled();
+
+    userEvent.click(getByText('Delete Template'));
+    expect(mockToggleDeleteModal).toHaveBeenCalled();
   });
 
   it('does not render action buttons when `hasActionButtons` is `false`', () => {

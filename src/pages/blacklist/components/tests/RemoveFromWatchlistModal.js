@@ -2,7 +2,7 @@ import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
 import TestApp from 'src/__testHelpers__/TestApp';
 
-import { StopMonitoringModal } from '../StopMonitoringModal';
+import { RemoveFromWatchlistModal } from '../RemoveFromWatchlistModal';
 
 describe('Stop Monitoring Modal', () => {
   const closeModal = jest.fn();
@@ -14,39 +14,37 @@ describe('Stop Monitoring Modal', () => {
 
     return render(
       <TestApp>
-        <StopMonitoringModal {...defaults} {...props} />
+        <RemoveFromWatchlistModal {...defaults} {...props} />
       </TestApp>,
     );
   };
 
   it('renders the modal correctly for an ip address', () => {
-    const { queryByText } = subject({ monitorToDelete: '1.2.3.4' });
+    const { getAllByText, getByText } = subject({ monitorToDelete: '1.2.3.4' });
 
-    expect(queryByText('Stop Monitoring 1.2.3.4')).toBeInTheDocument();
+    expect(getAllByText('Remove from Watchlist')).toHaveLength(2);
     expect(
-      queryByText(
-        "Removing this IP from your watchlist means you won't get notified of changes, but don't worry you can always add it again later.",
+      getByText(
+        "Removing IP 1.2.3.4 from your watchlist means you won't get notified of changes, but don't worry you can always add it again later.",
       ),
     ).toBeInTheDocument();
-    expect(queryByText('Stop Monitoring')).toBeInTheDocument();
   });
 
   it('renders the modal correctly for a sending domain', () => {
-    const { queryByText } = subject({ monitorToDelete: 'test.com' });
+    const { getAllByText, getByText } = subject({ monitorToDelete: 'test.com' });
 
-    expect(queryByText('Stop Monitoring test.com')).toBeInTheDocument();
+    expect(getAllByText('Remove from Watchlist')).toHaveLength(2);
     expect(
-      queryByText(
-        "Removing this domain from your watchlist means you won't get notified of changes, but don't worry you can always add it again later.",
+      getByText(
+        "Removing domain test.com from your watchlist means you won't get notified of changes, but don't worry you can always add it again later.",
       ),
     ).toBeInTheDocument();
-    expect(queryByText('Stop Monitoring')).toBeInTheDocument();
   });
 
   it('upon clicking the confirm button, deletes the resource, shows alert, and closes the modal', async () => {
-    const { queryByText } = subject();
+    const { getAllByText } = subject();
 
-    await fireEvent.click(queryByText('Stop Monitoring'));
+    await fireEvent.click(getAllByText('Remove from Watchlist')[1]);
     expect(deleteMonitor).toHaveBeenCalled();
     expect(showAlert).toHaveBeenCalled();
     expect(closeModal).toHaveBeenCalled();

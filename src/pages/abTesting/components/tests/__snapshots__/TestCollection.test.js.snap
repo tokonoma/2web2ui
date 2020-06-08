@@ -20,7 +20,11 @@ exports[`TestCollection Component should render 1`] = `
         "label": "Last Modified",
         "sortKey": "updated_at",
       },
-      null,
+      Object {
+        "label": <ScreenReaderOnly>
+          Actons
+        </ScreenReaderOnly>,
+      },
     ]
   }
   defaultSortColumn="updated_at"

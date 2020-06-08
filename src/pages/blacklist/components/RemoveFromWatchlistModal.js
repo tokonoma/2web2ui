@@ -3,10 +3,11 @@ import { Button, Panel, Modal } from 'src/components/matchbox';
 import { connect } from 'react-redux';
 import { domainRegex } from 'src/helpers/regex';
 import { PanelLoading } from 'src/components';
+import ButtonWrapper from 'src/components/buttonWrapper';
 import { deleteMonitor } from 'src/actions/blacklist';
 import { showAlert } from 'src/actions/globalAlert';
 
-export const StopMonitoringModal = ({
+export const RemoveFromWatchlistModal = ({
   closeModal,
   deleteMonitor,
   isPending,
@@ -30,30 +31,34 @@ export const StopMonitoringModal = ({
       <>
         <Panel.Section>
           <p>
-            {`Removing this ${
+            {`Removing ${
               monitorToDelete.match(domainRegex) ? 'domain' : 'IP'
-            } from your watchlist means you won't get notified of changes, but don't
+            } ${monitorToDelete} from your watchlist means you won't get notified of changes, but don't
           worry you can always add it again later.`}
           </p>
         </Panel.Section>
 
         <Panel.Section>
-          <Button variant="primary" disabled={isPending} onClick={confirmAction}>
-            Stop Monitoring
-          </Button>
+          <ButtonWrapper>
+            <Button variant="destructive" disabled={isPending} onClick={confirmAction}>
+              Remove from Watchlist
+            </Button>
+
+            <Button variant="monochrome-secondary" onClick={closeModal}>
+              Cancel
+            </Button>
+          </ButtonWrapper>
         </Panel.Section>
       </>
     );
   };
-
-  const title = monitorToDelete ? `Stop Monitoring ${monitorToDelete}` : '';
 
   return (
     <Modal open={Boolean(monitorToDelete)} onClose={closeModal} showCloseButton={true}>
       {isPending ? (
         <PanelLoading minHeight="175px" />
       ) : (
-        <Panel title={title}>{renderContent()}</Panel>
+        <Panel title="Remove from Watchlist">{renderContent()}</Panel>
       )}
     </Modal>
   );
@@ -62,4 +67,4 @@ export const StopMonitoringModal = ({
 const mapStateToProps = state => ({
   isPending: state.blacklist.deleteMonitorPending || state.blacklist.monitorsPending,
 });
-export default connect(mapStateToProps, { deleteMonitor, showAlert })(StopMonitoringModal);
+export default connect(mapStateToProps, { deleteMonitor, showAlert })(RemoveFromWatchlistModal);

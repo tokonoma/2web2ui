@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Subaccount } from 'src/components';
-import { Button } from 'src/components/matchbox';
+import { ScreenReaderOnly } from 'src/components/matchbox';
+import ActionPopover from 'src/components/actionPopover';
 import { PanelLoading, TableCollection, Empty, DeleteModal } from 'src/components';
 import { deleteSuppression } from 'src/actions/suppressions';
 import { showAlert } from 'src/actions/globalAlert';
@@ -16,7 +17,7 @@ export function Results(props) {
 
   function getRowData(row) {
     const { recipient, type, source, subaccount_id: subaccountId, subaccount_name } = row;
-    const { hasSubaccounts } = props;
+    const { hasSubaccounts, deleting } = props;
     const rowData = [
       recipient,
       type === 'transactional' ? 'Transactional' : 'Non-transactional',
@@ -28,17 +29,19 @@ export function Results(props) {
     }
 
     rowData.push(
-      <div style={{ textAlign: 'right' }}>
-        <Button.Group>
-          <Button size="small" onClick={() => openDetailModal(row)}>
-            View Details
-          </Button>
-
-          <Button disabled={deleting} destructive size="small" onClick={() => openDeleteModal(row)}>
-            Delete
-          </Button>
-        </Button.Group>
-      </div>,
+      <ActionPopover
+        actions={[
+          {
+            content: 'View Details',
+            onClick: () => openDetailModal(row),
+          },
+          {
+            content: 'Delete',
+            onClick: () => openDeleteModal(row),
+            visible: !deleting,
+          },
+        ]}
+      />,
     );
 
     return rowData;
@@ -61,7 +64,7 @@ export function Results(props) {
       });
     }
 
-    columns.push({ label: '', width: '21%' });
+    columns.push({ label: <ScreenReaderOnly>Actions</ScreenReaderOnly>, width: '21%' });
 
     return columns;
   }

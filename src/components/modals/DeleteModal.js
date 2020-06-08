@@ -8,7 +8,7 @@ export default function DeleteModal({ onDelete, deleting, ...props }) {
       confirmVerb="Delete"
       onConfirm={onDelete}
       confirmVariant="destructive"
-      cancelVariant="destructive-secondary"
+      cancelVariant="monochrome-secondary"
       {...props}
     />
   );

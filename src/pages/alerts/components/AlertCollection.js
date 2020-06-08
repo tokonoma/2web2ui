@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Delete } from '@sparkpost/matchbox-icons';
-import { Table, Button, Tag, ScreenReaderOnly, Tooltip } from 'src/components/matchbox';
+import { Button, ScreenReaderOnly, Table, Tag } from 'src/components/matchbox';
 import { TableCollection, DisplayDate } from 'src/components';
 import { NewCollectionBody } from 'src/components/collection';
 import { PageLink } from 'src/components/links';
@@ -19,7 +19,7 @@ export class AlertCollectionComponent extends Component {
       { label: 'Metric', sortKey: 'metric' },
       { label: 'Last Triggered', sortKey: 'last_triggered_timestamp' },
       { label: 'Mute', sortKey: 'muted' },
-      null,
+      { label: <ScreenReaderOnly>Actions</ScreenReaderOnly> },
     ];
 
     return columns;
@@ -45,13 +45,10 @@ export class AlertCollectionComponent extends Component {
         formattedDate={last_triggered_formatted || 'Never Triggered'}
       />,
       <AlertToggle muted={muted} id={id} />,
-      <Tooltip id={`delete-alert-${id}`} dark content="Delete" width="auto" horizontalOffset="-8px">
-        <Button flat onClick={deleteFn}>
-          <Delete className={styles.Icon} />
-
-          <ScreenReaderOnly>Delete Alert</ScreenReaderOnly>
-        </Button>
-      </Tooltip>,
+      <Button variant="minimal" onClick={deleteFn}>
+        <span>Delete</span>
+        <Delete className={styles.Icon} />
+      </Button>,
     ];
   };
 

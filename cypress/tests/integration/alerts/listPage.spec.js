@@ -102,7 +102,7 @@ describe('The alerts list page', () => {
     }
 
     function clickDeleteButton() {
-      cy.findAllByText('Delete Alert')
+      cy.findAllByText('Delete')
         .first()
         .click({ force: true });
     }
@@ -148,6 +148,7 @@ describe('The alerts list page', () => {
         .clear()
         .type('Alert 1');
 
+      /* eslint-disable-next-line */
       cy.wait(debounceDelay); // Debounce time
 
       cy.get('table').within(() => {
@@ -158,6 +159,7 @@ describe('The alerts list page', () => {
 
       cy.findByLabelText('Filter By').clear();
 
+      /* eslint-disable-next-line */
       cy.wait(debounceDelay); // Debounce time
 
       cy.get('table').within(() => {
@@ -171,6 +173,7 @@ describe('The alerts list page', () => {
         .clear()
         .type('Alert');
 
+      /* eslint-disable-next-line */
       cy.wait(debounceDelay); // Debounce time
 
       cy.get('table').within(() => {
@@ -184,6 +187,7 @@ describe('The alerts list page', () => {
         .clear()
         .type('1');
 
+      /* eslint-disable-next-line */
       cy.wait(debounceDelay); // Debounce time
 
       cy.get('table').within(() => {
@@ -276,7 +280,7 @@ describe('The alerts list page', () => {
       });
 
       cy.withinModal(() => cy.findByText('Delete').click());
-      //Needed to fix visibility issue with Hibana Cypress test
+      // Needed to fix visibility issue with Hibana Cypress test
       cy.withinModal(() => {
         cy.findByText('Cancel').click();
       });

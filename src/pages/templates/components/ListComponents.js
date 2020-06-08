@@ -1,12 +1,11 @@
 import React from 'react';
-import classNames from 'classnames';
-import { CheckCircle, Delete, Edit, ContentCopy } from '@sparkpost/matchbox-icons';
+import { CheckCircle, Edit } from '@sparkpost/matchbox-icons';
 import { formatDateTime } from 'src/helpers/date';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
 import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import useUniqueId from 'src/hooks/useUniqueId';
 import { PageLink } from 'src/components/links';
-import { Button, ScreenReaderOnly, Tag, Text, Tooltip } from 'src/components/matchbox';
+import { Tag, Text, Tooltip } from 'src/components/matchbox';
 import OGStyles from './ListComponents.module.scss';
 import hibanaStyles from './ListComponentsHibana.module.scss';
 import { routeNamespace } from '../constants/routes';
@@ -61,40 +60,6 @@ export const Status = rowData => {
       <Edit />
       &nbsp;<span>Draft</span>
     </Tag>
-  );
-};
-
-export const DeleteAction = ({ onClick, className, ...props }) => {
-  const styles = useHibanaOverride(OGStyles, hibanaStyles);
-
-  return (
-    <Button
-      {...props}
-      className={classNames(styles.Action, className)}
-      flat
-      onClick={() => onClick(props)}
-    >
-      <Delete size={16} />
-
-      <ScreenReaderOnly>Delete Template</ScreenReaderOnly>
-    </Button>
-  );
-};
-
-export const DuplicateAction = ({ onClick, className, ...props }) => {
-  const styles = useHibanaOverride(OGStyles, hibanaStyles);
-
-  return (
-    <Button
-      {...props}
-      className={classNames(styles.Action, className)}
-      flat
-      onClick={() => onClick(props)}
-    >
-      <ContentCopy size={16} />
-
-      <ScreenReaderOnly>Duplicate Template</ScreenReaderOnly>
-    </Button>
   );
 };
 

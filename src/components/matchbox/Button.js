@@ -53,6 +53,11 @@ function getVariantProps({ variant, isHibanaEnabled }) {
           color: 'blue',
           flat: true,
         };
+      case 'minimal':
+        return {
+          color: 'gray',
+          flat: true,
+        };
       case 'monochrome':
         return {
           color: 'gray',
@@ -65,11 +70,6 @@ function getVariantProps({ variant, isHibanaEnabled }) {
       case 'destructive':
         return {
           destructive: true,
-        };
-      case 'destructive-secondary':
-        return {
-          color: 'red',
-          outlineBorder: true,
         };
       // use when connecting a button to a TextField
       case 'connected':
@@ -94,10 +94,14 @@ function getVariantProps({ variant, isHibanaEnabled }) {
       return {
         destructive: true,
       };
+    case 'minimal':
+      return {
+        flat: true,
+      };
     case 'secondary':
     case 'tertiary':
-    case 'monochrome-primary':
     case 'monochrome':
+    case 'monochrome-secondary':
     case 'connected':
     default:
       return undefined;

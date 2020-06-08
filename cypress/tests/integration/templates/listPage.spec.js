@@ -97,9 +97,11 @@ describe('The templates list page', () => {
 
     cy.visit(PAGE_URL);
 
-    cy.get('[data-id="recent-activity-button-duplicate"]')
+    cy.findAllByText('Open Menu')
       .first()
-      .click();
+      .click({ force: true }); // Content is only present for screen readers, requiring use of `force`
+
+    cy.findByText('Duplicate Template').click();
 
     cy.findByLabelText(/Template Name/g).should('have.value', 'Stubbed Template 1 (COPY)');
     cy.findByLabelText(/Template ID/g).should('have.value', 'stubbed-template-1-copy');
@@ -113,9 +115,11 @@ describe('The templates list page', () => {
 
     cy.visit(PAGE_URL);
 
-    cy.get('[data-id="recent-activity-button-delete"]')
+    cy.findAllByText('Open Menu')
       .first()
-      .click();
+      .click({ force: true }); // Content is only present for screen readers, requiring use of `force`
+
+    cy.findByText('Delete Template').click();
 
     cy.findByText('Are you sure you want to delete your template?').should('be.visible');
   });
@@ -260,9 +264,11 @@ describe('The templates list page', () => {
 
     cy.visit(PAGE_URL);
 
-    cy.get('[data-id="table-button-duplicate"]')
+    cy.findAllByText('Open Menu')
       .first()
-      .click();
+      .click({ force: true });
+
+    cy.findByText('Duplicate Template').click();
 
     cy.findByLabelText(/Template Name/g).should('have.value', 'Stubbed Template 1 (COPY)');
     cy.findByLabelText(/Template ID/g).should('have.value', 'stubbed-template-1-copy');
@@ -286,9 +292,11 @@ describe('The templates list page', () => {
 
     cy.visit(PAGE_URL);
 
-    cy.get('[data-id="table-button-delete"]')
+    cy.findAllByText('Open Menu')
       .first()
-      .click();
+      .click({ force: true });
+
+    cy.findByText('Delete Template').click();
 
     cy.findByText('Are you sure you want to delete your template?').should('be.visible');
 

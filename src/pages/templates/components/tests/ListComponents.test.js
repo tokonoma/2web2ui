@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import useHibanaOverride from 'src/hooks/useHibanaOverride';
-import { DeleteAction, DuplicateAction, LastUpdated, Name, Status } from '../ListComponents';
+import { LastUpdated, Name, Status } from '../ListComponents';
 import styles from '../ListComponents.module.scss';
 
 jest.mock('src/hooks/useHibanaOverride');
@@ -49,47 +49,11 @@ describe('Template List Components', () => {
     });
   });
 
-  describe('DeleteAction', () => {
-    it('should render correctly', () => {
-      expect(shallow(<DeleteAction />)).toMatchSnapshot();
-    });
-
-    it('should invoke function passed in to `onClick` prop when clicked with other passed in props', () => {
-      const mockFn = jest.fn();
-      const props = {
-        onClick: mockFn,
-        name: 'Foo',
-        id: 'bar',
-      };
-      const wrapper = shallow(<DeleteAction {...props} />);
-      wrapper.find('Button').simulate('click');
-      expect(mockFn).toHaveBeenCalledWith({ id: 'bar', name: 'Foo' });
-    });
-  });
-
   describe('LastUpdated', () => {
     it('should render', () => {
       expect(
         shallow(<LastUpdated last_update_time="2017-08-10T14:15:16+00:00" />),
       ).toMatchSnapshot();
-    });
-  });
-
-  describe('DuplicateAction', () => {
-    it('should render correctly', () => {
-      expect(shallow(<DuplicateAction />)).toMatchSnapshot();
-    });
-
-    it('should invoke function passed in to `onClick` prop when clicked with other passed in props', () => {
-      const mockFn = jest.fn();
-      const props = {
-        onClick: mockFn,
-        name: 'Foo',
-        id: 'bar',
-      };
-      const wrapper = shallow(<DuplicateAction {...props} />);
-      wrapper.find('Button').simulate('click');
-      expect(mockFn).toHaveBeenCalledWith({ id: 'bar', name: 'Foo' });
     });
   });
 });

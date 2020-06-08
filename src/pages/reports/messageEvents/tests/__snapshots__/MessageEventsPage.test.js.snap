@@ -81,7 +81,11 @@ exports[`Page: Message Events tests should render page correctly 1`] = `
           Object {
             "label": "Time",
           },
-          null,
+          Object {
+            "label": <ScreenReaderOnly>
+              Actions
+            </ScreenReaderOnly>,
+          },
         ]
       }
       defaultSortColumn="timestamp"

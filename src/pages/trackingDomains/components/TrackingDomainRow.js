@@ -1,4 +1,3 @@
-/* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
@@ -8,7 +7,8 @@ import {
   verifyTrackingDomain,
 } from 'src/actions/trackingDomains';
 import { Subaccount } from 'src/components';
-import { Button, Grid, Panel, Tag } from 'src/components/matchbox';
+import ActionPopover from 'src/components/actionPopover';
+import { Grid, Panel, Tag } from 'src/components/matchbox';
 import { DeleteModal, ConfirmationModal } from 'src/components/modals';
 import { DomainStatusTag } from 'src/components/tags';
 import styles from './TrackingDomainRow.module.scss';
@@ -70,23 +70,6 @@ export class TrackingDomainRow extends Component {
     verifyTrackingDomain({ domain, subaccountId });
   };
 
-  renderDefaultOrVerifyButton() {
-    const { verified, isDefault, verifying, domain } = this.props;
-    if (verified) {
-      return (
-        <Button destructive={isDefault} size="small" onClick={this.toggleDefaultModal}>
-          {isDefault ? 'Remove Default' : 'Set as Default'}
-        </Button>
-      );
-    }
-    const verifyText = verifying.indexOf(domain) >= 0 ? 'Verifying...' : 'Retry Verification';
-    return (
-      <Button size="small" onClick={this.retryVerification}>
-        {verifyText}
-      </Button>
-    );
-  }
-
   renderModals() {
     const { domain, isDefault, deleting, updating } = this.props;
     const { deleteModalOpen, defaultModalOpen } = this.state;
@@ -133,37 +116,53 @@ export class TrackingDomainRow extends Component {
   }
 
   render() {
-    const { domain, subaccountId, status, isDefault } = this.props;
+    const { domain, subaccountId, status, isDefault, verifying } = this.props;
     return (
-      <Panel.Section>
-        <Grid>
-          <Grid.Column xs={12} md={8}>
-            <span className={styles.DomainHeading}>{domain}</span>
-            <div className={styles.TagRow}>
-              {status !== 'verified' && <DomainStatusTag className={styles.Tag} status={status} />}
-              {isDefault && !subaccountId && <IsDefaultTag />}
-              {subaccountId && (
-                <Subaccount
-                  className={styles.Tag}
-                  id={subaccountId}
-                  isDefault={!!subaccountId && isDefault}
-                />
-              )}
-            </div>
-          </Grid.Column>
-          <Grid.Column xs={12} md={4}>
-            <Button.Group className={styles.ButtonColumn}>
-              {this.renderDefaultOrVerifyButton()}
-              {status !== 'pending' && status !== 'blocked' && (
-                <Button destructive size="small" onClick={this.toggleDeleteModal}>
-                  Delete
-                </Button>
-              )}
-            </Button.Group>
-          </Grid.Column>
-        </Grid>
+      <>
+        <Panel.Section>
+          <Grid>
+            <Grid.Column xs={12} md={8}>
+              <span className={styles.DomainHeading}>{domain}</span>
+              <div className={styles.TagRow}>
+                {status !== 'verified' && (
+                  <DomainStatusTag className={styles.Tag} status={status} />
+                )}
+                {isDefault && !subaccountId && <IsDefaultTag />}
+                {subaccountId && (
+                  <Subaccount
+                    className={styles.Tag}
+                    id={subaccountId}
+                    isDefault={!!subaccountId && isDefault}
+                  />
+                )}
+              </div>
+            </Grid.Column>
+            <Grid.Column xs={12} md={4}>
+              <ActionPopover
+                actions={[
+                  {
+                    content: this.props.isDefault ? 'Remove Default' : 'Set as Default',
+                    onClick: () => this.toggleDefaultModal(),
+                    visible: this.props.verified,
+                  },
+                  {
+                    content: verifying.indexOf(domain) >= 0 ? 'Verifying...' : 'Retry Verification',
+                    onClick: () => this.retryVerification(),
+                    visible: !this.props.verified,
+                  },
+                  {
+                    content: 'Delete',
+                    onClick: () => this.toggleDeleteModal(),
+                    visible: status !== 'pending' && status !== 'blocked',
+                  },
+                ]}
+              />
+            </Grid.Column>
+          </Grid>
+        </Panel.Section>
+
         {this.renderModals()}
-      </Panel.Section>
+      </>
     );
   }
 }

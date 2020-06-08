@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { MoreHoriz } from '@sparkpost/matchbox-icons';
-import { ActionList, Button, Popover } from 'src/components/matchbox';
+import { ActionList, Button, Popover, ScreenReaderOnly } from 'src/components/matchbox';
 import useUniqueId from 'src/hooks/useUniqueId';
 
 const ActionPopover = ({ actions }) => {
@@ -13,8 +13,10 @@ const ActionPopover = ({ actions }) => {
         id={uniqueId}
         left
         trigger={
-          <Button aria-controls={uniqueId} flat>
-            <MoreHoriz size={20} />
+          <Button aria-controls={uniqueId} variant="minimal">
+            <MoreHoriz />
+
+            <ScreenReaderOnly>Open Menu</ScreenReaderOnly>
           </Button>
         }
       >

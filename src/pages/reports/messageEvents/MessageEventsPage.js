@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { snakeToFriendly } from 'src/helpers/string';
-import { Box, Button, Page } from 'src/components/matchbox';
+import { Box, Button, Page, ScreenReaderOnly } from 'src/components/matchbox';
 import {
   PanelLoading,
   TableCollection,
@@ -38,7 +38,7 @@ const columns = [
   { label: 'Recipient' },
   { label: 'From Address' },
   { label: 'Time' },
-  null,
+  { label: <ScreenReaderOnly>Actions</ScreenReaderOnly> },
 ];
 
 export class MessageEventsPageComponent extends Component {

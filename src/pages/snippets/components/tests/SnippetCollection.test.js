@@ -6,7 +6,11 @@ describe('SnippetCollection', () => {
   // pass-through to test the render prop
   const subject = ({ open, ...props } = {}) => {
     const wrapper = shallow(
-      <SnippetCollection canViewSubaccounts={true} snippets={[{ id: 'test-snippet' }]} {...props} />
+      <SnippetCollection
+        canViewSubaccounts={true}
+        snippets={[{ id: 'test-snippet' }]}
+        {...props}
+      />,
     );
     const RenderProp = wrapper.prop('children');
 
@@ -19,7 +23,9 @@ describe('SnippetCollection', () => {
 
   it('renders table collection with subaccount column', () => {
     const wrapper = subject({ hasSubaccounts: true });
-    expect(wrapper.prop('columns')).toContainEqual(expect.objectContaining({ label: 'Subaccount' }));
+    expect(wrapper.prop('columns')).toContainEqual(
+      expect.objectContaining({ label: 'Subaccount' }),
+    );
   });
 
   it('renders without subaccount column if not allowed', () => {
@@ -29,7 +35,10 @@ describe('SnippetCollection', () => {
 
   it('renders table collection with actions column', () => {
     const wrapper = subject({ canCreate: true });
-    expect(wrapper.prop('columns')).toContain(null);
+    const columns = wrapper.prop('columns');
+    const lastColumn = columns.pop();
+
+    expect(lastColumn.label.props.children).toBe('Actions');
   });
 
   it('renders a table collection row with modal callback', () => {

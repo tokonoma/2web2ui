@@ -1,12 +1,12 @@
 import React from 'react';
 import _ from 'lodash';
-import { Box, Panel, Stack, Text } from 'src/components/matchbox';
 import { FileEdit, CheckCircle } from '@sparkpost/matchbox-icons';
+import { Box, Panel, Stack, Text } from 'src/components/matchbox';
 import { PageLink } from 'src/components/links';
+import ActionPopover from 'src/components/actionPopover';
 import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import { formatDate } from 'src/helpers/date';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
-import { DuplicateAction, DeleteAction } from './ListComponents';
 import { routeNamespace } from '../constants/routes';
 import OGStyles from './RecentActivity.module.scss';
 import hibanaStyles from './RecentActivityHibana.module.scss';
@@ -84,16 +84,17 @@ const RecentActivity = props => {
 
                         {hasActionButtons && (
                           <div className={styles.RecentActivityActions}>
-                            <DuplicateAction
-                              className={styles.RecentActivityAction}
-                              onClick={() => onToggleDuplicateModal(template)}
-                              data-id="recent-activity-button-duplicate"
-                            />
-
-                            <DeleteAction
-                              className={styles.RecentActivityAction}
-                              onClick={() => onToggleDeleteModal(template)}
-                              data-id="recent-activity-button-delete"
+                            <ActionPopover
+                              actions={[
+                                {
+                                  content: 'Duplicate Template',
+                                  onClick: () => onToggleDuplicateModal(template),
+                                },
+                                {
+                                  content: 'Delete Template',
+                                  onClick: () => onToggleDeleteModal(template),
+                                },
+                              ]}
                             />
                           </div>
                         )}

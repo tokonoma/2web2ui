@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { ViewDetailsButton } from '../ViewDetailsButton';
+import ViewDetailsButton from '../ViewDetailsButton';
 
 let props;
 
@@ -15,8 +15,8 @@ describe('Component ViewDetailsButton', () => {
       message_id: '123abc',
       event_id: '456xyz',
       history: {
-        push: jest.fn()
-      }
+        push: jest.fn(),
+      },
     };
   });
 

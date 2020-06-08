@@ -55,7 +55,7 @@ const DeleteTemplateModal = props => {
                   Delete All Versions
                 </Button>
 
-                <Button variant="destructive-secondary" onClick={onClose}>
+                <Button variant="monochrome-secondary" onClick={onClose}>
                   Cancel
                 </Button>
               </ButtonWrapper>

@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import { DoNotDisturbOn } from '@sparkpost/matchbox-icons';
 import classNames from 'classnames';
 import { PageLink } from 'src/components/links';
 import { Button } from 'src/components/matchbox';
@@ -48,8 +49,10 @@ export const MonitorsCollection = props => {
           {total_listing_count}
         </div>,
         <div className={styles.Delete}>
-          <Button outline onClick={() => handleDelete(resource)}>
-            Stop Monitoring
+          <Button variant="minimal" onClick={() => handleDelete(resource)}>
+            <span>Remove from Watchlist</span>
+            {/* These inline styles should be removed if Matchbox can handle this independently */}
+            <DoNotDisturbOn style={{ marginLeft: '3px' }} />
           </Button>
         </div>,
       ];

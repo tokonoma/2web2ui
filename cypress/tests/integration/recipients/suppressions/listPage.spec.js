@@ -102,7 +102,21 @@ describe('The recipients suppressions list page', () => {
       cy.visit(PAGE_URL);
 
       // Testing cancellation within the modal
-      cy.get('table').within(() => cy.findByText('Delete').click());
+      cy.get('table').within(() => {
+        cy.findAllByText('Open Menu')
+          .first()
+          .click({ force: true });
+      });
+
+      if (Cypress.env('DEFAULT_TO_HIBANA') === true) {
+        cy.findAllByText('Delete')
+          .first()
+          .click();
+      } else {
+        cy.findAllByText('Delete')
+          .last()
+          .click();
+      }
 
       cy.findByText(DELETE_MODAL_CONTENT).should('be.visible');
 
@@ -113,7 +127,20 @@ describe('The recipients suppressions list page', () => {
       cy.queryByText(DELETE_MODAL_CONTENT).should('not.be.visible');
 
       // Testing deletion within the modal
-      cy.get('table').within(() => cy.findByText('Delete').click());
+      cy.get('table').within(() => {
+        cy.findAllByText('Open Menu')
+          .first()
+          .click({ force: true });
+      });
+      if (Cypress.env('DEFAULT_TO_HIBANA') === true) {
+        cy.findAllByText('Delete')
+          .first()
+          .click();
+      } else {
+        cy.findAllByText('Delete')
+          .last()
+          .click();
+      }
 
       cy.withinModal(() => {
         cy.findByText('Delete').click();
@@ -134,7 +161,11 @@ describe('The recipients suppressions list page', () => {
 
       cy.visit(PAGE_URL);
 
-      cy.get('table').within(() => cy.findByText('Delete').click());
+      cy.get('table').within(() => {
+        cy.findAllByText('Open Menu').click({ force: true });
+      });
+      cy.findAllByText('Delete').click();
+
       cy.withinModal(() => {
         cy.findByText('Delete').click();
       });
@@ -143,7 +174,7 @@ describe('The recipients suppressions list page', () => {
       cy.findByText(DELETE_MODAL_CONTENT).should('be.visible');
     });
 
-    it('disables "Delete" buttons within the table while a delete request is pending', () => {
+    it('unmounts "Delete" buttons within the table row popover while a delete request is pending', () => {
       const deleteDelay = 500;
 
       cy.stubRequest({
@@ -162,25 +193,47 @@ describe('The recipients suppressions list page', () => {
 
       cy.get('table').within(() =>
         cy
-          .findAllByText('Delete')
+          .findAllByText('Open Menu')
           .first()
-          .click(),
+          .click({ force: true }),
       );
+
+      cy.findAllByText('Delete')
+        .first()
+        .click();
 
       cy.withinModal(() => cy.findByText('Delete').click());
 
-      cy.get('table').within(() => cy.findAllByText('Delete').should('be.disabled'));
+      cy.get('table').within(() =>
+        cy
+          .findAllByText('Open Menu')
+          .first()
+          .click({ force: true }),
+      );
+
+      cy.queryAllByText('Delete').should('not.be.visible');
 
       // eslint-disable-next-line
       cy.wait(deleteDelay);
 
-      cy.get('table').within(() => cy.findAllByText('Delete').should('not.be.disabled'));
+      cy.get('table').within(() =>
+        cy
+          .findAllByText('Open Menu')
+          .first()
+          .click({ force: true }),
+      );
+      cy.findAllByText('Delete').should('be.visible');
     });
 
     it('renders a details modal when clicking the "View Details" button within a table row', () => {
       cy.visit(PAGE_URL);
 
-      cy.findByText('View Details').click();
+      cy.findAllByText('Open Menu')
+        .first()
+        .click({ force: true });
+      cy.findAllByText('View Details')
+        .first()
+        .click();
 
       cy.withinModal(() => {
         cy.findByText('Suppression Details').should('be.visible');

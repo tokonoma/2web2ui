@@ -6,7 +6,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { HibanaProvider } from 'src/context/HibanaContext';
 import { WatchlistPage } from '../WatchlistPage';
 
-jest.mock('../components/StopMonitoringModal', () => () => 'My Delete Modal');
+jest.mock('../components/RemoveFromWatchlistModal', () => () => 'My Delete Modal');
 
 describe('WatchlistPage', () => {
   const monitors = [
@@ -84,7 +84,7 @@ describe('WatchlistPage', () => {
 
   it('renders delete modal when trying to delete a resource', () => {
     const { queryByText } = renderSubject();
-    fireEvent.click(queryByText('Stop Monitoring'));
+    fireEvent.click(queryByText('Remove from Watchlist'));
     expect(queryByText('My Delete Modal')).toBeInTheDocument();
   });
 

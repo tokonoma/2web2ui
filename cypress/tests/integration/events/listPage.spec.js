@@ -472,10 +472,12 @@ describe('The events page', () => {
 
       cy.findAllByText('View Details')
         .first()
+        .closest('a')
         .should('have.attr', 'href', '/reports/message-events/details/mock-message-id-1/1234');
 
       cy.findAllByText('View Details')
         .last()
+        .closest('a')
         .should('have.attr', 'href', '/reports/message-events/details/mock-message-id-2/5678');
     });
 

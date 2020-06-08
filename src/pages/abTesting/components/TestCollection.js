@@ -1,17 +1,16 @@
 import React from 'react';
 import { setSubaccountQuery } from 'src/helpers/subaccounts';
-
 // Components
 import { PageLink } from 'src/components/links';
-import { ActionList, Button, Popover, Text } from 'src/components/matchbox';
+import { ScreenReaderOnly, Text } from 'src/components/matchbox';
 import { TableCollection } from 'src/components';
-import { MoreHoriz } from '@sparkpost/matchbox-icons';
+import ActionPopover from 'src/components/actionPopover';
 import StatusTag from './StatusTag';
 import { formatDateTime } from 'src/helpers/date';
-
 import OGStyles from '../ListPage.module.scss';
 import HibanaStyles from '../ListPageHibana.module.scss';
 import useHibanaOverride from 'src/hooks/useHibanaOverride';
+
 const filterBoxConfig = {
   show: true,
   itemToStringKeys: ['name', 'id', 'status', 'test_mode'],
@@ -29,7 +28,7 @@ export function TestCollection(props) {
       { label: 'Status', sortKey: 'status' },
       { label: 'Template', sortKey: i => i.winning_template_id || i.default_template.template_id },
       { label: 'Last Modified', sortKey: 'updated_at' },
-      null,
+      { label: <ScreenReaderOnly>Actons</ScreenReaderOnly> },
     ];
 
     return columns;
@@ -108,19 +107,7 @@ export function TestCollection(props) {
       <StatusTag status={status} />,
       <p className={styles.Template}>{template}</p>,
       <p className={styles.LastUpdated}>{formatDateTime(updated_at)}</p>,
-      <div style={{ textAlign: 'right' }}>
-        <Popover
-          id={`popover-actions-for-${id}`}
-          left
-          trigger={
-            <Button aria-controls={`popover-actions-for-${id}`} flat size="large">
-              <MoreHoriz size={21} />
-            </Button>
-          }
-        >
-          <ActionList actions={actions} />
-        </Popover>
-      </div>,
+      <ActionPopover actions={actions} />,
     ];
   };
 

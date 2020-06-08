@@ -5,7 +5,7 @@
   top: rem(75);
   right: spacing();
 
-  z-index: z-index(overlay);
+  z-index: z-index(overlay) + 1;
   text-align: right;
   overflow: hidden;
   pointer-events: none;

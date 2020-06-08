@@ -14,11 +14,12 @@ exports[`ActionPopover Component should render with actions 1`] = `
     trigger={
       <Button
         aria-controls="action-popover-0"
-        flat={true}
+        variant="minimal"
       >
-        <MoreHoriz
-          size={20}
-        />
+        <MoreHoriz />
+        <ScreenReaderOnly>
+          Open Menu
+        </ScreenReaderOnly>
       </Button>
     }
   >
@@ -54,11 +55,12 @@ exports[`ActionPopover Component should render with no props 1`] = `
     trigger={
       <Button
         aria-controls="action-popover-0"
-        flat={true}
+        variant="minimal"
       >
-        <MoreHoriz
-          size={20}
-        />
+        <MoreHoriz />
+        <ScreenReaderOnly>
+          Open Menu
+        </ScreenReaderOnly>
       </Button>
     }
   >
