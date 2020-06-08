@@ -23,15 +23,15 @@ export default (state = initialState, { type, payload }) => {
         generateScimTokenError: null,
       };
     // LIST_SCIM_TOKEN
-    case 'LIST_API_KEYS_PENDING': {
+    case 'LIST_SCIM_TOKEN_PENDING': {
       return { ...state, scimTokenListLoading: true, error: null };
     }
 
-    case 'LIST_API_KEYS_SUCCESS': {
+    case 'LIST_SCIM_TOKEN_SUCCESS': {
       return { ...state, scimTokenListLoading: false, scimTokenList: payload };
     }
 
-    case 'LIST_API_KEYS_FAIL': {
+    case 'LIST_SCIM_TOKEN_FAIL': {
       return { ...state, scimTokenListLoading: false, error: payload };
     }
     default:
