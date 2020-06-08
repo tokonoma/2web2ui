@@ -51,7 +51,6 @@ import { isAzure, isHeroku, isSubaccountUser } from 'src/helpers/conditions/user
 import { configEquals, configFlag } from 'src/helpers/conditions/config';
 import App from 'src/components/layout/App';
 import LargeForm from 'src/components/layout/LargeForm';
-import { hasVWOflagSet } from 'src/helpers/vwo';
 
 import {
   AUTH_ROUTE,
@@ -642,16 +641,6 @@ const routes = [
     condition: configFlag('featureFlags.has_signup'),
     title: 'Choose Your Plan | Onboarding',
     supportDocSearch: 'upgrade account',
-  },
-  {
-    path: '/onboarding/sending-domain',
-    component: onboarding.SendingDomainPage,
-    condition: all(
-      configFlag('featureFlags.has_signup'),
-      not(() => hasVWOflagSet('skipSendingDomain')),
-    ),
-    title: 'Create a Sending Domain | Onboarding',
-    supportDocSearch: 'sending domain',
   },
   {
     path: '/onboarding/recipient-validation',

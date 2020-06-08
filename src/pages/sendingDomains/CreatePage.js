@@ -5,8 +5,6 @@ import { create as createDomain } from 'src/actions/sendingDomains';
 import { showAlert } from 'src/actions/globalAlert';
 import { PageLink } from 'src/components/links';
 import { Page, Panel } from 'src/components/matchbox';
-import { CAMPAIGN_IDS } from 'src/constants';
-import { trackCustomConversionGoal } from 'src/helpers/vwo';
 import CreateForm from './components/CreateForm';
 
 export class CreatePage extends Component {
@@ -15,7 +13,6 @@ export class CreatePage extends Component {
 
     return createDomain(values).then(() => {
       history.push(`/account/sending-domains/edit/${values.domain}`);
-      trackCustomConversionGoal(CAMPAIGN_IDS.CREATE_SENDINGDOMAIN);
     });
   };
 
