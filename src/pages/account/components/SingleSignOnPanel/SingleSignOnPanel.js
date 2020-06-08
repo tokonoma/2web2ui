@@ -47,7 +47,7 @@ export function SingleSignOnPanel(props) {
         )}
         <ProviderSection readOnly={tfaRequired} provider={provider} />
         <StatusSection readOnly={tfaRequired} {...props} />
-        {isSsoScimUiEnabled && (
+        {isSsoScimUiEnabled && provider && (
           <SCIMTokenSection
             scimTokenList={scimTokenList}
             newScimToken={newScimToken}
