@@ -1,20 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Action Creator: dataPrivacy submitOptOutRequest should make the appropriate request 1`] = `
-Object {
-  "meta": Object {
-    "method": "GET",
-    "params": Object {
-      "grant": "scim/manage",
-    },
-    "showErrorAlert": false,
-    "url": "/v1/api-keys",
-  },
-  "type": "LIST_SCIM_TOKEN",
-}
-`;
-
-exports[`Action Creator: dataPrivacy submitRTBFRequest should make the appropriate request 1`] = `
+exports[`Action Creator: scimToken generateScimToken should make the appropriate request 1`] = `
 Object {
   "meta": Object {
     "data": Object {
@@ -28,5 +14,19 @@ Object {
     "url": "/v1/api-keys",
   },
   "type": "GENERATE_SCIM_TOKEN",
+}
+`;
+
+exports[`Action Creator: scimToken listScimToken should make the appropriate request 1`] = `
+Object {
+  "meta": Object {
+    "method": "GET",
+    "params": Object {
+      "grant": "scim/manage",
+    },
+    "showErrorAlert": false,
+    "url": "/v1/api-keys",
+  },
+  "type": "LIST_SCIM_TOKEN",
 }
 `;
