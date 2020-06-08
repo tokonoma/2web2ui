@@ -8,6 +8,5 @@ Object {
   "initialValues": "change-plan-initial-values",
   "loading": false,
   "selectedPlan": "selected-plan-redux-form-value",
-  "vwoSkipSendingDomainSet": false,
 }
 `;
