@@ -25,11 +25,6 @@ describe('EditSection', () => {
     return shallow(<EditSection />);
   };
 
-  it('renders tabs and section', () => {
-    const wrapper = subject({ currentTabIndex: 0 });
-    expect(wrapper).toMatchSnapshot();
-  });
-
   it('sets tab on select', () => {
     const setTab = jest.fn();
     const wrapper = subject({ currentTabIndex: 0, setTab });

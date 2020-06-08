@@ -37,7 +37,7 @@ describe('The recipient validation page', () => {
 
     it('renders the list validation form when the user clicks on "List"', () => {
       cy.findByText('Single Address').click(); // Have to click to another tab then back to the current active tab to successfully activate it
-      cy.findByText('List').click();
+      cy.findByText('List').click({ force: true });
 
       cy.url().should('include', 'list');
     });
