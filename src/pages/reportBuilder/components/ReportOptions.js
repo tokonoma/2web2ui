@@ -64,6 +64,12 @@ export function ReportOptions(props) {
   );
 
   const handleRemoveMetric = selectedMetric => {
+    const { metrics } = reportOptions;
+    if (metrics.length <= 1) {
+      //Prevent removing all metrics
+      //TODO RB Probably add some sort of snackbar maybe?
+      return;
+    }
     const updatedMetrics = reportOptions.metrics.filter(key => key !== selectedMetric);
     refreshReportOptions({ metrics: updatedMetrics });
   };

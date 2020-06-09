@@ -80,7 +80,9 @@ export default function MetricsDrawer(props) {
   const { DrawerFooter = Drawer.Footer } = props;
   return (
     <>
-      <Box margin="400">{renderMetricsCategories()}</Box>
+      <Box margin="400" paddingBottom={'90px'}>
+        {renderMetricsCategories()}
+      </Box>
       <DrawerFooter margin="400">
         <Inline spacing="400">
           <Button
