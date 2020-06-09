@@ -26,7 +26,7 @@ describe('Account Settings Page', () => {
         beforeEach(() => {
           cy.stubRequest({
             url: 'api/v1/api-keys?grant=scim/manage',
-            fixture: 'api-keys/200.get-scim-token-notoken.json',
+            fixture: 'api-keys/200.get.scim-token-notoken.json',
             requestAlias: 'oldScimTokenGet',
           });
           cy.visit(PAGE_URL);
@@ -43,7 +43,7 @@ describe('Account Settings Page', () => {
           });
           cy.stubRequest({
             url: 'api/v1/api-keys?grant=scim/manage',
-            fixture: 'api-keys/200.get-scim-token-newtoken.json',
+            fixture: 'api-keys/200.get.scim-token-newtoken.json',
             requestAlias: 'newScimTokenGet',
           });
           cy.findByText('Generate SCIM Token').click();
@@ -62,7 +62,7 @@ describe('Account Settings Page', () => {
         beforeEach(() => {
           cy.stubRequest({
             url: 'api/v1/api-keys?grant=scim/manage',
-            fixture: 'api-keys/200.get-scim-token.json',
+            fixture: 'api-keys/200.get.scim-token.json',
             requestAlias: 'scimTokenGet',
           });
           cy.visit(PAGE_URL);
@@ -82,7 +82,7 @@ describe('Account Settings Page', () => {
           });
           cy.stubRequest({
             url: 'api/v1/api-keys?grant=scim/manage',
-            fixture: 'api-keys/200.get-scim-token-newtoken.json',
+            fixture: 'api-keys/200.get.scim-token-newtoken.json',
             fixtureAlias: 'newScimTokenGet',
             requestAlias: 'newScimTokenGet',
           });
