@@ -64,6 +64,7 @@ Array [
     "label": "Delayed",
     "name": "count_delayed",
     "stroke": "#04AEF9",
+    "tab": "delayed",
     "type": "total",
     "unit": "number",
   },
