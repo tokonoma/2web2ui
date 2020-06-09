@@ -91,19 +91,19 @@ export function ReportBuilder({
         <ReportOptions reportLoading={chart.chartLoading} searchOptions={summarySearchOptions} />
         <hr className={styles.Line} />
         <div data-id="summary-chart">
-          <Panel.Section
-            className={classnames(styles.ChartSection, chart.chartLoading && styles.Pending)}
-          >
-            <Tabs defaultTabIndex={0} forceRender tabs={tabs}>
-              <Tabs.Item>
+          <Tabs defaultTabIndex={0} forceRender tabs={tabs}>
+            <Tabs.Item>
+              <Panel.Section
+                className={classnames(styles.ChartSection, chart.chartLoading && styles.Pending)}
+              >
                 <ChartGroup {...chart} metrics={processedMetrics} to={to} yScale={'linear'} />
-              </Tabs.Item>
-              {bounceTabMetrics && <Tabs.Item></Tabs.Item>}
-              {rejectionTabMetrics && <Tabs.Item></Tabs.Item>}
-              {delayTabMetrics && <Tabs.Item></Tabs.Item>}
-              {linksTabMetrics && <Tabs.Item></Tabs.Item>}
-            </Tabs>
-          </Panel.Section>
+              </Panel.Section>
+            </Tabs.Item>
+            {bounceTabMetrics && <Tabs.Item></Tabs.Item>}
+            {rejectionTabMetrics && <Tabs.Item></Tabs.Item>}
+            {delayTabMetrics && <Tabs.Item></Tabs.Item>}
+            {linksTabMetrics && <Tabs.Item></Tabs.Item>}
+          </Tabs>
           <Box padding="400" backgroundColor={tokens.color_gray_1000}>
             <Grid>
               <Grid.Column sm={3}>
