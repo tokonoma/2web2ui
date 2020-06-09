@@ -22,82 +22,80 @@ describe('Account Settings Page', () => {
 
   describe('Single Sign On Panel', () => {
     describe('SCIM Token Section', () => {
-      describe('generate token flow', () => {
-        describe('when no prior token is present', () => {
-          beforeEach(() => {
-            cy.stubRequest({
-              url: 'api/v1/api-keys?grant=scim/manage',
-              fixture: 'api-keys/200.get-scim-token-notoken.json',
-              requestAlias: 'oldScimTokenGet',
-            });
-            cy.visit(PAGE_URL);
+      describe('Generate token flow -> when no prior token is present', () => {
+        beforeEach(() => {
+          cy.stubRequest({
+            url: 'api/v1/api-keys?grant=scim/manage',
+            fixture: 'api-keys/200.get-scim-token-notoken.json',
+            requestAlias: 'oldScimTokenGet',
           });
-          it('renders correct message when no prior scim token is present', () => {
-            cy.findByText('No token generated').should('be.visible');
+          cy.visit(PAGE_URL);
+        });
+        it('renders correct message when no prior scim token is present', () => {
+          cy.findByText('No token generated').should('be.visible');
+        });
+        it('opens Generate SCIM token Modal when a token is not present and clicking on Continue dismisses the Modal and new token can be found', () => {
+          cy.stubRequest({
+            method: 'POST',
+            url: 'api/v1/api-keys',
+            fixture: 'api-keys/200.post.json',
+            requestAlias: 'scimTokenCreate',
           });
-          it('opens Generate SCIM token Modal when a token is not present and clicking on Continue dismisses the Modal and new token can be found', () => {
-            cy.stubRequest({
-              method: 'POST',
-              url: 'api/v1/api-keys',
-              fixture: 'api-keys/200.post.json',
-              requestAlias: 'scimTokenCreate',
-            });
-            cy.stubRequest({
-              url: 'api/v1/api-keys?grant=scim/manage',
-              fixture: 'api-keys/200.get-scim-token-newtoken.json',
-              requestAlias: 'newScimTokenGet',
-            });
-            cy.findByText('Generate SCIM Token').click();
+          cy.stubRequest({
+            url: 'api/v1/api-keys?grant=scim/manage',
+            fixture: 'api-keys/200.get-scim-token-newtoken.json',
+            requestAlias: 'newScimTokenGet',
+          });
+          cy.findByText('Generate SCIM Token').click();
+          cy.wait('@scimTokenCreate');
+          cy.wait('@newScimTokenGet');
+          cy.withinModal(() => {
+            cy.findByText('Generate SCIM Token').should('be.visible');
+            cy.findByText('Make sure to copy your SCIM token now.').should('be.visible');
+            cy.findByText('Continue').click();
+          });
+          cy.findByText('123f••••••••').should('be.visible');
+          cy.findByText('Delete Token').should('be.visible');
+        });
+      });
+      describe('Generate token flow -> when a token is already present', () => {
+        beforeEach(() => {
+          cy.stubRequest({
+            url: 'api/v1/api-keys?grant=scim/manage',
+            fixture: 'api-keys/200.get-scim-token.json',
+            requestAlias: 'scimTokenGet',
+          });
+          cy.visit(PAGE_URL);
+        });
+        it('renders shortkey for already existing skim token', () => {
+          cy.findByText('old1••••••••').should('be.visible');
+        });
+        it('opens Override SCIM token Modal when a token is already present and clicking on Generate New Token opens Generate SCIM token Modal and clicking on Continue dismisses the Modal and new token can be found', () => {
+          cy.findByText('old1••••••••').should('be.visible');
+          cy.findByText('Generate SCIM Token').click();
+          cy.stubRequest({
+            method: 'POST',
+            url: 'api/v1/api-keys',
+            fixture: 'api-keys/200.post.json',
+            fixtureAlias: 'scimTokenCreate',
+            requestAlias: 'scimTokenCreate',
+          });
+          cy.stubRequest({
+            url: 'api/v1/api-keys?grant=scim/manage',
+            fixture: 'api-keys/200.get-scim-token-newtoken.json',
+            fixtureAlias: 'newScimTokenGet',
+            requestAlias: 'newScimTokenGet',
+          });
+          // eslint-disable-next-line cypress/no-unnecessary-waiting
+
+          cy.withinModal(() => {
+            cy.findByText('Override Your Current Token?').should('be.visible');
+            cy.findByText('Generate New Token').click();
             cy.wait('@scimTokenCreate');
             cy.wait('@newScimTokenGet');
-            cy.withinModal(() => {
-              cy.findByText('Generate SCIM Token').should('be.visible');
-              cy.findByText('Make sure to copy your SCIM token now.').should('be.visible');
-              cy.findByText('Continue').click();
-            });
-            cy.findByText('123f••••••••').should('be.visible');
-            cy.findByText('Delete Token').should('be.visible');
+            cy.findByText('Continue').click();
           });
-        });
-        describe('when a token is already present', () => {
-          beforeEach(() => {
-            cy.stubRequest({
-              url: 'api/v1/api-keys?grant=scim/manage',
-              fixture: 'api-keys/200.get-scim-token.json',
-              requestAlias: 'scimTokenGet',
-            });
-            cy.visit(PAGE_URL);
-          });
-          it('renders shortkey for already existing skim token', () => {
-            cy.findByText('old1••••••••').should('be.visible');
-          });
-          it('opens Override SCIM token Modal when a token is already present and clicking on Generate New Token opens Generate SCIM token Modal and clicking on Continue dismisses the Modal and new token can be found', () => {
-            cy.findByText('old1••••••••').should('be.visible');
-            cy.findByText('Generate SCIM Token').click();
-            cy.stubRequest({
-              method: 'POST',
-              url: 'api/v1/api-keys',
-              fixture: 'api-keys/200.post.json',
-              fixtureAlias: 'scimTokenCreate',
-              requestAlias: 'scimTokenCreate',
-            });
-            cy.stubRequest({
-              url: 'api/v1/api-keys?grant=scim/manage',
-              fixture: 'api-keys/200.get-scim-token-newtoken.json',
-              fixtureAlias: 'newScimTokenGet',
-              requestAlias: 'newScimTokenGet',
-            });
-            // eslint-disable-next-line cypress/no-unnecessary-waiting
-
-            cy.withinModal(() => {
-              cy.findByText('Override Your Current Token?').should('be.visible');
-              cy.findByText('Generate New Token').click();
-              cy.wait('@scimTokenCreate');
-              cy.wait('@newScimTokenGet');
-              cy.findByText('Continue').click();
-            });
-            cy.findByText('123f••••••••').should('be.visible');
-          });
+          cy.findByText('123f••••••••').should('be.visible');
         });
       });
     });
