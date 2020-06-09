@@ -5,7 +5,11 @@ import { getRelativeDates } from 'src/helpers/date';
 // second argument is only for mocking local functions that can't be otherwise mocked or spied on in jest-land
 export function refreshSummaryReport(
   updates = {},
-  { getChartData = _getChartData, getTableData = _getTableData } = {},
+  {
+    getChartData = _getChartData,
+    getTableData = _getTableData,
+    getAggregateData = _getAggregateData,
+  } = {},
 ) {
   return (dispatch, getState) => {
     const { summaryChart, reportOptions } = getState();
@@ -26,11 +30,48 @@ export function refreshSummaryReport(
 
     // convert new meta data into query param format
     const params = getQueryFromOptions(merged);
-
+    const isCurrentGroupingAggregates = summaryChart.groupBy === 'aggregate';
     return Promise.all([
       dispatch(getChartData({ params, metrics: merged.metrics })),
-      dispatch(getTableData({ params, metrics: merged.metrics })),
+      dispatch(getAggregateData({ params, metrics: merged.metrics, isCurrentGroupingAggregates })),
+      !isCurrentGroupingAggregates && dispatch(getTableData({ params, metrics: merged.metrics })),
     ]);
+  };
+}
+
+export function _getAggregateData({ params, metrics, isCurrentGroupingAggregates }) {
+  return (dispatch, getState) => {
+    const state = getState();
+
+    // Get selected metrics
+    const activeMetrics = metrics || state.summaryChart.metrics;
+
+    // Gets filters and metrics for params
+    if (!params) {
+      params = getQueryFromOptions({ ...state.reportOptions, metrics: activeMetrics });
+    }
+
+    const options = {
+      type: 'FETCH_AGGREGATE_DATA',
+      path: 'deliverability',
+      params,
+      context: {
+        metrics: activeMetrics,
+      },
+    };
+
+    return dispatch(fetchMetrics(options)).then(results => {
+      if (!isCurrentGroupingAggregates) {
+        return;
+      }
+      dispatch({
+        type: 'REFRESH_SUMMARY_TABLE',
+        payload: {
+          data: results,
+          metrics: activeMetrics,
+        },
+      });
+    });
   };
 }
 
