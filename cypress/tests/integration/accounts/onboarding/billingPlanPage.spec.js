@@ -63,7 +63,7 @@ describe('The billing plan page', () => {
       cy.get('[data-id="plan-picker-trigger"]').click();
       cy.findByText('Full-featured developer account').click();
       cy.findByText('Get Started').click();
-      cy.title().should('include', 'Create a Sending Domain | Onboarding');
+      cy.title().should('include', 'Dashboard | SparkPost');
     });
 
     it('shows the credit card form when the user selects a non free plan', () => {
@@ -230,7 +230,7 @@ describe('The billing plan page', () => {
         ]);
       });
 
-      cy.title().should('include', 'Create a Sending Domain | Onboarding');
+      cy.title().should('include', 'Dashboard | SparkPost');
     });
 
     describe('the promo code field', () => {

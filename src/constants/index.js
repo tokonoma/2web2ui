@@ -9,7 +9,6 @@ export const TFA_ROUTE = '/auth/tfa';
 export const ENABLE_TFA_AUTH_ROUTE = '/auth/enable-tfa';
 export const SSO_AUTH_ROUTE = '/auth/sso';
 export const DASHBOARD_ROUTE = '/dashboard';
-export const ONBOARDING_SENDINGDOMAIN_ROUTE = '/onboarding/sending-domain';
 export const COOKIE_DOMAIN = '.sparkpost.com';
 
 export const FORMATS = {
@@ -241,4 +240,3 @@ export const HIBANA_METRICS_COLORS = [
 ];
 
 export { ROLES, SUBACCOUNT_ROLES, ROLE_LABELS } from './users';
-export { CAMPAIGN_IDS } from './vwo';
