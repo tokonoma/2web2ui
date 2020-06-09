@@ -4,18 +4,29 @@ exports[`ProfilePage renders correctly 1`] = `
 <Page
   title="Profile"
 >
-  <Panel
-    sectioned={true}
-  >
-    <LabelledValue
-      label="Username"
-      value="Lord Stark"
-    />
-    <LabelledValue
-      label="Email Address"
-      value="ned.stark@winterfell.biz"
-    />
+  <Panel>
+    <Panel.Section>
+      <LabelledValue
+        label="Username"
+        value="Lord Stark"
+      />
+      <LabelledValue
+        label="Email Address"
+        value="ned.stark@winterfell.biz"
+      />
+    </Panel.Section>
   </Panel>
+  <AccessControl
+    condition={[Function]}
+  >
+    <Panel>
+      <Panel.Section>
+        <ThemeToggleForm
+          onChange={[Function]}
+        />
+      </Panel.Section>
+    </Panel>
+  </AccessControl>
   <AccessControl
     condition={[Function]}
   >
@@ -53,16 +64,27 @@ exports[`ProfilePage renders with verify email banner 1`] = `
   <Connect(VerifyEmailBanner)
     verifying={true}
   />
-  <Panel
-    sectioned={true}
-  >
-    <LabelledValue
-      label="Username"
-    />
-    <LabelledValue
-      label="Email Address"
-    />
+  <Panel>
+    <Panel.Section>
+      <LabelledValue
+        label="Username"
+      />
+      <LabelledValue
+        label="Email Address"
+      />
+    </Panel.Section>
   </Panel>
+  <AccessControl
+    condition={[Function]}
+  >
+    <Panel>
+      <Panel.Section>
+        <ThemeToggleForm
+          onChange={[Function]}
+        />
+      </Panel.Section>
+    </Panel>
+  </AccessControl>
   <AccessControl
     condition={[Function]}
   >

@@ -1,12 +1,11 @@
 import { render } from '@testing-library/react';
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
-
 import useRouter from 'src/hooks/useRouter';
 import { IncidentsPage } from '../IncidentsPage';
 import IncidentsCollection from '../components/IncidentsCollection';
 import userEvent from '@testing-library/user-event';
-import { HibanaProvider } from 'src/context/HibanaContext';
+import TestApp from 'src/__testHelpers__/TestApp';
+
 jest.mock('../components/IncidentsCollection');
 IncidentsCollection.mockImplementation(({ updateDateRange }) => (
   <button onClick={() => updateDateRange({ to: '123', from: '234', range: '567' })}>
@@ -56,11 +55,9 @@ describe('IncidentsPage', () => {
       listIncidents: mockListIncidents,
     };
     return render(
-      <MemoryRouter>
-        <HibanaProvider>
-          <IncidentsPage {...defaults} {...props} />
-        </HibanaProvider>
-      </MemoryRouter>,
+      <TestApp>
+        <IncidentsPage {...defaults} {...props} />
+      </TestApp>,
     );
   };
 

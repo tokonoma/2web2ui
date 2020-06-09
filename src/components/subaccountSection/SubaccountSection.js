@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import { RadioGroup, SubaccountTypeaheadWrapper } from 'src/components';
 import { Stack } from 'src/components/matchbox';
-import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
+import { ToggleBlock } from 'src/components/toggleBlock';
 import { required } from 'src/helpers/validation';
 
 const createOptions = [

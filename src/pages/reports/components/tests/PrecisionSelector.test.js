@@ -1,7 +1,7 @@
 import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 import PrecisionSelector from '../PrecisionSelector';
-import { HibanaProvider } from 'src/context/HibanaContext';
+import TestApp from 'src/__testHelpers__/TestApp';
 
 describe('PrecisionSelector', () => {
   const mockChangeTime = jest.fn();
@@ -13,9 +13,9 @@ describe('PrecisionSelector', () => {
   };
   const subject = ({ ...props }) => {
     return render(
-      <HibanaProvider>
+      <TestApp>
         <PrecisionSelector {...defaults} {...props} />
-      </HibanaProvider>,
+      </TestApp>,
     );
   };
 
@@ -35,18 +35,5 @@ describe('PrecisionSelector', () => {
     });
     expect(mockChangeTime).toHaveBeenCalledWith(expect.objectContaining({ precision: 'hour' }));
     expect(target).toHaveValue('hour');
-  });
-
-  it('date changes that make the current precision unavailable triggers a change in precision', () => {
-    const { queryByTestId, rerender } = subject({ selectedPrecision: '5min' });
-    const target = queryByTestId('precision-selector');
-    expect(target).toHaveValue('5min');
-    rerender(
-      <HibanaProvider>
-        <PrecisionSelector {...defaults} from="2019-01-16T12:00:00" />
-      </HibanaProvider>,
-    );
-    expect(mockChangeTime).toHaveBeenCalledWith(expect.objectContaining({ precision: 'day' }));
-    expect(target).toHaveValue('day');
   });
 });

@@ -1,76 +1,136 @@
 const PAGE_URL = '/';
 const API_URL = '/api/v1/account*';
 
-describe('Hibana theme toggling UI', () => {
-  beforeEach(() => {
-    cy.stubAuth();
-    cy.login({ isStubbed: true });
-
+if (Cypress.env('DEFAULT_TO_HIBANA') !== true) {
+  // Pulled out of `beforeEach()` as this is needed in most tests, but not all
+  function beforeSteps() {
     cy.stubRequest({
       url: API_URL,
       fixture: 'account/200.get.has-hibana-theme-controls.json',
     });
-  });
 
-  it('renders the Hibana UI when the user\'s account has the UI flag "hibana.hasThemeControls"', () => {
-    cy.visit(PAGE_URL);
-
-    cy.get('[data-id="hibana-controls"]').should('be.visible');
-  });
-
-  it('does not render the Hibana UI when the user\'s account has the UI flag "hibana.hasThemeControls" set to `false`', () => {
     cy.stubRequest({
-      url: API_URL,
-      fixture: 'account/200.get.does-not-have-hibana-theme-controls.json',
+      url: 'api/v1/users/mockuser/two-factor',
+      fixture: 'users/two-factor/200.get.json',
     });
-    cy.visit(PAGE_URL);
 
-    cy.get('[data-id="hibana-controls"]').should('not.be.visible');
-  });
-
-  it('does not render the Hibana UI when the user\'s account lacks the "hibana" UI flag entirely', () => {
     cy.stubRequest({
-      url: API_URL,
-      fixture: 'account/200.get.no-ui-options.json',
+      url: 'api/v1/users/mockuser/two-factor/backup',
+      fixture: 'users/two-factor/backup/200.get.json',
     });
-    cy.visit(PAGE_URL);
+  }
 
-    cy.get('[data-id="hibana-controls"]').should('not.be.visible');
+  describe('Hibana theme toggling UI', () => {
+    beforeEach(() => {
+      cy.stubAuth();
+      cy.login({ isStubbed: true });
+    });
+
+    it('renders the Hibana UI when the user\'s account has the UI flag "hibana.hasThemeControls", but not on the profile page', () => {
+      beforeSteps();
+      cy.visit(PAGE_URL);
+
+      cy.findByDataId('hibana-controls').should('be.visible');
+
+      cy.visit('/account/profile');
+
+      cy.findByDataId('hibana-controls').should('not.be.visible');
+    });
+
+    it('does not render the Hibana UI when the user\'s account has the UI flag "hibana.hasThemeControls" set to `false`', () => {
+      beforeSteps();
+      cy.stubRequest({
+        url: API_URL,
+        fixture: 'account/200.get.does-not-have-hibana-theme-controls.json',
+      });
+      cy.visit(PAGE_URL);
+
+      cy.findByDataId('hibana-controls').should('not.be.visible');
+    });
+
+    it('does not render the Hibana UI when the user\'s account lacks the "hibana" UI flag entirely', () => {
+      beforeSteps();
+      cy.stubRequest({
+        url: API_URL,
+        fixture: 'account/200.get.no-ui-options.json',
+      });
+      cy.visit(PAGE_URL);
+
+      cy.findByDataId('hibana-controls').should('not.be.visible');
+    });
+
+    it('does not render the Hibana banner if the user UI option "isHibanaBannerVisible" is false', () => {
+      cy.stubRequest({
+        url: '/api/v1/users/mockuser',
+        fixture: 'users/200.get.hibana-banner-is-not-visible.json',
+      });
+
+      cy.visit(PAGE_URL);
+
+      cy.findByDataId('hibana-controls').should('not.be.visible');
+    });
+
+    it('does not render the UI toggling controls on the profile page when the user\'s account is missing the "hibana" UI flag', () => {
+      beforeSteps();
+      cy.stubRequest({
+        url: API_URL,
+        fixture: 'account/200.get.does-not-have-hibana-theme-controls.json',
+      });
+      cy.visit('/account/profile');
+
+      cy.queryByText('Use Redesigned Version of App').should('not.be.visible');
+    });
+
+    it('navigates the user to the profile page and dismisses the banner when clicking "Turn it on!"', () => {
+      beforeSteps();
+      cy.visit(PAGE_URL);
+
+      if (Cypress.env('DEFAULT_TO_HIBANA') !== true) {
+        cy.stubRequest({
+          url: 'api/v1/users/mockuser',
+          method: 'PUT',
+          fixture: 'users/200.put.update-ui-options.json',
+          requestAlias: 'updateUIOptions',
+        });
+
+        cy.findByDataId('hibana-controls').within(() => {
+          cy.findByText('Turn it on!').click();
+          cy.wait('@updateUIOptions').then(xhr => {
+            expect(xhr.request.body).to.deep.equal({
+              options: { ui: { isHibanaBannerVisible: false } },
+            });
+          });
+        });
+
+        cy.findByDataId('hibana-controls').should('not.be.visible');
+        cy.url().should('include', '/account/profile');
+        cy.title().should('include', 'Profile');
+      }
+    });
+
+    it('dismisses the banner when the user clicks the dismiss button', () => {
+      beforeSteps();
+      cy.visit(PAGE_URL);
+
+      if (Cypress.env('DEFAULT_TO_HIBANA') !== true) {
+        cy.stubRequest({
+          url: 'api/v1/users/mockuser',
+          method: 'PUT',
+          fixture: 'users/200.put.update-ui-options.json',
+          requestAlias: 'updateUIOptions',
+        });
+
+        cy.findByDataId('hibana-controls').within(() => {
+          cy.findByText('Dismiss').click({ force: true }); // `force` required because this is ScreenReaderOnly content
+          cy.wait('@updateUIOptions').then(xhr => {
+            expect(xhr.request.body).to.deep.equal({
+              options: { ui: { isHibanaBannerVisible: false } },
+            });
+          });
+
+          cy.findByDataId('hibana-controls').should('not.be.visible');
+        });
+      }
+    });
   });
-
-  it('Enables and disables Hibana when clicking "Take a Look" and "That’s fine, take me back" buttons', () => {
-    const disabledDescription =
-      'We’ve been working hard redesigning the SparkPost app for a better experience';
-    const disabledButtonContent = 'Take a Look';
-    const enabledDescription =
-      'Going back means you won’t get to experience the all new SparkPost app!';
-    const enabledButtonContent = 'That’s fine, take me back';
-
-    cy.visit(PAGE_URL);
-
-    if (Cypress.env('DEFAULT_TO_HIBANA') === true) {
-      cy.findByText(enabledDescription).should('be.visible');
-      cy.findByText(enabledButtonContent).click();
-      cy.findByText(disabledDescription).should('be.visible');
-      cy.findByText(disabledButtonContent).should('be.visible');
-
-      cy.findByText(disabledDescription).should('be.visible');
-      cy.findByText(disabledButtonContent).click();
-      cy.findByText(enabledDescription).should('be.visible');
-      cy.findByText(enabledButtonContent).should('be.visible');
-    }
-
-    // TODO: Remove when OG theme is removed
-    if (Cypress.env('DEFAULT_TO_HIBANA') !== true) {
-      cy.findByText(disabledDescription).should('be.visible');
-      cy.findByText(disabledButtonContent).click();
-      cy.findByText(enabledDescription).should('be.visible');
-      cy.findByText(enabledButtonContent).should('be.visible');
-
-      cy.findByText(enabledDescription).should('be.visible');
-      cy.findByText(enabledButtonContent).click();
-      cy.findByText(disabledDescription).should('be.visible');
-      cy.findByText(disabledButtonContent).should('be.visible');
-    }
-  });
-});
+}

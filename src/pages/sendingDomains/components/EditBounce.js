@@ -7,7 +7,7 @@ import { Help } from '@sparkpost/matchbox-icons';
 import { SubduedText } from 'src/components/text';
 import { PageLink } from 'src/components/links';
 import { Banner, Panel, Tooltip } from 'src/components/matchbox';
-import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
+import { ToggleBlock } from 'src/components/toggleBlock';
 import { SendingDomainSection } from './SendingDomainSection';
 import { resolveReadyFor } from 'src/helpers/domains';
 import BounceSetupInstructionContainer from './BounceSetupInstruction.container';

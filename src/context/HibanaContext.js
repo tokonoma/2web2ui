@@ -1,62 +1,58 @@
-import React, { createContext, useReducer, useContext } from 'react';
-
-// See:
-// https://kentcdodds.com/blog/how-to-use-react-context-effectively
+import React, { createContext, useContext } from 'react';
+import { connect } from 'react-redux';
+import { updateUserUIOptions } from 'src/actions/currentUser';
+import { showAlert } from 'src/actions/globalAlert';
+import { isUserUiOptionSet } from 'src/helpers/conditions/user';
+import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
+import { selectCondition } from 'src/selectors/accessConditionState';
 
 const HibanaStateContext = createContext();
-const HibanaDispatchContext = createContext();
 
-const initialState = {
-  isHibanaEnabled: process.env.REACT_APP_DEFAULT_TO_HIBANA === 'true' ? true : false,
-};
+function Provider(props) {
+  const { isHibanaEnabled: _isHibanaEnabled, children, ...rest } = props;
 
-function hibanaReducer(state, action) {
-  switch (action.type) {
-    case 'ENABLE': {
-      return { isHibanaEnabled: true };
-    }
-    case 'DISABLE': {
-      return { isHibanaEnabled: false };
-    }
-    default: {
-      throw new Error(`Unhandled Hibana action type: ${action.type}`);
-    }
-  }
-}
-
-function HibanaProvider({ children }) {
-  const [state, dispatch] = useReducer(hibanaReducer, initialState);
+  // TODO: When OG theme is removed, the env variables will no longer be necessary
+  const isHibanaEnabled =
+    process.env.REACT_APP_DEFAULT_TO_HIBANA === 'true' ? true : _isHibanaEnabled;
 
   return (
-    <HibanaStateContext.Provider value={state}>
-      <HibanaDispatchContext.Provider value={dispatch}>{children}</HibanaDispatchContext.Provider>
+    <HibanaStateContext.Provider value={{ isHibanaEnabled, ...rest }}>
+      {children}
     </HibanaStateContext.Provider>
   );
 }
 
-function HibanaConsumer({ children }) {
-  return <HibanaStateContext.Consumer>{children}</HibanaStateContext.Consumer>;
+function mapStateToProps(state) {
+  return {
+    isHibanaEnabled: selectCondition(isUserUiOptionSet('isHibanaEnabled'))(state),
+    isBannerVisible: selectCondition(isUserUiOptionSet('isHibanaBannerVisible'))(state),
+    hasThemeControls: selectCondition(isAccountUiOptionSet('hibana.hasThemeControls'))(state),
+  };
 }
 
-function useHibanaState() {
+const mapDispatchToProps = {
+  dismissBanner: () => updateUserUIOptions({ isHibanaBannerVisible: false }),
+  setIsHibanaEnabled: bool => {
+    if (window.pendo && window.pendo.track) {
+      window.pendo.track(`Hibana Toggle - ${Boolean(bool) ? 'On' : 'Off'}`);
+    }
+
+    // Always dismiss the banner when the user toggles their theme
+    return updateUserUIOptions({ isHibanaEnabled: bool, isHibanaBannerVisible: false });
+  },
+  showAlert,
+};
+
+export function useHibana() {
   const context = useContext(HibanaStateContext);
 
-  if (context === undefined) throw new Error('useHibanaState must be used within a HibanaProvider');
+  if (context === undefined) throw new Error('useHibana must be used within a HibanaProvider');
 
-  return context;
+  return [context];
 }
 
-function useHibanaDispatch() {
-  const context = useContext(HibanaDispatchContext);
+export const HibanaProvider = connect(mapStateToProps, mapDispatchToProps)(Provider);
 
-  if (context === undefined)
-    throw new Error('useHibanaDispatch must be used within a HibanaProvider');
-
-  return context;
+export function HibanaConsumer({ children }) {
+  return <HibanaStateContext.Consumer>{children}</HibanaStateContext.Consumer>;
 }
-
-function useHibana() {
-  return [useHibanaState(), useHibanaDispatch()];
-}
-
-export { HibanaProvider, HibanaConsumer, useHibana };
