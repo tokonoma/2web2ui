@@ -7,12 +7,12 @@ describe('Account Settings Page', () => {
     cy.stubRequest({
       url: '/api/v1/account/sso/saml',
       fixture: 'account/sso/200.get.saml.json',
-      fixtureAlias: 'ssoSamlGet',
+      requestAlias: 'ssoSamlGet',
     });
     cy.stubRequest({
       url: '/api/v1/users/mockuser/two-factor',
       fixture: 'users/two-factor/200.get.json',
-      fixtureAlias: 'twoFactorGet',
+      requestAlias: 'twoFactorGet',
     });
   });
   it('renders with a relevant page title', () => {
@@ -28,7 +28,7 @@ describe('Account Settings Page', () => {
             cy.stubRequest({
               url: 'api/v1/api-keys?grant=scim/manage',
               fixture: 'api-keys/200.get-scim-token-notoken.json',
-              fixtureAlias: 'oldScimTokenGet',
+              requestAlias: 'oldScimTokenGet',
             });
             cy.visit(PAGE_URL);
           });
@@ -40,16 +40,16 @@ describe('Account Settings Page', () => {
               method: 'POST',
               url: 'api/v1/api-keys',
               fixture: 'api-keys/200.post.json',
-              fixtureAlias: 'scimTokenCreate',
+              requestAlias: 'scimTokenCreate',
             });
             cy.stubRequest({
               url: 'api/v1/api-keys?grant=scim/manage',
               fixture: 'api-keys/200.get-scim-token-newtoken.json',
-              fixtureAlias: 'newScimTokenGet',
+              requestAlias: 'newScimTokenGet',
             });
-            // eslint-disable-next-line cypress/no-unnecessary-waiting
-            cy.wait(1000);
             cy.findByText('Generate SCIM Token').click();
+            cy.wait('@scimTokenCreate');
+            cy.wait('@newScimTokenGet');
             cy.withinModal(() => {
               cy.findByText('Generate SCIM Token').should('be.visible');
               cy.findByText('Make sure to copy your SCIM token now.').should('be.visible');
@@ -64,7 +64,7 @@ describe('Account Settings Page', () => {
             cy.stubRequest({
               url: 'api/v1/api-keys?grant=scim/manage',
               fixture: 'api-keys/200.get-scim-token.json',
-              fixtureAlias: 'scimTokenGet',
+              requestAlias: 'scimTokenGet',
             });
             cy.visit(PAGE_URL);
           });
@@ -79,17 +79,21 @@ describe('Account Settings Page', () => {
               url: 'api/v1/api-keys',
               fixture: 'api-keys/200.post.json',
               fixtureAlias: 'scimTokenCreate',
+              requestAlias: 'scimTokenCreate',
             });
             cy.stubRequest({
               url: 'api/v1/api-keys?grant=scim/manage',
               fixture: 'api-keys/200.get-scim-token-newtoken.json',
               fixtureAlias: 'newScimTokenGet',
+              requestAlias: 'newScimTokenGet',
             });
             // eslint-disable-next-line cypress/no-unnecessary-waiting
-            cy.wait(1000);
+
             cy.withinModal(() => {
               cy.findByText('Override Your Current Token?').should('be.visible');
               cy.findByText('Generate New Token').click();
+              cy.wait('@scimTokenCreate');
+              cy.wait('@newScimTokenGet');
               cy.findByText('Continue').click();
             });
             cy.findByText('123f••••••••').should('be.visible');
