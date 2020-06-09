@@ -4,17 +4,20 @@ import { mount } from 'enzyme';
 import useTabs from '../useTabs';
 
 describe('useTabs', () => {
-  const HoodedComponent = (props) => {
+  const mockOnClick = jest.fn();
+  const HoodedComponent = props => {
     const [tabIndex, tabs] = useTabs(props.tabs, props.initialIndex);
 
-    return (
-      <div tabIndex={tabIndex} tabs={tabs} />
-    );
+    return <div tabIndex={tabIndex} tabs={tabs} />;
   };
 
-  const subject = (initialIndex) => mount(
-    <HoodedComponent tabs={[{ content: 'A' }, { content: 'B' }]} initialIndex={initialIndex} />
-  );
+  const subject = initialIndex =>
+    mount(
+      <HoodedComponent
+        tabs={[{ content: 'A' }, { content: 'B', onClick: mockOnClick }]}
+        initialIndex={initialIndex}
+      />,
+    );
 
   it('sets initial index to zero', () => {
     const wrapper = subject();
@@ -30,11 +33,26 @@ describe('useTabs', () => {
     const wrapper = subject();
 
     act(() => {
-      wrapper.children().prop('tabs')[1].onClick();
+      wrapper
+        .children()
+        .prop('tabs')[1]
+        .onClick();
     });
 
     wrapper.update();
 
     expect(wrapper.children()).toHaveProp('tabIndex', 1);
+  });
+
+  it('changes calls the passed in onClick function when clicked', () => {
+    const wrapper = subject();
+
+    act(() => {
+      wrapper
+        .children()
+        .prop('tabs')[1]
+        .onClick();
+    });
+    expect(mockOnClick).toHaveBeenCalled();
   });
 });
