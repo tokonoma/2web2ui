@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import {
@@ -29,6 +29,8 @@ export function ReportBuilder({
   summarySearchOptions = {},
   refreshSummaryReport,
 }) {
+  const [showTable, setShowTable] = useState(true);
+
   useEffect(() => {
     refreshSummaryReport(reportOptions);
   }, [refreshSummaryReport, reportOptions]);
@@ -46,11 +48,11 @@ export function ReportBuilder({
     return linksTabMetrics.map(({ key }) => key).includes(key);
   });
   const tabs = [
-    { content: 'Report' },
-    hasBounceTab && { content: 'Bounce Reason' },
-    hasRejectionTab && { content: 'Rejection Reason' },
-    hasDelayTab && { content: 'Delay Reason' },
-    hasLinksTab && { content: 'Links' },
+    { content: 'Report', onClick: () => setShowTable(true) },
+    hasBounceTab && { content: 'Bounce Reason', onClick: () => setShowTable(false) },
+    hasRejectionTab && { content: 'Rejection Reason', onClick: () => setShowTable(false) },
+    hasDelayTab && { content: 'Delay Reason', onClick: () => setShowTable(false) },
+    hasLinksTab && { content: 'Links', onClick: () => setShowTable(false) },
   ].filter(Boolean);
 
   const renderLoading = () => {
@@ -98,38 +100,39 @@ export function ReportBuilder({
               >
                 <ChartGroup {...chart} metrics={processedMetrics} to={to} yScale={'linear'} />
               </Panel.Section>
+              <Box padding="400" backgroundColor={tokens.color_gray_1000}>
+                <Grid>
+                  <Grid.Column sm={3}>
+                    <Box id={'date'}>{renderAggregateMetric(dateLabelValue)}</Box>
+                  </Grid.Column>
+                  <Grid.Column sm={9}>
+                    <Inline space="600">
+                      {chart.aggregateData.map(metric => {
+                        return (
+                          <Box marginRight="600" key={metric.key}>
+                            {renderAggregateMetric(metric)}
+                          </Box>
+                        );
+                      })}
+                    </Inline>
+                  </Grid.Column>
+                </Grid>
+              </Box>
             </Tabs.Item>
             {bounceTabMetrics && <Tabs.Item></Tabs.Item>}
             {rejectionTabMetrics && <Tabs.Item></Tabs.Item>}
             {delayTabMetrics && <Tabs.Item></Tabs.Item>}
             {linksTabMetrics && <Tabs.Item></Tabs.Item>}
           </Tabs>
-          <Box padding="400" backgroundColor={tokens.color_gray_1000}>
-            <Grid>
-              <Grid.Column sm={3}>
-                <Box id={'date'}>{renderAggregateMetric(dateLabelValue)}</Box>
-              </Grid.Column>
-              <Grid.Column sm={9}>
-                <Inline space="600">
-                  {chart.aggregateData.map(metric => {
-                    return (
-                      <Box marginRight="600" key={metric.key}>
-                        {renderAggregateMetric(metric)}
-                      </Box>
-                    );
-                  })}
-                </Inline>
-              </Grid.Column>
-            </Grid>
-          </Box>
-
-          {renderLoading()}
         </div>
+        {renderLoading()}
       </Panel>
 
-      <div data-id="summary-table">
-        <Table />
-      </div>
+      {showTable && (
+        <div data-id="summary-table">
+          <Table />
+        </div>
+      )}
     </Page>
   );
 }
