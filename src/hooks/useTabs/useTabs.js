@@ -12,12 +12,15 @@ const useTabs = (initialTabs, initialIndex = 0) => {
       ...tab,
       onClick: () => {
         setIndex(index);
-        tab.onClick();
+        if (tab.onClick) {
+          tab.onClick();
+        }
       },
     }));
 
     setTabs(tabsWithClickHandling);
-  }, [initialTabs]);
+    setIndex(initialIndex);
+  }, [initialIndex, initialTabs]);
 
   return [tabIndex, tabs];
 };

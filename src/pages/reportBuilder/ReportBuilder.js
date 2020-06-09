@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import {
@@ -47,13 +47,21 @@ export function ReportBuilder({
   const hasLinksTab = processedMetrics.some(({ key }) => {
     return linksTabMetrics.map(({ key }) => key).includes(key);
   });
-  const tabs = [
-    { content: 'Report', onClick: () => setShowTable(true) },
-    hasBounceTab && { content: 'Bounce Reason', onClick: () => setShowTable(false) },
-    hasRejectionTab && { content: 'Rejection Reason', onClick: () => setShowTable(false) },
-    hasDelayTab && { content: 'Delay Reason', onClick: () => setShowTable(false) },
-    hasLinksTab && { content: 'Links', onClick: () => setShowTable(false) },
-  ].filter(Boolean);
+  const tabs = useMemo(
+    () =>
+      [
+        { content: 'Report', onClick: () => setShowTable(true) },
+        hasBounceTab && { content: 'Bounce Reason', onClick: () => setShowTable(false) },
+        hasRejectionTab && { content: 'Rejection Reason', onClick: () => setShowTable(false) },
+        hasDelayTab && { content: 'Delay Reason', onClick: () => setShowTable(false) },
+        hasLinksTab && { content: 'Links', onClick: () => setShowTable(false) },
+      ].filter(Boolean),
+    [hasBounceTab, hasRejectionTab, hasDelayTab, hasLinksTab],
+  );
+
+  useEffect(() => {
+    setShowTable(true);
+  }, [tabs]);
 
   const renderLoading = () => {
     if (chart.chartLoading) {
