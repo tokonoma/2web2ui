@@ -1,8 +1,15 @@
 import React, { useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
+import {
+  bounceTabMetrics,
+  rejectionTabMetrics,
+  delayTabMetrics,
+  linksTabMetrics,
+} from 'src/config/metrics';
 import { tokens } from '@sparkpost/design-tokens-hibana';
 import { refreshSummaryReport } from 'src/actions/summaryChart';
+import { Tabs } from 'src/components';
 import { Box, Grid, Page, Panel, Inline } from 'src/components/matchbox';
 import { Loading, Unit } from 'src/components';
 import { Table, ChartGroup } from '../reports/summary/components'; //TODO: Remove usage of these components
@@ -25,6 +32,26 @@ export function ReportBuilder({
   useEffect(() => {
     refreshSummaryReport(reportOptions);
   }, [refreshSummaryReport, reportOptions]);
+
+  const hasBounceTab = processedMetrics.some(({ key }) => {
+    return bounceTabMetrics.map(({ key }) => key).includes(key);
+  });
+  const hasRejectionTab = processedMetrics.some(({ key }) => {
+    return rejectionTabMetrics.map(({ key }) => key).includes(key);
+  });
+  const hasDelayTab = processedMetrics.some(({ key }) => {
+    return delayTabMetrics.map(({ key }) => key).includes(key);
+  });
+  const hasLinksTab = processedMetrics.some(({ key }) => {
+    return linksTabMetrics.map(({ key }) => key).includes(key);
+  });
+  const tabs = [
+    { content: 'Report' },
+    hasBounceTab && { content: 'Bounce Reason' },
+    hasRejectionTab && { content: 'Rejection Reason' },
+    hasDelayTab && { content: 'Delay Reason' },
+    hasLinksTab && { content: 'Links' },
+  ].filter(Boolean);
 
   const renderLoading = () => {
     if (chart.chartLoading) {
@@ -60,13 +87,22 @@ export function ReportBuilder({
   //TODO: Make sure to replace these components with new ones
   return (
     <Page title="Analytics Report">
-      <ReportOptions reportLoading={chart.chartLoading} searchOptions={summarySearchOptions} />
-      <div data-id="summary-chart">
-        <Panel>
+      <Panel>
+        <ReportOptions reportLoading={chart.chartLoading} searchOptions={summarySearchOptions} />
+        <hr className={styles.Line} />
+        <div data-id="summary-chart">
           <Panel.Section
-            className={classnames(styles.ChartSection, chart.chartLoading && styles.pending)}
+            className={classnames(styles.ChartSection, chart.chartLoading && styles.Pending)}
           >
-            <ChartGroup {...chart} metrics={processedMetrics} to={to} yScale={'linear'} />
+            <Tabs defaultTabIndex={0} forceRender tabs={tabs}>
+              <Tabs.Item>
+                <ChartGroup {...chart} metrics={processedMetrics} to={to} yScale={'linear'} />
+              </Tabs.Item>
+              {bounceTabMetrics && <Tabs.Item></Tabs.Item>}
+              {rejectionTabMetrics && <Tabs.Item></Tabs.Item>}
+              {delayTabMetrics && <Tabs.Item></Tabs.Item>}
+              {linksTabMetrics && <Tabs.Item></Tabs.Item>}
+            </Tabs>
           </Panel.Section>
           <Box padding="400" backgroundColor={tokens.color_gray_1000}>
             <Grid>
@@ -88,8 +124,9 @@ export function ReportBuilder({
           </Box>
 
           {renderLoading()}
-        </Panel>
-      </div>
+        </div>
+      </Panel>
+
       <div data-id="summary-table">
         <Table />
       </div>

@@ -107,65 +107,55 @@ export function ReportOptions(props) {
 
   return (
     <div data-id="report-options">
-      <Panel>
-        <Panel.Section>
-          <DateTimeSection
-            reportOptions={reportOptions}
-            handleTimezoneSelect={handleTimezoneSelect}
-            reportLoading={reportLoading}
-            refreshReportOptions={refreshReportOptions}
-          />
-        </Panel.Section>
-        <Panel.Section>
-          <Inline space={'300'}>
-            <Button
-              {...getActivatorProps()}
-              onClick={() => handleDrawerOpen(0)}
-              variant="secondary"
+      <Panel.Section>
+        <DateTimeSection
+          reportOptions={reportOptions}
+          handleTimezoneSelect={handleTimezoneSelect}
+          reportLoading={reportLoading}
+          refreshReportOptions={refreshReportOptions}
+        />
+      </Panel.Section>
+      <Panel.Section>
+        <Inline space={'300'}>
+          <Button {...getActivatorProps()} onClick={() => handleDrawerOpen(0)} variant="secondary">
+            Add Metrics
+          </Button>
+          <Button {...getActivatorProps()} onClick={() => handleDrawerOpen(1)} variant="secondary">
+            Add Filters
+          </Button>
+        </Inline>
+        <Drawer {...getDrawerProps()} portalId="drawer-portal">
+          <Drawer.Header showCloseButton />
+          <Drawer.Content p="0">
+            <Tabs
+              defaultTabIndex={drawerTab}
+              forceRender
+              fitted
+              tabs={[{ content: 'Metrics' }, { content: 'Filters' }]}
             >
-              Add Metrics
-            </Button>
-            <Button
-              {...getActivatorProps()}
-              onClick={() => handleDrawerOpen(1)}
-              variant="secondary"
-            >
-              Add Filters
-            </Button>
-          </Inline>
-          <Drawer {...getDrawerProps()} portalId="drawer-portal">
-            <Drawer.Header showCloseButton />
-            <Drawer.Content p="0">
-              <Tabs
-                defaultTab={drawerTab}
-                forceRender
-                fitted
-                tabs={[{ content: 'Metrics' }, { content: 'Filters' }]}
-              >
-                <Tabs.Item>
-                  <MetricsDrawer selectedMetrics={processedMetrics} handleSubmit={handleSubmit} />
-                </Tabs.Item>
-                <Tabs.Item>
-                  <AddFiltersSection
-                    addFilters={addFilters}
-                    closeDrawer={closeDrawer}
-                    refreshReportOptions={refreshReportOptions}
-                    reportOptions={reportOptions}
-                  />
-                </Tabs.Item>
-              </Tabs>
-            </Drawer.Content>
-          </Drawer>
-        </Panel.Section>
+              <Tabs.Item>
+                <MetricsDrawer selectedMetrics={processedMetrics} handleSubmit={handleSubmit} />
+              </Tabs.Item>
+              <Tabs.Item>
+                <AddFiltersSection
+                  addFilters={addFilters}
+                  closeDrawer={closeDrawer}
+                  refreshReportOptions={refreshReportOptions}
+                  reportOptions={reportOptions}
+                />
+              </Tabs.Item>
+            </Tabs>
+          </Drawer.Content>
+        </Drawer>
+      </Panel.Section>
+      <Panel.Section>
+        <Legend metrics={processedMetrics} removeMetric={handleRemoveMetric} />
+      </Panel.Section>
+      {Boolean(reportOptions.filters.length) && ( //Only show if there are active filters
         <Panel.Section>
-          <Legend metrics={processedMetrics} removeMetric={handleRemoveMetric} />
+          <ActiveFilters />
         </Panel.Section>
-        {Boolean(reportOptions.filters.length) && ( //Only show if there are active filters
-          <Panel.Section>
-            <ActiveFilters />
-          </Panel.Section>
-        )}
-      </Panel>
+      )}
     </div>
   );
 }
