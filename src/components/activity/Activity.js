@@ -2,7 +2,15 @@ import React from 'react';
 import { ChevronRight } from '@sparkpost/matchbox-icons';
 import { Box, Stack, Text } from 'src/components/matchbox';
 import { ButtonLink } from 'src/components/links';
-import { ActivityWrapper, DateWrapper, DateBorder, DateValue, Content } from './ActivityStyles';
+import {
+  ActivityWrapper,
+  ItemWrapper,
+  AvatarWrapper,
+  DateWrapper,
+  DateBorder,
+  DateValue,
+  Content,
+} from './ActivityStyles';
 
 function Activity({ children }) {
   return (
@@ -13,25 +21,13 @@ function Activity({ children }) {
 }
 
 function Avatar({ children }) {
-  return (
-    <Box
-      display="flex"
-      alignItems="center"
-      justifyContent="center"
-      backgroundColor="gray.200"
-      color="gray.800"
-      borderRadius="circle"
-      size="600"
-    >
-      {children}
-    </Box>
-  );
+  return <AvatarWrapper>{children}</AvatarWrapper>;
 }
 
 function Item(props) {
   const { children } = props;
 
-  return <Box role="listitem">{children}</Box>;
+  return <ItemWrapper role="listitem">{children}</ItemWrapper>;
 }
 
 function ViewMore(props) {

@@ -10,6 +10,25 @@ export const Content = styled.div`
 
 export const ActivityWrapper = styled.div``;
 
+export const ItemWrapper = styled.div``;
+
+export const AvatarWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${() => tokens.color_gray_200};
+  color: ${() => tokens.color_gray_800};
+  border-radius: ${() => tokens.borderRadius_circle};
+  width: ${() => tokens.sizing_600};
+  height: ${() => tokens.sizing_600};
+  transition: ${() => `transform ${tokens.motionDuration_fast} ${tokens.motionEase_out}`};
+
+  ${ItemWrapper}:hover &,
+  ${ItemWrapper}:focus-within & {
+    transform: scale(1.25);
+  }
+`;
+
 export const DateWrapper = styled.div`
   display: flex;
   align-items: center;
