@@ -8,7 +8,7 @@ export const Content = styled.div`
   grid-template-rows: 1fr 1fr;
   align-items: center;
 
-  @media (min-width: ${() => tokens.mediaQuery_sm}) {
+  @media (min-width: ${() => tokens.mediaQuery_md}) {
     grid-template-columns: ${() => `${tokens.spacing_600} 75% auto`};
     grid-template-rows: 1fr;
     grid-gap: ${() => tokens.spacing_500};
