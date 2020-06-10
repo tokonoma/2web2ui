@@ -15,6 +15,45 @@ export default function ActivityList({ activities }) {
   const [isModalOpen, setModalOpen] = useState(false);
 
   return (
+    <Activity>
+      {activities.map((activity, index) => {
+        return (
+          <div key={`activity-${index}`}>
+            <Activity.Item>
+              <Activity.Content>
+                <Activity.Avatar>
+                  <ActivityIcon type={activity.type} />
+                </Activity.Avatar>
+
+                <Text>
+                  <ActivityDescription activity={activity} />
+                  <Activity.ViewMore onClick={() => setModalOpen(true)} />
+                </Text>
+
+                <Activity.Time>12:22 PM</Activity.Time>
+              </Activity.Content>
+            </Activity.Item>
+
+            <Modal open={isModalOpen} showCloseButton={true} onClose={() => setModalOpen(false)}>
+              <Panel title="Activity Event Details">
+                <Panel.Section>
+                  <p>Here are some event details</p>
+                </Panel.Section>
+
+                <Panel.Section>
+                  <Button variant="secondary" onClick={() => setModalOpen(false)}>
+                    Got it.
+                  </Button>
+                </Panel.Section>
+              </Panel>
+            </Modal>
+          </div>
+        );
+      })}
+    </Activity>
+  );
+
+  return (
     <>
       <Activity>
         <Activity.Date>June 10</Activity.Date>
@@ -133,4 +172,60 @@ export default function ActivityList({ activities }) {
       </Modal>
     </>
   );
+}
+
+function ActivityIcon({ type }) {
+  switch (type) {
+    case 'click':
+      return <Mouse />;
+    case 'api_request':
+      return <CallMade />;
+    case 'pageview':
+      return <OpenInBrowser />;
+    case 'change':
+      return <ChangeHistory />;
+    case 'login':
+      return <Streetview />;
+    default:
+      return null;
+  }
+}
+
+function ActivityDescription({ activity }) {
+  const { uid, type, detail } = activity;
+
+  switch (type) {
+    case 'click':
+      return (
+        <>
+          <strong>{uid}</strong> clicked on <strong>{detail}</strong>.
+        </>
+      );
+    case 'api_request':
+      return (
+        <>
+          <strong>{uid}</strong> made a request to <strong>{detail}</strong>.
+        </>
+      );
+    case 'pageview':
+      return (
+        <>
+          <strong>{uid}</strong> visited <strong>{detail}</strong>.
+        </>
+      );
+    case 'change':
+      return (
+        <>
+          <strong>{uid}</strong> changed <strong>{detail}</strong>.
+        </>
+      );
+    case 'login':
+      return (
+        <>
+          <strong>{uid}</strong> logged in.
+        </>
+      );
+    default:
+      return null;
+  }
 }

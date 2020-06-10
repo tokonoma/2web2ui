@@ -8,7 +8,7 @@ export const Content = styled.div`
   grid-template-rows: 1fr 1fr;
   align-items: center;
 
-  @media (min-width: ${() => tokens.mediaQuery_md}) {
+  @media (min-width: ${() => tokens.mediaQuery_sm}) {
     grid-template-columns: ${() => `${tokens.spacing_600} 75% auto`};
     grid-template-rows: 1fr;
     grid-gap: ${() => tokens.spacing_500};
@@ -40,10 +40,12 @@ export const AvatarWrapper = styled.div`
 `;
 
 export const TimeWrapper = styled.div`
-  grid-column: 2;
+  grid-column: 3;
+  grid-row: 2;
 
   @media (min-width: ${() => tokens.mediaQuery_md}) {
     grid-column: unset;
+    grid-row: unset;
   }
 `;
 
