@@ -10,19 +10,45 @@ const api = axios.create({
   // headers: {'X-Custom-Header': 'foobar'}
 });
 
+class Client {
+  events = [];
+  isReady = false;
+
+  post() {
+    while (this.events.length) {
+      const event = this.events.pop();
+
+      api.post('/activity', {
+        ...this.identity,
+        ...event,
+      });
+    }
+  }
+
+  report(event) {
+    this.events.push(event);
+
+    if (this.identity) {
+      this.post();
+    }
+  }
+
+  setIdentity(identity) {
+    this.identity = identity;
+    this.post();
+  }
+}
+
+const client = new Client();
+
 const Timestream = props => {
   const {
     location: { pathname },
   } = useRouter();
 
+  // repot pageviews
   React.useEffect(() => {
-    api.post('/activity', {
-      tenant_id: getConfig('tenantId'),
-      customer_id: props.account.customer_id,
-
-      // see, selectors/currentUser.js usernameSelector
-      user_id: props.currentUser.username || props.tfa.username || props.auth.username,
-
+    client.report({
       // todo,
       // ip: "1.2.3.18",
 
@@ -31,16 +57,33 @@ const Timestream = props => {
       type: 'pageview',
       detail: pathname,
 
-      // extra
-      // release: getConfig('release')
-      // isTestAccount: props.currentUser.email looks like (messagesystems|parkpost).com
+      //   // extra
+      //   // release: getConfig('release')
+      //   // isTestAccount: props.currentUser.email looks like (messagesystems|parkpost).com
+      //   return state;
+      // };
     });
+  }, [pathname]);
+
+  // report clicks
+
+  // set account information
+  React.useEffect(() => {
+    const identity = {
+      tenant_id: getConfig('tenantId'),
+      customer_id: props.account.customer_id,
+      // see, selectors/currentUser.js usernameSelector
+      user_id: props.currentUser.username || props.tfa.username,
+    };
+
+    if (identity.tenant_id && identity.customer_id && identity.user_id) {
+      client.setIdentity(identity);
+    }
   }, [
-    pathname,
     props.account.customer_id,
-    props.auth.username,
     props.currentUser.username,
     props.tfa.username,
+    props.auth.username,
   ]);
 
   return null;
