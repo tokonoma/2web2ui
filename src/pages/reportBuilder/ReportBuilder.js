@@ -76,7 +76,7 @@ export function ReportBuilder({
   const { to, from } = summarySearchOptions;
   const dateLabelValue = {
     label: 'Date',
-    value: `${moment(from).format('MMM Do')} - ${moment(from).format('MMM Do, YYYY')}`,
+    value: `${moment(from).format('MMM Do')} - ${moment(to).format('MMM Do, YYYY')}`,
   };
 
   const renderAggregateMetric = useCallback(({ label, value, unit }) => {
