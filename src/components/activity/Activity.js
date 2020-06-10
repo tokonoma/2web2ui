@@ -2,7 +2,7 @@ import React from 'react';
 import { ChevronRight } from '@sparkpost/matchbox-icons';
 import { Box, Stack, Text } from 'src/components/matchbox';
 import { ButtonLink } from 'src/components/links';
-import { ActivityWrapper, Content } from './ActivityStyles';
+import { ActivityWrapper, DateWrapper, DateBorder, DateValue, Content } from './ActivityStyles';
 
 function Activity({ children }) {
   return (
@@ -45,10 +45,21 @@ function ViewMore(props) {
   );
 }
 
+// `Date` is a reserved word!
+function EventDate({ children }) {
+  return (
+    <DateWrapper>
+      <DateValue>{children}</DateValue>
+
+      <DateBorder />
+    </DateWrapper>
+  );
+}
+
 function Time({ children }) {
   return (
     <Box>
-      <Text color="gray.600" textAlign="right">
+      <Text color="gray.700" textAlign="right">
         {children}
       </Text>
     </Box>
@@ -65,5 +76,7 @@ Time.displayName = 'Activity.Time';
 Activity.Time = Time;
 Content.displayName = 'Content';
 Activity.Content = Content;
+EventDate.displayName = 'Activity.Date';
+Activity.Date = EventDate;
 
 export default Activity;

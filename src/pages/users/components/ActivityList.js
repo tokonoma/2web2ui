@@ -12,6 +12,8 @@ import { Activity } from 'src/components/activity';
 export default function ActivityList() {
   return (
     <Activity>
+      <Activity.Date>June 10</Activity.Date>
+
       {/* `click` event */}
       <Activity.Item>
         <Activity.Content>
@@ -75,6 +77,24 @@ export default function ActivityList() {
           <Activity.Time>12:22 PM</Activity.Time>
         </Activity.Content>
       </Activity.Item>
+
+      {/* `login` event */}
+      <Activity.Item>
+        <Activity.Content>
+          <Activity.Avatar>
+            <OpenInBrowser />
+          </Activity.Avatar>
+
+          <Text>
+            <strong>nlemmon86</strong> logged in.
+            <Activity.ViewMore />
+          </Text>
+
+          <Activity.Time>12:22 PM</Activity.Time>
+        </Activity.Content>
+      </Activity.Item>
+
+      <Activity.Date>June 09</Activity.Date>
 
       {/* `login` event */}
       <Activity.Item>
