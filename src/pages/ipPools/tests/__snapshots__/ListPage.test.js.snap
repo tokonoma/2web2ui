@@ -20,7 +20,6 @@ exports[`IP Pools List Page does not render purchase action if isAdmin is false 
   }
   title="IP Pools"
 >
-  <IPWarmupReminderBanner />
   <TableCollection
     columns={
       Array [
@@ -82,7 +81,6 @@ exports[`IP Pools List Page does not render purchase action if showPurchaseCTA i
   secondaryActions={null}
   title="IP Pools"
 >
-  <IPWarmupReminderBanner />
   <TableCollection
     columns={
       Array [
@@ -144,7 +142,6 @@ exports[`IP Pools List Page does not render purchase action if showPurchaseCTA i
   secondaryActions={null}
   title="IP Pools"
 >
-  <IPWarmupReminderBanner />
   <TableCollection
     columns={
       Array [
@@ -208,30 +205,6 @@ Array [
 ]
 `;
 
-exports[`IP Pools List Page should render the IP warm-up banner correctly 1`] = `
-<Banner
-  marginBottom="500"
-  status="warning"
-  title="New dedicated IP addresses need to be warmed up"
->
-  <Box
-    maxWidth="1200"
-  >
-    <p>
-      In order to establish a positive sending reputation, warm up new dedicated IP addresses by gradually sending more emails.
-    </p>
-    <Banner.Actions>
-      <ExternalLink
-        as={[Function]}
-        to="https://support.sparkpost.com/customer/portal/articles/1972209-ip-warm-up-overview"
-      >
-        Read our IP Warm-up Overview
-      </ExternalLink>
-    </Banner.Actions>
-  </Box>
-</Banner>
-`;
-
 exports[`IP Pools List Page should render the list page correctly 1`] = `
 <Page
   primaryAction={
@@ -252,7 +225,6 @@ exports[`IP Pools List Page should render the list page correctly 1`] = `
   }
   title="IP Pools"
 >
-  <IPWarmupReminderBanner />
   <TableCollection
     columns={
       Array [
@@ -335,7 +307,6 @@ exports[`IP Pools List Page should show alert upon error 1`] = `
   }
   title="IP Pools"
 >
-  <IPWarmupReminderBanner />
   <ApiErrorBanner
     errorDetails="Uh oh! It broke."
     message="Sorry, we seem to have had some trouble loading your ip pools."
