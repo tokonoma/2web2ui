@@ -21,11 +21,14 @@ export const AvatarWrapper = styled.div`
   border-radius: ${() => tokens.borderRadius_circle};
   width: ${() => tokens.sizing_600};
   height: ${() => tokens.sizing_600};
-  transition: ${() => `transform ${tokens.motionDuration_fast} ${tokens.motionEase_out}`};
+  transition-property: transform, box-shadow;
+  transition-duration: ${() => tokens.motionDuration_fast};
+  transition-timing-function: ${() => tokens.motionEase_in_out};
 
   ${ItemWrapper}:hover &,
   ${ItemWrapper}:focus-within & {
-    transform: scale(1.25);
+    transform: scale(1.1);
+    box-shadow: ${() => tokens.boxShadow_200};
   }
 `;
 
