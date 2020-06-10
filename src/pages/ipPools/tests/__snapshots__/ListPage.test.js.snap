@@ -20,6 +20,25 @@ exports[`IP Pools List Page does not render purchase action if isAdmin is false 
   }
   title="IP Pools"
 >
+  <Banner
+    marginBottom="500"
+    status="info"
+    title="SparkPost now supports Strict TLS and Custom Messaging Expiration"
+  >
+    <Stack>
+      <p>
+        To adjust these settings, please
+         
+        <Connect(SupportTicketLink)>
+          submit a support ticket
+        </Connect(SupportTicketLink)>
+         or contact your TAM.
+      </p>
+      <p>
+        Following implementation, changes may take up to 2 weeks to propagate.
+      </p>
+    </Stack>
+  </Banner>
   <TableCollection
     columns={
       Array [
@@ -81,6 +100,25 @@ exports[`IP Pools List Page does not render purchase action if showPurchaseCTA i
   secondaryActions={null}
   title="IP Pools"
 >
+  <Banner
+    marginBottom="500"
+    status="info"
+    title="SparkPost now supports Strict TLS and Custom Messaging Expiration"
+  >
+    <Stack>
+      <p>
+        To adjust these settings, please
+         
+        <Connect(SupportTicketLink)>
+          submit a support ticket
+        </Connect(SupportTicketLink)>
+         or contact your TAM.
+      </p>
+      <p>
+        Following implementation, changes may take up to 2 weeks to propagate.
+      </p>
+    </Stack>
+  </Banner>
   <TableCollection
     columns={
       Array [
@@ -142,6 +180,25 @@ exports[`IP Pools List Page does not render purchase action if showPurchaseCTA i
   secondaryActions={null}
   title="IP Pools"
 >
+  <Banner
+    marginBottom="500"
+    status="info"
+    title="SparkPost now supports Strict TLS and Custom Messaging Expiration"
+  >
+    <Stack>
+      <p>
+        To adjust these settings, please
+         
+        <Connect(SupportTicketLink)>
+          submit a support ticket
+        </Connect(SupportTicketLink)>
+         or contact your TAM.
+      </p>
+      <p>
+        Following implementation, changes may take up to 2 weeks to propagate.
+      </p>
+    </Stack>
+  </Banner>
   <TableCollection
     columns={
       Array [
@@ -225,6 +282,25 @@ exports[`IP Pools List Page should render the list page correctly 1`] = `
   }
   title="IP Pools"
 >
+  <Banner
+    marginBottom="500"
+    status="info"
+    title="SparkPost now supports Strict TLS and Custom Messaging Expiration"
+  >
+    <Stack>
+      <p>
+        To adjust these settings, please
+         
+        <Connect(SupportTicketLink)>
+          submit a support ticket
+        </Connect(SupportTicketLink)>
+         or contact your TAM.
+      </p>
+      <p>
+        Following implementation, changes may take up to 2 weeks to propagate.
+      </p>
+    </Stack>
+  </Banner>
   <TableCollection
     columns={
       Array [
@@ -307,6 +383,25 @@ exports[`IP Pools List Page should show alert upon error 1`] = `
   }
   title="IP Pools"
 >
+  <Banner
+    marginBottom="500"
+    status="info"
+    title="SparkPost now supports Strict TLS and Custom Messaging Expiration"
+  >
+    <Stack>
+      <p>
+        To adjust these settings, please
+         
+        <Connect(SupportTicketLink)>
+          submit a support ticket
+        </Connect(SupportTicketLink)>
+         or contact your TAM.
+      </p>
+      <p>
+        Following implementation, changes may take up to 2 weeks to propagate.
+      </p>
+    </Stack>
+  </Banner>
   <ApiErrorBanner
     errorDetails="Uh oh! It broke."
     message="Sorry, we seem to have had some trouble loading your ip pools."

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { listPools } from 'src/actions/ipPools';
 import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
-import { PageLink } from 'src/components/links';
-import { Page } from 'src/components/matchbox';
+import { PageLink, SupportTicketLink } from 'src/components/links';
+import { Banner, Page, Stack } from 'src/components/matchbox';
 import { openSupportTicketForm } from 'src/actions/support';
 import { not } from 'src/helpers/conditions';
 import { selectCondition } from 'src/selectors/accessConditionState';
@@ -79,6 +79,19 @@ export class IpPoolsList extends Component {
 
     return (
       <Page primaryAction={createAction} secondaryActions={purchaseActions} title="IP Pools">
+        <Banner
+          status="info"
+          title="SparkPost now supports Strict TLS and Custom Messaging Expiration"
+          marginBottom="500"
+        >
+          <Stack>
+            <p>
+              To adjust these settings, please{' '}
+              <SupportTicketLink>submit a support ticket</SupportTicketLink> or contact your TAM.
+            </p>
+            <p>Following implementation, changes may take up to 2 weeks to propagate.</p>
+          </Stack>
+        </Banner>
         {error ? this.renderError() : this.renderCollection()}
       </Page>
     );
