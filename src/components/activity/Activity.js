@@ -16,7 +16,7 @@ import {
 function Activity({ children }) {
   return (
     <ActivityWrapper role="list">
-      <Stack space="600">{children}</Stack>
+      <Stack space="700">{children}</Stack>
     </ActivityWrapper>
   );
 }

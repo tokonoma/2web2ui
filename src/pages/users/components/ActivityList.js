@@ -6,7 +6,7 @@ import {
   OpenInBrowser,
   Streetview,
 } from '@sparkpost/matchbox-icons';
-import { formatTime } from 'src/helpers/date';
+import { isSameDate, formatDate, formatTime } from 'src/helpers/date';
 import useModal from 'src/hooks/useModal';
 import { Button, Modal, Panel, Text } from 'src/components/matchbox';
 import { LabelledValue } from 'src/components';
@@ -17,9 +17,13 @@ export default function ActivityList({ activities }) {
 
   return (
     <Activity>
-      {activities.map((activity, index) => {
+      {formatActivities(activities).map((activity, index) => {
         return (
           <div key={`activity-${index}`}>
+            {activity.isPreviousDateDifferent && (
+              <Activity.Date>{formatDate(activity.time)}</Activity.Date>
+            )}
+
             <Activity.Item>
               <Activity.Content>
                 <Activity.Avatar>
@@ -43,8 +47,10 @@ export default function ActivityList({ activities }) {
           <Panel.Section>
             {meta.activity && (
               <>
-                {Object.keys(meta.activity).map(item => {
-                  return <LabelledValue label={item} value={meta.activity[item]} />;
+                {Object.keys(meta.activity).map((item, index) => {
+                  return (
+                    <LabelledValue label={item} value={meta.activity[item]} key={`item-${index}`} />
+                  );
                 })}
               </>
             )}
@@ -59,6 +65,19 @@ export default function ActivityList({ activities }) {
       </Modal>
     </Activity>
   );
+}
+
+function formatActivities(activities) {
+  return activities.map((activity, index) => {
+    const previousActivity = activities[index - 1];
+
+    return {
+      ...activity,
+      isPreviousDateDifferent: previousActivity
+        ? isSameDate(activity.time, previousActivity.time)
+        : true,
+    };
+  });
 }
 
 function ActivityIcon({ type }) {

@@ -52,6 +52,7 @@ export const TimeWrapper = styled.div`
 export const DateWrapper = styled.div`
   display: flex;
   align-items: center;
+  margin-bottom: ${() => tokens.spacing_500};
   color: ${() => tokens.color_gray_600};
 `;
 
