@@ -3,9 +3,16 @@ import { tokens } from '@sparkpost/design-tokens-hibana';
 
 export const Content = styled.div`
   display: grid;
-  grid-gap: ${() => tokens.spacing_500};
-  grid-template-columns: ${() => `${tokens.spacing_600} 75% auto`};
+  grid-gap: ${() => tokens.spacing_200};
+  grid-template-columns: ${() => `${tokens.spacing_600} auto`};
+  grid-template-rows: 1fr 1fr;
   align-items: center;
+
+  @media (min-width: ${() => tokens.mediaQuery_md}) {
+    grid-template-columns: ${() => `${tokens.spacing_600} 75% auto`};
+    grid-template-rows: 1fr;
+    grid-gap: ${() => tokens.spacing_500};
+  }
 `;
 
 export const ActivityWrapper = styled.div``;
@@ -29,6 +36,14 @@ export const AvatarWrapper = styled.div`
   ${ItemWrapper}:focus-within & {
     transform: scale(1.1);
     box-shadow: ${() => tokens.boxShadow_200};
+  }
+`;
+
+export const TimeWrapper = styled.div`
+  grid-column: 2;
+
+  @media (min-width: ${() => tokens.mediaQuery_md}) {
+    grid-column: unset;
   }
 `;
 

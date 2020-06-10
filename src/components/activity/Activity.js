@@ -1,6 +1,6 @@
 import React from 'react';
 import { ChevronRight } from '@sparkpost/matchbox-icons';
-import { Box, Stack, Text } from 'src/components/matchbox';
+import { Stack, Text } from 'src/components/matchbox';
 import { ButtonLink } from 'src/components/links';
 import {
   ActivityWrapper,
@@ -10,6 +10,7 @@ import {
   DateBorder,
   DateValue,
   Content,
+  TimeWrapper,
 } from './ActivityStyles';
 
 function Activity({ children }) {
@@ -54,11 +55,11 @@ function EventDate({ children }) {
 
 function Time({ children }) {
   return (
-    <Box>
+    <TimeWrapper>
       <Text color="gray.700" textAlign="right">
         {children}
       </Text>
-    </Box>
+    </TimeWrapper>
   );
 }
 
