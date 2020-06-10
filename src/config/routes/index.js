@@ -245,6 +245,15 @@ const routes = [
     category: 'Account',
   },
   {
+    path: '/account/users/activity',
+    component: users.ActivityPage,
+    condition: hasGrants('users/manage'),
+    layout: App,
+    title: 'User Activity',
+    supportDocSearch: 'user',
+    category: 'Account',
+  },
+  {
     path: '/snippets',
     component: snippets.ListPage,
     condition: hasGrants('templates/view'),
