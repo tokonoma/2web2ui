@@ -45,10 +45,10 @@ function ViewMore(props) {
   );
 }
 
-function EventDate({ children }) {
+function Time({ children }) {
   return (
     <Box>
-      <Text color="gray.700" textAlign="right">
+      <Text color="gray.600" textAlign="right">
         {children}
       </Text>
     </Box>
@@ -61,8 +61,8 @@ Avatar.displayName = 'Activity.Avatar';
 Activity.Avatar = Avatar;
 ViewMore.displayName = 'Activity.ViewMore';
 Activity.ViewMore = ViewMore;
-EventDate.displayName = 'Activity.EventDate';
-Activity.EventDate = EventDate;
+Time.displayName = 'Activity.Time';
+Activity.Time = Time;
 Content.displayName = 'Content';
 Activity.Content = Content;
 
