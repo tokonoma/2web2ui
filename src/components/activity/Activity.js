@@ -36,7 +36,7 @@ function ViewMore(props) {
 
   return (
     <ButtonLink style={{ textDecoration: 'none' }} onClick={onClick} ml="200" textDecoration="none">
-      <span>View More</span>
+      <span>View&nbsp;More</span>
       <ChevronRight size={18} />
     </ButtonLink>
   );
@@ -56,7 +56,7 @@ function EventDate({ children }) {
 function Time({ children }) {
   return (
     <TimeWrapper>
-      <Text color="gray.700" textAlign="right">
+      <Text color="gray.600" textAlign="right">
         {children}
       </Text>
     </TimeWrapper>

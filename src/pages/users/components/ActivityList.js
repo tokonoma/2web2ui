@@ -9,7 +9,9 @@ import {
 import { Button, Modal, Panel, Text } from 'src/components/matchbox';
 import { Activity } from 'src/components/activity';
 
-export default function ActivityList() {
+export default function ActivityList({ activities }) {
+  /* eslint-disable-next-line */
+  console.log('activities', activities);
   const [isModalOpen, setModalOpen] = useState(false);
 
   return (
@@ -116,7 +118,7 @@ export default function ActivityList() {
         </Activity.Item>
       </Activity>
 
-      <Modal open={isModalOpen}>
+      <Modal open={isModalOpen} showCloseButton={true} onClose={() => setModalOpen(false)}>
         <Panel title="Activity Event Details">
           <Panel.Section>
             <p>Here are some event details</p>
@@ -124,7 +126,7 @@ export default function ActivityList() {
 
           <Panel.Section>
             <Button variant="secondary" onClick={() => setModalOpen(false)}>
-              Cool!
+              Got it.
             </Button>
           </Panel.Section>
         </Panel>
