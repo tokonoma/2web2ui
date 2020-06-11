@@ -18,6 +18,9 @@ export default function ActivityList({ activities }) {
   return (
     <Activity>
       {formatActivities(activities).map((activity, index) => {
+        const timestamp = new Date(activity.time);
+        const fixedTimestamp = timestamp.setHours(timestamp.getHours() - 4);
+
         return (
           <div key={`activity-${index}`}>
             {activity.isPreviousDateDifferent && (
@@ -35,7 +38,7 @@ export default function ActivityList({ activities }) {
                   <Activity.ViewDetails onClick={() => openModal({ activity })} />
                 </Text>
 
-                <Activity.Time>{formatTime(activity.time)}</Activity.Time>
+                <Activity.Time>{formatTime(fixedTimestamp)}</Activity.Time>
               </Activity.Content>
             </Activity.Item>
           </div>
@@ -111,7 +114,7 @@ function ActivityDescription({ activity }) {
     case 'click':
       return (
         <>
-          <strong>{uid}</strong> clicked on <strong>{detail}</strong>.
+          <strong>{uid}</strong> clicked on <strong>{detail.replace('Click on a ', '')}</strong>.
         </>
       );
     case 'request':

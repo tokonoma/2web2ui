@@ -12,7 +12,7 @@ import ActivityList from './components/ActivityList';
 
 export default function ActivityPage() {
   const now = new Date();
-  const [limit, setLimit] = useState(50);
+  const [limit, setLimit] = useState(25);
   const [filters, setFilters] = useState({
     type: undefined,
     userId: undefined,
@@ -132,6 +132,10 @@ export default function ActivityPage() {
           </Panel.Section>
         )}
       </Panel>
+
+      <Button style={{ float: 'right' }} variant="monochrome-secondary">
+        Download as CSV
+      </Button>
     </Page>
   );
 }
