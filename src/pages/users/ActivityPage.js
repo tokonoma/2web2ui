@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import _ from 'lodash';
 import moment from 'moment';
 import { useQuery } from 'react-query';
-import { Button, Grid, Page, Panel, Select } from 'src/components/matchbox';
+import { Button, Grid, Page, Panel, Select, TextField } from 'src/components/matchbox';
 import { PageDescription } from 'src/components/text';
 import { Empty } from 'src/components';
 import DatePicker from 'src/components/datePicker/DatePicker';
@@ -13,16 +13,21 @@ import ActivityList from './components/ActivityList';
 export default function ActivityPage() {
   const now = new Date();
   const [limit, setLimit] = useState(50);
+  const [filters, setFilters] = useState({
+    type: undefined,
+    userId: undefined,
+  });
   const [datePicker, setDatePicker] = useState({
     relativeRange: 'custom',
-    from: moment(now - 7 * 24 * 3600 * 1000),
+    from: moment(now - 7 * 24 * 3600 * 1000), // 7 days in the past
     to: now,
     precision: 'hour',
   });
-  const { status, data, refetch } = useQuery(
+  const { status, data = [], refetch } = useQuery(
     ['activities', { ...datePicker, limit }],
     getActivities,
   );
+  const [filteredData, setFilteredData] = useState(data);
 
   const handleChange = e => {
     setDatePicker({
@@ -36,6 +41,31 @@ export default function ActivityPage() {
     refetch();
   };
 
+  useEffect(() => {
+    if (data) {
+      setFilteredData(
+        data.filter(activity => {
+          // THIS IS HORRIBLE. Could very easily be cleaned up, but :shrug: - Hackathon, baby.
+          if (!filters.type && !filters.userId) {
+            return true;
+          }
+
+          if (filters.type && filters.userId) {
+            return activity.type === filters.type && activity.uid === filters.userId;
+          }
+
+          if (filters.type) {
+            return activity.type === filters.type;
+          }
+
+          if (filters.userId) {
+            return activity.uid === filters.userId;
+          }
+        }),
+      );
+    }
+  }, [filters, setFilteredData, data]);
+
   return (
     <Page title="User Activity">
       <PageDescription>Activity from all users associated with this account.</PageDescription>
@@ -43,7 +73,7 @@ export default function ActivityPage() {
       <Panel>
         <Panel.Section>
           <Grid>
-            <Grid.Column>
+            <Grid.Column xs={6}>
               <DatePicker
                 relativeDateOptions={['custom']}
                 from={datePicker.from}
@@ -55,13 +85,28 @@ export default function ActivityPage() {
               />
             </Grid.Column>
 
-            <Grid.Column>
+            <Grid.Column xs={3}>
+              <TextField
+                id="user-id-filter"
+                name="userIdFilter"
+                placeholder="Filter by user ID"
+                onChange={e => setFilters({ ...filters, userId: e.target.value })}
+              />
+            </Grid.Column>
+
+            <Grid.Column xs={3}>
               <Select
+                id="type-filter"
                 options={[
-                  { label: 'Filter by activity type', disabled: true, selected: true },
+                  { label: 'Filter by activity type', value: 'default', disabled: true },
                   { label: 'Request', value: 'request' },
                   { label: 'Click', value: 'click' },
+                  { label: 'Page View', value: 'pageview' },
+                  { label: 'Change', value: 'change' },
+                  { label: 'Login', value: 'login' },
                 ]}
+                defaultValue="default"
+                onChange={e => setFilters({ ...filters, type: e.target.value })}
               />
             </Grid.Column>
           </Grid>
@@ -70,16 +115,22 @@ export default function ActivityPage() {
         <Panel.Section>
           {status === 'loading' && <PanelSectionLoading />}
 
-          {status === 'success' && data.length === 0 && (
+          {status === 'success' && filteredData.length === 0 && (
             <Empty hasPanel={false} message="No activity found." />
           )}
 
-          {status === 'success' && data.length > 0 && <ActivityList activities={data} />}
-
-          <Button variant="secondary" onClick={handleLoadMore} disabled={status === 'loading'}>
-            Load More
-          </Button>
+          {status === 'success' && filteredData.length > 0 && (
+            <ActivityList activities={filteredData} />
+          )}
         </Panel.Section>
+
+        {status === 'success' && filteredData.length === limit && (
+          <Panel.Section>
+            <Button variant="secondary" onClick={handleLoadMore} disabled={status === 'loading'}>
+              Load More Results
+            </Button>
+          </Panel.Section>
+        )}
       </Panel>
     </Page>
   );
