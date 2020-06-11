@@ -57,7 +57,7 @@ export default function ActivityList({ activities }) {
           </Panel.Section>
 
           <Panel.Section>
-            <Button variant="secondary" onClick={() => closeModal()}>
+            <Button variant="primary" onClick={() => closeModal()}>
               Got it.
             </Button>
           </Panel.Section>
