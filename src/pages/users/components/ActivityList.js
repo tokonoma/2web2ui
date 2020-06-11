@@ -32,7 +32,7 @@ export default function ActivityList({ activities }) {
 
                 <Text>
                   <ActivityDescription activity={activity} />
-                  <Activity.ViewMore onClick={() => openModal({ activity })} />
+                  <Activity.ViewDetails onClick={() => openModal({ activity })} />
                 </Text>
 
                 <Activity.Time>{formatTime(activity.time)}</Activity.Time>

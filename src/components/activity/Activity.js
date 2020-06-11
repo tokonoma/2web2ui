@@ -35,12 +35,12 @@ function Item(props) {
   return <ItemWrapper role="listitem">{children}</ItemWrapper>;
 }
 
-function ViewMore(props) {
+function ViewDetails(props) {
   const { onClick } = props;
 
   return (
     <ButtonLink style={{ textDecoration: 'none' }} onClick={onClick} ml="200" textDecoration="none">
-      <span>View&nbsp;More</span>
+      <span>View&nbsp;Details</span>
       <ChevronRight size={18} />
     </ButtonLink>
   );
@@ -71,8 +71,8 @@ Item.displayName = 'Activity.Item';
 Activity.Item = Item;
 Avatar.displayName = 'Activity.Avatar';
 Activity.Avatar = Avatar;
-ViewMore.displayName = 'Activity.ViewMore';
-Activity.ViewMore = ViewMore;
+ViewDetails.displayName = 'Activity.ViewDetails';
+Activity.ViewDetails = ViewDetails;
 Time.displayName = 'Activity.Time';
 Activity.Time = Time;
 Content.displayName = 'Content';
