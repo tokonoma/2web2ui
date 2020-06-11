@@ -20,11 +20,15 @@ export const ActivityWrapper = styled.div``;
 export const ItemWrapper = styled.div``;
 
 export const AvatarWrapper = styled.div`
+  z-index: 1;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: ${() => tokens.color_gray_200};
   color: ${() => tokens.color_gray_800};
+  /* background-color: ${() => tokens.color_blue_700};
+  color: #fff; */
   border-radius: ${() => tokens.borderRadius_circle};
   width: ${() => tokens.sizing_600};
   height: ${() => tokens.sizing_600};
@@ -36,6 +40,18 @@ export const AvatarWrapper = styled.div`
   ${ItemWrapper}:focus-within & {
     transform: scale(1.1);
     box-shadow: ${() => tokens.boxShadow_200};
+  }
+
+  &:after {
+    content: '';
+    display: ${props => (props.hasConnector ? 'block' : 'none')};
+    width: 2px;
+    height: 300%;
+    background-color: ${() => tokens.color_gray_200};
+    position: absolute;
+    top: 0;
+    left: auto;
+    z-index: -1;
   }
 `;
 
@@ -59,7 +75,7 @@ export const DateWrapper = styled.div`
 export const DateValue = styled.div`
   background-color: #fff;
   white-space: nowrap;
-  font-weight: ${() => tokens.fontWeight_semibold};
+  color: ${() => tokens.color_gray_800};
   padding-right: ${() => tokens.spacing_300};
 `;
 

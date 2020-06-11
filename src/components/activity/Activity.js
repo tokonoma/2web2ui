@@ -13,6 +13,10 @@ import {
   TimeWrapper,
 } from './ActivityStyles';
 
+/* TODO
+ * [] Incorporate `prop-types`
+ */
+
 function Activity({ children }) {
   return (
     <ActivityWrapper role="list">
@@ -21,8 +25,8 @@ function Activity({ children }) {
   );
 }
 
-function Avatar({ children }) {
-  return <AvatarWrapper>{children}</AvatarWrapper>;
+function Avatar({ children, hasConnector }) {
+  return <AvatarWrapper hasConnector={hasConnector}>{children}</AvatarWrapper>;
 }
 
 function Item(props) {

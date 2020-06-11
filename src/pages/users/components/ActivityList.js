@@ -26,7 +26,7 @@ export default function ActivityList({ activities }) {
 
             <Activity.Item>
               <Activity.Content>
-                <Activity.Avatar>
+                <Activity.Avatar hasConnector={!activity.isNextDateDifferent}>
                   <ActivityIcon type={activity.type} />
                 </Activity.Avatar>
 
@@ -70,12 +70,14 @@ export default function ActivityList({ activities }) {
 function formatActivities(activities) {
   return activities.map((activity, index) => {
     const previousActivity = activities[index - 1];
+    const nextActivity = activities[index + 1];
 
     return {
       ...activity,
       isPreviousDateDifferent: previousActivity
         ? isSameDate(activity.time, previousActivity.time)
         : true,
+      isNextDateDifferent: nextActivity ? isSameDate(activity.time, nextActivity.time) : true,
     };
   });
 }
@@ -84,7 +86,7 @@ function ActivityIcon({ type }) {
   switch (type) {
     case 'click':
       return <Mouse />;
-    case 'api_request':
+    case 'request':
       return <CallMade />;
     case 'pageview':
       return <OpenInBrowser />;
@@ -98,7 +100,7 @@ function ActivityIcon({ type }) {
 }
 
 function ActivityDescription({ activity }) {
-  const { uid, type, detail } = activity;
+  const { uid, type, url, detail } = activity;
 
   switch (type) {
     case 'click':
@@ -107,10 +109,10 @@ function ActivityDescription({ activity }) {
           <strong>{uid}</strong> clicked on <strong>{detail}</strong>.
         </>
       );
-    case 'api_request':
+    case 'request':
       return (
         <>
-          <strong>{uid}</strong> made a request to <strong>{detail}</strong>.
+          <strong>{uid}</strong> made a request to <strong>{url}</strong>.
         </>
       );
     case 'pageview':
