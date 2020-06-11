@@ -8,7 +8,7 @@ import {
 } from '@sparkpost/matchbox-icons';
 import { isSameDate, formatDate, formatTime } from 'src/helpers/date';
 import useModal from 'src/hooks/useModal';
-import { Button, Modal, Panel, Text } from 'src/components/matchbox';
+import { Box, Button, Modal, Panel, Text } from 'src/components/matchbox';
 import { LabelledValue } from 'src/components';
 import { Activity } from 'src/components/activity';
 
@@ -45,13 +45,18 @@ export default function ActivityList({ activities }) {
       <Modal open={isModalOpen} showCloseButton={true} onClose={() => closeModal()}>
         <Panel title="Activity Event Details">
           <Panel.Section>
-            {meta.activity && (
+            {meta.activity ? (
               <>
                 {Object.keys(meta.activity).map((item, index) => {
                   return (
                     <LabelledValue label={item} value={meta.activity[item]} key={`item-${index}`} />
                   );
                 })}
+              </>
+            ) : (
+              <>
+                {/* Hacky, but helps prevent Modal from collapsing before it animates out - we could use some hooks in to the animation completion *or* use placeholder UI, i.e. skeleton loaders */}
+                <Box height="460px" />
               </>
             )}
           </Panel.Section>

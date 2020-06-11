@@ -19,7 +19,7 @@ export default function ActivityPage() {
   });
   const [datePicker, setDatePicker] = useState({
     relativeRange: 'custom',
-    from: moment(now - 7 * 24 * 3600 * 1000), // 7 days in the past
+    from: new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000),
     to: now,
     precision: 'hour',
   });
@@ -112,7 +112,7 @@ export default function ActivityPage() {
           </Grid>
         </Panel.Section>
 
-        <Panel.Section>
+        <Panel.Section paddingBottom={filteredData.length > 0 ? '0' : undefined}>
           {status === 'loading' && <PanelSectionLoading />}
 
           {status === 'success' && filteredData.length === 0 && (
