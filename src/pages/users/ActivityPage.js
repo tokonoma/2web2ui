@@ -3,7 +3,7 @@ import axios from 'axios';
 import _ from 'lodash';
 import moment from 'moment';
 import { useQuery } from 'react-query';
-import { Button, Page, Panel } from 'src/components/matchbox';
+import { Button, Grid, Page, Panel, Select } from 'src/components/matchbox';
 import { PageDescription } from 'src/components/text';
 import { Empty } from 'src/components';
 import DatePicker from 'src/components/datePicker/DatePicker';
@@ -42,15 +42,29 @@ export default function ActivityPage() {
 
       <Panel>
         <Panel.Section>
-          <DatePicker
-            relativeDateOptions={['custom']}
-            from={datePicker.from}
-            to={datePicker.to}
-            onChange={e => handleChange(e)}
-            precision={datePicker.precision}
-            roundToPrecision={true}
-            disabled={status === 'loading'}
-          />
+          <Grid>
+            <Grid.Column>
+              <DatePicker
+                relativeDateOptions={['custom']}
+                from={datePicker.from}
+                to={datePicker.to}
+                onChange={e => handleChange(e)}
+                precision={datePicker.precision}
+                roundToPrecision={true}
+                disabled={status === 'loading'}
+              />
+            </Grid.Column>
+
+            <Grid.Column>
+              <Select
+                options={[
+                  { label: 'Filter by activity type', disabled: true, selected: true },
+                  { label: 'Request', value: 'request' },
+                  { label: 'Click', value: 'click' },
+                ]}
+              />
+            </Grid.Column>
+          </Grid>
         </Panel.Section>
 
         <Panel.Section>
