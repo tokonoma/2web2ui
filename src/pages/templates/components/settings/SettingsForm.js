@@ -2,7 +2,7 @@
 import React from 'react';
 import { Field } from 'redux-form';
 import { Button, Panel, Stack } from 'src/components/matchbox';
-import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
+import { ToggleBlock } from 'src/components/toggleBlock';
 import SubaccountSection from 'src/components/subaccountSection';
 import { TextFieldWrapper } from 'src/components';
 import FromEmailWrapper from '../FromEmailWrapper';

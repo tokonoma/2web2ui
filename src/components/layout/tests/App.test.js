@@ -1,17 +1,17 @@
 import React from 'react';
 import { App } from '../App';
 import { shallow } from 'enzyme';
-import { HibanaProvider } from 'src/context/HibanaContext';
+import TestApp from 'src/__testHelpers__/TestApp';
 
 describe('Component: App Layout', () => {
   it('should render correctly', () => {
     expect(
       shallow(
-        <HibanaProvider>
+        <TestApp>
           <App>
             <h1>My cool af children</h1>
           </App>
-        </HibanaProvider>,
+        </TestApp>,
       ),
     ).toMatchSnapshot();
   });

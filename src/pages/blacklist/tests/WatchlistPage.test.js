@@ -1,9 +1,7 @@
+import React from 'react';
 import { shallow } from 'enzyme';
 import { fireEvent, render } from '@testing-library/react';
-import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
-
-import { HibanaProvider } from 'src/context/HibanaContext';
+import TestApp from 'src/__testHelpers__/TestApp';
 import { WatchlistPage } from '../WatchlistPage';
 
 jest.mock('../components/RemoveFromWatchlistModal', () => () => 'My Delete Modal');
@@ -22,7 +20,7 @@ describe('WatchlistPage', () => {
 
   const mockListMonitors = jest.fn();
 
-  const renderSubject = ({ ...props }) => {
+  const renderSubject = props => {
     const defaults = {
       monitors: monitors,
       error: null,
@@ -30,17 +28,15 @@ describe('WatchlistPage', () => {
       listMonitors: mockListMonitors,
       hasBlacklisted: true,
     };
+
     return render(
-      <MemoryRouter>
-        <HibanaProvider>
-          <WatchlistPage {...defaults} {...props} />
-        </HibanaProvider>
-      </MemoryRouter>,
-      { isHibanaEnabled: false },
+      <TestApp>
+        <WatchlistPage {...defaults} {...props} />
+      </TestApp>,
     );
   };
 
-  const shallowSubject = ({ ...props }) => {
+  const shallowSubject = props => {
     const defaults = {
       monitors: monitors,
       error: null,
@@ -48,13 +44,12 @@ describe('WatchlistPage', () => {
       listMonitors: mockListMonitors,
       hasBlacklisted: true,
     };
-    return shallow(<WatchlistPage {...defaults} {...props} />, {
-      wrappingComponent: HibanaProvider,
-    });
+    return shallow(<WatchlistPage {...defaults} {...props} />);
   };
 
   it('renders loading component when loading data', () => {
-    const { queryByTestId } = renderSubject({ loading: true });
+    const { queryByTestId, debug } = renderSubject({ loading: true });
+    debug();
     expect(queryByTestId('loading')).toBeInTheDocument();
   });
 

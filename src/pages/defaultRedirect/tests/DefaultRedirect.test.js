@@ -5,9 +5,13 @@ import cases from 'jest-in-case';
 import { DefaultRedirect } from '../DefaultRedirect';
 import { ROLES } from 'src/constants';
 
-jest.mock('src/config', () => ({
-  splashPage: '/config/splash'
-}));
+// jest.mock('src/config', () => ({
+//   splashPage: '/config/splash',
+//   zuora: {
+//     baseUrl: '/zuora/base/url',
+//   },
+//   site: {},
+// }));
 
 describe('Component: DefaultRedirect', () => {
   let props;
@@ -18,16 +22,16 @@ describe('Component: DefaultRedirect', () => {
     props = {
       location: {
         state: {},
-        search: '?test=one'
+        search: '?test=one',
       },
       history: {
         push: jest.fn(),
-        replace: jest.fn()
+        replace: jest.fn(),
       },
       currentUser: {
-        access_level: 'admin'
+        access_level: 'admin',
       },
-      ready: false
+      ready: false,
     };
     props.history.push.mockName('historyPushMock');
     props.history.replace.mockName('historyReplaceMock');
@@ -45,9 +49,9 @@ describe('Component: DefaultRedirect', () => {
         redirectAfterLogin: {
           pathname: '/test/redirect/after/login',
           search: '?query-muh-thangs',
-          hash: '#cornbeef'
-        }
-      }
+          hash: '#cornbeef',
+        },
+      },
     };
     wrapper.setProps({ location });
     props.history.replace.mockClear();
@@ -62,25 +66,29 @@ describe('Component: DefaultRedirect', () => {
     expect(props.history.replace).not.toHaveBeenCalled();
   });
 
-  cases('should redirect to summary report for some users', ({ accessLevel }) => {
-    wrapper.setProps({
-      currentUser: {
-        access_level: accessLevel
-      },
-      ready: true
-    });
-    props.history.replace.mockClear();
-    instance.handleRedirect();
-    expect(props.history.replace).toHaveBeenCalledTimes(1);
-    expect(props.history.replace).toHaveBeenCalledWith({
-      pathname: '/reports/summary',
-      search: '?test=one',
-      state: {}
-    });
-  }, {
-    reporting: { accessLevel: ROLES.REPORTING },
-    'subaccount reporting': { accessLevel: ROLES.SUBACCOUNT_REPORTING }
-  });
+  cases(
+    'should redirect to summary report for some users',
+    ({ accessLevel }) => {
+      wrapper.setProps({
+        currentUser: {
+          access_level: accessLevel,
+        },
+        ready: true,
+      });
+      props.history.replace.mockClear();
+      instance.handleRedirect();
+      expect(props.history.replace).toHaveBeenCalledTimes(1);
+      expect(props.history.replace).toHaveBeenCalledWith({
+        pathname: '/reports/summary',
+        search: '?test=one',
+        state: {},
+      });
+    },
+    {
+      reporting: { accessLevel: ROLES.REPORTING },
+      'subaccount reporting': { accessLevel: ROLES.SUBACCOUNT_REPORTING },
+    },
+  );
 
   it('should redirect based on config', () => {
     wrapper.setProps({ ready: true });
@@ -88,9 +96,9 @@ describe('Component: DefaultRedirect', () => {
     instance.handleRedirect();
     expect(props.history.replace).toHaveBeenCalledTimes(1);
     expect(props.history.replace).toHaveBeenCalledWith({
-      pathname: '/config/splash',
+      pathname: '/dashboard',
       search: '?test=one',
-      state: {}
+      state: {},
     });
   });
 

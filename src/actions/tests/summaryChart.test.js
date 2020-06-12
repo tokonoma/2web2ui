@@ -1,14 +1,18 @@
 import * as metricsActions from 'src/actions/metrics';
 import * as metricsHelpers from 'src/helpers/metrics';
 import * as dateHelpers from 'src/helpers/date';
-import { refreshSummaryReport, _getChartData, _getTableData } from '../summaryChart';
+import {
+  refreshSummaryReport,
+  _getChartData,
+  _getTableData,
+  _getAggregateData,
+} from '../summaryChart';
 
 jest.mock('src/actions/metrics');
 jest.mock('src/helpers/metrics');
 jest.mock('src/helpers/date');
 
 describe('Action Creator: Refresh Summary Report', () => {
-
   let testState;
   let dispatchMock;
   let getStateMock;
@@ -20,10 +24,10 @@ describe('Action Creator: Refresh Summary Report', () => {
   beforeEach(() => {
     testState = {
       reportOptions: {},
-      summaryChart: {}
+      summaryChart: {},
     };
     getStateMock = jest.fn(() => testState);
-    dispatchMock = jest.fn((a) => a);
+    dispatchMock = jest.fn(a => a);
 
     relativeDatesFirst = {};
     relativeDatesSecond = {};
@@ -50,17 +54,17 @@ describe('Action Creator: Refresh Summary Report', () => {
   it('should merge report filters onto summary chart', () => {
     testState.summaryChart = {
       a: 1,
-      b: 2
+      b: 2,
     };
     testState.reportOptions = {
       b: 22,
-      c: 33
+      c: 33,
     };
     refreshSummaryReport({})(dispatchMock, getStateMock);
     expect(getMergedObject()).toEqual({
       a: 1,
       b: 22,
-      c: 33
+      c: 33,
     });
   });
 
@@ -82,30 +86,61 @@ describe('Action Creator: Refresh Summary Report', () => {
       report: true,
       rel1: true,
       refresh: true,
-      to: 'd'
+      to: 'd',
     });
   });
 
-  it('should dispatch actions', () => {
+  it('should dispatch actions for non-aggregate data', () => {
     const metrics = [];
     const params = {};
     const getChartData = jest.fn();
     const getTableData = jest.fn();
+    const getAggregateData = jest.fn();
     metricsHelpers.getMetricsFromKeys = jest.fn(() => metrics);
     metricsHelpers.getQueryFromOptions = jest.fn(() => params);
-    refreshSummaryReport({ metrics }, { getChartData, getTableData })(dispatchMock, getStateMock);
-    expect(dispatchMock).toHaveBeenCalledTimes(2);
+    refreshSummaryReport({ metrics }, { getChartData, getTableData, getAggregateData })(
+      dispatchMock,
+      getStateMock,
+    );
+    expect(dispatchMock).toHaveBeenCalledTimes(3);
     expect(getChartData).toHaveBeenCalledWith({ params, metrics });
     expect(getTableData).toHaveBeenCalledWith({ params, metrics });
+    expect(getAggregateData).toHaveBeenCalledWith({
+      params,
+      metrics,
+      isCurrentGroupingAggregates: false,
+    });
+  });
+
+  it('should dispatch actions for aggregate', () => {
+    testState.summaryChart = { groupBy: 'aggregate' };
+    const metrics = [];
+    const params = {};
+    const getChartData = jest.fn();
+    const getTableData = jest.fn();
+    const getAggregateData = jest.fn();
+    metricsHelpers.getMetricsFromKeys = jest.fn(() => metrics);
+    metricsHelpers.getQueryFromOptions = jest.fn(() => params);
+    refreshSummaryReport({ metrics }, { getChartData, getTableData, getAggregateData })(
+      dispatchMock,
+      getStateMock,
+    );
+    expect(dispatchMock).toHaveBeenCalledTimes(2);
+    expect(getChartData).toHaveBeenCalledWith({ params, metrics });
+    expect(getTableData).not.toHaveBeenCalled();
+    expect(getAggregateData).toHaveBeenCalledWith({
+      params,
+      metrics,
+      isCurrentGroupingAggregates: true,
+    });
   });
 
   describe('private action methods', () => {
-
     let fetchResult;
 
     beforeEach(() => {
       fetchResult = {};
-      metricsActions.fetch = jest.fn((a) => Promise.resolve(fetchResult));
+      metricsActions.fetch = jest.fn(() => Promise.resolve(fetchResult));
     });
 
     test('_getChartData should dispatch the correct actions', async () => {
@@ -118,15 +153,61 @@ describe('Action Creator: Refresh Summary Report', () => {
       expect(metricsActions.fetch).toHaveBeenCalledWith({
         type: 'FETCH_CHART_DATA',
         path: 'deliverability/time-series',
-        params
+        params,
       });
       expect(dispatchMock).toHaveBeenLastCalledWith({
         type: 'REFRESH_SUMMARY_CHART',
         payload: {
           data: fetchResult,
           precision: 'test',
-          metrics
-        }
+          metrics,
+        },
+      });
+    });
+
+    test('_getAgregateData should dispatch the correct actions when groupBy is set to aggregate', async () => {
+      const params = {};
+      const metrics = 'metrics-args';
+
+      await _getAggregateData({ params, metrics, isCurrentGroupingAggregates: true })(
+        dispatchMock,
+        getStateMock,
+      );
+
+      expect(dispatchMock).toHaveBeenCalledTimes(2);
+
+      expect(metricsActions.fetch).toHaveBeenCalledWith({
+        type: 'FETCH_AGGREGATE_DATA',
+        path: 'deliverability',
+        params,
+        context: { metrics: 'metrics-args' },
+      });
+
+      expect(dispatchMock).toHaveBeenLastCalledWith({
+        type: 'REFRESH_SUMMARY_TABLE',
+        payload: {
+          data: fetchResult,
+          metrics: 'metrics-args',
+        },
+      });
+    });
+
+    test('_getAgregateData should dispatch the correct actions when groupBy is not set to aggregate', async () => {
+      const params = {};
+      const metrics = 'metrics-args';
+
+      await _getAggregateData({ params, metrics, isCurrentGroupingAggregates: false })(
+        dispatchMock,
+        getStateMock,
+      );
+
+      expect(dispatchMock).toHaveBeenCalledTimes(1);
+
+      expect(metricsActions.fetch).toHaveBeenCalledWith({
+        type: 'FETCH_AGGREGATE_DATA',
+        path: 'deliverability',
+        params,
+        context: { metrics: 'metrics-args' },
       });
     });
 
@@ -143,15 +224,15 @@ describe('Action Creator: Refresh Summary Report', () => {
         type: 'FETCH_TABLE_DATA',
         path: 'deliverability/groupby-args',
         params,
-        context: { groupBy }
+        context: { groupBy },
       });
 
       expect(dispatchMock).toHaveBeenLastCalledWith({
         type: 'REFRESH_SUMMARY_TABLE',
         payload: {
           data: fetchResult,
-          metrics: 'metrics-args'
-        }
+          metrics: 'metrics-args',
+        },
       });
     });
 
@@ -168,15 +249,15 @@ describe('Action Creator: Refresh Summary Report', () => {
         type: 'FETCH_TABLE_DATA',
         path: 'deliverability/groupby-state',
         params,
-        context: { groupBy: testState.summaryChart.groupBy }
+        context: { groupBy: testState.summaryChart.groupBy },
       });
 
       expect(dispatchMock).toHaveBeenLastCalledWith({
         type: 'REFRESH_SUMMARY_TABLE',
         payload: {
           data: fetchResult,
-          metrics: 'metrics-state'
-        }
+          metrics: 'metrics-state',
+        },
       });
     });
 
@@ -184,7 +265,7 @@ describe('Action Creator: Refresh Summary Report', () => {
       const params = {};
       testState.summaryChart = {
         groupBy: 'aggregate',
-        metrics: ['count_accepted']
+        metrics: ['count_accepted'],
       };
 
       _getTableData({ params })(dispatchMock, getStateMock);
@@ -193,10 +274,8 @@ describe('Action Creator: Refresh Summary Report', () => {
         type: 'FETCH_TABLE_DATA',
         path: 'deliverability',
         params,
-        context: { groupBy: testState.summaryChart.groupBy }
+        context: { groupBy: testState.summaryChart.groupBy },
       });
     });
-
   });
-
 });

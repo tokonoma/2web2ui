@@ -18,8 +18,6 @@ import { hasAutoVerifyEnabledSelector } from 'src/selectors/account';
 
 import { resolveReadyFor } from 'src/helpers/domains';
 import config from 'src/config';
-import { CAMPAIGN_IDS } from 'src/constants';
-import { trackCustomConversionGoal } from 'src/helpers/vwo';
 
 export class SetupSending extends Component {
   state = {
@@ -42,7 +40,6 @@ export class SetupSending extends Component {
           type: 'success',
           message: `You have successfully verified DKIM record of ${id}`,
         });
-        trackCustomConversionGoal(CAMPAIGN_IDS.VERIFY_SENDINGDOMAIN);
       } else {
         showAlert({
           type: 'error',

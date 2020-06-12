@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Panel, Stack } from 'src/components/matchbox';
-import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
+import { ToggleBlock } from 'src/components/toggleBlock';
 
 export class DefaultTrackingForm extends Component {
   render() {

@@ -2,7 +2,6 @@ import { formValueSelector } from 'redux-form';
 import { createStructuredSelector } from 'reselect';
 import { selectAvailableBundles } from 'src/selectors/accountBillingInfo';
 import { changePlanInitialValues } from 'src/selectors/accountBillingForms';
-import { hasVWOflagSet } from 'src/helpers/vwo';
 
 const getChoosePlanInitialValues = (state, props) => {
   const { plan: planCode } = props.location.state || {};
@@ -26,5 +25,4 @@ export const choosePlanMSTP = formName =>
     initialValues: getChoosePlanInitialValues,
     selectedPlan: state => formValueSelector(formName)(state, 'planpicker'),
     hasError: state => Boolean(state.billing.plansError || state.billing.countriesError),
-    vwoSkipSendingDomainSet: () => hasVWOflagSet('skipSendingDomain'),
   });

@@ -1,7 +1,7 @@
 @import '~@sparkpost/design-tokens-hibana/tokens';
 
 .Wrapper {
-  bottom: spacing(400) * 5; // TODO: When OG theme is removed, remove multiplier - this is only to clear the theme banner
+  bottom: spacing(400);
   left: spacing(400);
   top: unset;
   right: unset;
@@ -14,5 +14,6 @@
 }
 
 .Alert {
-  padding-bottom: spacing(200);
+  padding-top: spacing(400);
+  padding-bottom: 0;
 }

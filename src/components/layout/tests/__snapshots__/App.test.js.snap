@@ -1,21 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Component: App Layout should render correctly 1`] = `
-<ContextProvider
-  value={
+<Providers
+  store={
     Object {
-      "isHibanaEnabled": false,
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
     }
   }
 >
-  <ContextProvider
-    value={[Function]}
-  >
+  <MemoryRouter>
     <App>
       <h1>
         My cool af children
       </h1>
     </App>
-  </ContextProvider>
-</ContextProvider>
+  </MemoryRouter>
+</Providers>
 `;

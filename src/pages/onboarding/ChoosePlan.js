@@ -20,7 +20,7 @@ import PromoCodeNew from '../../components/billing/PromoCodeNew';
 import { FORMS } from 'src/constants';
 import CreditCardSection from './components/CreditCardSection';
 import _ from 'lodash';
-import { DASHBOARD_ROUTE, ONBOARDING_SENDINGDOMAIN_ROUTE } from 'src/constants';
+import { DASHBOARD_ROUTE } from 'src/constants';
 
 export function OnboardingPlanPage({
   getPlans,
@@ -39,9 +39,8 @@ export function OnboardingPlanPage({
   handleSubmit,
   hasError,
   bundles,
-  vwoSkipSendingDomainSet,
 }) {
-  const next_step = vwoSkipSendingDomainSet ? DASHBOARD_ROUTE : ONBOARDING_SENDINGDOMAIN_ROUTE;
+  const next_step = DASHBOARD_ROUTE;
   useEffect(() => {
     getPlans();
   }, [getPlans]);

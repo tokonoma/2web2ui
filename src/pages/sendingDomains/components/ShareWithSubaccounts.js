@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Panel } from 'src/components/matchbox';
-import ToggleBlock from 'src/components/toggleBlock/ToggleBlock';
+import { ToggleBlock } from 'src/components/toggleBlock';
 
 const ShareWithSubaccounts = ({ domain, onChange }) => {
   // If the subaccount_id is set on the domain object, this is a
@@ -11,14 +11,16 @@ const ShareWithSubaccounts = ({ domain, onChange }) => {
     return null;
   }
 
-  return <Panel.Section>
-    <ToggleBlock
-      input={{ name: 'shareWithSubaccounts' }}
-      label='Share this domain with all subaccounts?'
-      checked={domain.shared_with_subaccounts}
-      onChange={onChange}
-    />
-  </Panel.Section>;
+  return (
+    <Panel.Section>
+      <ToggleBlock
+        input={{ name: 'shareWithSubaccounts' }}
+        label="Share this domain with all subaccounts?"
+        checked={domain.shared_with_subaccounts}
+        onChange={onChange}
+      />
+    </Panel.Section>
+  );
 };
 
 export default ShareWithSubaccounts;
