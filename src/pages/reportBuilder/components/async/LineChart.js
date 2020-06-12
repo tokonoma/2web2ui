@@ -4,16 +4,7 @@
 */
 
 import React from 'react';
-import {
-  Bar,
-  ComposedChart,
-  Line,
-  ReferenceLine,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from 'recharts';
+import { Bar, ComposedChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import moment from 'moment';
 import styles from './LineChart.module.scss';
 import { tokens } from '@sparkpost/design-tokens-hibana';
@@ -58,9 +49,9 @@ const CustomTooltip = ({ payload, label, labelFormatter, formatter }) => {
   );
 };
 
-export default class SpLineChart extends React.Component {
-  renderLines() {
-    const { lines = [] } = this.props;
+export default function SpLineChart(props) {
+  const renderLines = () => {
+    const { lines = [] } = props;
     return lines.map(line => {
       const lineProps = {
         strokeWidth: 2,
@@ -72,16 +63,16 @@ export default class SpLineChart extends React.Component {
       };
       return <Line {...lineProps} />;
     });
-  }
+  };
 
-  renderReferenceLines() {
-    const { referenceLines = [] } = this.props;
-    return referenceLines.map(props => <ReferenceLine {...props} />);
-  }
+  // renderReferenceLines() {
+  //   const { referenceLines = [] } = this.props;
+  //   return referenceLines.map(props => <ReferenceLine {...props} />);
+  // }
 
   // Manually generates X axis ticks
-  getXTicks() {
-    const { data, precision } = this.props;
+  const getXTicks = () => {
+    const { data, precision } = props;
     let ticks;
 
     // Shows ticks every Sunday
@@ -115,62 +106,60 @@ export default class SpLineChart extends React.Component {
     }
 
     return ticks;
-  }
+  };
 
-  render() {
-    const {
-      data,
-      lines = [],
-      syncId,
-      xTickFormatter = identity,
-      yTickFormatter = identity,
-      yScale = 'linear', // eslint-disable-line
-      tooltipLabelFormatter = identity,
-      tooltipValueFormatter = identity,
-      showXAxis,
-      yLabel,
-    } = this.props;
+  const {
+    data,
+    lines = [],
+    syncId,
+    xTickFormatter = identity,
+    yTickFormatter = identity,
+    yScale = 'linear', // eslint-disable-line
+    tooltipLabelFormatter = identity,
+    tooltipValueFormatter = identity,
+    showXAxis,
+    yLabel,
+  } = props;
 
-    return (
-      <div className={styles.ChartWrapper}>
-        <ResponsiveContainer width="99%" height={170 + 30 * lines.length}>
-          <ComposedChart barCategoryGap="3%" syncId={syncId} data={data}>
-            <XAxis
-              axisLine={false}
-              dataKey="ts"
-              height={30}
-              hide={!showXAxis}
-              interval="preserveStartEnd"
-              scale="auto"
-              tickFormatter={xTickFormatter}
-              tickLine={false}
-              ticks={this.getXTicks()}
-            />
-            <YAxis
-              axisLine={false}
-              domain={['dataMin', 'dataMax']}
-              interval="preserveStartEnd"
-              padding={{ top: 8, bottom: 8 }}
-              scale={yScale}
-              tickFormatter={yTickFormatter}
-              tickLine={false}
-              width={60}
-            />
-            <Tooltip
-              cursor={{ fill: '#ff0' }}
-              content={<CustomTooltip />}
-              isAnimationActive={false}
-              itemSorter={orderDesc}
-              labelFormatter={tooltipLabelFormatter}
-              formatter={tooltipValueFormatter}
-            />
-            <Bar background={{ fill: tokens.color_gray_100 }} />
-            {/* {this.renderReferenceLines()} */}
-            {this.renderLines()}
-          </ComposedChart>
-        </ResponsiveContainer>
-        <span className="sp-linechart-yLabel">{yLabel}</span>
-      </div>
-    );
-  }
+  return (
+    <div className={styles.ChartWrapper}>
+      <ResponsiveContainer width="99%" height={170 + 30 * lines.length}>
+        <ComposedChart barCategoryGap="3%" syncId={syncId} data={data}>
+          <XAxis
+            axisLine={false}
+            dataKey="ts"
+            height={30}
+            hide={!showXAxis}
+            interval="preserveStartEnd"
+            scale="auto"
+            tickFormatter={xTickFormatter}
+            tickLine={false}
+            ticks={getXTicks()}
+          />
+          <YAxis
+            axisLine={false}
+            domain={['dataMin', 'dataMax']}
+            interval="preserveStartEnd"
+            padding={{ top: 8, bottom: 8 }}
+            scale={yScale}
+            tickFormatter={yTickFormatter}
+            tickLine={false}
+            width={60}
+          />
+          <Tooltip
+            cursor={{ fill: '#ff0' }}
+            content={<CustomTooltip />}
+            isAnimationActive={false}
+            itemSorter={orderDesc}
+            labelFormatter={tooltipLabelFormatter}
+            formatter={tooltipValueFormatter}
+          />
+          <Bar background={{ fill: tokens.color_gray_100 }} />
+          {/* {this.renderReferenceLines()} */}
+          {renderLines()}
+        </ComposedChart>
+      </ResponsiveContainer>
+      <span className="sp-linechart-yLabel">{yLabel}</span>
+    </div>
+  );
 }

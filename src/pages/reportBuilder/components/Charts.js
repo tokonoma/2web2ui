@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import { getDayLines, getLineChartFormatters } from 'src/helpers/chart';
+import { getLineChartFormatters } from 'src/helpers/chart';
 import LineChart from './LineChart';
 import METRICS_UNIT_CONFIG from 'src/config/metrics-units';
 const DEFAULT_UNIT = 'number';
@@ -17,12 +17,12 @@ export default function Charts(props) {
   }
 
   const formatters = getLineChartFormatters(precision, to);
-  const referenceLines = getDayLines(chartData, precision).map(({ ts }) => ({
-    key: ts,
-    x: ts,
-    stroke: '#bbb',
-    strokeWidth: 2,
-  }));
+  // const referenceLines = getDayLines(chartData, precision).map(({ ts }) => ({
+  //   key: ts,
+  //   x: ts,
+  //   stroke: '#bbb',
+  //   strokeWidth: 2,
+  // }));
 
   //Separates the metrics into their appropriate charts
   const charts = getUniqueUnits(metrics).map(unit => ({
@@ -49,7 +49,7 @@ export default function Charts(props) {
           yScale={yScale}
           yLabel={chart.label}
           tooltipValueFormatter={chart.yAxisFormatter}
-          referenceLines={referenceLines}
+          // referenceLines={referenceLines}
           showXAxis={i === charts.length - 1}
         />
       ))}
