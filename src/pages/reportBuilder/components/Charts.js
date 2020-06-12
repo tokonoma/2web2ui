@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { getLineChartFormatters } from 'src/helpers/chart';
 import LineChart from './LineChart';
 import METRICS_UNIT_CONFIG from 'src/config/metrics-units';
+
 const DEFAULT_UNIT = 'number';
 
 function getUniqueUnits(metrics) {
@@ -12,23 +13,23 @@ function getUniqueUnits(metrics) {
 export default function Charts(props) {
   const { chartData = [], metrics, chartLoading, precision, yScale, to } = props;
 
+  const [activeX, setActiveX] = React.useState(null);
+
   if (!chartData.length || !metrics) {
     return null;
   }
 
   const formatters = getLineChartFormatters(precision, to);
-  // const referenceLines = getDayLines(chartData, precision).map(({ ts }) => ({
-  //   key: ts,
-  //   x: ts,
-  //   stroke: '#bbb',
-  //   strokeWidth: 2,
-  // }));
 
   //Separates the metrics into their appropriate charts
   const charts = getUniqueUnits(metrics).map(unit => ({
     metrics: metrics.filter(metric => metric.unit === unit),
     ...METRICS_UNIT_CONFIG[unit],
   }));
+
+  const onMouseOver = _.debounce(element => {
+    setActiveX(element.ts);
+  }, 50);
 
   return (
     <div>
@@ -38,6 +39,8 @@ export default function Charts(props) {
           syncId="summaryChart"
           data={chartData}
           precision={precision}
+          onMouseOver={onMouseOver}
+          activeX={activeX}
           lines={chart.metrics.map(({ name, label, stroke }) => ({
             key: name,
             dataKey: name,

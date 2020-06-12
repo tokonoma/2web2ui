@@ -4,7 +4,16 @@
 */
 
 import React from 'react';
-import { Bar, ComposedChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import {
+  Bar,
+  ComposedChart,
+  Line,
+  Rectangle,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts';
 import moment from 'moment';
 import styles from './LineChart.module.scss';
 import { tokens } from '@sparkpost/design-tokens-hibana';
@@ -65,11 +74,6 @@ export default function SpLineChart(props) {
     });
   };
 
-  // renderReferenceLines() {
-  //   const { referenceLines = [] } = this.props;
-  //   return referenceLines.map(props => <ReferenceLine {...props} />);
-  // }
-
   // Manually generates X axis ticks
   const getXTicks = () => {
     const { data, precision } = props;
@@ -119,12 +123,28 @@ export default function SpLineChart(props) {
     tooltipValueFormatter = identity,
     showXAxis,
     yLabel,
+    onMouseOver,
+    activeX,
   } = props;
 
   return (
     <div className={styles.ChartWrapper}>
       <ResponsiveContainer width="99%" height={170 + 30 * lines.length}>
         <ComposedChart barCategoryGap="3%" syncId={syncId} data={data}>
+          <Bar
+            onMouseOver={onMouseOver}
+            isAnimationActive={false}
+            key="noKey"
+            shape={({ background, ...rest }) => {
+              return (
+                <Rectangle
+                  {...rest}
+                  {...background}
+                  fill={activeX === rest.ts ? tokens.color_gray_400 : tokens.color_gray_200}
+                />
+              );
+            }}
+          />
           <XAxis
             axisLine={false}
             dataKey="ts"
@@ -147,15 +167,13 @@ export default function SpLineChart(props) {
             width={60}
           />
           <Tooltip
-            cursor={{ fill: '#ff0' }}
+            cursor={false}
             content={<CustomTooltip />}
             isAnimationActive={false}
             itemSorter={orderDesc}
             labelFormatter={tooltipLabelFormatter}
             formatter={tooltipValueFormatter}
           />
-          <Bar background={{ fill: tokens.color_gray_100 }} />
-          {/* {this.renderReferenceLines()} */}
           {renderLines()}
         </ComposedChart>
       </ResponsiveContainer>
