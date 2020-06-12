@@ -8,7 +8,7 @@ function Tabs(props) {
   const [selectedTabIndex, tabs] = useTabs(setTabs, defaultTabIndex);
   return (
     <>
-      {setTabs.length > 1 && <TabsComponent tabs={tabs} selected={selectedTabIndex} {...rest} />}
+      {tabs.length > 1 && <TabsComponent tabs={tabs} selected={selectedTabIndex} {...rest} />}
       {React.Children.map(children, (child, index) => {
         return React.cloneElement(child, { forceRender, selected: selectedTabIndex === index });
       })}
