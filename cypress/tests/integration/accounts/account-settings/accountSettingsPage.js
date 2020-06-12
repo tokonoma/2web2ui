@@ -67,9 +67,6 @@ describe('Account Settings Page', () => {
           });
           cy.visit(PAGE_URL);
         });
-        it('renders shortkey for already existing skim token', () => {
-          cy.findByText('old1••••••••').should('be.visible');
-        });
         it('opens Override SCIM token Modal when a token is already present and clicking on Generate New Token opens Generate SCIM token Modal and clicking on Continue dismisses the Modal and new token can be found', () => {
           cy.findByText('old1••••••••').should('be.visible');
           cy.findByText('Generate SCIM Token').click();
@@ -86,7 +83,6 @@ describe('Account Settings Page', () => {
             fixtureAlias: 'newScimTokenGet',
             requestAlias: 'newScimTokenGet',
           });
-          // eslint-disable-next-line cypress/no-unnecessary-waiting
 
           cy.withinModal(() => {
             cy.findByText('Override Your Current Token?').should('be.visible');

@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Modal, Panel, Stack, Text } from 'src/components/matchbox';
 import { ButtonWrapper, CopyField, LabelledValue, ShortKeyCode } from 'src/components';
 import useModal from 'src/hooks/useModal';
+import Heading from 'src/components/text/Heading';
 export default function SCIMTokenSection(props) {
   const { scimTokenList, newScimToken, generateScimToken, listScimToken } = props;
   const getActions =
@@ -43,17 +44,17 @@ export default function SCIMTokenSection(props) {
           <Panel title="Generate SCIM Token">
             <Panel.Section>
               <Stack>
-                <Text as="p" fontWeight="medium">
-                  <p>Override Your Current Token?</p>
-                </Text>
-                <Text as="p">
-                  <p>
-                    Creating a new token will
-                    <Text as="span" fontWeight="medium">
-                      <strong> override the existing token.</strong>
-                    </Text>
-                  </p>
-                </Text>
+                <p>
+                  <Text as="span" fontWeight="medium">
+                    Override Your Current Token?
+                  </Text>
+                </p>
+                <p>
+                  Creating a new token will
+                  <Text as="span" fontWeight="medium">
+                    <strong> override the existing token.</strong>
+                  </Text>
+                </p>
               </Stack>
             </Panel.Section>
             <Panel.Section>
@@ -81,17 +82,13 @@ export default function SCIMTokenSection(props) {
           <Panel title="Generate SCIM Token">
             <Panel.Section>
               <Stack>
-                <Text as="p">
-                  <p>Copy this token! </p>
-                </Text>
-                <Text as="p">
-                  <p>
-                    Make sure to copy your SCIM token now.{' '}
-                    <Text as="span" fontWeight="medium">
-                      <strong>You won't be able to see it again!</strong>
-                    </Text>
-                  </p>
-                </Text>
+                <p>Copy this token!</p>
+                <p>
+                  Make sure to copy your SCIM token now.{' '}
+                  <Text as="span" fontWeight="medium">
+                    <strong>You won't be able to see it again!</strong>
+                  </Text>
+                </p>
                 <CopyField value={newScimToken} />
               </Stack>
             </Panel.Section>
@@ -105,21 +102,19 @@ export default function SCIMTokenSection(props) {
     }
   };
   return (
-    <>
-      <Panel.Section title="SCIM Token" actions={getActions}>
-        <LabelledValue label="SCIM Token">
-          <h6>
-            {scimTokenList.length > 0 ? (
-              <ShortKeyCode shortKey={scimTokenList[0].short_key} />
-            ) : (
-              'No token generated'
-            )}
-          </h6>
-        </LabelledValue>
-      </Panel.Section>
+    <Panel.Section title="SCIM Token" actions={getActions}>
+      <LabelledValue label="SCIM Token">
+        <Heading as="h6">
+          {scimTokenList.length > 0 ? (
+            <ShortKeyCode shortKey={scimTokenList[0].short_key} />
+          ) : (
+            'No token generated'
+          )}
+        </Heading>
+      </LabelledValue>
       <Modal open={isModalOpen} onClose={() => closeModal()} showCloseButton>
         {isModalOpen && renderModalByName(name)}
       </Modal>
-    </>
+    </Panel.Section>
   );
 }
