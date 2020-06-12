@@ -4,8 +4,9 @@ import classnames from 'classnames';
 import { refreshSummaryReport } from 'src/actions/summaryChart';
 import { Page, Panel } from 'src/components/matchbox';
 import { Loading } from 'src/components';
-import { Table, ChartGroup } from '../reports/summary/components'; //TODO: Remove usage of these components
+import { Table } from '../reports/summary/components'; //TODO: Remove usage of these components
 import { ReportOptions } from './components';
+import Charts from './components/Charts';
 import {
   selectSummaryChartSearchOptions,
   selectSummaryMetricsProcessed,
@@ -43,7 +44,7 @@ export function ReportBuilder({
           <Panel.Section
             className={classnames(styles.ChartSection, chart.chartLoading && styles.pending)}
           >
-            <ChartGroup {...chart} metrics={processedMetrics} to={to} yScale={'linear'} />
+            <Charts {...chart} metrics={processedMetrics} to={to} yScale={'linear'} />
           </Panel.Section>
 
           {renderLoading()}
