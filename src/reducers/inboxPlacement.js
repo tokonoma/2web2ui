@@ -54,7 +54,11 @@ export default (state = initialState, { type, payload, meta }) => {
       };
     }
     case 'GET_INBOX_PLACEMENT_TRENDS_FILTER_VALUES_FAIL':
-      return { ...state, getTrendsFilterValuesPending: false, getTrendsFilterValuesError: payload };
+      return {
+        ...state,
+        getTrendsFilterValuesPending: false,
+        getTrendsFilterValuesError: payload.message,
+      };
 
     case 'GET_INBOX_PLACEMENT_TESTS_BY_MAILBOX_PROVIDER_PENDING':
       return { ...state, getByProviderPending: true, getByProviderError: null };
