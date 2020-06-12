@@ -13,8 +13,6 @@ function getUniqueUnits(metrics) {
 export default function Charts(props) {
   const { chartData = [], metrics, chartLoading, precision, yScale, to } = props;
 
-  const [activeX, setActiveX] = React.useState(null);
-
   if (!chartData.length || !metrics) {
     return null;
   }
@@ -27,10 +25,6 @@ export default function Charts(props) {
     ...METRICS_UNIT_CONFIG[unit],
   }));
 
-  const onMouseOver = _.debounce(element => {
-    setActiveX(element.ts);
-  }, 50);
-
   return (
     <div>
       {charts.map((chart, i) => (
@@ -39,8 +33,6 @@ export default function Charts(props) {
           syncId="summaryChart"
           data={chartData}
           precision={precision}
-          onMouseOver={onMouseOver}
-          activeX={activeX}
           lines={chart.metrics.map(({ name, label, stroke }) => ({
             key: name,
             dataKey: name,

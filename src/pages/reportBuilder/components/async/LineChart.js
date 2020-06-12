@@ -58,6 +58,16 @@ const CustomTooltip = ({ payload, label, labelFormatter, formatter }) => {
   );
 };
 
+const Cursor = ({ data, height, points: [{ x, y }], width: chartWidth }) => {
+  const sectionWidth = chartWidth / data.length;
+  const gap = sectionWidth * 0.03;
+  const width = sectionWidth - gap * 2;
+
+  return (
+    <Rectangle x={x - width / 2} y={y} height={height} width={width} fill={tokens.color_gray_400} />
+  );
+};
+
 export default function SpLineChart(props) {
   const renderLines = () => {
     const { lines = [] } = props;
@@ -123,28 +133,13 @@ export default function SpLineChart(props) {
     tooltipValueFormatter = identity,
     showXAxis,
     yLabel,
-    onMouseOver,
-    activeX,
   } = props;
 
   return (
     <div className={styles.ChartWrapper}>
       <ResponsiveContainer width="99%" height={170 + 30 * lines.length}>
         <ComposedChart barCategoryGap="3%" syncId={syncId} data={data}>
-          <Bar
-            onMouseOver={onMouseOver}
-            isAnimationActive={false}
-            key="noKey"
-            shape={({ background, ...rest }) => {
-              return (
-                <Rectangle
-                  {...rest}
-                  {...background}
-                  fill={activeX === rest.ts ? tokens.color_gray_400 : tokens.color_gray_200}
-                />
-              );
-            }}
-          />
+          <Bar key="noKey" dataKey="noKey" background={{ fill: tokens.color_gray_200 }} />
           <XAxis
             axisLine={false}
             dataKey="ts"
@@ -167,7 +162,7 @@ export default function SpLineChart(props) {
             width={60}
           />
           <Tooltip
-            cursor={false}
+            cursor={<Cursor data={data} />}
             content={<CustomTooltip />}
             isAnimationActive={false}
             itemSorter={orderDesc}
