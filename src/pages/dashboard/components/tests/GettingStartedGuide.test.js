@@ -22,32 +22,31 @@ describe('GettingStartedGuide shallow', () => {
     jest.mock('src/context/HibanaContext');
   });
 
-  const subject = (props, renderFn = render) =>
-    renderFn(<GettingStartedGuide {...defaultProps} {...props} />);
+  const subject = () => shallow(<GettingStartedGuide {...defaultProps} />);
 
-  it('should render correctly when guide is at bottom or when guide is at top', () => {
+  it('should render ShowMeSparkpostStep inside "Start Sending with SparkPost" Expandable and this Expandable is open by default', () => {
+    jest.mock('src/context/HibanaContext');
+    expect(subject().find('Expandable')).toHaveTextContent('Start Sending with SparkPost');
     expect(
-      subject({ onboarding: { isGuideAtBottom: true } }, shallow)
-        .find('Panel')
-        .prop('actions'),
-    ).toBe(null);
+      subject()
+        .find('Expandable')
+        .find('ShowMeSparkpostStep'),
+    ).toHaveLength(1);
     expect(
-      subject({ onboarding: { isGuideAtBottom: false } }, shallow)
-        .find('Panel')
-        .prop('actions'),
-    ).not.toBe(null);
+      subject()
+        .find('Expandable')
+        .first(),
+    ).toHaveProp('defaultOpen');
   });
 
-  it('should render ShowMeSparkpostStep when on step "Show Me SparkPost" ', () => {
+  it('should render LetsCodeStep inside SparkPost Analytics Expandable', () => {
     jest.mock('src/context/HibanaContext');
-    const instance = subject({ onboarding: { active_step: 'Show Me SparkPost' } }, shallow);
-    expect(instance.find('ShowMeSparkpostStep')).toHaveLength(1);
-  });
-
-  it("should render LetsCodeStep when on step Let's Code ", () => {
-    jest.mock('src/context/HibanaContext');
-    const instance = subject({ onboarding: { active_step: "Let's Code" } }, shallow);
-    expect(instance.find('LetsCodeStep')).toHaveLength(1);
+    expect(subject().find('Expandable')).toHaveTextContent('SparkPost Analytics');
+    expect(
+      subject()
+        .find('Expandable')
+        .find('LetsCodeStep'),
+    ).toHaveLength(1);
   });
 });
 
@@ -63,17 +62,6 @@ describe('GettingStartedGuide full', () => {
         <GettingStartedGuide {...defaultProps} {...props} />
       </TestApp>,
     );
-
-  it('should render the corresponding step when breadcrumb is clicked', () => {
-    const { queryByText } = subject({ onboarding: { active_step: 'Show Me SparkPost' } });
-    userEvent.click(queryByText('Sending'));
-    expect(queryByText('Where Would You Like to Begin?')).toBeInTheDocument(1);
-  });
-
-  it('should render the BreadCrumbItem as active corresponding to the Step', () => {
-    const { queryByText } = subject({ onboarding: { active_step: 'Show Me SparkPost' } });
-    expect(queryByText('Show Me SparkPost')).toBeInTheDocument();
-  });
 
   it('should navigate to templates page when Send a Test Email button is clicked', () => {
     const { queryByText } = subject({ onboarding: { active_step: 'Show Me SparkPost' } });
