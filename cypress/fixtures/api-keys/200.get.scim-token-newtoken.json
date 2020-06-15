@@ -1,0 +1,14 @@
+{
+  "results": [
+    {
+      "id": "02fa2d41-8bc0-4418-88b3-6a3fd4d25855",
+      "label": "SCIM Token",
+      "short_key": "123f",
+      "grants": [
+        "scim/manage"
+      ],
+      "created_at": "2019-06-18T20:50:12.164Z",
+      "username": "appteam"
+    }
+  ]
+}

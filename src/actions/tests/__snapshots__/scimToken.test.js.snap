@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Action Creator: scimToken generateScimToken should make the appropriate request 1`] = `
+Object {
+  "meta": Object {
+    "data": Object {
+      "grants": Array [
+        "scim/manage",
+      ],
+      "label": "SCIM Token",
+      "userless": true,
+    },
+    "method": "POST",
+    "url": "/v1/api-keys",
+  },
+  "type": "GENERATE_SCIM_TOKEN",
+}
+`;
+
+exports[`Action Creator: scimToken listScimToken should make the appropriate request 1`] = `
+Object {
+  "meta": Object {
+    "method": "GET",
+    "params": Object {
+      "grant": "scim/manage",
+    },
+    "showErrorAlert": false,
+    "url": "/v1/api-keys",
+  },
+  "type": "LIST_SCIM_TOKEN",
+}
+`;

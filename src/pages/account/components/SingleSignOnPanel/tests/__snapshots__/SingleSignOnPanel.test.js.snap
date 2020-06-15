@@ -27,14 +27,8 @@ exports[`SingleSignOnPanel renders with provider and status section 1`] = `
   <StatusSection
     cert="abc=="
     enabled={true}
-    getAccountSingleSignOnDetails={
-      [MockFunction] {
-        "calls": Array [
-          Array [],
-        ],
-        "results": undefined,
-      }
-    }
+    getAccountSingleSignOnDetails={[MockFunction]}
+    isSsoScimUiEnabled={false}
     loading={false}
     provider="https://sso.sparkpost.com/redirect"
     updateAccountSingleSignOn={[MockFunction]}
@@ -65,14 +59,8 @@ exports[`SingleSignOnPanel renders with tfaRequired 1`] = `
     readOnly={true}
   />
   <StatusSection
-    getAccountSingleSignOnDetails={
-      [MockFunction] {
-        "calls": Array [
-          Array [],
-        ],
-        "results": undefined,
-      }
-    }
+    getAccountSingleSignOnDetails={[MockFunction]}
+    isSsoScimUiEnabled={false}
     readOnly={true}
     tfaRequired={true}
     updateAccountSingleSignOn={[MockFunction]}

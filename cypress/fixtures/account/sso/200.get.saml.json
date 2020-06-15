@@ -1,0 +1,9 @@
+{ "results": {
+  "provider": "https://sparkpostdev.onelogin.com/trust/saml2/http-redirect/sso/837119",
+  "cert": "MIIEGjCCAwKgAwIB",
+  "enabled": false,
+  "sp_entity_id": "passport-saml",
+  "request_binding": "Redirect",
+  "created_at": "2018-10-24T20:59:19+00:00",
+  "updated_at": "2020-06-01T21:19:24+00:00"
+}}

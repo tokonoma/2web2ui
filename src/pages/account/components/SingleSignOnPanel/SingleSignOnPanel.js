@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Panel } from 'src/components/matchbox';
 import {
@@ -10,16 +10,33 @@ import { PanelLoading } from 'src/components/loading';
 import { LINKS } from 'src/constants';
 import ProviderSection from './ProviderSection';
 import StatusSection from './StatusSection';
+import SCIMTokenSection from './SCIMTokenSection';
 import { PANEL_LOADING_HEIGHT } from 'src/pages/account/constants';
+import { isAccountUiOptionSet } from 'src/helpers/conditions/account';
+import { generateScimToken, listScimToken } from 'src/actions/scimToken';
 
-export class SingleSignOnPanel extends React.Component {
-  componentDidMount() {
-    this.props.getAccountSingleSignOnDetails();
-  }
+export function SingleSignOnPanel(props) {
+  const {
+    getAccountSingleSignOnDetails,
+    provider,
+    tfaRequired,
+    isSsoScimUiEnabled,
+    loading,
+    listScimToken,
+    generateScimToken,
+    scimTokenList,
+    newScimToken,
+  } = props;
+  useEffect(() => {
+    getAccountSingleSignOnDetails();
+  }, [getAccountSingleSignOnDetails]);
+  useEffect(() => {
+    if (isSsoScimUiEnabled) {
+      listScimToken();
+    }
+  }, [isSsoScimUiEnabled, listScimToken]);
 
-  renderContent() {
-    const { provider, tfaRequired } = this.props;
-
+  const renderContent = () => {
     return (
       <React.Fragment>
         {tfaRequired && (
@@ -29,44 +46,53 @@ export class SingleSignOnPanel extends React.Component {
           </p>
         )}
         <ProviderSection readOnly={tfaRequired} provider={provider} />
-        <StatusSection readOnly={tfaRequired} {...this.props} />
+        <StatusSection readOnly={tfaRequired} {...props} />
+        {isSsoScimUiEnabled && provider && (
+          <SCIMTokenSection
+            scimTokenList={scimTokenList}
+            newScimToken={newScimToken}
+            generateScimToken={generateScimToken}
+            listScimToken={listScimToken}
+          />
+        )}
       </React.Fragment>
     );
+  };
+
+  if (loading) {
+    return <PanelLoading minHeight={PANEL_LOADING_HEIGHT} />;
   }
 
-  render() {
-    const { loading } = this.props;
-
-    if (loading) {
-      return <PanelLoading minHeight={PANEL_LOADING_HEIGHT} />;
-    }
-
-    return (
-      <Panel
-        title="Single Sign-On"
-        actions={[
-          {
-            color: 'orange',
-            component: ExternalLink,
-            content: 'Learn More',
-            to: LINKS.SSO_GUIDE,
-          },
-        ]}
-      >
-        {this.renderContent()}
-      </Panel>
-    );
-  }
+  return (
+    <Panel
+      title="Single Sign-On"
+      actions={[
+        {
+          color: 'orange',
+          component: ExternalLink,
+          content: 'Learn More',
+          to: LINKS.SSO_GUIDE,
+        },
+      ]}
+    >
+      {renderContent()}
+    </Panel>
+  );
 }
 
 const mapDispatchToProps = {
   getAccountSingleSignOnDetails,
   updateAccountSingleSignOn,
+  listScimToken,
+  generateScimToken,
 };
 
-const mapStateToProps = ({ account, accountSingleSignOn }) => ({
-  ...accountSingleSignOn,
-  tfaRequired: account.tfa_required,
+const mapStateToProps = state => ({
+  ...state.accountSingleSignOn,
+  tfaRequired: state.account.tfa_required,
+  isSsoScimUiEnabled: isAccountUiOptionSet('sso_scim_section')(state),
+  scimTokenList: state.scimToken.scimTokenList,
+  newScimToken: state.scimToken.newScimToken,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleSignOnPanel);

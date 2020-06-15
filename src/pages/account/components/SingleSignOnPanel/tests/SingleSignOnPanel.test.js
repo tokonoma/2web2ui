@@ -3,40 +3,53 @@ import { shallow } from 'enzyme';
 import { SingleSignOnPanel } from '../SingleSignOnPanel';
 
 describe('SingleSignOnPanel', () => {
-  let props;
-  let wrapper;
+  let wrapper, defaultProps;
 
   beforeEach(() => {
-    props = {
+    defaultProps = {
       getAccountSingleSignOnDetails: jest.fn(),
-      updateAccountSingleSignOn: jest.fn()
+      updateAccountSingleSignOn: jest.fn(),
+      isSsoScimUiEnabled: false,
     };
-    wrapper = shallow(<SingleSignOnPanel {...props} />);
+    wrapper = props => shallow(<SingleSignOnPanel {...defaultProps} {...props} />);
   });
 
   it('renders with panel loading', () => {
-    wrapper.setProps({ loading: true });
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper({ loading: true })).toMatchSnapshot();
   });
 
   it('renders with provider and status section', () => {
-    wrapper.setProps({
-      cert: 'abc==',
-      enabled: true,
-      loading: false,
-      provider: 'https://sso.sparkpost.com/redirect',
-      updateError: 'Oh no!',
-      updatedAt: '2018-09-11T19:39:06+00:00'
-    });
-    expect(wrapper).toMatchSnapshot();
+    expect(
+      wrapper({
+        cert: 'abc==',
+        enabled: true,
+        loading: false,
+        provider: 'https://sso.sparkpost.com/redirect',
+        updateError: 'Oh no!',
+        updatedAt: '2018-09-11T19:39:06+00:00',
+      }),
+    ).toMatchSnapshot();
   });
 
   it('renders with tfaRequired', () => {
-    wrapper.setProps({ tfaRequired: true });
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper({ tfaRequired: true })).toMatchSnapshot();
   });
 
-  it('calls getAccountSingleSignOnDetails when mounted', () => {
-    expect(props.getAccountSingleSignOnDetails).toHaveBeenCalled();
+  describe('renders SCIM Section when isSsoScimUiEnabled is true', () => {
+    it('renders with scim section', () => {
+      const subject = wrapper({
+        cert: 'abc==',
+        enabled: true,
+        loading: false,
+        provider: 'https://sso.sparkpost.com/redirect',
+        updateError: 'Oh no!',
+        updatedAt: '2018-09-11T19:39:06+00:00',
+        isSsoScimUiEnabled: true,
+        scimTokenList: [],
+        newScimToken: 'fake-token',
+      });
+
+      expect(subject.find('SCIMTokenSection')).toHaveLength(1);
+    });
   });
 });

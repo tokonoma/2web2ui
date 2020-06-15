@@ -28,6 +28,7 @@ import passwordReset from './passwordReset';
 import recipientLists from './recipientLists';
 import recipientValidation from './recipientValidation';
 import reportOptions from './reportOptions';
+import scimToken from './scimToken';
 import sendingDomains from './sendingDomains';
 import sendingIps from './sendingIps';
 import signalOptions from './signalOptions';
@@ -67,6 +68,7 @@ const appReducer = combineReducers({
   dataPrivacy,
   delayReport,
   engagementReport,
+  scimToken,
   globalAlert,
   form,
   inboxPlacement,
