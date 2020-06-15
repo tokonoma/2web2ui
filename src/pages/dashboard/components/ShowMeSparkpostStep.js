@@ -1,7 +1,6 @@
 import React from 'react';
 import { Panel, UnstyledLink, Box } from 'src/components/matchbox';
 import useHibanaToggle from 'src/hooks/useHibanaToggle';
-import GuideBreadCrumbs from './GuideBreadCrumbs';
 import { GuideListItem, GuideListItemTitle, GuideListItemDescription } from './GuideListItem';
 import { useGuideContext } from './GettingStartedGuide';
 
@@ -101,7 +100,6 @@ export function HibanaShowMeSparkpostStep() {
   return (
     <>
       <Box mx="400" mb="400">
-        <GuideBreadCrumbs />
         <SendTestEmailItem />
       </Box>
       <Box mx="400" mb="400">
@@ -121,7 +119,6 @@ export function OGShowMeSparkpostStep() {
   return (
     <>
       <Panel.Section>
-        <GuideBreadCrumbs />
         <SendTestEmailItem />
       </Panel.Section>
       <Panel.Section>
