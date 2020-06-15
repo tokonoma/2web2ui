@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Field, reset, reduxForm } from 'redux-form';
-import { Box, Button, Checkbox, Panel, Stack } from 'src/components/matchbox';
+import { Button, Checkbox, Panel, Stack } from 'src/components/matchbox';
 import { TextFieldWrapper, CheckboxWrapper } from 'src/components';
 import { showAlert } from 'src/actions/globalAlert';
 import { createOrUpdateSuppressions } from 'src/actions/suppressions';
@@ -44,23 +44,19 @@ export class AddForm extends Component {
         <form onSubmit={handleSubmit(this.onSubmit)}>
           <Panel.Section>
             <Stack>
-              <Box maxWidth="1200">
-                <Field
-                  name="recipient"
-                  component={TextFieldWrapper}
-                  validate={[required, email]}
-                  required
-                  label="Email Address"
-                />
-              </Box>
-              <Box maxWidth="1200">
-                <Field
-                  component={SubaccountTypeaheadWrapper}
-                  disabled={submitting}
-                  helpText="Leaving this field blank will add the suppressions to the master account."
-                  name="subaccount"
-                />
-              </Box>
+              <Field
+                name="recipient"
+                component={TextFieldWrapper}
+                validate={[required, email]}
+                required
+                label="Email Address"
+              />
+              <Field
+                component={SubaccountTypeaheadWrapper}
+                disabled={submitting}
+                helpText="Leaving this field blank will add the suppressions to the master account."
+                name="subaccount"
+              />
               <Checkbox.Group label="Type" required>
                 <Field
                   component={CheckboxWrapper}

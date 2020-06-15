@@ -58,12 +58,23 @@ exports[`CreateForm renders correctly 1`] = `
         xs={12}
       />
     </Grid>
-    <Field
-      component={[Function]}
-      label="Subject"
-      name="content.subject"
-      validate={[Function]}
-    />
+    <Grid>
+      <Grid.Column
+        lg={6}
+        xs={12}
+      >
+        <Field
+          component={[Function]}
+          label="Subject"
+          name="content.subject"
+          validate={[Function]}
+        />
+      </Grid.Column>
+      <Grid.Column
+        lg={6}
+        xs={12}
+      />
+    </Grid>
   </Stack>
 </Fragment>
 `;

@@ -12,7 +12,7 @@ describe('ComboBoxTextField Matchbox component wrapper', () => {
   it('renders the Hibana version of the ComboBoxTextField component correctly when Hibana is enabled', () => {
     useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: true }]);
     const wrapper = subject();
-    expect(wrapper).toHaveDisplayName('HibanaComboBoxTextField');
+    expect(wrapper.find('HibanaComboBoxTextField')).toExist();
   });
 
   it('renders the OG version of the ComboBoxTextField when Hibana is not enabled', () => {

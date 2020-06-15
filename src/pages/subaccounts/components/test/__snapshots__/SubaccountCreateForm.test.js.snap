@@ -6,11 +6,7 @@ exports[`api key form 1`] = `
 >
   <Panel.Section>
     <Stack>
-      <Box
-        maxWidth="45rem"
-      >
-        <NameField />
-      </Box>
+      <NameField />
       <ApiKeyCheckBox
         createApiKey={true}
       />
@@ -51,11 +47,7 @@ exports[`base case 1`] = `
 >
   <Panel.Section>
     <Stack>
-      <Box
-        maxWidth="45rem"
-      >
-        <NameField />
-      </Box>
+      <NameField />
       <ApiKeyCheckBox
         createApiKey={false}
       />
@@ -96,11 +88,7 @@ exports[`has ip pools 1`] = `
 >
   <Panel.Section>
     <Stack>
-      <Box
-        maxWidth="45rem"
-      >
-        <NameField />
-      </Box>
+      <NameField />
       <ApiKeyCheckBox
         createApiKey={false}
       />
@@ -144,11 +132,7 @@ exports[`has ip pools and checked checkbox 1`] = `
 >
   <Panel.Section>
     <Stack>
-      <Box
-        maxWidth="45rem"
-      >
-        <NameField />
-      </Box>
+      <NameField />
       <ApiKeyCheckBox
         createApiKey={false}
       />
@@ -206,13 +190,9 @@ exports[`submits correctly 1`] = `
 >
   <Panel.Section>
     <Stack>
-      <Box
-        maxWidth="45rem"
-      >
-        <NameField
-          disabled={true}
-        />
-      </Box>
+      <NameField
+        disabled={true}
+      />
       <ApiKeyCheckBox
         createApiKey={false}
         disabled={true}

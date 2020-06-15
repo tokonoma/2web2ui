@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, SubmissionError, reduxForm } from 'redux-form';
 import _ from 'lodash';
-import { Banner, Box, Button, Error, Panel, Stack } from 'src/components/matchbox';
+import { Banner, Button, Error, Panel, Stack } from 'src/components/matchbox';
 import { TextFieldWrapper } from 'src/components';
 import { DownloadLink } from 'src/components/links';
 import { required, maxLength } from 'src/helpers/validation';
@@ -75,28 +75,24 @@ export class RecipientListForm extends Component {
           <Panel>
             <Panel.Section>
               <Stack space="400">
-                <Box maxWidth="1200">
+                <Field
+                  name="name"
+                  label="Name"
+                  placeholder="My favorite recipients"
+                  validate={[required, maxLength(64)]}
+                  disabled={submitting}
+                  component={TextFieldWrapper}
+                />
+
+                {!editMode && (
                   <Field
-                    name="name"
-                    label="Name"
-                    placeholder="My favorite recipients"
+                    name="id"
+                    label="ID"
+                    placeholder="my-favorite-recipients"
                     validate={[required, maxLength(64)]}
                     disabled={submitting}
                     component={TextFieldWrapper}
                   />
-                </Box>
-
-                {!editMode && (
-                  <Box maxWidth="1200">
-                    <Field
-                      name="id"
-                      label="ID"
-                      placeholder="my-favorite-recipients"
-                      validate={[required, maxLength(64)]}
-                      disabled={submitting}
-                      component={TextFieldWrapper}
-                    />
-                  </Box>
                 )}
 
                 <Field

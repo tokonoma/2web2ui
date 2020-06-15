@@ -17,27 +17,27 @@ export class CreateForm extends Component {
     return (
       <form onSubmit={handleSubmit}>
         <Panel.Section>
-          <Box maxWidth="1200">
-            <Stack>
+          <Stack>
+            <Box maxWidth="1200">
               <p>
                 We recommend using a subdomain e.g. <em>mail.mydomain.com</em>. Depending on how you
                 want to use your domain, you may not be able to completely configure your DNS
                 records if you use your organizational domain.
               </p>
+            </Box>
 
-              <Field
-                component={TextFieldWrapper}
-                label="Domain Name"
-                placeholder="email.example.com"
-                name="domain"
-                // Do not try to validate sending domains, let our API make that decision
-                validate={[required]}
-                disabled={submitting}
-              />
+            <Field
+              component={TextFieldWrapper}
+              label="Domain Name"
+              placeholder="email.example.com"
+              name="domain"
+              // Do not try to validate sending domains, let our API make that decision
+              validate={[required]}
+              disabled={submitting}
+            />
 
-              {hasSubaccounts && <SubaccountForm formName={FORM_NAME} />}
-            </Stack>
-          </Box>
+            {hasSubaccounts && <SubaccountForm formName={FORM_NAME} />}
+          </Stack>
         </Panel.Section>
 
         <Panel.Section>

@@ -11,8 +11,7 @@ import {
 } from 'src/components/reduxFormWrappers';
 import { OGOnlyWrapper } from 'src/components/hibana';
 import { ExternalLink } from 'src/components/links';
-import { Box, Stack } from 'src/components/matchbox';
-import { tokens } from '@sparkpost/design-tokens-hibana';
+import { Stack } from 'src/components/matchbox';
 import GrantsCheckboxes from 'src/components/grantBoxes/GrantsCheckboxes';
 
 const uneditableMsg = 'System set statuses cannot be edited.';
@@ -62,15 +61,13 @@ const ApiKeyFields = ({ show, showGrants = false, grants, disabled }) => {
   return (
     <div>
       <Stack>
-        <Box maxWidth={tokens.sizing_1200}>
-          <Field
-            name="keyName"
-            component={TextFieldWrapper}
-            label="Key Name"
-            validate={required}
-            disabled={disabled}
-          />
-        </Box>
+        <Field
+          name="keyName"
+          component={TextFieldWrapper}
+          label="Key Name"
+          validate={required}
+          disabled={disabled}
+        />
 
         <Field
           name="grantsRadio"
@@ -82,19 +79,17 @@ const ApiKeyFields = ({ show, showGrants = false, grants, disabled }) => {
 
         <GrantsCheckboxes grants={grants} show={showGrants} />
 
-        <Box maxWidth={tokens.sizing_1200}>
-          <OGOnlyWrapper as="div" style={{ marginBottom: '10px' }}>
-            <Field
-              name="validIps"
-              component={TextFieldWrapper}
-              label="Allowed IPs"
-              helpText="Leaving the field blank will allow access by valid API keys from any IP address."
-              placeholder="10.20.30.40, 10.20.30.0/24"
-              validate={ipValidator}
-              disabled={disabled}
-            />
-          </OGOnlyWrapper>
-        </Box>
+        <OGOnlyWrapper as="div" style={{ marginBottom: '10px' }}>
+          <Field
+            name="validIps"
+            component={TextFieldWrapper}
+            label="Allowed IPs"
+            helpText="Leaving the field blank will allow access by valid API keys from any IP address."
+            placeholder="10.20.30.40, 10.20.30.0/24"
+            validate={ipValidator}
+            disabled={disabled}
+          />
+        </OGOnlyWrapper>
       </Stack>
     </div>
   );

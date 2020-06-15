@@ -57,6 +57,7 @@ const IntegrationPageFilter = ({ disabled, initialValues = {}, onChange }) => {
               setBatchIds(event.currentTarget.value);
             }}
             value={batchIds}
+            maxWidth="100%"
           />
         </Grid.Column>
       </Grid>

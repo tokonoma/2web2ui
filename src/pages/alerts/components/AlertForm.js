@@ -125,27 +125,25 @@ export const AlertForm = props => {
           <Grid>
             <Grid.Column {...columnProps}>
               <Panel.Section>
-                <Box maxWidth="699px">
-                  <label htmlFor="name">Alert Name</label>
+                <label htmlFor="name">Alert Name</label>
+                <Field
+                  name="name"
+                  component={TextFieldWrapper}
+                  disabled={submitting}
+                  validate={[required, maxLength(50)]}
+                />
+                <Box marginTop="300" />
+                <div className={styles.MetricSelector}>
+                  <label>Alert Metric</label>
                   <Field
-                    name="name"
-                    component={TextFieldWrapper}
-                    disabled={submitting}
-                    validate={[required, maxLength(50)]}
+                    name="metric"
+                    component={SelectWrapper}
+                    options={visibleMetricOptions}
+                    onChange={resetFormValues}
+                    validate={required}
+                    disabled={submitting || !isNewAlert}
                   />
-                  <Box marginTop="300" />
-                  <div className={styles.MetricSelector}>
-                    <label>Alert Metric</label>
-                    <Field
-                      name="metric"
-                      component={SelectWrapper}
-                      options={visibleMetricOptions}
-                      onChange={resetFormValues}
-                      validate={required}
-                      disabled={submitting || !isNewAlert}
-                    />
-                  </div>
-                </Box>
+                </div>
                 {metric !== '' && !formSpec.hideEvaluator && (
                   <div className={styles.Evaluator}>
                     <EvaluatorFields

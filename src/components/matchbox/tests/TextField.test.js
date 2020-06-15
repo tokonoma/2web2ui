@@ -24,8 +24,8 @@ describe('TextField Matchbox component wrapper', () => {
 
     const wrapper = subject();
 
-    expect(wrapper).toHaveProp('padding', '600');
-    expect(wrapper).toHaveDisplayName('HibanaTextField');
+    expect(wrapper.find('HibanaTextField')).toExist();
+    expect(wrapper.find('HibanaTextField')).toHaveProp('padding', '600');
   });
 
   it('only renders passed in children when hibana is not enabled', () => {

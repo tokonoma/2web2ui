@@ -4,27 +4,19 @@ exports[`renders correctly - new and no subaccounts 1`] = `
 <form>
   <Panel.Section>
     <Stack>
-      <Box
-        maxWidth="1200"
-      >
-        <Field
-          component={[Function]}
-          disabled={false}
-          label="API Key Name"
-          name="label"
-          validate={[Function]}
-        />
-      </Box>
-      <Box
-        maxWidth="1200"
-      >
-        <Field
-          component={[Function]}
-          disabled={false}
-          helpText="This assignment is permanent. Leave blank to assign to master account."
-          name="subaccount"
-        />
-      </Box>
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="API Key Name"
+        name="label"
+        validate={[Function]}
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        helpText="This assignment is permanent. Leave blank to assign to master account."
+        name="subaccount"
+      />
     </Stack>
   </Panel.Section>
   <Panel.Section>
@@ -67,19 +59,15 @@ exports[`renders correctly - new and no subaccounts 1`] = `
           }
         }
       />
-      <Box
-        maxWidth="1200"
-      >
-        <Field
-          component={[Function]}
-          disabled={false}
-          helpText="Leaving the field blank will allow access by valid API keys from any IP address."
-          label="Allowed IPs"
-          name="validIps"
-          placeholder="10.20.30.40, 10.20.30.0/24"
-          validate={[Function]}
-        />
-      </Box>
+      <Field
+        component={[Function]}
+        disabled={false}
+        helpText="Leaving the field blank will allow access by valid API keys from any IP address."
+        label="Allowed IPs"
+        name="validIps"
+        placeholder="10.20.30.40, 10.20.30.0/24"
+        validate={[Function]}
+      />
     </Stack>
   </Panel.Section>
   <Panel.Section>
@@ -97,27 +85,19 @@ exports[`renders correctly - readonly mode 1`] = `
 <form>
   <Panel.Section>
     <Stack>
-      <Box
-        maxWidth="1200"
-      >
-        <Field
-          component={[Function]}
-          disabled={true}
-          label="API Key Name"
-          name="label"
-          validate={[Function]}
-        />
-      </Box>
-      <Box
-        maxWidth="1200"
-      >
-        <Field
-          component={[Function]}
-          disabled={false}
-          helpText=""
-          name="subaccount"
-        />
-      </Box>
+      <Field
+        component={[Function]}
+        disabled={true}
+        label="API Key Name"
+        name="label"
+        validate={[Function]}
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        helpText=""
+        name="subaccount"
+      />
     </Stack>
   </Panel.Section>
   <Panel.Section>
@@ -160,19 +140,15 @@ exports[`renders correctly - readonly mode 1`] = `
           }
         }
       />
-      <Box
-        maxWidth="1200"
-      >
-        <Field
-          component={[Function]}
-          disabled={true}
-          helpText=""
-          label="Allowed IPs"
-          name="validIps"
-          placeholder=""
-          validate={[Function]}
-        />
-      </Box>
+      <Field
+        component={[Function]}
+        disabled={true}
+        helpText=""
+        label="Allowed IPs"
+        name="validIps"
+        placeholder=""
+        validate={[Function]}
+      />
     </Stack>
   </Panel.Section>
 </form>
@@ -182,27 +158,19 @@ exports[`renders correctly - update and subaccounts 1`] = `
 <form>
   <Panel.Section>
     <Stack>
-      <Box
-        maxWidth="1200"
-      >
-        <Field
-          component={[Function]}
-          disabled={false}
-          label="API Key Name"
-          name="label"
-          validate={[Function]}
-        />
-      </Box>
-      <Box
-        maxWidth="1200"
-      >
-        <Field
-          component={[Function]}
-          disabled={true}
-          helpText="This assignment is permanent. Leave blank to assign to master account."
-          name="subaccount"
-        />
-      </Box>
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="API Key Name"
+        name="label"
+        validate={[Function]}
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        helpText="This assignment is permanent. Leave blank to assign to master account."
+        name="subaccount"
+      />
     </Stack>
   </Panel.Section>
   <Panel.Section>
@@ -239,19 +207,15 @@ exports[`renders correctly - update and subaccounts 1`] = `
           }
         }
       />
-      <Box
-        maxWidth="1200"
-      >
-        <Field
-          component={[Function]}
-          disabled={false}
-          helpText="Leaving the field blank will allow access by valid API keys from any IP address."
-          label="Allowed IPs"
-          name="validIps"
-          placeholder="10.20.30.40, 10.20.30.0/24"
-          validate={[Function]}
-        />
-      </Box>
+      <Field
+        component={[Function]}
+        disabled={false}
+        helpText="Leaving the field blank will allow access by valid API keys from any IP address."
+        label="Allowed IPs"
+        name="validIps"
+        placeholder="10.20.30.40, 10.20.30.0/24"
+        validate={[Function]}
+      />
     </Stack>
   </Panel.Section>
   <Panel.Section>
@@ -269,27 +233,19 @@ exports[`submits correctly 1`] = `
 <form>
   <Panel.Section>
     <Stack>
-      <Box
-        maxWidth="1200"
-      >
-        <Field
-          component={[Function]}
-          disabled={false}
-          label="API Key Name"
-          name="label"
-          validate={[Function]}
-        />
-      </Box>
-      <Box
-        maxWidth="1200"
-      >
-        <Field
-          component={[Function]}
-          disabled={false}
-          helpText="This assignment is permanent. Leave blank to assign to master account."
-          name="subaccount"
-        />
-      </Box>
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="API Key Name"
+        name="label"
+        validate={[Function]}
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        helpText="This assignment is permanent. Leave blank to assign to master account."
+        name="subaccount"
+      />
     </Stack>
   </Panel.Section>
   <Panel.Section>
@@ -332,19 +288,15 @@ exports[`submits correctly 1`] = `
           }
         }
       />
-      <Box
-        maxWidth="1200"
-      >
-        <Field
-          component={[Function]}
-          disabled={false}
-          helpText="Leaving the field blank will allow access by valid API keys from any IP address."
-          label="Allowed IPs"
-          name="validIps"
-          placeholder="10.20.30.40, 10.20.30.0/24"
-          validate={[Function]}
-        />
-      </Box>
+      <Field
+        component={[Function]}
+        disabled={false}
+        helpText="Leaving the field blank will allow access by valid API keys from any IP address."
+        label="Allowed IPs"
+        name="validIps"
+        placeholder="10.20.30.40, 10.20.30.0/24"
+        validate={[Function]}
+      />
     </Stack>
   </Panel.Section>
   <Panel.Section>

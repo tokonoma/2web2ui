@@ -69,6 +69,7 @@ export class Typeahead extends Component {
       name,
       placeholder = isOpen ? 'Type to search' : 'None',
       renderItem,
+      maxWidth,
     } = this.props;
     const { matches } = this.state;
     const items = matches.map((item, index) =>
@@ -102,9 +103,11 @@ export class Typeahead extends Component {
 
     return (
       <div className={cx('Typeahead')}>
-        <ActionList className={listClasses} actions={items} maxHeight={maxHeight} />
+        <Box maxWidth={maxWidth ? maxWidth : '1200'} position="relative">
+          <ActionList className={listClasses} actions={items} maxHeight={maxHeight} />
 
-        <TextField {...textFieldProps} onFocus={openMenu} suffix={<Search />} />
+          <TextField {...textFieldProps} onFocus={openMenu} suffix={<Search />} />
+        </Box>
       </div>
     );
   };

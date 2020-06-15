@@ -8,38 +8,30 @@ exports[`RecipientListForm defaults to create mode 1`] = `
         <Stack
           space="400"
         >
-          <Box
-            maxWidth="1200"
-          >
-            <Field
-              component={[Function]}
-              label="Name"
-              name="name"
-              placeholder="My favorite recipients"
-              validate={
-                Array [
-                  [Function],
-                  [Function],
-                ]
-              }
-            />
-          </Box>
-          <Box
-            maxWidth="1200"
-          >
-            <Field
-              component={[Function]}
-              label="ID"
-              name="id"
-              placeholder="my-favorite-recipients"
-              validate={
-                Array [
-                  [Function],
-                  [Function],
-                ]
-              }
-            />
-          </Box>
+          <Field
+            component={[Function]}
+            label="Name"
+            name="name"
+            placeholder="My favorite recipients"
+            validate={
+              Array [
+                [Function],
+                [Function],
+              ]
+            }
+          />
+          <Field
+            component={[Function]}
+            label="ID"
+            name="id"
+            placeholder="my-favorite-recipients"
+            validate={
+              Array [
+                [Function],
+                [Function],
+              ]
+            }
+          />
           <Field
             component={[Function]}
             label="Description"
@@ -114,38 +106,30 @@ exports[`RecipientListForm renders CSV errors 1`] = `
         <Stack
           space="400"
         >
-          <Box
-            maxWidth="1200"
-          >
-            <Field
-              component={[Function]}
-              label="Name"
-              name="name"
-              placeholder="My favorite recipients"
-              validate={
-                Array [
-                  [Function],
-                  [Function],
-                ]
-              }
-            />
-          </Box>
-          <Box
-            maxWidth="1200"
-          >
-            <Field
-              component={[Function]}
-              label="ID"
-              name="id"
-              placeholder="my-favorite-recipients"
-              validate={
-                Array [
-                  [Function],
-                  [Function],
-                ]
-              }
-            />
-          </Box>
+          <Field
+            component={[Function]}
+            label="Name"
+            name="name"
+            placeholder="My favorite recipients"
+            validate={
+              Array [
+                [Function],
+                [Function],
+              ]
+            }
+          />
+          <Field
+            component={[Function]}
+            label="ID"
+            name="id"
+            placeholder="my-favorite-recipients"
+            validate={
+              Array [
+                [Function],
+                [Function],
+              ]
+            }
+          />
           <Field
             component={[Function]}
             label="Description"
@@ -206,38 +190,30 @@ exports[`RecipientListForm renders correctly in create mode 1`] = `
         <Stack
           space="400"
         >
-          <Box
-            maxWidth="1200"
-          >
-            <Field
-              component={[Function]}
-              label="Name"
-              name="name"
-              placeholder="My favorite recipients"
-              validate={
-                Array [
-                  [Function],
-                  [Function],
-                ]
-              }
-            />
-          </Box>
-          <Box
-            maxWidth="1200"
-          >
-            <Field
-              component={[Function]}
-              label="ID"
-              name="id"
-              placeholder="my-favorite-recipients"
-              validate={
-                Array [
-                  [Function],
-                  [Function],
-                ]
-              }
-            />
-          </Box>
+          <Field
+            component={[Function]}
+            label="Name"
+            name="name"
+            placeholder="My favorite recipients"
+            validate={
+              Array [
+                [Function],
+                [Function],
+              ]
+            }
+          />
+          <Field
+            component={[Function]}
+            label="ID"
+            name="id"
+            placeholder="my-favorite-recipients"
+            validate={
+              Array [
+                [Function],
+                [Function],
+              ]
+            }
+          />
           <Field
             component={[Function]}
             label="Description"
@@ -298,22 +274,18 @@ exports[`RecipientListForm renders correctly in edit mode 1`] = `
         <Stack
           space="400"
         >
-          <Box
-            maxWidth="1200"
-          >
-            <Field
-              component={[Function]}
-              label="Name"
-              name="name"
-              placeholder="My favorite recipients"
-              validate={
-                Array [
-                  [Function],
-                  [Function],
-                ]
-              }
-            />
-          </Box>
+          <Field
+            component={[Function]}
+            label="Name"
+            name="name"
+            placeholder="My favorite recipients"
+            validate={
+              Array [
+                [Function],
+                [Function],
+              ]
+            }
+          />
           <Field
             component={[Function]}
             label="Description"
@@ -370,40 +342,32 @@ exports[`RecipientListForm should disable form elements on submit 1`] = `
         <Stack
           space="400"
         >
-          <Box
-            maxWidth="1200"
-          >
-            <Field
-              component={[Function]}
-              disabled={true}
-              label="Name"
-              name="name"
-              placeholder="My favorite recipients"
-              validate={
-                Array [
-                  [Function],
-                  [Function],
-                ]
-              }
-            />
-          </Box>
-          <Box
-            maxWidth="1200"
-          >
-            <Field
-              component={[Function]}
-              disabled={true}
-              label="ID"
-              name="id"
-              placeholder="my-favorite-recipients"
-              validate={
-                Array [
-                  [Function],
-                  [Function],
-                ]
-              }
-            />
-          </Box>
+          <Field
+            component={[Function]}
+            disabled={true}
+            label="Name"
+            name="name"
+            placeholder="My favorite recipients"
+            validate={
+              Array [
+                [Function],
+                [Function],
+              ]
+            }
+          />
+          <Field
+            component={[Function]}
+            disabled={true}
+            label="ID"
+            name="id"
+            placeholder="my-favorite-recipients"
+            validate={
+              Array [
+                [Function],
+                [Function],
+              ]
+            }
+          />
           <Field
             component={[Function]}
             disabled={true}

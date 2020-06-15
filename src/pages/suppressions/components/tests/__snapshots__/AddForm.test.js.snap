@@ -5,32 +5,24 @@ exports[`AddForm tests should disable fields when submitting 1`] = `
   <form>
     <Panel.Section>
       <Stack>
-        <Box
-          maxWidth="1200"
-        >
-          <Field
-            component={[Function]}
-            label="Email Address"
-            name="recipient"
-            required={true}
-            validate={
-              Array [
-                [Function],
-                [Function],
-              ]
-            }
-          />
-        </Box>
-        <Box
-          maxWidth="1200"
-        >
-          <Field
-            component={[Function]}
-            disabled={true}
-            helpText="Leaving this field blank will add the suppressions to the master account."
-            name="subaccount"
-          />
-        </Box>
+        <Field
+          component={[Function]}
+          label="Email Address"
+          name="recipient"
+          required={true}
+          validate={
+            Array [
+              [Function],
+              [Function],
+            ]
+          }
+        />
+        <Field
+          component={[Function]}
+          disabled={true}
+          helpText="Leaving this field blank will add the suppressions to the master account."
+          name="subaccount"
+        />
         <Checkbox.Group
           label="Type"
           required={true}
@@ -74,32 +66,24 @@ exports[`AddForm tests should make form submitable when dirty and not submitting
   <form>
     <Panel.Section>
       <Stack>
-        <Box
-          maxWidth="1200"
-        >
-          <Field
-            component={[Function]}
-            label="Email Address"
-            name="recipient"
-            required={true}
-            validate={
-              Array [
-                [Function],
-                [Function],
-              ]
-            }
-          />
-        </Box>
-        <Box
-          maxWidth="1200"
-        >
-          <Field
-            component={[Function]}
-            disabled={false}
-            helpText="Leaving this field blank will add the suppressions to the master account."
-            name="subaccount"
-          />
-        </Box>
+        <Field
+          component={[Function]}
+          label="Email Address"
+          name="recipient"
+          required={true}
+          validate={
+            Array [
+              [Function],
+              [Function],
+            ]
+          }
+        />
+        <Field
+          component={[Function]}
+          disabled={false}
+          helpText="Leaving this field blank will add the suppressions to the master account."
+          name="subaccount"
+        />
         <Checkbox.Group
           label="Type"
           required={true}
@@ -143,32 +127,24 @@ exports[`AddForm tests should render add form 1`] = `
   <form>
     <Panel.Section>
       <Stack>
-        <Box
-          maxWidth="1200"
-        >
-          <Field
-            component={[Function]}
-            label="Email Address"
-            name="recipient"
-            required={true}
-            validate={
-              Array [
-                [Function],
-                [Function],
-              ]
-            }
-          />
-        </Box>
-        <Box
-          maxWidth="1200"
-        >
-          <Field
-            component={[Function]}
-            disabled={false}
-            helpText="Leaving this field blank will add the suppressions to the master account."
-            name="subaccount"
-          />
-        </Box>
+        <Field
+          component={[Function]}
+          label="Email Address"
+          name="recipient"
+          required={true}
+          validate={
+            Array [
+              [Function],
+              [Function],
+            ]
+          }
+        />
+        <Field
+          component={[Function]}
+          disabled={false}
+          helpText="Leaving this field blank will add the suppressions to the master account."
+          name="subaccount"
+        />
         <Checkbox.Group
           label="Type"
           required={true}

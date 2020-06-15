@@ -5,10 +5,10 @@ exports[`Sending Domains Create Form renders correctly 1`] = `
   onSubmit={[MockFunction]}
 >
   <Panel.Section>
-    <Box
-      maxWidth="1200"
-    >
-      <Stack>
+    <Stack>
+      <Box
+        maxWidth="1200"
+      >
         <p>
           We recommend using a subdomain e.g. 
           <em>
@@ -16,20 +16,20 @@ exports[`Sending Domains Create Form renders correctly 1`] = `
           </em>
           . Depending on how you want to use your domain, you may not be able to completely configure your DNS records if you use your organizational domain.
         </p>
-        <Field
-          component={[Function]}
-          disabled={false}
-          label="Domain Name"
-          name="domain"
-          placeholder="email.example.com"
-          validate={
-            Array [
-              [Function],
-            ]
-          }
-        />
-      </Stack>
-    </Box>
+      </Box>
+      <Field
+        component={[Function]}
+        disabled={false}
+        label="Domain Name"
+        name="domain"
+        placeholder="email.example.com"
+        validate={
+          Array [
+            [Function],
+          ]
+        }
+      />
+    </Stack>
   </Panel.Section>
   <Panel.Section>
     <ButtonWrapper>
@@ -58,10 +58,10 @@ exports[`Sending Domains Create Form renders submitting state correctly 1`] = `
   onSubmit={[MockFunction]}
 >
   <Panel.Section>
-    <Box
-      maxWidth="1200"
-    >
-      <Stack>
+    <Stack>
+      <Box
+        maxWidth="1200"
+      >
         <p>
           We recommend using a subdomain e.g. 
           <em>
@@ -69,20 +69,20 @@ exports[`Sending Domains Create Form renders submitting state correctly 1`] = `
           </em>
           . Depending on how you want to use your domain, you may not be able to completely configure your DNS records if you use your organizational domain.
         </p>
-        <Field
-          component={[Function]}
-          disabled={true}
-          label="Domain Name"
-          name="domain"
-          placeholder="email.example.com"
-          validate={
-            Array [
-              [Function],
-            ]
-          }
-        />
-      </Stack>
-    </Box>
+      </Box>
+      <Field
+        component={[Function]}
+        disabled={true}
+        label="Domain Name"
+        name="domain"
+        placeholder="email.example.com"
+        validate={
+          Array [
+            [Function],
+          ]
+        }
+      />
+    </Stack>
   </Panel.Section>
   <Panel.Section>
     <ButtonWrapper>

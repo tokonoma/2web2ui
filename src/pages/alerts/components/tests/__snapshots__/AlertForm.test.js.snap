@@ -13,76 +13,72 @@ exports[`Alert Form Component should render the alert form component correctly 1
           sm={12}
         >
           <Panel.Section>
-            <Box
-              maxWidth="699px"
+            <label
+              htmlFor="name"
             >
-              <label
-                htmlFor="name"
-              >
-                Alert Name
+              Alert Name
+            </label>
+            <Field
+              component={[Function]}
+              disabled={false}
+              name="name"
+              validate={
+                Array [
+                  [Function],
+                  [Function],
+                ]
+              }
+            />
+            <Box
+              marginTop="300"
+            />
+            <div
+              className="MetricSelector"
+            >
+              <label>
+                Alert Metric
               </label>
               <Field
                 component={[Function]}
                 disabled={false}
-                name="name"
-                validate={
+                name="metric"
+                onChange={[Function]}
+                options={
                   Array [
-                    [Function],
-                    [Function],
+                    Object {
+                      "disabled": true,
+                      "label": "Select Metric",
+                      "value": "",
+                    },
+                    Object {
+                      "label": "Monthly Sending Limit",
+                      "value": "monthly_sending_limit",
+                    },
+                    Object {
+                      "label": "Health Score",
+                      "value": "health_score",
+                    },
+                    Object {
+                      "label": "Block Bounce Rate",
+                      "value": "block_bounce_rate",
+                    },
+                    Object {
+                      "label": "Hard Bounce Rate",
+                      "value": "hard_bounce_rate",
+                    },
+                    Object {
+                      "label": "Soft Bounce Rate",
+                      "value": "soft_bounce_rate",
+                    },
+                    Object {
+                      "label": "Blacklists",
+                      "value": "blacklist",
+                    },
                   ]
                 }
+                validate={[Function]}
               />
-              <Box
-                marginTop="300"
-              />
-              <div
-                className="MetricSelector"
-              >
-                <label>
-                  Alert Metric
-                </label>
-                <Field
-                  component={[Function]}
-                  disabled={false}
-                  name="metric"
-                  onChange={[Function]}
-                  options={
-                    Array [
-                      Object {
-                        "disabled": true,
-                        "label": "Select Metric",
-                        "value": "",
-                      },
-                      Object {
-                        "label": "Monthly Sending Limit",
-                        "value": "monthly_sending_limit",
-                      },
-                      Object {
-                        "label": "Health Score",
-                        "value": "health_score",
-                      },
-                      Object {
-                        "label": "Block Bounce Rate",
-                        "value": "block_bounce_rate",
-                      },
-                      Object {
-                        "label": "Hard Bounce Rate",
-                        "value": "hard_bounce_rate",
-                      },
-                      Object {
-                        "label": "Soft Bounce Rate",
-                        "value": "soft_bounce_rate",
-                      },
-                      Object {
-                        "label": "Blacklists",
-                        "value": "blacklist",
-                      },
-                    ]
-                  }
-                  validate={[Function]}
-                />
-              </div>
-            </Box>
+            </div>
             <div
               className="Evaluator"
             >

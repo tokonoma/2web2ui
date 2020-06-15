@@ -34,16 +34,12 @@ exports[`UploadForm tests should disable fields when submitting 1`] = `
             ]
           }
         />
-        <Box
-          maxWidth="1200"
-        >
-          <Field
-            component={[Function]}
-            disabled={true}
-            helpText="Leaving this field blank will add the suppressions to the master account."
-            name="subaccount"
-          />
-        </Box>
+        <Field
+          component={[Function]}
+          disabled={true}
+          helpText="Leaving this field blank will add the suppressions to the master account."
+          name="subaccount"
+        />
       </Stack>
     </Panel.Section>
     <Panel.Section>
@@ -93,16 +89,12 @@ exports[`UploadForm tests should render upload form 1`] = `
             ]
           }
         />
-        <Box
-          maxWidth="1200"
-        >
-          <Field
-            component={[Function]}
-            disabled={false}
-            helpText="Leaving this field blank will add the suppressions to the master account."
-            name="subaccount"
-          />
-        </Box>
+        <Field
+          component={[Function]}
+          disabled={false}
+          helpText="Leaving this field blank will add the suppressions to the master account."
+          name="subaccount"
+        />
       </Stack>
     </Panel.Section>
     <Panel.Section>

@@ -91,6 +91,7 @@ export default function SettingsForm(props) {
               label="Template Name"
               disabled={isEditingDisabled}
               validate={required}
+              maxWidth="100%"
             />
 
             <CopyField
@@ -100,6 +101,7 @@ export default function SettingsForm(props) {
               value={draft.id}
               helpText={"A Unique ID for your template, we'll fill this in for you."}
               disabled={true}
+              maxWidth="100%"
             />
           </Stack>
         </Panel.Section>
@@ -118,6 +120,7 @@ export default function SettingsForm(props) {
               label="Subject"
               validate={required}
               disabled={isEditingDisabled}
+              maxWidth="100%"
             />
 
             <Field
@@ -130,6 +133,7 @@ export default function SettingsForm(props) {
               domains={domains}
               helpText={fromEmailHelpText}
               disabled={isEditingDisabled}
+              maxWidth="100%"
             />
 
             <Field
@@ -138,6 +142,7 @@ export default function SettingsForm(props) {
               label="From Name"
               helpText="A friendly from for your recipients."
               disabled={isEditingDisabled}
+              maxWidth="100%"
             />
 
             <Field
@@ -147,6 +152,7 @@ export default function SettingsForm(props) {
               label="Reply To"
               helpText="An email address recipients can reply to."
               disabled={isEditingDisabled}
+              maxWidth="100%"
             />
 
             <Field
@@ -155,6 +161,7 @@ export default function SettingsForm(props) {
               label="Description"
               helpText="Not visible to recipients."
               disabled={isEditingDisabled}
+              maxWidth="100%"
             />
           </Stack>
         </Panel.Section>
@@ -167,6 +174,7 @@ export default function SettingsForm(props) {
               type="checkbox"
               parse={parseToggle}
               disabled={isEditingDisabled}
+              maxWidth="100%"
             />
 
             <Field
@@ -176,6 +184,7 @@ export default function SettingsForm(props) {
               type="checkbox"
               parse={parseToggle}
               disabled={isEditingDisabled}
+              maxWidth="100%"
             />
 
             <Field
@@ -186,6 +195,7 @@ export default function SettingsForm(props) {
               parse={parseToggle}
               helpText="Transactional messages are triggered by a user’s actions on the website, like requesting a password reset, signing up, or making a purchase."
               disabled={isEditingDisabled}
+              maxWidth="100%"
             />
           </Stack>
         </Panel.Section>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { Box, Button, Panel, Stack } from 'src/components/matchbox';
+import { Button, Panel, Stack } from 'src/components/matchbox';
 import { showAlert } from 'src/actions/globalAlert';
 import { uploadSuppressions } from 'src/actions/suppressions';
 import { DownloadLink } from 'src/components/links';
@@ -54,14 +54,12 @@ export class UploadForm extends Component {
                   nonEmptyFile,
                 ]}
               />
-              <Box maxWidth="1200">
-                <Field
-                  component={SubaccountTypeaheadWrapper}
-                  disabled={submitting}
-                  helpText="Leaving this field blank will add the suppressions to the master account."
-                  name="subaccount"
-                />
-              </Box>
+              <Field
+                component={SubaccountTypeaheadWrapper}
+                disabled={submitting}
+                helpText="Leaving this field blank will add the suppressions to the master account."
+                name="subaccount"
+              />
             </Stack>
           </Panel.Section>
 

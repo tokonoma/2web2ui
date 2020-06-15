@@ -89,12 +89,18 @@ export class CreateForm extends Component {
             <Grid.Column xs={12} lg={6}></Grid.Column>
           </Grid>
 
-          <Field
-            name="content.subject"
-            component={TextFieldWrapper}
-            label="Subject"
-            validate={required}
-          />
+          <Grid>
+            <Grid.Column xs={12} lg={6}>
+              <Field
+                name="content.subject"
+                component={TextFieldWrapper}
+                label="Subject"
+                validate={required}
+              />
+            </Grid.Column>
+
+            <Grid.Column xs={12} lg={6}></Grid.Column>
+          </Grid>
 
           {canViewSubaccountSection && (
             <Grid>

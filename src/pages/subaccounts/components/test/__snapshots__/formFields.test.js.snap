@@ -27,17 +27,13 @@ exports[`ApiKeyFields 1`] = `""`;
 exports[`ApiKeyFields 2`] = `
 <div>
   <Stack>
-    <Box
-      maxWidth="45rem"
-    >
-      <Field
-        component={[Function]}
-        disabled={false}
-        label="Key Name"
-        name="keyName"
-        validate={[Function]}
-      />
-    </Box>
+    <Field
+      component={[Function]}
+      disabled={false}
+      label="Key Name"
+      name="keyName"
+      validate={[Function]}
+    />
     <Field
       component={[Function]}
       disabled={false}
@@ -64,28 +60,24 @@ exports[`ApiKeyFields 2`] = `
       }
       show={true}
     />
-    <Box
-      maxWidth="45rem"
-    >
-      <OGOnlyWrapper
-        as="div"
-        style={
-          Object {
-            "marginBottom": "10px",
-          }
+    <OGOnlyWrapper
+      as="div"
+      style={
+        Object {
+          "marginBottom": "10px",
         }
-      >
-        <Field
-          component={[Function]}
-          disabled={false}
-          helpText="Leaving the field blank will allow access by valid API keys from any IP address."
-          label="Allowed IPs"
-          name="validIps"
-          placeholder="10.20.30.40, 10.20.30.0/24"
-          validate={[Function]}
-        />
-      </OGOnlyWrapper>
-    </Box>
+      }
+    >
+      <Field
+        component={[Function]}
+        disabled={false}
+        helpText="Leaving the field blank will allow access by valid API keys from any IP address."
+        label="Allowed IPs"
+        name="validIps"
+        placeholder="10.20.30.40, 10.20.30.0/24"
+        validate={[Function]}
+      />
+    </OGOnlyWrapper>
   </Stack>
 </div>
 `;

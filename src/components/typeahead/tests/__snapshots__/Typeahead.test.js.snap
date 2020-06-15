@@ -4,47 +4,52 @@ exports[`Typeahead render function renders list of matches 1`] = `
 <div
   className="Typeahead"
 >
-  <ActionList
-    actions={
-      Array [
-        Object {
-          "content": <TypeaheadItem
-            label="apples"
-          />,
-          "highlighted": true,
-          "index": 0,
-          "item": "apples",
-        },
-        Object {
-          "content": <TypeaheadItem
-            label="bananas"
-          />,
-          "highlighted": false,
-          "index": 1,
-          "item": "bananas",
-        },
-        Object {
-          "content": <TypeaheadItem
-            label="cauliflower"
-          />,
-          "highlighted": false,
-          "index": 2,
-          "item": "cauliflower",
-        },
-      ]
-    }
-    className="List"
-    maxHeight={300}
-  />
-  <TextField
-    connectRight={null}
-    data-lpignore={true}
-    error={null}
-    id="subaccount"
-    name="subaccount"
-    placeholder="None"
-    readOnly={false}
-    suffix={<Search />}
-  />
+  <Box
+    maxWidth="1200"
+    position="relative"
+  >
+    <ActionList
+      actions={
+        Array [
+          Object {
+            "content": <TypeaheadItem
+              label="apples"
+            />,
+            "highlighted": true,
+            "index": 0,
+            "item": "apples",
+          },
+          Object {
+            "content": <TypeaheadItem
+              label="bananas"
+            />,
+            "highlighted": false,
+            "index": 1,
+            "item": "bananas",
+          },
+          Object {
+            "content": <TypeaheadItem
+              label="cauliflower"
+            />,
+            "highlighted": false,
+            "index": 2,
+            "item": "cauliflower",
+          },
+        ]
+      }
+      className="List"
+      maxHeight={300}
+    />
+    <TextField
+      connectRight={null}
+      data-lpignore={true}
+      error={null}
+      id="subaccount"
+      name="subaccount"
+      placeholder="None"
+      readOnly={false}
+      suffix={<Search />}
+    />
+  </Box>
 </div>
 `;

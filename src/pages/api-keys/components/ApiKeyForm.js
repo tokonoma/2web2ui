@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
-import { Box, Button, Panel, Stack } from 'src/components/matchbox';
+import { Button, Panel, Stack } from 'src/components/matchbox';
 
 import {
   RadioGroup,
@@ -66,27 +66,23 @@ export class ApiKeyForm extends Component {
       <form onSubmit={handleSubmit(this.onSubmit)}>
         <Panel.Section>
           <Stack>
-            <Box maxWidth="1200">
-              <Field
-                name="label"
-                component={TextFieldWrapper}
-                validate={required}
-                label="API Key Name"
-                disabled={isReadOnly}
-              />
-            </Box>
-            <Box maxWidth="1200">
-              <Field
-                name="subaccount"
-                helpText={
-                  isReadOnly
-                    ? ''
-                    : 'This assignment is permanent. Leave blank to assign to master account.'
-                }
-                component={SubaccountTypeaheadWrapper}
-                disabled={!isNew}
-              />
-            </Box>
+            <Field
+              name="label"
+              component={TextFieldWrapper}
+              validate={required}
+              label="API Key Name"
+              disabled={isReadOnly}
+            />
+            <Field
+              name="subaccount"
+              helpText={
+                isReadOnly
+                  ? ''
+                  : 'This assignment is permanent. Leave blank to assign to master account.'
+              }
+              component={SubaccountTypeaheadWrapper}
+              disabled={!isNew}
+            />
           </Stack>
         </Panel.Section>
         <Panel.Section>
@@ -102,21 +98,19 @@ export class ApiKeyForm extends Component {
               show={showGrants}
               disabled={isReadOnly}
             />
-            <Box maxWidth="1200">
-              <Field
-                name="validIps"
-                component={TextFieldWrapper}
-                label="Allowed IPs"
-                helpText={
-                  isReadOnly
-                    ? ''
-                    : 'Leaving the field blank will allow access by valid API keys from any IP address.'
-                }
-                placeholder={isReadOnly ? '' : '10.20.30.40, 10.20.30.0/24'}
-                validate={validIpList}
-                disabled={isReadOnly}
-              />
-            </Box>
+            <Field
+              name="validIps"
+              component={TextFieldWrapper}
+              label="Allowed IPs"
+              helpText={
+                isReadOnly
+                  ? ''
+                  : 'Leaving the field blank will allow access by valid API keys from any IP address.'
+              }
+              placeholder={isReadOnly ? '' : '10.20.30.40, 10.20.30.0/24'}
+              validate={validIpList}
+              disabled={isReadOnly}
+            />
           </Stack>
         </Panel.Section>
         {!isReadOnly && (
