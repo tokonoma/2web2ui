@@ -9,7 +9,7 @@ export function generateScimToken() {
       data: {
         label: 'SCIM Token',
         grants: ['scim/manage'],
-        master: true, // true; if the API key is not tied to a user
+        userless: true, // true; if the API key is not tied to a user
       },
     },
   });

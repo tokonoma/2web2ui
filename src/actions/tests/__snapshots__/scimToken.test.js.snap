@@ -8,7 +8,7 @@ Object {
         "scim/manage",
       ],
       "label": "SCIM Token",
-      "master": true,
+      "userless": true,
     },
     "method": "POST",
     "url": "/v1/api-keys",
