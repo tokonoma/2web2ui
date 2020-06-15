@@ -64,7 +64,6 @@ const InviteCollaboratorItem = () => {
   const {
     invite_collaborator_completed,
     handleAction,
-    setAndStoreStepName,
     setOnboardingAccountOption,
   } = useGuideContext();
 
@@ -85,7 +84,6 @@ const InviteCollaboratorItem = () => {
         <span>Or you can&nbsp;</span>
         <UnstyledLink
           onClick={() => {
-            setAndStoreStepName("Let's Code");
             setOnboardingAccountOption({ invite_collaborator_completed: true });
           }}
         >
