@@ -5,9 +5,9 @@ import { tokens } from '@sparkpost/design-tokens-hibana';
 import { refreshSummaryReport } from 'src/actions/summaryChart';
 import { Box, Grid, Page, Panel, Inline } from 'src/components/matchbox';
 import { Loading, Unit } from 'src/components';
-import { Table, ChartGroup } from '../reports/summary/components'; //TODO: Remove usage of these components
+import { ChartGroup } from '../reports/summary/components'; //TODO: Remove usage of these components
 import { Definition } from 'src/components/text';
-import { ReportOptions } from './components';
+import { ReportOptions, ReportTable } from './components';
 import {
   selectSummaryChartSearchOptions,
   selectSummaryMetricsProcessed,
@@ -91,7 +91,7 @@ export function ReportBuilder({
         </Panel>
       </div>
       <div data-id="summary-table">
-        <Table />
+        <ReportTable />
       </div>
     </Page>
   );

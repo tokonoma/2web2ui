@@ -1,0 +1,23 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+.TopDomainsCheckbox {
+  @media screen and (min-width: media-query(sm)) {
+    float: right;
+  }
+}
+
+.HeaderCell {
+  vertical-align: bottom;
+  word-break: normal;
+}
+
+.FirstColumnHeader {
+  min-width: 200px;
+}
+
+.NumericalHeader {
+  text-align: right;
+  min-width: 110px;
+
+  max-width: 200px;
+}
