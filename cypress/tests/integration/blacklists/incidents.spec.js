@@ -1,6 +1,6 @@
 import moment from 'moment';
 const utcFormatMatcher = /\d+-\d+-\d+T/g;
-const PAGE_BASE_URL = '/blacklist/incidents';
+const PAGE_BASE_URL = '/blocklist/incidents';
 const dateFormat = 'MMM D YYYY, h:mma';
 
 let nov = moment('2019-11-20T17:14:57.899Z');
@@ -9,16 +9,16 @@ let novTime = nov.format(dateFormat);
 let sep = moment('2019-09-09T00:00:00.000Z');
 let sepTime = sep.format(dateFormat);
 
-describe('The blacklist incidents page', () => {
+describe('The blocklist incidents page', () => {
   beforeEach(() => {
     cy.stubAuth();
     cy.login({ isStubbed: true });
   });
 
-  it('navigates to the blacklist state and renders with a relevant page title/text for the empty state.', () => {
+  it('navigates to the blocklist state and renders with a relevant page title/text for the empty state.', () => {
     cy.visit(PAGE_BASE_URL);
     cy.url().should('include', PAGE_BASE_URL);
-    cy.title().should('include', 'Blacklist Incidents');
+    cy.title().should('include', 'Blocklist Incidents');
     cy.findByText(
       'Keep an eye on your Domains and IPs and maintain a healthy sender reputation and improve your deliverability',
     ).should('be.visible');
@@ -28,34 +28,35 @@ describe('The blacklist incidents page', () => {
     cy.visit(PAGE_BASE_URL);
     cy.get('a')
       .findByText('Add to Watchlist')
-      .should('have.attr', 'href', '/blacklist/watchlist/add');
+      .should('have.attr', 'href', '/blocklist/watchlist/add');
   });
 
   it('sets the search in the url', () => {
     cy.stubRequest({
       method: 'GET',
       url: 'api/v1/blacklist-monitors',
-      fixture: 'blacklists/incident/200.get.search.json',
+      fixture: 'blocklists/incident/200.get.search.json',
     });
     cy.stubRequest({
       method: 'GET',
       url: 'api/v1/blacklist-monitors/incidents*',
       statusCode: 200,
-      fixture: 'blacklists/incident/200.get.json',
+      fixture: 'blocklists/incident/200.get.json',
     });
 
     cy.visit(PAGE_BASE_URL);
 
     cy.url().should('include', PAGE_BASE_URL);
-    cy.findByText('Blacklist Incidents').should('be.visible');
+    cy.findByText('Blocklist Incidents').should('be.visible');
     cy.findByText('View Watchlist').should('be.visible');
     cy.findByText(
-      'Check the current status of blacklists and learn more about what actions you can take to remedy and prevent future blacklisting.',
+      'Check the current status of blocklists and learn more about what actions you can take to remedy and prevent future blocklisting.',
     ).should('be.visible');
 
-    const filterInput = cy.findByLabelText('Filter By');
-    filterInput.should('be.visible');
-    filterInput.type('2.2.8').blur();
+    cy.findByLabelText('Filter By')
+      .should('be.visible')
+      .type('2.2.8')
+      .blur();
     cy.url().should('include', '2.2.8');
     cy.get('tbody > tr').should('have.length', 1);
     cy.get('tbody > tr').within(el => {
@@ -70,13 +71,13 @@ describe('The blacklist incidents page', () => {
     cy.stubRequest({
       method: 'GET',
       url: 'api/v1/blacklist-monitors',
-      fixture: 'blacklists/incident/200.get.search.json',
+      fixture: 'blocklists/incident/200.get.search.json',
     });
     cy.stubRequest({
       method: 'GET',
       url: 'api/v1/blacklist-monitors/incidents*',
       statusCode: 200,
-      fixture: 'blacklists/incident/200.get.json',
+      fixture: 'blocklists/incident/200.get.json',
     });
 
     cy.visit(`${PAGE_BASE_URL}?search=2.2.8`);
@@ -96,13 +97,13 @@ describe('The blacklist incidents page', () => {
     cy.stubRequest({
       method: 'GET',
       url: 'api/v1/blacklist-monitors',
-      fixture: 'blacklists/incident/200.get.search.json',
+      fixture: 'blocklists/incident/200.get.search.json',
     });
     cy.stubRequest({
       method: 'GET',
       url: 'api/v1/blacklist-monitors/incidents*',
       statusCode: 200,
-      fixture: 'blacklists/incident/200.get.json',
+      fixture: 'blocklists/incident/200.get.json',
       requestAlias: 'getIncidents',
     });
     cy.visit(PAGE_BASE_URL);
@@ -161,13 +162,13 @@ describe('The blacklist incidents page', () => {
     cy.stubRequest({
       method: 'GET',
       url: 'api/v1/blacklist-monitors',
-      fixture: 'blacklists/incident/200.get.search.json',
+      fixture: 'blocklists/incident/200.get.search.json',
     });
     cy.stubRequest({
       method: 'GET',
       url: 'api/v1/blacklist-monitors/incidents*',
       statusCode: 200,
-      fixture: 'blacklists/incident/200.get.json',
+      fixture: 'blocklists/incident/200.get.json',
     });
 
     cy.visit(PAGE_BASE_URL);
