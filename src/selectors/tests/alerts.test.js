@@ -202,7 +202,7 @@ describe('Alerts Selectors: ', () => {
     const state = {
       account: {
         options: {
-          blacklist_monitors: true,
+          blocklist_monitors: true,
           ui: {
             allow_injection_alerts: true,
           },

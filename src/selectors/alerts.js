@@ -90,7 +90,7 @@ export const selectAlertFormValues = createSelector(
 export const selectFeatureFlaggedAlerts = createSelector(
   [
     selectCondition(isAccountUiOptionSet('allow_injection_alerts')),
-    selectCondition(hasAccountOptionEnabled('blacklist_monitors')),
+    selectCondition(hasAccountOptionEnabled('blocklist_monitors')),
     // add more alert metric feature flags here
   ],
   (injection_count, blacklist) => ({ blacklist, injection_count }),
