@@ -1,12 +1,12 @@
 import _ from 'lodash';
-import { ANALYTICS_WHITELISTED_FORMS } from 'src/constants';
+import { ANALYTICS_FORMS } from 'src/constants';
 import { isError, isFormIncluded, isType, isTypeLike } from 'src/helpers/conditions/action';
 import { all } from 'src/helpers/conditions/compose';
 
 // access helpers
-const getErrorMessage = (action) => _.get(action, 'payload.error.message');
-const getFormName = (action) => _.get(action, 'meta.form');
-const getType = (action) => action.type;
+const getErrorMessage = action => _.get(action, 'payload.error.message');
+const getFormName = action => _.get(action, 'meta.form');
+const getType = action => action.type;
 
 /**
  * @example
@@ -39,8 +39,8 @@ const events = [
       event: 'API Request',
       category: 'SparkPost',
       action: getType,
-      label: getErrorMessage
-    }
+      label: getErrorMessage,
+    },
   },
   {
     condition: all(isTypeLike(/_FAIL$/), isError('ZuoraApiError')),
@@ -48,45 +48,45 @@ const events = [
       event: 'API Request',
       category: 'Zuora',
       action: getType,
-      label: getErrorMessage
-    }
+      label: getErrorMessage,
+    },
   },
   {
-    condition: all(isType('@@redux-form/INITIALIZE'), isFormIncluded(ANALYTICS_WHITELISTED_FORMS)),
+    condition: all(isType('@@redux-form/INITIALIZE'), isFormIncluded(ANALYTICS_FORMS)),
     definition: {
       event: 'Interactions',
       category: 'Form',
       action: 'Initialize',
-      label: getFormName
-    }
+      label: getFormName,
+    },
   },
   {
-    condition: all(isType('@@redux-form/START_SUBMIT'), isFormIncluded(ANALYTICS_WHITELISTED_FORMS)),
+    condition: all(isType('@@redux-form/START_SUBMIT'), isFormIncluded(ANALYTICS_FORMS)),
     definition: {
       event: 'Interactions',
       category: 'Form',
       action: 'Submit',
-      label: getFormName
-    }
+      label: getFormName,
+    },
   },
   {
-    condition: all(isType('@@redux-form/SET_SUBMIT_FAILED'), isFormIncluded(ANALYTICS_WHITELISTED_FORMS)),
+    condition: all(isType('@@redux-form/SET_SUBMIT_FAILED'), isFormIncluded(ANALYTICS_FORMS)),
     definition: {
       event: 'Interactions',
       category: 'Form',
       action: 'Submit Failure',
-      label: getFormName
-    }
+      label: getFormName,
+    },
   },
   {
-    condition: all(isType('@@redux-form/SET_SUBMIT_SUCCEEDED'), isFormIncluded(ANALYTICS_WHITELISTED_FORMS)),
+    condition: all(isType('@@redux-form/SET_SUBMIT_SUCCEEDED'), isFormIncluded(ANALYTICS_FORMS)),
     definition: {
       event: 'Interactions',
       category: 'Form',
       action: 'Submit Success',
-      label: getFormName
-    }
-  }
+      label: getFormName,
+    },
+  },
 ];
 
 export default function eventsMapper(action) {
@@ -97,5 +97,5 @@ export default function eventsMapper(action) {
   }
 
   // build an event from its definition and the incoming action
-  return _.mapValues(event.definition, (value) => _.isFunction(value) ? value(action) : value);
+  return _.mapValues(event.definition, value => (_.isFunction(value) ? value(action) : value));
 }

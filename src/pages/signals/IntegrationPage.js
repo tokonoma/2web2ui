@@ -19,7 +19,7 @@ const validatePage = val => !isNaN(val) && val >= 0;
 
 const normalizeNumber = val => val * 1;
 
-const filterWhitelist = {
+const filterConfiguration = {
   batchIds: {
     validate: validateBatchIds,
     defaultValue: [],
@@ -48,7 +48,7 @@ const IntegrationPage = ({
   nextCursor,
   totalCount,
 }) => {
-  const { filters, prevFilters, updateFilters } = usePageFilters(filterWhitelist);
+  const { filters, prevFilters, updateFilters } = usePageFilters(filterConfiguration);
 
   const getData = useCallback(() => {
     getIngestBatchEvents({
