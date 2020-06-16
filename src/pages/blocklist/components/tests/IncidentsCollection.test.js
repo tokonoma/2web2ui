@@ -3,7 +3,7 @@ import { render, fireEvent } from '@testing-library/react';
 import TestApp from 'src/__testHelpers__/TestApp';
 import IncidentsCollection from '../IncidentsCollection';
 
-describe('Blacklist Component: IncidentsCollection', () => {
+describe('Blocklist Component: IncidentsCollection', () => {
   const now = new Date('2019-12-18T04:20:00-04:00');
   Date.now = jest.fn(() => now);
   const updateDateRange = jest.fn();

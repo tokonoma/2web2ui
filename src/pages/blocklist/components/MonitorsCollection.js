@@ -31,8 +31,8 @@ export const MonitorsCollection = props => {
 
   const columns = [
     { label: 'Watched' },
-    { label: 'Current Blacklistings', width: '15%', className: styles.ListingDetails },
-    { label: 'Historic Blacklistings', width: '15%', className: styles.ListingDetails },
+    { label: 'Current Blocklistings', width: '15%', className: styles.ListingDetails },
+    { label: 'Historic Blocklistings', width: '15%', className: styles.ListingDetails },
     { label: '', width: '20%' },
   ];
 
@@ -40,7 +40,7 @@ export const MonitorsCollection = props => {
     ({ resource, active_listing_count, total_listing_count }) => {
       return [
         <div className={styles.NameDetails}>
-          <PageLink to={`/blacklist/incidents?search=${resource}`}>{resource}</PageLink>
+          <PageLink to={`/blocklist/incidents?search=${resource}`}>{resource}</PageLink>
         </div>,
         <div className={classNames(styles.ListingDetails, styles.ListingDetailsCell)}>
           {active_listing_count}

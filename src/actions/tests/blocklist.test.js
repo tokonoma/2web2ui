@@ -1,11 +1,11 @@
-import * as blacklist from '../blacklist';
+import * as blocklist from '../blocklist';
 import sparkpostApiRequest from '../helpers/sparkpostApiRequest';
 
 jest.mock('src/actions/helpers/sparkpostApiRequest', () => jest.fn(a => a));
 
-describe('Action Creator: Blacklist', () => {
+describe('Action Creator: Blocklist', () => {
   it('it makes request to list incidents', async () => {
-    await blacklist.listIncidents('2019-12-01T10:10', '2019-12-11T10:10');
+    await blocklist.listIncidents('2019-12-01T10:10', '2019-12-11T10:10');
     expect(sparkpostApiRequest).toHaveBeenCalledWith({
       type: 'LIST_INCIDENTS',
       meta: {
@@ -21,7 +21,7 @@ describe('Action Creator: Blacklist', () => {
   });
 
   it('it makes request to get a specific incident', async () => {
-    await blacklist.getIncident('abc123');
+    await blocklist.getIncident('abc123');
     expect(sparkpostApiRequest).toHaveBeenCalledWith({
       type: 'GET_INCIDENT',
       meta: {
@@ -33,7 +33,7 @@ describe('Action Creator: Blacklist', () => {
   });
 
   it('it makes request to get list incidents for a specific resource', async () => {
-    await blacklist.listIncidentsForResource('123.123.123.1');
+    await blocklist.listIncidentsForResource('123.123.123.1');
     expect(sparkpostApiRequest).toHaveBeenCalledWith({
       type: 'LIST_INCIDENTS_FOR_RESOURCE',
       meta: {
@@ -48,10 +48,10 @@ describe('Action Creator: Blacklist', () => {
     });
   });
 
-  it('it makes request to list incidents for a specific blacklist', async () => {
-    await blacklist.listIncidentsForBlacklist('spamhaus');
+  it('it makes request to list incidents for a specific blocklist', async () => {
+    await blocklist.listIncidentsForBlocklist('spamhaus');
     expect(sparkpostApiRequest).toHaveBeenCalledWith({
-      type: 'LIST_INCIDENTS_FOR_BLACKLIST',
+      type: 'LIST_INCIDENTS_FOR_BLOCKLIST',
       meta: {
         method: 'GET',
         url: `/v1/blacklist-monitors/incidents`,
@@ -64,8 +64,8 @@ describe('Action Creator: Blacklist', () => {
     });
   });
 
-  it('it makes request to list historical incidents for a specific resource and blacklist', async () => {
-    await blacklist.listHistoricalResolvedIncidents('spamhaus', '123.123.123.1');
+  it('it makes request to list historical incidents for a specific resource and blocklist', async () => {
+    await blocklist.listHistoricalResolvedIncidents('spamhaus', '123.123.123.1');
     expect(sparkpostApiRequest).toHaveBeenCalledWith({
       type: 'LIST_HISTORICAL_INCIDENTS',
       meta: {
@@ -83,7 +83,7 @@ describe('Action Creator: Blacklist', () => {
   });
 
   it('makes a request to add watchlist resource', async () => {
-    await blacklist.watchlistAdd('192.168.0.1');
+    await blocklist.watchlistAdd('192.168.0.1');
     expect(sparkpostApiRequest).toHaveBeenCalledWith({
       type: 'ADD_WATCHLIST',
       meta: {
@@ -98,7 +98,7 @@ describe('Action Creator: Blacklist', () => {
   });
 
   it('it makes request to list monitors', async () => {
-    await blacklist.listMonitors();
+    await blocklist.listMonitors();
     expect(sparkpostApiRequest).toHaveBeenCalledWith({
       type: 'LIST_MONITORS',
       meta: {
@@ -110,7 +110,7 @@ describe('Action Creator: Blacklist', () => {
   });
 
   it('it makes request to delete monitor', async () => {
-    await blacklist.deleteMonitor('test');
+    await blocklist.deleteMonitor('test');
     expect(sparkpostApiRequest).toHaveBeenCalledWith({
       type: 'DELETE_MONITOR',
       meta: {
@@ -121,10 +121,10 @@ describe('Action Creator: Blacklist', () => {
     });
   });
 
-  it('it makes request to list blacklists', async () => {
-    await blacklist.listBlacklists();
+  it('it makes request to list blocklists', async () => {
+    await blocklist.listBlocklists();
     expect(sparkpostApiRequest).toHaveBeenCalledWith({
-      type: 'LIST_BLACKLISTS',
+      type: 'LIST_BLOCKLISTS',
       meta: {
         method: 'GET',
         url: '/v1/blacklist-monitors/blacklists',

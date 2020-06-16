@@ -26,7 +26,7 @@ describe('WatchlistPage', () => {
       error: null,
       loading: null,
       listMonitors: mockListMonitors,
-      hasBlacklisted: true,
+      hasBlocklisted: true,
     };
 
     return render(
@@ -42,7 +42,7 @@ describe('WatchlistPage', () => {
       error: null,
       loading: null,
       listMonitors: mockListMonitors,
-      hasBlacklisted: true,
+      hasBlocklisted: true,
     };
     return shallow(<WatchlistPage {...defaults} {...props} />);
   };
@@ -58,13 +58,13 @@ describe('WatchlistPage', () => {
     expect(wrapper.find({ 'data-id': 'error-banner' })).toExist();
   });
 
-  it('renders congratulations banner when no current blacklistings', () => {
-    const { queryByTestId } = renderSubject({ hasBlacklisted: false });
+  it('renders congratulations banner when no current blocklistings', () => {
+    const { queryByTestId } = renderSubject({ hasBlocklisted: false });
     expect(queryByTestId('congrats-banner')).toBeInTheDocument();
   });
 
   it('Congrats Banner onDismiss correctly closes the banner', () => {
-    const wrapper = shallowSubject({ hasBlacklisted: false });
+    const wrapper = shallowSubject({ hasBlocklisted: false });
     const bannerWrapper = wrapper.find('CongratsBanner');
     expect(bannerWrapper).toExist();
     bannerWrapper.prop('onDismiss')();
