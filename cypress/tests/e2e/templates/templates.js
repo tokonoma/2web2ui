@@ -38,14 +38,14 @@ describe('Templates', () => {
 
       cy.title().should('include', 'Create');
 
-      cy.queryByLabelText('Template Name').type(templateTitle);
-      cy.queryByLabelText('Subject').type('Cypress Test Template');
-      cy.queryByLabelText('From Email').type('nick@');
+      cy.findByLabelText('Template Name').type(templateTitle);
+      cy.findByLabelText('Subject').type('Cypress Test Template');
+      cy.findByLabelText('From Email').type('nick@');
       cy.contains('nick@').click();
-      cy.queryByLabelText('From Email').blur(); // NOTE: Button should not be enabled only via blur - this is a UX problem
+      cy.findByLabelText('From Email').blur(); // NOTE: Button should not be enabled only via blur - this is a UX problem
 
-      cy.queryByLabelText('From Email').should('have.value', 'nick@bounce.uat.sparkspam.com');
-      cy.queryByLabelText('Template ID').should('have.value', `cypress-test-template-${randomID}`);
+      cy.findByLabelText('From Email').should('have.value', 'nick@bounce.uat.sparkspam.com');
+      cy.findByLabelText('Template ID').should('have.value', `cypress-test-template-${randomID}`);
 
       cy.findByText('Next').click();
 

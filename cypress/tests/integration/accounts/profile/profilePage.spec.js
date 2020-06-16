@@ -36,7 +36,7 @@ describe('The profile page', () => {
       });
       cy.visit(PAGE_URL);
 
-      cy.queryByText('Use Redesigned Version of App').should('not.be.visible');
+      cy.findByText('Use Redesigned Version of App').should('not.be.visible');
     });
 
     it('turns the Hibana theme on when the user clicks on the theme toggle', () => {

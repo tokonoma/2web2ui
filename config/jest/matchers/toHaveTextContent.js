@@ -1,4 +1,4 @@
-import { toHaveTextContent as testingLibraryToHaveTextContent } from '@testing-library/jest-dom';
+import { toHaveTextContent as testingLibraryToHaveTextContent } from '@testing-library/jest-dom/matchers';
 
 export default function toHaveTextContent(elementOrReceived, expectedContent) {
   try {

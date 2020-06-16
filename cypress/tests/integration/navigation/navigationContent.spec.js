@@ -14,7 +14,7 @@ function openAccountMenu() {
 
 function assertAllSignalsAnalyticsLinks() {
   // Signals Analytics section and subitems
-  cy.queryByText('Signals Analytics').click();
+  cy.findByText('Signals Analytics').click();
 
   cy.verifyLink({
     content: 'Summary',
@@ -53,7 +53,7 @@ function assertAllSignalsAnalyticsLinks() {
     href: '/reports/engagement',
   });
 
-  cy.queryByText('Signals Analytics').click();
+  cy.findByText('Signals Analytics').click();
 }
 
 function stubGrantsRequest({ role }) {
@@ -88,7 +88,7 @@ if (Cypress.env('DEFAULT_TO_HIBANA') !== true) {
           href: '/reports/message-events',
         });
 
-        cy.queryByText('Content').click();
+        cy.findByText('Content').click();
 
         cy.verifyLink({
           content: 'Templates',
@@ -103,9 +103,9 @@ if (Cypress.env('DEFAULT_TO_HIBANA') !== true) {
           href: '/snippets',
         });
 
-        cy.queryByText('Content').click();
+        cy.findByText('Content').click();
 
-        cy.queryByText('Recipients').click();
+        cy.findByText('Recipients').click();
 
         cy.verifyLink({
           content: 'Recipient Validation',
@@ -124,7 +124,7 @@ if (Cypress.env('DEFAULT_TO_HIBANA') !== true) {
           href: '/alerts',
         });
 
-        cy.queryByText('Recipients').click();
+        cy.findByText('Recipients').click();
 
         cy.findByText('Configuration')
           .scrollIntoView()
@@ -186,7 +186,7 @@ if (Cypress.env('DEFAULT_TO_HIBANA') !== true) {
           href: '/account/users',
         });
 
-        cy.queryByText('Get Help').should('be.visible');
+        cy.findByText('Get Help').should('be.visible');
 
         cy.verifyLink({
           content: 'API Docs',
@@ -220,7 +220,7 @@ if (Cypress.env('DEFAULT_TO_HIBANA') !== true) {
         content: 'Events',
         href: '/reports/message-events',
       });
-      cy.queryByText('Content').click();
+      cy.findByText('Content').click();
 
       cy.verifyLink({
         content: 'Templates',
@@ -235,9 +235,9 @@ if (Cypress.env('DEFAULT_TO_HIBANA') !== true) {
         href: '/snippets',
       });
 
-      cy.queryByText('Content').click();
+      cy.findByText('Content').click();
 
-      cy.queryByText('Recipients').click();
+      cy.findByText('Recipients').click();
 
       cy.verifyLink({
         content: 'Recipient Lists',
@@ -251,21 +251,21 @@ if (Cypress.env('DEFAULT_TO_HIBANA') !== true) {
         content: 'Alerts',
         href: '/alerts',
       });
-      cy.queryByText('Recipients').click();
-      cy.queryByText('Configuration').should('not.be.visible');
+      cy.findByText('Recipients').click();
+      cy.findByText('Configuration').should('not.be.visible');
     });
 
     it('renders relevant links in the account menu', () => {
       openAccountMenu();
 
       cy.get(accountDropdownListSelector).within(() => {
-        cy.queryByText('Account Settings').should('not.be.visible');
+        cy.findByText('Account Settings').should('not.be.visible');
 
         cy.verifyLink({
           content: 'Profile',
           href: '/account/profile',
         });
-        cy.queryByText('Get Help').should('be.visible');
+        cy.findByText('Get Help').should('be.visible');
         cy.verifyLink({
           content: 'API Docs',
           href: 'https://developers.sparkpost.com/api',
@@ -296,7 +296,7 @@ if (Cypress.env('DEFAULT_TO_HIBANA') !== true) {
           content: 'Events',
           href: '/reports/message-events',
         });
-        cy.queryByText('Content').click();
+        cy.findByText('Content').click();
 
         cy.verifyLink({
           content: 'Templates',
@@ -306,8 +306,8 @@ if (Cypress.env('DEFAULT_TO_HIBANA') !== true) {
           content: 'Snippets',
           href: '/snippets',
         });
-        cy.queryByText('Content').click();
-        cy.queryByText('Recipients').should('not.be.visible');
+        cy.findByText('Content').click();
+        cy.findByText('Recipients').should('not.be.visible');
         cy.verifyLink({
           content: 'Alerts',
           href: '/alerts',
@@ -332,9 +332,9 @@ if (Cypress.env('DEFAULT_TO_HIBANA') !== true) {
           href: '/logout',
         });
 
-        cy.queryByText('Billing').should('not.be.visible');
-        cy.queryByText('Manage Users').should('not.be.visible');
-        cy.queryByText('Get Help').should('be.visible');
+        cy.findByText('Billing').should('not.be.visible');
+        cy.findByText('Manage Users').should('not.be.visible');
+        cy.findByText('Get Help').should('be.visible');
       });
     });
   });
@@ -352,7 +352,7 @@ if (Cypress.env('DEFAULT_TO_HIBANA') !== true) {
           content: 'Dashboard',
           href: '/dashboard',
         });
-        cy.queryByText('Signals Analytics').click();
+        cy.findByText('Signals Analytics').click();
 
         cy.verifyLink({
           content: 'Summary',
@@ -395,9 +395,9 @@ if (Cypress.env('DEFAULT_TO_HIBANA') !== true) {
           href: '/reports/message-events',
         });
 
-        cy.queryByText('Signals Analytics').click();
+        cy.findByText('Signals Analytics').click();
 
-        cy.queryByText('Content').click();
+        cy.findByText('Content').click();
 
         cy.verifyLink({
           content: 'Templates',
@@ -408,9 +408,9 @@ if (Cypress.env('DEFAULT_TO_HIBANA') !== true) {
           href: '/snippets',
         });
 
-        cy.queryByText('Content').click();
+        cy.findByText('Content').click();
 
-        cy.queryByText('Recipients').should('not.be.visible');
+        cy.findByText('Recipients').should('not.be.visible');
         cy.verifyLink({
           content: 'Alerts',
           href: '/alerts',
@@ -435,9 +435,9 @@ if (Cypress.env('DEFAULT_TO_HIBANA') !== true) {
           href: '/logout',
         });
 
-        cy.queryByText('Billing').should('not.be.visible');
-        cy.queryByText('Manage Users').should('not.be.visible');
-        cy.queryByText('Get Help').should('be.visible');
+        cy.findByText('Billing').should('not.be.visible');
+        cy.findByText('Manage Users').should('not.be.visible');
+        cy.findByText('Get Help').should('be.visible');
       });
     });
   });
@@ -460,7 +460,7 @@ if (Cypress.env('DEFAULT_TO_HIBANA') !== true) {
           content: 'Events',
           href: '/reports/message-events',
         });
-        cy.queryByText('Content').click();
+        cy.findByText('Content').click();
 
         cy.verifyLink({
           content: 'Templates',
@@ -471,10 +471,10 @@ if (Cypress.env('DEFAULT_TO_HIBANA') !== true) {
           href: '/snippets',
         });
 
-        cy.queryByText('Content').click();
-        cy.queryByText('Recipients').should('not.be.visible');
-        cy.queryByText('Alerts').should('not.be.visible');
-        cy.queryByText('Configuration').should('not.be.visible');
+        cy.findByText('Content').click();
+        cy.findByText('Recipients').should('not.be.visible');
+        cy.findByText('Alerts').should('not.be.visible');
+        cy.findByText('Configuration').should('not.be.visible');
       });
     });
 
@@ -483,7 +483,7 @@ if (Cypress.env('DEFAULT_TO_HIBANA') !== true) {
 
       cy.get(accountDropdownListSelector).within(() => {
         cy.verifyLink({ content: 'Profile', href: '/account/profile' });
-        cy.queryByText('Get Help').should('be.visible');
+        cy.findByText('Get Help').should('be.visible');
         cy.verifyLink({ content: 'API Docs', href: 'https://developers.sparkpost.com/api' });
         cy.verifyLink({ content: 'Log Out', href: '/logout' });
       });
@@ -501,7 +501,7 @@ if (Cypress.env('DEFAULT_TO_HIBANA') !== true) {
 
       cy.visit(PAGE_URL);
 
-      cy.queryByText('Blacklist').should('be.visible');
+      cy.findByText('Blacklist').should('be.visible');
     });
 
     it('does not render the "Blacklist" feature when the user\'s account has the feature disabled', () => {
@@ -512,7 +512,7 @@ if (Cypress.env('DEFAULT_TO_HIBANA') !== true) {
 
       cy.visit(PAGE_URL);
 
-      cy.queryByText('Blacklist').should('not.be.visible');
+      cy.findByText('Blacklist').should('not.be.visible');
     });
 
     it('renders the "Inbox Placement" feature when the user\'s account has the feature enabled', () => {
@@ -523,7 +523,7 @@ if (Cypress.env('DEFAULT_TO_HIBANA') !== true) {
 
       cy.visit(PAGE_URL);
 
-      cy.queryByText('Inbox Placement').should('be.visible');
+      cy.findByText('Inbox Placement').should('be.visible');
     });
 
     it('does not render the "Inbox Placement" feature when the user\'s account has the feature enabled', () => {
@@ -534,7 +534,7 @@ if (Cypress.env('DEFAULT_TO_HIBANA') !== true) {
 
       cy.visit(PAGE_URL);
 
-      cy.queryByText('Inbox Placement').should('not.be.visible');
+      cy.findByText('Inbox Placement').should('not.be.visible');
     });
   });
 
@@ -559,8 +559,8 @@ if (Cypress.env('DEFAULT_TO_HIBANA') !== true) {
       openAccountMenu();
 
       cy.get(accountDropdownListSelector).within(() => {
-        cy.queryByText('Billing').should('be.visible');
-        cy.queryByText('Upgrade').should('be.visible');
+        cy.findByText('Billing').should('be.visible');
+        cy.findByText('Upgrade').should('be.visible');
       });
     });
   });

@@ -49,14 +49,14 @@ describe('The billing plan page', () => {
       cy.get('[data-id="plan-picker-trigger"]').click();
       cy.findByText('Full-featured developer account').click();
 
-      cy.queryByLabelText('Promo Code').should('not.be.visible');
-      cy.queryByLabelText('Credit Card Number').should('not.be.visible');
-      cy.queryByLabelText('Cardholder Name').should('not.be.visible');
-      cy.queryByLabelText('Expiration Date').should('not.be.visible');
-      cy.queryByLabelText('Security Code').should('not.be.visible');
-      cy.queryByLabelText('Country').should('not.be.visible');
-      cy.queryByLabelText('State').should('not.be.visible');
-      cy.queryByLabelText('Zip Code').should('not.be.visible');
+      cy.findByLabelText('Promo Code').should('not.be.visible');
+      cy.findByLabelText('Credit Card Number').should('not.be.visible');
+      cy.findByLabelText('Cardholder Name').should('not.be.visible');
+      cy.findByLabelText('Expiration Date').should('not.be.visible');
+      cy.findByLabelText('Security Code').should('not.be.visible');
+      cy.findByLabelText('Country').should('not.be.visible');
+      cy.findByLabelText('State').should('not.be.visible');
+      cy.findByLabelText('Zip Code').should('not.be.visible');
     });
 
     it('get started with a test account', () => {
@@ -68,18 +68,18 @@ describe('The billing plan page', () => {
 
     it('shows the credit card form when the user selects a non free plan', () => {
       cy.get('[data-id="plan-picker-trigger"]').click();
-      cy.queryAllByRole('option')
+      cy.findAllByRole('option')
         .eq(1)
         .click();
 
-      cy.queryByLabelText('Promo Code').should('be.visible');
-      cy.queryByLabelText('Credit Card Number').should('be.visible');
-      cy.queryByLabelText('Cardholder Name').should('be.visible');
-      cy.queryByLabelText('Expiration Date').should('be.visible');
-      cy.queryByLabelText('Security Code').should('be.visible');
-      cy.queryByLabelText('Country').should('be.visible');
-      cy.queryByLabelText('State').should('be.visible');
-      cy.queryByLabelText('Zip Code').should('be.visible');
+      cy.findByLabelText('Promo Code').should('be.visible');
+      cy.findByLabelText('Credit Card Number').should('be.visible');
+      cy.findByLabelText('Cardholder Name').should('be.visible');
+      cy.findByLabelText('Expiration Date').should('be.visible');
+      cy.findByLabelText('Security Code').should('be.visible');
+      cy.findByLabelText('Country').should('be.visible');
+      cy.findByLabelText('State').should('be.visible');
+      cy.findByLabelText('Zip Code').should('be.visible');
     });
   });
 
@@ -96,7 +96,7 @@ describe('The billing plan page', () => {
         .type('1111111111111111')
         .blur();
 
-      cy.queryByText('We only accept Visa, MasterCard, AmericanExpress, Discover').should(
+      cy.findByText('We only accept Visa, MasterCard, AmericanExpress, Discover').should(
         'be.visible',
       );
     });
@@ -127,7 +127,7 @@ describe('The billing plan page', () => {
 
     it('shows "Required" errors on all required fields when the user attempts to submit the form before completing relevant data', () => {
       cy.findByText('Get Started').click();
-      cy.queryAllByText('Required').should('have.length', 5);
+      cy.findAllByText('Required').should('have.length', 5);
     });
 
     it('get started with a paid account', () => {
@@ -247,7 +247,7 @@ describe('The billing plan page', () => {
 
         cy.wait('@invalidPromoCodeRequest');
 
-        cy.queryByText('Invalid promo code').should('be.visible');
+        cy.findByText('Invalid promo code').should('be.visible');
       });
 
       it('renders a "Resource could not be found" error when no entry is made in the promo code field and the user clicks "Apply"', () => {
@@ -260,7 +260,7 @@ describe('The billing plan page', () => {
 
         cy.findByText('Apply').click();
 
-        cy.queryByText('Resource could not be found');
+        cy.findByText('Resource could not be found');
       });
 
       it('applies the promo code when the promo code is valid', () => {
@@ -273,8 +273,8 @@ describe('The billing plan page', () => {
         cy.findByText('Apply').click();
         cy.findByText('$37.50').should('be.visible'); // Half of the starting value of $75.00 - determined by the fixture `discount_percentage` value
         cy.findByLabelText('Promo Code').should('be.disabled');
-        cy.queryByText('Apply').should('not.be.visible');
-        cy.queryByText('Remove').click();
+        cy.findByText('Apply').should('not.be.visible');
+        cy.findByText('Remove').click();
         cy.findByText('$37.50').should('not.be.visible'); // Half of the starting value of $75.00 - determined by the fixture `discount_percentage` value
       });
     });

@@ -38,7 +38,7 @@ describe('The templates published template page', () => {
     cy.visit(PAGE_URL);
 
     cy.get('[data-id="template-status"]').within(() => {
-      cy.queryByText('Published').should('be.visible'); // Note - content is capitalized with CSS, so the markup is not "DRAFT"
+      cy.findByText('Published').should('be.visible'); // Note - content is capitalized with CSS, so the markup is not "DRAFT"
     });
   });
 
@@ -157,7 +157,7 @@ describe('The templates published template page', () => {
     cy.url().should('include', 'draft');
     cy.findByText('Stubbed Template 1 (DRAFT)').should('be.visible');
     cy.get('[data-id="template-status"]').within(() => {
-      cy.queryByText('Draft').should('be.visible');
+      cy.findByText('Draft').should('be.visible');
     });
   });
 

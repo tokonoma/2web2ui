@@ -26,9 +26,11 @@ describe('The blacklist incidents page', () => {
 
   it(`goes to add to watchlist page from the call to action on ${PAGE_BASE_URL} page`, () => {
     cy.visit(PAGE_BASE_URL);
-    cy.get('a')
-      .findByText('Add to Watchlist')
-      .should('have.attr', 'href', '/blacklist/watchlist/add');
+
+    cy.verifyLink({
+      content: 'Add to Watchlist',
+      href: '/blacklist/watchlist/add',
+    });
   });
 
   it('sets the search in the url', () => {
@@ -53,9 +55,10 @@ describe('The blacklist incidents page', () => {
       'Check the current status of blacklists and learn more about what actions you can take to remedy and prevent future blacklisting.',
     ).should('be.visible');
 
-    const filterInput = cy.findByLabelText('Filter By');
-    filterInput.should('be.visible');
-    filterInput.type('2.2.8').blur();
+    cy.findByLabelText('Filter By')
+      .should('be.visible')
+      .type('2.2.8')
+      .blur();
     cy.url().should('include', '2.2.8');
     cy.get('tbody > tr').should('have.length', 1);
     cy.get('tbody > tr').within(el => {

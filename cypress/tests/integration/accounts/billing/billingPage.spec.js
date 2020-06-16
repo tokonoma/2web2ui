@@ -93,7 +93,7 @@ describe('Billing Page', () => {
     cy.visit(PAGE_URL);
 
     cy.findByText('Pending Plan Change').should('be.visible');
-    cy.queryByText('Change Plan').should('not.be.visible');
+    cy.findByText('Change Plan').should('not.be.visible');
   });
 
   it('renders with a link to the change plan page', () => {
@@ -117,7 +117,7 @@ describe('Billing Page', () => {
 
     cy.visit(PAGE_URL);
 
-    cy.queryByText('Dedicated IPs').should('not.be.visible');
+    cy.findByText('Dedicated IPs').should('not.be.visible');
   });
 
   it('renders the manually billed transition banner when the user\'s subscription type is not "active", "inactive", or "none"', () => {
@@ -305,7 +305,7 @@ describe('Billing Page', () => {
         cy.withinModal(() => {
           cy.findAllByText('Update Payment Information').should('be.visible');
           cy.findByText('Cancel').click({ force: true });
-          cy.queryAllByText('Update Payment Information').should('not.be.visible');
+          cy.findAllByText('Update Payment Information').should('not.be.visible');
         });
       });
 
@@ -357,7 +357,7 @@ describe('Billing Page', () => {
           .click();
 
         cy.findByText('Payment Information Updated').should('be.visible');
-        cy.queryByLabelText('Credit Card Number').should('not.be.visible'); // The modal should now be closed
+        cy.findByLabelText('Credit Card Number').should('not.be.visible'); // The modal should now be closed
       });
 
       it('renders an error when the server returns an error when updating payment information', () => {
@@ -480,7 +480,7 @@ describe('Billing Page', () => {
 
         cy.findByText('Cancel').click();
 
-        cy.queryByLabelText('First Name').should('not.be.visible');
+        cy.findByLabelText('First Name').should('not.be.visible');
       });
 
       it('renders each field with the current billing contact information', () => {
@@ -618,7 +618,7 @@ describe('Billing Page', () => {
 
       cy.visit(PAGE_URL);
 
-      cy.queryByText('Invoice History').should('not.be.visible');
+      cy.findByText('Invoice History').should('not.be.visible');
     });
 
     it('does not render the "Invoice History" table when the server returns an error', () => {
@@ -630,7 +630,7 @@ describe('Billing Page', () => {
 
       cy.visit(PAGE_URL);
 
-      cy.queryByText('Invoice History').should('not.be.visible');
+      cy.findByText('Invoice History').should('not.be.visible');
     });
 
     it('has a download button in each table row that requests an individual invoice', () => {

@@ -105,7 +105,7 @@ describe('Change Billing Plan Page', () => {
     cy.findByText('Change Plan').click();
     cy.findAllByText('Required').should('have.length', 5);
     fillOutCreditCardForm();
-    cy.queryAllByText('Required').should('not.be.visible');
+    cy.findAllByText('Required').should('not.be.visible');
 
     mockCommonHttpCalls();
 
@@ -533,8 +533,8 @@ describe('Change Billing Plan Page', () => {
       cy.findByText('Close').click({ force: true });
     });
 
-    cy.queryAllByText('Starter Plans').should('not.be.visible');
-    cy.queryAllByText('Premier Plans').should('not.be.visible');
+    cy.findAllByText('Starter Plans').should('not.be.visible');
+    cy.findAllByText('Premier Plans').should('not.be.visible');
   });
   it('Upgrades from a starter plan to premier plan, with subaccounts limit_override higher than premier subaccount limit', () => {
     // user is on the test plan

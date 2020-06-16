@@ -244,7 +244,7 @@ describe('The recipient validation list progress page', () => {
 
       cy.wait('@getValidation');
 
-      cy.queryByText('Validation Error').should('be.visible');
+      cy.findByText('Validation Error').should('be.visible');
 
       // eslint-disable-next-line cypress/no-unnecessary-waiting
       cy.wait(5000); // Wait for the polling interval as defined on the list progress component

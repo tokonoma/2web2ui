@@ -90,7 +90,7 @@ describe('The alerts details pages', () => {
       cy.findByText('Delete').click();
       cy.findByText('Are you sure you want to delete this alert?').should('be.visible');
       cy.findByText('Cancel').click();
-      cy.queryByText('Are you sure you want to delete this alert?').should('not.be.visible');
+      cy.findByText('Are you sure you want to delete this alert?').should('not.be.visible');
 
       cy.get('main').within(() => cy.findByText('Delete').click());
       cy.withinModal(() => {

@@ -1,4 +1,4 @@
-import { toHaveStyle as testingLibraryToHaveStyle } from '@testing-library/jest-dom';
+import { toHaveStyle as testingLibraryToHaveStyle } from '@testing-library/jest-dom/matchers';
 import { toHaveStyle as enzymeToHaveStyle } from 'enzyme-matchers';
 
 export default function toHaveStyle(element, expectedStyleKey, expectedStyle) {

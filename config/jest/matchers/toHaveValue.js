@@ -1,4 +1,4 @@
-import { toHaveValue as testingLibraryToHaveValue } from '@testing-library/jest-dom';
+import { toHaveValue as testingLibraryToHaveValue } from '@testing-library/jest-dom/matchers';
 import { toHaveValue as enzymeToHaveValue } from 'enzyme-matchers';
 
 export default function toHaveValue(element, expectedValue) {

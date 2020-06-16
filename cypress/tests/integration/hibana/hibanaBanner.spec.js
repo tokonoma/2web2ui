@@ -78,7 +78,7 @@ if (Cypress.env('DEFAULT_TO_HIBANA') !== true) {
       });
       cy.visit('/account/profile');
 
-      cy.queryByText('Use Redesigned Version of App').should('not.be.visible');
+      cy.findByText('Use Redesigned Version of App').should('not.be.visible');
     });
 
     it('navigates the user to the profile page and dismisses the banner when clicking "Turn it on!"', () => {

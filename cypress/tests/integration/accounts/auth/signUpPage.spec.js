@@ -19,10 +19,10 @@ describe('The sign up page', () => {
   });
 
   it('renders the "Create Account" button enabled when all fields are filled out', () => {
-    cy.queryByLabelText('First Name').type('Ron');
-    cy.queryByLabelText('Last Name').type('Swanson');
-    cy.queryByLabelText('Email').type('ron.swanson@pawnee.indiana.state.us.gov');
-    cy.queryByLabelText('Password').type('mulliganssteakhouse');
+    cy.findByLabelText('First Name').type('Ron');
+    cy.findByLabelText('Last Name').type('Swanson');
+    cy.findByLabelText('Email').type('ron.swanson@pawnee.indiana.state.us.gov');
+    cy.findByLabelText('Password').type('mulliganssteakhouse');
     cy.get('[name="tou_accepted"]').check({ force: true }); // Unable to use `queryByLabelText` because HTML is structured incorrectly in the Matchbox component
     cy.findByText('Create Account').should('not.be.disabled');
   });
@@ -34,7 +34,7 @@ describe('The sign up page', () => {
   it('renders an error when the user already exists', () => {});
 
   it('renders an error when the user enters an email address in an invalid format', () => {
-    cy.queryByLabelText('Email')
+    cy.findByLabelText('Email')
       .type('hello@')
       .blur();
 

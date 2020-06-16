@@ -75,7 +75,7 @@ describe('The templates edit draft page', () => {
     cy.visit(PAGE_URL);
 
     cy.get('[data-id="template-status"]').within(() => {
-      cy.queryByText('Draft').should('be.visible'); // Note - content is capitalized with CSS, so the markup is not "DRAFT"
+      cy.findByText('Draft').should('be.visible'); // Note - content is capitalized with CSS, so the markup is not "DRAFT"
     });
   });
 
@@ -176,7 +176,7 @@ describe('The templates edit draft page', () => {
 
       cy.visit(PAGE_URL);
 
-      cy.queryByText('Save and Publish').should('not.be.visible');
+      cy.findByText('Save and Publish').should('not.be.visible');
     });
 
     it('renders with a "Save and Publish" button', () => {
@@ -421,23 +421,23 @@ describe('The templates edit draft page', () => {
 
       // HTML tab already active by default, so no need to click it
       typeInEditor('Hello HTML tab.');
-      cy.queryByText('Hello HTML tab.').should('not.be.visible');
+      cy.findByText('Hello HTML tab.').should('not.be.visible');
       cy.findByText('Read Only').should('be.visible');
 
       cy.findByText('AMP HTML').click();
       typeInEditor('Hello AMP HTML tab.');
-      cy.queryByText('Hello AMP HTML tab.').should('not.be.visible');
+      cy.findByText('Hello AMP HTML tab.').should('not.be.visible');
       cy.findByText('Read Only').should('be.visible');
 
       cy.findByText('Text').click();
       typeInEditor('Hello Text tab.');
-      cy.queryByText('Hello Text tab.').should('not.be.visible');
+      cy.findByText('Hello Text tab.').should('not.be.visible');
       cy.findByText('Read Only').should('be.visible');
 
       cy.findByText('Test Data').click();
       typeInEditor('Hello Test Data tab.');
       cy.findByText('Hello Test Data tab.').should('be.visible');
-      cy.queryByText('Read Only').should('not.be.visible');
+      cy.findByText('Read Only').should('not.be.visible');
     });
 
     it('renders the values of the HTML, AMP HTML, and Text tabs from the stored template', () => {

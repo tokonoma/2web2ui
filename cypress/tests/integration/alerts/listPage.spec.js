@@ -69,10 +69,10 @@ describe('The alerts list page', () => {
 
     cy.get('[data-id="recent-incidents"]').within(() => {
       // 'Alert 1' and 'Alert 4' are not rendered since they are muted
-      cy.queryByText('Alert 1').should('not.be.visible');
+      cy.findByText('Alert 1').should('not.be.visible');
       cy.findByText('Alert 2').should('be.visible');
       cy.findByText('Alert 3').should('be.visible');
-      cy.queryByText('Alert 4').should('not.be.visible');
+      cy.findByText('Alert 4').should('not.be.visible');
     });
   });
 
@@ -84,7 +84,7 @@ describe('The alerts list page', () => {
 
     cy.visit(PAGE_URL);
 
-    cy.queryByText('Recent Incidents').should('not.be.visible');
+    cy.findByText('Recent Incidents').should('not.be.visible');
     cy.get('[data-id="recent-incidents"]').should('not.be.visible');
   });
 
@@ -152,9 +152,9 @@ describe('The alerts list page', () => {
       cy.wait(debounceDelay); // Debounce time
 
       cy.get('table').within(() => {
-        cy.queryByText('Alert 2').should('not.be.visible');
-        cy.queryByText('Alert 3').should('not.be.visible');
-        cy.queryByText('Alert 4').should('not.be.visible');
+        cy.findByText('Alert 2').should('not.be.visible');
+        cy.findByText('Alert 3').should('not.be.visible');
+        cy.findByText('Alert 4').should('not.be.visible');
       });
 
       cy.findByLabelText('Filter By').clear();
@@ -191,9 +191,9 @@ describe('The alerts list page', () => {
       cy.wait(debounceDelay); // Debounce time
 
       cy.get('table').within(() => {
-        cy.queryByText('Alert 2').should('not.be.visible');
-        cy.queryByText('Alert 3').should('not.be.visible');
-        cy.queryByText('Alert 4').should('not.be.visible');
+        cy.findByText('Alert 2').should('not.be.visible');
+        cy.findByText('Alert 3').should('not.be.visible');
+        cy.findByText('Alert 4').should('not.be.visible');
       });
     });
 
@@ -252,7 +252,7 @@ describe('The alerts list page', () => {
       cy.findByText('Are you sure you want to delete this alert?').should('be.visible');
       cy.withinModal(() => cy.findByText('Cancel').click());
 
-      cy.queryByText('Are you sure you want to delete this alert?').should('not.be.visible');
+      cy.findByText('Are you sure you want to delete this alert?').should('not.be.visible');
 
       clickDeleteButton();
 
@@ -264,7 +264,7 @@ describe('The alerts list page', () => {
 
       cy.withinModal(() => cy.findByText('Delete').click());
       cy.findByText('Alert deleted').should('be.visible');
-      cy.queryByText('Alert 2').should('not.be.visible');
+      cy.findByText('Alert 2').should('not.be.visible');
     });
 
     it('renders an error when deleting an alert fails', () => {

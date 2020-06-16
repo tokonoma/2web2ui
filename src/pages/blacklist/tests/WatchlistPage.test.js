@@ -48,8 +48,8 @@ describe('WatchlistPage', () => {
   };
 
   it('renders loading component when loading data', () => {
-    const { queryByTestId, debug } = renderSubject({ loading: true });
-    debug();
+    const { queryByTestId } = renderSubject({ loading: true });
+
     expect(queryByTestId('loading')).toBeInTheDocument();
   });
 

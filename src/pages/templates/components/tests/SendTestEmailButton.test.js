@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import useEditorContext from '../../hooks/useEditorContext';
 import SendTestEmailButton from '../SendTestEmailButton';
@@ -93,101 +93,31 @@ describe('SendTestEmailButton', () => {
     });
   });
 
-  describe('submitting the form', () => {
-    it('invokes the sendPreview function with loading UI, followed by showAlert without the loading UI when there are values in the to email list', () => {
-      const updateDraftPromise = Promise.resolve();
-      const sendPreviewPromise = Promise.resolve();
-      const mockSendPreview = jest.fn(() => sendPreviewPromise);
-      const mockUpdateDraft = jest.fn(() => updateDraftPromise);
-      const mockShowAlert = jest.fn();
-      const { getByText, queryByText, queryByLabelText, queryByTestId } = subject({
-        sendPreview: mockSendPreview,
-        showAlert: mockShowAlert,
-        updateDraft: mockUpdateDraft,
-      });
+  it('invokes the set test data action (without updating the template otherwise) when the template is in published mode', () => {
+    const mockSetTestData = jest.fn();
+    const mockUpdateDraft = jest.fn();
+    const mockParsedTestData = {
+      options: {},
+      substitution_data: {
+        foo: 'bar',
+      },
+      metadata: {},
+    };
 
-      userEvent.click(getByText('Send a Test'));
-
-      return updateDraftPromise.then(() => {
-        userEvent.type(queryByLabelText('To'), 'toEmail@sparkpost.com');
-        // Hit the enter key to add the email address to the list of values
-        fireEvent.keyDown(queryByLabelText('To'), { preventDefault: jest.fn(), keyCode: 13 });
-        expect(queryByText('toEmail@sparkpost.com')).toBeInTheDocument(); // The email address is stored in the DOM instead of the `value` attribute
-        expect(queryByLabelText('From')).toHaveValue('nick@bounce.uat.sparkpost.com');
-        userEvent.click(getByText('Send Email'));
-
-        expect(queryByTestId('panel-loading')).toBeInTheDocument();
-        expect(mockSendPreview).toHaveBeenCalledWith({
-          id: '123456',
-          mode: 'draft',
-          emails: ['toEmail@sparkpost.com'],
-          from: 'nick@bounce.uat.sparkpost.com',
-          subaccountId: 123,
-        });
-
-        return sendPreviewPromise.then(() => {
-          expect(mockShowAlert).toHaveBeenCalledWith({
-            type: 'success',
-            message: 'Successfully sent a test email',
-          });
-        });
-      });
+    const { getByText } = subject({
+      isPublishedMode: true,
+      updateDraft: mockUpdateDraft,
+      parsedTestData: mockParsedTestData,
+      setTestDataAction: mockSetTestData,
     });
 
-    it('no longer renders the loading UI if sending succeeds or catches', () => {
-      const updateDraftPromise = Promise.resolve();
-      const sendPreviewPromise = Promise.resolve();
-      const mockSendPreview = jest.fn(() => sendPreviewPromise);
-      const mockUpdateDraft = jest.fn(() => updateDraftPromise);
-      const mockShowAlert = jest.fn();
-      const { getByText, getByLabelText, queryByTestId } = subject({
-        sendPreview: mockSendPreview,
-        showAlert: mockShowAlert,
-        updateDraft: mockUpdateDraft,
-      });
+    userEvent.click(getByText('Send a Test'));
 
-      userEvent.click(getByText('Send a Test'));
-
-      return updateDraftPromise.then(() => {
-        userEvent.type(getByLabelText('To'), 'toEmail@sparkpost.com');
-        // Hit the enter key to add the email address to the list of values
-        fireEvent.keyDown(getByLabelText('To'), { preventDefault: jest.fn(), keyCode: 13 });
-        userEvent.click(getByText('Send Email'));
-
-        expect(queryByTestId('panel-loading')).toBeInTheDocument();
-
-        return sendPreviewPromise.finally(() => {
-          expect(queryByTestId('panel-loading')).not.toBeInTheDocument();
-        });
-      });
-    });
-
-    it('invokes the set test data action (without updating the template otherwise) when the template is in published mode', () => {
-      const mockSetTestData = jest.fn();
-      const mockUpdateDraft = jest.fn();
-      const mockParsedTestData = {
-        options: {},
-        substitution_data: {
-          foo: 'bar',
-        },
-        metadata: {},
-      };
-
-      const { getByText } = subject({
-        isPublishedMode: true,
-        updateDraft: mockUpdateDraft,
-        parsedTestData: mockParsedTestData,
-        setTestDataAction: mockSetTestData,
-      });
-
-      userEvent.click(getByText('Send a Test'));
-
-      expect(mockUpdateDraft).not.toHaveBeenCalled();
-      expect(mockSetTestData).toHaveBeenCalledWith({
-        id: '123456',
-        mode: 'published',
-        data: mockParsedTestData,
-      });
+    expect(mockUpdateDraft).not.toHaveBeenCalled();
+    expect(mockSetTestData).toHaveBeenCalledWith({
+      id: '123456',
+      mode: 'published',
+      data: mockParsedTestData,
     });
   });
 });

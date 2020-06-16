@@ -6,6 +6,7 @@ import '@testing-library/jest-dom/extend-expect'; // Provides Testing Library ma
 import { configure } from '@testing-library/react';
 import * as matchers from './matchers';
 import setupPortals from 'src/__testHelpers__/setupPortals';
+import MutationObserver from '@sheerun/mutationobserver-shim';
 
 // Provides enzyme assertions.
 // See https://github.com/blainekasten/enzyme-matchers#assertions
@@ -80,3 +81,4 @@ const mockLocalStorage = {
 };
 
 Object.defineProperty(global.window, 'localStorage', { value: mockLocalStorage });
+Object.defineProperty(global.window, 'MutationObserver', { value: MutationObserver });
