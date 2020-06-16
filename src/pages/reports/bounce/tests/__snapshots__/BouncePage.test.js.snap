@@ -134,7 +134,7 @@ exports[`BouncePage:  should render 1`] = `
       1
     </strong>
      of
-
+     
     <strong>
       10
     </strong>
@@ -421,7 +421,7 @@ exports[`BouncePage:  should show empty reasons table when there are no admin re
       1
     </strong>
      of
-
+     
     <strong>
       10
     </strong>
@@ -488,7 +488,7 @@ exports[`BouncePage:  should show empty reasons table when there are no reasons 
       1
     </strong>
      of
-
+     
     <strong>
       10
     </strong>
@@ -555,7 +555,7 @@ exports[`BouncePage:  should show loading panel when table is loading 1`] = `
       1
     </strong>
      of
-
+     
     <strong>
       10
     </strong>

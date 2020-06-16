@@ -33,7 +33,7 @@ const activeIncidents = [
 
 describe('Blocklist Component: RelatedIncidents', () => {
   const subject = ({ ...props }) => {
-    const defaults = { incidents: [], header: '', type: 'blacklist' };
+    const defaults = { incidents: [], header: '', type: 'blocklist' };
 
     return render(
       <TestApp>
