@@ -11,7 +11,7 @@ describe('hibana utils', () => {
     expect(omitSystemProps(props)).toEqual({ className: 'test' });
   });
 
-  it('removes styled system props except whitelisted ones that are set', () => {
+  it('only removes styled system props', () => {
     const props = {
       className: 'test',
       mt: 1,
@@ -24,7 +24,7 @@ describe('hibana utils', () => {
 
   // This might not actually be a thing that happens, but wanted to prove that it's not
   // a generic truthy check to add props back in
-  it('removes styled system props except whitelisted ones that are set, regardless if null', () => {
+  it('only removes styled system props even if null', () => {
     const props = {
       className: 'test',
       mt: 1,
@@ -35,7 +35,7 @@ describe('hibana utils', () => {
     expect(omitSystemProps(props, ['color'])).toEqual({ className: 'test', color: null });
   });
 
-  it('removes styled system props including whitelisted ones that are undefined', () => {
+  it('only removes styled system props even if undefined', () => {
     const props = {
       className: 'test',
       mt: 1,

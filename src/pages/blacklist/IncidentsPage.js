@@ -12,7 +12,7 @@ import { getRelativeDates } from 'src/helpers/date';
 import usePageFilters from 'src/hooks/usePageFilters';
 import IncidentsCollection from './components/IncidentsCollection';
 
-const filterWhitelist = {
+const filterConfiguration = {
   search: {},
 };
 
@@ -41,7 +41,7 @@ export const IncidentsPage = props => {
     }
   };
 
-  const { filters, updateFilters } = usePageFilters(filterWhitelist);
+  const { filters, updateFilters } = usePageFilters(filterConfiguration);
 
   const updateTextField = newSearch => {
     if (filters.search !== newSearch) {

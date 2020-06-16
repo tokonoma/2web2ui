@@ -1,10 +1,10 @@
 import { omit } from '@styled-system/props';
 import _ from 'lodash';
-export const omitSystemProps = (props, whitelistedProps = []) => {
+export const omitSystemProps = (props, allowedProps = []) => {
   const newProps = omit(props);
 
-  if (whitelistedProps.length) {
-    [...whitelistedProps].forEach(prop => {
+  if (allowedProps.length) {
+    [...allowedProps].forEach(prop => {
       if (props[prop] !== undefined) {
         newProps[prop] = props[prop];
       }

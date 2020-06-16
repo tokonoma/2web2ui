@@ -29,13 +29,16 @@ export const flattenParameters = obj =>
   }, {});
 
 // Exported to test
-export const unflattenParameters = (filters, whitelist) =>
-  Object.keys(whitelist).reduce((unflattened, parameter) => {
-    if (_.isPlainObject(whitelist[parameter].defaultValue)) {
-      unflattened[parameter] = Object.keys(whitelist[parameter].defaultValue).reduce((acc, val) => {
-        acc[val] = filters[val];
-        return acc;
-      }, {});
+export const unflattenParameters = (filters, allowedList) =>
+  Object.keys(allowedList).reduce((unflattened, parameter) => {
+    if (_.isPlainObject(allowedList[parameter].defaultValue)) {
+      unflattened[parameter] = Object.keys(allowedList[parameter].defaultValue).reduce(
+        (acc, val) => {
+          acc[val] = filters[val];
+          return acc;
+        },
+        {},
+      );
     } else {
       unflattened[parameter] = filters[parameter];
     }
@@ -45,12 +48,14 @@ export const unflattenParameters = (filters, whitelist) =>
 const noValidation = () => true;
 const noNormalization = val => val;
 
-const normalizeFilterState = (filters, whitelist) => {
+const normalizeFilterState = (filters, allowedList) => {
   const validatedAndNormalizedFilters = Object.keys(filters).reduce((validated, key) => {
-    if (whitelist[key]) {
-      const { validate = noValidation, normalize = noNormalization, defaultValue = '' } = whitelist[
-        key
-      ];
+    if (allowedList[key]) {
+      const {
+        validate = noValidation,
+        normalize = noNormalization,
+        defaultValue = '',
+      } = allowedList[key];
       try {
         const normalized = normalize(filters[key]);
         if (!validate(normalized, filters)) {
@@ -65,19 +70,19 @@ const normalizeFilterState = (filters, whitelist) => {
     return validated;
   }, {});
 
-  // Add missing keys from whitelist into filters
-  Object.keys(whitelist).forEach(filter => {
+  // Add missing keys from allowedList into filters
+  Object.keys(allowedList).forEach(filter => {
     if (!validatedAndNormalizedFilters[filter]) {
-      validatedAndNormalizedFilters[filter] = whitelist[filter].defaultValue;
+      validatedAndNormalizedFilters[filter] = allowedList[filter].defaultValue;
     }
   });
 
   return validatedAndNormalizedFilters;
 };
 
-const omitFiltersExcludedFromRoute = (filters, whitelist) => {
+const omitFiltersExcludedFromRoute = (filters, allowedList) => {
   return Object.keys(filters).reduce((routeFilters, current) => {
-    if (whitelist[current] && !whitelist[current].excludeFromRoute) {
+    if (allowedList[current] && !allowedList[current].excludeFromRoute) {
       routeFilters[current] = filters[current];
     }
     return routeFilters;
@@ -95,7 +100,7 @@ const omitFiltersExcludedFromRoute = (filters, whitelist) => {
 /**
  * Maintains state of page filters based on the URL.
  *
- * @param {object} whitelist - keys are the possible filter names and the value
+ * @param {object} allowedList - keys are the possible filter names and the value
  *        for each key is an object with a `validate` function, a `defaultValue` for the filter,
  *        an optional `excludeFromRoute` to exclude the parameter from being included in the route,
  *        and an optional `normalize` function to convert the string/array value from requestParams
@@ -114,11 +119,11 @@ const omitFiltersExcludedFromRoute = (filters, whitelist) => {
  *   }
  * });
  */
-const usePageFilters = whitelist => {
+const usePageFilters = allowedList => {
   const { requestParams, updateRoute } = useRouter();
   const defaultFilters = useRef(
-    Object.keys(whitelist).reduce((acc, key) => {
-      acc[key] = whitelist[key].defaultValue;
+    Object.keys(allowedList).reduce((acc, key) => {
+      acc[key] = allowedList[key].defaultValue;
       return acc;
     }, {}),
   );
@@ -127,14 +132,14 @@ const usePageFilters = whitelist => {
     const { filters } = state;
     return {
       prevFilters: filters,
-      filters: normalizeFilterState(reducer(filters, action), whitelist),
+      filters: normalizeFilterState(reducer(filters, action), allowedList),
     };
   };
 
   const [{ filters, prevFilters }, dispatch] = useReducer(cleanReducer, {
     filters: normalizeFilterState(
-      omitFiltersExcludedFromRoute(unflattenParameters(requestParams, whitelist), whitelist),
-      whitelist,
+      omitFiltersExcludedFromRoute(unflattenParameters(requestParams, allowedList), allowedList),
+      allowedList,
     ),
   });
 
@@ -148,9 +153,9 @@ const usePageFilters = whitelist => {
   );
 
   useEffect(() => {
-    const nonRouteFilters = omitFiltersExcludedFromRoute(filters, whitelist);
+    const nonRouteFilters = omitFiltersExcludedFromRoute(filters, allowedList);
     updateRoute(flattenParameters(nonRouteFilters));
-  }, [updateRoute, filters, whitelist]);
+  }, [updateRoute, filters, allowedList]);
 
   return { filters, prevFilters, updateFilters, resetFilters };
 };

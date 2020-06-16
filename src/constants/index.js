@@ -172,7 +172,7 @@ export const ANALYTICS_PREMIUM_SUPPORT = 'premium-support';
 export const ANALYTICS_ENTERPRISE_SUPPORT = 'enterprise-support';
 export const ANALYTICS_ONBOARDING = 'onboarding';
 export const ANALYTICS_ONBOARDING_CREATE_DOMAIN = 'create-sending-domain-verify-';
-export const ANALYTICS_WHITELISTED_FORMS = [
+export const ANALYTICS_FORMS = [
   FORMS.LOGIN,
   FORMS.JOIN,
   FORMS.JOIN_PLAN,
