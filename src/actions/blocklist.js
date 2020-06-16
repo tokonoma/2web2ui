@@ -1,8 +1,8 @@
 import sparkpostApiRequest from 'src/actions/helpers/sparkpostApiRequest';
 
-export const listBlacklists = () =>
+export const listBlocklists = () =>
   sparkpostApiRequest({
-    type: 'LIST_BLACKLISTS',
+    type: 'LIST_BLOCKLISTS',
     meta: {
       method: 'GET',
       url: '/v1/blacklist-monitors/blacklists',
@@ -90,15 +90,15 @@ export function listIncidentsForResource(resource, from = '2019-01-01') {
   });
 }
 
-export function listIncidentsForBlacklist(blacklist, from = '2019-01-01') {
+export function listIncidentsForBlocklist(blacklists, from = '2019-01-01') {
   return sparkpostApiRequest({
-    type: 'LIST_INCIDENTS_FOR_BLACKLIST',
+    type: 'LIST_INCIDENTS_FOR_BLOCKLIST',
     meta: {
       method: 'GET',
       url: `/v1/blacklist-monitors/incidents`,
       showErrorAlert: false,
       params: {
-        blacklists: blacklist,
+        blacklists,
         from,
       },
     },
@@ -106,7 +106,7 @@ export function listIncidentsForBlacklist(blacklist, from = '2019-01-01') {
 }
 
 export function listHistoricalResolvedIncidents(
-  blacklist,
+  blacklists,
   resource,
   from = '2019-01-01',
   limit = 7,
@@ -118,7 +118,7 @@ export function listHistoricalResolvedIncidents(
       url: `/v1/blacklist-monitors/${resource}/incidents`,
       showErrorAlert: false,
       params: {
-        blacklists: blacklist,
+        blacklists,
         limit,
         from,
         status: 'resolved',

@@ -4,14 +4,14 @@ import { ApiErrorBanner, Loading } from 'src/components';
 import { PageLink } from 'src/components/links';
 import { Page } from 'src/components/matchbox';
 import { PageDescription } from 'src/components/text';
-import { selectBlacklistedCount } from 'src/selectors/blacklist';
-import { listMonitors } from 'src/actions/blacklist';
+import { selectBlocklistedCount } from 'src/selectors/blocklist';
+import { listMonitors } from 'src/actions/blocklist';
 import MonitorsCollection from './components/MonitorsCollection';
 import RemoveFromWatchlistModal from './components/RemoveFromWatchlistModal';
 import CongratsBanner from './components/CongratsBanner';
 
 export const WatchlistPage = props => {
-  const { loading, listMonitors, monitors, hasBlacklisted, error } = props;
+  const { loading, listMonitors, monitors, hasBlocklisted, error } = props;
 
   const [showCongrats, setShowCongrats] = useState(true);
   const [monitorToDelete, setMonitorToDelete] = useState(null);
@@ -45,7 +45,7 @@ export const WatchlistPage = props => {
 
     return (
       <>
-        {showCongrats && !hasBlacklisted && (
+        {showCongrats && !hasBlocklisted && (
           <CongratsBanner onDismiss={() => setShowCongrats(false)} />
         )}
         <div data-id="monitors-table">
@@ -60,12 +60,12 @@ export const WatchlistPage = props => {
       title="Watched IPs and Domains"
       primaryAction={{
         content: 'Add IP or Sending Domain',
-        to: '/blacklist/watchlist/add',
+        to: '/blocklist/watchlist/add',
         component: PageLink,
       }}
       breadcrumbAction={{
-        content: 'Blacklisting Incidents',
-        to: '/blacklist/incidents',
+        content: 'Blocklisting Incidents',
+        to: '/blocklist/incidents',
         component: PageLink,
       }}
     >
@@ -80,9 +80,9 @@ export const WatchlistPage = props => {
 };
 
 const mapStateToProps = state => ({
-  hasBlacklisted: selectBlacklistedCount(state) > 0,
-  monitors: state.blacklist.monitors,
-  error: state.blacklist.monitorsError,
-  loading: state.blacklist.monitorsPending,
+  hasBlocklisted: selectBlocklistedCount(state) > 0,
+  monitors: state.blocklist.monitors,
+  error: state.blocklist.monitorsError,
+  loading: state.blocklist.monitorsPending,
 });
 export default connect(mapStateToProps, { listMonitors })(WatchlistPage);

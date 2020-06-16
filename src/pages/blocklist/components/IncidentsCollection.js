@@ -26,7 +26,7 @@ const getRowData = ({
   resolved_at_formatted,
 }) => {
   return [
-    <PageLink to={`/blacklist/incidents/${id}`}>
+    <PageLink to={`/blocklist/incidents/${id}`}>
       <span className={styles.DetailsLink}>{resource}</span>
       <span> on </span> <span className={styles.DetailsLink}>{blacklist_name}</span>
     </PageLink>,
@@ -76,7 +76,7 @@ export const IncidentsCollection = props => {
   const EmptyComponent = () => {
     const textFieldComponent = (
       <div className={styles.FilterBox}>
-        <TextField disabled id="disabled-blacklist-search" suffix={<Search />} />
+        <TextField disabled id="disabled-blocklist-search" suffix={<Search />} />
       </div>
     );
     return (

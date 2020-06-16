@@ -1,7 +1,7 @@
-import * as blacklistSelectors from '../blacklist';
+import * as blocklistSelectors from '../blocklist';
 const RealDate = Date;
 
-describe('Blacklist Selectors: ', () => {
+describe('Blocklist Selectors: ', () => {
   let incidents, monitors;
   let formattedIncidents;
   beforeAll(() => {
@@ -36,7 +36,7 @@ describe('Blacklist Selectors: ', () => {
     monitors = [
       {
         resource: 'foo',
-        currently_blacklisted_on: ['bar'],
+        currently_blocklisted_on: ['bar'],
         last_listed_at: '2019-07-23T12:48:00.000Z',
         watched_at: '2019-07-23T12:48:00.000Z',
         total_listing_count: 12,
@@ -46,13 +46,13 @@ describe('Blacklist Selectors: ', () => {
   });
 
   it('selectIncidentsList returns formatted incidents data', () => {
-    expect(blacklistSelectors.selectIncidentsList({ blacklist: { incidents } })).toEqual(
+    expect(blocklistSelectors.selectIncidentsList({ blocklist: { incidents } })).toEqual(
       formattedIncidents,
     );
   });
 
   it('selectIncident returns formatted incident for active incident', () => {
-    expect(blacklistSelectors.selectIncident({ blacklist: { incident: incidents[0] } })).toEqual(
+    expect(blocklistSelectors.selectIncident({ blocklist: { incident: incidents[0] } })).toEqual(
       formattedIncidents[0],
     );
   });
@@ -72,7 +72,7 @@ describe('Blacklist Selectors: ', () => {
     };
 
     expect(
-      blacklistSelectors.selectIncident({ blacklist: { incident: resolvedIncident } }),
+      blocklistSelectors.selectIncident({ blocklist: { incident: resolvedIncident } }),
     ).toEqual(formattedResolvedIncident);
   });
 
@@ -82,12 +82,12 @@ describe('Blacklist Selectors: ', () => {
       resolved_at: '2019-07-23T12:49:00.000Z',
     };
     expect(
-      blacklistSelectors.selectIncident({ blacklist: { incident: resolvedZeroDayIncident } }),
+      blocklistSelectors.selectIncident({ blocklist: { incident: resolvedZeroDayIncident } }),
     ).toHaveProperty('days_listed', 1);
   });
 
-  it('selectBlacklistedCount returns total number of resources blacklisted', () => {
-    expect(blacklistSelectors.selectBlacklistedCount({ blacklist: { monitors } })).toEqual(2);
+  it('selectBlocklistedCount returns total number of resources blocklisted', () => {
+    expect(blocklistSelectors.selectBlocklistedCount({ blocklist: { monitors } })).toEqual(2);
   });
 
   it('selectRelatedIncidentsForResource returns resources not including the current incident', () => {
@@ -132,27 +132,27 @@ describe('Blacklist Selectors: ', () => {
     ];
 
     expect(
-      blacklistSelectors.selectRelatedIncidentsForResource({
-        blacklist: { incidentsForResource, incident },
+      blocklistSelectors.selectRelatedIncidentsForResource({
+        blocklist: { incidentsForResource, incident },
       }),
     ).toHaveLength(3);
 
     // list of 3 where one is same id, so 2 total
     expect(
-      blacklistSelectors.selectRelatedIncidentsForResource({
-        blacklist: { incidentsForResource: incidentsForResource.slice(0, 3), incident },
+      blocklistSelectors.selectRelatedIncidentsForResource({
+        blocklist: { incidentsForResource: incidentsForResource.slice(0, 3), incident },
       }),
     ).toHaveLength(2);
 
     // list of 3 where none have current id, so 3 total
     expect(
-      blacklistSelectors.selectRelatedIncidentsForResource({
-        blacklist: { incidentsForResource: incidentsForResource.slice(1), incident },
+      blocklistSelectors.selectRelatedIncidentsForResource({
+        blocklist: { incidentsForResource: incidentsForResource.slice(1), incident },
       }),
     ).toHaveLength(3);
   });
 
-  it('selectRelatedIncidentsForBlacklist returns resources not including the current incident', () => {
+  it('selectRelatedIncidentsForBlocklist returns resources not including the current incident', () => {
     const incident = {
       id: 'id-1',
       resource: 'foo',
@@ -160,7 +160,7 @@ describe('Blacklist Selectors: ', () => {
       occurred_at: '2019-07-23T12:48:00.000Z',
     };
 
-    const incidentsForBlacklist = [
+    const incidentsForBlocklist = [
       {
         id: 'id-1',
         resource: 'foo 1',
@@ -194,22 +194,22 @@ describe('Blacklist Selectors: ', () => {
     ];
 
     expect(
-      blacklistSelectors.selectRelatedIncidentsForBlacklist({
-        blacklist: { incidentsForBlacklist, incident },
+      blocklistSelectors.selectRelatedIncidentsForBlocklist({
+        blocklist: { incidentsForBlocklist, incident },
       }),
     ).toHaveLength(3);
 
     // list of 3 where one is same id, so 2 total
     expect(
-      blacklistSelectors.selectRelatedIncidentsForBlacklist({
-        blacklist: { incidentsForBlacklist: incidentsForBlacklist.slice(0, 3), incident },
+      blocklistSelectors.selectRelatedIncidentsForBlocklist({
+        blocklist: { incidentsForBlocklist: incidentsForBlocklist.slice(0, 3), incident },
       }),
     ).toHaveLength(2);
 
     // list of 3 where none have current id, so 3 total
     expect(
-      blacklistSelectors.selectRelatedIncidentsForBlacklist({
-        blacklist: { incidentsForBlacklist: incidentsForBlacklist.slice(1), incident },
+      blocklistSelectors.selectRelatedIncidentsForBlocklist({
+        blocklist: { incidentsForBlocklist: incidentsForBlocklist.slice(1), incident },
       }),
     ).toHaveLength(3);
   });
@@ -269,22 +269,22 @@ describe('Blacklist Selectors: ', () => {
 
     // list of 7 where one is same id, so 6 total
     expect(
-      blacklistSelectors.selectHistoricalIncidents({
-        blacklist: { historicalIncidents, incident },
+      blocklistSelectors.selectHistoricalIncidents({
+        blocklist: { historicalIncidents, incident },
       }),
     ).toHaveLength(6);
 
     // list of 3 where one is same id, so 2 total
     expect(
-      blacklistSelectors.selectHistoricalIncidents({
-        blacklist: { historicalIncidents: historicalIncidents.slice(0, 3), incident },
+      blocklistSelectors.selectHistoricalIncidents({
+        blocklist: { historicalIncidents: historicalIncidents.slice(0, 3), incident },
       }),
     ).toHaveLength(2);
 
     // list of 6 where none have current id, so 6 total
     expect(
-      blacklistSelectors.selectHistoricalIncidents({
-        blacklist: { historicalIncidents: historicalIncidents.slice(1), incident },
+      blocklistSelectors.selectHistoricalIncidents({
+        blocklist: { historicalIncidents: historicalIncidents.slice(1), incident },
       }),
     ).toHaveLength(6);
   });
@@ -293,20 +293,20 @@ describe('Blacklist Selectors: ', () => {
     const incidentError = { error: 'incident' };
     const resourceError = { error: 'resource' };
     expect(
-      blacklistSelectors.selectDetailsPageError({
-        blacklist: { incidentError, incidentsForResourceError: resourceError },
+      blocklistSelectors.selectDetailsPageError({
+        blocklist: { incidentError, incidentsForResourceError: resourceError },
       }),
     ).toEqual(incidentError);
   });
 
   it('selectDetailsPageError returns the first error it finds after incident error is not there', () => {
     const incidentsForResourceError = { error: 'resource' };
-    const incidentsForBlacklistError = { error: 'blacklist' };
+    const incidentsForBlocklistError = { error: 'blocklist' };
     const historicalIncidentsError = { error: 'historical' };
     expect(
-      blacklistSelectors.selectDetailsPageError({
-        blacklist: {
-          incidentsForBlacklistError,
+      blocklistSelectors.selectDetailsPageError({
+        blocklist: {
+          incidentsForBlocklistError,
           incidentsForResourceError,
           historicalIncidentsError,
         },
@@ -316,27 +316,27 @@ describe('Blacklist Selectors: ', () => {
 
   it('selectDetailsPageError returns the first error it finds after incident error is not there - 2', () => {
     const incidentsForResourceError = false;
-    const incidentsForBlacklistError = { error: 'blacklist' };
+    const incidentsForBlocklistError = { error: 'blocklist' };
     const historicalIncidentsError = { error: 'historical' };
     expect(
-      blacklistSelectors.selectDetailsPageError({
-        blacklist: {
-          incidentsForBlacklistError,
+      blocklistSelectors.selectDetailsPageError({
+        blocklist: {
+          incidentsForBlocklistError,
           incidentsForResourceError,
           historicalIncidentsError,
         },
       }),
-    ).toEqual(incidentsForBlacklistError);
+    ).toEqual(incidentsForBlocklistError);
   });
 
   it('selectDetailsPageError returns the first error it finds after incident error is not there - 3', () => {
     const incidentsForResourceError = false;
-    const incidentsForBlacklistError = false;
+    const incidentsForBlocklistError = false;
     const historicalIncidentsError = { error: 'historical' };
     expect(
-      blacklistSelectors.selectDetailsPageError({
-        blacklist: {
-          incidentsForBlacklistError,
+      blocklistSelectors.selectDetailsPageError({
+        blocklist: {
+          incidentsForBlocklistError,
           incidentsForResourceError,
           historicalIncidentsError,
         },

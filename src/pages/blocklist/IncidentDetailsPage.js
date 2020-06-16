@@ -7,16 +7,16 @@ import { Grid, Page, Panel } from 'src/components/matchbox';
 import {
   getIncident,
   listIncidentsForResource,
-  listIncidentsForBlacklist,
+  listIncidentsForBlocklist,
   listHistoricalResolvedIncidents,
-} from 'src/actions/blacklist';
+} from 'src/actions/blocklist';
 import {
   selectIncident,
   selectRelatedIncidentsForResource,
-  selectRelatedIncidentsForBlacklist,
+  selectRelatedIncidentsForBlocklist,
   selectHistoricalIncidents,
   selectDetailsPageError,
-} from 'src/selectors/blacklist';
+} from 'src/selectors/blocklist';
 import IncidentDetails from './components/IncidentDetails';
 import RelatedIncidents from './components/RelatedIncidents';
 
@@ -26,26 +26,26 @@ export const IncidentDetailsPage = ({
   loading,
   historicalIncidents,
   incident,
-  incidentsForBlacklist,
+  incidentsForBlocklist,
   incidentsForResource,
   getIncident,
   listIncidentsForResource,
-  listIncidentsForBlacklist,
+  listIncidentsForBlocklist,
   listHistoricalResolvedIncidents,
   incidentsForResourcePending,
-  incidentsForBlacklistPending,
+  incidentsForBlocklistPending,
   historicalIncidentsPending,
 }) => {
   useEffect(() => {
     getIncident(id).then(incident => {
       listIncidentsForResource(incident.resource);
-      listIncidentsForBlacklist(incident.blacklist_name);
-      listHistoricalResolvedIncidents(incident.blacklist_name, incident.resource);
+      listIncidentsForBlocklist(incident.blocklist_name);
+      listHistoricalResolvedIncidents(incident.blocklist_name, incident.resource);
     });
   }, [
     getIncident,
     id,
-    listIncidentsForBlacklist,
+    listIncidentsForBlocklist,
     listIncidentsForResource,
     listHistoricalResolvedIncidents,
   ]);
@@ -55,7 +55,7 @@ export const IncidentDetailsPage = ({
   }
 
   const {
-    blacklist_name = '',
+    blocklist_name = '',
     resource = '',
     days_listed,
     resolved_at_timestamp,
@@ -67,13 +67,13 @@ export const IncidentDetailsPage = ({
       return (
         <div data-id="error-banner">
           <ApiErrorBanner
-            message={'Sorry, we seem to have had some trouble loading your blacklist incidents.'}
+            message={'Sorry, we seem to have had some trouble loading your blocklist incidents.'}
             errorDetails={error.message}
             reload={() => {
               getIncident(id).then(incident => {
                 listIncidentsForResource(incident.resource);
-                listIncidentsForBlacklist(incident.blacklist_name);
-                listHistoricalResolvedIncidents(incident.blacklist_name, incident.resource);
+                listIncidentsForBlocklist(incident.blocklist_name);
+                listHistoricalResolvedIncidents(incident.blocklist_name, incident.resource);
               });
             }}
           />
@@ -81,20 +81,20 @@ export const IncidentDetailsPage = ({
       );
     }
 
-    const renderRelatedIncidentsForBlacklist = () => {
-      if (incidentsForBlacklistPending) {
+    const renderRelatedIncidentsForBlocklist = () => {
+      if (incidentsForBlocklistPending) {
         return <PanelLoading />;
       }
-      if (!incidentsForBlacklist.length) {
-        return <Empty message={`No Other Recent ${blacklist_name} incidents`} />;
+      if (!incidentsForBlocklist.length) {
+        return <Empty message={`No Other Recent ${blocklist_name} incidents`} />;
       }
       return (
-        <Panel data-id="related-incidents-blacklist">
+        <Panel data-id="related-incidents-blocklist">
           <RelatedIncidents
             incident={{ ...incident, id }}
-            incidents={incidentsForBlacklist}
-            type="blacklist"
-            header={`Other Recent ${blacklist_name} Incidents`}
+            incidents={incidentsForBlocklist}
+            type="blocklist"
+            header={`Other Recent ${blocklist_name} Incidents`}
           />
         </Panel>
       );
@@ -126,7 +126,7 @@ export const IncidentDetailsPage = ({
           <Panel sectioned data-id="incident-details">
             <IncidentDetails
               resourceName={resource}
-              blacklistName={blacklist_name}
+              blocklistName={blocklist_name}
               listedTimestamp={occurred_at_timestamp}
               resolvedTimestamp={resolved_at_timestamp}
               daysListed={days_listed}
@@ -137,7 +137,7 @@ export const IncidentDetailsPage = ({
 
         <Grid>
           <Grid.Column lg={6} xs={12}>
-            {renderRelatedIncidentsForBlacklist()}
+            {renderRelatedIncidentsForBlocklist()}
           </Grid.Column>
           <Grid.Column lg={6} xs={12}>
             {renderRelatedIncidentsForResource()}
@@ -149,10 +149,10 @@ export const IncidentDetailsPage = ({
 
   return (
     <Page
-      title={`Blacklist Incident | ${resource || ''} | ${blacklist_name || ''}`}
+      title={`Blocklist Incident | ${resource || ''} | ${blocklist_name || ''}`}
       breadcrumbAction={{
-        content: 'Blacklist Incidents',
-        to: '/blacklist/incidents',
+        content: 'Blocklist Incidents',
+        to: '/blocklist/incidents',
         component: PageLink,
       }}
     >
@@ -163,22 +163,23 @@ export const IncidentDetailsPage = ({
 
 const mapStateToProps = (state, props) => {
   const { id } = props.match.params;
+
   return {
     historicalIncidents: selectHistoricalIncidents(state),
-    historicalIncidentsPending: state.blacklist.historicalIncidentsPending,
+    historicalIncidentsPending: state.blocklist.historicalIncidentsPending,
     id,
     incident: selectIncident(state),
     incidentsForResource: selectRelatedIncidentsForResource(state),
-    incidentsForResourcePending: state.blacklist.incidentsForResourcePending,
-    incidentsForBlacklist: selectRelatedIncidentsForBlacklist(state),
-    incidentsForBlacklistPending: state.blacklist.incidentsForBlacklistPending,
+    incidentsForResourcePending: state.blocklist.incidentsForResourcePending,
+    incidentsForBlocklist: selectRelatedIncidentsForBlocklist(state),
+    incidentsForBlocklistPending: state.blocklist.incidentsForBlocklistPending,
     error: selectDetailsPageError(state),
-    loading: state.blacklist.incidentPending,
+    loading: state.blocklist.incidentPending,
   };
 };
 export default connect(mapStateToProps, {
   getIncident,
   listIncidentsForResource,
-  listIncidentsForBlacklist,
+  listIncidentsForBlocklist,
   listHistoricalResolvedIncidents,
 })(IncidentDetailsPage);

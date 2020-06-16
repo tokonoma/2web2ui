@@ -1,7 +1,7 @@
 export const initialState = {
-  blacklistsPending: false,
-  blacklists: [],
-  blacklistsError: null,
+  blocklistsPending: false,
+  blocklists: [],
+  blocklistsError: null,
   monitorsPending: false,
   monitors: [],
   monitorsError: null,
@@ -14,12 +14,12 @@ export const initialState = {
 
 export default (state = initialState, { type, payload, meta }) => {
   switch (type) {
-    case 'LIST_BLACKLISTS_PENDING':
-      return { ...state, blacklistsPending: true, blacklistsError: null };
-    case 'LIST_BLACKLISTS_FAIL':
-      return { ...state, blacklistsPending: false, blacklistsError: payload };
-    case 'LIST_BLACKLISTS_SUCCESS':
-      return { ...state, blacklists: payload, blacklistsPending: false, blacklistsError: null };
+    case 'LIST_BLOCKLISTS_PENDING':
+      return { ...state, blocklistsPending: true, blocklistsError: null };
+    case 'LIST_BLOCKLISTS_FAIL':
+      return { ...state, blocklistsPending: false, blocklistsError: payload };
+    case 'LIST_BLOCKLISTS_SUCCESS':
+      return { ...state, blocklists: payload, blocklistsPending: false, blocklistsError: null };
 
     case 'LIST_MONITORS_PENDING':
       return { ...state, monitorsPending: true, monitorsError: null };
@@ -54,16 +54,16 @@ export default (state = initialState, { type, payload, meta }) => {
         incidentsForResourceError: null,
       };
 
-    case 'LIST_INCIDENTS_FOR_BLACKLIST_PENDING':
-      return { ...state, incidentsForBlacklistPending: true, incidentsForBlacklistError: null };
-    case 'LIST_INCIDENTS_FOR_BLACKLIST_FAIL':
-      return { ...state, incidentsForBlacklistPending: false, incidentsForBlacklistError: payload };
-    case 'LIST_INCIDENTS_FOR_BLACKLIST_SUCCESS':
+    case 'LIST_INCIDENTS_FOR_BLOCKLIST_PENDING':
+      return { ...state, incidentsForBlocklistPending: true, incidentsForBlocklistError: null };
+    case 'LIST_INCIDENTS_FOR_BLOCKLIST_FAIL':
+      return { ...state, incidentsForBlocklistPending: false, incidentsForBlocklistError: payload };
+    case 'LIST_INCIDENTS_FOR_BLOCKLIST_SUCCESS':
       return {
         ...state,
-        incidentsForBlacklist: payload,
-        incidentsForBlacklistPending: false,
-        incidentsForBlacklistError: null,
+        incidentsForBlocklist: payload,
+        incidentsForBlocklistPending: false,
+        incidentsForBlocklistError: null,
       };
 
     case 'LIST_HISTORICAL_INCIDENTS_PENDING':

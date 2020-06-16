@@ -6,8 +6,8 @@ import { Users } from 'src/components/images';
 import { PageLink } from 'src/components/links';
 import { PageDescription } from 'src/components/text';
 import { Page } from 'src/components/matchbox';
-import { listMonitors, listIncidents } from 'src/actions/blacklist';
-import { selectIncidentsList } from 'src/selectors/blacklist';
+import { listMonitors, listIncidents } from 'src/actions/blocklist';
+import { selectIncidentsList } from 'src/selectors/blocklist';
 import { getRelativeDates } from 'src/helpers/date';
 import usePageFilters from 'src/hooks/usePageFilters';
 import IncidentsCollection from './components/IncidentsCollection';
@@ -74,7 +74,7 @@ export const IncidentsPage = props => {
       return (
         <div data-id="error-banner">
           <ApiErrorBanner
-            message={'Sorry, we seem to have had some trouble loading your blacklist incidents.'}
+            message={'Sorry, we seem to have had some trouble loading your blocklist incidents.'}
             errorDetails={error.message}
             reload={() => {
               listMonitors();
@@ -102,7 +102,7 @@ export const IncidentsPage = props => {
     <Page
       empty={{
         show: monitors.length === 0,
-        title: 'Blacklist Reports',
+        title: 'Blocklist Reports',
         image: Users,
         content: (
           <p>
@@ -111,16 +111,16 @@ export const IncidentsPage = props => {
           </p>
         ),
       }}
-      title="Blacklist Incidents"
+      title="Blocklist Incidents"
       primaryAction={{
         content: monitors.length === 0 ? 'Add to Watchlist' : 'View Watchlist',
-        to: monitors.length === 0 ? '/blacklist/watchlist/add' : '/blacklist/watchlist',
+        to: monitors.length === 0 ? '/blocklist/watchlist/add' : '/blocklist/watchlist',
         component: PageLink,
       }}
     >
       <PageDescription>
-        Check the current status of blacklists and learn more about what actions you can take to
-        remedy and prevent future blacklisting.
+        Check the current status of blocklists and learn more about what actions you can take to
+        remedy and prevent future blocklisting.
       </PageDescription>
       {renderContent()}
     </Page>
@@ -129,8 +129,8 @@ export const IncidentsPage = props => {
 
 const mapStateToProps = state => ({
   incidents: selectIncidentsList(state),
-  monitors: state.blacklist.monitors,
-  error: state.blacklist.incidentsError || state.blacklist.monitorsError,
-  loading: state.blacklist.incidentsPending || state.blacklist.monitorsPending,
+  monitors: state.blocklist.monitors,
+  error: state.blocklist.incidentsError || state.blocklist.monitorsError,
+  loading: state.blocklist.incidentsPending || state.blocklist.monitorsPending,
 });
 export default connect(mapStateToProps, { listMonitors, listIncidents })(IncidentsPage);

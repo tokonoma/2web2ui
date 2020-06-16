@@ -31,7 +31,7 @@ const activeIncidents = [
   },
 ];
 
-describe('Blacklist Component: RelatedIncidents', () => {
+describe('Blocklist Component: RelatedIncidents', () => {
   const subject = ({ ...props }) => {
     const defaults = { incidents: [], header: '', type: 'blacklist' };
 
@@ -47,12 +47,12 @@ describe('Blacklist Component: RelatedIncidents', () => {
     expect(queryByText('Recent spamhaus.org - pbl Incidents')).toBeInTheDocument();
   });
 
-  it('renders the resource name of incidents when type is blacklist', () => {
+  it('renders the resource name of incidents when type is blocklist', () => {
     const { queryByText } = subject({ incidents: mixedIncidents });
     expect(queryByText('1.2.3.4')).toBeInTheDocument();
   });
 
-  it('renders the blacklist name of incidents when type is resource', () => {
+  it('renders the blocklist name of incidents when type is resource', () => {
     const { queryByText } = subject({ incidents: mixedIncidents, type: 'resource' });
     expect(queryByText('spamhaus.org - sbl')).toBeInTheDocument();
   });

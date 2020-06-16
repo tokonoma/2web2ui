@@ -21,7 +21,7 @@ export default ({ incidents = [], header = '', type = '' }) => {
           <Table.Row className={styles.Table} key={incident.id}>
             <Table.Cell>
               <div>
-                <PageLink to={`/blacklist/incidents/${incident.id}`}>
+                <PageLink to={`/blocklist/incidents/${incident.id}`}>
                   <strong>
                     <Text as="span" fontWeight="normal">
                       {type === 'blacklist' ? incident.resource : incident.blacklist_name}

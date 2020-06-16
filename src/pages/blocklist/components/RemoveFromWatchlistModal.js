@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { domainRegex } from 'src/helpers/regex';
 import { PanelLoading } from 'src/components';
 import ButtonWrapper from 'src/components/buttonWrapper';
-import { deleteMonitor } from 'src/actions/blacklist';
+import { deleteMonitor } from 'src/actions/blocklist';
 import { showAlert } from 'src/actions/globalAlert';
 
 export const RemoveFromWatchlistModal = ({
@@ -65,6 +65,6 @@ export const RemoveFromWatchlistModal = ({
 };
 
 const mapStateToProps = state => ({
-  isPending: state.blacklist.deleteMonitorPending || state.blacklist.monitorsPending,
+  isPending: state.blocklist.deleteMonitorPending || state.blocklist.monitorsPending,
 });
 export default connect(mapStateToProps, { deleteMonitor, showAlert })(RemoveFromWatchlistModal);

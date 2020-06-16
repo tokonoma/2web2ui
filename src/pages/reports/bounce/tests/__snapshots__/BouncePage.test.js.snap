@@ -99,7 +99,7 @@ exports[`BouncePage:  should display loading panel on top level metrics when agg
           "classification_id": 51,
           "count_bounce": 5,
           "domain": "yahoo.com",
-          "reason": "554 - 5.7.1 Blacklisted by 'twoomail.com'(twoo.com.multi.surbl.org) Contact the postmaster of this domain for resolution. This attempt has been logged.",
+          "reason": "554 - 5.7.1 Blocklisted by 'twoomail.com'(twoo.com.multi.surbl.org) Contact the postmaster of this domain for resolution. This attempt has been logged.",
         },
       ]
     }
@@ -128,7 +128,7 @@ exports[`BouncePage:  should render 1`] = `
       1
     </strong>
      of
-     
+
     <strong>
       10
     </strong>
@@ -220,7 +220,7 @@ exports[`BouncePage:  should render 1`] = `
           "classification_id": 51,
           "count_bounce": 5,
           "domain": "yahoo.com",
-          "reason": "554 - 5.7.1 Blacklisted by 'twoomail.com'(twoo.com.multi.surbl.org) Contact the postmaster of this domain for resolution. This attempt has been logged.",
+          "reason": "554 - 5.7.1 Blocklisted by 'twoomail.com'(twoo.com.multi.surbl.org) Contact the postmaster of this domain for resolution. This attempt has been logged.",
         },
       ]
     }
@@ -315,7 +315,7 @@ exports[`BouncePage:  should render correctly with no bounces 1`] = `
           "classification_id": 51,
           "count_bounce": 5,
           "domain": "yahoo.com",
-          "reason": "554 - 5.7.1 Blacklisted by 'twoomail.com'(twoo.com.multi.surbl.org) Contact the postmaster of this domain for resolution. This attempt has been logged.",
+          "reason": "554 - 5.7.1 Blocklisted by 'twoomail.com'(twoo.com.multi.surbl.org) Contact the postmaster of this domain for resolution. This attempt has been logged.",
         },
       ]
     }
@@ -406,7 +406,7 @@ exports[`BouncePage:  should show empty reasons table when there are no admin re
       1
     </strong>
      of
-     
+
     <strong>
       10
     </strong>
@@ -466,7 +466,7 @@ exports[`BouncePage:  should show empty reasons table when there are no reasons 
       1
     </strong>
      of
-     
+
     <strong>
       10
     </strong>
@@ -526,7 +526,7 @@ exports[`BouncePage:  should show loading panel when table is loading 1`] = `
       1
     </strong>
      of
-     
+
     <strong>
       10
     </strong>
