@@ -36,7 +36,7 @@ describe('Blocklist Selectors: ', () => {
     monitors = [
       {
         resource: 'foo',
-        currently_blocklisted_on: ['bar'],
+        currently_blacklisted_on: ['bar'],
         last_listed_at: '2019-07-23T12:48:00.000Z',
         watched_at: '2019-07-23T12:48:00.000Z',
         total_listing_count: 12,
