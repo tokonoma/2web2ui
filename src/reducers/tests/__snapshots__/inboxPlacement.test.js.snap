@@ -90,13 +90,7 @@ exports[`Inbox Placement Reducer get inbox placement trends filter values fail 1
 Object {
   "allMessages": Array [],
   "currentTestDetails": Object {},
-  "getTrendsFilterValuesError": Object {
-    "errors": Array [
-      Object {
-        "message": "Some error occurred",
-      },
-    ],
-  },
+  "getTrendsFilterValuesError": undefined,
   "getTrendsFilterValuesPending": false,
   "messagesById": Object {},
   "placementsByProvider": Array [],
