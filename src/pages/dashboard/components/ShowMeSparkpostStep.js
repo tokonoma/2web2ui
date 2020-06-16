@@ -81,7 +81,7 @@ const InviteCollaboratorItem = () => {
   );
 };
 
-export function HibanaShowMeSparkpostStep() {
+export function HibanaShowMeSparkpostStep(props) {
   return (
     <>
       <Box mx="400" mb="400">
@@ -93,14 +93,16 @@ export function HibanaShowMeSparkpostStep() {
       <Box mx="400" mb="400">
         <ViewEventsItem />
       </Box>
-      <Box mx="400" mb="400">
-        <InviteCollaboratorItem />
-      </Box>
+      {props.canManageUsers && (
+        <Box mx="400" mb="400">
+          <InviteCollaboratorItem />
+        </Box>
+      )}
     </>
   );
 }
 
-export function OGShowMeSparkpostStep() {
+export function OGShowMeSparkpostStep(props) {
   return (
     <>
       <Panel.Section>
@@ -112,9 +114,11 @@ export function OGShowMeSparkpostStep() {
       <Panel.Section>
         <ViewEventsItem />
       </Panel.Section>
-      <Panel.Section>
-        <InviteCollaboratorItem />
-      </Panel.Section>
+      {props.canManageUsers && (
+        <Panel.Section>
+          <InviteCollaboratorItem />
+        </Panel.Section>
+      )}
     </>
   );
 }

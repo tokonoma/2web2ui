@@ -15,6 +15,9 @@ const defaultProps = {
   setAccountOption: jest.fn(),
   listSendingDomains: jest.fn(),
   isAdmin: true,
+  canManageKeys: true,
+  canManageSendingDomains: true,
+  canManageUsers: true,
 };
 
 describe('GettingStartedGuide shallow', () => {

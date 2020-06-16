@@ -25,6 +25,7 @@ function mapStateToProps(state) {
     accountAgeInDays,
     canManageKeys: hasGrants('api_keys/manage')(state),
     canManageSendingDomains: hasGrants('sending_domains/manage')(state),
+    canManageUsers: hasGrants('users/manage')(state),
     currentUser: state.currentUser,
     hasSendingDomains: notBlockedDomains.length > 0,
     hasVerifiedDomains: verifiedDomains.length > 0,

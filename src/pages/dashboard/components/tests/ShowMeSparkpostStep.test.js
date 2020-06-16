@@ -5,7 +5,7 @@ import ShowMeSparkpostStep from '../ShowMeSparkpostStep';
 import { GuideContext } from '../GettingStartedGuide';
 
 describe('ShowMeSparkpostStep', () => {
-  const subject_rtl = (func = render) => {
+  const subject_rtl = (func = render, props = {}) => {
     const values = {
       stepName: 'Show Me SparkPost',
       setAndStoreStepName: jest.fn(),
@@ -22,7 +22,7 @@ describe('ShowMeSparkpostStep', () => {
     return func(
       <TestApp>
         <GuideContext.Provider value={values}>
-          <ShowMeSparkpostStep />
+          <ShowMeSparkpostStep canManageUsers={true} {...props} />
         </GuideContext.Provider>
       </TestApp>,
     );
@@ -40,8 +40,12 @@ describe('ShowMeSparkpostStep', () => {
     const { queryAllByText } = subject_rtl(render);
     expect(queryAllByText('Check Out Events')[0]).toBeInTheDocument();
   });
-  it('should render Checklist with title Invite a Collaborator', () => {
+  it('should render Checklist with title Invite a Collaborator when user has grant to manage users', () => {
     const { queryByText } = subject_rtl(render);
     expect(queryByText('Invite a Collaborator')).toBeInTheDocument();
+  });
+  it('should not render Checklist with title Invite a Collaborator when user does not have grant to manage users', () => {
+    const { queryByText } = subject_rtl(render, { canManageUsers: false });
+    expect(queryByText('Invite a Collaborator')).not.toBeInTheDocument();
   });
 });

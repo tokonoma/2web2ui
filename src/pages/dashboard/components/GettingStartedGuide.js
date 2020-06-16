@@ -14,6 +14,9 @@ export const GettingStartedGuide = ({
   hasSendingDomains,
   hasApiKeysForSending,
   isAdmin,
+  canManageKeys,
+  canManageSendingDomains,
+  canManageUsers,
 }) => {
   const {
     send_test_email_completed,
@@ -82,16 +85,18 @@ export const GettingStartedGuide = ({
   return (
     <GuideContext.Provider value={values}>
       <Panel title="Getting Started" sectioned>
-        <Expandable
-          title={'Start Sending with SparkPost'}
-          my="300"
-          defaultOpen
-          id="start_sending_expandable"
-        >
-          <LetsCodeStep />
-        </Expandable>
+        {canManageKeys && canManageSendingDomains && (
+          <Expandable
+            title={'Start Sending with SparkPost'}
+            my="300"
+            defaultOpen
+            id="start_sending_expandable"
+          >
+            <LetsCodeStep />
+          </Expandable>
+        )}
         <Expandable title={'SparkPost Analytics'} my="300" id="sparkpost_analytics">
-          <ShowMeSparkpostStep />
+          <ShowMeSparkpostStep canManageUsers={canManageUsers} />
         </Expandable>
       </Panel>
     </GuideContext.Provider>

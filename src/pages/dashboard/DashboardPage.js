@@ -29,10 +29,8 @@ export default function DashboardPage(props) {
   }, [listSendingDomains, canManageSendingDomains]);
 
   const displayGuideAndReport = () => {
-    const { canManageKeys, canManageSendingDomains } = props;
     const usageReport = <UsageReport />;
-    const gettingStartedGuide =
-      canManageKeys && canManageSendingDomains ? <GettingStartedGuide {...props} /> : null;
+    const gettingStartedGuide = <GettingStartedGuide {...props} />;
 
     return (
       <>
