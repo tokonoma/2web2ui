@@ -19,6 +19,7 @@ import {
   selectSummaryChartSearchOptions,
   selectSummaryMetricsProcessed,
 } from 'src/selectors/reportSearchOptions';
+import BounceReason from './components/tabs/BounceReason';
 import styles from './ReportBuilder.module.scss';
 import moment from 'moment';
 
@@ -128,7 +129,11 @@ export function ReportBuilder({
               </Box>
               {renderLoading()}
             </Tabs.Item>
-            {bounceTabMetrics && <Tabs.Item></Tabs.Item>}
+            {bounceTabMetrics && (
+              <Tabs.Item>
+                <BounceReason />
+              </Tabs.Item>
+            )}
             {rejectionTabMetrics && <Tabs.Item></Tabs.Item>}
             {delayTabMetrics && <Tabs.Item></Tabs.Item>}
             {linksTabMetrics && <Tabs.Item></Tabs.Item>}
