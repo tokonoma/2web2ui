@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import { Grid, Panel } from 'src/components/matchbox';
-import { Loading, PieChart } from 'src/components';
+import { Grid } from 'src/components/matchbox';
+import { PanelSectionLoading } from 'src/components/loading';
+import { PieChart } from 'src/components';
 import { generateColors } from 'src/helpers/color';
 import styles from './BounceChart.module.scss';
 import { formatPercent } from 'src/helpers/units';
@@ -155,40 +156,34 @@ export default class BounceChart extends Component {
     const { loading } = this.props;
 
     if (loading) {
-      return (
-        <Panel sectioned className={styles.LoadingPanel}>
-          <Loading />
-        </Panel>
-      );
+      return <PanelSectionLoading minHeight="300px" />;
     }
 
     return (
-      <Panel sectioned>
-        <Grid>
-          <Grid.Column xs={12} lg={5}>
-            <div className={styles.ChartWrapper}>
-              <PieChart.Chart
-                {...this.getData()}
-                hoveredItem={this.state.hoveredItem}
-                onMouseOver={this.handleMouseOver}
-                onMouseOut={this.handleMouseOut}
-                onClick={this.handleClick}
-              />
-              <PieChart.ActiveLabel {...this.getLabelProps()} />
-            </div>
-          </Grid.Column>
-          <Grid.Column xs={12} lg={7}>
-            <PieChart.Legend
-              headerData={this.getLegendHeaderData()}
+      <Grid>
+        <Grid.Column xs={12} lg={5}>
+          <div className={styles.ChartWrapper}>
+            <PieChart.Chart
               {...this.getData()}
               hoveredItem={this.state.hoveredItem}
               onMouseOver={this.handleMouseOver}
               onMouseOut={this.handleMouseOut}
               onClick={this.handleClick}
             />
-          </Grid.Column>
-        </Grid>
-      </Panel>
+            <PieChart.ActiveLabel {...this.getLabelProps()} />
+          </div>
+        </Grid.Column>
+        <Grid.Column xs={12} lg={7}>
+          <PieChart.Legend
+            headerData={this.getLegendHeaderData()}
+            {...this.getData()}
+            hoveredItem={this.state.hoveredItem}
+            onMouseOver={this.handleMouseOver}
+            onMouseOut={this.handleMouseOut}
+            onClick={this.handleClick}
+          />
+        </Grid.Column>
+      </Grid>
     );
   }
 }

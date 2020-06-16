@@ -5,7 +5,6 @@ import { PageLink } from 'src/components/links';
 import { Box, Grid, Panel } from 'src/components/matchbox';
 import LineChart from './components/charts/linechart/LineChart';
 import Legend from './components/charts/legend/Legend';
-import Callout from 'src/components/callout';
 import { useHibana } from 'src/context/HibanaContext';
 import DateFilter from './components/filters/DateFilter';
 import UnsubscribeRateByCohortActions from './components/actionContent/UnsubscribeRateByCohortActions';
@@ -15,7 +14,8 @@ import TooltipMetric from 'src/components/charts/TooltipMetric';
 import withDetails from './containers/withDetails';
 import withDateSelection from './containers/withDateSelection';
 import { ENGAGEMENT_RECENCY_COHORTS } from './constants/info';
-import { Loading } from 'src/components';
+import { Empty } from 'src/components';
+import { PanelSectionLoading } from 'src/components/loading';
 import { roundToPlaces } from 'src/helpers/units';
 import moment from 'moment';
 import _ from 'lodash';
@@ -95,21 +95,15 @@ export function UnsubscribeRateByCohortPage(props) {
     let chartPanel;
 
     if (empty) {
-      chartPanel = (
-        <Callout title="No Data Available">Insufficient data to populate this chart</Callout>
-      );
+      chartPanel = <Empty message="Insufficient data to populate this chart" />;
     }
 
     if (error) {
-      chartPanel = <Callout title="Unable to Load Data">{error.message}</Callout>;
+      chartPanel = <Empty message="Unable to Load Data" />;
     }
 
     if (loading) {
-      chartPanel = (
-        <div style={{ height: '220px', position: 'relative' }}>
-          <Loading />
-        </div>
-      );
+      chartPanel = <PanelSectionLoading minHeight="250px" />;
     }
 
     return (
@@ -117,8 +111,8 @@ export function UnsubscribeRateByCohortPage(props) {
         <Grid.Column sm={12} md={7}>
           <Panel data-id="unsubscribe-rate-chart">
             <Tabs facet={facet} facetId={facetId} subaccountId={subaccountId} />
-            <Panel.Section>
-              {chartPanel || (
+            {chartPanel || (
+              <Panel.Section>
                 <div className="LiftTooltip">
                   <LineChart
                     height={300}
@@ -148,14 +142,14 @@ export function UnsubscribeRateByCohortPage(props) {
                     tooltipContent={label => ENGAGEMENT_RECENCY_COHORTS[label]}
                   />
                 </div>
-              )}
-            </Panel.Section>
+              </Panel.Section>
+            )}
           </Panel>
         </Grid.Column>
         <Grid.Column sm={12} md={5} mdOffset={0}>
           <div>
             {!chartPanel && (
-              <Box as={Panel} sectioned>
+              <Box as={Panel}>
                 <UnsubscribeRateByCohortActions
                   unsubscribeByCohort={selectedUnsubscribe}
                   recencyByCohort={selectedEngagementRecency}

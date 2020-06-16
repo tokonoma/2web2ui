@@ -19,8 +19,8 @@ import {
 } from './constants/info';
 import withDetails from './containers/withDetails';
 import withDateSelection from './containers/withDateSelection';
-import { Loading } from 'src/components';
-import Callout from 'src/components/callout';
+import { Empty } from 'src/components';
+import { PanelSectionLoading } from 'src/components/loading';
 import ChartHeader from './components/ChartHeader';
 import { formatFullNumber, roundToPlaces, formatNumber } from 'src/helpers/units';
 import moment from 'moment';
@@ -90,30 +90,24 @@ export class HealthScorePage extends Component {
     let panelContent;
 
     if (empty) {
-      panelContent = (
-        <Callout title="No Data Available">Insufficient data to populate this chart</Callout>
-      );
+      panelContent = <Empty message="Insufficient data to populate this chart" />;
     }
 
     if (error) {
-      panelContent = <Callout title="Unable to Load Data">{error.message}</Callout>;
+      panelContent = <Empty message="Unable to Load Data" />;
     }
 
     if (loading) {
-      panelContent = (
-        <div style={{ height: '220px', position: 'relative' }}>
-          <Loading />
-        </div>
-      );
+      panelContent = <PanelSectionLoading minHeight="225px" />;
     }
 
     return (
       <OGOnlyWrapper as={Grid}>
         <OGOnlyWrapper as={Grid.Column} sm={12} md={7}>
-          <Panel sectioned data-id="health-score-panel">
+          <Panel data-id="health-score-panel">
             <ChartHeader title="Health Score" tooltipContent={HEALTH_SCORE_INFO} />
             {panelContent || (
-              <>
+              <Panel.Section>
                 <BarChart
                   margin={newModelMarginsHealthScore}
                   gap={gap}
@@ -199,7 +193,7 @@ export class HealthScorePage extends Component {
                     />
                   </>
                 )}
-              </>
+              </Panel.Section>
             )}
           </Panel>
         </OGOnlyWrapper>
@@ -208,7 +202,7 @@ export class HealthScorePage extends Component {
             <div data-id="health-score-components">
               <Box as={Grid}>
                 <Box as={Grid.Column} xs={12} md={7}>
-                  <Box as={Panel} sectioned>
+                  <Box as={Panel}>
                     <ChartHeader
                       title="Health Score Components"
                       date={selectedDate}
@@ -216,30 +210,32 @@ export class HealthScorePage extends Component {
                       tooltipContent={HEALTH_SCORE_COMPONENT_INFO}
                     />
                     {!loading && selectedWeightsAreEmpty && (
-                      <Callout>Insufficient data to populate this chart</Callout>
+                      <Empty message="Insufficient data to populate this chart" />
                     )}
                     {!panelContent && !selectedWeightsAreEmpty && (
-                      <DivergingBar
-                        barHeight={280 / (selectedWeights.length || 1)}
-                        data={selectedWeights}
-                        xKey="weight"
-                        yKey="weight_type"
-                        yLabel={({ value }) => _.get(HEALTH_SCORE_COMPONENTS[value], 'label')}
-                        tooltipContent={({ payload = {} }) =>
-                          _.get(HEALTH_SCORE_COMPONENTS[payload.weight_type], 'info')
-                        }
-                        onClick={this.handleComponentSelect}
-                        selected={selectedComponent}
-                      />
+                      <Panel.Section>
+                        <DivergingBar
+                          barHeight={280 / (selectedWeights.length || 1)}
+                          data={selectedWeights}
+                          xKey="weight"
+                          yKey="weight_type"
+                          yLabel={({ value }) => _.get(HEALTH_SCORE_COMPONENTS[value], 'label')}
+                          tooltipContent={({ payload = {} }) =>
+                            _.get(HEALTH_SCORE_COMPONENTS[payload.weight_type], 'info')
+                          }
+                          onClick={this.handleComponentSelect}
+                          selected={selectedComponent}
+                        />
+                      </Panel.Section>
                     )}
                   </Box>
                 </Box>
                 <Box as={Grid.Column} xs={12} md={5}>
-                  <Box as={Panel} sectioned>
-                    {!panelContent && (
+                  {!panelContent && (
+                    <Box as={Panel}>
                       <HealthScoreActions weights={selectedWeights} date={selectedDate} />
-                    )}
-                  </Box>
+                    </Box>
+                  )}
                 </Box>
               </Box>
             </div>

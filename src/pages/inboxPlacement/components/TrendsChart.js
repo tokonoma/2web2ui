@@ -11,7 +11,7 @@ import TooltipMetric from 'src/components/charts/TooltipMetric';
 import useDateHover from 'src/pages/inboxPlacement/hooks/useDateHover';
 import { getInboxPlacementTrends } from 'src/actions/inboxPlacement';
 import { selectTrends } from 'src/selectors/inboxPlacement';
-import Callout from 'src/components/callout';
+import { Empty } from 'src/components';
 import { formatApiDate } from 'src/helpers/date';
 import { PanelSectionLoading } from 'src/components/loading';
 
@@ -114,13 +114,7 @@ export const TrendsChart = props => {
   ));
 
   if (error) {
-    return (
-      <div>
-        <Callout title="Unable to Load Trends Data" height={panelHeight}>
-          {error.message}
-        </Callout>
-      </div>
-    );
+    return <Empty message="Unable to Load Trends Data" />;
   }
 
   if (loading) {
@@ -130,12 +124,10 @@ export const TrendsChart = props => {
   return (
     <>
       {hasNoData ? (
-        <div>
-          <Callout height={panelHeight}>Inbox Placement Trends Not Available</Callout>
-        </div>
+        <Empty message="Inbox Placement Trends Not Available" />
       ) : (
         <>
-          {/*float:right does't work for some reason. Causes tooltip to not show when hovering bottom of chart*/}
+          {/* float:right doesn't work for some reason. Causes tooltip to not show when hovering bottom of chart */}
           <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Legend items={legend} />
           </div>

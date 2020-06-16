@@ -13,8 +13,8 @@ import DateFilter from './components/filters/DateFilter';
 import { SPAM_TRAP_INFO } from './constants/info';
 import withDetails from './containers/withDetails';
 import withDateSelection from './containers/withDateSelection';
-import { Loading } from 'src/components';
-import Callout from 'src/components/callout';
+import { Empty } from 'src/components';
+import { PanelSectionLoading } from 'src/components/loading';
 import Legend from './components/charts/legend/Legend';
 import Calculation from './components/viewControls/Calculation';
 import ChartHeader from './components/ChartHeader';
@@ -107,27 +107,21 @@ export function SpamTrapPage(props) {
     let chartPanel;
 
     if (empty) {
-      chartPanel = (
-        <Callout title="No Data Available">Insufficient data to populate this chart</Callout>
-      );
+      chartPanel = <Empty message="Insufficient data to populate this chart" />;
     }
 
     if (error) {
-      chartPanel = <Callout title="Unable to Load Data">{error.message}</Callout>;
+      chartPanel = <Empty message="Unable to Load Data" />;
     }
 
     if (loading) {
-      chartPanel = (
-        <div style={{ height: '220px', position: 'relative' }}>
-          <Loading />
-        </div>
-      );
+      chartPanel = <PanelSectionLoading minHeight="225px" />;
     }
 
     return (
       <Grid>
         <Grid.Column sm={12} md={7}>
-          <Panel sectioned>
+          <Panel>
             <ChartHeader
               title="Spam Trap Monitoring"
               primaryArea={
@@ -136,49 +130,49 @@ export function SpamTrapPage(props) {
               tooltipContent={SPAM_TRAP_INFO}
             />
             {chartPanel || (
-              <div className="LiftTooltip">
-                <BarChart
-                  gap={gap}
-                  onClick={handleDateSelect}
-                  selected={selectedDate}
-                  timeSeries={data}
-                  onMouseOver={handleDateHover}
-                  onMouseOut={resetDateHover}
-                  hovered={hoveredDate}
-                  shouldHighlightSelected={shouldHighlightSelected}
-                  tooltipContent={getTooltipContent}
-                  yKeys={spamTrapHitTypesCollection
-                    .map(({ key, OGFill, hibanaFill }) => {
-                      const fill = isHibanaEnabled ? hibanaFill : OGFill;
+              <Panel.Section>
+                <div className="LiftTooltip">
+                  <BarChart
+                    gap={gap}
+                    onClick={handleDateSelect}
+                    selected={selectedDate}
+                    timeSeries={data}
+                    onMouseOver={handleDateHover}
+                    onMouseOut={resetDateHover}
+                    hovered={hoveredDate}
+                    shouldHighlightSelected={shouldHighlightSelected}
+                    tooltipContent={getTooltipContent}
+                    yKeys={spamTrapHitTypesCollection
+                      .map(({ key, OGFill, hibanaFill }) => {
+                        const fill = isHibanaEnabled ? hibanaFill : OGFill;
 
-                      return {
-                        fill,
-                        key: calculation === 'relative' ? `relative_${key}` : key,
-                      };
-                    })
-                    .reverse()}
-                  yAxisProps={getYAxisProps()}
-                  xAxisProps={getXAxisProps()}
-                />
-                <Legend
-                  items={spamTrapHitTypesCollection}
-                  tooltipContent={label => spamTrapHitTypesByLabel[label].description}
-                />
-              </div>
+                        return {
+                          fill,
+                          key: calculation === 'relative' ? `relative_${key}` : key,
+                        };
+                      })
+                      .reverse()}
+                    yAxisProps={getYAxisProps()}
+                    xAxisProps={getXAxisProps()}
+                  />
+                  <Legend
+                    items={spamTrapHitTypesCollection}
+                    tooltipContent={label => spamTrapHitTypesByLabel[label].description}
+                  />
+                </div>
+              </Panel.Section>
             )}
           </Panel>
         </Grid.Column>
         <Grid.Column sm={12} md={5} mdOffset={0}>
-          {!loading && (
-            <Box as={Panel} sectioned>
-              <div>
-                {!chartPanel && (
-                  <SpamTrapActions
-                    percent={selectedSpamTrapHits.relative_trap_hits}
-                    date={selectedDate}
-                  />
-                )}
-              </div>
+          {!loading && !chartPanel && (
+            <Box as={Panel}>
+              {!chartPanel && (
+                <SpamTrapActions
+                  percent={selectedSpamTrapHits.relative_trap_hits}
+                  date={selectedDate}
+                />
+              )}
             </Box>
           )}
         </Grid.Column>

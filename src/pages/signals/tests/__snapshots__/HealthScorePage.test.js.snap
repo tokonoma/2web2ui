@@ -79,7 +79,6 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
     >
       <Panel
         data-id="health-score-panel"
-        sectioned={true}
       >
         <ChartHeader
           title="Health Score"
@@ -89,265 +88,267 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
   including bounces, spam trap hits, and engagement across our entire network.
 "
         />
-        <BarChart
-          disableHover={false}
-          gap={0.25}
-          height={250}
-          hovered="2017-01-05"
-          margin={
-            Object {
-              "bottom": 5,
-              "left": 18,
-              "right": 8,
-              "top": 21,
+        <Panel.Section>
+          <BarChart
+            disableHover={false}
+            gap={0.25}
+            height={250}
+            hovered="2017-01-05"
+            margin={
+              Object {
+                "bottom": 5,
+                "left": 18,
+                "right": 8,
+                "top": 21,
+              }
             }
-          }
-          onClick={[MockFunction]}
-          onMouseOver={[MockFunction]}
-          selected="2017-01-01"
-          shouldHighlightSelected={true}
-          timeSeries={
-            Array [
-              Object {
-                "date": "2017-01-01",
-                "weights": Array [
-                  Object {
-                    "weight": 0.5,
-                    "weight_type": "Hard Bounces",
-                    "weight_value": 0.25,
-                  },
-                  Object {
-                    "weight": -0.5,
-                    "weight_type": "eng cohorts: new, 14-day",
-                    "weight_value": 0.25,
-                  },
-                ],
-              },
-              Object {
-                "date": "2017-01-02",
-                "weights": Array [
-                  Object {
-                    "weight": 0.8,
-                    "weight_type": "List Quality",
-                    "weight_value": 0.25,
-                  },
-                  Object {
-                    "weight": -0.8,
-                    "weight_type": "Other bounces",
-                    "weight_value": 0.25,
-                  },
-                ],
-              },
-            ]
-          }
-          tooltipContent={[Function]}
-          width="99%"
-          xAxisProps={
-            Object {
-              "tickFormatter": [Function],
-              "ticks": Array [],
-            }
-          }
-          xAxisRefLines={
-            Array [
-              Object {
-                "label": Object {
-                  "className": "xDividerLabel",
-                  "offset": 14,
-                  "position": "top",
-                  "value": "New",
+            onClick={[MockFunction]}
+            onMouseOver={[MockFunction]}
+            selected="2017-01-01"
+            shouldHighlightSelected={true}
+            timeSeries={
+              Array [
+                Object {
+                  "date": "2017-01-01",
+                  "weights": Array [
+                    Object {
+                      "weight": 0.5,
+                      "weight_type": "Hard Bounces",
+                      "weight_value": 0.25,
+                    },
+                    Object {
+                      "weight": -0.5,
+                      "weight_type": "eng cohorts: new, 14-day",
+                      "weight_value": 0.25,
+                    },
+                  ],
                 },
-                "stroke": "#d2d2d7",
-                "strokeWidth": 1,
-                "x": "2019-06-07",
-              },
-              Object {
-                "label": Object {
-                  "className": "xDividerLabel",
-                  "position": "top",
-                  "value": "Model",
+                Object {
+                  "date": "2017-01-02",
+                  "weights": Array [
+                    Object {
+                      "weight": 0.8,
+                      "weight_type": "List Quality",
+                      "weight_value": 0.25,
+                    },
+                    Object {
+                      "weight": -0.8,
+                      "weight_type": "Other bounces",
+                      "weight_value": 0.25,
+                    },
+                  ],
                 },
-                "strokeWidth": 0,
-                "x": "2019-06-07",
-              },
-            ]
-          }
-          xKey="date"
-          yAxisProps={
-            Object {
-              "tickFormatter": [Function],
-              "ticks": Array [
-                0,
-                0.55,
-                0.8,
-                1,
-              ],
+              ]
             }
-          }
-          yAxisRefLines={
-            Array [
+            tooltipContent={[Function]}
+            width="99%"
+            xAxisProps={
               Object {
-                "stroke": "#067852",
-                "strokeWidth": 1,
-                "y": 0.8,
-              },
+                "tickFormatter": [Function],
+                "ticks": Array [],
+              }
+            }
+            xAxisRefLines={
+              Array [
+                Object {
+                  "label": Object {
+                    "className": "xDividerLabel",
+                    "offset": 14,
+                    "position": "top",
+                    "value": "New",
+                  },
+                  "stroke": "#d2d2d7",
+                  "strokeWidth": 1,
+                  "x": "2019-06-07",
+                },
+                Object {
+                  "label": Object {
+                    "className": "xDividerLabel",
+                    "position": "top",
+                    "value": "Model",
+                  },
+                  "strokeWidth": 0,
+                  "x": "2019-06-07",
+                },
+              ]
+            }
+            xKey="date"
+            yAxisProps={
               Object {
-                "stroke": "#d9363e",
-                "strokeWidth": 1,
-                "y": 0.55,
-              },
-            ]
-          }
-          yKey="health_score"
-          yRange={
-            Array [
-              "auto",
-              "auto",
-            ]
-          }
-        />
-        <ChartHeader
-          title="Injections"
-          tooltipContent="
+                "tickFormatter": [Function],
+                "ticks": Array [
+                  0,
+                  0.55,
+                  0.8,
+                  1,
+                ],
+              }
+            }
+            yAxisRefLines={
+              Array [
+                Object {
+                  "stroke": "#067852",
+                  "strokeWidth": 1,
+                  "y": 0.8,
+                },
+                Object {
+                  "stroke": "#d9363e",
+                  "strokeWidth": 1,
+                  "y": 0.55,
+                },
+              ]
+            }
+            yKey="health_score"
+            yRange={
+              Array [
+                "auto",
+                "auto",
+              ]
+            }
+          />
+          <ChartHeader
+            title="Injections"
+            tooltipContent="
   Injections are defined as the total number of messages successfully generated or relayed to SparkPost for delivery.
 "
-        />
-        <BarChart
-          gap={0.25}
-          height={190}
-          hovered="2017-01-05"
-          margin={
-            Object {
-              "bottom": 5,
-              "left": 18,
-              "right": 8,
-              "top": 12,
-            }
-          }
-          onClick={[MockFunction]}
-          onMouseOver={[MockFunction]}
-          selected="2017-01-01"
-          shouldHighlightSelected={true}
-          timeSeries={
-            Array [
+          />
+          <BarChart
+            gap={0.25}
+            height={190}
+            hovered="2017-01-05"
+            margin={
               Object {
-                "date": "2017-01-01",
-                "weights": Array [
-                  Object {
-                    "weight": 0.5,
-                    "weight_type": "Hard Bounces",
-                    "weight_value": 0.25,
-                  },
-                  Object {
-                    "weight": -0.5,
-                    "weight_type": "eng cohorts: new, 14-day",
-                    "weight_value": 0.25,
-                  },
-                ],
-              },
+                "bottom": 5,
+                "left": 18,
+                "right": 8,
+                "top": 12,
+              }
+            }
+            onClick={[MockFunction]}
+            onMouseOver={[MockFunction]}
+            selected="2017-01-01"
+            shouldHighlightSelected={true}
+            timeSeries={
+              Array [
+                Object {
+                  "date": "2017-01-01",
+                  "weights": Array [
+                    Object {
+                      "weight": 0.5,
+                      "weight_type": "Hard Bounces",
+                      "weight_value": 0.25,
+                    },
+                    Object {
+                      "weight": -0.5,
+                      "weight_type": "eng cohorts: new, 14-day",
+                      "weight_value": 0.25,
+                    },
+                  ],
+                },
+                Object {
+                  "date": "2017-01-02",
+                  "weights": Array [
+                    Object {
+                      "weight": 0.8,
+                      "weight_type": "List Quality",
+                      "weight_value": 0.25,
+                    },
+                    Object {
+                      "weight": -0.8,
+                      "weight_type": "Other bounces",
+                      "weight_value": 0.25,
+                    },
+                  ],
+                },
+              ]
+            }
+            tooltipContent={[Function]}
+            width="99%"
+            xAxisProps={
               Object {
-                "date": "2017-01-02",
-                "weights": Array [
-                  Object {
-                    "weight": 0.8,
-                    "weight_type": "List Quality",
-                    "weight_value": 0.25,
-                  },
-                  Object {
-                    "weight": -0.8,
-                    "weight_type": "Other bounces",
-                    "weight_value": 0.25,
-                  },
-                ],
-              },
-            ]
-          }
-          tooltipContent={[Function]}
-          width="99%"
-          xAxisProps={
-            Object {
-              "tickFormatter": [Function],
-              "ticks": Array [],
+                "tickFormatter": [Function],
+                "ticks": Array [],
+              }
             }
-          }
-          xAxisRefLines={Array []}
-          xKey="date"
-          yAxisProps={
-            Object {
-              "tickFormatter": [Function],
-            }
-          }
-          yAxisRefLines={Array []}
-          yKey="injections"
-          yRange={
-            Array [
-              "auto",
-              "auto",
-            ]
-          }
-        />
-        <ChartHeader
-          title="Hard Bounces Percent"
-        />
-        <BarChart
-          gap={0.25}
-          height={190}
-          hovered="2017-01-05"
-          margin={
-            Object {
-              "bottom": 5,
-              "left": 18,
-              "right": 8,
-              "top": 12,
-            }
-          }
-          onClick={[MockFunction]}
-          onMouseOver={[MockFunction]}
-          selected="2017-01-01"
-          shouldHighlightSelected={true}
-          timeSeries={
-            Array [
+            xAxisRefLines={Array []}
+            xKey="date"
+            yAxisProps={
               Object {
-                "date": "2017-01-01",
-                "weight": 0.5,
-                "weight_type": "Hard Bounces",
-                "weight_value": 0.25,
-              },
+                "tickFormatter": [Function],
+              }
+            }
+            yAxisRefLines={Array []}
+            yKey="injections"
+            yRange={
+              Array [
+                "auto",
+                "auto",
+              ]
+            }
+          />
+          <ChartHeader
+            title="Hard Bounces Percent"
+          />
+          <BarChart
+            gap={0.25}
+            height={190}
+            hovered="2017-01-05"
+            margin={
               Object {
-                "date": "2017-01-02",
-              },
-            ]
-          }
-          tooltipContent={[Function]}
-          width="99%"
-          xAxisProps={
-            Object {
-              "tickFormatter": [Function],
-              "ticks": Array [],
+                "bottom": 5,
+                "left": 18,
+                "right": 8,
+                "top": 12,
+              }
             }
-          }
-          xAxisRefLines={Array []}
-          xKey="date"
-          yAxisProps={
-            Object {
-              "tickFormatter": [Function],
+            onClick={[MockFunction]}
+            onMouseOver={[MockFunction]}
+            selected="2017-01-01"
+            shouldHighlightSelected={true}
+            timeSeries={
+              Array [
+                Object {
+                  "date": "2017-01-01",
+                  "weight": 0.5,
+                  "weight_type": "Hard Bounces",
+                  "weight_value": 0.25,
+                },
+                Object {
+                  "date": "2017-01-02",
+                },
+              ]
             }
-          }
-          yAxisRefLines={Array []}
-          yDomain={
-            Array [
-              0,
-              "auto",
-            ]
-          }
-          yKey="weight_value"
-          yRange={
-            Array [
-              "auto",
-              "auto",
-            ]
-          }
-        />
+            tooltipContent={[Function]}
+            width="99%"
+            xAxisProps={
+              Object {
+                "tickFormatter": [Function],
+                "ticks": Array [],
+              }
+            }
+            xAxisRefLines={Array []}
+            xKey="date"
+            yAxisProps={
+              Object {
+                "tickFormatter": [Function],
+              }
+            }
+            yAxisRefLines={Array []}
+            yDomain={
+              Array [
+                0,
+                "auto",
+              ]
+            }
+            yKey="weight_value"
+            yRange={
+              Array [
+                "auto",
+                "auto",
+              ]
+            }
+          />
+        </Panel.Section>
       </Panel>
     </OGOnlyWrapper>
     <OGOnlyWrapper
@@ -369,7 +370,6 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
           >
             <Box
               as={[Function]}
-              sectioned={true}
             >
               <ChartHeader
                 date="2017-01-01"
@@ -380,38 +380,40 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
   engagement, and others.
 "
               />
-              <DivergingBar
-                barHeight={140}
-                data={
-                  Array [
-                    Object {
-                      "weight": 0.5,
-                      "weight_type": "Hard Bounces",
-                      "weight_value": 0.25,
-                    },
-                    Object {
-                      "weight": -0.5,
-                      "weight_type": "eng cohorts: new, 14-day",
-                      "weight_value": 0.25,
-                    },
-                  ]
-                }
-                negativeFill="#d9363e"
-                onClick={[Function]}
-                positiveFill="#009f6a"
-                selected="Hard Bounces"
-                tooltipContent={[Function]}
-                width="99%"
-                xDomain={
-                  Array [
-                    "dataMin",
-                    "dataMax",
-                  ]
-                }
-                xKey="weight"
-                yKey="weight_type"
-                yLabel={[Function]}
-              />
+              <Panel.Section>
+                <DivergingBar
+                  barHeight={140}
+                  data={
+                    Array [
+                      Object {
+                        "weight": 0.5,
+                        "weight_type": "Hard Bounces",
+                        "weight_value": 0.25,
+                      },
+                      Object {
+                        "weight": -0.5,
+                        "weight_type": "eng cohorts: new, 14-day",
+                        "weight_value": 0.25,
+                      },
+                    ]
+                  }
+                  negativeFill="#d9363e"
+                  onClick={[Function]}
+                  positiveFill="#009f6a"
+                  selected="Hard Bounces"
+                  tooltipContent={[Function]}
+                  width="99%"
+                  xDomain={
+                    Array [
+                      "dataMin",
+                      "dataMax",
+                    ]
+                  }
+                  xKey="weight"
+                  yKey="weight_type"
+                  yLabel={[Function]}
+                />
+              </Panel.Section>
             </Box>
           </Box>
           <Box
@@ -421,7 +423,6 @@ exports[`Signals Health Score Page renders correctly when recieving data 1`] = `
           >
             <Box
               as={[Function]}
-              sectioned={true}
             >
               <HealthScoreActions
                 date="2017-01-01"
@@ -469,7 +470,6 @@ Array [
   </Panel>,
   <Panel
     data-id="health-score-panel"
-    sectioned={true}
   >
     <ChartHeader
       title="Health Score"
@@ -479,11 +479,9 @@ Array [
   including bounces, spam trap hits, and engagement across our entire network.
 "
     />
-    <Callout
-      title="No Data Available"
-    >
-      Insufficient data to populate this chart
-    </Callout>
+    <Empty
+      message="Insufficient data to populate this chart"
+    />
   </Panel>,
 ]
 `;
@@ -527,7 +525,6 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
     >
       <Panel
         data-id="health-score-panel"
-        sectioned={true}
       >
         <ChartHeader
           title="Health Score"
@@ -537,149 +534,151 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
   including bounces, spam trap hits, and engagement across our entire network.
 "
         />
-        <BarChart
-          disableHover={false}
-          gap={0.25}
-          height={250}
-          hovered="2017-01-05"
-          margin={
-            Object {
-              "bottom": 5,
-              "left": 18,
-              "right": 8,
-              "top": 21,
-            }
-          }
-          onClick={[MockFunction]}
-          onMouseOver={[MockFunction]}
-          selected="2017-01-01"
-          shouldHighlightSelected={true}
-          timeSeries={
-            Array [
+        <Panel.Section>
+          <BarChart
+            disableHover={false}
+            gap={0.25}
+            height={250}
+            hovered="2017-01-05"
+            margin={
               Object {
-                "date": "2017-01-01",
-              },
-            ]
-          }
-          tooltipContent={[Function]}
-          width="99%"
-          xAxisProps={
-            Object {
-              "tickFormatter": [Function],
-              "ticks": Array [],
+                "bottom": 5,
+                "left": 18,
+                "right": 8,
+                "top": 21,
+              }
             }
-          }
-          xAxisRefLines={
-            Array [
-              Object {
-                "label": Object {
-                  "className": "xDividerLabel",
-                  "offset": 14,
-                  "position": "top",
-                  "value": "New",
+            onClick={[MockFunction]}
+            onMouseOver={[MockFunction]}
+            selected="2017-01-01"
+            shouldHighlightSelected={true}
+            timeSeries={
+              Array [
+                Object {
+                  "date": "2017-01-01",
                 },
-                "stroke": "#d2d2d7",
-                "strokeWidth": 1,
-                "x": "2019-06-07",
-              },
-              Object {
-                "label": Object {
-                  "className": "xDividerLabel",
-                  "position": "top",
-                  "value": "Model",
-                },
-                "strokeWidth": 0,
-                "x": "2019-06-07",
-              },
-            ]
-          }
-          xKey="date"
-          yAxisProps={
-            Object {
-              "tickFormatter": [Function],
-              "ticks": Array [
-                0,
-                0.55,
-                0.8,
-                1,
-              ],
+              ]
             }
-          }
-          yAxisRefLines={
-            Array [
+            tooltipContent={[Function]}
+            width="99%"
+            xAxisProps={
               Object {
-                "stroke": "#067852",
-                "strokeWidth": 1,
-                "y": 0.8,
-              },
+                "tickFormatter": [Function],
+                "ticks": Array [],
+              }
+            }
+            xAxisRefLines={
+              Array [
+                Object {
+                  "label": Object {
+                    "className": "xDividerLabel",
+                    "offset": 14,
+                    "position": "top",
+                    "value": "New",
+                  },
+                  "stroke": "#d2d2d7",
+                  "strokeWidth": 1,
+                  "x": "2019-06-07",
+                },
+                Object {
+                  "label": Object {
+                    "className": "xDividerLabel",
+                    "position": "top",
+                    "value": "Model",
+                  },
+                  "strokeWidth": 0,
+                  "x": "2019-06-07",
+                },
+              ]
+            }
+            xKey="date"
+            yAxisProps={
               Object {
-                "stroke": "#d9363e",
-                "strokeWidth": 1,
-                "y": 0.55,
-              },
-            ]
-          }
-          yKey="health_score"
-          yRange={
-            Array [
-              "auto",
-              "auto",
-            ]
-          }
-        />
-        <ChartHeader
-          title="Injections"
-          tooltipContent="
+                "tickFormatter": [Function],
+                "ticks": Array [
+                  0,
+                  0.55,
+                  0.8,
+                  1,
+                ],
+              }
+            }
+            yAxisRefLines={
+              Array [
+                Object {
+                  "stroke": "#067852",
+                  "strokeWidth": 1,
+                  "y": 0.8,
+                },
+                Object {
+                  "stroke": "#d9363e",
+                  "strokeWidth": 1,
+                  "y": 0.55,
+                },
+              ]
+            }
+            yKey="health_score"
+            yRange={
+              Array [
+                "auto",
+                "auto",
+              ]
+            }
+          />
+          <ChartHeader
+            title="Injections"
+            tooltipContent="
   Injections are defined as the total number of messages successfully generated or relayed to SparkPost for delivery.
 "
-        />
-        <BarChart
-          gap={0.25}
-          height={190}
-          hovered="2017-01-05"
-          margin={
-            Object {
-              "bottom": 5,
-              "left": 18,
-              "right": 8,
-              "top": 12,
-            }
-          }
-          onClick={[MockFunction]}
-          onMouseOver={[MockFunction]}
-          selected="2017-01-01"
-          shouldHighlightSelected={true}
-          timeSeries={
-            Array [
+          />
+          <BarChart
+            gap={0.25}
+            height={190}
+            hovered="2017-01-05"
+            margin={
               Object {
-                "date": "2017-01-01",
-              },
-            ]
-          }
-          tooltipContent={[Function]}
-          width="99%"
-          xAxisProps={
-            Object {
-              "tickFormatter": [Function],
-              "ticks": Array [],
+                "bottom": 5,
+                "left": 18,
+                "right": 8,
+                "top": 12,
+              }
             }
-          }
-          xAxisRefLines={Array []}
-          xKey="date"
-          yAxisProps={
-            Object {
-              "tickFormatter": [Function],
+            onClick={[MockFunction]}
+            onMouseOver={[MockFunction]}
+            selected="2017-01-01"
+            shouldHighlightSelected={true}
+            timeSeries={
+              Array [
+                Object {
+                  "date": "2017-01-01",
+                },
+              ]
             }
-          }
-          yAxisRefLines={Array []}
-          yKey="injections"
-          yRange={
-            Array [
-              "auto",
-              "auto",
-            ]
-          }
-        />
+            tooltipContent={[Function]}
+            width="99%"
+            xAxisProps={
+              Object {
+                "tickFormatter": [Function],
+                "ticks": Array [],
+              }
+            }
+            xAxisRefLines={Array []}
+            xKey="date"
+            yAxisProps={
+              Object {
+                "tickFormatter": [Function],
+              }
+            }
+            yAxisRefLines={Array []}
+            yKey="injections"
+            yRange={
+              Array [
+                "auto",
+                "auto",
+              ]
+            }
+          />
+        </Panel.Section>
       </Panel>
     </OGOnlyWrapper>
     <OGOnlyWrapper
@@ -701,7 +700,6 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
           >
             <Box
               as={[Function]}
-              sectioned={true}
             >
               <ChartHeader
                 date="2017-01-01"
@@ -712,9 +710,9 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
   engagement, and others.
 "
               />
-              <Callout>
-                Insufficient data to populate this chart
-              </Callout>
+              <Empty
+                message="Insufficient data to populate this chart"
+              />
             </Box>
           </Box>
           <Box
@@ -724,7 +722,6 @@ exports[`Signals Health Score Page renders empty weights 1`] = `
           >
             <Box
               as={[Function]}
-              sectioned={true}
             >
               <HealthScoreActions
                 date="2017-01-01"
@@ -778,7 +775,6 @@ exports[`Signals Health Score Page renders error correctly 1`] = `
     >
       <Panel
         data-id="health-score-panel"
-        sectioned={true}
       >
         <ChartHeader
           title="Health Score"
@@ -788,11 +784,9 @@ exports[`Signals Health Score Page renders error correctly 1`] = `
   including bounces, spam trap hits, and engagement across our entire network.
 "
         />
-        <Callout
-          title="Unable to Load Data"
-        >
-          error message
-        </Callout>
+        <Empty
+          message="Unable to Load Data"
+        />
       </Panel>
     </OGOnlyWrapper>
     <OGOnlyWrapper
@@ -814,7 +808,6 @@ exports[`Signals Health Score Page renders error correctly 1`] = `
           >
             <Box
               as={[Function]}
-              sectioned={true}
             >
               <ChartHeader
                 date="2017-01-01"
@@ -831,12 +824,7 @@ exports[`Signals Health Score Page renders error correctly 1`] = `
             as={[Function]}
             md={5}
             xs={12}
-          >
-            <Box
-              as={[Function]}
-              sectioned={true}
-            />
-          </Box>
+          />
         </Box>
       </div>
     </OGOnlyWrapper>
@@ -864,7 +852,6 @@ Array [
   </Panel>,
   <Panel
     data-id="health-score-panel"
-    sectioned={true}
   >
     <ChartHeader
       title="Health Score"
@@ -874,16 +861,9 @@ Array [
   including bounces, spam trap hits, and engagement across our entire network.
 "
     />
-    <div
-      style={
-        Object {
-          "height": "220px",
-          "position": "relative",
-        }
-      }
-    >
-      <Loading />
-    </div>
+    <PanelSectionLoading
+      minHeight="225px"
+    />
   </Panel>,
 ]
 `;

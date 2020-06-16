@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import { getBatches } from 'src/actions/webhooks';
 import { PanelSectionTableCollection } from 'src/components/collection';
-import Loading from 'src/components/loading';
+import { PanelSectionLoading } from 'src/components/loading';
 import { Button, Panel } from 'src/components/matchbox';
 import { Empty } from 'src/components';
 import { selectWebhookBatches } from 'src/selectors/webhooks';
@@ -40,19 +40,11 @@ export class BatchTab extends Component {
     const { batches, batchesLoading } = this.props;
 
     if (batchesLoading) {
-      return (
-        <Panel.Section>
-          <Loading />
-        </Panel.Section>
-      );
+      return <PanelSectionLoading />;
     }
 
     if (_.isEmpty(batches)) {
-      return (
-        <Panel.Section>
-          <Empty hasPanel={false} message="There are no batches for your webhook" />
-        </Panel.Section>
-      );
+      return <Empty message="There are no batches for your webhook" />;
     }
 
     return (

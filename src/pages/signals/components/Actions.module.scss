@@ -1,9 +1,5 @@
 @import '~@sparkpost/matchbox/src/styles/config.scss';
 
-.Wrapper {
-  padding: spacing() 0 0 0;
-}
-
 .Action {
   display: flex;
 
@@ -12,7 +8,6 @@
     font-size: font-size(400);
   }
 }
-
 
 .ActionWrapper:last-child {
   .Dash {
@@ -28,7 +23,8 @@
   border: none;
   margin-bottom: spacing();
   height: 1px;
-  background: center left / 10px 1px  linear-gradient(to right, transparent 40%, color(gray, 8) 40%) repeat-x;
+  background: center left / 10px 1px linear-gradient(to right, transparent 40%, color(gray, 8) 40%)
+    repeat-x;
 }
 
 %Icon {
@@ -51,18 +47,6 @@
   color: color(yellow, dark);
 }
 
-.Title {
-  border-bottom: 1px solid color(gray, 8);
-  margin-bottom: spacing();
-  padding-top: rem(8);
-}
-
-.TitleText {
-  font-weight: 500;
-  font-size: font-size(500);
-  margin-bottom: rem(23);
-}
-
 .Link {
-  white-space: nowrap
+  white-space: nowrap;
 }

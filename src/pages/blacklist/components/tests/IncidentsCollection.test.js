@@ -40,9 +40,9 @@ describe('Blacklist Component: IncidentsCollection', () => {
   });
 
   it('renders the empty state when there are no incidents', () => {
-    const { queryByText } = subject({ incidents: [] });
-    expect(queryByText('There are no incidents for your date range selection')).toBeInTheDocument();
-    expect(queryByText('Last 7 Days')).toBeInTheDocument();
+    const { getByText } = subject({ incidents: [] });
+
+    expect(getByText('No results found.')).toBeInTheDocument();
   });
 
   it('displays the search text in the text field', () => {

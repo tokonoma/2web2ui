@@ -1,18 +1,14 @@
 @import '~@sparkpost/design-tokens-hibana/tokens';
 
 .ChartHeader {
-  padding: 0;
-  margin: 0;
-  margin-bottom: spacing(500);
+  padding: spacing(500);
 }
 
 .Title {
   font-weight: font-weight(semibold);
   font-size: font-size(400);
-  line-height: unset;
 }
 
-// TODO: All overrides - can eventually be removed
 .Line {
   background: none;
   border-bottom: 0;

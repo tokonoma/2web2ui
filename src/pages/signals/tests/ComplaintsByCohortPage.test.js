@@ -71,8 +71,8 @@ describe('ComplaintsByCohortPage', () => {
 
   it('renders error correctly', () => {
     const wrapper = subject({ error: { message: 'error message' } });
-    expect(wrapper.find('Callout').prop('children')).toEqual('error message');
-    expect(wrapper.find('Callout').prop('title')).toEqual('Unable to Load Data');
+
+    expect(wrapper).toHaveTextContent('Unable to Load Data');
   });
 
   describe('bar chart props', () => {

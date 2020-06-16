@@ -1,5 +1,6 @@
 import React from 'react';
 import { ApiErrorBanner, Empty, PanelLoading } from 'src/components';
+import { Panel } from 'src/components/matchbox';
 import { TableCollection } from 'src/components/collection';
 import { columns } from '../constants/integration';
 import formatRow from './FormatRow';
@@ -14,7 +15,11 @@ const IntegrationCollection = ({ events = [], loadingStatus, onRetry }) => {
   }
 
   if (events.length === 0) {
-    return <Empty message="No Data Found!" />;
+    return (
+      <Panel>
+        <Empty message="No Data Found!" />
+      </Panel>
+    );
   }
 
   return (

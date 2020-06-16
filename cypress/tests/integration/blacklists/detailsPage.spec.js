@@ -99,12 +99,7 @@ describe('Blacklist Incident Details Page', () => {
       cy.visit(PAGE_URL);
       cy.findByText('View Engagement').click();
 
-      cy.url().should('include', '/reports/summary?filters=Sending%20Domain%3Asparkpost.io');
-      // Within summary report, find the filter tag
-      cy.get('[data-id="report-options"]').within(() => {
-        cy.findByText(/Sending Domain/g).should('be.visible');
-        cy.findByText(/sparkpost.io/g).should('be.visible');
-      });
+      cy.url().should('include', 'filters=Sending%20Domain%3Asparkpost.io');
     });
   });
 
@@ -117,7 +112,7 @@ describe('Blacklist Incident Details Page', () => {
       });
       cy.visit(PAGE_URL);
       cy.wait('@recentOtherIncidentsEmpty');
-      cy.findByText('No Other Recent abuseat.org (CBL) incidents').should('be.visible');
+      cy.findByText('No other recent abuseat.org (CBL) incidents').should('be.visible');
     });
 
     it("redirects to that incident's detail page when clicking another incident", () => {
@@ -141,7 +136,7 @@ describe('Blacklist Incident Details Page', () => {
       });
       cy.visit(PAGE_URL);
       cy.wait('@recentOtherIncidentsEmpty');
-      cy.findByText('No Other Recent sparkpost.io incidents').should('be.visible');
+      cy.findByText('No other recent sparkpost.io incidents').should('be.visible');
     });
 
     it("redirects to that incident's detail page when clicking another incident", () => {

@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { snakeToFriendly } from 'src/helpers/string';
-import { Box, Button, Page, ScreenReaderOnly } from 'src/components/matchbox';
+import { Box, Button, Page, Panel, ScreenReaderOnly } from 'src/components/matchbox';
 import {
   PanelLoading,
   TableCollection,
@@ -152,7 +152,9 @@ export class MessageEventsPageComponent extends Component {
     const perPageProps = isHibanaEnabled ? {} : { className: styles.RightAlignedButtons };
     const saveCSVProps = isHibanaEnabled ? { variant: 'monochrome-secondary' } : {};
     const content = empty ? (
-      <Empty message={emptyMessage} />
+      <Panel>
+        <Empty message={emptyMessage} />
+      </Panel>
     ) : (
       <div>
         <TableCollection

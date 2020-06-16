@@ -46,7 +46,6 @@ describe('The engagement recency page', () => {
     cy.visit(PAGE_URL);
 
     cy.findByText('Unable to Load Data').should('be.visible');
-    cy.findByText('This is an error').should('be.visible');
   });
 
   it('re-requests data when filtering by "Broad Date Range"', () => {

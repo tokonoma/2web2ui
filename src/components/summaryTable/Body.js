@@ -2,36 +2,34 @@ import React from 'react';
 import classNames from 'classnames';
 import { useHibana } from 'src/context/HibanaContext';
 import { Table } from 'src/components/matchbox';
-import Callout from 'src/components/callout';
-import Loading from 'src/components/loading'; // todo, move to src/components
+import { Empty } from 'src/components';
+import { PanelSectionLoading } from 'src/components/loading';
 import Billboard from './Billboard';
 import styles from './SummaryTable.module.scss';
 
 const Body = ({ columns, data, empty, error, loading, perPage }) => {
   const [state] = useHibana();
   const { isHibanaEnabled } = state;
-  const colSpan = columns.length;
 
   if (loading) {
     return (
-      <Billboard colSpan={colSpan}>
-        <Loading />
+      <Billboard>
+        <PanelSectionLoading minHeight="175px" />
       </Billboard>
     );
   }
-
   if (error) {
     return (
-      <Billboard colSpan={colSpan}>
-        <Callout title="Unable to Load Data" children={error} />
+      <Billboard>
+        <Empty message="Unable to Load Data" />
       </Billboard>
     );
   }
 
   if (empty) {
     return (
-      <Billboard colSpan={colSpan}>
-        <Callout title="No Data Available" />
+      <Billboard>
+        <Empty message="No Data Available" />
       </Billboard>
     );
   }

@@ -82,11 +82,9 @@ describe('The engagement details page', () => {
 
   it('renders the empty state when no results are returned', () => {
     stubEmptyState();
-
     cy.visit(PAGE_URL);
 
     cy.queryByText('Recommendations').should('not.be.visible');
-    cy.findByText('No Data Available').should('be.visible');
     cy.findByText('Insufficient data to populate this chart').should('be.visible');
   });
 
@@ -98,12 +96,10 @@ describe('The engagement details page', () => {
 
   it('re-requests data when filtering by date', () => {
     cy.visit(PAGE_URL);
-
     stubEmptyState();
 
     cy.findByLabelText('Broad Date Range').select('Last 7 Days');
 
-    cy.findByText('No Data Available').should('be.visible');
     cy.findByText('Insufficient data to populate this chart').should('be.visible');
   });
 
@@ -145,7 +141,6 @@ describe('The engagement details page', () => {
         cy.visit(PAGE_URL);
 
         cy.get(cohortsChartSelector).within(() => {
-          cy.findByText('No Data Available').should('be.visible');
           cy.findByText('Insufficient data to populate this chart').should('be.visible');
         });
 
@@ -173,7 +168,6 @@ describe('The engagement details page', () => {
 
         cy.get(cohortsChartSelector).within(() => {
           cy.findByText('Unable to Load Data').should('be.visible');
-          cy.findByText('This is an error').should('be.visible');
         });
       });
     });
@@ -221,7 +215,6 @@ describe('The engagement details page', () => {
         cy.visit(tabRoute);
 
         cy.get(engagementRateChartSelector).within(() => {
-          cy.findByText('No Data Available').should('be.visible');
           cy.findByText('Insufficient data to populate this chart').should('be.visible');
         });
       });
@@ -251,7 +244,6 @@ describe('The engagement details page', () => {
 
         cy.get(engagementRateChartSelector).within(() => {
           cy.findByText('Unable to Load Data').should('be.visible');
-          cy.findByText('This is an error').should('be.visible');
         });
       });
     });
@@ -300,7 +292,6 @@ describe('The engagement details page', () => {
         cy.visit(tabRoute);
 
         cy.get(unsubscribeRateChartSelector).within(() => {
-          cy.findByText('No Data Available').should('be.visible');
           cy.findByText('Insufficient data to populate this chart').should('be.visible');
         });
       });
@@ -330,7 +321,6 @@ describe('The engagement details page', () => {
 
         cy.get(unsubscribeRateChartSelector).within(() => {
           cy.findByText('Unable to Load Data').should('be.visible');
-          cy.findByText('This is an error').should('be.visible');
         });
       });
     });
@@ -381,7 +371,6 @@ describe('The engagement details page', () => {
         cy.visit(tabRoute);
 
         cy.get(complaintRateChartsSelector).within(() => {
-          cy.findByText('No Data Available').should('be.visible');
           cy.findByText('Insufficient data to populate this chart').should('be.visible');
         });
       });
@@ -411,7 +400,6 @@ describe('The engagement details page', () => {
 
         cy.get(complaintRateChartsSelector).within(() => {
           cy.findByText('Unable to Load Data').should('be.visible');
-          cy.findByText('This is an error').should('be.visible');
         });
       });
     });

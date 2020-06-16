@@ -35,8 +35,6 @@ exports[`AcceptedPage:  should render 1`] = `
 
 exports[`AcceptedPage:  should render correctly with no accepted results 1`] = `
 <Empty
-  hasPanel={true}
   message="No accepted messages to report"
-  title="Accepted Rates"
 />
 `;

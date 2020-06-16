@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { Table } from 'src/components/matchbox';
 
 import { TableCollection, Empty, LongTextContainer } from 'src/components';
+import { Panel } from 'src/components/matchbox';
 import { NewCollectionBody } from 'src/components/collection';
 import { Percent } from 'src/components/formatters';
 import { safeRate } from 'src/helpers/math';
@@ -39,7 +40,11 @@ export class DelaysDataTable extends Component {
     const { rows, title } = this.props;
 
     if (_.isEmpty(rows)) {
-      return <Empty title={title} message={'No delayed messages to report'} />;
+      return (
+        <Panel>
+          <Empty message="No delayed messages to report" />
+        </Panel>
+      );
     }
 
     return (

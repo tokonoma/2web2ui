@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
-import { Box, Tooltip } from 'src/components/matchbox';
+import { Box, Panel, Tooltip } from 'src/components/matchbox';
 import { InfoOutline } from '@sparkpost/matchbox-icons';
 import useUniqueId from 'src/hooks/useUniqueId';
 import { Empty, PanelLoading, TableCollection } from 'src/components';
@@ -52,7 +52,11 @@ export default function EngagementTable({ data, loading }) {
   }
 
   if (data.length === 0) {
-    return <Empty message="No clicks to report" />;
+    return (
+      <Panel>
+        <Empty message="No clicks to report" />
+      </Panel>
+    );
   }
 
   // Manually count the total number of clicks (FWIW didn't included metric with chart data request,

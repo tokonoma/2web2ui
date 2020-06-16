@@ -66,32 +66,26 @@ exports[`Body renders custom component 1`] = `
 `;
 
 exports[`Body renders empty message 1`] = `
-<Billboard
-  colSpan={2}
->
-  <Callout
-    title="No Data Available"
+<Billboard>
+  <Empty
+    message="No Data Available"
   />
 </Billboard>
 `;
 
 exports[`Body renders error message 1`] = `
-<Billboard
-  colSpan={2}
->
-  <Callout
-    title="Unable to Load Data"
-  >
-    Oh no!
-  </Callout>
+<Billboard>
+  <Empty
+    message="Unable to Load Data"
+  />
 </Billboard>
 `;
 
 exports[`Body renders loading 1`] = `
-<Billboard
-  colSpan={2}
->
-  <Loading />
+<Billboard>
+  <PanelSectionLoading
+    minHeight="175px"
+  />
 </Billboard>
 `;
 

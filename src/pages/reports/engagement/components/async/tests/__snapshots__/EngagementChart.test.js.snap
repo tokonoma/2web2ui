@@ -1,10 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`EngagementChart renders empty panel 1`] = `
-<Empty
-  hasPanel={true}
-  message="No engagement to report"
-/>
+<Panel>
+  <Empty
+    message="No engagement to report"
+  />
+</Panel>
 `;
 
 exports[`EngagementChart renders engagement chart 1`] = `

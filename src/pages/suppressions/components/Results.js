@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Subaccount } from 'src/components';
-import { ScreenReaderOnly } from 'src/components/matchbox';
 import ActionPopover from 'src/components/actionPopover';
+import { Panel, ScreenReaderOnly } from 'src/components/matchbox';
 import { PanelLoading, TableCollection, Empty, DeleteModal } from 'src/components';
 import { deleteSuppression } from 'src/actions/suppressions';
 import { showAlert } from 'src/actions/globalAlert';
@@ -130,11 +130,19 @@ export function Results(props) {
 }
 
 function PlaceholderResults() {
-  return <Empty message="Choose some options to see your suppressions" />;
+  return (
+    <Panel>
+      <Empty message="Choose some options to see your suppressions" />
+    </Panel>
+  );
 }
 
 function EmptyResults() {
-  return <Empty message="There are no results for your current query" />;
+  return (
+    <Panel>
+      <Empty message="There are no results for your current query" />
+    </Panel>
+  );
 }
 
 export default connect(null, { deleteSuppression, showAlert })(Results);

@@ -120,7 +120,6 @@ describe('The health score by subaccount page', () => {
       cy.visit(PAGE_URL);
 
       cy.get('[data-id="health-score-panel"]').within(() => {
-        cy.findByText('No Data Available').should('be.visible');
         cy.findByText('Insufficient data to populate this chart').should('be.visible');
       });
     });

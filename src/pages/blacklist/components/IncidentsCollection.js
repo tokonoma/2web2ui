@@ -1,10 +1,9 @@
 import React from 'react';
-import { Search } from '@sparkpost/matchbox-icons';
 import { FORMATS } from 'src/constants';
 import { OGOnlyWrapper } from 'src/components/hibana';
-import { Empty, TableCollection, DisplayDate } from 'src/components';
+import { TableCollection, DisplayDate } from 'src/components';
 import { PageLink } from 'src/components/links';
-import { Box, Grid, Panel, Table, Tag, TextField } from 'src/components/matchbox';
+import { Box, Grid, Panel, Table, Tag } from 'src/components/matchbox';
 import styles from './IncidentsCollection.module.scss';
 import DatePicker from 'src/components/datePicker/DatePicker';
 
@@ -73,22 +72,6 @@ export const IncidentsCollection = props => {
     </Grid>
   );
 
-  const EmptyComponent = () => {
-    const textFieldComponent = (
-      <div className={styles.FilterBox}>
-        <TextField disabled id="disabled-blacklist-search" suffix={<Search />} />
-      </div>
-    );
-    return (
-      <Panel>
-        <Panel.Section>{renderHeader({ textFieldComponent: textFieldComponent })}</Panel.Section>
-        <Panel.Section>
-          <Empty hasPanel={false} message="There are no incidents for your date range selection" />
-        </Panel.Section>
-      </Panel>
-    );
-  };
-
   return (
     <TableCollection
       wrapperComponent={TableWrapper}
@@ -107,7 +90,6 @@ export const IncidentsCollection = props => {
       defaultSortColumn="resolved_at"
       defaultSortDirection="desc"
       saveCsv={false}
-      emptyComponent={EmptyComponent}
     >
       {({ filterBox, collection, pagination }) => (
         <>

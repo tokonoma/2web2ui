@@ -268,7 +268,6 @@ exports[`EngagementRateByCohortPage renders correctly 1`] = `
       <div>
         <Box
           as={[Function]}
-          sectioned={true}
         >
           <EngagementRateByCohortActions
             date="2017-01-02"
@@ -317,13 +316,9 @@ Array [
       facet="sending-domain"
       facetId="test.com"
     />
-    <Panel.Section>
-      <Callout
-        title="No Data Available"
-      >
-        Insufficient data to populate this chart
-      </Callout>
-    </Panel.Section>
+    <Empty
+      message="Insufficient data to populate this chart"
+    />
   </Panel>,
 ]
 `;
@@ -367,13 +362,9 @@ exports[`EngagementRateByCohortPage renders error correctly 1`] = `
           facet="sending-domain"
           facetId="test.com"
         />
-        <Panel.Section>
-          <Callout
-            title="Unable to Load Data"
-          >
-            error message
-          </Callout>
-        </Panel.Section>
+        <Empty
+          message="Unable to Load Data"
+        />
       </Panel>
     </Grid.Column>
     <Grid.Column
@@ -410,18 +401,9 @@ Array [
       facet="sending-domain"
       facetId="test.com"
     />
-    <Panel.Section>
-      <div
-        style={
-          Object {
-            "height": "220px",
-            "position": "relative",
-          }
-        }
-      >
-        <Loading />
-      </div>
-    </Panel.Section>
+    <PanelSectionLoading
+      minHeight="250px"
+    />
   </Panel>,
 ]
 `;

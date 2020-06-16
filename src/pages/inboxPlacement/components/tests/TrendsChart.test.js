@@ -39,15 +39,12 @@ describe('Inbox Placement Trends Chart', () => {
 
   it('renders error correctly', () => {
     const wrapper = subject({ error: { message: 'You Dun Goofed' } });
-    expect(wrapper.find('Callout')).toExist();
-    expect(wrapper.find('Callout')).toHaveProp('title', 'Unable to Load Trends Data');
-    expect(wrapper.find('Callout')).toHaveTextContent('You Dun Goofed');
+    expect(wrapper.find('Empty')).toHaveTextContent('Unable to Load Trends Data');
   });
 
-  it('renders no account level data callout correctly', () => {
+  it('renders no account level data Empty correctly', () => {
     const wrapper = subject({ trends: [], hasNoData: true });
-    expect(wrapper.find('Callout')).toExist();
-    expect(wrapper.find('Callout')).toHaveTextContent('Inbox Placement Trends Not Available');
+    expect(wrapper.find('Empty')).toHaveTextContent('Inbox Placement Trends Not Available');
   });
 
   describe('Bars', () => {

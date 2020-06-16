@@ -86,7 +86,11 @@ export const IncidentDetailsPage = ({
         return <PanelLoading />;
       }
       if (!incidentsForBlacklist.length) {
-        return <Empty message={`No Other Recent ${blacklist_name} incidents`} />;
+        return (
+          <Panel>
+            <Empty message={`No other recent ${blacklist_name} incidents`} />
+          </Panel>
+        );
       }
       return (
         <Panel data-id="related-incidents-blacklist">
@@ -105,7 +109,11 @@ export const IncidentDetailsPage = ({
         return <PanelLoading />;
       }
       if (!incidentsForResource.length) {
-        return <Empty message={`No Other Recent ${resource} incidents`} />;
+        return (
+          <Panel>
+            <Empty message={`No other recent ${resource} incidents`} />
+          </Panel>
+        );
       }
       return (
         <Panel data-id="related-incidents-resource">

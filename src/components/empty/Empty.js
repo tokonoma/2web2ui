@@ -1,45 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Panel } from 'src/components/matchbox';
-import { Block } from '@sparkpost/matchbox-icons';
 import useHibanaToggle from 'src/hooks/useHibanaToggle';
+import { Heading } from 'src/components/text';
 import { Box, Text } from 'src/components/matchbox';
 import styles from './Empty.module.scss';
 
-// TODO: This component should be composable and probably *never* ship with a <Panel/> baked in
-function OGEmpty({ title, message, hasPanel }) {
+function OGEmpty({ message }) {
   return (
-    <WrappingComponent title={title} hasPanel={hasPanel}>
-      <h6 className={styles.Center}>{message}</h6>
-    </WrappingComponent>
-  );
-}
-function HibanaEmpty({ title, message, hasPanel }) {
-  return (
-    <WrappingComponent title={title} hasPanel={hasPanel}>
-      <Box textAlign="center" color="gray.700">
-        <Block size={28} />
-        <Text as="h3" color="gray.700">
-          {message}
-        </Text>
-      </Box>
-    </WrappingComponent>
+    <Heading as="h6" className={styles.Message}>
+      {message}
+    </Heading>
   );
 }
 
-// Used to conditionally render a `<Panel/>`
-function WrappingComponent(props) {
-  const { children, hasPanel, title } = props;
-
-  if (hasPanel) {
-    return (
-      <Panel sectioned title={title}>
-        {children}
-      </Panel>
-    );
-  }
-
-  return <>{children}</>;
+function HibanaEmpty({ message }) {
+  return (
+    <Box
+      paddingTop="800"
+      paddingRight="500"
+      paddingBottom="800"
+      paddingLeft="500"
+      textAlign="center"
+      backgroundColor="gray.200"
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      size="100%"
+    >
+      <Text color="gray.900" fontSize="400" fontWeight="500">
+        {message}
+      </Text>
+    </Box>
+  );
 }
 
 function Empty(props) {
@@ -47,13 +39,7 @@ function Empty(props) {
 }
 
 Empty.propTypes = {
-  title: PropTypes.string,
-  message: PropTypes.string,
-  className: PropTypes.string,
-};
-
-Empty.defaultProps = {
-  hasPanel: true,
+  message: PropTypes.string.isRequired,
 };
 
 export default Empty;

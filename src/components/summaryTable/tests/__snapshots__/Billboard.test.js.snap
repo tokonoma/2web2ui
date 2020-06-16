@@ -4,16 +4,24 @@ exports[`Billboard renders signle cell table row 1`] = `
 <tbody>
   <Table.Row>
     <Table.Cell
-      className="Billboard"
-      colSpan={7}
+      colSpan="100%"
+      style={
+        Object {
+          "padding": 0,
+        }
+      }
     >
-      <Box
-        height="220px"
-      >
-        <h1>
-          Test Example
-        </h1>
-      </Box>
+      <h1>
+        Test Example
+      </h1>
+      <hr
+        role="presentation"
+        style={
+          Object {
+            "margin": 0,
+          }
+        }
+      />
     </Table.Cell>
   </Table.Row>
 </tbody>

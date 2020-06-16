@@ -1,6 +1,9 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { OGHeading, HibanaHeading } from '../Heading';
+import { useHibana } from 'src/context/HibanaContext';
+
+jest.mock('src/context/HibanaContext');
 
 describe('Heading', () => {
   const defaultProps = {
@@ -8,10 +11,16 @@ describe('Heading', () => {
     looksLike: 'h1',
     children: 'My Heading',
   };
+
   const hibanaSubject = props => {
+    useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: true }]);
+
     return render(<HibanaHeading {...defaultProps} {...props} />);
   };
+
   const OGSubject = props => {
+    useHibana.mockImplementationOnce(() => [{ isHibanaEnabled: false }]);
+
     return render(<OGHeading {...defaultProps} {...props} />);
   };
 

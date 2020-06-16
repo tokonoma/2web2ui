@@ -36,7 +36,7 @@ describe('The health score dashboard page', () => {
     cy.visit(PAGE_URL);
 
     cy.findAllByText('Unable to Load Data').should('have.length', 3);
-    cy.findAllByText('This is an error').should('have.length', 3);
+    cy.findAllByText('This is an error').should('have.length', 2);
   });
 
   it('renders the empty state when insufficient data is returned', () => {

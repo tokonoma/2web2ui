@@ -1,4 +1,3 @@
-/* eslint max-lines: ["error", 200] */
 import React, { Component } from 'react';
 import CollectionPropTypes from './Collection.propTypes';
 import qs from 'query-string';
@@ -6,6 +5,7 @@ import _ from 'lodash';
 import { withRouter } from 'react-router-dom';
 import Pagination from './Pagination';
 import FilterBox from './FilterBox';
+import { Empty } from 'src/components';
 import { objectSortMatch } from 'src/helpers/sortMatch';
 
 const PassThroughWrapper = props => props.children;
@@ -101,9 +101,11 @@ export class Collection extends Component {
   getVisibleRows() {
     const { perPage, currentPage, filteredRows } = this.state;
     const { rows = [], pagination } = this.props;
+
     if (!pagination) {
       return filteredRows || rows;
     }
+
     const currentIndex = (currentPage - 1) * perPage;
     return (filteredRows || rows).slice(currentIndex, currentIndex + perPage);
   }
@@ -141,7 +143,6 @@ export class Collection extends Component {
 
   render() {
     const {
-      rows,
       rowComponent: RowComponent,
       rowKeyName = 'id',
       headerComponent: HeaderComponent = NullComponent,
@@ -149,21 +150,25 @@ export class Collection extends Component {
       bodyWrapper: BodyWrapper = PassThroughWrapper,
       children,
       title,
-      emptyComponent: EmptyComponent,
     } = this.props;
-
-    if (!rows.length) {
-      return EmptyComponent ? <EmptyComponent /> : null;
-    }
-
     const filterBox = this.renderFilterBox();
+    const visibleRows = this.getVisibleRows();
+
     const collection = (
       <OuterWrapper>
         <HeaderComponent />
         <BodyWrapper>
-          {this.getVisibleRows().map((row, i) => (
-            <RowComponent key={`${row[rowKeyName] || 'row'}-${i}`} {...row} />
-          ))}
+          {visibleRows.length === 0 ? (
+            <tr>
+              <td colSpan="100%" style={{ padding: 0 }}>
+                <Empty message="No results found." />
+              </td>
+            </tr>
+          ) : (
+            visibleRows.map((row, i) => (
+              <RowComponent key={`${row[rowKeyName] || 'row'}-${i}`} {...row} />
+            ))
+          )}
         </BodyWrapper>
       </OuterWrapper>
     );

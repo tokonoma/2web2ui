@@ -75,9 +75,9 @@ exports[`Webhook Component: Batch Status Tab should show button text as Refreshi
       Refreshing...
     </Button>
   </Panel.Section>
-  <Panel.Section>
-    <Loading />
-  </Panel.Section>
+  <PanelSectionLoading
+    minHeight="400px"
+  />
 </Fragment>
 `;
 
@@ -92,11 +92,8 @@ exports[`Webhook Component: Batch Status Tab should show empty message when no b
       Refresh Batches
     </Button>
   </Panel.Section>
-  <Panel.Section>
-    <Empty
-      hasPanel={false}
-      message="There are no batches for your webhook"
-    />
-  </Panel.Section>
+  <Empty
+    message="There are no batches for your webhook"
+  />
 </Fragment>
 `;

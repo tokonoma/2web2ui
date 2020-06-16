@@ -2,20 +2,20 @@
 
 .ChartHeader {
   display: flex;
-  align-items: baseline;
+  align-items: center;
+  padding: spacing();
 }
 
 .Title {
   font-weight: 500;
   font-size: font-size(500);
+  font-weight: 600;
   margin-bottom: 0;
-  line-height: rem(33);
 }
 
 .Line {
   border-bottom: 1px solid color(gray, 9);
-  margin-top: spacing();
-  margin-bottom: spacing(larger);
+  margin: 0;
 }
 
 .PrimaryArea {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { TableCollection, Empty } from 'src/components';
 import { NewCollectionBody } from 'src/components/collection';
-import { Table, Tag } from 'src/components/matchbox';
+import { Panel, Table, Tag } from 'src/components/matchbox';
 import { FORMATS } from 'src/constants';
 import { formatDateTime } from 'src/helpers/date';
 import { METRICS, FILTERS_FRIENDLY_NAMES, SOURCE_FRIENDLY_NAMES } from '../constants/formConstants';
@@ -89,10 +89,13 @@ const AlertIncidents = ({ incidents = [], alert, subaccountIdToString }) => {
 
   const TableWrapper = props => <Table>{props.children}</Table>;
   const title = 'Alert Incidents';
+
   return (
     <>
       {incidents.length <= 0 ? (
-        <Empty title={title} message="No incidents" />
+        <Panel>
+          <Empty message="No incidents" />
+        </Panel>
       ) : (
         <TableCollection
           wrapperComponent={TableWrapper}

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { refreshAcceptedReport } from 'src/actions/acceptedReport';
 import { selectAcceptedAggregates, selectAcceptedAttempts } from 'src/selectors/acceptedReport';
 import { Empty, PanelLoading } from 'src/components';
-import { Page } from 'src/components/matchbox';
+import { Page, Panel } from 'src/components/matchbox';
 import ReportOptions from 'src/pages/reports/components/ReportOptions';
 import AcceptedChart from './components/AcceptedChart';
 import TopLevelMetrics from './components/TopLevelMetrics';
@@ -37,7 +37,11 @@ export class AcceptedPage extends Component {
     const { loading, aggregates, attempts } = this.props;
 
     if (!loading && _.isEmpty(aggregates)) {
-      return <Empty title="Accepted Rates" message="No accepted messages to report" />;
+      return (
+        <Panel>
+          <Empty message="No accepted messages to report" />
+        </Panel>
+      );
     }
 
     return <AcceptedChart loading={loading} aggregates={aggregates} attempts={attempts} />;

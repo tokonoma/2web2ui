@@ -1,18 +1,14 @@
 import React from 'react';
-import classNames from 'classnames';
-import { Box, Table } from 'src/components/matchbox';
-import { useHibana } from 'src/context/HibanaContext';
-import styles from './SummaryTable.module.scss'; // TODO: Remove style import when OG theme is removed
+import { Table } from 'src/components/matchbox';
 
-function Billboard({ children, colSpan }) {
-  const [state] = useHibana();
-  const { isHibanaEnabled } = state;
-
+function Billboard({ children }) {
   return (
     <tbody>
       <Table.Row>
-        <Table.Cell className={classNames(!isHibanaEnabled && styles.Billboard)} colSpan={colSpan}>
-          <Box height="220px">{children}</Box>
+        <Table.Cell colSpan="100%" style={{ padding: 0 }}>
+          {children}
+
+          <hr style={{ margin: 0 }} role="presentation" />
         </Table.Cell>
       </Table.Row>
     </tbody>

@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import { safeRate } from 'src/helpers/math';
 import { refreshBounceReport } from 'src/actions/bounceReport';
-import { TableCollection, Empty, LongTextContainer } from 'src/components';
+import { Empty, LongTextContainer, TableCollection, TabsWrapper } from 'src/components';
 import { Percent } from 'src/components/formatters';
 import { PanelLoading } from 'src/components/loading';
-import { Page, Tabs } from 'src/components/matchbox';
+import { Page, Panel, Tabs } from 'src/components/matchbox';
 import ReportOptions from '../components/ReportOptions';
 import BounceChart from './components/BounceChart';
 import MetricsSummary from '../components/MetricsSummary';
@@ -83,14 +83,16 @@ export class BouncePage extends Component {
     }
 
     return (
-      <BounceChart
-        loading={chartLoading}
-        aggregates={aggregates}
-        categories={categories}
-        types={types}
-        admin={adminCategories}
-        tab={this.state.tab}
-      />
+      <Panel.Section>
+        <BounceChart
+          loading={chartLoading}
+          aggregates={aggregates}
+          categories={categories}
+          types={types}
+          admin={adminCategories}
+          tab={this.state.tab}
+        />
+      </Panel.Section>
     );
   }
 
@@ -103,7 +105,11 @@ export class BouncePage extends Component {
     }
 
     if (!reasons.length) {
-      return <Empty message={'No bounce reasons to report'} />;
+      return (
+        <Panel>
+          <Empty message={'No bounce reasons to report'} />
+        </Panel>
+      );
     }
 
     return (
@@ -182,8 +188,12 @@ export class BouncePage extends Component {
       <Page title="Bounce Report">
         <ReportOptions reportLoading={chartLoading} searchOptions={bounceSearchOptions} />
         {this.renderTopLevelMetrics()}
-        {this.renderTabs()}
-        {this.renderChart()}
+
+        <Panel>
+          <TabsWrapper>{this.renderTabs()}</TabsWrapper>
+
+          {this.renderChart()}
+        </Panel>
         <hr />
         {this.renderCollection()}
       </Page>

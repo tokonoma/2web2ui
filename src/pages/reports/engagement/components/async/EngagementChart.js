@@ -52,7 +52,11 @@ export default function EngagementChart({
 
   // sent should always be the largest number, so if it is zero all others should be zero
   if (sent === 0) {
-    return <Empty message="No engagement to report" />;
+    return (
+      <Panel>
+        <Empty message="No engagement to report" />
+      </Panel>
+    );
   }
 
   return (

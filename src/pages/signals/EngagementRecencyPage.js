@@ -1,11 +1,9 @@
-/* eslint-disable max-lines */
 import React from 'react';
 import { getEngagementRecency } from 'src/actions/signals';
 import { selectEngagementRecencyDetails } from 'src/selectors/signals';
 import { PageLink } from 'src/components/links';
 import { Box, Grid, Panel, Stack } from 'src/components/matchbox';
 import BarChart from './components/charts/barchart/BarChart';
-import Callout from 'src/components/callout';
 import { useHibana } from 'src/context/HibanaContext';
 import DateFilter from './components/filters/DateFilter';
 import EngagementRecencyActions from './components/actionContent/EngagementRecencyActions';
@@ -17,7 +15,8 @@ import TooltipMetric from 'src/components/charts/TooltipMetric';
 import withDetails from './containers/withDetails';
 import withDateSelection from './containers/withDateSelection';
 import { ENGAGEMENT_RECENCY_COHORTS, ENGAGEMENT_RECENCY_INFO } from './constants/info';
-import { Loading } from 'src/components';
+import { Empty } from 'src/components';
+import { PanelSectionLoading } from 'src/components/loading';
 import { roundToPlaces } from 'src/helpers/units';
 import moment from 'moment';
 import _ from 'lodash';
@@ -80,21 +79,15 @@ export function EngagementRecencyPage(props) {
     let chartPanel;
 
     if (empty) {
-      chartPanel = (
-        <Callout title="No Data Available">Insufficient data to populate this chart</Callout>
-      );
+      chartPanel = <Empty message="Insufficient data to populate this chart" />;
     }
 
     if (error) {
-      chartPanel = <Callout title="Unable to Load Data">{error.message}</Callout>;
+      chartPanel = <Empty message="Unable to Load Data" />;
     }
 
     if (loading) {
-      chartPanel = (
-        <div style={{ height: '220px', position: 'relative' }}>
-          <Loading />
-        </div>
-      );
+      chartPanel = <PanelSectionLoading height="250px" />;
     }
 
     return (
@@ -102,8 +95,8 @@ export function EngagementRecencyPage(props) {
         <Grid.Column sm={12} md={7}>
           <Panel data-id="engagement-recency-cohorts-chart">
             <Tabs facet={facet} facetId={facetId} subaccountId={subaccountId} />
-            <Panel.Section>
-              {chartPanel || (
+            {chartPanel || (
+              <Panel.Section>
                 <div className="LiftTooltip">
                   <BarChart
                     gap={gap}
@@ -136,14 +129,14 @@ export function EngagementRecencyPage(props) {
                     tooltipContent={label => ENGAGEMENT_RECENCY_COHORTS[label]}
                   />
                 </div>
-              )}
-            </Panel.Section>
+              </Panel.Section>
+            )}
           </Panel>
         </Grid.Column>
         <Grid.Column sm={12} md={5} mdOffset={0}>
           <div>
             {!chartPanel && (
-              <Box as={Panel} sectioned>
+              <Box as={Panel}>
                 <EngagementRecencyActions cohorts={selectedCohorts} date={selectedDate} />
               </Box>
             )}

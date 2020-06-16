@@ -34,14 +34,9 @@ describe('Component: Collection', () => {
     };
   });
 
-  it('should render null if there are no rows and no EmptyComponent', () => {
+  it('should render an <Empty/> component if there are no rows', () => {
     const wrapper = shallow(<Collection {...props} />);
-    expect(wrapper.equals(null)).toEqual(true);
-  });
-
-  it('should render EmptyComponent if there are no rows and EmptyComponent exists', () => {
-    const wrapper = shallow(<Collection {...props} emptyComponent={() => ''} />);
-    expect(wrapper.find('emptyComponent')).toExist();
+    expect(wrapper.find('Empty')).toExist();
   });
 
   it('should render correctly with basic props', () => {
