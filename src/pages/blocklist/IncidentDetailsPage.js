@@ -39,8 +39,8 @@ export const IncidentDetailsPage = ({
   useEffect(() => {
     getIncident(id).then(incident => {
       listIncidentsForResource(incident.resource);
-      listIncidentsForBlocklist(incident.blocklist_name);
-      listHistoricalResolvedIncidents(incident.blocklist_name, incident.resource);
+      listIncidentsForBlocklist(incident.blacklist_name);
+      listHistoricalResolvedIncidents(incident.blacklist_name, incident.resource);
     });
   }, [
     getIncident,
@@ -55,7 +55,7 @@ export const IncidentDetailsPage = ({
   }
 
   const {
-    blocklist_name = '',
+    blacklist_name = '',
     resource = '',
     days_listed,
     resolved_at_timestamp,
@@ -72,8 +72,8 @@ export const IncidentDetailsPage = ({
             reload={() => {
               getIncident(id).then(incident => {
                 listIncidentsForResource(incident.resource);
-                listIncidentsForBlocklist(incident.blocklist_name);
-                listHistoricalResolvedIncidents(incident.blocklist_name, incident.resource);
+                listIncidentsForBlocklist(incident.blacklist_name);
+                listHistoricalResolvedIncidents(incident.blacklist_name, incident.resource);
               });
             }}
           />
@@ -89,18 +89,18 @@ export const IncidentDetailsPage = ({
       if (!incidentsForBlocklist.length) {
         return (
           <Panel>
-            <Empty message={`No other recent ${blocklist_name} incidents`} />
+            <Empty message={`No other recent ${blacklist_name} incidents`} />
           </Panel>
         );
       }
-      
+
       return (
         <Panel data-id="related-incidents-blocklist">
           <RelatedIncidents
             incident={{ ...incident, id }}
             incidents={incidentsForBlocklist}
             type="blocklist"
-            header={`Other Recent ${blocklist_name} Incidents`}
+            header={`Other Recent ${blacklist_name} Incidents`}
           />
         </Panel>
       );
@@ -136,7 +136,7 @@ export const IncidentDetailsPage = ({
           <Panel sectioned data-id="incident-details">
             <IncidentDetails
               resourceName={resource}
-              blocklistName={blocklist_name}
+              blocklistName={blacklist_name}
               listedTimestamp={occurred_at_timestamp}
               resolvedTimestamp={resolved_at_timestamp}
               daysListed={days_listed}
@@ -159,7 +159,7 @@ export const IncidentDetailsPage = ({
 
   return (
     <Page
-      title={`Blocklist Incident | ${resource || ''} | ${blocklist_name || ''}`}
+      title={`Blocklist Incident | ${resource || ''} | ${blacklist_name || ''}`}
       breadcrumbAction={{
         content: 'Blocklist Incidents',
         to: '/blocklist/incidents',

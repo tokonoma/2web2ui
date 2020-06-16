@@ -24,7 +24,7 @@ export default ({ incidents = [], header = '', type = '' }) => {
                 <PageLink to={`/blocklist/incidents/${incident.id}`}>
                   <strong>
                     <Text as="span" fontWeight="normal">
-                      {type === 'blacklist' ? incident.resource : incident.blacklist_name}
+                      {type === 'blocklist' ? incident.resource : incident.blacklist_name}
                     </Text>
                   </strong>
                 </PageLink>
