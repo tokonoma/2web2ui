@@ -1,6 +1,5 @@
 import React, { createContext, useContext } from 'react';
 import { Expandable, Panel } from 'src/components/matchbox';
-import { ArrowDownward } from '@sparkpost/matchbox-icons';
 import { GUIDE_IDS } from 'src/constants';
 import ShowMeSparkpostStep from './ShowMeSparkpostStep';
 import LetsCodeStep from './LetsCodeStep';
@@ -17,7 +16,6 @@ export const GettingStartedGuide = ({
   isAdmin,
 }) => {
   const {
-    isGuideAtBottom = false,
     send_test_email_completed,
     explore_analytics_completed,
     invite_collaborator_completed,
@@ -25,35 +23,12 @@ export const GettingStartedGuide = ({
     check_events_completed,
   } = onboarding;
 
-  const areAllGuidesCompleted =
-    send_test_email_completed &&
-    explore_analytics_completed &&
-    invite_collaborator_completed &&
-    view_developer_docs_completed &&
-    check_events_completed &&
-    hasSendingDomains &&
-    hasApiKeysForSending;
-
   const setOnboardingAccountOption = (obj = {}) => {
     if (isAdmin) {
       setAccountOption('onboarding', obj);
     }
   };
 
-  const actions =
-    isGuideAtBottom || areAllGuidesCompleted
-      ? null
-      : [
-          {
-            content: (
-              <span>
-                {`Move to Bottom`} <ArrowDownward size="20" />{' '}
-              </span>
-            ),
-            color: 'blue',
-            onClick: () => setOnboardingAccountOption({ isGuideAtBottom: true }),
-          },
-        ];
   const handleAction = action => {
     switch (action) {
       case 'Send Test Email':
@@ -106,7 +81,7 @@ export const GettingStartedGuide = ({
 
   return (
     <GuideContext.Provider value={values}>
-      <Panel title="Getting Started" actions={actions} sectioned>
+      <Panel title="Getting Started" sectioned>
         <Expandable
           title={'Start Sending with SparkPost'}
           my="300"

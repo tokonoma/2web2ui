@@ -1,5 +1,5 @@
 import React from 'react';
-import { Panel, UnstyledLink, Box } from 'src/components/matchbox';
+import { Panel, Box } from 'src/components/matchbox';
 import useHibanaToggle from 'src/hooks/useHibanaToggle';
 import { GuideListItem, GuideListItemTitle, GuideListItemDescription } from './GuideListItem';
 import { useGuideContext } from './GettingStartedGuide';
@@ -61,11 +61,7 @@ const ViewEventsItem = () => {
 };
 
 const InviteCollaboratorItem = () => {
-  const {
-    invite_collaborator_completed,
-    handleAction,
-    setOnboardingAccountOption,
-  } = useGuideContext();
+  const { invite_collaborator_completed, handleAction } = useGuideContext();
 
   return (
     <GuideListItem
@@ -80,15 +76,6 @@ const InviteCollaboratorItem = () => {
         <span>
           Need help integrating? Pass the ball on to someone else to finish setting up this account.
         </span>
-        <br />
-        <span>Or you can&nbsp;</span>
-        <UnstyledLink
-          onClick={() => {
-            setOnboardingAccountOption({ invite_collaborator_completed: true });
-          }}
-        >
-          setup email sending now.
-        </UnstyledLink>
       </GuideListItemDescription>
     </GuideListItem>
   );
