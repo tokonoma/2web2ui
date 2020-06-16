@@ -84,43 +84,46 @@ export class UsageReport extends Component {
     const hasDailyLimit = usage.day.limit > 0;
     const hasMonthlyLimit = usage.month.limit > 0;
 
-    return (
-      <Panel title="Your Usage Report" actions={actions}>
-        <Panel.Section>
-          <ProgressLabel
-            title="Today"
-            secondaryTitle={`Since ${formatDateTime(usage.day.start)}`}
-          />
-          {hasDailyLimit && (
-            <ProgressBar completed={getPercent(usage.day.used, usage.day.limit)} my="300" />
-          )}
-          <DisplayNumber label="Used" content={usage.day.used.toLocaleString()} primary />
-          {hasDailyLimit && (
-            <DisplayNumber label="Daily Limit" content={usage.day.limit.toLocaleString()} />
-          )}
-          <SendMoreCTA hasSendingLimits={hasDailyLimit || hasMonthlyLimit} />
-        </Panel.Section>
-        <Panel.Section>
-          <ProgressLabel
-            title="This Month"
-            secondaryTitle={`Billing cycle: ${formatDate(usage.month.start)} - ${formatDate(
-              usage.month.end,
-            )}`}
-          />
-          {hasMonthlyLimit && (
-            <ProgressBar completed={getPercent(usage.month.used, usage.month.limit)} my="300" />
-          )}
-          <DisplayNumber label="Used" content={usage.month.used.toLocaleString()} primary />
-          <DisplayNumber label="Included" content={subscription.plan_volume.toLocaleString()} />
-          {overage > 0 && (
-            <DisplayNumber label="Extra Emails Used" content={overage.toLocaleString()} />
-          )}
-          {hasMonthlyLimit && (
-            <DisplayNumber label="Monthly limit" content={usage.month.limit.toLocaleString()} />
-          )}
-        </Panel.Section>
-      </Panel>
-    );
+    if (usage.month.used > 0 || usage.day.used > 0)
+      return (
+        <Panel title="Your Usage Report" actions={actions}>
+          <Panel.Section>
+            <ProgressLabel
+              title="Today"
+              secondaryTitle={`Since ${formatDateTime(usage.day.start)}`}
+            />
+            {hasDailyLimit && (
+              <ProgressBar completed={getPercent(usage.day.used, usage.day.limit)} my="300" />
+            )}
+            <DisplayNumber label="Used" content={usage.day.used.toLocaleString()} primary />
+            {hasDailyLimit && (
+              <DisplayNumber label="Daily Limit" content={usage.day.limit.toLocaleString()} />
+            )}
+            <SendMoreCTA hasSendingLimits={hasDailyLimit || hasMonthlyLimit} />
+          </Panel.Section>
+          <Panel.Section>
+            <ProgressLabel
+              title="This Month"
+              secondaryTitle={`Billing cycle: ${formatDate(usage.month.start)} - ${formatDate(
+                usage.month.end,
+              )}`}
+            />
+            {hasMonthlyLimit && (
+              <ProgressBar completed={getPercent(usage.month.used, usage.month.limit)} my="300" />
+            )}
+            <DisplayNumber label="Used" content={usage.month.used.toLocaleString()} primary />
+            <DisplayNumber label="Included" content={subscription.plan_volume.toLocaleString()} />
+            {overage > 0 && (
+              <DisplayNumber label="Extra Emails Used" content={overage.toLocaleString()} />
+            )}
+            {hasMonthlyLimit && (
+              <DisplayNumber label="Monthly limit" content={usage.month.limit.toLocaleString()} />
+            )}
+          </Panel.Section>
+        </Panel>
+      );
+
+    return null;
   }
 }
 
