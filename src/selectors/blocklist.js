@@ -2,24 +2,24 @@ import { createSelector } from 'reselect';
 import { formatDateTime } from '../helpers/date';
 import moment from 'moment';
 
-const getIncident = state => state.blacklist.incident || {};
+const getIncident = state => state.blocklist.incident || {};
 
-const getIncidents = state => state.blacklist.incidents;
-const getMonitors = state => state.blacklist.monitors;
+const getIncidents = state => state.blocklist.incidents;
+const getMonitors = state => state.blocklist.monitors;
 
-const getIncidentsForResource = state => state.blacklist.incidentsForResource || [];
+const getIncidentsForResource = state => state.blocklist.incidentsForResource || [];
 
-const getIncidentsForBlacklist = state => state.blacklist.incidentsForBlacklist || [];
+const getIncidentsForBlocklist = state => state.blocklist.incidentsForBlocklist || [];
 
-const getHistoricalIncidents = state => state.blacklist.historicalIncidents || [];
+const getHistoricalIncidents = state => state.blocklist.historicalIncidents || [];
 
-const getIncidentError = state => state.blacklist.incidentError || false;
+const getIncidentError = state => state.blocklist.incidentError || false;
 
-const getIncidentsForResourceError = state => state.blacklist.incidentsForResourceError || false;
+const getIncidentsForResourceError = state => state.blocklist.incidentsForResourceError || false;
 
-const getHistoricalIncidentsError = state => state.blacklist.historicalIncidentsError || false;
+const getHistoricalIncidentsError = state => state.blocklist.historicalIncidentsError || false;
 
-const getIncidentsForBlacklistError = state => state.blacklist.incidentsForBlacklistError || false;
+const getIncidentsForBlocklistError = state => state.blocklist.incidentsForBlocklistError || false;
 
 const getDaysListed = (resolvedDate, occurredDate) => {
   const resolvedMoment = resolvedDate === null ? moment() : moment(resolvedDate);
@@ -70,8 +70,8 @@ export const selectRelatedIncidentsForResource = createSelector(
       .slice(0, 3),
 );
 
-export const selectRelatedIncidentsForBlacklist = createSelector(
-  [getIncidentsForBlacklist, getIncident],
+export const selectRelatedIncidentsForBlocklist = createSelector(
+  [getIncidentsForBlocklist, getIncident],
   (incidents, currentIncident) =>
     incidents
       .filter(
@@ -96,18 +96,18 @@ export const selectDetailsPageError = createSelector(
   [
     getIncidentError,
     getIncidentsForResourceError,
-    getIncidentsForBlacklistError,
+    getIncidentsForBlocklistError,
     getHistoricalIncidentsError,
   ],
-  (incidentError, resourceError, blacklistError, historicalError) => {
+  (incidentError, resourceError, blocklistError, historicalError) => {
     // Return the first error object we find
     switch (true) {
       case incidentError !== false:
         return incidentError;
       case resourceError !== false:
         return resourceError;
-      case blacklistError !== false:
-        return blacklistError;
+      case blocklistError !== false:
+        return blocklistError;
       case historicalError !== false:
         return historicalError;
       default:
@@ -116,9 +116,9 @@ export const selectDetailsPageError = createSelector(
   },
 );
 
-export const selectBlacklistedCount = createSelector([getMonitors], monitors =>
+export const selectBlocklistedCount = createSelector([getMonitors], monitors =>
   monitors.reduce(
-    (totalBlacklistCount, monitor) => totalBlacklistCount + monitor.active_listing_count,
+    (totalBlocklistCount, monitor) => totalBlocklistCount + monitor.active_listing_count,
     0,
   ),
 );

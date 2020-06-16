@@ -11,7 +11,7 @@ import hibanaStyles from './IncidentDetailsHibana.module.scss';
 
 export default ({
   resourceName,
-  blacklistName,
+  blocklistName,
   listedTimestamp,
   resolvedTimestamp,
   daysListed,
@@ -67,11 +67,11 @@ export default ({
             {historicalIncidents.length === 0 ? (
               <span
                 className={styles.Value}
-              >{`No historical incidents for ${resourceName} on ${blacklistName}`}</span>
+              >{`No historical incidents for ${resourceName} on ${blocklistName}`}</span>
             ) : (
               historicalIncidents.map(({ id, occurred_at_formatted, resolved_at_formatted }) => (
                 <div className={styles.Value} key={id}>
-                  <PageLink to={`/blacklist/incidents/${id}`}>
+                  <PageLink to={`/blocklist/incidents/${id}`}>
                     {`Listed ${occurred_at_formatted} | Resolved ${resolved_at_formatted}`}
                   </PageLink>
                 </div>

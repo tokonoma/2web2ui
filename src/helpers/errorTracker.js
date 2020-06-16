@@ -7,7 +7,7 @@ import bowser from 'bowser';
  * List of breadcrumbs to ignore to reduce noise
  * @note Sentry has a 100 breadcrumb per event/error maximum
  */
-const BLACKLIST = new Set([
+const IGNORED_ACTIONS = new Set([
   '@@redux/INIT',
   '@@redux-form/BLUR',
   '@@redux-form/CHANGE',
@@ -23,7 +23,7 @@ const BLACKLIST = new Set([
 ]);
 
 /**
- * Filter out blacklisted breadcrumbs
+ * Filter breadcrumbs
  *
  * @param {object} crumb
  * @param {string} crumb.category - console, http, redux-action, xhr, etc.
@@ -32,7 +32,7 @@ const BLACKLIST = new Set([
  * @see https://docs.sentry.io/clients/javascript/config
  */
 export function breadcrumbCallback(crumb) {
-  if (BLACKLIST.has(crumb.message)) {
+  if (IGNORED_ACTIONS.has(crumb.message)) {
     return false;
   }
 

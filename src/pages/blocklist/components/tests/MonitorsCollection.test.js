@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import TestApp from 'src/__testHelpers__/TestApp';
 import MonitorssCollection from '../MonitorsCollection';
 
-describe('Blacklist Component: MonitorsCollection', () => {
+describe('Blocklist Component: MonitorsCollection', () => {
   const monitors = [
     {
       resource: '1.2.3.4',
@@ -33,13 +33,13 @@ describe('Blacklist Component: MonitorsCollection', () => {
 
     //headers
     expect(queryByText('Watched')).toBeInTheDocument();
-    expect(queryByText('Current Blacklistings')).toBeInTheDocument();
-    expect(queryByText('Historic Blacklistings')).toBeInTheDocument();
+    expect(queryByText('Current Blocklistings')).toBeInTheDocument();
+    expect(queryByText('Historic Blocklistings')).toBeInTheDocument();
   });
 
   it('links each item to the incidents page filtered by the resource', () => {
     const { queryByText } = subject();
     const anchor = queryByText('1.2.3.4');
-    expect(anchor.getAttribute('href')).toBe('/blacklist/incidents?search=1.2.3.4');
+    expect(anchor.getAttribute('href')).toBe('/blocklist/incidents?search=1.2.3.4');
   });
 });

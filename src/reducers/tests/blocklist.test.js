@@ -1,5 +1,5 @@
 import cases from 'jest-in-case';
-import blacklistReducer, { initialState } from '../blacklist';
+import blocklistReducer, { initialState } from '../blocklist';
 
 const TEST_CASES = {
   'list incidents pending': {
@@ -35,16 +35,16 @@ const TEST_CASES = {
     payload: { errors: [{ message: 'Some error occurred' }] },
     type: 'LIST_INCIDENTS_FOR_RESOURCE_FAIL',
   },
-  'list incidents for blacklist pending': {
-    type: 'LIST_INCIDENTS_FOR_BLACKLIST_PENDING',
+  'list incidents for blocklist pending': {
+    type: 'LIST_INCIDENTS_FOR_BLOCKLIST_PENDING',
   },
-  'list incidents for blacklist success': {
+  'list incidents for blocklist success': {
     payload: { fakeData: true },
-    type: 'LIST_INCIDENTS_FOR_BLACKLIST_SUCCESS',
+    type: 'LIST_INCIDENTS_FOR_BLOCKLIST_SUCCESS',
   },
-  'list incidents for blacklist fail': {
+  'list incidents for blocklist fail': {
     payload: { errors: [{ message: 'Some error occurred' }] },
-    type: 'LIST_INCIDENTS_FOR_BLACKLIST_FAIL',
+    type: 'LIST_INCIDENTS_FOR_BLOCKLIST_FAIL',
   },
   'list historical incidents pending': {
     type: 'LIST_HISTORICAL_INCIDENTS_PENDING',
@@ -86,28 +86,28 @@ const TEST_CASES = {
     payload: { errors: [{ message: 'Some error occurred' }] },
     type: 'DELETE_MONITOR_FAIL',
   },
-  'list blacklists pending': {
-    type: 'LIST_BLACKLISTS_PENDING',
+  'list blocklists pending': {
+    type: 'LIST_BLOCKLISTS_PENDING',
   },
-  'list blacklists success': {
+  'list blocklists success': {
     payload: { fakeData: true },
-    type: 'LIST_BLACKLISTS_SUCCESS',
+    type: 'LIST_BLOCKLISTS_SUCCESS',
   },
-  'list blacklists fail': {
+  'list blocklists fail': {
     payload: { errors: [{ message: 'Some error occurred' }] },
-    type: 'LIST_BLACKLISTS_FAIL',
+    type: 'LIST_BLOCKLISTS_FAIL',
   },
 };
 
 cases(
-  'BlackList Reducer',
+  'BlockList Reducer',
   action => {
-    expect(blacklistReducer(initialState, action)).toMatchSnapshot();
+    expect(blocklistReducer(initialState, action)).toMatchSnapshot();
   },
   TEST_CASES,
 );
 
-it('BlackList Reducer delete monitor success deletes the resource from redux store list', () => {
+it('BlockList Reducer delete monitor success deletes the resource from redux store list', () => {
   const state = { ...initialState, monitors: [{ resource: '101.101' }, { resource: '101.102' }] };
   const action = {
     type: 'DELETE_MONITOR_SUCCESS',
@@ -115,5 +115,5 @@ it('BlackList Reducer delete monitor success deletes the resource from redux sto
       resource: '101.101',
     },
   };
-  expect(blacklistReducer(state, action).monitors).toEqual([{ resource: '101.102' }]);
+  expect(blocklistReducer(state, action).monitors).toEqual([{ resource: '101.102' }]);
 });

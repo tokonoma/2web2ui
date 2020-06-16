@@ -42,7 +42,7 @@ const mockIncidentsForResource = [
   },
 ];
 
-const mockIncidentsForBlacklist = [
+const mockIncidentsForBlocklist = [
   {
     id: '2345',
     resource: '2.3.4.5',
@@ -56,7 +56,7 @@ const mockIncidentsForBlacklist = [
 describe('IncidentDetailsPage', () => {
   const mockGetIncident = jest.fn(() => Promise.resolve(mockIncident));
   const mockListIncidentsForResource = jest.fn();
-  const mockListIncidentsForBlacklist = jest.fn();
+  const mockListIncidentsForBlocklist = jest.fn();
   const mockListHistoricalResolvedIncidents = jest.fn();
 
   const subject = ({ ...props }) => {
@@ -64,7 +64,7 @@ describe('IncidentDetailsPage', () => {
       id: mockIncident.id,
       getIncident: mockGetIncident,
       listIncidentsForResource: mockListIncidentsForResource,
-      listIncidentsForBlacklist: mockListIncidentsForBlacklist,
+      listIncidentsForBlocklist: mockListIncidentsForBlocklist,
       listHistoricalResolvedIncidents: mockListHistoricalResolvedIncidents,
     };
     return mount(
@@ -74,7 +74,7 @@ describe('IncidentDetailsPage', () => {
     );
   };
 
-  it('fetches incident, similar incidents for resource and blacklist, and historical incidents on mount', async () => {
+  it('fetches incident, similar incidents for resource and blocklist, and historical incidents on mount', async () => {
     const wrapper = subject({ loading: true });
 
     wrapper.update();
@@ -83,7 +83,7 @@ describe('IncidentDetailsPage', () => {
     wrapper.update();
     await mockGetIncident(mockIncident.id).then(() => {
       expect(mockListIncidentsForResource).toHaveBeenCalledWith(mockIncident.resource);
-      expect(mockListIncidentsForBlacklist).toHaveBeenCalledWith(mockIncident.blacklist_name);
+      expect(mockListIncidentsForBlocklist).toHaveBeenCalledWith(mockIncident.blacklist_name);
       expect(mockListHistoricalResolvedIncidents).toHaveBeenCalledWith(
         mockIncident.blacklist_name,
         mockIncident.resource,
@@ -95,7 +95,7 @@ describe('IncidentDetailsPage', () => {
     const wrapper = subject({
       loading: false,
       incident: mockIncident,
-      incidentsForBlacklist: mockIncidentsForBlacklist,
+      incidentsForBlocklist: mockIncidentsForBlocklist,
       incidentsForResource: mockIncidentsForResource,
       historicalIncidents: mockHistoricalIncidents,
     });

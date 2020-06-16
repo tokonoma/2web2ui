@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { showAlert } from 'src/actions/globalAlert';
-import { watchlistAdd } from 'src/actions/blacklist';
+import { watchlistAdd } from 'src/actions/blocklist';
 import { ButtonWrapper } from 'src/components';
 import { PageLink } from 'src/components/links';
 import { Button, Page, Panel, TextField } from 'src/components/matchbox';
@@ -33,7 +33,7 @@ export const WatchlistAddPage = ({
       watchlistAdd(resource)
         .then(({ resource }) => {
           showAlert({ type: 'success', message: `Added ${resource} to Watchlist` });
-          history.push(`/blacklist/watchlist`);
+          history.push(`/blocklist/watchlist`);
         })
         .catch(() => {
           // Don't do anything since `submitError` prop will be passed
@@ -65,7 +65,7 @@ export const WatchlistAddPage = ({
       title="Add to Watchlist"
       breadcrumbAction={{
         content: 'Watchlist',
-        to: '/blacklist/watchlist',
+        to: '/blocklist/watchlist',
         component: PageLink,
       }}
     >
@@ -103,8 +103,8 @@ export const WatchlistAddPage = ({
 };
 
 const mapStateToProps = state => ({
-  submitPending: state.blacklist.watchlistAddPending,
-  submitError: state.blacklist.watchlistAddError,
+  submitPending: state.blocklist.watchlistAddPending,
+  submitError: state.blocklist.watchlistAddError,
 });
 
 export default connect(mapStateToProps, { watchlistAdd, showAlert })(WatchlistAddPage);

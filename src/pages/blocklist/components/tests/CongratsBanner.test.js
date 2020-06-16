@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import TestApp from 'src/__testHelpers__/TestApp';
 import CongratsBanner from '../CongratsBanner';
 
-describe('Blacklist Component: CongratsBanner', () => {
+describe('Blocklist Component: CongratsBanner', () => {
   const mockDismiss = jest.fn();
   const subject = ({ ...props }) => {
     const defaults = { mockDismiss };
@@ -18,7 +18,7 @@ describe('Blacklist Component: CongratsBanner', () => {
   it('renders the banner correctly', () => {
     const { queryByText } = subject();
     expect(
-      queryByText('Congratulations! You are not currently on a Blacklist'),
+      queryByText('Congratulations! You are not currently on a Blocklist'),
     ).toBeInTheDocument();
   });
 
