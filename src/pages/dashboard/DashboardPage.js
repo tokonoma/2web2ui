@@ -29,42 +29,15 @@ export default function DashboardPage(props) {
   }, [listSendingDomains, canManageSendingDomains]);
 
   const displayGuideAndReport = () => {
-    const {
-      onboarding: {
-        isGuideAtBottom,
-        send_test_email_completed,
-        explore_analytics_completed,
-        invite_collaborator_completed,
-        view_developer_docs_completed,
-      } = {},
-      hasSendingDomains,
-      hasApiKeysForSending,
-      canManageKeys,
-      canManageSendingDomains,
-    } = props;
+    const { canManageKeys, canManageSendingDomains } = props;
     const usageReport = <UsageReport />;
     const gettingStartedGuide =
       canManageKeys && canManageSendingDomains ? <GettingStartedGuide {...props} /> : null;
-    const areAllGuidesCompleted =
-      send_test_email_completed &&
-      explore_analytics_completed &&
-      invite_collaborator_completed &&
-      view_developer_docs_completed &&
-      hasSendingDomains &&
-      hasApiKeysForSending;
 
-    if (isGuideAtBottom || areAllGuidesCompleted) {
-      return (
-        <>
-          {usageReport}
-          {gettingStartedGuide}
-        </>
-      );
-    }
     return (
       <>
-        {gettingStartedGuide}
         {usageReport}
+        {gettingStartedGuide}
       </>
     );
   };
