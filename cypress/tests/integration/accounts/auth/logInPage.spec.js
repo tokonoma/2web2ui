@@ -1,5 +1,6 @@
 /**
- * The following tests have some funky behavior between each test. Since we have whitelisted the auth cookies, the logged in state is preserved after finishing the final test. In order to successfully
+ * The following tests have some funky behavior between each test. Since we do not clear the auth
+ * cookies between tests, the logged in state is preserved after finishing the final test. In order to successfully
  * re-run the tests (typically while editing them), stopping the test runner and restarting will
  * help clear the application state. This preservation of state between tests is very helpful with other features,
  * and mainly painful on this one. A necessary tradeoff!

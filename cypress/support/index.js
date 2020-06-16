@@ -19,6 +19,7 @@ import './commands';
 // See: https://github.com/cypress-io/cypress/issues/3199#issuecomment-529430701
 Cypress.Commands.overwrite('log', (subject, message) => cy.task('log', message));
 
-Cypress.Cookies.defaults({
-  whitelist: ['website_auth', '__ssid', 'auth'], // Preserves signed-in state between route changes
+// see, https://docs.cypress.io/api/cypress-api/cookies.html#Preserve-Once
+beforeEach(() => {
+  Cypress.Cookies.preserveOnce('website_auth', '__ssid', 'auth');
 });

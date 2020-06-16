@@ -37,10 +37,10 @@ export default function ProgressBar(props) {
 The custom `omitSystemProps` function is used to prevent certain props from rendering to the DOM
 unintentionally, first removing styled system props via the `@styled-system/props` package
 ([See the repo on GitHub](https://github.com/styled-system/styled-system/tree/master/packages/props)).
-Pass a whitelist of OGComponent props that overlap with styled-system props so that they are not
+Pass a allowed list of OGComponent props that overlap with styled-system props so that they are not
 unintentionally removed by the omit. ie. `['color', 'maxWidth']`. The display name allows tests to
-shallow render the component using the display name rather than the generic name, which does 
-not contain the 'Hibana'/'OG' prefix.
+shallow render the component using the display name rather than the generic name, which does not
+contain the 'Hibana'/'OG' prefix.
 
 ## Using the Component
 

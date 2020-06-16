@@ -85,7 +85,7 @@ const validateDate = ({ from, to }) => {
 
 const now = Date.now();
 
-const whitelistFilters = {
+const allowedListFilters = {
   dateRange: {
     defaultValue: {
       from: formatApiTimestamp(moment(now).subtract(30, 'd')),
@@ -126,7 +126,7 @@ const whitelistFilters = {
 
 export const TestListPage = ({ tests, error, loading, listTests }) => {
   const styles = useHibanaOverride(OGStyles, HibanaStyles);
-  const { filters, updateFilters } = usePageFilters(whitelistFilters);
+  const { filters, updateFilters } = usePageFilters(allowedListFilters);
 
   useEffect(() => {
     listTests();

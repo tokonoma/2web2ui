@@ -6,7 +6,7 @@ import usePageFilters, { flattenParameters, unflattenParameters } from '../usePa
 
 jest.mock('src/hooks/useRouter');
 
-const whitelist = {
+const allowedList = {
   foo: {
     validate: Array.isArray,
     defaultValue: ['a', 'b', 'c'],
@@ -72,7 +72,7 @@ describe('flattenParameters', () => {
 });
 
 describe('unflattenParameters', () => {
-  it('unflattens an object based on a whitelist', () => {
+  it('unflattens an object based on a allowedList', () => {
     const unflattened = unflattenParameters(
       {
         foo: ['a', 'b', 'c'],
@@ -80,7 +80,7 @@ describe('unflattenParameters', () => {
         a: 1,
         b: 3,
       },
-      whitelist,
+      allowedList,
     );
     expect(unflattened).toEqual({
       foo: ['a', 'b', 'c'],
@@ -100,7 +100,7 @@ describe('usePageFilters', () => {
       requestParams: initFilterObject,
       updateRoute,
     });
-    const { filters, updateFilters, resetFilters } = usePageFilters(whitelist);
+    const { filters, updateFilters, resetFilters } = usePageFilters(allowedList);
 
     getUpdateFilters(updateFilters);
     getFilters(filters);
