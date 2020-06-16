@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { refreshBounceReport } from 'src/actions/bounceReport';
-import { Empty, LongTextContainer, Percent, TableCollection, PanelLoading } from 'src/components';
+import { LongTextContainer, Percent, TableCollection, PanelLoading } from 'src/components';
 import { mapStateToProps } from 'src/selectors/bounceReport';
-import { Box, Table, Tag, Text } from 'src/components/matchbox';
-import styles from '../../ReportBuilder.module.scss';
+import { Tag } from 'src/components/matchbox';
 import { safeRate } from 'src/helpers/math';
+import { EmptyWrapper, FilterBoxWrapper, TableWrapper } from './Wrappers';
 
 const filterBoxConfig = {
   show: true,
@@ -16,17 +16,7 @@ const filterBoxConfig = {
   itemToStringKeys: ['bounce_category_name', 'bounce_class_name', 'domain', 'reason'],
   exampleModifiers: ['domain', 'category', 'classification'],
   matchThreshold: 5,
-  wrapper: props => (
-    <>
-      <Box padding="500">
-        <Text as="div" fontSize="400" fontWeight="600">
-          Filter
-        </Text>
-        {props}
-      </Box>
-      <hr className={styles.Line} />
-    </>
-  ),
+  wrapper: FilterBoxWrapper,
 };
 
 const columns = [
@@ -36,13 +26,6 @@ const columns = [
   { label: 'Reason', width: '45%', sortKey: 'reason' },
   { label: 'Domain', sortKey: 'domain' },
 ];
-
-const wrapperComponent = props => (
-  <>
-    <Table>{props.children}</Table>
-    <hr className={styles.Line} />
-  </>
-);
 
 export function BounceReason(props) {
   const { aggregates, reasons, refreshBounceReport, reportOptions, tableLoading } = props;
@@ -75,11 +58,7 @@ export function BounceReason(props) {
   }
 
   if (!reasons.length) {
-    return (
-      <Box height={'200px'} paddingTop={'70px'}>
-        <Empty message={'No bounce reasons to report'} hasPanel={false} />
-      </Box>
-    );
+    return <EmptyWrapper message="No bounce reasons to report" />;
   }
 
   return (
@@ -89,7 +68,7 @@ export function BounceReason(props) {
       getRowData={getRowData}
       defaultSortColumn="count_bounce"
       defaultSortDirection="desc"
-      wrapperComponent={wrapperComponent}
+      wrapperComponent={TableWrapper}
       pagination
       filterBox={filterBoxConfig}
     />

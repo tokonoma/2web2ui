@@ -19,7 +19,7 @@ import {
   selectSummaryChartSearchOptions,
   selectSummaryMetricsProcessed,
 } from 'src/selectors/reportSearchOptions';
-import BounceReason from './components/tabs/BounceReason';
+import { BounceReason } from './components/tabs';
 import styles from './ReportBuilder.module.scss';
 import moment from 'moment';
 
