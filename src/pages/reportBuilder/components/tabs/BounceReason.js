@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { refreshBounceReport } from 'src/actions/bounceReport';
-import { LongTextContainer, Percent, TableCollection, PanelLoading } from 'src/components';
+import { LongTextContainer, Percent, TableCollection } from 'src/components';
 import { mapStateToProps } from 'src/selectors/bounceReport';
 import { Tag } from 'src/components/matchbox';
 import { safeRate } from 'src/helpers/math';
-import { EmptyWrapper, FilterBoxWrapper, TableWrapper } from './Wrappers';
+import { EmptyWrapper, FilterBoxWrapper, LoadingWrapper, TableWrapper } from './Wrappers';
 
 const filterBoxConfig = {
   show: true,
@@ -54,7 +54,7 @@ export function BounceReason(props) {
   );
 
   if (tableLoading) {
-    return <PanelLoading />;
+    return <LoadingWrapper />;
   }
 
   if (!reasons.length) {
