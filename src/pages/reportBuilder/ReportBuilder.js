@@ -1,6 +1,5 @@
 import React, { useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
-import classnames from 'classnames';
 import { tokens } from '@sparkpost/design-tokens-hibana';
 import { refreshSummaryReport } from 'src/actions/summaryChart';
 import { Page, Panel } from 'src/components/matchbox';
@@ -59,16 +58,15 @@ export function ReportBuilder({
     );
   }, []);
 
-  //TODO: Make sure to replace these components with new ones
   return (
     <Page title="Analytics Report">
       <ReportOptions reportLoading={chart.chartLoading} searchOptions={summarySearchOptions} />
       <div data-id="summary-chart">
         <Panel>
-          <Panel.Section
-            className={classnames(styles.ChartSection, chart.chartLoading && styles.pending)}
-          >
-            <Charts {...chart} metrics={processedMetrics} to={to} yScale={'linear'} />
+          <Panel.Section>
+            <Box className={styles.ChartSection}>
+              <Charts {...chart} metrics={processedMetrics} to={to} yScale={'linear'} />
+            </Box>
           </Panel.Section>
           <Box padding="400" backgroundColor={tokens.color_gray_1000}>
             <Grid>
@@ -88,7 +86,6 @@ export function ReportBuilder({
               </Grid.Column>
             </Grid>
           </Box>
-
           {renderLoading()}
         </Panel>
       </div>
