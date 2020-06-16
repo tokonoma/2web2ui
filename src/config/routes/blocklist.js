@@ -2,7 +2,7 @@ import { blocklist } from 'src/pages';
 import App from 'src/components/layout/App';
 import { hasAccountOptionEnabled } from 'src/helpers/conditions/account';
 
-const blockListRoutes = [
+const blocklistRoutes = [
   {
     path: '/blocklist/incidents',
     component: blocklist.IncidentsPage,
@@ -41,4 +41,4 @@ const blockListRoutes = [
   },
 ];
 
-export default blockListRoutes;
+export default blocklistRoutes;
