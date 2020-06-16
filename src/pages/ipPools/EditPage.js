@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ApiErrorBanner, DeleteModal, Loading } from 'src/components';
-import { Box, Page, Panel } from 'src/components/matchbox';
+import { ExternalLink } from 'src/components/links';
+import { Banner, Box, Button, Page, Panel } from 'src/components/matchbox';
 import { OGOnlyWrapper } from 'src/components/hibana';
+import { LINKS } from 'src/constants';
 import PoolForm from './components/PoolForm';
 import IpList from './components/IpList';
 
@@ -177,6 +179,24 @@ export class EditPage extends Component {
           },
         ]}
       >
+        <Banner
+          status="warning"
+          title="New dedicated IP addresses need to be warmed up"
+          marginBottom="500"
+        >
+          <Box maxWidth="1200">
+            <p>
+              In order to establish a positive sending reputation, warm up new dedicated IP
+              addresses by gradually sending more emails.
+            </p>
+
+            <Banner.Actions>
+              <ExternalLink as={Button} to={LINKS.IP_WARM_UP}>
+                Read our IP Warm-up Overview
+              </ExternalLink>
+            </Banner.Actions>
+          </Box>
+        </Banner>
         {this.renderForm()}
         {this.renderIps()}
 

@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { listPools } from 'src/actions/ipPools';
 import { Loading, TableCollection, ApiErrorBanner } from 'src/components';
-import { ExternalLink, PageLink } from 'src/components/links';
-import { Banner, Box, Button, Page } from 'src/components/matchbox';
-import { LINKS } from 'src/constants';
+import { PageLink, SupportTicketLink } from 'src/components/links';
+import { Banner, Page, Stack } from 'src/components/matchbox';
 import { openSupportTicketForm } from 'src/actions/support';
 import { not } from 'src/helpers/conditions';
 import { selectCondition } from 'src/selectors/accessConditionState';
@@ -57,6 +56,7 @@ export class IpPoolsList extends Component {
 
   render() {
     const { loading, error, showPurchaseCTA, isManuallyBilled, openSupportTicketForm } = this.props;
+
     if (loading) {
       return <Loading />;
     }
@@ -79,33 +79,24 @@ export class IpPoolsList extends Component {
 
     return (
       <Page primaryAction={createAction} secondaryActions={purchaseActions} title="IP Pools">
-        <IPWarmupReminderBanner />
+        <Banner
+          status="info"
+          title="SparkPost now supports Strict TLS and Custom Messaging Expiration"
+          marginBottom="500"
+        >
+          <Stack>
+            <p>
+              To adjust these settings, please{' '}
+              <SupportTicketLink>submit a support ticket</SupportTicketLink> or contact your TAM.
+            </p>
+            <p>Following implementation, changes may take up to 2 weeks to propagate.</p>
+          </Stack>
+        </Banner>
         {error ? this.renderError() : this.renderCollection()}
       </Page>
     );
   }
 }
-
-export const IPWarmupReminderBanner = () => (
-  <Banner
-    status="warning"
-    title="New dedicated IP addresses need to be warmed up"
-    marginBottom="500"
-  >
-    <Box maxWidth="1200">
-      <p>
-        In order to establish a positive sending reputation, warm up new dedicated IP addresses by
-        gradually sending more emails.
-      </p>
-
-      <Banner.Actions>
-        <ExternalLink as={Button} to={LINKS.IP_WARM_UP}>
-          Read our IP Warm-up Overview
-        </ExternalLink>
-      </Banner.Actions>
-    </Box>
-  </Banner>
-);
 
 function mapStateToProps(state) {
   const { ipPools } = state;

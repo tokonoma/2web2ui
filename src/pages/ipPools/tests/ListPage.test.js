@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { IpPoolsList, getRowData, IPWarmupReminderBanner } from '../ListPage';
+import { IpPoolsList, getRowData } from '../ListPage';
 
 describe('IP Pools List Page', () => {
   let props;
@@ -11,13 +11,13 @@ describe('IP Pools List Page', () => {
     props = {
       loading: false,
       ipPools: [
-        { name: 'Test Pool 1', id: 101, ips: [{ external_ip: 1111 }, { external_ip: 2222 }]},
-        { name: 'Test Pool 2', id: 102, ips: []}
+        { name: 'Test Pool 1', id: 101, ips: [{ external_ip: 1111 }, { external_ip: 2222 }] },
+        { name: 'Test Pool 2', id: 102, ips: [] },
       ],
       listPools: jest.fn(() => []),
       showPurchaseCTA: true,
       isManuallyBilled: false,
-      isAdmin: true
+      isAdmin: true,
     };
 
     wrapper = shallow(<IpPoolsList {...props} />);
@@ -28,7 +28,7 @@ describe('IP Pools List Page', () => {
   });
 
   it('should show alert upon error', () => {
-    wrapper.setProps({ ipPools: [], error: { message: 'Uh oh! It broke.' }});
+    wrapper.setProps({ ipPools: [], error: { message: 'Uh oh! It broke.' } });
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -41,38 +41,31 @@ describe('IP Pools List Page', () => {
     const rows = getRowData({
       id: 'my-pool',
       name: 'My Pool',
-      ips: [1,2,3]
+      ips: [1, 2, 3],
     });
 
     expect(rows).toMatchSnapshot();
   });
 
   it('does not render purchase action if showPurchaseCTA is false', () => {
-    wrapper.setProps({ ipPools: [{ name: 'Default', ips: []}], showPurchaseCTA: false });
+    wrapper.setProps({ ipPools: [{ name: 'Default', ips: [] }], showPurchaseCTA: false });
     expect(wrapper).toMatchSnapshot();
   });
 
   it('does not render purchase action if showPurchaseCTA is false2', () => {
-    wrapper.setProps({ ipPools: [{ name: 'Default', ips: []}], showPurchaseCTA: false });
+    wrapper.setProps({ ipPools: [{ name: 'Default', ips: [] }], showPurchaseCTA: false });
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders request IP action if showPurchaseCTA is true and isManuallyBilled is true', () => {
     wrapper.setProps({ isManuallyBilled: true });
     expect(wrapper.prop('secondaryActions')).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({ content: 'Request IPs' })
-      ])
+      expect.arrayContaining([expect.objectContaining({ content: 'Request IPs' })]),
     );
   });
 
   it('does not render purchase action if isAdmin is false', () => {
-    wrapper.setProps({ ipPools: [{ name: 'Default', ips: []}], isAdmin: false });
+    wrapper.setProps({ ipPools: [{ name: 'Default', ips: [] }], isAdmin: false });
     expect(wrapper).toMatchSnapshot();
   });
-
-  it('should render the IP warm-up banner correctly', () => {
-    expect(shallow(<IPWarmupReminderBanner />)).toMatchSnapshot();
-  });
-
 });

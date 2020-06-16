@@ -31,6 +31,27 @@ exports[`IP Pools Edit Page render tests should not show purchase action if show
   }
   title="My Pool (my-pool)"
 >
+  <Banner
+    marginBottom="500"
+    status="warning"
+    title="New dedicated IP addresses need to be warmed up"
+  >
+    <Box
+      maxWidth="1200"
+    >
+      <p>
+        In order to establish a positive sending reputation, warm up new dedicated IP addresses by gradually sending more emails.
+      </p>
+      <Banner.Actions>
+        <ExternalLink
+          as={[Function]}
+          to="https://support.sparkpost.com/customer/portal/articles/1972209-ip-warm-up-overview"
+        >
+          Read our IP Warm-up Overview
+        </ExternalLink>
+      </Banner.Actions>
+    </Box>
+  </Banner>
   <withRouter(Connect(ReduxForm))
     isNew={false}
     onSubmit={[Function]}
@@ -104,6 +125,27 @@ exports[`IP Pools Edit Page render tests should render the edit page correctly 1
   }
   title="My Pool (my-pool)"
 >
+  <Banner
+    marginBottom="500"
+    status="warning"
+    title="New dedicated IP addresses need to be warmed up"
+  >
+    <Box
+      maxWidth="1200"
+    >
+      <p>
+        In order to establish a positive sending reputation, warm up new dedicated IP addresses by gradually sending more emails.
+      </p>
+      <Banner.Actions>
+        <ExternalLink
+          as={[Function]}
+          to="https://support.sparkpost.com/customer/portal/articles/1972209-ip-warm-up-overview"
+        >
+          Read our IP Warm-up Overview
+        </ExternalLink>
+      </Banner.Actions>
+    </Box>
+  </Banner>
   <withRouter(Connect(ReduxForm))
     isNew={false}
     onSubmit={[Function]}
