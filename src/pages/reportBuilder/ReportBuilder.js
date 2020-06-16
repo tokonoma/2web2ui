@@ -126,6 +126,7 @@ export function ReportBuilder({
                   </Grid.Column>
                 </Grid>
               </Box>
+              {renderLoading()}
             </Tabs.Item>
             {bounceTabMetrics && <Tabs.Item></Tabs.Item>}
             {rejectionTabMetrics && <Tabs.Item></Tabs.Item>}
@@ -133,7 +134,6 @@ export function ReportBuilder({
             {linksTabMetrics && <Tabs.Item></Tabs.Item>}
           </Tabs>
         </div>
-        {renderLoading()}
       </Panel>
 
       {showTable && (
