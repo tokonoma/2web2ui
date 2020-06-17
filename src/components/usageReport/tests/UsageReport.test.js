@@ -42,6 +42,30 @@ describe('UsageReport Component', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should render null when usage is zero', () => {
+    const props = {
+      getAccount: getAccount,
+      subscription: {
+        plan_volume: 10000,
+      },
+      usage: {
+        month: {
+          used: 0,
+          limit: 50000,
+          start: '2017-08-01T08:00:00.000Z',
+          end: '2017-08-31T08:00:00.000Z',
+        },
+        day: {
+          used: 0,
+          limit: 2000,
+          start: '2017-08-30T00:00:00.000Z',
+        },
+      },
+    };
+    const wrapper = shallow(<UsageReport {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('should render with regular usage', () => {
     const wrapper = shallow(<UsageReport {...props} />);
     expect(wrapper).toMatchSnapshot();
