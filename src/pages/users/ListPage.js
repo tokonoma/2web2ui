@@ -77,7 +77,7 @@ export class ListPage extends Component {
     const data = [
       <User name={user.name} email={user.email} username={user.username} />,
       user.roleLabel,
-      user.tfa_enabled ? <Tag color="blue">Enabled</Tag> : <Tag>Disabled</Tag>,
+      user.tfa_enabled ? <Tag>Enabled</Tag> : <Tag>Disabled</Tag>,
       user.last_login ? <TimeAgo date={user.last_login} live={false} /> : 'Never',
       <Actions
         username={user.username}
