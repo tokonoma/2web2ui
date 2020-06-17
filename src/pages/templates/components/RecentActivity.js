@@ -39,31 +39,31 @@ const RecentActivity = props => {
               return (
                 <div
                   role="listitem"
-                  className={styles.RecentActivityListItem}
+                  className={styles.ListItem}
                   key={`recent-activity-template-${index}`}
                 >
-                  <Panel className={styles.RecentActivityPanel} accent>
-                    <div className={styles.RecentActivityPanelContent}>
-                      <Panel.Section className={styles.RecentActivityStatus}>
-                        {template.list_status === 'published' ||
-                        template.list_status === 'published_with_draft' ? (
-                          <div className={styles.RecentActivityStatus}>
-                            <CheckCircle className={styles.RecentActivityPublishedIcon} />
+                  <Panel className={styles.Panel} accent>
+                    <div className={styles.PanelContent}>
+                      <Panel.Section>
+                        <div className={styles.Status}>
+                          {template.list_status === 'published' ||
+                          template.list_status === 'published_with_draft' ? (
+                            <>
+                              <CheckCircle className={styles.PublishedIcon} />
 
-                            <span className={styles.RecentActivityContent}>Published</span>
-                          </div>
-                        ) : (
-                          <div className={styles.RecentActivityStatus}>
-                            <FileEdit className={styles.RecentActivityDraftIcon} />
+                              <span className={styles.StatusContent}>Published</span>
+                            </>
+                          ) : (
+                            <>
+                              <FileEdit />
 
-                            <span className={styles.RecentActivityContent}>Draft</span>
-                          </div>
-                        )}
-                      </Panel.Section>
+                              <span className={styles.StatusContent}>Draft</span>
+                            </>
+                          )}
+                        </div>
 
-                      <Panel.Section className={styles.RecentActivitySection}>
                         {/* TODO: Remove <strong> when OG theme is removed */}
-                        <strong>
+                        <strong className={styles.Link}>
                           <Text as="span" fontWeight="400">
                             <PageLink
                               to={`/${routeNamespace}/edit/${
@@ -76,32 +76,32 @@ const RecentActivity = props => {
                         </strong>
                       </Panel.Section>
 
-                      <div className={styles.RecentActivityMeta}>
-                        <div className={styles.RecentActivityDate}>
-                          <div>
+                      <Panel.Section paddingTop="200" paddingBottom="200">
+                        <div className={styles.Meta}>
+                          <div className={styles.Date}>
                             <span>Updated&nbsp;</span>
 
                             {formatDate(template.last_update_time)}
                           </div>
-                        </div>
 
-                        {hasActionButtons && (
-                          <div className={styles.RecentActivityActions}>
-                            <ActionPopover
-                              actions={[
-                                {
-                                  content: 'Duplicate Template',
-                                  onClick: () => onToggleDuplicateModal(template),
-                                },
-                                {
-                                  content: 'Delete Template',
-                                  onClick: () => onToggleDeleteModal(template),
-                                },
-                              ]}
-                            />
-                          </div>
-                        )}
-                      </div>
+                          {hasActionButtons && (
+                            <div className={styles.Actions}>
+                              <ActionPopover
+                                actions={[
+                                  {
+                                    content: 'Duplicate Template',
+                                    onClick: () => onToggleDuplicateModal(template),
+                                  },
+                                  {
+                                    content: 'Delete Template',
+                                    onClick: () => onToggleDeleteModal(template),
+                                  },
+                                ]}
+                              />
+                            </div>
+                          )}
+                        </div>
+                      </Panel.Section>
                     </div>
                   </Panel>
                 </div>
