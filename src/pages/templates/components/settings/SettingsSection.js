@@ -4,11 +4,8 @@ import SettingsForm from './SettingsForm.Container';
 import styles from './SettingsSection.module.scss';
 
 const SettingsSection = () => (
-  <Panel
-    className={styles.SettingsSection}
-    title="Template Settings"
-  >
-    <SettingsForm/>
+  <Panel className={styles.SettingsSection} title="Template Settings">
+    <SettingsForm />
   </Panel>
 );
 

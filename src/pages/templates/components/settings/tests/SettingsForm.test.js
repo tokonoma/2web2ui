@@ -34,7 +34,7 @@ describe('SettingsForm', () => {
 
   it('renders without subaccounts', () => {
     const wrapper = subject();
-    expect(wrapper).toMatchSnapshot();
+
     expect(wrapper.exists('SubaccountSection')).toBe(false);
   });
 
