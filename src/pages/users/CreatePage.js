@@ -45,14 +45,13 @@ export class CreatePage extends Component {
           <form onSubmit={handleSubmit(this.handleSubmit)}>
             <Panel.Section>
               <Stack>
-                <p>An invitation will be sent to the email address you supply</p>
-
                 <Field
                   name="email"
                   validate={[required, email]}
                   normalize={trimWhitespaces}
                   label="Email address"
                   component={TextFieldWrapper}
+                  helpText="An invitation will be sent to the email address you supply"
                 />
 
                 <Field
