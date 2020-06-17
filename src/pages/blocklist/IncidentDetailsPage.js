@@ -67,7 +67,7 @@ export const IncidentDetailsPage = ({
       return (
         <div data-id="error-banner">
           <ApiErrorBanner
-            message={'Sorry, we seem to have had some trouble loading your blocklist incidents.'}
+            message="Sorry, we seem to have had some trouble loading your blocklist incidents."
             errorDetails={error.message}
             reload={() => {
               getIncident(id).then(incident => {
@@ -131,7 +131,7 @@ export const IncidentDetailsPage = ({
     return (
       <>
         {historicalIncidentsPending ? (
-          <PanelLoading minHeight={'150px'} />
+          <PanelLoading minHeight="150px" />
         ) : (
           <Panel sectioned data-id="incident-details">
             <IncidentDetails

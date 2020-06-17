@@ -74,7 +74,7 @@ export const IncidentsPage = props => {
       return (
         <div data-id="error-banner">
           <ApiErrorBanner
-            message={'Sorry, we seem to have had some trouble loading your blocklist incidents.'}
+            message="Sorry, we seem to have had some trouble loading your blocklist incidents."
             errorDetails={error.message}
             reload={() => {
               listMonitors();
