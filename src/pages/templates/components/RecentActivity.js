@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { FileEdit, CheckCircle } from '@sparkpost/matchbox-icons';
 import { Box, Panel, Stack, Text } from 'src/components/matchbox';
 import { PageLink } from 'src/components/links';
+import { Heading } from 'src/components/text';
 import ActionPopover from 'src/components/actionPopover';
 import useHibanaOverride from 'src/hooks/useHibanaOverride';
 import { formatDate } from 'src/helpers/date';
@@ -23,7 +24,9 @@ const RecentActivity = props => {
   return (
     <Box mb="500">
       <Stack space="400">
-        <h2>Recent Activity</h2>
+        <Heading as="h2" looksLike="h3">
+          Recent Activity
+        </Heading>
 
         <div className={styles.RecentActivity} role="list">
           {descendingSortedTemplates.map((template, index) => {
