@@ -102,7 +102,7 @@ export const IpForm = props => {
                     <div className={styles.MaxWidthMD}>
                       <p className={styles.RadioParagraph}>
                         Standard warmup involves gradually increasing the amount of traffic to the
-                        gold IP each day based on a pre-determined schedule. Traffic exceeding the
+                        cold IP each day based on a pre-determined schedule. Traffic exceeding the
                         daily limit will be directed to other IPs in the same pool and then to the
                         overflow pool you designate.
                       </p>
