@@ -155,7 +155,7 @@ export const list = [
       'Total number of messages which had at least one link selected one or more times. ',
     inSummary: true,
     isUniquePerTimePeriod: true,
-    tab: 'delayed',
+    tab: 'links',
   },
   {
     key: 'count_bounce',
@@ -299,7 +299,7 @@ export const list = [
     compute: rate,
     description: 'Percentage of Accepted messages that had at least one link selected.',
     inSummary: true,
-    tab: 'delayed',
+    tab: 'links',
   },
   {
     key: 'bounce_rate',
