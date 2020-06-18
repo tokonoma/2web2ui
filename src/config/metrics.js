@@ -54,6 +54,7 @@ export const list = [
     unit: 'number',
     description: 'Messages delivered on the first attempt.',
     inSummary: true,
+    tab: 'delayed',
   },
   {
     key: 'count_delivered_subsequent',
@@ -63,6 +64,7 @@ export const list = [
     unit: 'number',
     description: 'Messages delivered that required more than one delivery attempt.',
     inSummary: true,
+    tab: 'delayed',
   },
   {
     key: 'count_spam_complaint',
@@ -141,6 +143,7 @@ export const list = [
     unit: 'number',
     description: 'Total number of times that links were selected across all messages.',
     inSummary: true,
+    tab: 'links',
   },
   {
     key: 'count_unique_clicked_approx',
@@ -152,6 +155,7 @@ export const list = [
       'Total number of messages which had at least one link selected one or more times. ',
     inSummary: true,
     isUniquePerTimePeriod: true,
+    tab: 'delayed',
   },
   {
     key: 'count_bounce',
@@ -162,6 +166,7 @@ export const list = [
     description:
       'Total number of bounced messages, which includes both In-Band and Out-of-Band bounces.',
     inSummary: true,
+    tab: 'bounce',
   },
   {
     key: 'count_hard_bounce',
@@ -171,6 +176,7 @@ export const list = [
     unit: 'number',
     description: 'Total number of Bounced messages due to hard bounce classification reasons.',
     inSummary: true,
+    tab: 'bounce',
   },
   {
     key: 'count_soft_bounce',
@@ -180,6 +186,7 @@ export const list = [
     unit: 'number',
     description: 'Total number of Bounced messages due to soft bounce classification reasons.',
     inSummary: true,
+    tab: 'bounce',
   },
   {
     key: 'count_block_bounce',
@@ -189,6 +196,7 @@ export const list = [
     unit: 'number',
     description: 'Total number of Bounced messages due to an IP block.',
     inSummary: true,
+    tab: 'bounce',
   },
   {
     key: 'count_admin_bounce',
@@ -199,6 +207,7 @@ export const list = [
     description:
       'Total number of Bounced messages due to admin bounce classification reasons, also includes Rejected.',
     inSummary: true,
+    tab: 'bounce',
   },
   {
     key: 'count_undetermined_bounce',
@@ -208,6 +217,7 @@ export const list = [
     unit: 'number',
     description: 'Total number of Bounced messages due to undetermined bounce reasons.',
     inSummary: true,
+    tab: 'bounce',
   },
   {
     key: 'count_rejected',
@@ -217,6 +227,7 @@ export const list = [
     unit: 'number',
     description: 'Messages either rejected due to policy or failed to generate.',
     inSummary: true,
+    tab: 'rejection',
   },
   {
     key: 'count_policy_rejection',
@@ -226,6 +237,7 @@ export const list = [
     unit: 'number',
     description: 'Messages rejected by SparkPost due to policy.',
     inSummary: true,
+    tab: 'rejection',
   },
   {
     key: 'count_generation_failed',
@@ -235,6 +247,7 @@ export const list = [
     unit: 'number',
     description: 'Message generation failed for an intended recipient.',
     inSummary: true,
+    tab: 'rejection',
   },
   {
     key: 'count_unsubscribe',
@@ -253,6 +266,7 @@ export const list = [
     unit: 'number',
     description: 'Messages rejected by SparkPost due to policy.',
     inSummary: true,
+    tab: 'rejection',
   },
   {
     key: 'accepted_rate',
@@ -285,6 +299,7 @@ export const list = [
     compute: rate,
     description: 'Percentage of Accepted messages that had at least one link selected.',
     inSummary: true,
+    tab: 'delayed',
   },
   {
     key: 'bounce_rate',
@@ -296,6 +311,7 @@ export const list = [
     compute: rate,
     description: 'Percentage of Sent messages that Bounced.',
     inSummary: true,
+    tab: 'bounce',
   },
   {
     key: 'hard_bounce_rate',
@@ -306,6 +322,7 @@ export const list = [
     compute: rate,
     description: 'Percentage of Sent messages that Hard Bounced.',
     inSummary: true,
+    tab: 'bounce',
   },
   {
     key: 'soft_bounce_rate',
@@ -316,6 +333,7 @@ export const list = [
     compute: rate,
     description: 'Percentage of Sent messages that Soft Bounced.',
     inSummary: true,
+    tab: 'bounce',
   },
   {
     key: 'block_bounce_rate',
@@ -327,6 +345,7 @@ export const list = [
     compute: rate,
     description: 'Percentage of Sent messages that Block Bounced.',
     inSummary: true,
+    tab: 'bounce',
   },
   {
     key: 'admin_bounce_rate',
@@ -337,6 +356,7 @@ export const list = [
     compute: rate,
     description: 'Percentage of Targeted messages that Admin Bounced.',
     inSummary: true,
+    tab: 'bounce',
   },
   {
     key: 'undetermined_bounce_rate',
@@ -347,6 +367,7 @@ export const list = [
     compute: rate,
     description: 'Percentage of Sent messages that Undetermined Bounced.',
     inSummary: true,
+    tab: 'bounce',
   },
   {
     key: 'unsubscribe_rate',
@@ -366,6 +387,7 @@ export const list = [
     unit: 'number',
     description: 'Total number of delays due to any temporary failure.',
     inSummary: true,
+    tab: 'delayed',
   },
   {
     key: 'count_delayed_first',
@@ -421,11 +443,13 @@ export const list = [
     key: 'count_inband_bounce',
     type: 'total',
     unit: 'number',
+    tab: 'bounce',
   },
   {
     key: 'count_outofband_bounce',
     type: 'total',
     unit: 'number',
+    tab: 'bounce',
   },
   {
     key: 'count_raw_clicked_approx',
@@ -434,6 +458,11 @@ export const list = [
     description: 'Total number of messages which had at least one link selected one or more times.',
   },
 ];
+
+export const bounceTabMetrics = list.filter(({ tab }) => tab && tab === 'bounce');
+export const rejectionTabMetrics = list.filter(({ tab }) => tab && tab === 'rejection');
+export const delayTabMetrics = list.filter(({ tab }) => tab && tab === 'delayed');
+export const linksTabMetrics = list.filter(({ tab }) => tab && tab === 'links');
 
 export const map = list.reduce((accumulator = {}, metric) => ({
   ...accumulator,

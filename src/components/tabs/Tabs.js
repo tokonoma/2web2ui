@@ -1,15 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Tabs as TabsComponent } from 'src/components/matchbox';
 import useTabs from 'src/hooks/useTabs';
 
 function Tabs(props) {
-  const { children, defaultTab = 0, forceRender = false, tabs: setTabs, ...rest } = props;
+  const { children, defaultTabIndex = 0, forceRender = false, tabs: setTabs, ...rest } = props;
 
-  const [selectedTabIndex, tabs] = useTabs(setTabs, defaultTab);
-
+  const [selectedTabIndex, tabs] = useTabs(setTabs, defaultTabIndex);
   return (
     <>
-      <TabsComponent tabs={tabs} selected={selectedTabIndex} {...rest} />
+      {tabs.length > 1 && <TabsComponent tabs={tabs} selected={selectedTabIndex} {...rest} />}
       {React.Children.map(children, (child, index) => {
         return React.cloneElement(child, { forceRender, selected: selectedTabIndex === index });
       })}
@@ -20,13 +19,21 @@ function Tabs(props) {
 function Item(props) {
   const { forceRender, selected, children } = props;
 
+  //Prevent rendering the tab children unless tab has already been selected before
+  const [hasRendered, setHasRendered] = useState(false);
+  useEffect(() => {
+    if (selected && !hasRendered) {
+      setHasRendered(true);
+    }
+  }, [hasRendered, selected]);
+
   return (
     <div
       style={{
         display: forceRender && !selected ? 'none' : null,
       }}
     >
-      {forceRender || selected ? children : null}
+      {(forceRender || selected) && hasRendered ? children : null}
     </div>
   );
 }

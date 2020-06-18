@@ -10,9 +10,13 @@
   transition: 0.15s;
 }
 
-.pending {
+.Pending {
   opacity: 0.5;
   pointer-events: none;
+}
+
+.Line {
+  margin: 0;
 }
 
 .Loading {

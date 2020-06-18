@@ -9,11 +9,18 @@ const useTabs = (initialTabs, initialIndex = 0) => {
   // only on mount attach click handler to tabs
   useEffect(() => {
     const tabsWithClickHandling = initialTabs.map((tab, index) => ({
-      ...tab, onClick: () => { setIndex(index); }
+      ...tab,
+      onClick: () => {
+        setIndex(index);
+        if (tab.onClick) {
+          tab.onClick();
+        }
+      },
     }));
 
     setTabs(tabsWithClickHandling);
-  }, [initialTabs]);
+    setIndex(initialIndex);
+  }, [initialIndex, initialTabs]);
 
   return [tabIndex, tabs];
 };
