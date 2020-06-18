@@ -44,14 +44,13 @@ export default function SettingsForm(props) {
 
   const renderPublishedIntro = () => {
     const { hasDraft } = props;
+
     return (
-      <Panel.Section>
-        <p
-          className={styles.SettingsIntro}
-        >{`Template settings can only be changed in drafts. Simply select '${
-          hasDraft ? 'Edit Draft' : 'Save as Draft'
-        }' in the top right to access the draft version, and adjust settings as needed.`}</p>
-      </Panel.Section>
+      <p
+        className={styles.SettingsIntro}
+      >{`Template settings can only be changed in drafts. Simply select '${
+        hasDraft ? 'Edit Draft' : 'Save as Draft'
+      }' in the top right to access the draft version, and adjust settings as needed.`}</p>
     );
   };
 
@@ -82,9 +81,9 @@ export default function SettingsForm(props) {
   return (
     <form onSubmit={handleSubmit(updateSettings)}>
       <Panel.Section>
-        {isPublishedMode && renderPublishedIntro()}
-
         <Stack>
+          {isPublishedMode && renderPublishedIntro()}
+
           <Field
             name="name"
             component={TextFieldWrapper}
