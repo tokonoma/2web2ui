@@ -5,7 +5,7 @@ import useHibanaOverride from 'src/hooks/useHibanaOverride';
 
 import OGStyles from './LabelledValue.module.scss';
 import hibanaStyles from './LabelledValueHibana.module.scss';
-const LabelledValue = ({ label, value, children, bold = true }) => {
+const LabelledValue = ({ label, value, children, bold = true, style }) => {
   const styles = useHibanaOverride(OGStyles, hibanaStyles);
   const [state] = useHibana();
   const { isHibanaEnabled } = state;
@@ -35,7 +35,7 @@ const LabelledValue = ({ label, value, children, bold = true }) => {
   ) : null;
 
   return (
-    <div className={styles.LabelledValue}>
+    <div className={styles.LabelledValue} style={style}>
       {labelMarkup}
       <div className={styles.Content}>{childrenMarkup}</div>
     </div>
@@ -47,6 +47,7 @@ LabelledValue.propTypes = {
   value: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
   bold: PropTypes.bool,
+  style: PropTypes.object,
 };
 
 export default LabelledValue;

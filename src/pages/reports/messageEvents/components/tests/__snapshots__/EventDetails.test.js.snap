@@ -4,6 +4,10 @@ exports[`EventDetails Component should render with all props 1`] = `
 <Panel
   title="Event Details"
 >
+  <Box
+    borderBottom="400"
+    paddingTop="500"
+  />
   <Panel.Section>
     <LabelledValue
       key="key1"
@@ -20,6 +24,11 @@ exports[`EventDetails Component should render with all props 1`] = `
     <LabelledValue
       key="key2"
       label="key2"
+      style={
+        Object {
+          "alignItems": "center",
+        }
+      }
     >
       <CopyField
         hideCopy={true}
@@ -49,6 +58,10 @@ exports[`EventDetails Component should render with no props 1`] = `
 <Panel
   title="Event Details"
 >
+  <Box
+    borderBottom="400"
+    paddingTop="500"
+  />
   <Panel.Section />
   <Panel.Section>
     <LabelledValue

@@ -6,13 +6,14 @@ exports[`Component: ShareModal should render correctly when open 1`] = `
     fullWidth={true}
     id="shareModalButton"
     onClick={[Function]}
-    variant="monochrome-secondary"
+    variant="secondary"
   >
     Share
   </Button>
   <Modal
     onClose={[Function]}
     open={true}
+    showCloseButton={true}
   >
     <WindowEvent
       event="keydown"
@@ -55,13 +56,14 @@ exports[`Component: ShareModal should render with a valid relative range 1`] = `
     fullWidth={true}
     id="shareModalButton"
     onClick={[Function]}
-    variant="monochrome-secondary"
+    variant="secondary"
   >
     Share
   </Button>
   <Modal
     onClose={[Function]}
     open={false}
+    showCloseButton={true}
   >
     <Panel
       title="Share this report"

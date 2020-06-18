@@ -9,6 +9,7 @@
   position: relative;
   transition: 0.15s;
   background: #ffffff;
+
   &:not(.selected):hover {
     cursor: pointer;
     background: color(gray, 100);
@@ -16,6 +17,8 @@
 }
 
 .selected {
+  color: color(blue, 800);
+  font-weight: font-weight(semibold);
   background: color(blue, 100);
 
   .Bar {

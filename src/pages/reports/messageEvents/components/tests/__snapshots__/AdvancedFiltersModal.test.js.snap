@@ -4,13 +4,14 @@ exports[`Component: AdvancedFiltersModal should render initially and sync to sta
 <Fragment>
   <Button
     onClick={[Function]}
-    variant="monochrome-secondary"
+    variant="secondary"
   >
     Add Filters
   </Button>
   <Modal
     onClose={[Function]}
     open={false}
+    showCloseButton={true}
   >
     <WindowEvent
       event="keydown"

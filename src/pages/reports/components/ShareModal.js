@@ -103,12 +103,12 @@ export class ShareModal extends Component {
             disabled={this.props.disabled}
             fullWidth
             onClick={this.toggleModal}
-            variant="monochrome-secondary"
+            variant="secondary"
           >
             Share
           </Button>
         )}
-        <Modal open={open} onClose={this.toggleModal}>
+        <Modal open={open} onClose={this.toggleModal} showCloseButton={true}>
           {open && <WindowEvent event="keydown" handler={this.handleKeydown} />}
           <Panel title="Share this report">
             <Panel.Section>

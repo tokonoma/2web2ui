@@ -9,9 +9,9 @@ exports[`SearchForm should render correctly with existing filters 1`] = `
       key="0"
     >
       <Grid.Column
-        lg={3}
-        md={3}
-        xs={3}
+        lg={4}
+        md={6}
+        xs={6}
       >
         <div
           className="Selector"
@@ -38,7 +38,7 @@ exports[`SearchForm should render correctly with existing filters 1`] = `
         </div>
       </Grid.Column>
       <Grid.Column
-        lg={7}
+        lg={6}
         md={12}
         xs={12}
       >
@@ -68,8 +68,10 @@ exports[`SearchForm should render correctly with existing filters 1`] = `
             flat={true}
             onClick={[Function]}
           >
-            Remove
-            <HighlightOff
+            <span>
+              Remove
+            </span>
+            <RemoveCircle
               className="Icon"
             />
           </Button>
@@ -80,9 +82,9 @@ exports[`SearchForm should render correctly with existing filters 1`] = `
       key="1"
     >
       <Grid.Column
-        lg={3}
-        md={3}
-        xs={3}
+        lg={4}
+        md={6}
+        xs={6}
       >
         <div
           className="Selector"
@@ -109,7 +111,7 @@ exports[`SearchForm should render correctly with existing filters 1`] = `
         </div>
       </Grid.Column>
       <Grid.Column
-        lg={7}
+        lg={6}
         md={12}
         xs={12}
       >
@@ -139,8 +141,10 @@ exports[`SearchForm should render correctly with existing filters 1`] = `
             flat={true}
             onClick={[Function]}
           >
-            Remove
-            <HighlightOff
+            <span>
+              Remove
+            </span>
+            <RemoveCircle
               className="Icon"
             />
           </Button>
@@ -151,9 +155,9 @@ exports[`SearchForm should render correctly with existing filters 1`] = `
       key="2"
     >
       <Grid.Column
-        lg={3}
-        md={3}
-        xs={3}
+        lg={4}
+        md={6}
+        xs={6}
       >
         <div
           className="Selector"
@@ -181,7 +185,7 @@ exports[`SearchForm should render correctly with existing filters 1`] = `
         </div>
       </Grid.Column>
       <Grid.Column
-        lg={7}
+        lg={6}
         md={12}
         xs={12}
       >
@@ -211,8 +215,10 @@ exports[`SearchForm should render correctly with existing filters 1`] = `
             flat={true}
             onClick={[Function]}
           >
-            Remove
-            <HighlightOff
+            <span>
+              Remove
+            </span>
+            <RemoveCircle
               className="Icon"
             />
           </Button>
@@ -229,8 +235,10 @@ exports[`SearchForm should render correctly with existing filters 1`] = `
     flat={true}
     onClick={[Function]}
   >
-    Add Filter
-    <AddCircleOutline
+    <span>
+      Add Filter
+    </span>
+    <AddCircle
       className="Icon"
     />
   </Button>
@@ -251,8 +259,10 @@ exports[`SearchForm should render correctly with no filters 1`] = `
     flat={true}
     onClick={[Function]}
   >
-    Add Filter
-    <AddCircleOutline
+    <span>
+      Add Filter
+    </span>
+    <AddCircle
       className="Icon"
     />
   </Button>

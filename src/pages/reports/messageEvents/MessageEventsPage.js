@@ -217,9 +217,7 @@ const MessageEventsPage = props => {
   const { isHibanaEnabled } = state;
 
   return (
-    <>
-      <MessageEventsPageComponent {...props} styles={styles} isHibanaEnabled={isHibanaEnabled} />
-    </>
+    <MessageEventsPageComponent {...props} styles={styles} isHibanaEnabled={isHibanaEnabled} />
   );
 };
 

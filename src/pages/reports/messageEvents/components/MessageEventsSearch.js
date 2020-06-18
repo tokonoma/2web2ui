@@ -83,7 +83,7 @@ export class MessageEventsSearchComponent extends Component {
     const { recipients } = ALL_EVENTS_FILTERS;
 
     return (
-      <Panel>
+      <Panel mb="0" className={styles.Panel}>
         <Panel.Section>
           <div className={styles.Filters}>
             <div className={styles.DateFilter}>
@@ -134,11 +134,7 @@ export class MessageEventsSearchComponent extends Component {
 const MessageEventsSearch = props => {
   const styles = useHibanaOverride(OGStyles, hibanaStyles);
 
-  return (
-    <>
-      <MessageEventsSearchComponent {...props} styles={styles} />
-    </>
-  );
+  return <MessageEventsSearchComponent {...props} styles={styles} />;
 };
 
 const mapStateToProps = state => ({

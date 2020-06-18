@@ -1,5 +1,11 @@
 @import '~@sparkpost/design-tokens-hibana/tokens';
 
+.Panel {
+  > div {
+    border-bottom: 0;
+  }
+}
+
 .Filters {
   grid-column-gap: spacing(400);
   grid-row-gap: spacing(400);

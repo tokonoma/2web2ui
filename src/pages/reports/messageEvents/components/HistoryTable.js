@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-
+import _ from 'lodash';
 import { TableCollection } from 'src/components';
-import { Panel } from 'src/components/matchbox';
+import { Box, Panel } from 'src/components/matchbox';
 import { Header, Row, TableWrapper } from './TableElements';
 import RefreshAction from './RefreshAction';
-
-import _ from 'lodash';
 
 class HistoryTable extends Component {
   static defaultProps = {
@@ -41,6 +39,8 @@ class HistoryTable extends Component {
             { content: <RefreshAction />, onClick: this.props.handleRefresh, color: 'orange' },
           ]}
         >
+          {/* TODO: We could stand to have a component like <Panel.Header> from Matchbox to address this scenario */}
+          <Box paddingTop="1.25rem" borderBottom="400" />
           <TableCollection
             outerWrapper={TableWrapper}
             headerComponent={Header}

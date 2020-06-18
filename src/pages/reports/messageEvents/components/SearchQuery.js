@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Box, Grid, Stack, Button } from 'src/components/matchbox';
-import { AddCircleOutline, HighlightOff } from '@sparkpost/matchbox-icons';
+import { AddCircle, RemoveCircle } from '@sparkpost/matchbox-icons';
 import _ from 'lodash';
 import { Field } from 'redux-form';
 import OGStyles from './SearchForm.module.scss';
@@ -41,7 +41,7 @@ export default ({ fields }) => {
       <Stack space="400">
         {fields.map((member, index) => (
           <Grid key={index}>
-            <Grid.Column xs={3} md={3} lg={3}>
+            <Grid.Column xs={6} md={6} lg={4}>
               <div className={styles.Selector}>
                 <label htmlFor={`select-a-filter-${index}`} className={styles.ScreenReaderOnly}>
                   Filter By
@@ -55,7 +55,7 @@ export default ({ fields }) => {
                 />
               </div>
             </Grid.Column>
-            <Grid.Column xs={12} md={12} lg={7}>
+            <Grid.Column xs={12} md={12} lg={6}>
               <label htmlFor={`filter-field-${index}`} className={styles.ScreenReaderOnly}>
                 Filter
               </label>
@@ -72,8 +72,8 @@ export default ({ fields }) => {
             <Grid.Column xs={12} md={12} lg={2}>
               <p>
                 <Button color="red" flat onClick={() => fields.remove(index)}>
-                  Remove
-                  <HighlightOff className={styles.Icon} />
+                  <span>Remove</span>
+                  <RemoveCircle className={styles.Icon} />
                 </Button>
               </p>
             </Grid.Column>
@@ -82,8 +82,8 @@ export default ({ fields }) => {
       </Stack>
       <Box marginBottom="400" />
       <Button className={styles.AddButton} color="blue" flat onClick={() => fields.push({})}>
-        Add Filter
-        <AddCircleOutline className={styles.Icon} />
+        <span>Add Filter</span>
+        <AddCircle className={styles.Icon} />
       </Button>
     </Fragment>
   );

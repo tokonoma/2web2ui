@@ -39,6 +39,10 @@ exports[`HistoryTable Component should render with no props 1`] = `
     }
     title="Message History"
   >
+    <Box
+      borderBottom="400"
+      paddingTop="1.25rem"
+    />
     <TableCollection
       defaultSortColumn={null}
       defaultSortDirection="asc"
