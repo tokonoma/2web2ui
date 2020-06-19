@@ -55,21 +55,4 @@ describe('Page: Dashboard tests', () => {
     wrapper.setProps({ isMessageOnboardingSet: true });
     expect(wrapper.find('GettingStartedGuide')).toExist();
   });
-
-  it('should move the guide to bottom or top based on isGuideAtBottom', () => {
-    wrapper.setProps({ isMessageOnboardingSet: true, onboarding: { isGuideAtBottom: true } });
-    expect(
-      wrapper
-        .find('Page')
-        .children()
-        .last(),
-    ).toContainExactlyOneMatchingElement('GettingStartedGuide');
-    wrapper.setProps({ isMessageOnboardingSet: true, onboarding: { isGuideAtBottom: false } });
-    expect(
-      wrapper
-        .find('Page')
-        .children()
-        .last(),
-    ).not.toContainExactlyOneMatchingElement('GettingStartedGuide');
-  });
 });

@@ -1,8 +1,6 @@
-import React, { useState, createContext, useContext } from 'react';
-import { Panel } from 'src/components/matchbox';
-import { ArrowDownward } from '@sparkpost/matchbox-icons';
+import React, { createContext, useContext } from 'react';
+import { Expandable, Panel } from 'src/components/matchbox';
 import { GUIDE_IDS } from 'src/constants';
-import SendingStep from './SendingStep';
 import ShowMeSparkpostStep from './ShowMeSparkpostStep';
 import LetsCodeStep from './LetsCodeStep';
 
@@ -16,10 +14,11 @@ export const GettingStartedGuide = ({
   hasSendingDomains,
   hasApiKeysForSending,
   isAdmin,
+  canManageKeys,
+  canManageSendingDomains,
+  canManageUsers,
 }) => {
   const {
-    isGuideAtBottom = false,
-    active_step,
     send_test_email_completed,
     explore_analytics_completed,
     invite_collaborator_completed,
@@ -27,46 +26,12 @@ export const GettingStartedGuide = ({
     check_events_completed,
   } = onboarding;
 
-  const areAllGuidesCompleted =
-    send_test_email_completed &&
-    explore_analytics_completed &&
-    invite_collaborator_completed &&
-    view_developer_docs_completed &&
-    check_events_completed &&
-    hasSendingDomains &&
-    hasApiKeysForSending;
-
   const setOnboardingAccountOption = (obj = {}) => {
     if (isAdmin) {
       setAccountOption('onboarding', obj);
     }
   };
 
-  const actions =
-    isGuideAtBottom || areAllGuidesCompleted
-      ? null
-      : [
-          {
-            content: (
-              <span>
-                {`Move to Bottom`} <ArrowDownward size="20" />{' '}
-              </span>
-            ),
-            color: 'blue',
-            onClick: () => setOnboardingAccountOption({ isGuideAtBottom: true }),
-          },
-        ];
-  //stepName could be Features,Sending,Show Me Sparkpost, Let's Code
-  const currentSteps = ['Sending', "Let's Code", 'Show Me SparkPost'];
-  const defaultStep = 'Sending';
-  const [stepName, setStepName] = useState(
-    currentSteps.includes(active_step) ? active_step : defaultStep,
-  );
-
-  const setAndStoreStepName = active_step => {
-    setOnboardingAccountOption({ active_step: active_step });
-    setStepName(active_step);
-  };
   const handleAction = action => {
     switch (action) {
       case 'Send Test Email':
@@ -105,16 +70,7 @@ export const GettingStartedGuide = ({
     }
   };
 
-  const step = {
-    Sending: <SendingStep />,
-
-    'Show Me SparkPost': <ShowMeSparkpostStep />,
-
-    "Let's Code": <LetsCodeStep />,
-  };
   const values = {
-    stepName: stepName,
-    setAndStoreStepName: setAndStoreStepName,
     setOnboardingAccountOption: setOnboardingAccountOption,
     send_test_email_completed: send_test_email_completed,
     explore_analytics_completed: explore_analytics_completed,
@@ -128,8 +84,20 @@ export const GettingStartedGuide = ({
 
   return (
     <GuideContext.Provider value={values}>
-      <Panel title="Getting Started" actions={actions}>
-        {step[stepName]}
+      <Panel title="Getting Started" sectioned>
+        {canManageKeys && canManageSendingDomains && (
+          <Expandable
+            title={'Start Sending with SparkPost'}
+            my="300"
+            defaultOpen
+            id="start_sending_expandable"
+          >
+            <LetsCodeStep />
+          </Expandable>
+        )}
+        <Expandable title={'SparkPost Analytics'} my="300" id="sparkpost_analytics">
+          <ShowMeSparkpostStep canManageUsers={canManageUsers} />
+        </Expandable>
       </Panel>
     </GuideContext.Provider>
   );

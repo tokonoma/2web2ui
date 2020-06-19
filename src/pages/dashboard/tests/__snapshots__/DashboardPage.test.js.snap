@@ -17,6 +17,7 @@ exports[`Page: Dashboard tests should correctly render page when user is not ver
     accountAgeInDays={15}
     ageRangeStart={16}
   />
+  <Connect(UsageReport) />
   <GettingStartedGuide
     account={
       Object {
@@ -44,7 +45,6 @@ exports[`Page: Dashboard tests should correctly render page when user is not ver
     updateAccount={[MockFunction]}
     verifyingEmail={false}
   />
-  <Connect(UsageReport) />
 </Page>
 `;
 
@@ -64,6 +64,7 @@ exports[`Page: Dashboard tests should display upgrade CTA when account is free a
     accountAgeInDays={15}
     ageRangeStart={16}
   />
+  <Connect(UsageReport) />
   <GettingStartedGuide
     account={
       Object {
@@ -90,7 +91,6 @@ exports[`Page: Dashboard tests should display upgrade CTA when account is free a
     updateAccount={[MockFunction]}
     verifyingEmail={false}
   />
-  <Connect(UsageReport) />
 </Page>
 `;
 
@@ -111,6 +111,7 @@ exports[`Page: Dashboard tests should render page correctly with defaults 1`] = 
     accountAgeInDays={15}
     ageRangeStart={16}
   />
+  <Connect(UsageReport) />
   <GettingStartedGuide
     account={
       Object {
@@ -138,6 +139,5 @@ exports[`Page: Dashboard tests should render page correctly with defaults 1`] = 
     updateAccount={[MockFunction]}
     verifyingEmail={false}
   />
-  <Connect(UsageReport) />
 </Page>
 `;

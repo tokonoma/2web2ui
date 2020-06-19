@@ -1,13 +1,10 @@
 import React from 'react';
-import { shallow } from 'enzyme';
 import { render } from '@testing-library/react';
 import TestApp from 'src/__testHelpers__/TestApp';
-import LetsCodeStep, { OGLetsCodeStep, HibanaLetsCodeStep } from '../LetsCodeStep';
+import LetsCodeStep from '../LetsCodeStep';
 import { GuideContext } from '../GettingStartedGuide';
 
 describe('LetsCodeStep', () => {
-  const subject_enzyme_og = (func = shallow) => func(<OGLetsCodeStep />);
-  const subject_enzyme_hibana = (func = shallow) => func(<HibanaLetsCodeStep />);
   const subject_rtl = (func = render) => {
     const values = {
       stepName: 'Show Me SparkPost',
@@ -30,10 +27,6 @@ describe('LetsCodeStep', () => {
       </TestApp>,
     );
   };
-  it('should render breadcrumbs', () => {
-    expect(subject_enzyme_og().find('GuideBreadCrumbs')).toHaveLength(1);
-    expect(subject_enzyme_hibana().find('GuideBreadCrumbs')).toHaveLength(1);
-  });
   it('should render Checklist with title Add Sending Domain', () => {
     const { queryByText } = subject_rtl(render);
     expect(queryByText('Add Sending Domain')).toBeInTheDocument();

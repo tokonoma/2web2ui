@@ -1,7 +1,6 @@
 import React from 'react';
 import { Panel, Box } from 'src/components/matchbox';
 import useHibanaToggle from 'src/hooks/useHibanaToggle';
-import GuideBreadCrumbs from './GuideBreadCrumbs';
 import { GuideListItem, GuideListItemTitle, GuideListItemDescription } from './GuideListItem';
 import { useGuideContext } from './GettingStartedGuide';
 import { Abbreviation } from 'src/components';
@@ -72,7 +71,6 @@ export function OGLetsCodeStep() {
   return (
     <>
       <Panel.Section>
-        <GuideBreadCrumbs />
         <AddSendingDomainItem />
       </Panel.Section>
       <Panel.Section>
@@ -89,7 +87,6 @@ export function HibanaLetsCodeStep() {
   return (
     <>
       <Box mx="400" mb="400">
-        <GuideBreadCrumbs />
         <AddSendingDomainItem />
       </Box>
       <Box mx="400" mb="400">

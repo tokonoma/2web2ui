@@ -15,6 +15,9 @@ const defaultProps = {
   setAccountOption: jest.fn(),
   listSendingDomains: jest.fn(),
   isAdmin: true,
+  canManageKeys: true,
+  canManageSendingDomains: true,
+  canManageUsers: true,
 };
 
 describe('GettingStartedGuide shallow', () => {
@@ -22,32 +25,23 @@ describe('GettingStartedGuide shallow', () => {
     jest.mock('src/context/HibanaContext');
   });
 
-  const subject = (props, renderFn = render) =>
-    renderFn(<GettingStartedGuide {...defaultProps} {...props} />);
+  const subject = props => shallow(<GettingStartedGuide {...defaultProps} {...props} />);
+  const wrapper = subject();
 
-  it('should render correctly when guide is at bottom or when guide is at top', () => {
-    expect(
-      subject({ onboarding: { isGuideAtBottom: true } }, shallow)
-        .find('Panel')
-        .prop('actions'),
-    ).toBe(null);
-    expect(
-      subject({ onboarding: { isGuideAtBottom: false } }, shallow)
-        .find('Panel')
-        .prop('actions'),
-    ).not.toBe(null);
+  it('should render ShowMeSparkpostStep inside "Start Sending with SparkPost" Expandable and this Expandable is open by default', () => {
+    expect(wrapper.find('Expandable')).toHaveTextContent('Start Sending with SparkPost');
+    expect(wrapper.find('Expandable').find('ShowMeSparkpostStep')).toHaveLength(1);
+    expect(wrapper.find('Expandable').first()).toHaveProp('defaultOpen');
   });
 
-  it('should render ShowMeSparkpostStep when on step "Show Me SparkPost" ', () => {
-    jest.mock('src/context/HibanaContext');
-    const instance = subject({ onboarding: { active_step: 'Show Me SparkPost' } }, shallow);
-    expect(instance.find('ShowMeSparkpostStep')).toHaveLength(1);
+  it('should render LetsCodeStep inside SparkPost Analytics Expandable', () => {
+    expect(wrapper.find('Expandable')).toHaveTextContent('SparkPost Analytics');
+    expect(wrapper.find('Expandable').find('LetsCodeStep')).toHaveLength(1);
   });
 
-  it("should render LetsCodeStep when on step Let's Code ", () => {
-    jest.mock('src/context/HibanaContext');
-    const instance = subject({ onboarding: { active_step: "Let's Code" } }, shallow);
-    expect(instance.find('LetsCodeStep')).toHaveLength(1);
+  it('should not render the "Start Sending with SparkPost" Expandable when user does not have grants to manageKeys or manageSendingDomains', () => {
+    const wrapper = subject({ canManageKeys: false, canManageSendingDomains: false });
+    expect(wrapper.find({ title: 'Start Sending with SparkPost' })).not.toExist();
   });
 });
 
@@ -63,17 +57,6 @@ describe('GettingStartedGuide full', () => {
         <GettingStartedGuide {...defaultProps} {...props} />
       </TestApp>,
     );
-
-  it('should render the corresponding step when breadcrumb is clicked', () => {
-    const { queryByText } = subject({ onboarding: { active_step: 'Show Me SparkPost' } });
-    userEvent.click(queryByText('Sending'));
-    expect(queryByText('Where Would You Like to Begin?')).toBeInTheDocument(1);
-  });
-
-  it('should render the BreadCrumbItem as active corresponding to the Step', () => {
-    const { queryByText } = subject({ onboarding: { active_step: 'Show Me SparkPost' } });
-    expect(queryByText('Show Me SparkPost')).toBeInTheDocument();
-  });
 
   it('should navigate to templates page when Send a Test Email button is clicked', () => {
     const { queryByText } = subject({ onboarding: { active_step: 'Show Me SparkPost' } });
