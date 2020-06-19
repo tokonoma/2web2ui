@@ -5,21 +5,25 @@
   margin-bottom: 0;
 }
 
-.RecentActivityListItem {
+.ListItem {
   height: 100%;
 }
 
-.RecentActivityDate {
+.PanelContent {
+  grid-template-rows: 5fr 2fr;
+}
+
+.Date {
   color: color(gray, 700);
   font-size: font-size(200);
 }
 
-.RecentActivityStatus {
+.Status {
   color: color(gray, 700);
   font-size: font-size(200);
 }
 
-.RecentActivityContent {
+.StatusContent {
   margin-left: spacing(200);
 }
 
@@ -29,10 +33,6 @@
   height: 100%;
 }
 
-.RecentActivityPublishedIcon {
+.PublishedIcon {
   fill: color(green, 700);
-}
-
-.RecentActivityMeta {
-  padding: 0 spacing(300);
 }

@@ -1,5 +1,5 @@
-/* eslint-disable max-lines */
 import React, { useState } from 'react';
+import { Send } from '@sparkpost/matchbox-icons';
 import { Button, Modal, Panel, Stack, TextField } from 'src/components/matchbox';
 import { PanelLoading } from 'src/components/loading';
 import MultiEmailField, { useMultiEmailField } from 'src/components/multiEmailField';
@@ -123,7 +123,9 @@ const SendTestEmailButton = () => {
         onClick={handleModalOpen}
         data-id="button-send-a-test"
       >
-        Send a Test
+        <span style={{ marginRight: '4px' }}>Send a Test</span>
+
+        <Send />
       </Button>
 
       <Modal
