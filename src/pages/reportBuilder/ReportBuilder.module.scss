@@ -2,17 +2,7 @@
 
 .ChartSection {
   position: relative;
-  padding: spacing(300);
-  min-height: 350px;
-
-  opacity: 1;
-  pointer-events: auto;
-  transition: 0.15s;
-}
-
-.Pending {
-  opacity: 0.5;
-  pointer-events: none;
+  min-height: 250px;
 }
 
 .Line {

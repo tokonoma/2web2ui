@@ -1,0 +1,119 @@
+@import '~@sparkpost/design-tokens-hibana/tokens';
+
+@mixin line-chart() {
+  position: relative;
+  // Tick label
+  :global .recharts-text.recharts-cartesian-axis-tick-value {
+    fill: color(gray, 500);
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  :global .xAxis {
+    .recharts-text.recharts-cartesian-axis-tick-value {
+      transform: translate(0, 6px);
+    }
+  }
+
+  :global .yAxis {
+    .recharts-text.recharts-cartesian-axis-tick-value {
+      transform: translate(-2px, 0);
+    }
+  }
+
+  :global .sp-linechart-yLabel {
+    position: absolute;
+    top: 50%;
+    transform: rotate(-90deg) translate(0, -3px);
+    transform-origin: 0;
+
+    color: color(gray, 600);
+    font-size: 13px;
+  }
+
+  :global .recharts-cartesian-grid-horizontal line {
+    stroke: color(gray, 800);
+    &:last-child {
+      stroke: color(gray, 700);
+      stroke-dasharray: 4 0 !important;
+    }
+  }
+
+  :global .recharts-cartesian-axis-line {
+    stroke: color(gray, 700);
+  }
+
+  :global .recharts-cartesian-axis-tick-line {
+    stroke: color(gray, 800);
+    stroke-width: 1;
+  }
+
+  :global .recharts-reference-line line {
+    stroke: color(gray, 800);
+    stroke-width: 1;
+  }
+
+  // Tooltip
+  :global .recharts-tooltip-wrapper {
+    .recharts-default-tooltip {
+      background: color(gray, 1000) !important; // fuck cssinjs
+      box-shadow: shadow(deep) !important;
+      border-radius: border-radius(200) !important;
+      border: 1px solid color(gray, 800) !important;
+      padding: spacing(300) !important;
+
+      .recharts-tooltip-label {
+        font-weight: 500;
+        color: color(gray, 300);
+        font-size: rem(15);
+        margin-bottom: rem(9) !important;
+      }
+      .recharts-tooltip-item-list {
+        .recharts-tooltip-item {
+          font-size: rem(13) !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          position: relative;
+
+          .recharts-tooltip-item-name {
+          }
+          .recharts-tooltip-item-separator {
+            padding-right: rem(55);
+          }
+          .recharts-tooltip-item-value {
+            font-weight: 600;
+            position: absolute;
+            right: 0;
+          }
+          .recharts-tooltip-item-unit {
+          }
+        }
+      }
+    }
+  }
+
+  :global .recharts-legend-wrapper {
+    margin-left: rem(30);
+    padding-top: rem(11);
+    padding-bottom: rem(0);
+  }
+
+  :global .recharts-legend-item-text {
+    display: inline-block;
+    vertical-align: middle;
+    padding: rem(0) rem(15) rem(24) rem(6);
+    font-size: rem(13);
+  }
+
+  :global .recharts-legend-item .recharts-surface {
+    margin-top: rem(-24);
+  }
+
+  :global .recharts-tooltip-cursor {
+    stroke: color(gray, 500) !important;
+  }
+
+  :global .recharts-responsive-container {
+    position: relative;
+  }
+}
